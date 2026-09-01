@@ -10,7 +10,7 @@ M0 Product Foundation 已完成基础版本；M1 Data & Calculation Engine 已�
 
 - Next.js/TypeScript/Tailwind 项目骨架与响应式首页、详情页。
 - Ingredient、Recipe、Nutrition、Recommendation 类型。
-- 28 种 demo 食材，覆盖约 30 道 MVP 菜谱计划所需的肉类、蛋类、豆制品、主食、蔬菜、菌菇和基础调味料。
+- 29 种 `demo-estimated` 食材，覆盖约 30 道 MVP 菜谱计划所需的鸡/猪/牛肉、鱼虾、蛋类、豆制品、主食、蔬菜、菌菇和基础调味料。
 - 食材数据完整性校验与测试，可发现重复标识、非法营养/价格、无效单位换算等明显错误。
 - 4 道结构化 demo 菜谱。
 - 单位换算、营养估算、成本估算和透明规则推荐骨架。
@@ -29,6 +29,8 @@ M0 Product Foundation 已完成基础版本；M1 Data & Calculation Engine 已�
 ## 已知问题与技术债
 
 - demo 营养/价格未引用生产级数据源，仅用于功能验证。
+- 当前覆盖已满足 Issue #1 的基础要求，最终完整覆盖将在 Issue #2 生成并审核约 30 道菜谱时再次验证。
+- 食材类别是 MVP 粗粒度分类；更细的食品学分类或多维筛选需在后续独立设计。
 - 推荐条件当前等权；盐、添加糖、菜系、标签和技法条件接口已定义但规则待完善。
 - 尚无菜谱 schema 运行时校验、完整列表页、自动化可访问性测试或部署。
 - 本机未安装 GitHub CLI；仓库与 Issue 已通过 GitHub 连接器管理。

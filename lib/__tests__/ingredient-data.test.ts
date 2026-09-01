@@ -6,7 +6,7 @@ import { toGrams } from "../unit-conversion";
 
 describe("ingredient dataset", () => {
   it("passes structural and numeric validation", () => {
-    expect(ingredients.length).toBeGreaterThanOrEqual(25);
+    expect(ingredients.length).toBeGreaterThanOrEqual(29);
     expect(validateIngredients(ingredients)).toEqual([]);
     expect(ingredients.every((ingredient) => ingredient.dataQuality === "demo-estimated")).toBe(true);
   });
@@ -14,7 +14,7 @@ describe("ingredient dataset", () => {
   it("covers the MVP ingredient groups", () => {
     const ids = new Set(ingredients.map((ingredient) => ingredient.id));
     for (const required of [
-      "chicken-breast", "chicken-thigh", "pork-tenderloin", "shrimp", "salmon", "egg",
+      "chicken-breast", "chicken-thigh", "pork-tenderloin", "beef-lean", "shrimp", "salmon", "egg",
       "tofu", "lentil", "rice", "noodles", "oats", "potato", "sweet-potato",
       "tomato", "broccoli", "spinach", "cabbage", "mushroom", "cooking-oil", "salt", "soy-sauce",
     ]) {
@@ -37,5 +37,22 @@ describe("ingredient dataset", () => {
     ];
     const issues = validateIngredients(invalid);
     expect(issues.map((issue) => issue.message)).toEqual(expect.arrayContaining(["ID 重复", "名称重复", "参考价格必须是非负有限数", "营养值必须是非负有限数"]));
+  });
+
+  it("reports alias conflicts and invalid runtime metadata", () => {
+    const conflicting = {
+      ...ingredients[1],
+      id: "conflicting-item",
+      name: "测试食材",
+      aliases: [ingredients[0].name],
+      category: "unknown",
+      dataQuality: "verified",
+    } as unknown as Ingredient;
+    const messages = validateIngredients([ingredients[0], conflicting]).map((issue) => issue.message);
+    expect(messages).toEqual(expect.arrayContaining([
+      "名称或别名与 egg 冲突",
+      "类别不在当前 schema 中",
+      "数据质量必须标记为 demo-estimated",
+    ]));
   });
 });

@@ -11,6 +11,7 @@ const nutritionFields = [
   "fiber",
   "sodium",
 ] as const;
+const ingredientCategories = new Set(["protein", "vegetable", "grain", "dairy", "seasoning", "oil"]);
 
 export interface IngredientValidationIssue {
   ingredientId: string;
@@ -22,6 +23,7 @@ export function validateIngredients(items: Ingredient[]): IngredientValidationIs
   const issues: IngredientValidationIssue[] = [];
   const ids = new Set<string>();
   const names = new Set<string>();
+  const searchTerms = new Map<string, string>();
 
   for (const ingredient of items) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(ingredient.id)) {
@@ -40,6 +42,30 @@ export function validateIngredients(items: Ingredient[]): IngredientValidationIs
     }
     names.add(normalizedName);
 
+    if (!ingredientCategories.has(ingredient.category)) {
+      issues.push({ ingredientId: ingredient.id, field: "category", message: "类别不在当前 schema 中" });
+    }
+
+    const ownTerms = new Set<string>();
+    for (const [field, value] of [["name", ingredient.name], ...ingredient.aliases.map((alias) => ["aliases", alias])] as const) {
+      const normalizedTerm = value.trim().toLocaleLowerCase("zh-CN");
+      if (!normalizedTerm) {
+        issues.push({ ingredientId: ingredient.id, field, message: "名称或别名不能为空" });
+        continue;
+      }
+      if (ownTerms.has(normalizedTerm)) {
+        issues.push({ ingredientId: ingredient.id, field, message: "名称与别名或别名之间重复" });
+        continue;
+      }
+      ownTerms.add(normalizedTerm);
+      const owner = searchTerms.get(normalizedTerm);
+      if (owner && owner !== ingredient.id) {
+        issues.push({ ingredientId: ingredient.id, field, message: `名称或别名与 ${owner} 冲突` });
+      } else {
+        searchTerms.set(normalizedTerm, ingredient.id);
+      }
+    }
+
     for (const field of nutritionFields) {
       const value = ingredient.nutritionPer100g[field];
       if (!Number.isFinite(value) || value < 0) {
@@ -49,6 +75,10 @@ export function validateIngredients(items: Ingredient[]): IngredientValidationIs
 
     if (!Number.isFinite(ingredient.estimatedPricePer100g) || ingredient.estimatedPricePer100g < 0) {
       issues.push({ ingredientId: ingredient.id, field: "estimatedPricePer100g", message: "参考价格必须是非负有限数" });
+    }
+
+    if (ingredient.dataQuality !== "demo-estimated") {
+      issues.push({ ingredientId: ingredient.id, field: "dataQuality", message: "数据质量必须标记为 demo-estimated" });
     }
 
     for (const [unit, weight] of Object.entries(ingredient.approximateUnitWeight ?? {})) {

@@ -2,13 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { RecipeCard } from "./recipe-card";
+import { getTagLabel, getToolLabel } from "@/lib/display-labels";
 import { discoverRecipes, hasActiveCriteria, resetRecommendationCriteria } from "@/lib/recommendation";
 import type { Ingredient } from "@/types/ingredient";
 import type { Recipe } from "@/types/recipe";
 import type { RecommendationCriteria } from "@/types/recommendation";
 
-const toolNames: Record<string, string> = { "cutting-board": "砧板", "frying-pan": "平底锅", saucepan: "汤锅", steamer: "蒸锅", oven: "烤箱", "rice-cooker": "电饭锅", knife: "刀", tongs: "夹子", "mixing-bowl": "料理碗", blender: "搅拌机", colander: "滤篮", spatula: "锅铲" };
-const tagNames: Record<string, string> = { "high-protein": "高蛋白", quick: "快手", "vegetable-rich": "蔬菜丰富", "one-pot": "一锅完成", "no-added-sugar": "无添加糖", vegan: "纯素", vegetarian: "蛋奶素", "high-fiber": "高纤维" };
 const valuableTags = ["high-protein", "quick", "vegetable-rich", "one-pot", "no-added-sugar", "high-fiber"];
 
 export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; ingredients: Ingredient[] }) {
@@ -42,8 +41,8 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
               <label className="text-sm"><span className="mb-1 block text-stone-600">菜系</span><select value={criteria.cuisine ?? ""} onChange={(event) => setCriteria((current) => ({ ...current, cuisine: event.target.value || undefined }))} className="min-h-11 w-full rounded-xl border border-stone-300 bg-white px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"><option value="">不限</option>{cuisines.map((cuisine) => <option key={cuisine}>{cuisine}</option>)}</select></label>
             </div></fieldset>
             <fieldset><legend className="font-semibold">我有的食材</legend><label className="mt-3 block text-sm"><span className="sr-only">搜索食材</span><input type="search" value={ingredientQuery} onChange={(event) => setIngredientQuery(event.target.value)} placeholder="搜索 30 种食材" className="min-h-11 w-full rounded-xl border border-stone-300 px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" /></label><div className="mt-3 max-h-44 overflow-y-auto rounded-xl border border-stone-200 p-2"><div className="flex flex-wrap gap-2">{shownIngredients.map((item) => <Toggle key={item.id} label={item.name} checked={criteria.availableIngredients?.includes(item.id) ?? false} onChange={() => toggle("availableIngredients", item.id)} />)}</div>{shownIngredients.length === 0 && <p className="p-2 text-sm text-stone-500">没有找到该食材</p>}</div></fieldset>
-            <fieldset><legend className="font-semibold">我有的厨具</legend><div className="mt-3 flex flex-wrap gap-2">{tools.map((tool) => <Toggle key={tool} label={toolNames[tool] ?? tool} checked={criteria.availableTools?.includes(tool) ?? false} onChange={() => toggle("availableTools", tool)} />)}</div></fieldset>
-            <fieldset><legend className="font-semibold">偏好标签</legend><div className="mt-3 flex flex-wrap gap-2">{valuableTags.filter((tag) => recipes.some((recipe) => recipe.tags.includes(tag))).map((tag) => <Toggle key={tag} label={tagNames[tag] ?? tag} checked={criteria.dietaryTags?.includes(tag) ?? false} onChange={() => toggle("dietaryTags", tag)} />)}</div></fieldset>
+            <fieldset><legend className="font-semibold">我有的厨具</legend><div className="mt-3 flex flex-wrap gap-2">{tools.map((tool) => <Toggle key={tool} label={getToolLabel(tool)} checked={criteria.availableTools?.includes(tool) ?? false} onChange={() => toggle("availableTools", tool)} />)}</div></fieldset>
+            <fieldset><legend className="font-semibold">偏好标签</legend><div className="mt-3 flex flex-wrap gap-2">{valuableTags.filter((tag) => recipes.some((recipe) => recipe.tags.includes(tag))).map((tag) => <Toggle key={tag} label={getTagLabel(tag)} checked={criteria.dietaryTags?.includes(tag) ?? false} onChange={() => toggle("dietaryTags", tag)} />)}</div></fieldset>
           </div>
         </aside>
         <div>
@@ -68,8 +67,8 @@ function summary(criteria: RecommendationCriteria, ingredients: Ingredient[]): s
   const ingredientNames = new Map(ingredients.map((item) => [item.id, item.name]));
   return [
     ...(criteria.availableIngredients ?? []).map((id) => ingredientNames.get(id) ?? id),
-    ...(criteria.availableTools ?? []).map((id) => toolNames[id] ?? id),
-    ...(criteria.dietaryTags ?? []).map((id) => tagNames[id] ?? id),
+    ...(criteria.availableTools ?? []).map(getToolLabel),
+    ...(criteria.dietaryTags ?? []).map(getTagLabel),
     criteria.maxTime !== undefined ? `≤ ${criteria.maxTime} 分钟` : undefined,
     criteria.maxCalories !== undefined ? `≤ ${criteria.maxCalories} kcal/份` : undefined,
     criteria.minProtein !== undefined ? `≥ ${criteria.minProtein} g 蛋白质/份` : undefined,

@@ -25,6 +25,56 @@
 3. Update relevant documentation and `docs/STATUS.md`.
 4. Summarize changes, verification results, known issues, and the best next step.
 
+## Execution Policy
+
+For normal development tasks, do not stop after completing a single small subtask.
+
+When a task or GitHub Issue contains multiple logically connected steps:
+
+1. Read the full task and identify the complete acceptance criteria.
+2. Create an internal execution plan.
+3. Execute all non-blocked steps continuously.
+4. Run tests, lint, typecheck, and build where relevant.
+5. Fix failures that are directly caused by the current task.
+6. Update documentation and STATUS.md.
+7. Only stop when:
+   - all acceptance criteria are completed, or
+   - there is a genuine external blocker that cannot be resolved locally.
+
+Do NOT pause merely to:
+
+- ask whether to continue to the next obvious step;
+- report completion of one file;
+- ask permission to run normal tests;
+- ask permission to fix errors introduced by the current work;
+- ask permission to create ordinary files required by the task;
+- ask whether to proceed with the remaining acceptance criteria.
+
+Assume permission to continue within the scope of the current Issue.
+
+For low-risk implementation decisions, make a reasonable engineering decision and continue.
+
+Only ask the user before:
+
+- destructive operations;
+- force push;
+- deleting remote branches or repositories;
+- overwriting unrelated existing work;
+- introducing paid services;
+- exposing or modifying secrets;
+- making a major architectural change outside the current Issue.
+
+A task is not complete until its full acceptance criteria are satisfied.
+
+At completion, report once with:
+
+- completed work;
+- important files changed;
+- tests/build/lint/typecheck results;
+- Git status;
+- unresolved blockers;
+- recommended next Issue.
+
 ## Git workflow
 
 Use Issue → branch (`feature/`, `fix/`, `docs/`, `refactor/`) → logical commits → pull request → merge. Never force-push or delete remote resources without explicit confirmation.

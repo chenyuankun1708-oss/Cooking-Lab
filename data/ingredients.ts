@@ -135,6 +135,12 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality">[] = [
     tags: ["vegan"],
   },
   {
+    id: "lemon", name: "柠檬", aliases: [], category: "vegetable",
+    nutritionPer100g: nutrition(29, 1.1, 0.3, 0, 9.3, 2.5, 2.8, 2),
+    defaultUnit: "piece", approximateUnitWeight: { piece: 90 }, estimatedPricePer100g: 2,
+    tags: ["vegan", "fruit"],
+  },
+  {
     id: "milk", name: "纯牛奶", aliases: ["牛奶"], category: "dairy",
     nutritionPer100g: nutrition(61, 3.2, 3.3, 1.9, 4.8, 4.8, 0, 43),
     defaultUnit: "ml", approximateUnitWeight: { ml: 1 }, estimatedPricePer100g: 1.2,

@@ -6,7 +6,7 @@ import { toGrams } from "../unit-conversion";
 
 describe("ingredient dataset", () => {
   it("passes structural and numeric validation", () => {
-    expect(ingredients.length).toBeGreaterThanOrEqual(29);
+    expect(ingredients.length).toBeGreaterThanOrEqual(30);
     expect(validateIngredients(ingredients)).toEqual([]);
     expect(ingredients.every((ingredient) => ingredient.dataQuality === "demo-estimated")).toBe(true);
   });

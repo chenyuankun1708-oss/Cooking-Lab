@@ -13,6 +13,8 @@
 - `lib/cost.ts`：按静态参考价估算成本。
 - `lib/recommendation.ts`：实现透明硬条件、解释、稳定排序与发现结果筛选的可替换接口。
 - `lib/formatters.ts`：集中处理营养、成本与时间的估算展示精度。
+- `lib/display-labels.ts`：集中映射工具、火候、标签、难度与单位的稳定 machine value。
+- `lib/recipe-detail.ts`：将 Recipe、Ingredient Repository 和 Nutrition/Cost Engine 组合为详情页展示模型。
 - `lib/ingredient-repository.ts`：隔离数据来源。
 - `lib/ingredient-validation.ts`、`lib/recipe-validation.ts`：检查单类实体与跨字段数据规则。
 - `lib/dataset-validation.ts`：在测试/build-time 组合完整静态数据集校验。
@@ -20,6 +22,8 @@
 ## 数据流
 
 客户端筛选状态 → recommendation/application helper → repository 与 nutrition/cost engines → 排序后的 Recipe 结果 → UI formatter 与卡片。引擎返回 warnings，让缺失或不可换算数据可见，而非静默制造结果；涉及营养或成本的硬条件只接受完整计算结果。
+
+目录页通过无条件 recommendation 结果复用 RecipeCard 的 catalog variant。详情页通过 slug 获取 Recipe，再由 `createRecipeDetailViewModel` 解析食材名称、运行计算引擎并应用共享展示格式；页面组件只渲染语义化结构，不复制计算公式或 machine-value 映射。
 
 ## 领域职责与错误边界
 

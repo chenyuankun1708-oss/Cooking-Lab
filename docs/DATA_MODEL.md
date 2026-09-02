@@ -9,6 +9,7 @@
 - `estimatedPricePer100g` 是静态人民币参考值，用于验证成本计算；不代表实时行情或特定地区售价。
 - `dataQuality` 当前固定为 `demo-estimated`，让上层明确这些数据只用于产品与计算逻辑验证，不能按生产级精度解释。未来可通过 repository/provider 换成经过溯源和审核的数据集，而不改变上层计算接口。
 - `piece`、`ml`、`tsp`、`tbsp` 通过 `approximateUnitWeight` 换算为克。同一种食材的大小、密度和量具会产生偏差，因此只展示适度精度。
+- `g` 直接按克计算，`kg` 乘以 1000。`ml` 不做通用 1:1 假设；它与 `piece`、`tsp`、`tbsp` 一样，必须使用当前食材自己的正有限近似克重。缺失或非法换算数据会产生领域错误，不会返回 0 或猜测密度。
 - 使用非重量默认单位的食材必须提供对应近似克重。数据校验同时检查重复 ID/名称、非法营养值、非法价格和无效换算重量。
 - 当前类别是面向 MVP 筛选的粗粒度烹饪分类；例如豆类归入 `protein`、块茎归入 `vegetable` 并使用 `staple` 标签。若后续需要食品学分类或多维筛选，应另行升级 schema，而不是改变现有类别含义。
 - 当前食材集覆盖 Issue #2 已明确的主要类别，但最终完整覆盖仍需在生成并审核约 30 道菜谱时，通过悬空 Ingredient ID 校验再次确认。
@@ -23,14 +24,23 @@
 - `cooking.oil`、`salt`、`addedSugar` 是配方级显式用量，并由校验器与食材明细核对；当前 30 道菜未使用添加糖食材，因此 `addedSugar` 为 0。
 - `nutrition` 不存储在静态 Recipe 中，营养和成本分别由 Nutrition Engine 与 Cost Engine 根据食材用量计算。
 - Recipe 数据仍标记为 `demo-estimated`。步骤和 `why` 已完成人工可读性检查，但时间、营养和成本仍用于产品验证，不是专业餐饮、医学或实时价格数据。
+- V1 optional 语义：只要 optional 食材已出现在传给 engine 的列表中且带有用量，就计入营养和成本；若用户未选择它，调用方应在计算前从输入列表移除。
 
 ## Nutrition
 
-字段为 calories、protein、fat、saturatedFat、carbs、sugar、addedSugar、fiber、sodium。基础算法为 `Σ(食材克重 / 100 × 每100g营养)`。首期不模拟烹饪损耗、吸油率、沥水、品牌差异和个体可食部，结果不是医学级精度。
+字段为 calories、protein、fat、saturatedFat、carbs、sugar、addedSugar、fiber、sodium，其中 sodium 单位为 mg，其余宏量营养素单位为 g，calories 单位为 kcal。基础算法为 `Σ(食材克重 / 100 × 每100g营养)`。领域层保留 JavaScript number 计算精度并返回 `estimated: true`；不为 UI 提前舍入。首期不模拟烹饪损耗、实际吸油率、汤汁残留、品牌差异和个体可食部，结果不是医学级精度。
+
+Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回结构化 warning，并以 `complete: false` 标记部分结果。空输入是有效的完整零估算。任何会产生 NaN/Infinity 的单项都被拒绝，不会污染累计值。
 
 ## Cost
 
-按食材克重与静态每 100g 参考价相乘并汇总，UI 四舍五入显示“预计 ¥N”。未来价格来源应通过独立 provider/repository 注入。
+按食材克重与静态每 100g 参考价相乘并汇总。领域层保留未舍入的 CNY 数值并返回 `estimated`、`complete` 与结构化 warnings；缺失食材、非法价格、转换失败或非有限结果不会被静默计为成功。未来价格来源应通过独立 provider/repository 注入。
+
+展示层建议独立格式化：calories 显示整数（如“约 520 kcal”），蛋白质等宏量营养素保留 1 位小数，sodium 以 mg 显示，成本按界面密度显示整数或 1 位小数并明确“预计”。这些展示规则不写入 engine。
+
+## Validation
+
+`validateIngredients` 与 `validateRecipes` 分别负责静态实体规则；`validateDataset` 组合两者并检查完整 Ingredient/Recipe 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性及运行时元数据等跨字段规则。
 
 ## Recommendation
 

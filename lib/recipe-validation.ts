@@ -1,6 +1,7 @@
 import type { Ingredient, Unit } from "@/types/ingredient";
 import type { Recipe } from "@/types/recipe";
 import { toGrams } from "./unit-conversion";
+import { isNonNegativeFinite, isPositiveFinite, isSlug } from "./validation-utils";
 
 export interface RecipeValidationIssue {
   recipeId: string;
@@ -14,10 +15,6 @@ const cuisines = new Set(["中式", "西式", "融合"]);
 const categories = new Set(["主菜", "主食", "汤", "凉菜", "早餐", "配菜"]);
 const difficulties = new Set(["easy", "medium", "hard"]);
 const heatLevels = new Set(["none", "low", "medium", "high"]);
-
-const isNonNegativeFinite = (value: number) => Number.isFinite(value) && value >= 0;
-const isPositiveFinite = (value: number) => Number.isFinite(value) && value > 0;
-const isSlug = (value: string) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 
 export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): RecipeValidationIssue[] {
   const issues: RecipeValidationIssue[] = [];

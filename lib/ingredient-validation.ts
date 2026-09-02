@@ -1,4 +1,5 @@
 import type { Ingredient } from "@/types/ingredient";
+import { isNonNegativeFinite, isPositiveFinite, isSlug } from "./validation-utils";
 
 const nutritionFields = [
   "calories",
@@ -26,7 +27,7 @@ export function validateIngredients(items: Ingredient[]): IngredientValidationIs
   const searchTerms = new Map<string, string>();
 
   for (const ingredient of items) {
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(ingredient.id)) {
+    if (!isSlug(ingredient.id)) {
       issues.push({ ingredientId: ingredient.id, field: "id", message: "ID 必须使用 kebab-case" });
     }
     if (ids.has(ingredient.id)) {
@@ -68,12 +69,12 @@ export function validateIngredients(items: Ingredient[]): IngredientValidationIs
 
     for (const field of nutritionFields) {
       const value = ingredient.nutritionPer100g[field];
-      if (!Number.isFinite(value) || value < 0) {
+      if (!isNonNegativeFinite(value)) {
         issues.push({ ingredientId: ingredient.id, field: `nutritionPer100g.${field}`, message: "营养值必须是非负有限数" });
       }
     }
 
-    if (!Number.isFinite(ingredient.estimatedPricePer100g) || ingredient.estimatedPricePer100g < 0) {
+    if (!isNonNegativeFinite(ingredient.estimatedPricePer100g)) {
       issues.push({ ingredientId: ingredient.id, field: "estimatedPricePer100g", message: "参考价格必须是非负有限数" });
     }
 
@@ -82,7 +83,7 @@ export function validateIngredients(items: Ingredient[]): IngredientValidationIs
     }
 
     for (const [unit, weight] of Object.entries(ingredient.approximateUnitWeight ?? {})) {
-      if (!Number.isFinite(weight) || weight <= 0) {
+      if (!isPositiveFinite(weight)) {
         issues.push({ ingredientId: ingredient.id, field: `approximateUnitWeight.${unit}`, message: "近似克重必须是正有限数" });
       }
     }

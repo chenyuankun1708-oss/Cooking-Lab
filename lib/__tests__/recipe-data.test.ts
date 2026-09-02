@@ -3,6 +3,7 @@ import { ingredients } from "@/data/ingredients";
 import { recipes } from "@/data/recipes";
 import type { Recipe } from "@/types/recipe";
 import { calculateCost } from "../cost";
+import { validateDataset } from "../dataset-validation";
 import { localIngredientRepository as repository } from "../ingredient-repository";
 import { calculateNutrition } from "../nutrition";
 import { validateRecipes } from "../recipe-validation";
@@ -11,6 +12,7 @@ describe("recipe dataset", () => {
   it("contains 30 valid recipes without dangling ingredient references", () => {
     expect(recipes).toHaveLength(30);
     expect(validateRecipes(recipes, ingredients)).toEqual([]);
+    expect(validateDataset(ingredients, recipes)).toEqual([]);
   });
 
   it("covers the planned cooking methods and stable metadata values", () => {
@@ -45,15 +47,17 @@ describe("recipe dataset", () => {
   it("reports structural, reference and cooking consistency errors", () => {
     const invalid = {
       ...recipes[0], id: recipes[1].id, slug: recipes[1].slug, servings: 0,
-      ingredients: [{ ingredientId: "missing", amount: -1, unit: "g", optional: false }],
+      ingredients: [{ ingredientId: "missing", amount: -1, unit: "cup", optional: false }],
       cooking: { ...recipes[0].cooking, prepTime: -1, oil: 99 },
+      cost: { currency: "CNY", basis: "" }, tags: ["Bad Tag"],
       tools: ["Bad Tool"], steps: [{ order: 2, instruction: "", why: "" }],
-    } as Recipe;
+    } as unknown as Recipe;
     const messages = validateRecipes([recipes[1], invalid], ingredients).map((issue) => issue.message);
     expect(messages).toEqual(expect.arrayContaining([
       "Recipe ID 重复", "Slug 重复", "份数必须是正有限数", "不存在的食材 ID: missing",
-      "食材用量必须是正有限数", "烹饪数值必须是非负有限数", "用油字段与食材明细不一致",
-      "工具必须是非空 kebab-case 列表", "步骤序号必须从 1 连续递增", "步骤说明不能为空", "步骤原理不能为空",
+      "食材用量必须是正有限数", "单位不在当前 schema 中", "烹饪数值必须是非负有限数", "用油字段与食材明细不一致",
+      "成本元数据不完整", "标签必须是非空 kebab-case 列表", "工具必须是非空 kebab-case 列表",
+      "步骤序号必须从 1 连续递增", "步骤说明不能为空", "步骤原理不能为空",
     ]));
   });
 });

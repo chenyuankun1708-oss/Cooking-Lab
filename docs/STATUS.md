@@ -1,10 +1,10 @@
 # Status
 
-最近更新：2026-09-01
+最近更新：2026-09-02
 
 ## 当前阶段
 
-M0 Product Foundation 已完成基础版本；M1 Data & Calculation Engine 已完成基础食材库、30 道 MVP 菜谱与数据校验。
+M0 Product Foundation 已完成；M1 Data & Calculation Engine 已完成，可进入 M2 Web MVP。
 
 ## 已完成
 
@@ -15,18 +15,21 @@ M0 Product Foundation 已完成基础版本；M1 Data & Calculation Engine 已�
 - 30 道结构化 `demo-estimated` 菜谱，覆盖煎、炒、蒸、煮、炖、焖、烤、汤、凉拌和电饭锅料理。
 - Recipe 数据校验可发现重复 ID/slug、悬空食材引用、非法用量/时间、油盐不一致、步骤与工具异常。
 - 全部菜谱可由 Nutrition Engine 与 Cost Engine 无 warning 地计算估算结果。
-- 单位换算、营养估算、成本估算和透明规则推荐骨架。
+- 单位换算覆盖 g/kg/ml/piece/tsp/tbsp，并对非法输入、缺失密度和非有限结果提供明确错误。
+- 营养与成本引擎保留计算精度，返回 estimated、complete 和结构化 warnings，不静默生成 NaN/Infinity。
+- `validateDataset` 可在测试/build-time 一次验证完整 30 Ingredient + 30 Recipe 数据集。
+- 透明规则推荐骨架。
 - 领域测试与核心文档。
 
 ## 正在做
 
-M1 数据集目标已完成，准备进入后续领域引擎或 M2 Web MVP 工作。
+M1 已完成，无已知 blocker；准备进入 M2。
 
 ## 下一步
 
-1. 按 GitHub Issue 优先级继续完善领域引擎与测试。
-2. 进入 M2，将首页标签升级为真实可操作筛选并展示推荐解释。
-3. 增加完整菜谱列表页和自动化可访问性测试。
+1. Issue #4：实现可交互料理筛选与菜谱发现。
+2. Issue #5：完善菜谱目录与详情体验。
+3. 后续补充自动化可访问性测试与部署。
 
 ## 已知问题与技术债
 

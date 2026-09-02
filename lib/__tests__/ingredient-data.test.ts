@@ -55,4 +55,14 @@ describe("ingredient dataset", () => {
       "数据质量必须标记为 demo-estimated",
     ]));
   });
+
+  it("reports invalid and missing default-unit conversion weights", () => {
+    const invalidWeight = { ...ingredients.find((item) => item.id === "milk")!, approximateUnitWeight: { ml: 0 } };
+    const missingWeight = { ...ingredients.find((item) => item.id === "egg")!, approximateUnitWeight: undefined };
+    const messages = validateIngredients([invalidWeight, missingWeight]).map((issue) => issue.message);
+    expect(messages).toEqual(expect.arrayContaining([
+      "近似克重必须是正有限数",
+      "非重量默认单位必须提供近似克重",
+    ]));
+  });
 });

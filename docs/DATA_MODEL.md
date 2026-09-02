@@ -17,6 +17,13 @@
 
 包含标识、描述、菜系/类别、份数、结构化食材用量、可选营养快照、烹饪时间/油盐糖/难度/技法、厨具、成本元数据、标签、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
 
+- 当前静态数据要求 `id` 与唯一 kebab-case `slug` 一致；Ingredient 引用必须存在，且用量必须能通过现有单位系统换算为克。
+- `cuisine` 使用 `中式`、`西式`、`融合`；`category` 使用 `主菜`、`主食`、`汤`、`凉菜`、`早餐`、`配菜`。
+- `cooking.method` 使用稳定集合：`煎`、`炒`、`蒸`、`煮`、`炖`、`焖`、`烤`、`汤`、`凉拌`、`电饭锅`。工具与标签使用 kebab-case，供后续筛选逻辑使用。
+- `cooking.oil`、`salt`、`addedSugar` 是配方级显式用量，并由校验器与食材明细核对；当前 30 道菜未使用添加糖食材，因此 `addedSugar` 为 0。
+- `nutrition` 不存储在静态 Recipe 中，营养和成本分别由 Nutrition Engine 与 Cost Engine 根据食材用量计算。
+- Recipe 数据仍标记为 `demo-estimated`。步骤和 `why` 已完成人工可读性检查，但时间、营养和成本仍用于产品验证，不是专业餐饮、医学或实时价格数据。
+
 ## Nutrition
 
 字段为 calories、protein、fat、saturatedFat、carbs、sugar、addedSugar、fiber、sodium。基础算法为 `Σ(食材克重 / 100 × 每100g营养)`。首期不模拟烹饪损耗、吸油率、沥水、品牌差异和个体可食部，结果不是医学级精度。

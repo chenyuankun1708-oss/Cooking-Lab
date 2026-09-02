@@ -1,2 +1,19 @@
-import{recipes}from"@/data/recipes";import{RecipeCard}from"@/components/recipe-card";
-export default function Home(){return <main><section className="border-b border-stone-200 bg-[#173f35] px-5 py-16 text-white"><div className="mx-auto max-w-6xl"><p className="mb-4 text-sm font-semibold tracking-[.22em] text-emerald-200">COOKING LAB · WEB MVP</p><h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-6xl">今天想吃什么？</h1><p className="mt-5 max-w-2xl text-base leading-7 text-emerald-50/80 sm:text-lg">根据食材、时间、营养、预算与厨具做选择；每一道推荐，都能解释为什么。</p><div className="mt-8 flex flex-wrap gap-3">{["我有的食材","≤ 30 分钟","高蛋白","预算 ≤ ¥20","平底锅"].map(x=><span key={x} className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm">{x}</span>)}</div></div></section><section className="mx-auto max-w-6xl px-5 py-12"><div className="mb-7 flex items-end justify-between"><div><p className="text-sm font-semibold text-emerald-700">首批实验菜单</p><h2 className="mt-2 text-3xl font-bold">从结构化数据实时计算</h2></div><p className="hidden text-sm text-stone-500 sm:block">营养与价格均为演示估算</p></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{recipes.map(r=><RecipeCard key={r.id} recipe={r}/>)}</div><p className="mt-8 text-sm text-stone-500">提示：本版本数据用于产品验证，不构成医学或个体化营养建议。</p></section></main>}
+import { RecipeDiscovery } from "@/components/recipe-discovery";
+import { ingredients } from "@/data/ingredients";
+import { recipes } from "@/data/recipes";
+
+export default function Home() {
+  return (
+    <main>
+      <section className="border-b border-stone-200 bg-[#173f35] px-5 py-14 text-white">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-4 text-sm font-semibold tracking-[.22em] text-emerald-200">COOKING LAB · DECISION INTERFACE</p>
+          <h1 className="max-w-4xl text-4xl font-bold leading-tight sm:text-6xl">说出你现在的条件，找到最适合做的料理。</h1>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-emerald-50/80 sm:text-lg">组合现有食材、时间、每份营养、预算与厨具限制；结果会即时更新，并解释为什么匹配。</p>
+        </div>
+      </section>
+      <RecipeDiscovery recipes={recipes} ingredients={ingredients} />
+      <p className="mx-auto max-w-7xl px-5 pb-10 text-sm text-stone-500">本版本营养与价格为 demo 估算，用于产品和计算逻辑验证，不构成医学或个体化营养建议。</p>
+    </main>
+  );
+}

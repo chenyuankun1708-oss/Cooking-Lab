@@ -11,14 +11,15 @@
 - `lib/unit-conversion.ts`：常用单位转克。
 - `lib/nutrition.ts`：按食材重量汇总营养。
 - `lib/cost.ts`：按静态参考价估算成本。
-- `lib/recommendation.ts`：实现透明规则评分的可替换接口。
+- `lib/recommendation.ts`：实现透明硬条件、解释、稳定排序与发现结果筛选的可替换接口。
+- `lib/formatters.ts`：集中处理营养、成本与时间的估算展示精度。
 - `lib/ingredient-repository.ts`：隔离数据来源。
 - `lib/ingredient-validation.ts`、`lib/recipe-validation.ts`：检查单类实体与跨字段数据规则。
 - `lib/dataset-validation.ts`：在测试/build-time 组合完整静态数据集校验。
 
 ## 数据流
 
-UI 获取 Recipe → repository 提供 Ingredient → engines 计算展示值/推荐解释 → UI 格式化为适度精度。引擎返回 warnings，让缺失或不可换算数据可见，而非静默制造结果。
+客户端筛选状态 → recommendation/application helper → repository 与 nutrition/cost engines → 排序后的 Recipe 结果 → UI formatter 与卡片。引擎返回 warnings，让缺失或不可换算数据可见，而非静默制造结果；涉及营养或成本的硬条件只接受完整计算结果。
 
 ## 领域职责与错误边界
 

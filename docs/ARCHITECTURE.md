@@ -11,7 +11,7 @@
 - `lib/unit-conversion.ts`：常用单位转克。
 - `lib/nutrition.ts`：按食材重量汇总营养。
 - `lib/cost.ts`：按静态参考价估算成本。
-- `lib/recommendation.ts`：实现透明硬条件、解释、稳定排序与发现结果筛选的可替换接口。
+- `lib/recommendation.ts`：实现硬限制、软偏好、加权食材匹配、结构化评分拆解、确定性解释与稳定排序。
 - `lib/formatters.ts`：集中处理营养、成本与时间的估算展示精度。
 - `lib/display-labels.ts`：集中映射工具、火候、标签、难度与单位的稳定 machine value。
 - `lib/recipe-detail.ts`：将 Recipe、Ingredient Repository 和 Nutrition/Cost Engine 组合为详情页展示模型。
@@ -22,6 +22,8 @@
 ## 数据流
 
 客户端筛选状态 → recommendation/application helper → repository 与 nutrition/cost engines → 排序后的 Recipe 结果 → UI formatter 与卡片。引擎返回 warnings，让缺失或不可换算数据可见，而非静默制造结果；涉及营养或成本的硬条件只接受完整计算结果。
+
+Recommendation Engine 先产生包含 eligible、hard failures、missing ingredients/tools 和 score breakdown 的完整 evaluation；`discoverRecipes` 作为 application helper 只向首页返回 eligible 结果。软偏好只决定合格结果的排序，不能抵消硬条件。权重和食材类别权重集中在领域模块，UI 只收集条件并展示结构化解释。详细规则见 `docs/RECOMMENDATION.md`。
 
 目录页通过无条件 recommendation 结果复用 RecipeCard 的 catalog variant。详情页通过 slug 获取 Recipe，再由 `createRecipeDetailViewModel` 解析食材名称、运行计算引擎并应用共享展示格式；页面组件只渲染语义化结构，不复制计算公式或 machine-value 映射。
 

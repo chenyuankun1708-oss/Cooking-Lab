@@ -165,12 +165,13 @@ describe("recommendation integration", () => {
   it("ranks matching time constraints first", () => {
     const results = new RuleRecommendationEngine().rank(recipes, { maxTime: 20 });
     expect(results[0].score).toBe(100);
-    expect(results.at(-1)?.unmatchedConditions).toContain("超过时间限制");
+    expect(results.at(-1)?.hardFailures).toContainEqual(expect.objectContaining({ criterion: "maxTime" }));
   });
 
   it("explains ingredient mismatch", () => {
     const result = new RuleRecommendationEngine().rank([recipes[0]], { availableIngredients: ["egg"] })[0];
-    expect(result.score).toBe(0);
-    expect(result.unmatchedConditions[0]).toMatch(/缺少/);
+    expect(result.score).toBeGreaterThan(0);
+    expect(result.missingIngredients.length).toBeGreaterThan(0);
+    expect(result.explanation).toMatch(/只缺/);
   });
 });

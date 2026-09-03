@@ -54,9 +54,9 @@
 - [x] README 已包含本地运行说明
 - [x] README 已包含 Vercel 免费部署路径
 - [x] 已提供 GitHub Issues 反馈入口
+- [x] Public Beta 已上线到生产环境
 
-## Remaining Manual Checks Before Public URL
+## Remaining Manual Checks After Launch
 
 - [ ] 在 Safari 做一轮手机与桌面人工目视检查
 - [ ] 在 Firefox 做一轮桌面人工目视检查
-- [ ] 由用户完成 Vercel Hobby 授权并生成公开 URL

@@ -66,7 +66,11 @@ npm run build
 
 ## Deployment
 
-当前代码已经适合部署到 Vercel Hobby（免费）并保持零额外基础设施：
+当前代码已经部署在 Vercel Hobby（免费）并保持零额外基础设施：
+
+- Production URL: [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
+
+如需重新部署或复制环境，可按以下步骤操作：
 
 1. 在 Vercel 中选择 `Add New Project`
 2. 导入 GitHub 仓库 `chenyuankun1708-oss/Cooking-Lab`
@@ -76,7 +80,7 @@ npm run build
 6. 当前项目不需要额外环境变量
 7. 点击部署
 
-本仓库目前默认做到 deployment-ready；若需要真正生成公开 URL，下一步只需用户完成自己的 Vercel 账号授权与项目创建。
+当前生产环境已经可访问；后续若需要新的部署环境或新的公开 URL，仍只需要用户完成自己的 Vercel 账号授权与项目创建。
 
 ## Feedback
 

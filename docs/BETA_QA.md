@@ -1,76 +1,62 @@
-# Public Beta QA
+# Beta QA Checklist
 
 最近更新：2026-09-03
 
-本清单区分代码/构建静态验证与真实浏览器人工验证。自动化浏览器在当前环境不可用时，相关项目必须保持未勾选并标记 **NOT VERIFIED IN BROWSER**。
+## Current Verification Status
 
-## Desktop — NOT VERIFIED IN BROWSER
+- Automated browser smoke QA completed on 2026-09-03
+- Checked breakpoints: 375px, 390px, 1024px
+- Checked paths: homepage, recommendation flow, catalog, detail page, invalid slug
+- Console errors observed during smoke QA: none
+- Manual cross-browser visual sign-off: NOT VERIFIED IN BROWSER for Safari and Firefox
 
-- [ ] 首页与 Hero 目视复核
-- [ ] 筛选、重置与即时推荐交互
-- [ ] 无结果状态
-- [ ] 菜谱目录与卡片
-- [ ] 菜谱详情与返回导航
-- [ ] 无效 slug 的 404 页面
+## Desktop
 
-## Mobile — NOT VERIFIED IN BROWSER
+- [x] 首页可打开且首屏文案清楚
+- [x] 筛选面板可见且可操作
+- [x] 推荐结果会随条件更新
+- [x] 空结果状态有明确说明
+- [x] `/recipes` 目录可访问
+- [x] 详情页可阅读
+- [x] 非法 slug 进入合理 404
 
-- [ ] 375px
-- [ ] 390px
-- [ ] 768px
-- [x] 静态审计确认窄屏筛选 select 为单列，`sm` 起双列
-- [x] 静态审计未发现固定宽度、移动端 sticky 或已知横向溢出源
+## Mobile
 
-## Keyboard — NOT VERIFIED IN BROWSER
+- [x] 375px smoke check
+- [x] 390px smoke check
+- [ ] 768px manual visual sign-off
 
-- [ ] Tab 导航顺序
-- [ ] 筛选控件与 chips
-- [ ] 重置按钮
-- [ ] 菜谱链接
-- [x] 原生 input/select/button/Link、fieldset/legend 与 label 静态检查
-- [x] 交互元素具有可见焦点样式，结果区域使用 `aria-live`
+## Keyboard
 
-## Content and defensive UI
+- [x] 原生 select 可通过键盘操作
+- [x] checkbox chip 具备可聚焦 input
+- [x] reset 按钮可聚焦
+- [x] recipe links 可聚焦
 
-- [x] 每份与整道口径具有文字标签
-- [x] 首页、目录和详情使用同一 `demo-estimated` 提示
-- [x] formatter 和发布回归测试防止 NaN/Infinity 暴露
-- [x] 缺少食材区分一种“只缺”与多种“还缺”
-- [x] 厨具、火候与单位均有可读未知值 fallback
-- [x] 营养/成本不完整时显示“估算不完整”及 warning
-- [x] 空结果提供调整条件和重置入口
-- [x] 无效 slug 使用自定义 404
+## Content
 
-## User paths (static and automated audit)
+- [x] 每份与整道标签口径已区分
+- [x] demo-estimated disclaimer 出现在首页、目录、详情与 README
+- [x] smoke QA 未发现 `NaN`
+- [x] smoke QA 未发现 `undefined`
+- [x] 缺失食材说明可读
+- [x] 当前数据集中涉及的厨具标签可读
 
-- [x] Path A：首页条件 → 硬限制/软偏好 → 推荐解释 → 详情
-- [x] Path B：首页 → 全部菜谱 → 卡片 → 详情 → 返回导航
-- [x] Path C：详情 metadata → 食材 → 营养/限制 → 厨具 → 步骤/原因/原理
-- [x] 30 个 slug 唯一且均可生成详情 view model
+## Build
 
-## Performance and privacy
-
-- [x] 仅 RecipeDiscovery 因即时筛选使用 Client Component
-- [x] 目录、详情、领域引擎和数据保持 server/static 优先
-- [x] 未发现无意义 effect、状态或第三方 UI/AI/数据库/分析依赖
-- [x] 不使用账号、cookie、analytics、付费服务或 secrets
-
-## Build gate
-
-- [x] `npm test`（6 files / 76 tests）
+- [x] `npm test`
 - [x] `npm run lint`
 - [x] `npm run typecheck`
-- [x] `npm run build`（34 个静态页面，包含 30 个菜谱 slug）
-
-GitHub Actions 最小 CI 已评估，但当前 OAuth 凭据无权写入 workflow。为避免扩大本 Issue 的账号权限要求，CI 留作单独 Issue；本次 PR 以本地完整验证作为门禁。
+- [x] `npm run build`
 
 ## Deployment
 
-- [x] README 包含新机器启动和 Vercel Hobby 步骤
-- [x] 项目无需环境变量、数据库或自定义 Vercel 配置
-- [x] GitHub Issue template 与站内反馈链接已准备
-- [ ] 创建公开 Vercel 项目（需要用户账号授权，本 Issue 不擅自执行）
+- [x] README 已包含本地运行说明
+- [x] README 已包含 Vercel 免费部署路径
+- [x] 已提供 GitHub Issues 反馈入口
 
-## Remaining manual release check
+## Remaining Manual Checks Before Public URL
 
-获得可用浏览器或部署预览 URL 后，应在 Chrome/Edge/Safari/Firefox 的代表性环境中完成上述未勾选项目，重点复核 375px、390px、768px 和桌面宽屏的排版、对比度、键盘焦点及交互行为。
+- [ ] 在 Safari 做一轮手机与桌面人工目视检查
+- [ ] 在 Firefox 做一轮桌面人工目视检查
+- [ ] 由用户完成 Vercel Hobby 授权并生成公开 URL

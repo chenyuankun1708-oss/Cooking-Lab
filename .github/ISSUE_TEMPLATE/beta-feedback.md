@@ -1,31 +1,31 @@
 ---
-name: Beta 反馈
-about: 报告 Cooking Lab 公测中的问题或建议
-title: "[Beta] "
+name: Beta feedback
+about: Share a problem, confusion, or suggestion from the public beta
+title: "[Beta Feedback] "
 labels: beta-feedback
 assignees: ""
 ---
 
-## 你想完成什么？
+## 你想做什么菜？
 
-例如：用现有食材找一道 30 分钟以内的晚餐。
+<!-- 例如：想找 20 分钟内、高蛋白、只用平底锅的晚餐 -->
 
-## 使用了哪些筛选条件？
+## 你使用了哪些筛选条件？
 
-请填写相关食材、时间、厨具或偏好；不适用可留空。
+<!-- 食材、时间、营养、预算、厨具、偏好等 -->
 
-## 发生了什么？
+## 实际发生了什么？
 
-请描述看到的结果或问题。
+<!-- 包括看到了什么结果、哪里困惑、哪里出错 -->
 
-## 你期待什么？
+## 你原本期待什么？
 
-请描述你认为更合理的结果。
+<!-- 例如：希望出现某种菜、解释更清楚、结果更少或更多 -->
 
-## 设备与浏览器
+## 设备 / 浏览器
 
-例如：iPhone Safari、Windows Edge。请勿填写账号、联系方式等隐私信息。
+<!-- 例如：iPhone Safari、Mac Chrome、Windows Edge -->
 
 ## 其他建议
 
-感谢帮助我们改进 Cooking Lab。
+<!-- 可选 -->

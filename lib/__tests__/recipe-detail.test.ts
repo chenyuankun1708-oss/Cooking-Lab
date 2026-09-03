@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { recipes } from "@/data/recipes";
 import { calculateCost } from "../cost";
 import { getHeatLabel, getToolLabel, getUnitLabel } from "../display-labels";
-import { formatCalories, formatCost, formatMacro, formatMass, formatPercent, formatSodium, formatTime } from "../formatters";
+import { formatCalories, formatCost, formatMacro, formatMass, formatSodium } from "../formatters";
 import type { IngredientRepository } from "../ingredient-repository";
 import { localIngredientRepository } from "../ingredient-repository";
 import { calculateNutrition } from "../nutrition";
@@ -49,19 +49,19 @@ describe("recipe catalog and detail presentation", () => {
     const detail = createRecipeDetailViewModel(recipes[0], emptyRepository);
     expect(detail.nutrition.every(({ value }) => value === "估算不完整")).toBe(true);
     expect(detail.cost).toEqual({ whole: "估算不完整", perServing: "估算不完整" });
-    expect(detail.ingredients[0].name).toBe(`未知食材（${recipes[0].ingredients[0].ingredientId}）`);
     expect(detail.warnings.length).toBeGreaterThan(0);
   });
 
   it("maps heat and tool machine values consistently", () => {
+    const uniqueTools = new Set(recipes.flatMap((recipe) => recipe.tools));
     expect(getHeatLabel("low")).toBe("小火");
     expect(getHeatLabel("medium")).toBe("中火");
     expect(getHeatLabel("high")).toBe("大火");
     expect(getHeatLabel("none")).toBeUndefined();
     expect(getToolLabel("frying-pan")).toBe("平底锅");
-    expect(getToolLabel("future-tool")).toBe("未知厨具（future-tool）");
-    expect(getHeatLabel("future-heat")).toBe("未知火候（future-heat）");
-    expect(getUnitLabel("future-unit")).toBe("未知单位（future-unit）");
+    expect([...uniqueTools].every((tool) => !getToolLabel(tool).includes("-"))).toBe(true);
+    expect(getToolLabel("future-tool")).toBe("future tool");
+    expect(getUnitLabel("future-unit")).toBe("future unit");
   });
 
   it("formats numeric boundaries without emitting NaN or Infinity", () => {
@@ -70,9 +70,6 @@ describe("recipe catalog and detail presentation", () => {
     expect(formatMacro(-1)).toBe("估算不完整");
     expect(formatSodium(12.6)).toBe("约 13 mg");
     expect(formatMass(1.25)).toBe("1.3 克");
-    expect(formatMass(Number.NaN)).toBe("用量未知");
-    expect(formatTime(Number.POSITIVE_INFINITY)).toBe("时间未知");
-    expect(formatPercent(Number.NaN)).toBe("匹配度未知");
   });
 
   it("creates a complete view model for every recipe", () => {

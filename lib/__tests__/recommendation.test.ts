@@ -146,6 +146,13 @@ describe("soft preferences and score", () => {
     expect(result.explanation).toContain(result.scoreBreakdown.cuisine!.explanation);
     expect(buildRecommendationExplanation(result)).toBe(result.explanation);
   });
+
+  it("uses different missing-ingredient wording for one vs many missing ingredients", () => {
+    const oneMissing = evaluate({ availableIngredients: requiredIds().slice(0, -1) });
+    const severalMissing = evaluate({ availableIngredients: requiredIds().slice(0, 1) });
+    expect(oneMissing.explanation).toContain("只缺");
+    expect(severalMissing.explanation).toContain("还缺");
+  });
 });
 
 describe("safety, reset, and determinism", () => {

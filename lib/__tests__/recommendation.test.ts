@@ -1,96 +1,190 @@
 import { describe, expect, it } from "vitest";
 import { recipes } from "@/data/recipes";
 import type { Recipe } from "@/types/recipe";
-import { discoverRecipes, hasActiveCriteria, resetRecommendationCriteria, RuleRecommendationEngine } from "../recommendation";
 import type { IngredientRepository } from "../ingredient-repository";
+import {
+  buildRecommendationExplanation,
+  discoverRecipes,
+  hasActiveCriteria,
+  INGREDIENT_CATEGORY_WEIGHTS,
+  RECOMMENDATION_WEIGHTS,
+  resetRecommendationCriteria,
+  RuleRecommendationEngine,
+} from "../recommendation";
 
-const discover = (criteria: Parameters<typeof discoverRecipes>[1]) => discoverRecipes(recipes, criteria);
+const engine = new RuleRecommendationEngine();
+const target = recipes[0];
+const evaluate = (criteria: Parameters<typeof engine.rank>[1], recipe = target) => engine.rank([recipe], criteria)[0];
+const requiredIds = (recipe = target) => recipe.ingredients.filter(({ optional }) => !optional).map(({ ingredientId }) => ingredientId);
 
-describe("recipe discovery filters", () => {
-  it("returns every recipe without criteria", () => {
-    expect(discover({})).toHaveLength(recipes.length);
+describe("hard constraints", () => {
+  it("keeps every recipe eligible and neutral without criteria", () => {
+    const results = engine.rank(recipes, {});
+    expect(results).toHaveLength(30);
+    expect(results.every(({ eligible, score }) => eligible && score === 100)).toBe(true);
   });
 
-  it("applies max time inclusively", () => {
-    expect(discover({ maxTime: 15 }).every(({ recipe }) => recipe.cooking.totalTime <= 15)).toBe(true);
+  it.each([
+    ["maxTime", { maxTime: target.cooking.totalTime - 1 }],
+    ["maxCalories", { maxCalories: 0 }],
+    ["minProtein", { minProtein: 10_000 }],
+    ["maxOil", { maxOil: Math.max(0, target.cooking.oil / target.servings - 0.1) }],
+    ["maxSalt", { maxSalt: Math.max(0, target.cooking.salt / target.servings - 0.1) }],
+    ["maxCost", { maxCost: 0 }],
+  ] as const)("excludes a recipe that fails %s", (criterion, criteria) => {
+    const result = evaluate(criteria);
+    expect(result.eligible).toBe(false);
+    expect(result.hardFailures).toContainEqual(expect.objectContaining({ criterion }));
+    expect(discoverRecipes([target], criteria)).toEqual([]);
   });
 
-  it("applies per-serving calorie limits", () => {
-    const results = discover({ maxCalories: 400 });
-    expect(results.length).toBeGreaterThan(0);
-    expect(results.every(({ metrics }) => metrics.caloriesPerServing <= 400)).toBe(true);
+  it("supports an inclusive per-serving added-sugar limit", () => {
+    expect(evaluate({ maxAddedSugar: 0 })).toMatchObject({ eligible: true, metrics: { addedSugarPerServing: 0 } });
+    const sweet: Recipe = { ...target, cooking: { ...target.cooking, addedSugar: 4 } };
+    expect(evaluate({ maxAddedSugar: 1 }, sweet).hardFailures).toContainEqual(expect.objectContaining({ criterion: "maxAddedSugar" }));
   });
 
-  it("applies per-serving minimum protein", () => {
-    const results = discover({ minProtein: 30 });
-    expect(results.length).toBeGreaterThan(0);
-    expect(results.every(({ metrics }) => metrics.proteinPerServing >= 30)).toBe(true);
+  it("treats oil, salt, sugar, calories, protein and cost limits as per-serving values", () => {
+    const result = evaluate({ maxOil: target.cooking.oil / target.servings, maxSalt: target.cooking.salt / target.servings });
+    expect(result.eligible).toBe(true);
+    expect(result.metrics.oilPerServing).toBe(target.cooking.oil / target.servings);
+    expect(result.metrics.saltPerServing).toBe(target.cooking.salt / target.servings);
   });
 
-  it("applies maximum recipe oil", () => {
-    expect(discover({ maxOil: 5 }).every(({ recipe }) => recipe.cooking.oil <= 5)).toBe(true);
+  it("makes missing tools a hard feasibility failure with names", () => {
+    const availableTools = target.tools.slice(1);
+    const result = evaluate({ availableTools });
+    expect(result.eligible).toBe(false);
+    expect(result.missingTools).toContainEqual(expect.objectContaining({ id: target.tools[0] }));
+    expect(result.hardFailures.find(({ criterion }) => criterion === "availableTools")?.message).toContain(result.missingTools[0].name);
+    expect(result.explanation).toMatch(/无法直接推荐/);
   });
 
-  it("applies per-serving estimated cost", () => {
-    const results = discover({ maxCost: 10 });
-    expect(results.length).toBeGreaterThan(0);
-    expect(results.every(({ metrics }) => metrics.costPerServing <= 10)).toBe(true);
+  it("never lets a perfect soft score override a hard failure", () => {
+    const result = evaluate({ maxTime: 1, availableIngredients: requiredIds(), preferredCuisine: target.cuisine, preferredTags: target.tags });
+    expect(result.score).toBe(100);
+    expect(result.eligible).toBe(false);
+    expect(discoverRecipes([target], { maxTime: 1, availableIngredients: requiredIds(), preferredCuisine: target.cuisine })).toEqual([]);
   });
 
-  it("requires the available ingredient set to cover every required ingredient", () => {
-    const target = recipes[0];
-    const availableIngredients = target.ingredients.filter((item) => !item.optional).map((item) => item.ingredientId);
-    expect(discoverRecipes([target], { availableIngredients })).toHaveLength(1);
-    expect(discoverRecipes([target], { availableIngredients: availableIngredients.slice(1) })).toHaveLength(0);
+  it("returns no results for conflicting strict constraints", () => {
+    expect(discoverRecipes(recipes, { maxTime: 1, maxCalories: 10, minProtein: 100, maxCost: 1 })).toEqual([]);
+  });
+});
+
+describe("ingredient fit", () => {
+  it("distinguishes one missing ingredient from several", () => {
+    const oneMissing = evaluate({ availableIngredients: requiredIds().slice(0, -1) });
+    const severalMissing = evaluate({ availableIngredients: requiredIds().slice(0, 1) });
+    expect(oneMissing.missingIngredients).toHaveLength(1);
+    expect(severalMissing.missingIngredients.length).toBeGreaterThan(1);
+    expect(oneMissing.ingredientMatch.fit).toBeGreaterThan(severalMissing.ingredientMatch.fit);
   });
 
-  it("requires the available tool set to cover every recipe tool", () => {
-    const target = recipes[0];
-    expect(discoverRecipes([target], { availableTools: target.tools })).toHaveLength(1);
-    expect(discoverRecipes([target], { availableTools: target.tools.slice(1) })).toHaveLength(0);
+  it("does not penalize missing optional ingredients", () => {
+    const optionalRecipe: Recipe = {
+      ...target,
+      ingredients: target.ingredients.map((item, index) => index === target.ingredients.length - 1 ? { ...item, optional: true } : item),
+    };
+    const available = optionalRecipe.ingredients.filter(({ optional }) => !optional).map(({ ingredientId }) => ingredientId);
+    const result = evaluate({ availableIngredients: available }, optionalRecipe);
+    expect(result.ingredientMatch.fit).toBe(1);
+    expect(result.missingIngredients).toEqual([]);
   });
 
-  it("filters cuisine exactly", () => {
-    expect(discover({ cuisine: "中式" }).every(({ recipe }) => recipe.cuisine === "中式")).toBe(true);
+  it("weights a core ingredient more than seasoning or oil", () => {
+    expect(INGREDIENT_CATEGORY_WEIGHTS.protein).toBeGreaterThan(INGREDIENT_CATEGORY_WEIGHTS.seasoning);
+    const coreOnly = evaluate({ availableIngredients: ["egg"] });
+    const seasoningOnly = evaluate({ availableIngredients: ["salt"] });
+    expect(coreOnly.ingredientMatch.fit).toBeGreaterThan(seasoningOnly.ingredientMatch.fit);
   });
 
-  it("requires every selected tag", () => {
-    const results = discover({ dietaryTags: ["high-protein", "no-added-sugar"] });
-    expect(results.length).toBeGreaterThan(0);
-    expect(results.every(({ recipe }) => recipe.tags.includes("high-protein") && recipe.tags.includes("no-added-sugar"))).toBe(true);
+  it("ranks higher ingredient fit first", () => {
+    const ids = requiredIds();
+    const highFitRecipe: Recipe = { ...target, id: "high-fit", slug: "high-fit" };
+    const lowFitRecipe: Recipe = { ...target, id: "low-fit", slug: "low-fit", ingredients: [...target.ingredients, { ingredientId: "broccoli", amount: 100, unit: "g", optional: false }] };
+    const results = engine.rank([lowFitRecipe, highFitRecipe], { availableIngredients: ids });
+    expect(results[0].recipe.id).toBe("high-fit");
+  });
+});
+
+describe("soft preferences and score", () => {
+  it("scores cuisine as a soft preference without excluding", () => {
+    const matched = evaluate({ preferredCuisine: target.cuisine });
+    const unmatched = evaluate({ preferredCuisine: "不存在的菜系" });
+    expect(matched.score).toBe(100);
+    expect(unmatched).toMatchObject({ eligible: true, score: 0 });
+    expect(unmatched.scoreBreakdown.cuisine?.score).toBe(0);
   });
 
-  it("combines multiple hard conditions", () => {
-    const results = discover({ maxTime: 30, maxCalories: 600, minProtein: 20, maxOil: 10, maxCost: 20 });
-    expect(results.length).toBeGreaterThan(0);
-    expect(results.every(({ score }) => score === 100)).toBe(true);
+  it("supports partial tag matches", () => {
+    const result = evaluate({ preferredTags: [target.tags[0], "missing-tag"] });
+    expect(result.scoreBreakdown.tags?.score).toBe(0.5);
+    expect(result.score).toBe(50);
+    expect(result.unmatchedConditions).toContain("匹配 1/2 个标签偏好");
   });
 
-  it("returns an empty result for impossible conditions", () => {
-    expect(discover({ maxTime: 1, minProtein: 1000 })).toEqual([]);
+  it("scores method preferences", () => {
+    expect(evaluate({ preferredMethods: [target.cooking.method] }).scoreBreakdown.methods?.score).toBe(1);
+    expect(evaluate({ preferredMethods: ["不存在"] }).scoreBreakdown.methods?.score).toBe(0);
   });
 
-  it("provides a complete reset state", () => {
+  it("normalizes multiple active soft dimensions by centralized weights", () => {
+    const result = evaluate({ availableIngredients: requiredIds(), preferredCuisine: "不存在", preferredTags: [target.tags[0]], preferredMethods: [target.cooking.method] });
+    const expected = Math.round((RECOMMENDATION_WEIGHTS.ingredientFit + RECOMMENDATION_WEIGHTS.tags + RECOMMENDATION_WEIGHTS.methods) /
+      Object.values(RECOMMENDATION_WEIGHTS).reduce((sum, weight) => sum + weight, 0) * 100);
+    expect(result.score).toBe(expected);
+    expect(Object.keys(result.scoreBreakdown).sort()).toEqual(["cuisine", "ingredientFit", "methods", "tags"]);
+  });
+
+  it("keeps explanation consistent with structured breakdown and missing ingredients", () => {
+    const result = evaluate({ availableIngredients: requiredIds().slice(0, -1), preferredCuisine: target.cuisine });
+    expect(result.explanation).toContain(`${result.ingredientMatch.availableRequired}/${result.ingredientMatch.totalRequired}`);
+    expect(result.explanation).toContain(result.missingIngredients[0].name);
+    expect(result.explanation).toContain(result.scoreBreakdown.cuisine!.explanation);
+    expect(buildRecommendationExplanation(result)).toBe(result.explanation);
+  });
+});
+
+describe("safety, reset, and determinism", () => {
+  const emptyRepository: IngredientRepository = { getById: () => undefined, list: () => [] };
+  const incompleteEngine = new RuleRecommendationEngine(emptyRepository);
+
+  it("excludes incomplete nutrition only when a related hard constraint is active", () => {
+    const result = incompleteEngine.rank([target], { maxCalories: 600 })[0];
+    expect(result.eligible).toBe(false);
+    expect(result.hardFailures[0]).toMatchObject({ criterion: "maxCalories" });
+    expect(result.hardFailures[0].message).toMatch(/不完整/);
+  });
+
+  it("excludes incomplete cost when budget is active", () => {
+    const result = incompleteEngine.rank([target], { maxCost: 20 })[0];
+    expect(result.eligible).toBe(false);
+    expect(result.hardFailures[0]).toMatchObject({ criterion: "maxCost" });
+  });
+
+  it("provides a complete inactive reset state", () => {
     const reset = resetRecommendationCriteria();
     expect(hasActiveCriteria(reset)).toBe(false);
-    expect(discover(reset)).toHaveLength(recipes.length);
+    expect(discoverRecipes(recipes, reset)).toHaveLength(30);
   });
 
-  it("uses a deterministic score, time, then id ordering", () => {
-    const base = recipes[0];
-    const later: Recipe = { ...base, id: "z-stable", slug: "z-stable" };
-    const earlier: Recipe = { ...base, id: "a-stable", slug: "a-stable" };
-    const ids = new RuleRecommendationEngine().rank([later, earlier], {}).map(({ recipe }) => recipe.id);
-    expect(ids).toEqual(["a-stable", "z-stable"]);
+  it("produces deterministic scores", () => {
+    const criteria = { availableIngredients: ["egg", "tomato"], preferredCuisine: "中式", preferredTags: ["quick"] };
+    expect(evaluate(criteria).score).toBe(evaluate(criteria).score);
+    expect(evaluate(criteria).scoreBreakdown).toEqual(evaluate(criteria).scoreBreakdown);
   });
 
-  it("never treats incomplete nutrition or cost calculations as reliable zero matches", () => {
-    const emptyRepository: IngredientRepository = { getById: () => undefined, list: () => [] };
-    const engine = new RuleRecommendationEngine(emptyRepository);
-    expect(discoverRecipes([recipes[0]], { maxCalories: 1 }, engine)).toEqual([]);
-    expect(discoverRecipes([recipes[0]], { maxCost: 1 }, engine)).toEqual([]);
-    const evaluation = engine.rank([recipes[0]], { maxCalories: 1 })[0];
-    expect(evaluation.metrics.nutritionComplete).toBe(false);
-    expect(evaluation.unmatchedConditions).toContain("营养估算不完整");
+  it("uses score, ingredient fit, time, then id for deterministic ordering", () => {
+    const later: Recipe = { ...target, id: "z-stable", slug: "z-stable" };
+    const earlier: Recipe = { ...target, id: "a-stable", slug: "a-stable" };
+    expect(engine.rank([later, earlier], {}).map(({ recipe }) => recipe.id)).toEqual(["a-stable", "z-stable"]);
+  });
+
+  it("evaluates all 30 recipes without non-finite scores or breakdown values", () => {
+    const results = engine.rank(recipes, { availableIngredients: ["egg", "rice", "salt"], preferredCuisine: "中式", preferredTags: ["quick"], preferredMethods: ["炒", "蒸"] });
+    expect(results).toHaveLength(30);
+    expect(results.every((result) => Number.isFinite(result.score) && Number.isFinite(result.ingredientMatch.fit) &&
+      Object.values(result.scoreBreakdown).every((item) => Number.isFinite(item.score) && Number.isFinite(item.contribution)))).toBe(true);
   });
 });

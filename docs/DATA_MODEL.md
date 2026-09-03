@@ -44,4 +44,4 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 ## Recommendation
 
-输入 `RecommendationCriteria`，输出带 `score`、匹配项、不匹配项和解释的 `RecommendationResult`。当前规则引擎按启用条件等权计算，后续应通过用户研究调整权重与硬约束策略。
+输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具、匹配项、不匹配项和解释的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签与技法是归一化加权软偏好。详细口径与权重见 `docs/RECOMMENDATION.md`，未来仍应通过用户研究校准。

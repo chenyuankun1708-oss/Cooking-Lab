@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-M0 Product Foundation 与 M1 Data & Calculation Engine 已完成；M2 Web MVP 开发中。
+M0 Product Foundation、M1 Data & Calculation Engine 与 M2 Web MVP 已完成；M3 Recommendation Engine 已完成实现。
 
 ## 已完成
 
@@ -25,23 +25,27 @@ M0 Product Foundation 与 M1 Data & Calculation Engine 已完成；M2 Web MVP �
 - 独立 `/recipes` 目录展示全部 30 道菜，可从首页进入并导航到稳定 slug 详情页。
 - 完整菜谱详情展示基础信息、准备/烹饪/总时间、每份营养、整道限制指标、整道与每份成本、可读食材/厨具、步骤解释和关键原理。
 - 详情展示通过轻量 view model 组合 Repository、Nutrition/Cost Engine、共享 formatter 与 machine-value 标签，不完整估算具有明确提示。
+- 两层规则推荐系统：时间、每份营养/油盐糖/成本和厨具作为硬限制，食材匹配、菜系、标签和技法作为软偏好。
+- 食材匹配按核心类别与调味料加权，区分缺少一种与缺少多种，并输出可读的缺失食材和匹配比例。
+- 推荐结果提供 eligible、hard failures、missing tools、score breakdown 和确定性自然语言解释；排序稳定且高软偏好不能覆盖硬失败。
 - 领域测试与核心文档。
 
 ## 正在做
 
-Issue #4 的交互筛选与 Issue #5 的目录/详情体验已完成；M2 核心浏览体验已具备，无已知 blocker。
+Issue #6 的可解释推荐引擎已完成，M3 Recommendation Engine completed，无已知 blocker。
 
 ## 下一步
 
-1. Issue #6：在用户研究基础上升级推荐权重与软硬条件策略。
-2. 后续补充自动化可访问性测试与部署。
+1. 进入 M4：补充 QA、自动化可访问性测试、性能检查与免费部署。
+2. 通过用户研究验证推荐权重与硬软条件是否符合真实决策习惯。
 
 ## 已知问题与技术债
 
 - demo 营养/价格未引用生产级数据源，仅用于功能验证。
 - Issue #1 的食材覆盖已由 30 道菜谱反向验证；当前无悬空 Ingredient ID。
 - 食材类别是 MVP 粗粒度分类；更细的食品学分类或多维筛选需在后续独立设计。
-- Issue #4 使用可预测的硬条件与等权匹配解释；复杂缺失食材权重、偏好权重和软条件留给 Issue #6。
+- 当前推荐权重是 MVP 产品判断，尚未经过用户研究或线上行为验证。
+- 当前 30 道菜添加糖均为 0；推荐接口和 UI 已支持非零每份上限，但现有数据下该条件区分度有限。
 - 筛选状态当前不写入 URL，刷新或分享链接不会保留条件。
 - 已落实语义化表单、键盘焦点与响应式布局，但尚无浏览器级自动化可访问性测试。
 - 尚无自动化浏览器可访问性测试或部署。

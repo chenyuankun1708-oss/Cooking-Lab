@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getToolLabel } from "@/lib/display-labels";
-import { formatCalories, formatCost, formatProtein, formatTime } from "@/lib/formatters";
+import { formatCalories, formatCost, formatGrams, formatPercent, formatProtein, formatTime } from "@/lib/formatters";
 import type { RecommendationResult } from "@/types/recommendation";
 
 export function RecipeCard({ result, variant = "recommendation" }: { result: RecommendationResult; variant?: "recommendation" | "catalog" }) {
@@ -19,15 +19,18 @@ export function RecipeCard({ result, variant = "recommendation" }: { result: Rec
         <Metric label="时间" value={formatTime(recipe.cooking.totalTime)} />
         <Metric label="热量/份" value={formatCalories(metrics.caloriesPerServing, metrics.nutritionComplete)} />
         <Metric label="蛋白质/份" value={formatProtein(metrics.proteinPerServing, metrics.nutritionComplete)} />
-        <Metric label="用油" value={`${recipe.cooking.oil} g`} />
+        <Metric label="用油/份" value={formatGrams(metrics.oilPerServing)} />
         <Metric label="成本/份" value={formatCost(metrics.costPerServing, metrics.costComplete)} />
         <Metric label="技法" value={recipe.cooking.method} />
       </dl>
       <p className="mt-4 text-xs leading-5 text-stone-500"><span className="font-semibold text-stone-700">厨具：</span>{recipe.tools.map(getToolLabel).join("、")}</p>
-      {variant === "recommendation" && <div className="mt-4 flex flex-wrap gap-2" aria-label="推荐理由">
-        {(result.matchedConditions.length ? result.matchedConditions : ["结构化数据已就绪"]).slice(0, 3).map((reason) => (
-          <span key={reason} className="rounded-full bg-amber-50 px-2.5 py-1 text-xs text-amber-900">✓ {reason}</span>
-        ))}
+      {variant === "recommendation" && <div className="mt-4 space-y-3">
+        <p className="text-sm leading-6 text-stone-700"><span className="font-semibold">推荐说明：</span>{result.explanation}</p>
+        {result.scoreBreakdown.ingredientFit && <div className="rounded-xl bg-stone-50 p-3 text-sm"><p className="font-semibold text-stone-800">食材匹配 {formatPercent(result.ingredientMatch.fit)} · 已有 {result.ingredientMatch.availableRequired}/{result.ingredientMatch.totalRequired}</p>{result.missingIngredients.length > 0 && <p className="mt-1 text-stone-600">还缺：{result.missingIngredients.map(({ name }) => name).join("、")}</p>}</div>}
+        <div className="flex flex-wrap gap-2" aria-label="匹配理由">
+          {(result.matchedConditions.length ? result.matchedConditions : ["满足当前全部严格限制"]).slice(0, 4).map((reason) => <span key={reason} className="rounded-full bg-amber-50 px-2.5 py-1 text-xs text-amber-900">✓ {reason}</span>)}
+          {result.unmatchedConditions.slice(0, 2).map((reason) => <span key={reason} className="rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-700">△ {reason}</span>)}
+        </div>
       </div>}
       <Link className="mt-auto pt-5 text-sm font-semibold text-emerald-700 underline-offset-4 hover:underline" href={`/recipes/${recipe.slug}`}>查看做法与原理 →</Link>
     </article>

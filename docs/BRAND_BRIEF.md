@@ -1,14 +1,41 @@
 # Brand Brief
 
-最近更新：2026-09-03
+最近更新：2026-09-04
 
 ## Working Title Note
 
 `Cooking Lab` 目前继续作为工程名和 working title 使用。
 
-本文件不确定最终消费者品牌名，只定义 M5 阶段的品牌与视觉方向，供后续设计和命名讨论使用。
+本文件记录 M5 品牌工作的核心边界和已确认方向，详细方案请看：
 
-## Product Personality
+- `docs/BRAND_DIRECTIONS.md`
+- `DESIGN.md`
+
+## Confirmed scope
+
+- M0-M4 已完成，Public Beta 已上线
+- M5 已启动
+- 当前 Issue #16 的目标是完成品牌与视觉方向确认
+- 本轮不做最终 UI implementation
+- 本轮不决定最终品牌名
+
+## Confirmed direction
+
+当前确认采用混合方向：
+
+- `Fresh Editorial` 70%
+- `Modern Culinary Lab` 30%
+
+这一方向意味着：
+
+- 视觉上优先 food-first、fresh、editorial、自然留白、强料理摄影
+- 体验上优先尽快摆脱 dashboard / SaaS / engineering demo 感
+- 内容结构上保留 recommendation explainability、cooking science、`why` 和 structured cooking knowledge
+- 不走纯工具风
+- 不走纯生活方式内容站
+- 不让数据重新成为一级视觉
+
+## Product personality
 
 产品应更接近：
 
@@ -29,7 +56,7 @@
 - luxury restaurant
 - food delivery app
 
-## Emotional Goal
+## Emotional goal
 
 用户打开产品时，理想的第一感觉应该是：
 
@@ -39,48 +66,35 @@
 
 “我要填写一个营养计算表。”
 
-这意味着产品需要同时保留理性能力和感性吸引力：
+因此，产品需要同时保留：
 
-- 决策能力仍然可靠
-- 内容依然有知识深度
-- 但整体氛围应更轻松、更生活化、更让人想继续逛下去
+- recommendation 的可靠与可解释
+- recipe / story / technique 的内容深度
+- 更轻松、更生活化、更有食欲的视觉入口
 
-## Visual Keywords
+## Directional summary
 
-- fresh
-- natural
-- editorial
-- warm
-- ingredient-led
+Issue #16 已完成方向确认，三套候选里当前采用的是 `A 70% + C 30%`。
+
+### A. Fresh Editorial
+
+- 食物摄影为主
+- 杂志感、自然留白、现代排版
+- 强调食材与料理本身
+
+`Warm Companion` 当前不作为主方向，但其 warmth、household 延展性和 companion potential 仍可在未来相关场景重新引入。
+
+## Visual principles
+
 - food-first
-- quiet confidence
-- everyday cooking
-- discovery
-- cultural texture
+- knowledge second
+- data supports trust
+- recommendation explains, but does not dominate
+- warmth without childishness
+- editorial without luxury pretension
+- scientific without SaaS appearance
 
-## Photography Direction
-
-M5 之后的料理图片系统应优先服务“真实可做、真实想吃”的感受：
-
-- 新鲜
-- 自然
-- 明亮
-- 有食欲
-- 食材纹理清楚
-- 自然光优先
-- 少量摆盘
-- 家庭厨房或轻 editorial 氛围
-- 不油腻
-- 不过度滤镜
-- 不使用明显低质量 stock / watermark 图片
-
-图片应尽量让用户看到：
-
-- 这道菜长什么样
-- 食材状态是什么样
-- 这是一道可以在现实厨房完成的料理
-
-## UI Direction
+## UI direction
 
 下一版 UI 应减少：
 
@@ -92,94 +106,79 @@ M5 之后的料理图片系统应优先服务“真实可做、真实想吃”�
 下一版 UI 应增加：
 
 - food photography
-- editorial layout
-- 更明显的视觉层级
-- discovery / browse / learn 路径
-- story-led content blocks
+- clearer visual hierarchy
+- browse / learn / discover 路径
+- story-led blocks
 - 更自然的留白与节奏
 
-推荐引擎仍然是核心能力，但它不应该继续作为唯一的首屏视觉主角。
+推荐引擎仍然是核心能力，但不再作为首页唯一视觉主角。
 
-## Homepage Direction
+## Photography principle
 
-首页下一版应从“工具首页”转向“消费者入口页”：
+图片系统确认采用：
 
-- 第一屏提出一个自然的问题，例如 `今晚，想吃点什么？`
-- 快速表达条件，而不是立即暴露完整的控制台式筛选面板
-- 把推荐、灵感、浏览、学习与故事组织成连续体验
+- 主方向：editorial food-first
+- 辅方向：modern culinary studio
 
-建议的首页信息架构方向：
+图片系统应优先服务“真实可做、真实想吃”的感受：
 
-- Hero / prompt
-- 快速条件输入
-- 推荐入口
-- 今日灵感
-- 按你的条件
-- 探索世界料理
-- 按食材探索
-- 按技法探索
-- 今天学一个技巧
-- 料理故事
+- 新鲜
+- 自然
+- 明亮
+- 有食欲
+- 食材纹理清楚
+- 自然光优先
+- 少量摆盘
+- 生活化
+- 不油腻
+- 不过度滤镜
+- 不明显 stock 感
+- 不使用黑背景 fine-dining 风格
 
-## Recipe Card Direction
+详情页可适度出现：
 
-Recipe card 在 M5 中需要从“信息卡片”升级为“想点进去的内容入口”：
-
-- 更强的食物视觉锚点
-- 一眼可识别的风味 / 地域 / 技法提示
-- 仍保留时间、营养、成本等理性信息，但不压过食物本身
-- 支持未来由推荐、浏览、故事、学习等多个入口复用
-
-## Recipe Detail Direction
-
-Recipe detail v2 应更像一篇可浏览、可学习、可收藏的料理内容页：
-
-- hero image
-- recipe name
-- taxonomy
-- intro
-- time / difficulty / nutrition / cost
-- 这道菜
-- story / origin / cultural context
-- why
-- cooking science
 - ingredients
-- steps
-- variations / substitutions / related recipes
+- cut surfaces
+- cookware
+- process details
 
-## Naming Directions
+用于强化 cooking science / culinary studio 感。
 
-当前只探索命名方向，不做最终定名。
+## Naming principle
 
-可探索的命名方向包括：
+当前继续保留 `Cooking Lab` 作为 M5 对外 working brand。
+
+正式品牌名 decision 暂缓到：
+
+- after M5 visual prototype / redesign
+
+Naming exploration 仍保留，继续覆盖：
 
 1. 中文自然系
-   - 强调季节、食材、厨房、烟火气
 2. 中文陪伴系
-   - 强调“今晚吃什么”“做饭陪伴”“日常照料感”
-3. 中文知识 / 料理系
-   - 强调理解、技法、料理学习，但要避免过硬的实验室感
+3. 中文料理 / 知识系
 4. 国际品牌系
-   - 适合未来更广泛受众，但仍需保留温度和食欲
-5. 中英混合可能性
-   - 既保留内容气质，也保留可扩展的国际表达空间
+5. 中英混合系
 
-## Mobile-first Considerations
+## Mobile and accessibility
 
-虽然本轮不开发 Mobile App，但品牌和视觉方向需要提前考虑：
-
-- 首页模块需要可自然下沉到移动端长滚动体验
-- 视觉系统不能依赖超宽屏 dashboard 结构
-- 卡片、图像、内容层级需要适应单列阅读
-- 后续 design tokens 应支持 Web + Mobile 共享
-
-## Accessibility and Design Constraints
-
+- 首页结构必须能自然下沉到移动端单列长滚动
+- 视觉系统不能依赖 desktop dashboard 布局
 - 不用低对比、小字号和仅靠颜色表达信息
-- 真实图片与内容优先，不用装饰性假图替代真实内容
-- 设计系统后续应形成 color / type / spacing / radius / shadow 的清晰方向
-- 最终品牌判断需要用户参与，Codex 不在当前阶段代替用户拍板
+- 图片与文字都要服务可读性，而不是只追求氛围
 
 ## Future IP
 
-未来可以考虑存在一个持续陪伴用户的料理伙伴、character、mascot 或稳定 voice，但当前阶段只记录可能性，不设计具体人物或形象。
+未来可以考虑 mascot、cooking companion、narrator voice 或 household assistant。
+
+但 M5 当前明确不做：
+
+- visual mascot implementation
+
+当前先建立：
+
+- brand voice
+- narrator tone
+- microcopy style
+
+只有在 household、assistant、personalized recommendation、habit / retention 场景足够明确后，再设计 character，而且角色不得抢过 food photography。

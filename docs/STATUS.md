@@ -1,10 +1,10 @@
 # Status
 
-最近更新：2026-09-03
+最近更新：2026-09-04
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，当前进入 M5 `Content, Brand & Experience` 的规划与架构审计阶段。
+Cooking Lab Public Beta v0.1 已上线，当前进入 M5 `Content, Brand & Experience` 的品牌方向确认与后续体验重设计准备阶段。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -16,6 +16,7 @@ Production URL：
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
+- M5 已启动
 
 ## 已完成能力
 
@@ -59,6 +60,34 @@ Production URL：
 - 新增 `docs/CONTENT_STRATEGY.md`
 - 已建立 M5 Epic 与分拆 Issues：`#15` - `#21`
 
+## Issue #16 当前产物
+
+Issue #16 `[M5] Define brand and visual design system` 当前已在品牌规划分支中形成以下文档产物：
+
+- 新增 `docs/BRAND_DIRECTIONS.md`
+  - 当前 Production 视觉审计
+  - A / B / C 三套品牌与视觉方向
+  - Naming exploration
+  - Design token proposal v0.1
+  - Homepage wireframes
+  - Recipe Card v2 / Recipe Detail v2 方向
+  - Photography direction
+  - IP / character direction
+- 更新 `docs/BRAND_BRIEF.md`
+- 新增 repo-level `DESIGN.md` 作为后续 UI / UX 实现的设计基线
+
+当前方向已确认，不再停留在“待用户从 A / B / C 中选择”的状态。
+
+### 已确认方向
+
+- Visual direction：`Fresh Editorial 70% + Modern Culinary Lab 30%`
+- Working brand：`Cooking Lab`
+- Naming status：deferred until after M5 visual prototype / redesign
+- Photography：editorial food-first 为主，modern culinary studio 为辅
+- Character / mascot：长期可能性保留，但 M5 当前不做 visual mascot implementation
+
+这意味着 Issue #16 已从“提出可选方案”进入“方向已确认并可供后续重设计引用”的收口状态，但尚未进入最终 UI 实装。
+
 ## 当前产品缺口
 
 - 当前 30 道菜仍不足以形成真正的内容型产品
@@ -69,7 +98,7 @@ Production URL：
 
 ## 下一步
 
-1. 启动 M5 Issue A（Brand）与 Issue B（Taxonomy）并行定义方向。
-2. 尽早完成 Issue F（App-ready architecture audit），作为后续内容与体验工作的约束条件。
-3. 在 taxonomy 稳定后再推进 30 -> 100 的结构化 recipe 扩充。
-4. 在品牌和图片系统足够稳定后推进消费者 Web 重设计。
+1. 以已确认的品牌方向作为后续 visual prototype / consumer web redesign 的约束输入。
+2. Naming exploration 保留，但正式品牌名延后到 M5 visual prototype / redesign 之后再评估。
+3. 在 taxonomy、image system 和体验重设计推进时，持续遵守 “Food first / Knowledge second / Data supports trust” 原则。
+4. PR #22 保持 open，等待后续 review，不在当前步骤 merge。

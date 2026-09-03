@@ -12,7 +12,13 @@ export function RecipeCard({ result, variant = "recommendation" }: { result: Rec
         <span className="text-xs text-stone-500">{recipe.cuisine} · {recipe.category}</span>
       </div>
       <h2 className="text-xl font-semibold text-stone-900">
-        <Link className="rounded focus:outline-none" href={`/recipes/${recipe.slug}`}>{recipe.name}</Link>
+        <Link
+          aria-label={`${recipe.name}详情`}
+          className="rounded focus:outline-none"
+          href={`/recipes/${recipe.slug}`}
+        >
+          {recipe.name}
+        </Link>
       </h2>
       <p className="mt-2 text-sm leading-6 text-stone-600">{recipe.description}</p>
       <dl className="mt-5 grid grid-cols-2 gap-2 text-center sm:grid-cols-3">
@@ -32,7 +38,13 @@ export function RecipeCard({ result, variant = "recommendation" }: { result: Rec
           {result.unmatchedConditions.slice(0, 2).map((reason) => <span key={reason} className="rounded-full bg-stone-100 px-2.5 py-1 text-xs text-stone-700">△ {reason}</span>)}
         </div>
       </div>}
-      <Link className="mt-auto pt-5 text-sm font-semibold text-emerald-700 underline-offset-4 hover:underline" href={`/recipes/${recipe.slug}`}>查看做法与原理 →</Link>
+      <Link
+        aria-label={`查看 ${recipe.name} 的做法与原理`}
+        className="mt-auto pt-5 text-sm font-semibold text-emerald-700 underline-offset-4 hover:underline"
+        href={`/recipes/${recipe.slug}`}
+      >
+        查看做法与原理 →
+      </Link>
     </article>
   );
 }

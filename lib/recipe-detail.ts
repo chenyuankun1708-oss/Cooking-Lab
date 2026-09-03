@@ -1,7 +1,7 @@
 import { recipes as recipeDataset } from "@/data/recipes";
 import type { Recipe } from "@/types/recipe";
 import { calculateCost } from "./cost";
-import { getHeatLabel, getToolLabel, getUnitLabel } from "./display-labels";
+import { getHeatLabel, getIngredientFallbackLabel, getToolLabel, getUnitLabel } from "./display-labels";
 import { formatCalories, formatCost, formatMacro, formatMass, formatProtein, formatSodium, formatTime } from "./formatters";
 import { type IngredientRepository, localIngredientRepository } from "./ingredient-repository";
 import { calculateNutrition } from "./nutrition";
@@ -38,7 +38,7 @@ export function createRecipeDetailViewModel(
     recipe,
     ingredients: recipe.ingredients.map((item) => ({
       id: item.ingredientId,
-      name: repository.getById(item.ingredientId)?.name ?? item.ingredientId,
+      name: repository.getById(item.ingredientId)?.name ?? getIngredientFallbackLabel(item.ingredientId),
       amount: `${item.amount} ${getUnitLabel(item.unit)}`,
       note: item.note,
       optional: Boolean(item.optional),

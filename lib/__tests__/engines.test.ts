@@ -172,6 +172,6 @@ describe("recommendation integration", () => {
     const result = new RuleRecommendationEngine().rank([recipes[0]], { availableIngredients: ["egg"] })[0];
     expect(result.score).toBeGreaterThan(0);
     expect(result.missingIngredients.length).toBeGreaterThan(0);
-    expect(result.explanation).toMatch(/只缺/);
+    expect(result.explanation).toMatch(/还缺/);
   });
 });

@@ -1,8 +1,11 @@
 export const toolLabels: Record<string, string> = {
+  "baking-tray": "烤盘",
   blender: "搅拌机",
   colander: "滤篮",
   "cutting-board": "砧板",
   "frying-pan": "平底锅",
+  "heatproof-bowl": "耐热碗",
+  "heatproof-plate": "耐热盘",
   knife: "刀",
   "mixing-bowl": "料理碗",
   oven: "烤箱",
@@ -16,9 +19,11 @@ export const toolLabels: Record<string, string> = {
 export const tagLabels: Record<string, string> = {
   "high-fiber": "高纤维",
   "high-protein": "高蛋白",
+  "low-oil": "低用油",
   "no-added-sugar": "无添加糖",
   "one-pot": "一锅完成",
   quick: "快手",
+  staple: "主食友好",
   vegan: "纯素",
   "vegetable-rich": "蔬菜丰富",
   vegetarian: "蛋奶素",
@@ -45,8 +50,12 @@ export const unitLabels: Record<string, string> = {
   tbsp: "汤匙",
 };
 
-export const getToolLabel = (tool: string) => toolLabels[tool] ?? tool;
-export const getTagLabel = (tag: string) => tagLabels[tag] ?? tag;
-export const getHeatLabel = (heat: string | undefined) => heat ? heatLabels[heat] : undefined;
-export const getUnitLabel = (unit: string) => unitLabels[unit] ?? unit;
-export const getDifficultyLabel = (difficulty: string) => difficultyLabels[difficulty] ?? difficulty;
+const fallbackLabel = (value: string) => value.replace(/[-_]+/g, " ").trim();
+
+export const getToolLabel = (tool: string) => toolLabels[tool] ?? fallbackLabel(tool);
+export const getTagLabel = (tag: string) => tagLabels[tag] ?? fallbackLabel(tag);
+export const getHeatLabel = (heat: string | undefined) =>
+  heat && heat !== "none" ? heatLabels[heat] ?? fallbackLabel(heat) : undefined;
+export const getUnitLabel = (unit: string) => unitLabels[unit] ?? fallbackLabel(unit);
+export const getDifficultyLabel = (difficulty: string) => difficultyLabels[difficulty] ?? fallbackLabel(difficulty);
+export const getIngredientFallbackLabel = (ingredientId: string) => `未知食材（${ingredientId}）`;

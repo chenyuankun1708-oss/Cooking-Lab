@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { recipes } from "@/data/recipes";
 import { calculateCost } from "../cost";
-import { getHeatLabel, getToolLabel } from "../display-labels";
+import { getHeatLabel, getToolLabel, getUnitLabel } from "../display-labels";
 import { formatCalories, formatCost, formatMacro, formatMass, formatSodium } from "../formatters";
 import type { IngredientRepository } from "../ingredient-repository";
 import { localIngredientRepository } from "../ingredient-repository";
@@ -53,12 +53,15 @@ describe("recipe catalog and detail presentation", () => {
   });
 
   it("maps heat and tool machine values consistently", () => {
+    const uniqueTools = new Set(recipes.flatMap((recipe) => recipe.tools));
     expect(getHeatLabel("low")).toBe("小火");
     expect(getHeatLabel("medium")).toBe("中火");
     expect(getHeatLabel("high")).toBe("大火");
     expect(getHeatLabel("none")).toBeUndefined();
     expect(getToolLabel("frying-pan")).toBe("平底锅");
-    expect(getToolLabel("future-tool")).toBe("future-tool");
+    expect([...uniqueTools].every((tool) => !getToolLabel(tool).includes("-"))).toBe(true);
+    expect(getToolLabel("future-tool")).toBe("future tool");
+    expect(getUnitLabel("future-unit")).toBe("future unit");
   });
 
   it("formats numeric boundaries without emitting NaN or Infinity", () => {

@@ -206,9 +206,13 @@ export function buildRecommendationExplanation(input: Pick<RecommendationResult,
   if (!input.eligible) return `当前无法直接推荐：${input.hardFailures.map(({ message }) => message).join("；")}。`;
   const parts: string[] = [];
   if (input.scoreBreakdown.ingredientFit) {
+    const missingNames = input.ingredientMatch.missingIngredients.map(({ name }) => name).join("、");
+    const missingPhrase = input.ingredientMatch.missingIngredients.length <= 1
+      ? `只缺${missingNames}`
+      : `还缺${missingNames}`;
     parts.push(input.ingredientMatch.fit === 1
       ? "必需食材已齐全"
-      : `已有 ${input.ingredientMatch.availableRequired}/${input.ingredientMatch.totalRequired} 种必需食材，只缺${input.ingredientMatch.missingIngredients.map(({ name }) => name).join("、")}`);
+      : `已有 ${input.ingredientMatch.availableRequired}/${input.ingredientMatch.totalRequired} 种必需食材，${missingPhrase}`);
   }
   const preferenceMatches = Object.entries(input.scoreBreakdown)
     .filter(([key, value]) => key !== "ingredientFit" && value && value.score > 0)

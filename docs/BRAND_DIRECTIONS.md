@@ -13,6 +13,52 @@
 - 本 Issue 不替用户决定最终品牌名
 - `Cooking Lab` 继续作为 working title
 
+## Confirmed Direction
+
+当前确认采用混合方向：
+
+- `Fresh Editorial` 70%
+- `Modern Culinary Lab` 30%
+
+### 保留的 A 元素
+
+- food-first 视觉优先级
+- fresh、editorial、自然留白
+- 强料理摄影和真实食材纹理
+- 现代排版和更清楚的浏览节奏
+- 尽快摆脱 dashboard / SaaS / engineering demo 感
+
+### 保留的 C 元素
+
+- recommendation explainability
+- cooking science
+- `why` 解释层
+- structured cooking knowledge
+- 现代料理工作室而非纯生活方式内容站的骨架
+
+### 当前不采用的 B 元素
+
+- 温暖陪伴感作为主视觉人格
+- 更柔软、更圆润的家庭 companion 主导界面
+- mascot-first 或 companion-first 的品牌表达
+
+### 未来可能重新引入的 B 元素
+
+- household 场景里的陪伴感
+- assistant / personalized recommendation 的长期语气
+- narrator tone、microcopy warmth
+- 明确功能场景下的 character / companion
+
+### 最终原则
+
+- Food first.
+- Knowledge second.
+- Data supports trust.
+- Recommendation explains, but does not dominate.
+- Warmth without childishness.
+- Editorial without luxury pretension.
+- Scientific without SaaS appearance.
+
 ## Visual Audit
 
 ### 为什么现在有 dashboard / SaaS / engineering demo 感
@@ -1034,18 +1080,103 @@ Recommendation Engine 仍然是核心，但不再以“左筛选 + 右结果”�
 - 可以先定义 narrator tone、标题语气、微文案节奏
 - 角色形象至少晚于品牌方向和摄影语言稳定之后再进入
 
-## Decisions Required From User
+## Confirmed Decisions
 
-1. 请选择 `A / B / C`，或明确指定你想要的混合方向。
-2. 请选择更想继续收敛的命名方向：
-   - 中文自然系
-   - 中文陪伴系
-   - 中文料理 / 知识系
-   - 国际品牌系
-   - 中英混合系
-3. 是否保留 `Cooking Lab` 作为对外名，还是只保留为 working title？
-4. 摄影风格更偏向：
-   - editorial food-first
-   - warm home kitchen
-   - modern culinary studio
-5. 未来是否希望加入 character / mascot / cooking companion？
+### 1. Visual Direction
+
+确认采用：
+
+- `Fresh Editorial` 70%
+- `Modern Culinary Lab` 30%
+
+这意味着：
+
+- 视觉第一目标是 food-first、fresh、editorial、自然留白、强料理摄影
+- 快速摆脱 dashboard / SaaS / engineering demo 感
+- 同时保留 recommendation explainability、cooking science、`why` 和 structured cooking knowledge
+- 不走纯工具风
+- 不走纯生活方式内容站
+- 不让数据重新成为一级视觉
+
+### 2. Product Name
+
+- 当前继续保留 `Cooking Lab`
+- 作为 M5 当前对外 working brand
+- 本阶段暂不改正式品牌名
+
+原因：
+
+- 当前 naming candidates 尚无明显强过 `Cooking Lab` 的方案
+- 先完成视觉与内容体验，再评估名称
+- 后续需要结合商标、域名、重名、跨语言可读性再决定
+
+Naming exploration 保留，但状态改为：
+
+- deferred until after M5 visual prototype / redesign
+
+### 3. Photography
+
+主方向：
+
+- editorial food-first
+
+辅方向：
+
+- modern culinary studio
+
+摄影要求：
+
+- fresh
+- natural light
+- bright but realistic
+- ingredient texture
+- appetizing
+- minimal styling
+- not oily
+- not over-saturated
+- not obvious stock
+- not black-background fine dining
+
+允许部分详情页出现：
+
+- ingredients
+- cut surfaces
+- cookware
+- process details
+
+用于强化 cooking science / culinary studio 感。
+
+### 4. Character / Mascot
+
+长期：
+
+- YES, potentially
+
+M5 当前：
+
+- NO visual mascot implementation
+
+先建立：
+
+- brand voice
+- narrator tone
+- microcopy style
+
+未来只有在以下场景足够明确后再设计 character：
+
+- household
+- assistant
+- personalized recommendation
+- habit / retention
+
+角色不得抢过 food photography。
+
+### 5. Design Principle Summary
+
+- Food first.
+- Knowledge second.
+- Data supports trust.
+- Recommendation explains, but does not dominate.
+- Warmth without childishness.
+- Editorial without luxury pretension.
+- Scientific without SaaS appearance.

@@ -47,6 +47,13 @@
   - food delivery app tropes
   - luxury fine-dining stiffness
   - childish mascot-first branding
+- Confirmed direction:
+  - Fresh Editorial 70%
+  - Modern Culinary Lab 30%
+- Working brand:
+  - `Cooking Lab` remains the external working brand through M5
+- Naming status:
+  - final renaming deferred until after the M5 visual prototype / redesign
 
 ## Product goals
 
@@ -64,6 +71,7 @@
   - Recipe cards invite browsing before exposing dense metrics.
   - Detail pages read like useful cooking content, not a dashboard.
   - Future UI work can cite stable visual, content, and accessibility rules.
+  - recommendation explainability and cooking science remain visible, but below the food-first visual layer
 
 ## Personas and jobs
 
@@ -101,14 +109,17 @@
 
 ## Design principles
 
-- Principle 1: Food before form controls.
-- Principle 2: Recommendation is core logic, not the whole visual identity.
-- Principle 3: Data should support trust, not dominate the first glance.
-- Principle 4: Calm editorial rhythm beats dense panel stacking.
-- Principle 5: Cultural and culinary context should feel additive, never decorative filler.
+- Principle 1: Food first.
+- Principle 2: Knowledge second.
+- Principle 3: Data supports trust.
+- Principle 4: Recommendation explains, but does not dominate.
+- Principle 5: Warmth without childishness.
+- Principle 6: Editorial without luxury pretension.
+- Principle 7: Scientific without SaaS appearance.
 - Tradeoffs:
   - Keep structured data visible enough for trust while moving it below image, title, and story cues.
   - Preserve the product's rational "lab" credibility without keeping the current dashboard styling.
+  - keep future household warmth as a secondary layer, not the primary M5 visual identity
 
 ## Visual language
 
@@ -119,7 +130,7 @@
   - restrained success/warning states
 - Typography:
   - modern humanist or neo-grotesk body text
-  - display typography with mild editorial personality
+  - display typography with editorial personality
   - numeric metrics use a quieter, compact style
 - Spacing/layout rhythm:
   - generous section spacing
@@ -134,7 +145,8 @@
   - small hover states on cards
   - reduced motion support by default
 - Imagery/iconography:
-  - natural-light food photography
+  - editorial food-first photography as the primary visual language
+  - modern culinary studio details as a secondary layer on recipe detail and knowledge surfaces
   - minimal icon usage
   - line icons only as supporting UI, not brand personality
 
@@ -215,6 +227,7 @@
   - ask natural cooking questions
   - avoid admin-panel nouns
   - keep nutrition/cost disclaimers factual and compact
+  - build brand warmth through narrator tone and microcopy, not through a mascot-first interface
 
 ## Implementation constraints
 
@@ -235,7 +248,6 @@
 
 ## Open questions
 
-- [ ] Which primary brand direction should lead M5 implementation: A, B, C, or a deliberate hybrid?
-- [ ] Should `Cooking Lab` remain a public-facing name or stay internal as a working title?
-- [ ] How much of the "lab" identity should remain visible to users versus only structuring backend trust?
-- [ ] When should a future mascot or companion voice appear: onboarding, content layer, or household features?
+- [ ] Which specific typography pair best expresses the confirmed A 70% + C 30% direction across Chinese and Latin text?
+- [ ] How much of the "lab" identity should appear in homepage copy versus staying mostly in detail and knowledge surfaces?
+- [ ] At what later milestone should a future character be evaluated: household MVP, assistant layer, or retention-focused release?

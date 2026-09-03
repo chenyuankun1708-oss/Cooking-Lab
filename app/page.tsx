@@ -2,6 +2,7 @@ import { RecipeDiscovery } from "@/components/recipe-discovery";
 import { ingredients } from "@/data/ingredients";
 import { recipes } from "@/data/recipes";
 import Link from "next/link";
+import { BetaFooter } from "@/components/beta-footer";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
         </div>
       </section>
       <RecipeDiscovery recipes={recipes} ingredients={ingredients} />
-      <p className="mx-auto max-w-7xl px-5 pb-10 text-sm text-stone-500">本版本营养与价格为 demo 估算，用于产品和计算逻辑验证，不构成医学或个体化营养建议。</p>
+      <BetaFooter />
     </main>
   );
 }

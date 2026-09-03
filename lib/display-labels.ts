@@ -45,8 +45,9 @@ export const unitLabels: Record<string, string> = {
   tbsp: "汤匙",
 };
 
-export const getToolLabel = (tool: string) => toolLabels[tool] ?? tool;
+export const getToolLabel = (tool: string) => toolLabels[tool] ?? `未知厨具（${tool}）`;
 export const getTagLabel = (tag: string) => tagLabels[tag] ?? tag;
-export const getHeatLabel = (heat: string | undefined) => heat ? heatLabels[heat] : undefined;
-export const getUnitLabel = (unit: string) => unitLabels[unit] ?? unit;
+export const getHeatLabel = (heat: string | undefined) => !heat || heat === "none" ? undefined : heatLabels[heat] ?? `未知火候（${heat}）`;
+export const getUnitLabel = (unit: string) => unitLabels[unit] ?? `未知单位（${unit}）`;
 export const getDifficultyLabel = (difficulty: string) => difficultyLabels[difficulty] ?? difficulty;
+export const getIngredientFallbackLabel = (ingredientId: string) => `未知食材（${ingredientId}）`;

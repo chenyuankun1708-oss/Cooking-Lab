@@ -1,10 +1,10 @@
 # Status
 
-最近更新：2026-09-02
+最近更新：2026-09-03
 
 ## 当前阶段
 
-M0 Product Foundation、M1 Data & Calculation Engine 与 M2 Web MVP 已完成；M3 Recommendation Engine 已完成实现。
+M4 Public Beta。M0–M3 核心 MVP 已完成，M4 发布准备已完成；尚未执行需要用户账号授权的公开部署与真实设备目视复核。
 
 ## 已完成
 
@@ -29,15 +29,19 @@ M0 Product Foundation、M1 Data & Calculation Engine 与 M2 Web MVP 已完成；
 - 食材匹配按核心类别与调味料加权，区分缺少一种与缺少多种，并输出可读的缺失食材和匹配比例。
 - 推荐结果提供 eligible、hard failures、missing tools、score breakdown 和确定性自然语言解释；排序稳定且高软偏好不能覆盖硬失败。
 - 领域测试与核心文档。
+- Public Beta 发布门禁：统一数据免责声明、基础 metadata、自定义 404、未知标签与非有限数值 fallback。
+- 375/390px 窄屏筛选布局修复，并完成响应式、语义化、键盘焦点、对比度和主要用户路径的静态审计。
+- GitHub Issues Beta 反馈入口和不收集隐私信息的反馈模板。
+- README 本地运行、架构、数据限制与 Vercel Hobby 零成本部署说明，以及发布 QA 清单。
 
 ## 正在做
 
-Issue #6 的可解释推荐引擎已完成，M3 Recommendation Engine completed，无已知 blocker。
+Issue #7 Public Beta readiness：代码、文档和自动化发布门禁已完成；等待用户授权 Vercel/GitHub 账号后创建公开部署。
 
 ## 下一步
 
-1. 进入 M4：补充 QA、自动化可访问性测试、性能检查与免费部署。
-2. 通过用户研究验证推荐权重与硬软条件是否符合真实决策习惯。
+1. 用户授权 Vercel 后按 README 创建 Hobby 项目，并使用 preview/production URL 完成真实浏览器和目标设备目视 QA。
+2. 发布 Beta，收集 GitHub Issues 反馈，再以证据决定下一个 Post-MVP milestone。
 
 ## 已知问题与技术债
 
@@ -47,6 +51,10 @@ Issue #6 的可解释推荐引擎已完成，M3 Recommendation Engine completed�
 - 当前推荐权重是 MVP 产品判断，尚未经过用户研究或线上行为验证。
 - 当前 30 道菜添加糖均为 0；推荐接口和 UI 已支持非零每份上限，但现有数据下该条件区分度有限。
 - 筛选状态当前不写入 URL，刷新或分享链接不会保留条件。
-- 已落实语义化表单、键盘焦点与响应式布局，但尚无浏览器级自动化可访问性测试。
-- 尚无自动化浏览器可访问性测试或部署。
+- 当前使用 CSS 渐变作为菜谱图片占位，没有真实菜品图片。
+- 没有用户账号、持久化储藏室、收藏或跨设备状态。
+- 当前环境的 in-app 浏览器不可用；375/390/768/桌面与键盘体验仅完成静态审计，尚未在真实浏览器目视复核。
+- 尚未创建公开 Vercel 部署；此操作需要用户账号授权。
+- 当前没有浏览器级自动化可访问性测试，MVP 未引入 Playwright/Cypress 等大型依赖。
+- 最小 GitHub Actions CI 已评估但未纳入：当前 OAuth 凭据缺少 `workflow` scope；建议用单独 Issue 在获得适当仓库授权后添加，不阻塞 Beta。
 - 本机未安装 GitHub CLI；仓库与 Issue 已通过 GitHub 连接器管理。

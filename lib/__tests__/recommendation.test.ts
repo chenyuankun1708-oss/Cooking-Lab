@@ -79,6 +79,8 @@ describe("ingredient fit", () => {
     expect(oneMissing.missingIngredients).toHaveLength(1);
     expect(severalMissing.missingIngredients.length).toBeGreaterThan(1);
     expect(oneMissing.ingredientMatch.fit).toBeGreaterThan(severalMissing.ingredientMatch.fit);
+    expect(oneMissing.explanation).toContain("只缺");
+    expect(severalMissing.explanation).toContain("还缺");
   });
 
   it("does not penalize missing optional ingredients", () => {
@@ -167,6 +169,10 @@ describe("safety, reset, and determinism", () => {
     const reset = resetRecommendationCriteria();
     expect(hasActiveCriteria(reset)).toBe(false);
     expect(discoverRecipes(recipes, reset)).toHaveLength(30);
+  });
+
+  it("handles an empty recipe collection", () => {
+    expect(discoverRecipes([], {})).toEqual([]);
   });
 
   it("produces deterministic scores", () => {

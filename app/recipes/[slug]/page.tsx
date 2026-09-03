@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { createRecipeDetailViewModel, getRecipeBySlug } from "@/lib/recipe-detail";
+import { BetaFooter } from "@/components/beta-footer";
 
 export function generateStaticParams() {
   return recipes.map(({ slug }) => ({ slug }));
@@ -49,7 +50,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           {detail.warnings.length > 0 && <section className="rounded-2xl border border-amber-300 bg-amber-50 p-5" aria-labelledby="estimate-warning"><h2 id="estimate-warning" className="font-bold text-amber-950">部分估算不完整</h2><ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-amber-950">{detail.warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul></section>}
         </aside>
       </div>
-      <footer className="border-t border-stone-200 px-5 py-8"><div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4"><p className="max-w-2xl text-sm leading-6 text-stone-500">营养、价格与时间均为 demo 估算，实际结果受食材品牌、可食部和烹饪损耗影响。</p><Link className="min-h-11 rounded-xl bg-emerald-700 px-5 py-3 font-semibold text-white hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" href="/recipes">浏览全部菜谱</Link></div></footer>
+      <BetaFooter showCatalogLink />
     </main>
   );
 }

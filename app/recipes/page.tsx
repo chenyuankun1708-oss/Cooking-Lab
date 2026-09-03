@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { RecipeCard } from "@/components/recipe-card";
+import { BetaFooter } from "@/components/beta-footer";
 import { recipes } from "@/data/recipes";
 import { recommendationEngine } from "@/lib/recommendation";
 
@@ -24,6 +25,7 @@ export default function RecipeCatalogPage() {
           {catalog.map((result) => <RecipeCard key={result.recipe.id} result={result} variant="catalog" />)}
         </div>
       </section>
+      <BetaFooter />
     </main>
   );
 }

@@ -33,10 +33,10 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(17rem,21rem)_1fr]">
         <aside className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm lg:sticky lg:top-4" aria-labelledby="filter-title">
-          <div className="flex items-center justify-between gap-3"><h2 id="filter-title" className="text-xl font-bold">我的料理条件</h2><button type="button" onClick={reset} disabled={!hasActiveCriteria(criteria)} className="min-h-11 rounded-xl px-3 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:text-stone-400">全部重置</button></div>
+          <div className="flex items-center justify-between gap-3"><h2 id="filter-title" className="text-xl font-bold">我的料理条件</h2><button type="button" onClick={reset} disabled={!hasActiveCriteria(criteria)} className="min-h-11 rounded-xl px-3 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:text-stone-500">全部重置</button></div>
           <p className="mt-2 text-sm leading-6 text-stone-600">严格限制会排除不符合的料理；偏好只影响剩余料理的推荐顺序。</p>
           <div className="mt-5 space-y-6">
-            <fieldset><legend className="font-semibold">严格限制</legend><div className="mt-3 grid grid-cols-2 gap-3">
+            <fieldset><legend className="font-semibold">严格限制</legend><div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Select label="最长时间" value={criteria.maxTime} options={[15, 30, 45, 60]} suffix="分钟" onChange={(v) => setNumber("maxTime", v)} />
               <Select label="热量上限/份" value={criteria.maxCalories} options={[400, 500, 600, 800]} suffix="kcal" onChange={(v) => setNumber("maxCalories", v)} />
               <Select label="最低蛋白质/份" value={criteria.minProtein} options={[20, 30, 40]} suffix="g" onChange={(v) => setNumber("minProtein", v)} />

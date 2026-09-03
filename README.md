@@ -58,11 +58,11 @@ npm run build
 
 更多说明见：
 
-- [docs/PRODUCT.md](/Users/chenyuankun/ai-projects/Cooking%20Lab/docs/PRODUCT.md)
-- [docs/ARCHITECTURE.md](/Users/chenyuankun/ai-projects/Cooking%20Lab/docs/ARCHITECTURE.md)
-- [docs/DATA_MODEL.md](/Users/chenyuankun/ai-projects/Cooking%20Lab/docs/DATA_MODEL.md)
-- [docs/RECOMMENDATION.md](/Users/chenyuankun/ai-projects/Cooking%20Lab/docs/RECOMMENDATION.md)
-- [docs/STATUS.md](/Users/chenyuankun/ai-projects/Cooking%20Lab/docs/STATUS.md)
+- [docs/PRODUCT.md](docs/PRODUCT.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
+- [docs/RECOMMENDATION.md](docs/RECOMMENDATION.md)
+- [docs/STATUS.md](docs/STATUS.md)
 
 ## Deployment
 

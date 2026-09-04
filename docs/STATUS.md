@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，当前正在完成 M5 `Content, Brand & Experience` 的消费者 Web 重设计。
+Cooking Lab Public Beta v0.1 已上线，M5 消费者 Web 重设计已合并，当前进入 M5.1 `Product Naturalization & Content Quality`。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -17,7 +17,10 @@ Production URL：
 - GitHub Issue #16 已于 2026-09-03 closed
 - GitHub PR #26 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #20 已关闭
-- GitHub Issue #21 当前 open，工作分支为 `feature/issue-21-consumer-web-redesign`
+- GitHub PR #27 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #21 已关闭
+- GitHub Epic #28 与 Issue #29 当前 open
+- Issue #29 工作分支为 `feature/issue-29-flavor-human-language`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -162,7 +165,7 @@ PR #26 已建立 Recipe Image System 基础并 merge 到 `main`：
 
 ## Issue #21 当前产物
 
-当前分支 `feature/issue-21-consumer-web-redesign` 已完成：
+PR #27 已合并并完成：
 
 - Food-first 首页与真实料理 hero
 - 今晚灵感、菜系探索和技法探索内容层级
@@ -173,6 +176,17 @@ PR #26 已建立 Recipe Image System 基础并 merge 到 `main`：
 - 10 张来自 Wikimedia Commons、授权和 attribution 完整的 seed images
 - 保持 recommendation、nutrition、cost、taxonomy 与 shared-core 边界不变
 
+## Issue #29 当前产物
+
+当前分支已建立 M5.1 Flavor 与自然语言基线：
+
+- `recipe.flavor` 取代旧 `taxonomy.flavorProfile`，成为唯一 canonical Flavor source
+- 100 道 recipe 完成保守 Flavor Profile 迁移
+- 基础味使用 `0–4` 编辑强度，香气、口感与饮食感受使用克制的稳定词汇
+- 清淡、鲜辣、酸爽、浓郁、焦香、暖乎乎作为 deterministic soft preferences 进入推荐
+- 时间按照真实 100 道分布映射为轻松快手、日常料理、慢慢做、值得等待，精确分钟继续保留
+- 首页、目录、卡片和详情页移除匹配百分比、数据库计数 CTA、重复“为什么这样做？”与主要区域 Beta 说明框
+
 ## 当前产品缺口
 
 - 100 道菜已形成第一版料理世界地图，但文化 provenance 与更深 region coverage 仍需持续审核
@@ -182,6 +196,6 @@ PR #26 已建立 Recipe Image System 基础并 merge 到 `main`：
 
 ## 下一步
 
-1. 完成 Issue #21 的 browser QA、PR review 与生产部署验证。
-2. 后续按 `docs/IMAGE_SYSTEM.md` 分批补齐剩余 90 道 recipe hero images。
-3. Naming exploration 保留，正式品牌名在 M5 体验验证之后再评估。
+1. 完成 Issue #29 browser QA、PR review 与合并前验证。
+2. Issue #30 再处理 recipe publishing gate 与内容深度；本 Issue 不提前实现。
+3. 后续按 `docs/IMAGE_SYSTEM.md` 分批补齐剩余 90 道 recipe hero images。

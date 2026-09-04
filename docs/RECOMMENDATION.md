@@ -23,8 +23,11 @@ Cooking Lab 的推荐系统是完全本地、确定性且可解释的规则引�
 - `preferredCuisine`：菜系是否相同。
 - `preferredTags`：所选标签的匹配比例，允许部分匹配。
 - `preferredMethods`：料理技法是否属于所选集合。
+- `flavorPreferences`：将清淡、鲜辣、酸爽、浓郁、焦香、暖乎乎等用户语言映射为结构化 Flavor 目标，再比较基础味强度距离与 aroma / texture / character signals。
 
 `minProtein` 保持“最低”这一明确的用户语义，因此仍是硬限制；偏好高蛋白但不要求下限时可使用 `high-protein` 标签。
+
+Flavor 始终是 soft preference。即使没有完全命中所选口味，只要料理满足硬限制，它仍可保留在结果中；Flavor 不能抵消时间、厨具、营养或预算失败。
 
 ## Ingredient Fit
 
@@ -40,8 +43,9 @@ Cooking Lab 的推荐系统是完全本地、确定性且可解释的规则引�
 
 - ingredient fit：0.50
 - cuisine：0.20
-- tags：0.20
+- tags：0.15
 - methods：0.10
+- flavor：0.20
 
 每个已启用维度先得到 0–1 分数：`score = Σ(dimension score × weight) / Σ(active weight) × 100`，最终显示为整数。未启用任何软偏好时，中性分数为 100，表示料理满足全部已启用硬限制，而不是声称它是绝对最佳选择。
 
@@ -68,5 +72,5 @@ Cooking Lab 的推荐系统是完全本地、确定性且可解释的规则引�
 - 权重来自当前 MVP 产品判断，尚未经过用户研究或线上行为校准。
 - 食材重要性只能使用现有粗粒度 category；未建模替代食材、库存数量或采购难度。
 - 工具仍是二元可行性约束，尚未建模可替代工具。
-- 当前 30 道菜的显式添加糖均为 0；控件与规则已支持非零数据，但区分度要随未来数据扩展验证。
+- 100 道 recipe 的 Flavor Profile 是基于当前配方的人工编辑判断，尚未经过用户研究或感官实验校准。
 - 营养、价格、时间和单位换算仍是 `demo-estimated`，不是医学或实时市场数据。

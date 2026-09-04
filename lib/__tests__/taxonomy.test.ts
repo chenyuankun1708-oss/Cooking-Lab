@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { getTaxonomyLabel } from "@/data/taxonomy";
 import { recipes } from "@/data/recipes";
+import { getFlavorProfileLabels } from "../flavor";
 import {
-  getFlavorProfileLabels,
   getRecipeCuisineLabel,
   getRecipeDishTypeLabel,
   getRecipeLegacyCategoryLabel,
@@ -43,7 +43,7 @@ describe("taxonomy helpers", () => {
     expect(recipe!.taxonomy.browseTagIds).toEqual(["one-pot"]);
     expect(recipe!.taxonomy.dietaryTagIds).toEqual(["vegan"]);
     expect(recipe!.taxonomy.mealType.dishTypeId).toBe("staple");
-    expect(recipe!.taxonomy.flavorProfile?.tasteIds).toContain("umami");
+    expect(recipe!.flavor.tastes.umami).toBe(3);
     expect(getRecipeTagIds(recipe!)).toEqual(expect.arrayContaining(["one-pot", "vegan", "staple", "no-added-sugar"]));
     expect(getRecipeTagLabels(recipe!)).toEqual(expect.arrayContaining(["一锅完成", "纯素"]));
   });
@@ -56,16 +56,21 @@ describe("taxonomy helpers", () => {
     expect(getRecipeTagIds(slowerRecipe!)).not.toContain("quick");
   });
 
-  it("supports optional origin and flavor labels without requiring full hierarchy", () => {
+  it("keeps optional geography separate from the canonical flavor display adapter", () => {
     const chineseRecipe = recipes.find((recipe) => recipe.slug === "tomato-scrambled-eggs");
     const fusionRecipe = recipes.find((recipe) => recipe.slug === "lemon-chicken-breast");
     expect(chineseRecipe).toBeDefined();
     expect(fusionRecipe).toBeDefined();
     expect(getRecipeOriginLabel(chineseRecipe!)).toBe("中国");
     expect(getRecipeOriginLabel(fusionRecipe!)).toBeUndefined();
-    expect(getFlavorProfileLabels(chineseRecipe!)).toEqual({
-      tastes: ["咸鲜", "微酸"],
-      characteristics: ["带汁", "嫩"],
+    expect(getFlavorProfileLabels(chineseRecipe!.flavor)).toMatchObject({
+      tastes: expect.arrayContaining([
+        { id: "salty", label: "咸香", intensity: 1 },
+        { id: "sour", label: "酸香", intensity: 2 },
+      ]),
+      aromas: ["番茄浓香"],
+      textures: ["软嫩", "裹汁"],
+      characters: ["家常舒服", "下饭"],
     });
   });
 

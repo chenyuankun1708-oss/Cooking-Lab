@@ -26,14 +26,14 @@
   - `cuisine: { cuisineId; subCuisineId? }`
   - `techniques: string[]`
   - `mealType: { dishTypeId; mealOccasionIds? }`
-  - `flavorProfile?: { tasteIds?; characteristicIds? }`
   - `dietaryTagIds?: string[]`
   - `browseTagIds?: string[]`
+- `recipe.flavor` 是 Flavor Profile 的唯一 canonical source。它与 taxonomy 分离，包含 `tastes` 基础味强度，以及可选 `aromaIds / textureIds / characterIds`；稳定 ID 与中文展示 label 分离，完整定义见 `docs/FLAVOR_MODEL.md`。
 - geography 与 cuisine tradition 明确分离：`country / region` 不等于 `cuisine / subCuisine`。不是每道菜都需要填满四层。
 - taxonomy machine value 统一使用稳定英文 ID；中文和英文展示文案由 taxonomy registry 提供，不在 UI 中散落硬编码 label。
 - `techniques` 表示烹饪动作或加热方式，例如 `pan-fry`、`stir-fry`、`steam`、`boil`、`simmer`、`stew`、`braise`、`roast`、`dress`、`rice-cook`。旧模型里的“汤”不再作为 technique，而是 `dishTypeId = "soup"`；“电饭锅”拆为 `tool = "rice-cooker"` 与 `technique = "rice-cook"`。
 - `mealType` 把“料理类型”和“用餐场景”拆开：`dishTypeId` 表示主菜、主食、汤、凉菜、配菜；`mealOccasionIds` 表示早餐、午餐、晚餐等场景。
-- `flavorProfile` 目前轻量拆为 `tasteIds` 与 `characteristicIds`，既能表达味型，也能表达口感/体感，不引入完整 flavor ontology。
+- Flavor 强度是用于浏览和推荐的编辑性主观近似，不是化学或感官实验测量。旧 `taxonomy.flavorProfile` 已移除，不保留兼容双写。
 - `dietaryTagIds` 只保存静态事实标签，例如 `vegan`、`vegetarian`；`high-protein`、`high-fiber`、`quick`、`low-oil`、`no-added-sugar` 等通过 helper 从营养或烹饪字段派生，不把易过期的计算结果硬编码回 recipe 数据。
 - `culture?` 是可选的结构化内容块：`summary`、`originNote`、`traditionalContext`、`modernContext`、`sources?`。没有可靠依据时留空，不为了“文化感”编造背景。
 - `culture.sources` 使用轻量 reference 对象（`title`、可选 `url / publisher / accessedAt`），只解决“能追溯到哪里”这一需求，不引入 CMS 或 citation engine。
@@ -63,4 +63,4 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 ## Recommendation
 
-输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具、匹配项、不匹配项和解释的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签与技法是归一化加权软偏好。当前 recommendation/filter compatibility 继续通过 taxonomy helper 暴露 `cuisine`、`technique` 和派生 `tag` 语义，避免在 M5 期间破坏现有交互。详细口径与权重见 `docs/RECOMMENDATION.md`，未来仍应通过用户研究校准。
+输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具、匹配项、不匹配项和解释的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签、技法与 Flavor 是归一化加权软偏好。Flavor 只改变合格料理的顺序，不会成为硬排除条件。当前 recommendation/filter compatibility 继续通过 taxonomy helper 暴露 `cuisine`、`technique` 和派生 `tag` 语义，避免在 M5 期间破坏现有交互。详细口径与权重见 `docs/RECOMMENDATION.md`，未来仍应通过用户研究校准。

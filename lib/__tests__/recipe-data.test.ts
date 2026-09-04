@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ingredients } from "@/data/ingredients";
 import { recipeImages } from "@/data/recipe-images";
 import { recipes } from "@/data/recipes";
+import { recipeFlavorProfiles } from "@/data/recipe-flavors";
 import type { Recipe } from "@/types/recipe";
 import { calculateCost } from "../cost";
 import { cuisines, getTaxonomyLabel, techniques } from "@/data/taxonomy";
@@ -15,6 +16,13 @@ describe("recipe dataset", () => {
     expect(recipes).toHaveLength(100);
     expect(validateRecipes(recipes, ingredients)).toEqual([]);
     expect(validateDataset(ingredients, recipes, recipeImages)).toEqual([]);
+  });
+
+  it("gives every recipe one canonical, serializable Flavor Profile", () => {
+    expect(Object.keys(recipeFlavorProfiles)).toHaveLength(100);
+    expect(recipes.every((recipe) => recipeFlavorProfiles[recipe.slug] === recipe.flavor)).toBe(true);
+    expect(recipes.every((recipe) => Object.keys(recipe.flavor.tastes).length > 0)).toBe(true);
+    expect(() => JSON.stringify(recipes.map((recipe) => recipe.flavor))).not.toThrow();
   });
 
   it("covers the planned cooking methods and stable metadata values", () => {
@@ -125,13 +133,17 @@ describe("recipe dataset", () => {
       cost: { currency: "CNY", basis: "" },
       tools: ["Bad Tool"],
       steps: [{ order: 2, instruction: "", why: "" }],
+      flavor: {
+        tastes: { salty: 5, mystery: 2 },
+        aromaIds: ["garlicky", "garlicky", "missing-aroma"],
+        characterIds: ["light", "hearty"],
+      },
       taxonomy: {
         ...recipes[0].taxonomy,
         cuisine: { cuisineId: "missing-cuisine", subCuisineId: "guangfu" },
         origin: { countryId: "china", regionId: "valencia" },
         techniques: ["stir-fry", "missing-technique", "stir-fry"],
         mealType: { dishTypeId: "missing-dish-type", mealOccasionIds: ["breakfast", "breakfast", "missing-meal"] },
-        flavorProfile: { tasteIds: ["savory", "missing-taste"], characteristicIds: ["light", "missing-characteristic"] },
         dietaryTagIds: ["vegan", "missing-dietary"],
         browseTagIds: ["quick", "missing-browse"],
       },
@@ -148,8 +160,9 @@ describe("recipe dataset", () => {
       "步骤序号必须从 1 连续递增", "步骤说明不能为空", "步骤原理不能为空",
       "菜系 ID 不在 taxonomy registry 中", "子菜系与父级菜系不匹配", "地域与所属国家不匹配",
       "technique 列表不能重复", "存在未注册的 technique ID", "料理类型 ID 不在 taxonomy registry 中",
-      "meal occasion 列表不能重复", "存在未注册的 meal occasion ID", "taxonomy.flavorProfile.tasteIds 存在未注册的 ID",
-      "taxonomy.flavorProfile.characteristicIds 存在未注册的 ID", "taxonomy.dietaryTagIds 存在未注册的 ID",
+      "meal occasion 列表不能重复", "存在未注册的 meal occasion ID", "taste intensity 必须是 0–4 的整数",
+      "未知 taste ID: mystery", "aromaIds 不能重复", "aromaIds 存在未知 ID: missing-aroma",
+      "不兼容的 flavor character: light / hearty", "taxonomy.dietaryTagIds 存在未注册的 ID",
       "taxonomy.browseTagIds 存在未注册的 ID", "quick 必须由 totalTime 派生，不应静态维护",
       "文化元数据不能为空字符串", "文化元数据来源标题不能为空",
     ]));

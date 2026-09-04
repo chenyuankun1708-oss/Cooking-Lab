@@ -1,10 +1,10 @@
 # Taxonomy
 
-最近更新：2026-09-04
+最近更新：2026-09-05
 
 ## Goal
 
-Recipe Taxonomy v2 的目标不是建立一部料理百科，而是为当前 30 道菜和未来约 100 道结构化菜谱提供：
+Recipe Taxonomy v2 的目标不是建立一部料理百科，而是为当前 100 道结构化菜谱及后续扩展提供：
 
 - 清楚的 source of truth
 - 可验证的 machine values
@@ -114,36 +114,14 @@ mealType: {
 
 而不会被错误地压扁成“早餐”这一种混合概念。
 
-## Flavor profile
+## Flavor boundary
 
-当前 flavor 采用轻量双层结构：
+Issue #29 将 Flavor 从 taxonomy 中独立为 `recipe.flavor`。这是有意的语义边界：
 
-```ts
-flavorProfile?: {
-  tasteIds?: string[];
-  characteristicIds?: string[];
-}
-```
+- taxonomy 回答“这是什么料理、来自哪里、用了什么做法”
+- Flavor Profile 回答“这份具体配方吃起来怎样”
 
-### tasteIds
-
-- `savory`
-- `umami`
-- `tangy`
-- `sweet`
-- `fresh`
-
-### characteristicIds
-
-- `light`
-- `comforting`
-- `saucy`
-- `hearty`
-- `brothy`
-- `crisp`
-- `tender`
-
-这不是完整 flavor ontology，只是让用户能理解、数据能稳定标注、推荐系统未来能消费。
+旧 `taxonomy.flavorProfile.tasteIds / characteristicIds` 已移除，不保留兼容双写。完整 schema、词汇、强度和推荐规则见 `docs/FLAVOR_MODEL.md`。
 
 ## Dietary and browse tags
 
@@ -238,8 +216,8 @@ interface RecipeReference {
 
 为了不破坏当前产品：
 
-- filter 继续按 cuisine / methods / tags 工作
-- recommendation 继续消费 cuisine preference、method preference、tag preference
+- filter 继续按 cuisine / methods / tags 工作，并可独立消费 `recipe.flavor`
+- recommendation 继续消费 cuisine、method、tag preference，并加入 Flavor soft preference
 - 兼容层通过 `lib/taxonomy.ts` 从 taxonomy source of truth 派生旧交互所需语义
 
 因此当前 UI 不需要先重写，taxonomy 也已经能成为唯一真实数据源。
@@ -257,35 +235,43 @@ interface RecipeReference {
 ### 番茄炒蛋
 
 ```ts
-taxonomy: {
-  origin: { countryId: "china" },
-  cuisine: { cuisineId: "chinese" },
-  techniques: ["stir-fry"],
-  mealType: { dishTypeId: "main-dish" },
-  flavorProfile: {
-    tasteIds: ["savory", "tangy"],
-    characteristicIds: ["saucy", "tender"],
+{
+  taxonomy: {
+    origin: { countryId: "china" },
+    cuisine: { cuisineId: "chinese" },
+    techniques: ["stir-fry"],
+    mealType: { dishTypeId: "main-dish" },
+    dietaryTagIds: ["vegetarian"],
   },
-  dietaryTagIds: ["vegetarian"],
-  browseTagIds: ["quick"],
+  flavor: {
+    tastes: { salty: 1, sweet: 2, sour: 2, umami: 2 },
+    aromaIds: ["tomato-rich"],
+    textureIds: ["tender", "saucy"],
+    characterIds: ["comforting", "rice-friendly"],
+  },
 }
 ```
+
+`quick` 由 `cooking.totalTime` 派生，不写入 `browseTagIds`。
 
 ### 燕麦鸡蛋粥
 
 ```ts
-taxonomy: {
-  cuisine: { cuisineId: "fusion" },
-  techniques: ["boil"],
-  mealType: {
-    dishTypeId: "staple",
-    mealOccasionIds: ["breakfast"],
+{
+  taxonomy: {
+    cuisine: { cuisineId: "fusion" },
+    techniques: ["boil"],
+    mealType: {
+      dishTypeId: "staple",
+      mealOccasionIds: ["breakfast"],
+    },
+    dietaryTagIds: ["vegetarian"],
   },
-  flavorProfile: {
-    tasteIds: ["savory"],
-    characteristicIds: ["comforting", "hearty"],
+  flavor: {
+    tastes: { salty: 1, umami: 1 },
+    textureIds: ["creamy", "silky"],
+    characterIds: ["comforting", "warming"],
   },
-  dietaryTagIds: ["vegetarian"],
 }
 ```
 

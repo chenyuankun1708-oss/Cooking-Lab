@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { recipes } from "@/data/recipes";
 import type { Recipe } from "@/types/recipe";
+import type { RecommendationCriteria } from "@/types/recommendation";
 import type { IngredientRepository } from "../ingredient-repository";
 import { getRecipeCuisineId, getRecipePrimaryTechniqueId, getRecipeTagIds } from "../taxonomy";
 import {
@@ -61,7 +62,7 @@ describe("hard constraints", () => {
     expect(result.eligible).toBe(false);
     expect(result.missingTools).toContainEqual(expect.objectContaining({ id: target.tools[0] }));
     expect(result.hardFailures.find(({ criterion }) => criterion === "availableTools")?.message).toContain(result.missingTools[0].name);
-    expect(result.explanation).toMatch(/无法直接推荐/);
+    expect(result.explanation).toMatch(/暂时不合适/);
   });
 
   it("never lets a perfect soft score override a hard failure", () => {
@@ -135,7 +136,7 @@ describe("soft preferences and score", () => {
     const result = evaluate({ preferredTags: [targetTagIds[0], "missing-tag"] });
     expect(result.scoreBreakdown.tags?.score).toBe(0.5);
     expect(result.score).toBe(50);
-    expect(result.unmatchedConditions).toContain("匹配 1/2 个标签偏好");
+    expect(result.unmatchedConditions).toContain("有 1 个饮食方向合拍");
   });
 
   it("scores method preferences", () => {
@@ -143,10 +144,30 @@ describe("soft preferences and score", () => {
     expect(evaluate({ preferredMethods: ["不存在"] }).scoreBreakdown.methods?.score).toBe(0);
   });
 
+  it("uses structured Flavor Profiles as a soft, deterministic preference", () => {
+    const spicy = recipes.find((recipe) => recipe.slug === "thai-basil-chicken")!;
+    const gentle = recipes.find((recipe) => recipe.slug === "steamed-egg")!;
+    const ranked = engine.rank([gentle, spicy], { flavorPreferences: ["fresh-spicy"] });
+    expect(ranked[0].recipe.slug).toBe(spicy.slug);
+    expect(ranked[0].scoreBreakdown.flavor!.score).toBeGreaterThan(ranked[1].scoreBreakdown.flavor!.score);
+    expect(ranked.every((result) => result.eligible)).toBe(true);
+    expect(ranked[0].explanation).toMatch(/辣味|椒香|鲜味/);
+  });
+
+  it("does not mutate recipes or flavor preferences while scoring", () => {
+    const input = recipes.slice(0, 8);
+    const criteria = { flavorPreferences: ["tangy-refreshing", "roasted"] as const };
+    const before = JSON.stringify(input);
+    const first = engine.rank(input, { flavorPreferences: [...criteria.flavorPreferences] });
+    const second = engine.rank(input, { flavorPreferences: [...criteria.flavorPreferences] });
+    expect(JSON.stringify(input)).toBe(before);
+    expect(first).toEqual(second);
+  });
+
   it("normalizes multiple active soft dimensions by centralized weights", () => {
     const result = evaluate({ availableIngredients: requiredIds(), preferredCuisine: "不存在", preferredTags: [targetTagIds[0]], preferredMethods: [targetTechniqueId] });
     const expected = Math.round((RECOMMENDATION_WEIGHTS.ingredientFit + RECOMMENDATION_WEIGHTS.tags + RECOMMENDATION_WEIGHTS.methods) /
-      Object.values(RECOMMENDATION_WEIGHTS).reduce((sum, weight) => sum + weight, 0) * 100);
+      (RECOMMENDATION_WEIGHTS.ingredientFit + RECOMMENDATION_WEIGHTS.cuisine + RECOMMENDATION_WEIGHTS.tags + RECOMMENDATION_WEIGHTS.methods) * 100);
     expect(result.score).toBe(expected);
     expect(Object.keys(result.scoreBreakdown).sort()).toEqual(["cuisine", "ingredientFit", "methods", "tags"]);
   });
@@ -161,7 +182,7 @@ describe("soft preferences and score", () => {
 
   it("does not claim that no preference was set when an active preference misses", () => {
     const result = evaluate({ preferredCuisine: "不存在的菜系" });
-    expect(result.explanation).toBe("满足全部硬性条件，但未命中当前软偏好。");
+    expect(result.explanation).toBe("基本条件合适，不过没有完全碰上当前口味和偏好。");
   });
 
   it("uses different missing-ingredient wording for one vs many missing ingredients", () => {
@@ -200,7 +221,7 @@ describe("safety, reset, and determinism", () => {
   });
 
   it("produces deterministic scores", () => {
-    const criteria = { availableIngredients: ["egg", "tomato"], preferredCuisine: "chinese", preferredTags: ["quick"] };
+    const criteria: RecommendationCriteria = { availableIngredients: ["egg", "tomato"], preferredCuisine: "chinese", preferredTags: ["quick"], flavorPreferences: ["tangy-refreshing"] };
     expect(evaluate(criteria).score).toBe(evaluate(criteria).score);
     expect(evaluate(criteria).scoreBreakdown).toEqual(evaluate(criteria).scoreBreakdown);
   });
@@ -217,6 +238,7 @@ describe("safety, reset, and determinism", () => {
       preferredCuisine: "chinese",
       preferredTags: ["quick"],
       preferredMethods: ["stir-fry", "steam"],
+      flavorPreferences: ["fresh-spicy", "warming"],
     });
     expect(results).toHaveLength(100);
     expect(results.every((result) => Number.isFinite(result.score) && Number.isFinite(result.ingredientMatch.fit) &&

@@ -33,7 +33,7 @@ export function HomeHero({ image }: { image?: RecipeImage }) {
               决定今晚吃什么
             </Link>
             <Link className="focus-ring inline-flex min-h-11 items-center rounded-md border border-white/70 px-5 font-semibold text-white hover:bg-white/12" href="/recipes">
-              浏览 100 道料理
+              去发现更多
             </Link>
           </div>
           {image ? (

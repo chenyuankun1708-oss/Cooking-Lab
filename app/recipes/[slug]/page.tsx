@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BetaNote } from "@/components/beta-note";
 import { RecipeImage } from "@/components/recipe-image";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -10,6 +9,7 @@ import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
 import { buildRecipeDetail, getRecipeBySlug } from "@/lib/recipe-detail";
+import { describeFlavorProfile } from "@/lib/flavor";
 import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
 import { SITE_NAME } from "@/lib/site";
 
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!recipe) return { title: "菜谱未找到" };
   return {
     title: `${recipe.name} 做法与原理`,
-    description: `${recipe.name} 的步骤、料理原理、时间、成本与每份营养估算，来自 ${SITE_NAME} Public Beta。`,
+    description: `${recipe.name} 的食材、步骤、做饭时间与每份营养估算，来自 ${SITE_NAME}。`,
   };
 }
 
@@ -37,6 +37,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const fallback = getRecipeImageFallback(recipe);
   const calories = detail.nutrition.find((item) => item.label === "热量")?.value ?? "估算不完整";
   const protein = detail.nutrition.find((item) => item.label === "蛋白质")?.value ?? "估算不完整";
+  const flavor = describeFlavorProfile(recipe.flavor);
   const taxonomyLine = [
     detail.taxonomy.origin,
     detail.taxonomy.subCuisine ?? detail.taxonomy.cuisine,
@@ -74,13 +75,14 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
             {recipe.name}
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-stone-600 sm:text-lg">{recipe.description}</p>
+          {flavor ? <p className="mt-4 font-semibold text-[#235849]">{flavor}</p> : null}
           <dl className="mt-8 grid grid-cols-2 border-y border-stone-300 text-left sm:grid-cols-4">
-            <KeyFact label="总时间" value={detail.times.total} />
+            <KeyFact label="做饭时间" value={detail.times.humanTotal} />
             <KeyFact label="份量" value={`${recipe.servings} 人份`} />
             <KeyFact label="热量 / 份" value={calories} />
             <KeyFact label="蛋白质 / 份" value={protein} />
           </dl>
-          <p className="mt-3 text-xs leading-5 text-stone-500">营养、时间与价格均为演示估算，实际结果会因食材和设备而变化。</p>
+          <p className="mt-3 text-xs leading-5 text-stone-500">时间、营养和成本为估算值，实际结果会因食材和设备而变化。</p>
         </header>
 
         <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 sm:pb-20">
@@ -117,8 +119,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
             </section>
 
             <section aria-labelledby="steps-title">
-              <p className="text-sm font-semibold text-[#a64631]">做与理解</p>
-              <h2 id="steps-title" className="mt-2 text-3xl font-bold text-stone-950">步骤与为什么</h2>
+              <p className="text-sm font-semibold text-[#a64631]">开始做</p>
+              <h2 id="steps-title" className="mt-2 text-3xl font-bold text-stone-950">步骤</h2>
               <ol className="mt-6 border-t border-stone-300">
                 {detail.steps.map((step) => (
                   <li key={step.order} className="grid gap-4 border-b border-stone-300 py-7 sm:grid-cols-[3rem_1fr] sm:gap-6">
@@ -131,10 +133,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
                         {step.duration ? <span>· {step.duration}</span> : null}
                       </div>
                       <p className="mt-2 text-lg font-semibold leading-8 text-stone-950">{step.instruction}</p>
-                      <div className="mt-4 border-l-2 border-[#e5bd53] bg-[#fff9e8] px-4 py-3">
-                        <h3 className="text-sm font-bold text-stone-900">为什么这样做？</h3>
-                        <p className="mt-1 leading-7 text-stone-700">{step.why}</p>
-                      </div>
+                      <p className="mt-4 border-l-2 border-[#e5bd53] pl-4 leading-7 text-stone-600">{step.why}</p>
                     </div>
                   </li>
                 ))}
@@ -163,7 +162,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="details-title">
           <p className="text-sm font-semibold text-[#a64631]">作为参考</p>
           <h2 id="details-title" className="mt-2 text-3xl font-bold text-stone-950">营养、用量与成本</h2>
-          <p className="mt-3 max-w-2xl leading-7 text-stone-600">这些数字用于比较和决策，不构成医学或个体化饮食建议。</p>
+          <p className="mt-3 max-w-2xl leading-7 text-stone-600">营养和成本为估算值，可作为日常比较参考，不构成个体化饮食建议。</p>
 
           <div className="mt-8 grid border-y border-stone-300 md:grid-cols-3 md:divide-x md:divide-stone-300">
             <SecondarySection title="每份营养估算">
@@ -224,9 +223,6 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </section>
         ) : null}
 
-        <div className="mx-auto max-w-6xl px-4 pb-12 sm:px-6">
-          <BetaNote title="这份菜谱的估算说明" />
-        </div>
       </article>
       <SiteFooter />
     </main>

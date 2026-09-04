@@ -2,6 +2,7 @@ import type { Unit } from "@/types/ingredient";
 import type { Difficulty, Recipe, RecipeIngredient, RecipeStep } from "@/types/recipe";
 import type { RecipeCulturalContext, RecipeTaxonomy } from "@/types/taxonomy";
 import { ingredients } from "./ingredients";
+import { getRecipeFlavorProfile } from "./recipe-flavors";
 
 export type IngredientInput = [ingredientId: string, amount: number, unit?: Unit, note?: string];
 export type StepInput = [instruction: string, why: string, heat?: RecipeStep["heat"]];
@@ -14,8 +15,6 @@ interface TaxonomyInput {
   techniqueIds: string[];
   dishTypeId: string;
   mealOccasionIds?: string[];
-  tasteIds?: string[];
-  characteristicIds?: string[];
   dietaryTagIds?: string[];
   browseTagIds?: string[];
 }
@@ -72,14 +71,6 @@ function buildTaxonomy(input: TaxonomyInput): RecipeTaxonomy {
       dishTypeId: input.dishTypeId,
       ...(input.mealOccasionIds?.length ? { mealOccasionIds: input.mealOccasionIds } : {}),
     },
-    ...(input.tasteIds?.length || input.characteristicIds?.length
-      ? {
-        flavorProfile: {
-          ...(input.tasteIds?.length ? { tasteIds: input.tasteIds } : {}),
-          ...(input.characteristicIds?.length ? { characteristicIds: input.characteristicIds } : {}),
-        },
-      }
-      : {}),
     ...(input.dietaryTagIds?.length ? { dietaryTagIds: input.dietaryTagIds } : {}),
     ...(input.browseTagIds?.length ? { browseTagIds: input.browseTagIds } : {}),
   };
@@ -92,6 +83,7 @@ export const buildRecipe = (input: RecipeInput): Recipe => ({
   description: input.description,
   ...(input.heroImageId ? { heroImageId: input.heroImageId } : {}),
   taxonomy: buildTaxonomy(input.taxonomy),
+  flavor: getRecipeFlavorProfile(input.slug),
   servings: input.servings,
   ingredients: input.ingredients.map(([ingredientId, amount, unit = "g", note]) => ingredient(ingredientId, amount, unit, note)),
   cooking: {

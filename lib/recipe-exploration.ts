@@ -1,5 +1,9 @@
 import type { Recipe } from "@/types/recipe";
 import type { RecommendationResult } from "@/types/recommendation";
+import type { FlavorPreferenceId } from "@/types/flavor";
+import type { CookingTimeBandId } from "./cooking-time";
+import { getCookingTimeBand } from "./cooking-time";
+import { scoreFlavorPreferences } from "./flavor";
 import { recommendationEngine } from "./recommendation";
 
 export interface RecipeCatalogFilters {
@@ -10,6 +14,8 @@ export interface RecipeCatalogFilters {
   techniqueId?: string;
   dishTypeId?: string;
   maxTime?: number;
+  timeBandId?: CookingTimeBandId;
+  flavorPreferenceId?: FlavorPreferenceId;
 }
 
 export function exploreRecipeCatalog(
@@ -25,6 +31,8 @@ export function exploreRecipeCatalog(
     if (filters.techniqueId && !recipe.taxonomy.techniques.includes(filters.techniqueId)) return false;
     if (filters.dishTypeId && recipe.taxonomy.mealType.dishTypeId !== filters.dishTypeId) return false;
     if (filters.maxTime !== undefined && recipe.cooking.totalTime > filters.maxTime) return false;
+    if (filters.timeBandId && getCookingTimeBand(recipe.cooking.totalTime).id !== filters.timeBandId) return false;
+    if (filters.flavorPreferenceId && scoreFlavorPreferences(recipe.flavor, [filters.flavorPreferenceId]).score < 0.6) return false;
     return true;
   });
 }

@@ -7,10 +7,13 @@ import { RuleRecommendationEngine } from "../recommendation";
 
 const sharedCoreFiles = [
   "lib/cost.ts",
+  "lib/cooking-time.ts",
   "lib/dataset-validation.ts",
   "lib/ingredient-repository.ts",
   "lib/ingredient-validation.ts",
   "lib/image-validation.ts",
+  "lib/flavor.ts",
+  "lib/flavor-validation.ts",
   "lib/nutrition.ts",
   "lib/recipe-detail.ts",
   "lib/recipe-exploration.ts",
@@ -21,12 +24,15 @@ const sharedCoreFiles = [
   "lib/tool-labels.ts",
   "lib/unit-conversion.ts",
   "data/additional-recipes.ts",
+  "data/flavor.ts",
   "data/ingredients.ts",
   "data/recipe-images.ts",
+  "data/recipe-flavors.ts",
   "data/recipe-factories.ts",
   "data/recipes.ts",
   "data/taxonomy.ts",
   "types/ingredient.ts",
+  "types/flavor.ts",
   "types/image.ts",
   "types/nutrition.ts",
   "types/recipe.ts",
@@ -51,6 +57,7 @@ describe("shared core boundaries", () => {
       maxTime: 30,
       preferredCuisine: "chinese",
       preferredTags: ["quick"],
+      flavorPreferences: ["light"],
     });
 
     expect(() => JSON.stringify(detail)).not.toThrow();

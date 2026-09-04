@@ -17,6 +17,11 @@
 - `lib/cost.ts`：成本估算引擎
 - `lib/recommendation.ts`：规则推荐、评分、解释与部分 application helper
 - `lib/recipe-exploration.ts`：目录搜索与 taxonomy/time 组合过滤的纯 application helper
+- `types/flavor.ts`：framework-independent Flavor Profile、稳定 ID 与 preference contract
+- `data/flavor.ts`：Flavor vocabulary、localized labels 与用户偏好映射
+- `data/recipe-flavors.ts`：100 道 recipe 的 canonical Flavor Profile 数据
+- `lib/flavor.ts` / `lib/flavor-validation.ts`：确定性评分、描述与 validation
+- `lib/cooking-time.ts`：精确分钟到自然时间分组的集中 presentation helper
 - `types/taxonomy.ts`：taxonomy v2 与 cultural metadata 契约
 - `data/taxonomy.ts`：machine value registry 与中英 label source
 - `lib/taxonomy.ts`：taxonomy helper、兼容派生标签与展示适配
@@ -45,6 +50,7 @@
 - `lib/recipe-validation.ts`
 - `lib/dataset-validation.ts`
 - `lib/recommendation.ts` 中偏领域的硬限制、软偏好、评分和解释逻辑
+- Flavor schema、scoring、validation 与自然时间分组
 
 这些模块当前没有依赖 React、Next.js、DOM 或 Tailwind，是未来抽离共享核心时最自然的保留对象。
 
@@ -67,9 +73,13 @@
 
 被集中在一个组件中。
 
-目录探索不复用这条 client boundary。`/recipes` 通过 URL 参数和 `lib/recipe-exploration.ts` 在服务器端过滤，保持 SSG/SSR 优势，也没有复制 taxonomy source of truth。
+目录探索不复用这条 client boundary。`/recipes` 通过 URL 参数和 `lib/recipe-exploration.ts` 在服务器端按 taxonomy、Flavor 与时间过滤，保持 SSR 优势，也没有复制 source of truth。
 
-#### 3. 内容 schema 已进入 100 道菜与 seed image 阶段
+#### 3. Flavor 与 taxonomy 分离
+
+`recipe.taxonomy` 继续是来源、菜系、技法、料理类型和用餐场景的 canonical source。`recipe.flavor` 是具体配方感官描述的 canonical source。两者没有 compatibility 双写；Web 通过 `lib/flavor.ts` 和 `lib/cooking-time.ts` 取得展示语言，推荐引擎直接消费可序列化 profile。
+
+#### 4. 内容 schema 已进入 100 道菜与 seed image 阶段
 
 Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framework-independent 层。当前仍有未完成部分：
 
@@ -82,7 +92,7 @@ Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framewor
 ### 当前前端边界
 
 - `app/` 与 `components/` 依赖 Next.js、React、Link、Metadata 和 CSS class，是明确的 Web-only 层
-- `lib/site.ts`、`components/beta-note.tsx`、`components/site-footer.tsx` 等是当前 Web 站点品牌与公共文案层，不应被误认为共享 core
+- `lib/site.ts`、`components/site-footer.tsx` 等是当前 Web 站点品牌与公共文案层，不应被误认为共享 core
 
 ## M5 目标架构方向
 

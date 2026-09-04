@@ -80,7 +80,6 @@ M5 需要从当前粗粒度的 `cuisine` 升级到更可扩展的 taxonomy，但
 - `cuisine: { cuisineId; subCuisineId? }`
 - `techniques: string[]`
 - `mealType: { dishTypeId; mealOccasionIds? }`
-- `flavorProfile?: { tasteIds?; characteristicIds? }`
 - `dietaryTagIds?: string[]`
 - `browseTagIds?: string[]`
 
@@ -90,12 +89,14 @@ M5 需要从当前粗粒度的 `cuisine` 升级到更可扩展的 taxonomy，但
 - `dishType` 与 `meal occasion` 分离建模
 - `soup` 归入 dish type，不再把“汤”当 technique
 - `rice-cooker` 归入 tool，`rice-cook` 才是 technique
-- 只保留当前 30 recipes 与近期 100 recipes 扩展真的会使用的 taxonomy 项
+- 只保留当前 100 recipes 真正使用的 taxonomy 项
 
 - `country / region / cuisine / subCuisine` 只在有可靠依据时填写
 - 不是每道菜都必须拥有四级完整地域链
 - 避免把所有语义都塞进一个 `tags` 数组
 - taxonomy 必须可校验、可迁移、可回退，并能通过 helper 继续兼容当前 filter / recommendation 语义
+
+Flavor 不属于 taxonomy。当前以 `recipe.flavor` 单独描述具体配方的基础味强度、香气、口感和饮食感受，并通过集中 registry 生成面向用户的中文表达。迁移内容只标记能从配方和做法合理判断、且会影响选择的特征；不为覆盖率填满字段，也不把 Flavor、Cuisine、Technique、Dietary 或 Meal Occasion 混回通用 tags。
 
 ### Static vs derived attributes
 
@@ -149,7 +150,7 @@ Recipe 当前使用轻量 optional 结构：
 - `publisher?`
 - `accessedAt?`
 
-目标不是建立 citation engine，而是避免未来在 recipe detail 上出现无法追溯的文化说明。当前 30 道菜只对少数低争议、容易确认语境的菜品给出 cultural metadata 示例，其余留空。
+目标不是建立 citation engine，而是避免未来在 recipe detail 上出现无法追溯的文化说明。当前 100 道菜只对少数低争议、容易确认语境的菜品给出 cultural metadata 示例，其余留空。
 
 ## Recipe Detail v2 Content Surface
 

@@ -1,8 +1,9 @@
 import { getHeatLabel, getIngredientFallbackLabel, getToolLabel, getUnitLabel } from "./display-labels";
 import { formatCalories, formatCost, formatMacro, formatMass, formatProtein, formatSodium, formatTime } from "./formatters";
+import { formatHumanCookingTime } from "./cooking-time";
+import { getFlavorProfileLabels } from "./flavor";
 import type { RecipeDetailModel } from "./recipe-detail";
 import {
-  getFlavorProfileLabels,
   getRecipeCuisineLabel,
   getRecipeDishTypeLabel,
   getRecipeMealOccasionLabels,
@@ -21,8 +22,10 @@ export interface RecipeDetailViewModel {
     mealOccasions: string[];
     techniques: string[];
     flavor: {
-      tastes: string[];
-      characteristics: string[];
+      tastes: Array<{ id: string; label: string; intensity: number }>;
+      aromas: string[];
+      textures: string[];
+      characters: string[];
     };
   };
   culture?: {
@@ -34,7 +37,7 @@ export interface RecipeDetailViewModel {
   };
   ingredients: Array<{ id: string; name: string; amount: string; note?: string; optional: boolean }>;
   tools: string[];
-  times: { prep: string; cook: string; total: string };
+  times: { prep: string; cook: string; total: string; humanTotal: string };
   nutrition: Array<{ label: string; value: string }>;
   limits: Array<{ label: string; value: string; scope: string }>;
   cost: { whole: string; perServing: string };
@@ -54,7 +57,7 @@ export function buildRecipeDetailDisplay(detail: RecipeDetailModel): RecipeDetai
       dishType: getRecipeDishTypeLabel(recipe),
       mealOccasions: getRecipeMealOccasionLabels(recipe),
       techniques: getRecipeTechniqueLabels(recipe),
-      flavor: getFlavorProfileLabels(recipe),
+      flavor: getFlavorProfileLabels(recipe.flavor),
     },
     culture: recipe.culture
       ? {
@@ -81,6 +84,7 @@ export function buildRecipeDetailDisplay(detail: RecipeDetailModel): RecipeDetai
       prep: formatTime(detail.times.prepMinutes),
       cook: formatTime(detail.times.cookMinutes),
       total: formatTime(detail.times.totalMinutes),
+      humanTotal: formatHumanCookingTime(detail.times.totalMinutes),
     },
     nutrition: [
       { label: "热量", value: formatCalories(detail.nutritionPerServing.calories, detail.nutritionPerServing.complete) },

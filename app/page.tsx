@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BetaNote } from "@/components/beta-note";
 import { HomeHero } from "@/components/home-hero";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeDiscovery } from "@/components/recipe-discovery";
@@ -53,7 +52,7 @@ export default function Home() {
               </p>
             </div>
             <Link className="focus-ring min-h-11 py-3 text-sm font-bold text-[#235849] hover:underline" href="/recipes">
-              看全部 100 道料理
+              看看今晚还有什么
             </Link>
           </div>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -73,7 +72,7 @@ export default function Home() {
                 换一种熟悉食材的做法
               </h2>
               <p className="mt-4 max-w-xl leading-7 text-stone-600">
-                从菜系进入 100 道料理的地图。分类直接来自每道菜的 canonical taxonomy，并随着内容一起更新。
+                从熟悉的中式家常，到东南亚的酸香和欧洲的慢炖，顺着口味走进不同地方的餐桌。
               </p>
             </div>
             <ul className="grid border-t border-stone-300 sm:grid-cols-2">
@@ -84,7 +83,7 @@ export default function Home() {
                     href={`/recipes?cuisine=${cuisine.id}`}
                   >
                     <span>{cuisine.label}</span>
-                    <span className="text-sm font-medium text-stone-500">{cuisine.count} 道</span>
+                    <span className="text-sm font-medium text-stone-500">去看看</span>
                   </Link>
                 </li>
               ))}
@@ -103,7 +102,7 @@ export default function Home() {
               </h2>
             </div>
             <p className="max-w-2xl leading-7 text-white/76">
-              从炒、煎、蒸、炖到冷拌，进入使用同一技法的菜谱，并在每一步读懂为什么这样做。
+              从炒、煎、蒸、炖到冷拌，看看同一种做法如何改变香气、口感和一顿饭的样子。
             </p>
           </div>
           <div className="mt-9 grid grid-cols-2 border-l border-t border-white/25 sm:grid-cols-4">
@@ -114,16 +113,13 @@ export default function Home() {
                 href={`/recipes?technique=${technique.id}`}
               >
                 <span className="block text-xl font-bold">{technique.label}</span>
-                <span className="mt-2 block text-sm text-white/65">{technique.count} 道料理</span>
+                <span className="mt-2 block text-sm text-white/65">顺着这种做法探索</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <BetaNote title="这些数字如何理解" />
-      </div>
       <SiteFooter />
     </main>
   );

@@ -1,4 +1,4 @@
-import { browseTags, countries, cuisines, dietaryTags, dishTypes, flavorCharacteristics, getTaxonomyLabel, mealOccasions, regions, subCuisines, tasteProfiles, techniques } from "@/data/taxonomy";
+import { browseTags, countries, cuisines, dietaryTags, dishTypes, getTaxonomyLabel, mealOccasions, regions, subCuisines, techniques } from "@/data/taxonomy";
 import type { Recipe } from "@/types/recipe";
 import type { SupportedLocale } from "@/types/taxonomy";
 import { localIngredientRepository } from "./ingredient-repository";
@@ -111,13 +111,6 @@ export function listRecipeRegionOptions(recipes: readonly Recipe[]) {
 
 export function listRecipeDishTypeOptions(recipes: readonly Recipe[]) {
   return countOptions(recipes.map((recipe) => recipe.taxonomy.mealType.dishTypeId), dishTypes);
-}
-
-export function getFlavorProfileLabels(recipe: Recipe, locale: SupportedLocale = "zh-CN") {
-  return {
-    tastes: (recipe.taxonomy.flavorProfile?.tasteIds ?? []).map((id) => tasteProfiles[id]?.label[locale] ?? id),
-    characteristics: (recipe.taxonomy.flavorProfile?.characteristicIds ?? []).map((id) => flavorCharacteristics[id]?.label[locale] ?? id),
-  };
 }
 
 export function getCuisineHierarchyLabels(recipe: Recipe, locale: SupportedLocale = "zh-CN") {

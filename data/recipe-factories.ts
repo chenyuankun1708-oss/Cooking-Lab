@@ -1,6 +1,7 @@
 import type { Unit } from "@/types/ingredient";
 import type { Difficulty, Recipe, RecipeIngredient, RecipeStep } from "@/types/recipe";
 import type { RecipeCulturalContext, RecipeTaxonomy } from "@/types/taxonomy";
+import { ingredients } from "./ingredients";
 
 export type IngredientInput = [ingredientId: string, amount: number, unit?: Unit, note?: string];
 export type StepInput = [instruction: string, why: string, heat?: RecipeStep["heat"]];
@@ -45,6 +46,19 @@ export const ingredient = (ingredientId: string, amount: number, unit: Unit = "g
   ...(note ? { note } : {}),
 });
 
+const ingredientById = new Map(ingredients.map((item) => [item.id, item]));
+
+function calculateAddedSugar(inputs: IngredientInput[]): number {
+  return inputs.reduce((total, [ingredientId, amount, unit = "g"]) => {
+    const item = ingredientById.get(ingredientId);
+    if (!item) return total;
+    const grams = unit === "g" ? amount
+      : unit === "kg" ? amount * 1000
+      : amount * (item.approximateUnitWeight?.[unit] ?? 0);
+    return total + grams / 100 * item.nutritionPer100g.addedSugar;
+  }, 0);
+}
+
 function buildTaxonomy(input: TaxonomyInput): RecipeTaxonomy {
   return {
     ...(input.countryId ? { origin: { countryId: input.countryId, ...(input.regionId ? { regionId: input.regionId } : {}) } } : {}),
@@ -84,7 +98,7 @@ export const buildRecipe = (input: RecipeInput): Recipe => ({
     totalTime: input.prep + input.cook,
     oil: input.oil,
     salt: input.salt,
-    addedSugar: 0,
+    addedSugar: calculateAddedSugar(input.ingredients),
     difficulty: input.difficulty ?? "easy",
   },
   tools: input.tools,

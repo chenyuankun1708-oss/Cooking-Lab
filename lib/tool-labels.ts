@@ -4,6 +4,7 @@ export const toolLabels: Readonly<Record<string, string>> = Object.freeze({
   colander: "滤篮",
   "cutting-board": "砧板",
   "frying-pan": "平底锅",
+  "grill-pan": "烤纹锅",
   "heatproof-bowl": "耐热碗",
   "heatproof-plate": "耐热盘",
   knife: "刀",

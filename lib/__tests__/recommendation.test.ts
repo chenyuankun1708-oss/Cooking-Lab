@@ -24,7 +24,7 @@ const targetTechniqueId = getRecipePrimaryTechniqueId(target);
 describe("hard constraints", () => {
   it("keeps every recipe eligible and neutral without criteria", () => {
     const results = engine.rank(recipes, {});
-    expect(results).toHaveLength(30);
+    expect(results).toHaveLength(100);
     expect(results.every(({ eligible, score }) => eligible && score === 100)).toBe(true);
   });
 
@@ -73,6 +73,14 @@ describe("hard constraints", () => {
 
   it("returns no results for conflicting strict constraints", () => {
     expect(discoverRecipes(recipes, { maxTime: 1, maxCalories: 10, minProtein: 100, maxCost: 1 })).toEqual([]);
+  });
+
+  it.each([30, 45, 60])("keeps every result within the declared %i minute contract", (maxTime) => {
+    const results = discoverRecipes(recipes, { maxTime });
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.every(({ recipe }) => recipe.cooking.totalTime <= maxTime)).toBe(true);
+    expect(results.every(({ recipe }) => recipe.ingredients.every(({ ingredientId }) =>
+      ingredientId !== "dry-chickpea" && ingredientId !== "dry-black-bean"))).toBe(true);
   });
 });
 
@@ -179,7 +187,7 @@ describe("safety, reset, and determinism", () => {
   it("provides a complete inactive reset state", () => {
     const reset = resetRecommendationCriteria();
     expect(hasActiveCriteria(reset)).toBe(false);
-    expect(discoverRecipes(recipes, reset)).toHaveLength(30);
+    expect(discoverRecipes(recipes, reset)).toHaveLength(100);
   });
 
   it("handles an empty recipe collection", () => {
@@ -198,14 +206,14 @@ describe("safety, reset, and determinism", () => {
     expect(engine.rank([later, earlier], {}).map(({ recipe }) => recipe.id)).toEqual(["a-stable", "z-stable"]);
   });
 
-  it("evaluates all 30 recipes without non-finite scores or breakdown values", () => {
+  it("evaluates all 100 recipes without non-finite scores or breakdown values", () => {
     const results = engine.rank(recipes, {
       availableIngredients: ["egg", "rice", "salt"],
       preferredCuisine: "chinese",
       preferredTags: ["quick"],
       preferredMethods: ["stir-fry", "steam"],
     });
-    expect(results).toHaveLength(30);
+    expect(results).toHaveLength(100);
     expect(results.every((result) => Number.isFinite(result.score) && Number.isFinite(result.ingredientMatch.fit) &&
       Object.values(result.scoreBreakdown).every((item) => Number.isFinite(item.score) && Number.isFinite(item.contribution)))).toBe(true);
   });

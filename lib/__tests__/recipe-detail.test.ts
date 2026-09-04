@@ -13,10 +13,10 @@ const createRecipeDetailViewModel = (recipe: (typeof recipes)[number], repositor
   buildRecipeDetailDisplay(buildRecipeDetail(recipe, repository));
 
 describe("recipe catalog and detail presentation", () => {
-  it("has 30 unique recipe slugs that all resolve", () => {
+  it("has 100 unique recipe slugs that all resolve", () => {
     const slugs = recipes.map((recipe) => recipe.slug);
-    expect(slugs).toHaveLength(30);
-    expect(new Set(slugs)).toHaveLength(30);
+    expect(slugs).toHaveLength(100);
+    expect(new Set(slugs)).toHaveLength(100);
     expect(slugs.every((slug) => getRecipeBySlug(slug)?.slug === slug)).toBe(true);
   });
 
@@ -91,7 +91,7 @@ describe("recipe catalog and detail presentation", () => {
 
   it("creates a complete view model for every recipe", () => {
     const details = recipes.map((recipe) => createRecipeDetailViewModel(recipe));
-    expect(details).toHaveLength(30);
+    expect(details).toHaveLength(100);
     expect(details.every((detail) =>
       detail.ingredients.length > 0 && detail.tools.length > 0 && detail.steps.length > 0 && detail.warnings.length === 0,
     )).toBe(true);

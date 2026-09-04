@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { RecipeImage } from "@/components/recipe-image";
 import { SiteFooter } from "@/components/site-footer";
+import { recipeImages } from "@/data/recipe-images";
 import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
 import { buildRecipeDetail, getRecipeBySlug } from "@/lib/recipe-detail";
+import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
 import { SITE_NAME } from "@/lib/site";
 import { getRecipeLegacyCategoryLabel } from "@/lib/taxonomy";
 
@@ -31,6 +34,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const recipe = getRecipeBySlug(slug);
   if (!recipe) notFound();
   const detail = buildRecipeDetailDisplay(buildRecipeDetail(recipe));
+  const image = getRecipeHeroImage(recipe, recipeImages);
+  const fallback = getRecipeImageFallback(recipe);
 
   return (
     <main>
@@ -49,7 +54,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-6xl">{recipe.name}</h1>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-emerald-50/80">{recipe.description}</p>
             </div>
-            <div aria-hidden="true" className="h-44 rounded-3xl bg-gradient-to-br from-amber-200 via-orange-100 to-emerald-200 shadow-inner" />
+            <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={detail.taxonomy.cuisine} variant="hero" preload />
           </div>
         </div>
       </header>

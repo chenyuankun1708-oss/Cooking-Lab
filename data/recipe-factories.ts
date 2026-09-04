@@ -24,6 +24,7 @@ export interface RecipeInput {
   slug: string;
   name: string;
   description: string;
+  heroImageId?: string;
   servings: number;
   ingredients: IngredientInput[];
   prep: number;
@@ -89,6 +90,7 @@ export const buildRecipe = (input: RecipeInput): Recipe => ({
   slug: input.slug,
   name: input.name,
   description: input.description,
+  ...(input.heroImageId ? { heroImageId: input.heroImageId } : {}),
   taxonomy: buildTaxonomy(input.taxonomy),
   servings: input.servings,
   ingredients: input.ingredients.map(([ingredientId, amount, unit = "g", note]) => ingredient(ingredientId, amount, unit, note)),

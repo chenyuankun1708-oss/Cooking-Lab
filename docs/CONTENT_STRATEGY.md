@@ -189,27 +189,7 @@ M5 必须引入真实料理视觉系统，但本轮只定义 schema 和原则，
 - `stepImages`
 - `finishedDishImages`
 
-建议的共享 schema 方向：
-
-```ts
-interface ImageAsset {
-  id: string;
-  entityType: "recipe" | "ingredient" | "step";
-  entityId: string;
-  role: "hero" | "finished-dish" | "ingredient" | "step";
-  src: string;
-  alt: string;
-  source: "self-shot" | "open-license" | "licensed-stock" | "ai-generated" | "partner-provided";
-  author?: string;
-  license?: string;
-  attribution?: string;
-  originalUrl?: string;
-  width?: number;
-  height?: number;
-  aspectRatio?: "4:3" | "3:2" | "1:1" | "16:9";
-  blurDataURL?: string;
-}
-```
+当前实现使用 `Recipe.heroImageId?` 关联 `data/recipe-images.ts` 的 framework-independent metadata。图片 registry 集中保存 src、role、delivery、尺寸、焦点、source、license、author、source URL、license URL、attribution 与可选 AI provenance；完整契约与素材工作流见 `docs/IMAGE_SYSTEM.md`。
 
 ### 图片原则
 
@@ -229,6 +209,7 @@ interface ImageAsset {
 不得：
 
 - 直接从 Google 图片搜索结果复制进项目
+- 直接从 Baidu Image、Pinterest、小红书、大众点评、未授权博客或社交媒体复制
 
 允许来源：
 
@@ -244,6 +225,8 @@ interface ImageAsset {
 - author
 - license
 - attribution（在适用时）
+
+当前不加入未完成授权核验的 sample asset。100 道 hero 补齐作为后续独立 content batches 推进，不用数量目标降低版权或摄影质量要求。
 
 ## Data Expansion Quality Rules
 

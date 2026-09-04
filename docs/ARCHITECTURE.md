@@ -130,7 +130,15 @@ Taxonomy 的 schema、validation、registry 与 fallback/compatibility helper �
 
 ### Image system
 
-图片 metadata、来源与 license 记录属于共享内容模型，不应只存在于前端组件 props 里。
+图片 metadata、来源与 license 记录属于共享内容模型，不应只存在于前端组件 props 里。当前采用：
+
+- `types/image.ts`：可序列化图片契约
+- `data/recipe-images.ts`：可用图片 registry 与版权 metadata source of truth
+- `Recipe.heroImageId?`：Recipe 到 hero 的稳定引用
+- `lib/recipe-images.ts` / `lib/image-validation.ts`：framework-independent lookup、fallback data 与 validation
+- `components/recipe-image.tsx`：Web-only Next/Image adapter
+
+本地静态资产是 M5 默认交付方式；远程 CDN 与 domain allowlist 在出现真实需求后再配置。完整规则见 `docs/IMAGE_SYSTEM.md`。
 
 ### Story / cultural context
 

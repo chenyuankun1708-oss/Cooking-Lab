@@ -1,4 +1,5 @@
 import type { IngredientCategory } from "./ingredient";
+import type { FlavorPreferenceId } from "./flavor";
 import type { Recipe } from "./recipe";
 
 export interface RecommendationCriteria {
@@ -14,12 +15,13 @@ export interface RecommendationCriteria {
   preferredCuisine?: string;
   preferredTags?: string[];
   preferredMethods?: string[];
+  flavorPreferences?: FlavorPreferenceId[];
 }
 
 export type HardConstraintKey =
   | "maxTime" | "maxCalories" | "minProtein" | "maxOil"
   | "maxSalt" | "maxAddedSugar" | "maxCost" | "availableTools";
-export type ScoreDimensionKey = "ingredientFit" | "cuisine" | "tags" | "methods";
+export type ScoreDimensionKey = "ingredientFit" | "cuisine" | "tags" | "methods" | "flavor";
 
 export interface HardConstraintFailure {
   criterion: HardConstraintKey;

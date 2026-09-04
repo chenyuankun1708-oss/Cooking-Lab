@@ -69,6 +69,12 @@ GitHub tracking:
 
 Issue #21 当前已完成代码实现：food-first 首页、渐进式推荐条件、视觉优先卡片、taxonomy 驱动的服务器端目录探索、editorial detail v2，以及 10 张已核验授权的 seed images。完成验证与 PR review 后，M5 的主要 Web 交付即可收口。
 
+### M5.1 Product Naturalization & Content Quality
+
+GitHub tracking：Epic `#28`，Flavor & Human Language `#29`，后续 Recipe Quality `#30`、Similar Recipes `#31`、Living Hero `#32`。
+
+Issue #29 只负责 canonical Flavor Profile、自然时间语言、Flavor-aware deterministic recommendation 和现有页面语言自然化。Recipe publishing、相似菜、Hero rotation 与图片补齐继续由后续独立 Issue 承担。
+
 ### F. Shared core audit for future mobile app
 
 审计当前耦合边界，约束后续 M5 工作避免把新领域能力写死在 Next.js 或 React 里。

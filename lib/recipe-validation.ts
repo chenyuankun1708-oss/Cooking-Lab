@@ -1,6 +1,7 @@
 import type { Ingredient, Unit } from "@/types/ingredient";
 import type { Recipe } from "@/types/recipe";
-import { browseTags, countries, cuisines, dietaryTags, dishTypes, flavorCharacteristics, mealOccasions, regions, subCuisines, tasteProfiles, techniques } from "@/data/taxonomy";
+import { browseTags, countries, cuisines, dietaryTags, dishTypes, mealOccasions, regions, subCuisines, techniques } from "@/data/taxonomy";
+import { validateFlavorProfile } from "./flavor-validation";
 import { toGrams } from "./unit-conversion";
 import { isNonNegativeFinite, isPositiveFinite, isSlug } from "./validation-utils";
 
@@ -43,6 +44,8 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
     if (!isPositiveFinite(recipe.servings)) report(recipeId, "servings", "份数必须是正有限数");
     if (recipe.dataQuality !== "demo-estimated") report(recipeId, "dataQuality", "数据质量必须标记为 demo-estimated");
     validateTaxonomy(recipe, report);
+    if (!recipe.flavor) report(recipeId, "flavor", "Recipe 必须声明 canonical Flavor Profile");
+    else for (const issue of validateFlavorProfile(recipe.flavor)) report(recipeId, `flavor.${issue.field}`, issue.message);
 
     if (recipe.ingredients.length === 0) report(recipeId, "ingredients", "食材列表不能为空");
     const recipeIngredientIds = new Set<string>();
@@ -176,8 +179,6 @@ function validateTaxonomy(recipe: Recipe, report: (recipeId: string, field: stri
     }
   }
 
-  validateTaxonomyList(recipeId, "taxonomy.flavorProfile.tasteIds", taxonomy.flavorProfile?.tasteIds, tasteProfiles, report);
-  validateTaxonomyList(recipeId, "taxonomy.flavorProfile.characteristicIds", taxonomy.flavorProfile?.characteristicIds, flavorCharacteristics, report);
   validateTaxonomyList(recipeId, "taxonomy.dietaryTagIds", taxonomy.dietaryTagIds, dietaryTags, report);
   validateTaxonomyList(recipeId, "taxonomy.browseTagIds", taxonomy.browseTagIds, browseTags, report);
   if (taxonomy.browseTagIds?.includes("quick")) {

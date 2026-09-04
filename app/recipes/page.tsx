@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BetaNote } from "@/components/beta-note";
 import { RecipeCard } from "@/components/recipe-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { recipes } from "@/data/recipes";
+import { cookingTimeBands, type CookingTimeBandId } from "@/lib/cooking-time";
+import { listFlavorPreferenceOptions } from "@/lib/flavor";
 import { exploreRecipeCatalog, type RecipeCatalogFilters } from "@/lib/recipe-exploration";
 import {
   listRecipeCountryOptions,
@@ -13,10 +14,11 @@ import {
   listRecipeRegionOptions,
   listRecipeTechniqueOptions,
 } from "@/lib/taxonomy";
+import { flavorPreferenceIds, type FlavorPreferenceId } from "@/types/flavor";
 
 export const metadata: Metadata = {
   title: "料理目录",
-  description: "按菜系、来源、技法、料理类型与时间浏览 Cooking Lab 的 100 道结构化菜谱。",
+  description: "按口味、做饭节奏、菜系与技法发现 Cooking Lab 料理。",
 };
 
 type RawSearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -30,6 +32,8 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
     techniqueId: first(raw.technique),
     dishTypeId: first(raw.dish),
     maxTime: parseMaxTime(first(raw.time)),
+    timeBandId: parseTimeBand(first(raw.pace)),
+    flavorPreferenceId: parseFlavorPreference(first(raw.flavor)),
     countryId: origin?.startsWith("country:") ? origin.slice("country:".length) : undefined,
     regionId: origin?.startsWith("region:") ? origin.slice("region:".length) : undefined,
   };
@@ -39,6 +43,7 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
   const regions = listRecipeRegionOptions(recipes);
   const techniques = listRecipeTechniqueOptions(recipes);
   const dishTypes = listRecipeDishTypeOptions(recipes);
+  const flavorOptions = listFlavorPreferenceOptions();
   const activeCount = Object.values(filters).filter((value) => value !== undefined && value !== "").length;
 
   return (
@@ -52,14 +57,37 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
               从一道想吃的菜，走进更大的料理地图
             </h1>
             <p className="leading-7 text-stone-600">
-              浏览 100 道结构化菜谱。用菜系、来源、技法和时间缩小范围，营养与成本保持为清楚标注的估算。
+              先从想吃的味道和今天的做饭节奏出发，也可以按菜系、地区与技法慢慢逛。
             </p>
           </div>
         </div>
       </header>
 
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6" aria-labelledby="catalog-title">
+        <div className="grid gap-7 border-b border-stone-300 pb-7 lg:grid-cols-3">
+          <BrowseChoices
+            label="口味"
+            options={flavorOptions}
+            selected={filters.flavorPreferenceId}
+            hrefFor={(id) => catalogHref(filters, { flavorPreferenceId: filters.flavorPreferenceId === id ? undefined : id as FlavorPreferenceId })}
+          />
+          <BrowseChoices
+            label="做饭节奏"
+            options={cookingTimeBands.map((band) => ({ id: band.id, label: band.label["zh-CN"] }))}
+            selected={filters.timeBandId}
+            hrefFor={(id) => catalogHref(filters, { timeBandId: filters.timeBandId === id ? undefined : id as CookingTimeBandId })}
+          />
+          <BrowseChoices
+            label="菜系"
+            options={cuisines.slice(0, 6)}
+            selected={filters.cuisineId}
+            hrefFor={(id) => catalogHref(filters, { cuisineId: filters.cuisineId === id ? undefined : id })}
+          />
+        </div>
+
         <form action="/recipes" className="border-y border-stone-300 py-5">
+          {filters.flavorPreferenceId ? <input name="flavor" type="hidden" value={filters.flavorPreferenceId} /> : null}
+          {filters.timeBandId ? <input name="pace" type="hidden" value={filters.timeBandId} /> : null}
           <div className="flex flex-col gap-3 sm:flex-row">
             <label className="flex-1">
               <span className="sr-only">搜索料理</span>
@@ -83,8 +111,8 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
 
           <details className="mt-3" open={activeCount > Number(Boolean(filters.query))}>
             <summary className="focus-ring flex min-h-11 cursor-pointer items-center justify-between gap-4 font-bold text-stone-900">
-              <span>按菜系、来源、类型和技法浏览</span>
-              <span className="text-sm font-semibold text-[#235849]">{activeCount ? `已启用 ${activeCount} 项` : "展开筛选"}</span>
+              <span>地区、类型、技法与精确时间</span>
+              <span className="text-sm font-semibold text-[#235849]">{activeCount ? "继续细选" : "展开"}</span>
             </summary>
             <div className="grid gap-4 pb-2 pt-4 sm:grid-cols-2 lg:grid-cols-5">
               <FilterSelect label="菜系" name="cuisine" value={filters.cuisineId} options={cuisines} />
@@ -107,7 +135,7 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
               />
             </div>
             <button className="focus-ring mt-3 min-h-11 rounded-md border border-[#235849] px-5 text-sm font-bold text-[#235849] hover:bg-[#edf4f0]" type="submit">
-              应用浏览条件
+              看看这些料理
             </button>
           </details>
         </form>
@@ -125,7 +153,7 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
                 }`}
                 href={catalogHref(filters, { techniqueId: filters.techniqueId === technique.id ? undefined : technique.id })}
               >
-                {technique.label} · {technique.count}
+                {technique.label}
               </Link>
             ))}
           </div>
@@ -133,12 +161,13 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
 
         <div className="mt-9 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="text-sm font-semibold text-[#a64631]">{activeCount ? "当前探索结果" : "完整目录"}</p>
+            <p className="text-sm font-semibold text-[#a64631]">{activeCount ? "顺着你的选择" : "慢慢逛"}</p>
             <h2 id="catalog-title" className="mt-1 text-3xl font-bold text-stone-950">
-              {catalog.length} 道料理
+              {activeCount ? "这些料理正合适" : "今天从哪道开始？"}
             </h2>
+            <p className="mt-2 text-sm text-stone-500">共 {catalog.length} 道可看</p>
           </div>
-          <p className="text-sm text-stone-500">数据为 Public Beta 演示估算</p>
+          <p className="text-sm text-stone-500">营养与成本为估算值</p>
         </div>
 
         {catalog.length ? (
@@ -150,14 +179,10 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
             <h2 className="text-2xl font-bold text-stone-950">没有找到符合条件的料理</h2>
             <p className="mt-3 text-stone-600">减少一个筛选条件，或换一个更宽泛的关键词试试。</p>
             <Link className="focus-ring mt-6 inline-flex min-h-11 items-center rounded-md bg-[#235849] px-5 font-bold text-white" href="/recipes">
-              查看全部料理
+              换个方向看看
             </Link>
           </div>
         )}
-
-        <div className="mt-10">
-          <BetaNote title="目录中的估算说明" />
-        </div>
       </section>
       <SiteFooter />
     </main>
@@ -199,6 +224,14 @@ function parseMaxTime(value: string | undefined): number | undefined {
   return [20, 30, 45, 60].includes(parsed) ? parsed : undefined;
 }
 
+function parseTimeBand(value: string | undefined): CookingTimeBandId | undefined {
+  return cookingTimeBands.some((band) => band.id === value) ? value as CookingTimeBandId : undefined;
+}
+
+function parseFlavorPreference(value: string | undefined): FlavorPreferenceId | undefined {
+  return flavorPreferenceIds.includes(value as FlavorPreferenceId) ? value as FlavorPreferenceId : undefined;
+}
+
 function catalogHref(filters: RecipeCatalogFilters, changes: Partial<RecipeCatalogFilters>): string {
   const next = { ...filters, ...changes };
   const params = new URLSearchParams();
@@ -209,5 +242,39 @@ function catalogHref(filters: RecipeCatalogFilters, changes: Partial<RecipeCatal
   if (next.techniqueId) params.set("technique", next.techniqueId);
   if (next.dishTypeId) params.set("dish", next.dishTypeId);
   if (next.maxTime !== undefined) params.set("time", next.maxTime.toString());
+  if (next.timeBandId) params.set("pace", next.timeBandId);
+  if (next.flavorPreferenceId) params.set("flavor", next.flavorPreferenceId);
   return params.size ? `/recipes?${params.toString()}` : "/recipes";
+}
+
+function BrowseChoices({
+  label,
+  options,
+  selected,
+  hrefFor,
+}: {
+  label: string;
+  options: Array<{ id: string; label: string }>;
+  selected?: string;
+  hrefFor: (id: string) => string;
+}) {
+  return (
+    <div>
+      <p className="text-sm font-semibold text-stone-600">{label}</p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {options.map((option) => (
+          <Link
+            aria-current={selected === option.id ? "page" : undefined}
+            className={`focus-ring inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold ${
+              selected === option.id ? "border-[#235849] bg-[#235849] text-white" : "border-stone-300 bg-white text-stone-700 hover:border-[#235849]"
+            }`}
+            href={hrefFor(option.id)}
+            key={option.id}
+          >
+            {option.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
 }

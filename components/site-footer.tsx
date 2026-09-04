@@ -11,7 +11,7 @@ export function SiteFooter() {
         </div>
         <nav aria-label="页脚导航" className="flex flex-col gap-3 text-sm font-semibold text-[#235849]">
           <Link className="focus-ring inline-flex min-h-11 items-center hover:underline" href="/recipes">
-            浏览 100 道料理
+            继续逛料理
           </Link>
           <a className="focus-ring inline-flex min-h-11 items-center hover:underline" href={BETA_FEEDBACK_URL} rel="noreferrer" target="_blank">
             提交 Beta 反馈

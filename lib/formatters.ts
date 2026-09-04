@@ -8,4 +8,3 @@ export const formatCost = (value: number, complete = true) => usable(value, comp
 export const formatTime = (minutes: number) => usable(minutes, true) ? `${minutes} 分钟` : "时间未知";
 export const formatMass = (grams: number) => usable(grams, true) ? `${Number.isInteger(grams) ? grams : grams.toFixed(1)} 克` : "用量未知";
 export const formatGrams = (grams: number) => usable(grams, true) ? `${grams.toFixed(1)} g` : "用量未知";
-export const formatPercent = (ratio: number) => Number.isFinite(ratio) && ratio >= 0 && ratio <= 1 ? `${Math.round(ratio * 100)}%` : "匹配度未知";

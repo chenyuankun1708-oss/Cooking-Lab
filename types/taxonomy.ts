@@ -26,11 +26,6 @@ export interface RecipeMealType {
   mealOccasionIds?: string[];
 }
 
-export interface RecipeFlavorProfile {
-  tasteIds?: string[];
-  characteristicIds?: string[];
-}
-
 export interface RecipeCulturalContext {
   summary?: string;
   originNote?: string;
@@ -51,7 +46,6 @@ export interface RecipeTaxonomy {
   cuisine: RecipeCuisineTaxonomy;
   techniques: string[];
   mealType: RecipeMealType;
-  flavorProfile?: RecipeFlavorProfile;
   dietaryTagIds?: string[];
   browseTagIds?: string[];
 }

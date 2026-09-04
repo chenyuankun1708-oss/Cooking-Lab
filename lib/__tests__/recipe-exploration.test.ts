@@ -35,4 +35,14 @@ describe("recipe catalog exploration", () => {
     )).toBe(true);
     expect(results.every((result) => result.score === 100)).toBe(true);
   });
+
+  it("browses by human time bands and flavor without changing canonical recipe data", () => {
+    const before = JSON.stringify(recipes);
+    const quick = exploreRecipeCatalog(recipes, { timeBandId: "quick" });
+    const freshSpicy = exploreRecipeCatalog(recipes, { flavorPreferenceId: "fresh-spicy" });
+    expect(quick.length).toBeGreaterThan(0);
+    expect(quick.every(({ recipe }) => recipe.cooking.totalTime <= 20)).toBe(true);
+    expect(freshSpicy.map(({ recipe }) => recipe.slug)).toEqual(expect.arrayContaining(["thai-basil-chicken", "hunan-chili-pork"]));
+    expect(JSON.stringify(recipes)).toBe(before);
+  });
 });

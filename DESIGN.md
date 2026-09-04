@@ -230,7 +230,7 @@
   - capable
   - lightly editorial
 - Terminology:
-  - prefer "料理", "灵感", "做法", "技巧", "为什么这样做"
+  - prefer "料理", "灵感", "做法", "技巧"；步骤原因直接接在动作之后，不重复加流程标签
   - use "实验室" language sparingly and only where it clarifies structured reasoning
 - Microcopy rules:
   - ask natural cooking questions

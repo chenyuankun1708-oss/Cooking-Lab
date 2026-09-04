@@ -71,6 +71,17 @@ M5 `Content, Brand & Experience` 的目标不是简单增加几个功能，而�
 
 M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展、image system，并在 Issue #21 落地消费者 Web 重设计。本阶段仍不完成最终品牌命名、完整 100 张图片覆盖或 Mobile App 开发。
 
+## M5.1 产品自然化
+
+Issue #29 开始把用户体验从“参数和数据库描述”转向真实做饭语言：
+
+- `recipe.flavor` 成为口味、香气、口感和饮食感受的 canonical data
+- 用户可以用清淡、鲜辣、酸爽、浓郁、焦香、暖乎乎表达 soft preference
+- 首页与卡片优先显示自然时间分组，详情页仍保留精确分钟
+- Recipe Card 使用单一整卡链接，不再展示匹配百分比或流程式 CTA
+- step reasoning 融入步骤正文，不重复显示“为什么这样做？”
+- Beta 状态与完整估算免责声明收回 footer，主要内容只保留必要的简短估算提示
+
 ## 体验方向
 
 ### 首页 v2 实现
@@ -102,7 +113,7 @@ M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展�
 - 这道菜
 - ingredients
 - steps
-- why for every structured step
+- 每一步自然衔接的料理原因
 - cooking principles
 - nutrition / limiting metrics / cost
 - tools

@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { RecipeCard } from "./recipe-card";
 import { getCuisineLabel, getTagLabel, getTechniqueLabel, getToolLabel } from "@/lib/display-labels";
+import { cookingTimeBands } from "@/lib/cooking-time";
+import { getFlavorPreferenceLabel, listFlavorPreferenceOptions } from "@/lib/flavor";
 import {
   buildRelaxationSuggestions,
   discoverRecipes,
@@ -12,6 +14,7 @@ import {
 } from "@/lib/recommendation";
 import { getRecipeTagIds, listRecipeCuisineOptions, listRecipeTechniqueOptions } from "@/lib/taxonomy";
 import type { Ingredient } from "@/types/ingredient";
+import type { FlavorPreferenceId } from "@/types/flavor";
 import type { Recipe } from "@/types/recipe";
 import type { RecommendationCriteria } from "@/types/recommendation";
 
@@ -26,6 +29,7 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
   const tools = useMemo(() => [...new Set(recipes.flatMap((recipe) => recipe.tools))].sort(), [recipes]);
   const cuisines = useMemo(() => listRecipeCuisineOptions(recipes), [recipes]);
   const methods = useMemo(() => listRecipeTechniqueOptions(recipes), [recipes]);
+  const flavorOptions = useMemo(() => listFlavorPreferenceOptions(), []);
   const shownIngredients = ingredients.filter((item) =>
     `${item.name} ${item.aliases.join(" ")} ${item.id}`.toLocaleLowerCase("zh-CN")
       .includes(ingredientQuery.trim().toLocaleLowerCase("zh-CN")));
@@ -42,6 +46,10 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
     const values = current[key] ?? [];
     return { ...current, [key]: values.includes(value) ? values.filter((item) => item !== value) : [...values, value] };
   });
+  const toggleFlavor = (value: FlavorPreferenceId) => setCriteria((current) => {
+    const values = current.flavorPreferences ?? [];
+    return { ...current, flavorPreferences: values.includes(value) ? values.filter((item) => item !== value) : [...values, value] };
+  });
   const setNumber = (key: NumberKey, value: string) =>
     setCriteria((current) => ({ ...current, [key]: value ? Number(value) : undefined }));
 
@@ -51,10 +59,10 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
         <div className="max-w-3xl">
           <p className="text-sm font-semibold text-[#a64631]">今晚的决定</p>
           <h2 id="decision-title" className="mt-2 text-3xl font-bold leading-tight text-stone-950 sm:text-5xl">
-            先说说你此刻的条件
+            今天想吃什么味道？
           </h2>
           <p className="mt-4 leading-7 text-stone-600">
-            时间和营养上限会严格筛选；食材、菜系和技法只调整推荐顺序。结果始终来自同一套确定性规则。
+            先从时间、口味和手边食材开始。想得更具体时，再补充厨具、菜系或营养范围。
           </p>
         </div>
 
@@ -63,14 +71,14 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
             <fieldset className="py-6 lg:pr-7">
               <legend className="text-lg font-bold text-stone-950">有多少时间？</legend>
               <div className="mt-4 flex flex-wrap gap-2" aria-label="最长料理时间">
-                {[20, 30, 45, 60].map((minutes) => (
+                {cookingTimeBands.slice(0, 3).map((band) => (
                   <ChoiceButton
-                    key={minutes}
-                    active={criteria.maxTime === minutes}
-                    label={`${minutes} 分钟`}
+                    key={band.id}
+                    active={criteria.maxTime === band.maxMinutes}
+                    label={`${band.label["zh-CN"]} · ${band.maxMinutes} 分钟内`}
                     onClick={() => setCriteria((current) => ({
                       ...current,
-                      maxTime: current.maxTime === minutes ? undefined : minutes,
+                      maxTime: current.maxTime === band.maxMinutes ? undefined : band.maxMinutes,
                     }))}
                   />
                 ))}
@@ -78,18 +86,16 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
             </fieldset>
 
             <fieldset className="border-t border-stone-200 py-6 lg:border-t-0 lg:px-7">
-              <legend className="text-lg font-bold text-stone-950">今天想吃得怎样？</legend>
+              <legend className="text-lg font-bold text-stone-950">想吃什么味道？</legend>
               <div className="mt-4 flex flex-wrap gap-2">
-                {cookingGoals
-                  .filter((tag) => recipes.some((recipe) => getRecipeTagIds(recipe).includes(tag)))
-                  .map((tag) => (
-                    <Toggle
-                      key={tag}
-                      checked={criteria.preferredTags?.includes(tag) ?? false}
-                      label={getTagLabel(tag)}
-                      onChange={() => toggle("preferredTags", tag)}
-                    />
-                  ))}
+                {flavorOptions.map((option) => (
+                  <Toggle
+                    key={option.id}
+                    checked={criteria.flavorPreferences?.includes(option.id) ?? false}
+                    label={option.label}
+                    onChange={() => toggleFlavor(option.id)}
+                  />
+                ))}
               </div>
             </fieldset>
 
@@ -131,13 +137,13 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
           <div className="border-t border-stone-200 py-4">
             <details>
               <summary className="focus-ring flex min-h-11 cursor-pointer items-center justify-between gap-4 font-bold text-stone-900">
-                <span>厨具、预算、菜系与技法</span>
-                <span className="text-sm font-semibold text-[#235849]">更多条件</span>
+                <span>还想怎么选？</span>
+                <span className="text-sm font-semibold text-[#235849]">厨具、预算、菜系与做法</span>
               </summary>
               <div className="grid gap-7 pb-4 pt-5 md:grid-cols-2">
                 <fieldset>
-                  <legend className="font-semibold">我可使用的完整厨具集合</legend>
-                  <p className="mt-1 text-xs leading-5 text-stone-500">缺少任一必要厨具的料理会被排除。</p>
+                  <legend className="font-semibold">手边可以用的厨具</legend>
+                  <p className="mt-1 text-xs leading-5 text-stone-500">选中后，只留下这些厨具能完成的料理。</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {tools.map((tool) => (
                       <Toggle
@@ -175,6 +181,21 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
                       ))}
                     </div>
                   </fieldset>
+                  <fieldset className="sm:col-span-2">
+                    <legend className="text-sm text-stone-600">今天想吃得怎样？</legend>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {cookingGoals
+                        .filter((tag) => recipes.some((recipe) => getRecipeTagIds(recipe).includes(tag)))
+                        .map((tag) => (
+                          <Toggle
+                            key={tag}
+                            checked={criteria.preferredTags?.includes(tag) ?? false}
+                            label={getTagLabel(tag)}
+                            onChange={() => toggle("preferredTags", tag)}
+                          />
+                        ))}
+                    </div>
+                  </fieldset>
                 </div>
               </div>
             </details>
@@ -183,8 +204,8 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
           <div className="border-t border-stone-200 py-4">
             <details>
               <summary className="focus-ring flex min-h-11 cursor-pointer items-center justify-between gap-4 font-bold text-stone-900">
-                <span>精确营养与用量限制</span>
-                <span className="text-sm font-semibold text-[#235849]">高级条件</span>
+                <span>营养与用量</span>
+                <span className="text-sm font-semibold text-[#235849]">需要时再看</span>
               </summary>
               <div className="grid gap-4 pb-4 pt-5 sm:grid-cols-2 lg:grid-cols-5">
                 <Select label="热量上限/份" onChange={(value) => setNumber("maxCalories", value)} options={[400, 500, 600, 800]} suffix="kcal" value={criteria.maxCalories} />
@@ -199,10 +220,9 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-[#a64631]">{active ? "按当前条件排序" : "先从这些料理开始"}</p>
-            <h3 className="mt-1 text-2xl font-bold text-stone-950 sm:text-3xl" aria-live="polite">
-              找到 {results.length} 道可做的料理
-            </h3>
+            <p className="text-sm font-semibold text-[#a64631]">{active ? "为你排在前面" : "先从这些料理开始"}</p>
+            <h3 className="mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">这些更适合今晚</h3>
+            <p className="mt-2 text-sm text-stone-500" aria-live="polite">目前有 {results.length} 道可以继续看看</p>
           </div>
           <button
             className="focus-ring min-h-11 px-2 text-sm font-bold text-[#235849] hover:underline disabled:cursor-not-allowed disabled:text-stone-400"
@@ -210,13 +230,13 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
             onClick={reset}
             type="button"
           >
-            清除全部条件
+            重新想想
           </button>
         </div>
 
         {activeSummary.length ? (
           <p className="mt-4 border-l-2 border-[#235849] pl-3 text-sm leading-6 text-stone-600">
-            <span className="font-semibold text-stone-900">当前条件：</span>{activeSummary.join(" · ")}
+            <span className="font-semibold text-stone-900">你刚才选了：</span>{activeSummary.join(" · ")}
           </p>
         ) : null}
 
@@ -227,16 +247,16 @@ export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; i
             </div>
             {results.length > visibleResults.length ? (
               <p className="mt-7 text-center text-sm text-stone-600">
-                先展示前 {visibleResults.length} 道。<Link className="focus-ring ml-1 font-bold text-[#235849] hover:underline" href="/recipes">到料理目录继续浏览</Link>
+                先看看最合适的几道。<Link className="focus-ring ml-1 font-bold text-[#235849] hover:underline" href="/recipes">再去发现更多</Link>
               </p>
             ) : null}
           </>
         ) : (
           <div className="mt-7 border border-dashed border-stone-400 bg-[#fbfaf6] px-6 py-14 text-center">
-            <h3 className="text-2xl font-bold text-stone-950">这些条件暂时没有交集</h3>
-            <p className="mx-auto mt-3 max-w-lg leading-7 text-stone-600">可以尝试：{suggestions.join("、")}。</p>
+            <h3 className="text-2xl font-bold text-stone-950">暂时没找到正合适的</h3>
+            <p className="mx-auto mt-3 max-w-lg leading-7 text-stone-600">不妨试试：{suggestions.join("、")}。</p>
             <button className="focus-ring mt-6 min-h-11 rounded-md bg-[#235849] px-5 font-semibold text-white hover:bg-[#173f35]" onClick={reset} type="button">
-              重新选择
+              重选一下
             </button>
           </div>
         )}
@@ -306,7 +326,8 @@ function summary(criteria: RecommendationCriteria, ingredients: Ingredient[]): s
     ...(criteria.availableTools ?? []).map((id) => `可用${getToolLabel(id)}`),
     ...(criteria.preferredTags ?? []).map((id) => `偏好${getTagLabel(id)}`),
     ...(criteria.preferredMethods ?? []).map((method) => `偏好${getTechniqueLabel(method)}`),
-    criteria.maxTime !== undefined ? `≤ ${criteria.maxTime} 分钟` : undefined,
+    ...(criteria.flavorPreferences ?? []).map((id) => `想吃${getFlavorPreferenceLabel(id)}`),
+    criteria.maxTime !== undefined ? `${cookingTimeBands.find((band) => band.maxMinutes === criteria.maxTime)?.label["zh-CN"] ?? "约"}，${criteria.maxTime} 分钟内` : undefined,
     criteria.maxCalories !== undefined ? `≤ ${criteria.maxCalories} kcal/份` : undefined,
     criteria.minProtein !== undefined ? `≥ ${criteria.minProtein} g 蛋白质/份` : undefined,
     criteria.maxOil !== undefined ? `≤ ${criteria.maxOil} g 油/份` : undefined,

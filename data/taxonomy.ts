@@ -109,24 +109,6 @@ export const mealOccasions = createRegistry([
   { id: "dinner", label: { "zh-CN": "晚餐", en: "Dinner" } },
 ] as const);
 
-export const tasteProfiles = createRegistry([
-  { id: "savory", label: { "zh-CN": "咸鲜", en: "Savory" } },
-  { id: "umami", label: { "zh-CN": "鲜味", en: "Umami" } },
-  { id: "tangy", label: { "zh-CN": "微酸", en: "Tangy" } },
-  { id: "sweet", label: { "zh-CN": "自然甜味", en: "Naturally sweet" } },
-] as const);
-
-export const flavorCharacteristics = createRegistry([
-  { id: "fresh", label: { "zh-CN": "清新", en: "Fresh" } },
-  { id: "light", label: { "zh-CN": "清爽", en: "Light" } },
-  { id: "comforting", label: { "zh-CN": "安慰感", en: "Comforting" } },
-  { id: "saucy", label: { "zh-CN": "带汁", en: "Saucy" } },
-  { id: "hearty", label: { "zh-CN": "扎实饱腹", en: "Hearty" } },
-  { id: "brothy", label: { "zh-CN": "汤汁感", en: "Brothy" } },
-  { id: "crisp", label: { "zh-CN": "脆爽", en: "Crisp" } },
-  { id: "tender", label: { "zh-CN": "嫩", en: "Tender" } },
-] as const);
-
 export const dietaryTags = createRegistry([
   { id: "vegan", label: { "zh-CN": "纯素", en: "Vegan" } },
   { id: "vegetarian", label: { "zh-CN": "蛋奶素", en: "Vegetarian" } },
@@ -146,8 +128,6 @@ export const taxonomyCollections = Object.freeze({
   techniques,
   dishTypes,
   mealOccasions,
-  tasteProfiles,
-  flavorCharacteristics,
   dietaryTags,
   browseTags,
 });

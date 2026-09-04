@@ -13,6 +13,7 @@ import type { Recipe } from "@/types/recipe";
 import { calculateCost } from "./cost";
 import { type IngredientRepository, localIngredientRepository } from "./ingredient-repository";
 import { calculateNutrition } from "./nutrition";
+import { scoreFlavorPreferences } from "./flavor";
 import { getRecipeCuisineId, getRecipeCuisineLabel, getRecipePrimaryTechniqueLabel, getRecipeTagIds } from "./taxonomy";
 import { getToolLabel } from "./tool-labels";
 
@@ -20,8 +21,9 @@ import { getToolLabel } from "./tool-labels";
 export const RECOMMENDATION_WEIGHTS: Readonly<Record<ScoreDimensionKey, number>> = Object.freeze({
   ingredientFit: 0.5,
   cuisine: 0.2,
-  tags: 0.2,
+  tags: 0.15,
   methods: 0.1,
+  flavor: 0.2,
 });
 
 /** Pantry staples should not outweigh a missing core protein, vegetable, or grain. */
@@ -40,14 +42,14 @@ const hasValue = (value: number | undefined): value is number =>
 export function hasActiveCriteria(criteria: RecommendationCriteria): boolean {
   return Boolean(
     criteria.availableIngredients?.length || criteria.availableTools?.length || criteria.preferredCuisine ||
-    criteria.preferredTags?.length || criteria.preferredMethods?.length || hasValue(criteria.maxTime) ||
+    criteria.preferredTags?.length || criteria.preferredMethods?.length || criteria.flavorPreferences?.length || hasValue(criteria.maxTime) ||
     hasValue(criteria.maxCalories) || hasValue(criteria.minProtein) || hasValue(criteria.maxOil) ||
     hasValue(criteria.maxSalt) || hasValue(criteria.maxAddedSugar) || hasValue(criteria.maxCost),
   );
 }
 
 export function resetRecommendationCriteria(): RecommendationCriteria {
-  return { availableIngredients: [], availableTools: [], preferredTags: [], preferredMethods: [] };
+  return { availableIngredients: [], availableTools: [], preferredTags: [], preferredMethods: [], flavorPreferences: [] };
 }
 
 export class RuleRecommendationEngine implements RecommendationEngine {
@@ -161,19 +163,24 @@ export class RuleRecommendationEngine implements RecommendationEngine {
       const cuisineId = getRecipeCuisineId(recipe);
       breakdown.cuisine = dimension(cuisineId === criteria.preferredCuisine ? 1 : 0, "cuisine",
         cuisineId === criteria.preferredCuisine
-          ? `符合${getRecipeCuisineLabel(recipe)}偏好`
+          ? `正是你选的${getRecipeCuisineLabel(recipe)}风味`
           : `菜系为${getRecipeCuisineLabel(recipe)}`);
     }
     if (criteria.preferredTags?.length) {
       const recipeTags = getRecipeTagIds(recipe);
       const matches = criteria.preferredTags.filter((tag) => recipeTags.includes(tag)).length;
       breakdown.tags = dimension(matches / criteria.preferredTags.length, "tags",
-        `匹配 ${matches}/${criteria.preferredTags.length} 个标签偏好`);
+        matches ? `有 ${matches} 个饮食方向合拍` : "没有碰上所选饮食方向");
     }
     if (criteria.preferredMethods?.length) {
       const matches = recipe.taxonomy.techniques.some((techniqueId) => criteria.preferredMethods?.includes(techniqueId));
       breakdown.methods = dimension(matches ? 1 : 0, "methods",
-        matches ? `符合${getRecipePrimaryTechniqueLabel(recipe)}偏好` : `技法为${getRecipePrimaryTechniqueLabel(recipe)}`);
+        matches ? `用了你偏好的${getRecipePrimaryTechniqueLabel(recipe)}做法` : `主要用${getRecipePrimaryTechniqueLabel(recipe)}完成`);
+    }
+    if (criteria.flavorPreferences?.length) {
+      const flavor = scoreFlavorPreferences(recipe.flavor, criteria.flavorPreferences);
+      breakdown.flavor = dimension(flavor.score, "flavor",
+        flavor.description ? `味道偏${flavor.description.replaceAll(" · ", "、")}` : "口味没有碰上当前偏好");
     }
     return breakdown;
   }
@@ -209,7 +216,7 @@ function buildSoftConditionMessages(breakdown: Partial<Record<ScoreDimensionKey,
 
 export function buildRecommendationExplanation(input: Pick<RecommendationResult,
   "recipe" | "eligible" | "hardFailures" | "ingredientMatch" | "scoreBreakdown">): string {
-  if (!input.eligible) return `当前无法直接推荐：${input.hardFailures.map(({ message }) => message).join("；")}。`;
+  if (!input.eligible) return `这道菜暂时不合适：${input.hardFailures.map(({ message }) => message).join("；")}。`;
   const parts: string[] = [];
   if (input.scoreBreakdown.ingredientFit) {
     const missingNames = input.ingredientMatch.missingIngredients.map(({ name }) => name).join("、");
@@ -226,8 +233,8 @@ export function buildRecommendationExplanation(input: Pick<RecommendationResult,
   if (preferenceMatches.length) parts.push(preferenceMatches.join("，"));
   if (parts.length) return `${parts.join("；")}，因此优先推荐。`;
   return Object.keys(input.scoreBreakdown).length
-    ? "满足全部硬性条件，但未命中当前软偏好。"
-    : "满足全部硬性条件，当前未设置其他偏好。";
+    ? "基本条件合适，不过没有完全碰上当前口味和偏好。"
+    : "适合先放进今晚的灵感清单。";
 }
 
 export function discoverRecipes(recipes: Recipe[], criteria: RecommendationCriteria,

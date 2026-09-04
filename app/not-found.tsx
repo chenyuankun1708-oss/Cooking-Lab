@@ -10,7 +10,7 @@ export default function NotFound() {
         <p className="text-sm font-semibold text-[#a64631]">没有找到这道料理</p>
         <h1 className="mt-3 text-4xl font-bold text-stone-900 sm:text-5xl">这个菜谱不存在</h1>
         <p className="mt-4 max-w-2xl leading-7 text-stone-600">
-          你访问的链接可能已经失效，或者这个 slug 并不在当前 100 道公开 Beta 菜谱中。
+          你访问的链接可能已经失效，或者这道料理还不在当前已发布内容中。
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link

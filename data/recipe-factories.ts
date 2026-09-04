@@ -1,5 +1,5 @@
 import type { Unit } from "@/types/ingredient";
-import type { Difficulty, Recipe, RecipeIngredient, RecipeStep } from "@/types/recipe";
+import type { Difficulty, Recipe, RecipeIngredient, RecipePublication, RecipeStep } from "@/types/recipe";
 import type { RecipeCulturalContext, RecipeTaxonomy } from "@/types/taxonomy";
 import { ingredients } from "./ingredients";
 import { getRecipeFlavorProfile } from "./recipe-flavors";
@@ -24,6 +24,7 @@ export interface RecipeInput {
   name: string;
   description: string;
   heroImageId?: string;
+  publication?: RecipePublication;
   servings: number;
   ingredients: IngredientInput[];
   prep: number;
@@ -82,6 +83,7 @@ export const buildRecipe = (input: RecipeInput): Recipe => ({
   name: input.name,
   description: input.description,
   ...(input.heroImageId ? { heroImageId: input.heroImageId } : {}),
+  publication: input.publication ?? { status: "draft" },
   taxonomy: buildTaxonomy(input.taxonomy),
   flavor: getRecipeFlavorProfile(input.slug),
   servings: input.servings,

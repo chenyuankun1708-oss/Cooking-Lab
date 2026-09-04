@@ -3,8 +3,8 @@ import Link from "next/link";
 import { RecipeCard } from "@/components/recipe-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { recipes } from "@/data/recipes";
-import { cookingTimeBands, type CookingTimeBandId } from "@/lib/cooking-time";
+import { getPublishedRecipes } from "@/data/published-recipes";
+import { cookingTimeBands, getCookingTimeBand, type CookingTimeBandId } from "@/lib/cooking-time";
 import { listFlavorPreferenceOptions } from "@/lib/flavor";
 import { exploreRecipeCatalog, type RecipeCatalogFilters } from "@/lib/recipe-exploration";
 import {
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 type RawSearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 export default async function RecipeCatalogPage({ searchParams }: { searchParams: RawSearchParams }) {
+  const recipes = getPublishedRecipes();
   const raw = await searchParams;
   const origin = first(raw.origin);
   const filters: RecipeCatalogFilters = {
@@ -44,6 +45,8 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
   const techniques = listRecipeTechniqueOptions(recipes);
   const dishTypes = listRecipeDishTypeOptions(recipes);
   const flavorOptions = listFlavorPreferenceOptions();
+  const availableTimeBands = cookingTimeBands.filter((band) =>
+    recipes.some((recipe) => getCookingTimeBand(recipe.cooking.totalTime).id === band.id));
   const activeCount = Object.values(filters).filter((value) => value !== undefined && value !== "").length;
 
   return (
@@ -73,7 +76,7 @@ export default async function RecipeCatalogPage({ searchParams }: { searchParams
           />
           <BrowseChoices
             label="做饭节奏"
-            options={cookingTimeBands.map((band) => ({ id: band.id, label: band.label["zh-CN"] }))}
+            options={availableTimeBands.map((band) => ({ id: band.id, label: band.label["zh-CN"] }))}
             selected={filters.timeBandId}
             hrefFor={(id) => catalogHref(filters, { timeBandId: filters.timeBandId === id ? undefined : id as CookingTimeBandId })}
           />

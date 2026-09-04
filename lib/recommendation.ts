@@ -237,9 +237,9 @@ export function buildRecommendationExplanation(input: Pick<RecommendationResult,
     : "适合先放进今晚的灵感清单。";
 }
 
-export function discoverRecipes(recipes: Recipe[], criteria: RecommendationCriteria,
+export function discoverRecipes(recipes: readonly Recipe[], criteria: RecommendationCriteria,
   engine: RecommendationEngine = recommendationEngine): RecommendationResult[] {
-  return engine.rank(recipes, criteria).filter(({ eligible }) => eligible);
+  return engine.rank([...recipes], criteria).filter(({ eligible }) => eligible);
 }
 
 export function buildRelaxationSuggestions(criteria: RecommendationCriteria): string[] {

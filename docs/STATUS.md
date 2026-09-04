@@ -19,8 +19,10 @@ Production URL：
 - GitHub Issue #20 已关闭
 - GitHub PR #27 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #21 已关闭
-- GitHub Epic #28 与 Issue #29 当前 open
-- Issue #29 工作分支为 `feature/issue-29-flavor-human-language`
+- GitHub PR #33 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #29 已关闭
+- GitHub Epic #28 与 Issue #30 当前 open
+- Issue #30 工作分支为 `feature/issue-30-recipe-quality-publishing`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -33,7 +35,7 @@ Production URL：
 - 73 种 `demo-estimated` 食材与 100 道结构化菜谱
 - Unit Conversion、Nutrition Engine、Cost Engine 与 Dataset Validation
 - 硬限制 + 软偏好的确定性 Recommendation Engine
-- 首页即时料理决策、全量目录、稳定 slug 详情页
+- 首页即时料理决策、已发布目录、稳定 slug 详情页
 - Public Beta disclaimer、404、反馈入口和基础 metadata
 - 已上线的 Public Beta 生产环境
 
@@ -178,7 +180,7 @@ PR #27 已合并并完成：
 
 ## Issue #29 当前产物
 
-当前分支已建立 M5.1 Flavor 与自然语言基线：
+PR #33 已合并并建立 M5.1 Flavor 与自然语言基线：
 
 - `recipe.flavor` 取代旧 `taxonomy.flavorProfile`，成为唯一 canonical Flavor source
 - 100 道 recipe 完成保守 Flavor Profile 迁移
@@ -187,15 +189,26 @@ PR #27 已合并并完成：
 - 时间按照真实 100 道分布映射为轻松快手、日常料理、慢慢做、值得等待，精确分钟继续保留
 - 首页、目录、卡片和详情页移除匹配百分比、数据库计数 CTA、重复“为什么这样做？”与主要区域 Beta 说明框
 
+## Issue #30 当前产物
+
+当前分支已建立 Recipe publishing 与 quality gate：
+
+- 100 道 structured recipes 全部保留，publication status 明确区分 `draft / reviewed / published`
+- 技术 eligibility 与编辑发布状态分离，只有 `published` 且通过校验的 Recipe 可公开
+- 初始 published set 为 10 道已有合法 hero 的 Recipe；静态详情页参数同为 10
+- 10 道公开 Recipe 已逐道深化为 4–6 个真实步骤，补齐 sensory cues、doneness、调味时机和失败预防
+- Homepage、catalog、recommendation、taxonomy options、detail lookup 与 SSG 统一消费 `data/published-recipes.ts`
+- 未发布 slug 不生成静态详情，直接进入公开路由时返回 404
+
 ## 当前产品缺口
 
 - 100 道菜已形成第一版料理世界地图，但文化 provenance 与更深 region coverage 仍需持续审核
-- 当前只有 10 / 100 道 recipe 有已审核 hero image，其余 recipe 继续显示设计一致的 fallback
+- 当前只有 10 / 100 道 recipe 有已审核 hero image；其余 90 道保留为 draft，不进入公开 UI
 - 更深的文化 provenance 和地域覆盖仍需作为内容审核持续推进
 - Household、个人口味和长期陪伴能力仍只有方向，没有 schema
 
 ## 下一步
 
-1. 完成 Issue #29 browser QA、PR review 与合并前验证。
-2. Issue #30 再处理 recipe publishing gate 与内容深度；本 Issue 不提前实现。
-3. 后续按 `docs/IMAGE_SYSTEM.md` 分批补齐剩余 90 道 recipe hero images。
+1. 完成 Issue #30 验证、PR review 与合并前检查。
+2. 后续内容批次按 publishing contract 逐道补齐步骤、来源和 hero，不以数量替代审核。
+3. #31 Similar Recipes 与 #32 Living Hero 保持独立，不在 Issue #30 中提前实现。

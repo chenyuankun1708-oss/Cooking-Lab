@@ -29,6 +29,8 @@
 - `lib/formatters.ts`：展示层估算文案和精度格式
 - `lib/recipe-detail.ts`：framework-independent 的详情 use case 与数值聚合
 - `lib/recipe-detail-display.ts`：当前 Web 详情页的 label 与展示格式适配
+- `lib/recipe-publishing.ts`：framework-independent publication eligibility 与可见性规则
+- `data/published-recipes.ts`：当前 Web 的唯一公开 Recipe adapter，并负责本地 hero 文件存在性注入
 - `lib/*validation*.ts`：静态数据校验
 - `lib/ingredient-repository.ts`：数据来源抽象
 - `app/`：Next.js 路由、metadata 与页面组合
@@ -83,11 +85,21 @@
 
 Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framework-independent 层。当前仍有未完成部分：
 
-- 只有 10 道 recipe 具备已审核 hero image，其他 90 道继续使用稳定 fallback
+- 只有 10 道 recipe 具备已审核 hero image 并进入公开集合，其他 90 道保留为 draft
 - cultural metadata 目前只在少量 recipe 上示例性使用
 - taxonomy registry 只覆盖当前数据集需要的稳定语义，不追求成为完整世界料理百科
 
 这意味着内容域已经脱离“只有 `cuisine` / `tags` / `method`”的 MVP 状态，但距离 100+ recipes 与图片系统仍有后续工作。
+
+#### 5. Structured data 与 public data 分离
+
+`data/recipes.ts` 保留全部 100 道内容数据，用于 validation、coverage 和后续编辑。`lib/recipe-publishing.ts` 纯粹评估技术 eligibility，`recipe.publication.status` 记录独立的人工编辑决定；只有两者同时通过的 Recipe 才由 `data/published-recipes.ts` 暴露。
+
+公开依赖方向为：
+
+`app/components -> data/published-recipes.ts -> lib/recipe-publishing.ts -> recipes/images/ingredients`
+
+Homepage、catalog、recommendation input、taxonomy option counts、detail lookup 与 SSG params 不再直接读取 raw `recipes`。本地文件检查留在 Node data adapter，通过回调注入纯 eligibility helper，因此核心发布规则仍可被未来客户端复用。
 
 ### 当前前端边界
 

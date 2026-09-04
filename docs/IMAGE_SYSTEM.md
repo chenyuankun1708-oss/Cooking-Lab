@@ -153,7 +153,7 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 
 无 `heroImageId`、引用缺失或浏览器加载失败时，`RecipeImage` 显示固定比例的暖中性色 fallback、Recipe 首字和 cuisine label。fallback 不改变周围布局，也不会用无来源的默认 food photo 冒充菜品。
 
-当前 10 道 Recipe 具备已审核 hero，其余 90 道继续安全使用同尺寸 fallback。两种状态使用相同 card/detail frame，不改变周围布局。
+当前 10 道 Recipe 具备已审核 hero 并进入公开集合。Fallback 仍是图片组件的容错能力，但其余 90 道无已审核 hero 的 Recipe 保持 draft，不会因为存在 fallback 就自动公开。
 
 ## Validation
 
@@ -211,3 +211,5 @@ Issue #21 加入第一批 10 张真实 seed assets，用于验证首页、card�
 - 其他地区：黎巴嫩风味鹰嘴豆泥
 
 全部来源于 Wikimedia Commons 的原始 file page，授权为 CC0、CC BY 或 CC BY-SA。`data/recipe-images.ts` 逐张记录 author、source URL、license URL、attribution、alt 与 focal point；served asset 统一裁切为 `1500 x 1000` WebP。原始图片不进入仓库。
+
+Issue #30 再次逐张检查这 10 张图片的本地文件、授权记录、alt 与食物主体，并将它们作为初始 published set 的必要条件。本轮没有新增图片；90 道无已审核 hero 的 Recipe 保持 draft，不再由公开 UI fallback 掩盖发布缺口。Publishing eligibility 会拒绝缺失 hero、受限 license、无意义 alt、悬空引用或本地文件不存在的 `published` Recipe。

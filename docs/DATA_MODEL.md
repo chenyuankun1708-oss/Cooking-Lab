@@ -17,9 +17,10 @@
 
 ## Recipe
 
-当前包含 100 道 Recipe；每道包含标识、描述、taxonomy、可选文化内容、份数、结构化食材用量、烹饪时间/油盐糖/难度、厨具、成本元数据、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
+当前包含 100 道 Recipe；每道包含标识、描述、publication、taxonomy、可选文化内容、份数、结构化食材用量、烹饪时间/油盐糖/难度、厨具、成本元数据、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
 
 - 当前静态数据要求 `id` 与唯一 kebab-case `slug` 一致；Ingredient 引用必须存在，且用量必须能通过现有单位系统换算为克。
+- `publication.status` 是 `draft / reviewed / published` 三态编辑决定。它不代表技术校验结果；只有 `published` 且通过 publishing eligibility 的 Recipe 才可公开。
 - Canonical source of truth 是 `recipe.taxonomy`。新 recipe 不再维护独立的 `cuisine / category / method / tags` 静态字段。
 - `taxonomy` 是新的 source of truth，字段为：
   - `origin?: { countryId; regionId? }`
@@ -60,6 +61,8 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 ## Validation
 
 `validateIngredients`、`validateRecipes` 与 `validateImageAssets` 分别负责静态实体规则；`validateDataset` 组合三者并检查完整 Ingredient/Recipe/Image 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性、图片授权 metadata 及跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
+
+`evaluateRecipePublishingEligibility` 是更窄的发布 gate：在 Recipe validation 之外验证 nutrition/cost completeness、hero/license/local asset/alt、公开步骤信息量和事实性 culture provenance。更深的 sensory cue、doneness、失败预防与 food accuracy 仍由人工 editorial review 决定，不使用脆弱 NLP 规则自动盖章。当前 public adapter 暴露 10 道 published Recipe，静态详情参数也只有 10 个。
 
 ## Recommendation
 

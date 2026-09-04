@@ -73,7 +73,9 @@ Issue #21 当前已完成代码实现：food-first 首页、渐进式推荐条�
 
 GitHub tracking：Epic `#28`，Flavor & Human Language `#29`，后续 Recipe Quality `#30`、Similar Recipes `#31`、Living Hero `#32`。
 
-Issue #29 只负责 canonical Flavor Profile、自然时间语言、Flavor-aware deterministic recommendation 和现有页面语言自然化。Recipe publishing、相似菜、Hero rotation 与图片补齐继续由后续独立 Issue 承担。
+Issue #29 已完成并通过 PR #33 合并：canonical Flavor Profile、自然时间语言、Flavor-aware deterministic recommendation 和现有页面语言自然化已经进入 `main`。
+
+Issue #30 建立 Recipe publishing gate 并完成初始内容深化：保留 100 道 structured recipes，先公开 10 道经图片和人工内容审校的 Recipe；首页、目录、推荐、详情与 SSG 全部基于统一 public source。Similar Recipes 与 Living Hero 继续分别留给 #31 / #32，本 Issue 不提前实现。
 
 ### F. Shared core audit for future mobile app
 

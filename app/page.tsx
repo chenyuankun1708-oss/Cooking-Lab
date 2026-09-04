@@ -4,9 +4,10 @@ import { HomeHero } from "@/components/home-hero";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeDiscovery } from "@/components/recipe-discovery";
 import { SiteFooter } from "@/components/site-footer";
+import { homepageFeaturedRecipeSlugs } from "@/data/homepage";
 import { ingredients } from "@/data/ingredients";
+import { getPublishedRecipes, getPublishedRecipesBySlugs } from "@/data/published-recipes";
 import { recipeImages } from "@/data/recipe-images";
-import { recipes } from "@/data/recipes";
 import { recommendationEngine } from "@/lib/recommendation";
 import { listRecipeCuisineOptions, listRecipeTechniqueOptions } from "@/lib/taxonomy";
 
@@ -14,24 +15,16 @@ export const metadata: Metadata = {
   title: "今晚，想吃点什么？",
 };
 
-const featuredSlugs = [
-  "thai-basil-chicken",
-  "tomato-scrambled-eggs",
-  "french-ratatouille",
-  "japanese-miso-tofu-soup",
-] as const;
-
 const featuredCuisineIds = ["chinese", "japanese", "korean", "thai", "vietnamese", "italian", "french", "fusion"] as const;
 const featuredTechniqueIds = ["pan-fry", "stir-fry", "steam", "stew", "roast", "blanch", "boil", "cold-mix"] as const;
 
 export default function Home() {
+  const publishedRecipes = getPublishedRecipes();
   const heroImage = recipeImages.find((image) => image.id === "italian-tomato-basil-pasta-hero");
-  const featuredResults = featuredSlugs.flatMap((slug) => {
-    const recipe = recipes.find((item) => item.slug === slug);
-    return recipe ? recommendationEngine.rank([recipe], {}) : [];
-  });
-  const allCuisineOptions = listRecipeCuisineOptions(recipes);
-  const allTechniqueOptions = listRecipeTechniqueOptions(recipes);
+  const featuredResults = getPublishedRecipesBySlugs(homepageFeaturedRecipeSlugs)
+    .map((recipe) => recommendationEngine.rank([recipe], {})[0]);
+  const allCuisineOptions = listRecipeCuisineOptions(publishedRecipes);
+  const allTechniqueOptions = listRecipeTechniqueOptions(publishedRecipes);
   const cuisineOptions = featuredCuisineIds.flatMap((id) => allCuisineOptions.find((option) => option.id === id) ?? []);
   const techniqueOptions = featuredTechniqueIds.flatMap((id) => allTechniqueOptions.find((option) => option.id === id) ?? []);
 
@@ -61,7 +54,7 @@ export default function Home() {
         </div>
       </section>
 
-      <RecipeDiscovery recipes={recipes} ingredients={ingredients} />
+      <RecipeDiscovery recipes={publishedRecipes} ingredients={ingredients} />
 
       <section className="py-14 sm:py-20" aria-labelledby="world-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">

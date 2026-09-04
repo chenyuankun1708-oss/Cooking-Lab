@@ -22,7 +22,7 @@ const cookingGoals = ["high-protein", "vegetable-rich", "one-pot", "quick", "hig
 type ListKey = "availableIngredients" | "availableTools" | "preferredTags" | "preferredMethods";
 type NumberKey = "maxTime" | "maxCalories" | "minProtein" | "maxOil" | "maxSalt" | "maxAddedSugar" | "maxCost";
 
-export function RecipeDiscovery({ recipes, ingredients }: { recipes: Recipe[]; ingredients: Ingredient[] }) {
+export function RecipeDiscovery({ recipes, ingredients }: { recipes: readonly Recipe[]; ingredients: Ingredient[] }) {
   const [criteria, setCriteria] = useState<RecommendationCriteria>(() => resetRecommendationCriteria());
   const [ingredientQuery, setIngredientQuery] = useState("");
   const results = useMemo(() => discoverRecipes(recipes, criteria), [recipes, criteria]);

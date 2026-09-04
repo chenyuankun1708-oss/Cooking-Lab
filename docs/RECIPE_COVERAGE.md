@@ -44,11 +44,23 @@ Ingredient dataset 从 30 扩展到 73。新增 43 项均被至少一道新增 r
 
 ## Quality And Culture
 
-新增 recipe 均包含至少三个有顺序的步骤和可操作的 why。解释集中于传热、表面水分、褐变、蛋白质凝固、淀粉糊化、豆类水合、乳化、余热和香气加入时机。
+100 道 structured recipe 全部保留并通过 schema、taxonomy、Flavor、Ingredient 引用与营养/成本计算校验。Issue #30 审计发现原数据 100 道都恰好为三步，这是覆盖扩张阶段的模板化信号，不再作为公开质量标准。
+
+当前 10 道 published recipe 已按真实流程重写为 4–6 步，逐道补充锅温、颜色、气味、质地、汁水、最厚肉片熟度、调味时机和必要失败预防。其余 90 道继续为 draft，后续必须逐道深化，而不是批量把三步模板视为已发布内容。
 
 所有新增 recipe 的 culture 留空。名称与 taxonomy 使用常见、低争议的国家或地方身份；简化或替代关键食材的 recipe 明确标记“家庭版”或“风味”，不写无来源的历史、起源或传统习惯。
 
 自动化抽查固定覆盖 15 道新增 recipe，横跨中国、欧洲、日韩、东南亚、美洲、印度与黎巴嫩。全量校验覆盖 100 道的唯一 ID/slug、引用、单位、步骤及营养成本完整性。
+
+## Publishing Coverage
+
+- Structured recipes：100
+- Published recipes：10
+- Static recipe detail params：10
+- Draft / unpublished recipes：90
+- Published hero coverage：10 / 10
+
+公开集覆盖中国、日本、韩国、泰国、越南、法国、意大利和黎巴嫩，以及 stir-fry、braise、cold-mix、stew、boil、simmer、poach 与主食料理。更完整的全量 coverage 仍描述 100 道内容储备，不能被解释成公开目录数量。
 
 ## Time And Practicality Hardening
 

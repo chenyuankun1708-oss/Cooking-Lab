@@ -1,5 +1,5 @@
 import type { Ingredient, Unit } from "@/types/ingredient";
-import type { Recipe } from "@/types/recipe";
+import { recipePublicationStatuses, type Recipe } from "@/types/recipe";
 import { browseTags, countries, cuisines, dietaryTags, dishTypes, mealOccasions, regions, subCuisines, techniques } from "@/data/taxonomy";
 import { validateFlavorProfile } from "./flavor-validation";
 import { toGrams } from "./unit-conversion";
@@ -14,6 +14,7 @@ export interface RecipeValidationIssue {
 const units = new Set<Unit>(["g", "kg", "ml", "piece", "tbsp", "tsp"]);
 const difficulties = new Set(["easy", "medium", "hard"]);
 const heatLevels = new Set(["none", "low", "medium", "high"]);
+const publicationStatuses = new Set<string>(recipePublicationStatuses);
 const minimumTotalTimeByIngredientId: Readonly<Record<string, number>> = Object.freeze({
   "dry-chickpea": 120,
   "dry-black-bean": 120,
@@ -40,6 +41,9 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
 
     if (!recipe.name.trim()) report(recipeId, "name", "名称不能为空");
     if (!recipe.description.trim()) report(recipeId, "description", "描述不能为空");
+    if (!recipe.publication || !publicationStatuses.has(recipe.publication.status)) {
+      report(recipeId, "publication.status", "发布状态必须是 draft、reviewed 或 published");
+    }
     if (!difficulties.has(recipe.cooking.difficulty)) report(recipeId, "cooking.difficulty", "难度不在当前 schema 中");
     if (!isPositiveFinite(recipe.servings)) report(recipeId, "servings", "份数必须是正有限数");
     if (recipe.dataQuality !== "demo-estimated") report(recipeId, "dataQuality", "数据质量必须标记为 demo-estimated");

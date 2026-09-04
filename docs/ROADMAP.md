@@ -55,6 +55,8 @@ GitHub tracking:
 
 在 taxonomy 稳定后，扩展内容覆盖面，形成一个更像“小型世界料理地图”的结构化数据集。
 
+当前已完成 100 道 recipe、72 种 ingredient、16 种 technique 与 20 个 country 状态的覆盖；详细基线见 `docs/RECIPE_COVERAGE.md`。
+
 ### D. Recipe image system and visual asset pipeline
 
 建立合法可追溯的图片 schema、来源管理和前端图片策略，为 hero image 和未来内容视觉打底。

@@ -1,5 +1,10 @@
 import type { Recipe } from "@/types/recipe";
 import { additionalRecipes } from "./additional-recipes";
+import { chinaExpansionRecipes } from "./recipes-china";
+import { europeExpansionRecipes } from "./recipes-europe";
+import { eastAsiaExpansionRecipes } from "./recipes-east-asia";
+import { southeastAsiaExpansionRecipes } from "./recipes-southeast-asia";
+import { globalExpansionRecipes } from "./recipes-global";
 import { buildRecipe } from "./recipe-factories";
 
 const coreRecipes: Recipe[] = [
@@ -141,4 +146,4 @@ const coreRecipes: Recipe[] = [
   }),
 ];
 
-export const recipes: Recipe[] = [...coreRecipes, ...additionalRecipes];
+export const recipes: Recipe[] = [...coreRecipes, ...additionalRecipes, ...chinaExpansionRecipes, ...europeExpansionRecipes, ...eastAsiaExpansionRecipes, ...southeastAsiaExpansionRecipes, ...globalExpansionRecipes];

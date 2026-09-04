@@ -54,6 +54,6 @@ describe("shared core boundaries", () => {
       recipe: { slug: recipes[0].slug },
       times: { totalMinutes: recipes[0].cooking.totalTime },
     });
-    expect(JSON.parse(JSON.stringify(recommendations))).toHaveLength(30);
+    expect(JSON.parse(JSON.stringify(recommendations))).toHaveLength(100);
   });
 });

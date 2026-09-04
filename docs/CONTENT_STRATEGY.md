@@ -4,13 +4,11 @@
 
 ## M5 内容目标
 
-当前 Public Beta 的 30 道结构化菜谱已经足够验证推荐引擎和 Web MVP，但还不足以形成一个真正有内容深度、有探索感的消费者料理产品。
+当前数据集已从 30 道扩展到 100 道结构化菜谱，形成第一版可审计的料理世界地图。
 
 M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展成一个更像“小型世界料理地图”的结构化内容体系。
 
-目标总量：
-
-- 从 30 道扩展到约 100 道 structured recipes
+当前总量：100 道 structured recipes。最终 coverage 见 docs/RECIPE_COVERAGE.md。
 
 ## 当前内容缺口
 
@@ -98,12 +96,13 @@ M5 需要从当前粗粒度的 `cuisine` 升级到更可扩展的 taxonomy，但
 以下标签适合作为静态 taxonomy 保存：
 
 - `dietaryTagIds`：例如 `vegan`、`vegetarian`
-- `browseTagIds`：例如 `quick`、`one-pot`、`vegetable-rich`
+- `browseTagIds`：例如 `one-pot`、`vegetable-rich`
 
 以下语义更适合作为运行时派生值，不直接写死进 recipe 数据：
 
 - `high-protein`
 - `high-fiber`
+- `quick`
 - `low-oil`
 - `no-added-sugar`
 

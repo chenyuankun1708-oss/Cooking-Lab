@@ -24,7 +24,7 @@ Production URL：
 
 - Next.js / TypeScript / Tailwind Web 应用骨架
 - Ingredient、Recipe、Nutrition、Recommendation 类型系统
-- 30 种 `demo-estimated` 食材与 30 道结构化菜谱
+- 72 种 `demo-estimated` 食材与 100 道结构化菜谱
 - Unit Conversion、Nutrition Engine、Cost Engine 与 Dataset Validation
 - 硬限制 + 软偏好的确定性 Recommendation Engine
 - 首页即时料理决策、全量目录、稳定 slug 详情页
@@ -51,7 +51,7 @@ Issue #18 shared core audit 已完成代码侧最小调整：
 
 - `app/` 与 `components/` 是纯 Web 展示层，但首页交互当前高度依赖工具式筛选布局
 - `components/recipe-discovery.tsx` 直接消费 recommendation helper，适合当前 MVP，但未来首页重设计时需要更清晰的 application adapter
-- `lib/recipe-detail.ts` 同时承担数据读取、计算聚合、machine-value 映射和展示格式化，已经偏向 Web view-model，而非纯共享 core
+- recipe detail 已拆为 framework-independent application model 与 Web display adapter
 - image asset schema 仍未建立
 - cultural metadata 目前只在少量 recipe 上示例性使用
 
@@ -139,8 +139,7 @@ Issue #16 `[M5] Define brand and visual design system` 当前已在品牌规划�
 
 ## 当前产品缺口
 
-- 当前 30 道菜仍不足以形成真正的内容型产品
-- taxonomy v2 已建立，但世界料理覆盖度仍明显不足
+- 100 道菜已形成第一版料理世界地图，但文化 provenance 与更深 region coverage 仍需持续审核
 - 缺少真实料理图像系统
 - 首页和详情页仍明显带有工具 / dashboard / engineering demo 气质
 - Household、个人口味和长期陪伴能力仍只有方向，没有 schema
@@ -148,6 +147,6 @@ Issue #16 `[M5] Define brand and visual design system` 当前已在品牌规划�
 ## 下一步
 
 1. 以已确认的品牌方向作为后续 visual prototype / consumer web redesign 的约束输入。
-2. 以 taxonomy v2 作为 `#19` recipe expansion 与 `#20` image system 的共享数据基础。
+2. 以已完成的 100 道 recipe coverage 作为 `#20` image system 的内容基础。
 3. Naming exploration 保留，但正式品牌名延后到 M5 visual prototype / redesign 之后再评估。
 4. 在 image system 和体验重设计推进时，持续遵守 “Food first / Knowledge second / Data supports trust” 原则。

@@ -76,7 +76,18 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
       }, 0);
     if (Math.abs(oil - gramsFor("cooking-oil")) > 0.01) report(recipeId, "cooking.oil", "用油字段与食材明细不一致");
     if (Math.abs(salt - gramsFor("salt")) > 0.01) report(recipeId, "cooking.salt", "盐字段与食材明细不一致");
-    if (addedSugar !== 0) report(recipeId, "cooking.addedSugar", "当前数据未定义添加糖食材，addedSugar 必须为 0");
+    const calculatedAddedSugar = recipe.ingredients.reduce((total, item) => {
+      const ingredient = ingredientById.get(item.ingredientId);
+      if (!ingredient) return total;
+      try {
+        return total + toGrams(item.amount, item.unit, ingredient) / 100 * ingredient.nutritionPer100g.addedSugar;
+      } catch {
+        return total;
+      }
+    }, 0);
+    if (Math.abs(addedSugar - calculatedAddedSugar) > 0.01) {
+      report(recipeId, "cooking.addedSugar", "添加糖字段与食材营养估算不一致");
+    }
 
     if (recipe.cost.currency !== "CNY" || !recipe.cost.basis.trim()) report(recipeId, "cost", "成本元数据不完整");
     if (recipe.cost.estimated !== undefined && !isNonNegativeFinite(recipe.cost.estimated)) report(recipeId, "cost.estimated", "成本估算必须是非负有限数");

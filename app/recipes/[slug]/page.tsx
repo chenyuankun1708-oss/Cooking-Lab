@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
-import { createRecipeDetailViewModel, getRecipeBySlug } from "@/lib/recipe-detail";
+import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
+import { buildRecipeDetail, getRecipeBySlug } from "@/lib/recipe-detail";
 import { SITE_NAME } from "@/lib/site";
 import { getRecipeLegacyCategoryLabel } from "@/lib/taxonomy";
 
@@ -29,7 +30,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const { slug } = await params;
   const recipe = getRecipeBySlug(slug);
   if (!recipe) notFound();
-  const detail = createRecipeDetailViewModel(recipe);
+  const detail = buildRecipeDetailDisplay(buildRecipeDetail(recipe));
 
   return (
     <main>

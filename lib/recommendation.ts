@@ -11,10 +11,10 @@ import type {
 } from "@/types/recommendation";
 import type { Recipe } from "@/types/recipe";
 import { calculateCost } from "./cost";
-import { getToolLabel } from "./display-labels";
 import { type IngredientRepository, localIngredientRepository } from "./ingredient-repository";
 import { calculateNutrition } from "./nutrition";
 import { getRecipeCuisineId, getRecipeCuisineLabel, getRecipePrimaryTechniqueLabel, getRecipeTagIds } from "./taxonomy";
+import { getToolLabel } from "./tool-labels";
 
 /** Relative influence of each active soft preference. Scores are normalized over active dimensions. */
 export const RECOMMENDATION_WEIGHTS: Readonly<Record<ScoreDimensionKey, number>> = Object.freeze({

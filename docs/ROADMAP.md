@@ -1,6 +1,6 @@
 # Roadmap
 
-最近更新：2026-09-03
+最近更新：2026-09-04
 
 ## 当前发布状态
 
@@ -66,6 +66,13 @@ GitHub tracking:
 ### F. Shared core audit for future mobile app
 
 审计当前耦合边界，约束后续 M5 工作避免把新领域能力写死在 Next.js 或 React 里。
+
+当前实现进度：
+
+- 已完成 shared core / application / Web adapter / data 的模块审计
+- 已将 recipe detail 的纯数据聚合与 Web display formatting 分离
+- 已增加 framework coupling 与 JSON serialization guard tests
+- 保持单仓库，不提前迁移 monorepo 或创建 Mobile app
 
 ## 推荐依赖关系
 

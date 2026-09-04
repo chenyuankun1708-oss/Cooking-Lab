@@ -14,6 +14,7 @@ import { calculateCost } from "./cost";
 import { getToolLabel } from "./display-labels";
 import { type IngredientRepository, localIngredientRepository } from "./ingredient-repository";
 import { calculateNutrition } from "./nutrition";
+import { getRecipeCuisineId, getRecipeCuisineLabel, getRecipePrimaryTechniqueLabel, getRecipeTagIds } from "./taxonomy";
 
 /** Relative influence of each active soft preference. Scores are normalized over active dimensions. */
 export const RECOMMENDATION_WEIGHTS: Readonly<Record<ScoreDimensionKey, number>> = Object.freeze({
@@ -157,17 +158,22 @@ export class RuleRecommendationEngine implements RecommendationEngine {
         `已有 ${ingredientMatch.availableRequired}/${ingredientMatch.totalRequired} 种必需食材`);
     }
     if (criteria.preferredCuisine) {
-      breakdown.cuisine = dimension(recipe.cuisine === criteria.preferredCuisine ? 1 : 0, "cuisine",
-        recipe.cuisine === criteria.preferredCuisine ? `符合${criteria.preferredCuisine}偏好` : `菜系为${recipe.cuisine}`);
+      const cuisineId = getRecipeCuisineId(recipe);
+      breakdown.cuisine = dimension(cuisineId === criteria.preferredCuisine ? 1 : 0, "cuisine",
+        cuisineId === criteria.preferredCuisine
+          ? `符合${getRecipeCuisineLabel(recipe)}偏好`
+          : `菜系为${getRecipeCuisineLabel(recipe)}`);
     }
     if (criteria.preferredTags?.length) {
-      const matches = criteria.preferredTags.filter((tag) => recipe.tags.includes(tag)).length;
+      const recipeTags = getRecipeTagIds(recipe);
+      const matches = criteria.preferredTags.filter((tag) => recipeTags.includes(tag)).length;
       breakdown.tags = dimension(matches / criteria.preferredTags.length, "tags",
         `匹配 ${matches}/${criteria.preferredTags.length} 个标签偏好`);
     }
     if (criteria.preferredMethods?.length) {
-      breakdown.methods = dimension(criteria.preferredMethods.includes(recipe.cooking.method) ? 1 : 0, "methods",
-        criteria.preferredMethods.includes(recipe.cooking.method) ? `符合${recipe.cooking.method}制偏好` : `技法为${recipe.cooking.method}`);
+      const matches = recipe.taxonomy.techniques.some((techniqueId) => criteria.preferredMethods?.includes(techniqueId));
+      breakdown.methods = dimension(matches ? 1 : 0, "methods",
+        matches ? `符合${getRecipePrimaryTechniqueLabel(recipe)}偏好` : `技法为${getRecipePrimaryTechniqueLabel(recipe)}`);
     }
     return breakdown;
   }

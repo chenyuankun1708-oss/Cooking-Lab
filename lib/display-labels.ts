@@ -1,3 +1,5 @@
+import { browseTags, cuisines, dietaryTags, dishTypes, getTaxonomyLabel, mealOccasions, techniques } from "@/data/taxonomy";
+
 export const toolLabels: Record<string, string> = {
   "baking-tray": "烤盘",
   blender: "搅拌机",
@@ -21,6 +23,7 @@ export const tagLabels: Record<string, string> = {
   "high-protein": "高蛋白",
   "low-oil": "低用油",
   "no-added-sugar": "无添加糖",
+  breakfast: "早餐",
   "one-pot": "一锅完成",
   quick: "快手",
   staple: "主食友好",
@@ -59,3 +62,15 @@ export const getHeatLabel = (heat: string | undefined) =>
 export const getUnitLabel = (unit: string) => unitLabels[unit] ?? fallbackLabel(unit);
 export const getDifficultyLabel = (difficulty: string) => difficultyLabels[difficulty] ?? fallbackLabel(difficulty);
 export const getIngredientFallbackLabel = (ingredientId: string) => `未知食材（${ingredientId}）`;
+export const getCuisineLabel = (cuisineId: string) =>
+  cuisines[cuisineId]?.label["zh-CN"] ?? getTaxonomyLabel("cuisines", cuisineId) ?? fallbackLabel(cuisineId);
+export const getTechniqueLabel = (techniqueId: string) =>
+  techniques[techniqueId]?.label["zh-CN"] ?? getTaxonomyLabel("techniques", techniqueId) ?? fallbackLabel(techniqueId);
+export const getDishTypeLabel = (dishTypeId: string) =>
+  dishTypes[dishTypeId]?.label["zh-CN"] ?? getTaxonomyLabel("dishTypes", dishTypeId) ?? fallbackLabel(dishTypeId);
+export const getMealOccasionLabel = (occasionId: string) =>
+  mealOccasions[occasionId]?.label["zh-CN"] ?? getTaxonomyLabel("mealOccasions", occasionId) ?? fallbackLabel(occasionId);
+export const getDietaryTagLabel = (tagId: string) =>
+  dietaryTags[tagId]?.label["zh-CN"] ?? getTagLabel(tagId);
+export const getBrowseTagLabel = (tagId: string) =>
+  browseTags[tagId]?.label["zh-CN"] ?? getTagLabel(tagId);

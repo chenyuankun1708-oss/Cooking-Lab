@@ -70,35 +70,54 @@ M5 数据扩充时，至少要保证以下核心技法有代表性覆盖：
 
 ## Recipe Taxonomy v2
 
-M5 需要从当前粗粒度的 `cuisine` 升级到更可扩展的 taxonomy，但不能为了整齐而强行让每道菜都填满所有层级。
+M5 需要从当前粗粒度的 `cuisine` 升级到更可扩展的 taxonomy，但不能为了整齐而强行让每道菜都填满所有层级。当前 v2 已采用：
 
-建议至少评估以下字段：
+- `origin?: { countryId; regionId? }`
+- `cuisine: { cuisineId; subCuisineId? }`
+- `techniques: string[]`
+- `mealType: { dishTypeId; mealOccasionIds? }`
+- `flavorProfile?: { tasteIds?; characteristicIds? }`
+- `dietaryTagIds?: string[]`
+- `browseTagIds?: string[]`
 
-- `country`
-- `region`
-- `cuisine`
-- `subCuisine`
-- `mealType`
-- `techniques`
-- `flavorProfile`
-- `dietaryTags`
-- `occasion`
-- `season`
+这套结构的核心判断是：
 
-规则：
+- `country / region` 与 `cuisine / subCuisine` 分离建模
+- `dishType` 与 `meal occasion` 分离建模
+- `soup` 归入 dish type，不再把“汤”当 technique
+- `rice-cooker` 归入 tool，`rice-cook` 才是 technique
+- 只保留当前 30 recipes 与近期 100 recipes 扩展真的会使用的 taxonomy 项
 
 - `country / region / cuisine / subCuisine` 只在有可靠依据时填写
 - 不是每道菜都必须拥有四级完整地域链
 - 避免把所有语义都塞进一个 `tags` 数组
-- taxonomy 必须可校验、可迁移、可回退
+- taxonomy 必须可校验、可迁移、可回退，并能通过 helper 继续兼容当前 filter / recommendation 语义
+
+### Static vs derived attributes
+
+以下标签适合作为静态 taxonomy 保存：
+
+- `dietaryTagIds`：例如 `vegan`、`vegetarian`
+- `browseTagIds`：例如 `quick`、`one-pot`、`vegetable-rich`
+
+以下语义更适合作为运行时派生值，不直接写死进 recipe 数据：
+
+- `high-protein`
+- `high-fiber`
+- `low-oil`
+- `no-added-sugar`
+
+原因是这类结论依赖营养计算或烹饪字段，一旦配方变动，硬编码 tag 很容易过期。
 
 ## Cultural Metadata
 
-Recipe 可增加以下 optional 内容字段：
+Recipe 当前使用轻量 optional 结构：
 
-- `story`
-- `origin`
-- `culturalContext`
+- `summary`
+- `originNote`
+- `traditionalContext`
+- `modernContext`
+- `sources?`
 
 用途包括：
 
@@ -115,6 +134,17 @@ Recipe 可增加以下 optional 内容字段：
 - 没有可靠依据就留空
 - 不虚构历史
 - 不为了内容丰富而制造“文化感”
+
+### Provenance strategy
+
+`sources` 使用轻量 reference 对象记录最少必要来源字段：
+
+- `title`
+- `url?`
+- `publisher?`
+- `accessedAt?`
+
+目标不是建立 citation engine，而是避免未来在 recipe detail 上出现无法追溯的文化说明。当前 30 道菜只对少数低争议、容易确认语境的菜品给出 cultural metadata 示例，其余留空。
 
 ## Recipe Detail v2 Content Surface
 
@@ -137,6 +167,8 @@ Recipe 可增加以下 optional 内容字段：
 - related recipes
 
 当前 M5 只定义这些内容面，不在本轮全部开发。
+
+Taxonomy 详细约定、label strategy 与示例见新增的 `docs/TAXONOMY.md`。
 
 ## Image System v1
 

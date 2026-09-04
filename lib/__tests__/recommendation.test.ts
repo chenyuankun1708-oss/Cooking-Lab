@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { recipes } from "@/data/recipes";
 import type { Recipe } from "@/types/recipe";
 import type { IngredientRepository } from "../ingredient-repository";
+import { getRecipeCuisineId, getRecipePrimaryTechniqueId, getRecipeTagIds } from "../taxonomy";
 import {
   buildRecommendationExplanation,
   discoverRecipes,
@@ -16,6 +17,9 @@ const engine = new RuleRecommendationEngine();
 const target = recipes[0];
 const evaluate = (criteria: Parameters<typeof engine.rank>[1], recipe = target) => engine.rank([recipe], criteria)[0];
 const requiredIds = (recipe = target) => recipe.ingredients.filter(({ optional }) => !optional).map(({ ingredientId }) => ingredientId);
+const targetCuisineId = getRecipeCuisineId(target);
+const targetTagIds = getRecipeTagIds(target);
+const targetTechniqueId = getRecipePrimaryTechniqueId(target);
 
 describe("hard constraints", () => {
   it("keeps every recipe eligible and neutral without criteria", () => {
@@ -61,10 +65,10 @@ describe("hard constraints", () => {
   });
 
   it("never lets a perfect soft score override a hard failure", () => {
-    const result = evaluate({ maxTime: 1, availableIngredients: requiredIds(), preferredCuisine: target.cuisine, preferredTags: target.tags });
+    const result = evaluate({ maxTime: 1, availableIngredients: requiredIds(), preferredCuisine: targetCuisineId, preferredTags: targetTagIds });
     expect(result.score).toBe(100);
     expect(result.eligible).toBe(false);
-    expect(discoverRecipes([target], { maxTime: 1, availableIngredients: requiredIds(), preferredCuisine: target.cuisine })).toEqual([]);
+    expect(discoverRecipes([target], { maxTime: 1, availableIngredients: requiredIds(), preferredCuisine: targetCuisineId })).toEqual([]);
   });
 
   it("returns no results for conflicting strict constraints", () => {
@@ -112,7 +116,7 @@ describe("ingredient fit", () => {
 
 describe("soft preferences and score", () => {
   it("scores cuisine as a soft preference without excluding", () => {
-    const matched = evaluate({ preferredCuisine: target.cuisine });
+    const matched = evaluate({ preferredCuisine: targetCuisineId });
     const unmatched = evaluate({ preferredCuisine: "不存在的菜系" });
     expect(matched.score).toBe(100);
     expect(unmatched).toMatchObject({ eligible: true, score: 0 });
@@ -120,19 +124,19 @@ describe("soft preferences and score", () => {
   });
 
   it("supports partial tag matches", () => {
-    const result = evaluate({ preferredTags: [target.tags[0], "missing-tag"] });
+    const result = evaluate({ preferredTags: [targetTagIds[0], "missing-tag"] });
     expect(result.scoreBreakdown.tags?.score).toBe(0.5);
     expect(result.score).toBe(50);
     expect(result.unmatchedConditions).toContain("匹配 1/2 个标签偏好");
   });
 
   it("scores method preferences", () => {
-    expect(evaluate({ preferredMethods: [target.cooking.method] }).scoreBreakdown.methods?.score).toBe(1);
+    expect(evaluate({ preferredMethods: [targetTechniqueId] }).scoreBreakdown.methods?.score).toBe(1);
     expect(evaluate({ preferredMethods: ["不存在"] }).scoreBreakdown.methods?.score).toBe(0);
   });
 
   it("normalizes multiple active soft dimensions by centralized weights", () => {
-    const result = evaluate({ availableIngredients: requiredIds(), preferredCuisine: "不存在", preferredTags: [target.tags[0]], preferredMethods: [target.cooking.method] });
+    const result = evaluate({ availableIngredients: requiredIds(), preferredCuisine: "不存在", preferredTags: [targetTagIds[0]], preferredMethods: [targetTechniqueId] });
     const expected = Math.round((RECOMMENDATION_WEIGHTS.ingredientFit + RECOMMENDATION_WEIGHTS.tags + RECOMMENDATION_WEIGHTS.methods) /
       Object.values(RECOMMENDATION_WEIGHTS).reduce((sum, weight) => sum + weight, 0) * 100);
     expect(result.score).toBe(expected);
@@ -140,7 +144,7 @@ describe("soft preferences and score", () => {
   });
 
   it("keeps explanation consistent with structured breakdown and missing ingredients", () => {
-    const result = evaluate({ availableIngredients: requiredIds().slice(0, -1), preferredCuisine: target.cuisine });
+    const result = evaluate({ availableIngredients: requiredIds().slice(0, -1), preferredCuisine: targetCuisineId });
     expect(result.explanation).toContain(`${result.ingredientMatch.availableRequired}/${result.ingredientMatch.totalRequired}`);
     expect(result.explanation).toContain(result.missingIngredients[0].name);
     expect(result.explanation).toContain(result.scoreBreakdown.cuisine!.explanation);
@@ -183,7 +187,7 @@ describe("safety, reset, and determinism", () => {
   });
 
   it("produces deterministic scores", () => {
-    const criteria = { availableIngredients: ["egg", "tomato"], preferredCuisine: "中式", preferredTags: ["quick"] };
+    const criteria = { availableIngredients: ["egg", "tomato"], preferredCuisine: "chinese", preferredTags: ["quick"] };
     expect(evaluate(criteria).score).toBe(evaluate(criteria).score);
     expect(evaluate(criteria).scoreBreakdown).toEqual(evaluate(criteria).scoreBreakdown);
   });
@@ -195,7 +199,12 @@ describe("safety, reset, and determinism", () => {
   });
 
   it("evaluates all 30 recipes without non-finite scores or breakdown values", () => {
-    const results = engine.rank(recipes, { availableIngredients: ["egg", "rice", "salt"], preferredCuisine: "中式", preferredTags: ["quick"], preferredMethods: ["炒", "蒸"] });
+    const results = engine.rank(recipes, {
+      availableIngredients: ["egg", "rice", "salt"],
+      preferredCuisine: "chinese",
+      preferredTags: ["quick"],
+      preferredMethods: ["stir-fry", "steam"],
+    });
     expect(results).toHaveLength(30);
     expect(results.every((result) => Number.isFinite(result.score) && Number.isFinite(result.ingredientMatch.fit) &&
       Object.values(result.scoreBreakdown).every((item) => Number.isFinite(item.score) && Number.isFinite(item.contribution)))).toBe(true);

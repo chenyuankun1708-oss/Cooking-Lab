@@ -5,9 +5,37 @@ import { getHeatLabel, getIngredientFallbackLabel, getToolLabel, getUnitLabel } 
 import { formatCalories, formatCost, formatMacro, formatMass, formatProtein, formatSodium, formatTime } from "./formatters";
 import { type IngredientRepository, localIngredientRepository } from "./ingredient-repository";
 import { calculateNutrition } from "./nutrition";
+import {
+  getFlavorProfileLabels,
+  getRecipeCuisineLabel,
+  getRecipeDishTypeLabel,
+  getRecipeMealOccasionLabels,
+  getRecipeOriginLabel,
+  getRecipeSubCuisineLabel,
+  getRecipeTechniqueLabels,
+} from "./taxonomy";
 
 export interface RecipeDetailViewModel {
   recipe: Recipe;
+  taxonomy: {
+    origin?: string;
+    cuisine: string;
+    subCuisine?: string;
+    dishType: string;
+    mealOccasions: string[];
+    techniques: string[];
+    flavor: {
+      tastes: string[];
+      characteristics: string[];
+    };
+  };
+  culture?: {
+    summary?: string;
+    originNote?: string;
+    traditionalContext?: string;
+    modernContext?: string;
+    sources: string[];
+  };
   ingredients: Array<{ id: string; name: string; amount: string; note?: string; optional: boolean }>;
   tools: string[];
   times: { prep: string; cook: string; total: string };
@@ -33,9 +61,26 @@ export function createRecipeDetailViewModel(
     ...nutrition.warnings.map((warning) => warning.message),
     ...cost.warnings.map((warning) => warning.message),
   ];
+  const flavor = getFlavorProfileLabels(recipe);
 
   return {
     recipe,
+    taxonomy: {
+      origin: getRecipeOriginLabel(recipe),
+      cuisine: getRecipeCuisineLabel(recipe),
+      subCuisine: getRecipeSubCuisineLabel(recipe),
+      dishType: getRecipeDishTypeLabel(recipe),
+      mealOccasions: getRecipeMealOccasionLabels(recipe),
+      techniques: getRecipeTechniqueLabels(recipe),
+      flavor,
+    },
+    culture: recipe.culture ? {
+      summary: recipe.culture.summary,
+      originNote: recipe.culture.originNote,
+      traditionalContext: recipe.culture.traditionalContext,
+      modernContext: recipe.culture.modernContext,
+      sources: (recipe.culture.sources ?? []).map((source) => source.title),
+    } : undefined,
     ingredients: recipe.ingredients.map((item) => ({
       id: item.ingredientId,
       name: repository.getById(item.ingredientId)?.name ?? getIngredientFallbackLabel(item.ingredientId),

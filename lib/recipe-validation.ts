@@ -1,5 +1,6 @@
 import type { Ingredient, Unit } from "@/types/ingredient";
 import type { Recipe } from "@/types/recipe";
+import { browseTags, countries, cuisines, dietaryTags, dishTypes, flavorCharacteristics, mealOccasions, regions, subCuisines, tasteProfiles, techniques } from "@/data/taxonomy";
 import { toGrams } from "./unit-conversion";
 import { isNonNegativeFinite, isPositiveFinite, isSlug } from "./validation-utils";
 
@@ -10,9 +11,6 @@ export interface RecipeValidationIssue {
 }
 
 const units = new Set<Unit>(["g", "kg", "ml", "piece", "tbsp", "tsp"]);
-const methods = new Set(["煎", "炒", "蒸", "煮", "炖", "焖", "烤", "汤", "凉拌", "电饭锅"]);
-const cuisines = new Set(["中式", "西式", "融合"]);
-const categories = new Set(["主菜", "主食", "汤", "凉菜", "早餐", "配菜"]);
 const difficulties = new Set(["easy", "medium", "hard"]);
 const heatLevels = new Set(["none", "low", "medium", "high"]);
 
@@ -34,16 +32,13 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
     if (!isSlug(recipe.slug)) report(recipeId, "slug", "Slug 必须使用 kebab-case");
     if (slugs.has(recipe.slug)) report(recipeId, "slug", "Slug 重复");
     slugs.add(recipe.slug);
-    if (recipe.id !== recipe.slug) report(recipeId, "id", "当前静态数据要求 ID 与 slug 一致");
 
     if (!recipe.name.trim()) report(recipeId, "name", "名称不能为空");
     if (!recipe.description.trim()) report(recipeId, "description", "描述不能为空");
-    if (!cuisines.has(recipe.cuisine)) report(recipeId, "cuisine", "菜系不在当前约定集合中");
-    if (!categories.has(recipe.category)) report(recipeId, "category", "类别不在当前约定集合中");
-    if (!methods.has(recipe.cooking.method)) report(recipeId, "cooking.method", "技法不在当前约定集合中");
     if (!difficulties.has(recipe.cooking.difficulty)) report(recipeId, "cooking.difficulty", "难度不在当前 schema 中");
     if (!isPositiveFinite(recipe.servings)) report(recipeId, "servings", "份数必须是正有限数");
     if (recipe.dataQuality !== "demo-estimated") report(recipeId, "dataQuality", "数据质量必须标记为 demo-estimated");
+    validateTaxonomy(recipe, report);
 
     if (recipe.ingredients.length === 0) report(recipeId, "ingredients", "食材列表不能为空");
     const recipeIngredientIds = new Set<string>();
@@ -87,8 +82,6 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
     if (recipe.cost.estimated !== undefined && !isNonNegativeFinite(recipe.cost.estimated)) report(recipeId, "cost.estimated", "成本估算必须是非负有限数");
     if (recipe.tools.length === 0 || recipe.tools.some((tool) => !isSlug(tool))) report(recipeId, "tools", "工具必须是非空 kebab-case 列表");
     if (new Set(recipe.tools).size !== recipe.tools.length) report(recipeId, "tools", "工具列表不能重复");
-    if (recipe.tags.length === 0 || recipe.tags.some((tag) => !isSlug(tag))) report(recipeId, "tags", "标签必须是非空 kebab-case 列表");
-    if (new Set(recipe.tags).size !== recipe.tags.length) report(recipeId, "tags", "标签列表不能重复");
 
     if (recipe.steps.length === 0) report(recipeId, "steps", "步骤不能为空");
     const expectedOrders = recipe.steps.map((_, index) => index + 1);
@@ -100,7 +93,86 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
       if (step.duration !== undefined && !isNonNegativeFinite(step.duration)) report(recipeId, `steps.${index}.duration`, "步骤时间必须是非负有限数");
     }
     if (recipe.principles.length === 0 || recipe.principles.some((principle) => !principle.trim())) report(recipeId, "principles", "烹饪原理不能为空");
+    if (recipe.culture) {
+      for (const [field, value] of Object.entries(recipe.culture)) {
+        if (field === "sources") continue;
+        if (value !== undefined && !value.trim()) report(recipeId, `culture.${field}`, "文化元数据不能为空字符串");
+      }
+      if (recipe.culture.sources) {
+        if (recipe.culture.sources.length === 0) {
+          report(recipeId, "culture.sources", "文化元数据来源不能为空列表");
+        }
+        for (const [index, source] of recipe.culture.sources.entries()) {
+          const field = `culture.sources.${index}`;
+          if (!source.title.trim()) report(recipeId, `${field}.title`, "文化元数据来源标题不能为空");
+          if (source.url !== undefined && !source.url.trim()) report(recipeId, `${field}.url`, "文化元数据来源 URL 不能为空字符串");
+          if (source.publisher !== undefined && !source.publisher.trim()) report(recipeId, `${field}.publisher`, "文化元数据来源 publisher 不能为空字符串");
+          if (source.accessedAt !== undefined && !source.accessedAt.trim()) report(recipeId, `${field}.accessedAt`, "文化元数据来源 accessedAt 不能为空字符串");
+        }
+      }
+    }
   }
 
   return issues;
+}
+
+function validateTaxonomy(recipe: Recipe, report: (recipeId: string, field: string, message: string) => void) {
+  const recipeId = recipe.id || recipe.slug || "<unknown>";
+  const { taxonomy } = recipe;
+
+  if (!cuisines[taxonomy.cuisine.cuisineId]) report(recipeId, "taxonomy.cuisine.cuisineId", "菜系 ID 不在 taxonomy registry 中");
+  if (taxonomy.cuisine.subCuisineId) {
+    const subCuisine = subCuisines[taxonomy.cuisine.subCuisineId];
+    if (!subCuisine) report(recipeId, "taxonomy.cuisine.subCuisineId", "子菜系 ID 不在 taxonomy registry 中");
+    else if (subCuisine.parentId !== taxonomy.cuisine.cuisineId) {
+      report(recipeId, "taxonomy.cuisine.subCuisineId", "子菜系与父级菜系不匹配");
+    }
+  }
+
+  if (!dishTypes[taxonomy.mealType.dishTypeId]) report(recipeId, "taxonomy.mealType.dishTypeId", "料理类型 ID 不在 taxonomy registry 中");
+  if (!taxonomy.techniques.length) report(recipeId, "taxonomy.techniques", "至少需要一个 technique");
+  if (new Set(taxonomy.techniques).size !== taxonomy.techniques.length) report(recipeId, "taxonomy.techniques", "technique 列表不能重复");
+  if (taxonomy.techniques.some((techniqueId) => !techniques[techniqueId])) report(recipeId, "taxonomy.techniques", "存在未注册的 technique ID");
+
+  if (taxonomy.mealType.mealOccasionIds) {
+    if (new Set(taxonomy.mealType.mealOccasionIds).size !== taxonomy.mealType.mealOccasionIds.length) {
+      report(recipeId, "taxonomy.mealType.mealOccasionIds", "meal occasion 列表不能重复");
+    }
+    if (taxonomy.mealType.mealOccasionIds.some((occasionId) => !mealOccasions[occasionId])) {
+      report(recipeId, "taxonomy.mealType.mealOccasionIds", "存在未注册的 meal occasion ID");
+    }
+  }
+
+  if (taxonomy.origin) {
+    const country = countries[taxonomy.origin.countryId];
+    if (!country) report(recipeId, "taxonomy.origin.countryId", "国家 ID 不在 taxonomy registry 中");
+    if (taxonomy.origin.regionId) {
+      const region = regions[taxonomy.origin.regionId];
+      if (!region) report(recipeId, "taxonomy.origin.regionId", "地域 ID 不在 taxonomy registry 中");
+      else if (region.parentId !== taxonomy.origin.countryId) {
+        report(recipeId, "taxonomy.origin.regionId", "地域与所属国家不匹配");
+      }
+    }
+  }
+
+  validateTaxonomyList(recipeId, "taxonomy.flavorProfile.tasteIds", taxonomy.flavorProfile?.tasteIds, tasteProfiles, report);
+  validateTaxonomyList(recipeId, "taxonomy.flavorProfile.characteristicIds", taxonomy.flavorProfile?.characteristicIds, flavorCharacteristics, report);
+  validateTaxonomyList(recipeId, "taxonomy.dietaryTagIds", taxonomy.dietaryTagIds, dietaryTags, report);
+  validateTaxonomyList(recipeId, "taxonomy.browseTagIds", taxonomy.browseTagIds, browseTags, report);
+}
+
+function validateTaxonomyList(
+  recipeId: string,
+  field: string,
+  values: string[] | undefined,
+  registry: Record<string, unknown>,
+  report: (recipeId: string, field: string, message: string) => void,
+) {
+  if (!values) return;
+  if (new Set(values).size !== values.length) {
+    report(recipeId, field, `${field} 不能重复`);
+  }
+  if (values.some((value) => !registry[value])) {
+    report(recipeId, field, `${field} 存在未注册的 ID`);
+  }
 }

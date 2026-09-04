@@ -16,11 +16,25 @@
 
 ## Recipe
 
-包含标识、描述、菜系/类别、份数、结构化食材用量、可选营养快照、烹饪时间/油盐糖/难度/技法、厨具、成本元数据、标签、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
+包含标识、描述、taxonomy、可选文化内容、份数、结构化食材用量、可选营养快照、烹饪时间/油盐糖/难度、厨具、成本元数据、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
 
 - 当前静态数据要求 `id` 与唯一 kebab-case `slug` 一致；Ingredient 引用必须存在，且用量必须能通过现有单位系统换算为克。
-- `cuisine` 使用 `中式`、`西式`、`融合`；`category` 使用 `主菜`、`主食`、`汤`、`凉菜`、`早餐`、`配菜`。
-- `cooking.method` 使用稳定集合：`煎`、`炒`、`蒸`、`煮`、`炖`、`焖`、`烤`、`汤`、`凉拌`、`电饭锅`。工具与标签使用 kebab-case，供后续筛选逻辑使用。
+- `taxonomy` 是新的 source of truth，字段为：
+  - `origin?: { countryId; regionId? }`
+  - `cuisine: { cuisineId; subCuisineId? }`
+  - `techniques: string[]`
+  - `mealType: { dishTypeId; mealOccasionIds? }`
+  - `flavorProfile?: { tasteIds?; characteristicIds? }`
+  - `dietaryTagIds?: string[]`
+  - `browseTagIds?: string[]`
+- geography 与 cuisine tradition 明确分离：`country / region` 不等于 `cuisine / subCuisine`。不是每道菜都需要填满四层。
+- taxonomy machine value 统一使用稳定英文 ID；中文和英文展示文案由 taxonomy registry 提供，不在 UI 中散落硬编码 label。
+- `techniques` 表示烹饪动作或加热方式，例如 `pan-fry`、`stir-fry`、`steam`、`boil`、`simmer`、`stew`、`braise`、`roast`、`dress`、`rice-cook`。旧模型里的“汤”不再作为 technique，而是 `dishTypeId = "soup"`；“电饭锅”拆为 `tool = "rice-cooker"` 与 `technique = "rice-cook"`。
+- `mealType` 把“料理类型”和“用餐场景”拆开：`dishTypeId` 表示主菜、主食、汤、凉菜、配菜；`mealOccasionIds` 表示早餐、午餐、晚餐等场景。
+- `flavorProfile` 目前轻量拆为 `tasteIds` 与 `characteristicIds`，既能表达味型，也能表达口感/体感，不引入完整 flavor ontology。
+- `dietaryTagIds` 只保存静态事实标签，例如 `vegan`、`vegetarian`；`high-protein`、`high-fiber`、`low-oil`、`no-added-sugar` 等通过 helper 从营养或烹饪字段派生，不把易过期的计算结果硬编码回 recipe 数据。
+- `culture?` 是可选的结构化内容块：`summary`、`originNote`、`traditionalContext`、`modernContext`、`sources?`。没有可靠依据时留空，不为了“文化感”编造背景。
+- `culture.sources` 使用轻量 reference 对象（`title`、可选 `url / publisher / accessedAt`），只解决“能追溯到哪里”这一需求，不引入 CMS 或 citation engine。
 - `cooking.oil`、`salt`、`addedSugar` 是配方级显式用量，并由校验器与食材明细核对；当前 30 道菜未使用添加糖食材，因此 `addedSugar` 为 0。
 - `nutrition` 不存储在静态 Recipe 中，营养和成本分别由 Nutrition Engine 与 Cost Engine 根据食材用量计算。
 - Recipe 数据仍标记为 `demo-estimated`。步骤和 `why` 已完成人工可读性检查，但时间、营养和成本仍用于产品验证，不是专业餐饮、医学或实时价格数据。
@@ -44,4 +58,4 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 ## Recommendation
 
-输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具、匹配项、不匹配项和解释的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签与技法是归一化加权软偏好。详细口径与权重见 `docs/RECOMMENDATION.md`，未来仍应通过用户研究校准。
+输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具、匹配项、不匹配项和解释的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签与技法是归一化加权软偏好。当前 recommendation/filter compatibility 继续通过 taxonomy helper 暴露 `cuisine`、`technique` 和派生 `tag` 语义，避免在 M5 期间破坏现有交互。详细口径与权重见 `docs/RECOMMENDATION.md`，未来仍应通过用户研究校准。

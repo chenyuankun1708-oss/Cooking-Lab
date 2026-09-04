@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { getToolLabel } from "@/lib/display-labels";
 import { formatCalories, formatCost, formatGrams, formatPercent, formatProtein, formatTime } from "@/lib/formatters";
+import { getRecipeCuisineLabel, getRecipeLegacyCategoryLabel, getRecipeOriginLabel, getRecipePrimaryTechniqueLabel } from "@/lib/taxonomy";
 import type { RecommendationResult } from "@/types/recommendation";
 
 export function RecipeCard({ result, variant = "recommendation" }: { result: RecommendationResult; variant?: "recommendation" | "catalog" }) {
   const { recipe, metrics } = result;
+  const geographyLine = getRecipeOriginLabel(recipe);
   return (
     <article className="flex h-full flex-col rounded-3xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg focus-within:ring-2 focus-within:ring-emerald-700">
       <div className="mb-4 flex items-center justify-between gap-3">
-        {variant === "recommendation" ? <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">{result.score}% 匹配</span> : <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-900">{recipe.cooking.method}</span>}
-        <span className="text-xs text-stone-500">{recipe.cuisine} · {recipe.category}</span>
+        {variant === "recommendation" ? <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">{result.score}% 匹配</span> : <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-900">{getRecipePrimaryTechniqueLabel(recipe)}</span>}
+        <span className="text-xs text-stone-500">{[geographyLine, getRecipeCuisineLabel(recipe), getRecipeLegacyCategoryLabel(recipe)].filter(Boolean).join(" · ")}</span>
       </div>
       <h2 className="text-xl font-semibold text-stone-900">
         <Link
@@ -27,7 +29,7 @@ export function RecipeCard({ result, variant = "recommendation" }: { result: Rec
         <Metric label="蛋白质/份" value={formatProtein(metrics.proteinPerServing, metrics.nutritionComplete)} />
         <Metric label="用油/份" value={formatGrams(metrics.oilPerServing)} />
         <Metric label="成本/份" value={formatCost(metrics.costPerServing, metrics.costComplete)} />
-        <Metric label="技法" value={recipe.cooking.method} />
+        <Metric label="技法" value={getRecipePrimaryTechniqueLabel(recipe)} />
       </dl>
       <p className="mt-4 text-xs leading-5 text-stone-500"><span className="font-semibold text-stone-700">厨具：</span>{recipe.tools.map(getToolLabel).join("、")}</p>
       {variant === "recommendation" && <div className="mt-4 space-y-3">

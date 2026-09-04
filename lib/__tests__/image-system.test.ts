@@ -23,17 +23,27 @@ const heroImage: RecipeImage = {
 };
 
 describe("recipe image system", () => {
-  it("keeps the current empty registry valid and returns a stable fallback", () => {
-    expect(recipeImages).toEqual([]);
+  it("keeps the seed registry valid and returns real or fallback presentation data", () => {
+    expect(recipeImages).toHaveLength(10);
     expect(validateImageAssets(recipeImages)).toEqual([]);
     expect(validateRecipeImageReferences(recipes, recipeImages)).toEqual([]);
-    expect(getRecipeHeroImage(recipes[0], recipeImages)).toBeUndefined();
+    expect(getRecipeHeroImage(recipes[0], recipeImages)?.id).toBe("tomato-scrambled-eggs-hero");
     expect(getRecipeImageFallback(recipes[0])).toEqual({ initial: "番", label: "番茄炒蛋" });
   });
 
   it("keeps every registered local asset present under public", () => {
     for (const image of recipeImages.filter((item) => item.delivery === "local")) {
       expect(existsSync(resolve(process.cwd(), "public", image.src.replace(/^\//, ""))), image.src).toBe(true);
+    }
+  });
+
+  it("keeps source, author and license provenance for every seed image", () => {
+    for (const image of recipeImages) {
+      expect(image.sourceUrl, image.id).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      expect(image.author?.trim(), image.id).toBeTruthy();
+      expect(image.licenseUrl, image.id).toMatch(/^https:\/\/creativecommons\.org\//);
+      expect(image.attribution?.trim(), image.id).toBeTruthy();
+      expect(image.alt.length, image.id).toBeGreaterThan(10);
     }
   });
 

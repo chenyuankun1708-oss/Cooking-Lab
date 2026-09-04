@@ -67,6 +67,8 @@ GitHub tracking:
 
 在品牌、图片和内容方向稳定后，重做首页、卡片、目录和详情页体验，但继续保留确定性推荐引擎。
 
+Issue #21 当前已完成代码实现：food-first 首页、渐进式推荐条件、视觉优先卡片、taxonomy 驱动的服务器端目录探索、editorial detail v2，以及 10 张已核验授权的 seed images。完成验证与 PR review 后，M5 的主要 Web 交付即可收口。
+
 ### F. Shared core audit for future mobile app
 
 审计当前耦合边界，约束后续 M5 工作避免把新领域能力写死在 Next.js 或 React 里。

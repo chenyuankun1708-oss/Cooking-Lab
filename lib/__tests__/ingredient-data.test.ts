@@ -15,7 +15,7 @@ describe("ingredient dataset", () => {
     const ids = new Set(ingredients.map((ingredient) => ingredient.id));
     for (const required of [
       "chicken-breast", "chicken-thigh", "pork-tenderloin", "beef-lean", "shrimp", "salmon", "egg",
-      "tofu", "lentil", "rice", "noodles", "oats", "potato", "sweet-potato",
+      "tofu", "dry-lentil", "rice", "noodles", "oats", "potato", "sweet-potato",
       "tomato", "broccoli", "spinach", "cabbage", "mushroom", "cooking-oil", "salt", "soy-sauce",
     ]) {
       expect(ids.has(required), `missing ${required}`).toBe(true);

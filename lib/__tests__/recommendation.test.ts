@@ -74,6 +74,14 @@ describe("hard constraints", () => {
   it("returns no results for conflicting strict constraints", () => {
     expect(discoverRecipes(recipes, { maxTime: 1, maxCalories: 10, minProtein: 100, maxCost: 1 })).toEqual([]);
   });
+
+  it.each([30, 45, 60])("keeps every result within the declared %i minute contract", (maxTime) => {
+    const results = discoverRecipes(recipes, { maxTime });
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.every(({ recipe }) => recipe.cooking.totalTime <= maxTime)).toBe(true);
+    expect(results.every(({ recipe }) => recipe.ingredients.every(({ ingredientId }) =>
+      ingredientId !== "dry-chickpea" && ingredientId !== "dry-black-bean"))).toBe(true);
+  });
 });
 
 describe("ingredient fit", () => {

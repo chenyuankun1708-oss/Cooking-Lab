@@ -1,6 +1,6 @@
 # Content Strategy
 
-最近更新：2026-09-03
+最近更新：2026-09-05
 
 ## M5 内容目标
 
@@ -40,6 +40,12 @@ M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展�
 - cultural reliability
 
 做小幅调整，但整体目标仍应保持“约 100 道，且具有世界料理覆盖感”。
+
+## Recipe Time And Ingredient State
+
+用户看到的 `totalTime` 必须可用于实际决策：在用户拥有 recipe 声明状态的食材后，它覆盖从开始准备到可食用的主动操作和必要等待。强制浸泡、预煮、腌制、解冻、冷却或静置不能藏在步骤之外，也不能依赖用户提前完成而仍显示为短时 recipe。
+
+状态会显著改变营养、重量、时间或推荐匹配时，Ingredient ID 必须明确区分 `raw` / `dry` / `cooked` / `canned` / `frozen`。日常家庭 recipe 优先声明可直接使用的熟豆或罐装豆；保留干豆时，完整处理时间必须进入 recipe 时间。短时并行浸泡或静置应在步骤中写明分钟数，并计入 `prepTime` 或 `cookTime`。
 
 ## Technique Coverage
 

@@ -13,6 +13,10 @@ export interface RecipeValidationIssue {
 const units = new Set<Unit>(["g", "kg", "ml", "piece", "tbsp", "tsp"]);
 const difficulties = new Set(["easy", "medium", "hard"]);
 const heatLevels = new Set(["none", "low", "medium", "high"]);
+const minimumTotalTimeByIngredientId: Readonly<Record<string, number>> = Object.freeze({
+  "dry-chickpea": 120,
+  "dry-black-bean": 120,
+});
 
 export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): RecipeValidationIssue[] {
   const issues: RecipeValidationIssue[] = [];
@@ -66,6 +70,12 @@ export function validateRecipes(recipes: Recipe[], ingredients: Ingredient[]): R
       if (!isNonNegativeFinite(value)) report(recipeId, `cooking.${field}`, "烹饪数值必须是非负有限数");
     }
     if (totalTime !== prepTime + cookTime) report(recipeId, "cooking.totalTime", "总时间必须等于准备时间与烹饪时间之和");
+    for (const item of recipe.ingredients) {
+      const minimumTotalTime = minimumTotalTimeByIngredientId[item.ingredientId];
+      if (minimumTotalTime !== undefined && totalTime < minimumTotalTime) {
+        report(recipeId, "cooking.totalTime", `${item.ingredientId} 必须把浸泡和煮制计入总时间，不能短于 ${minimumTotalTime} 分钟`);
+      }
+    }
 
     const gramsFor = (ingredientId: string) => recipe.ingredients
       .filter((item) => item.ingredientId === ingredientId)

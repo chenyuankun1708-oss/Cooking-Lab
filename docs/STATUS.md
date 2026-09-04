@@ -1,6 +1,6 @@
 # Status
 
-最近更新：2026-09-04
+最近更新：2026-09-05
 
 ## 当前阶段
 
@@ -24,7 +24,7 @@ Production URL：
 
 - Next.js / TypeScript / Tailwind Web 应用骨架
 - Ingredient、Recipe、Nutrition、Recommendation 类型系统
-- 72 种 `demo-estimated` 食材与 100 道结构化菜谱
+- 73 种 `demo-estimated` 食材与 100 道结构化菜谱
 - Unit Conversion、Nutrition Engine、Cost Engine 与 Dataset Validation
 - 硬限制 + 软偏好的确定性 Recommendation Engine
 - 首页即时料理决策、全量目录、稳定 slug 详情页
@@ -136,6 +136,15 @@ Issue #16 `[M5] Define brand and visual design system` 当前已在品牌规划�
 - `high-protein / high-fiber / low-oil / no-added-sugar` 继续保持 derived attributes
 - 对无 provenance 的文化性断言做了删除或降级为现代 recipe context
 - 详情页只保留最小 taxonomy 适配，不把所有新字段直接铺成 sidebar 信息卡
+
+## Issue #19 当前产物
+
+PR #25 已将数据集扩展到 100 道 recipe，并完成时间与家庭可执行性 hardening：
+
+- `totalTime` 现在明确覆盖食材声明状态之后的主动操作与必要等待
+- 干扁豆、熟鹰嘴豆、熟黑豆、熟米饭使用不同稳定 ID，避免营养、重量和时间语义混用
+- 清除了 10 道 recipe 的隐藏干豆/冷饭前置步骤，并补齐相关 tools 与步骤顺序
+- 30 / 45 / 60 分钟 recommendation 场景均只返回可在声明时间内完成的 recipe
 
 ## 当前产品缺口
 

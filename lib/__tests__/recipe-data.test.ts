@@ -45,7 +45,7 @@ describe("recipe dataset", () => {
     const used = new Set(recipes.flatMap((recipe) => recipe.ingredients.map((item) => item.ingredientId)));
     for (const id of [
       "chicken-breast", "chicken-thigh", "beef-lean", "pork-tenderloin", "salmon", "shrimp",
-      "egg", "tofu", "lentil", "rice", "noodles", "potato", "sweet-potato", "oats",
+      "egg", "tofu", "dry-lentil", "rice", "noodles", "potato", "sweet-potato", "oats",
     ]) {
       expect(used.has(id), `unused required ingredient ${id}`).toBe(true);
     }
@@ -60,6 +60,35 @@ describe("recipe dataset", () => {
     expect(recipes.filter((recipe) => recipe.taxonomy.dietaryTagIds?.includes("vegan")).length).toBeGreaterThanOrEqual(15);
     expect(recipes.filter((recipe) => recipe.cooking.totalTime <= 30).length).toBeGreaterThanOrEqual(25);
     expect(recipes.filter((recipe) => recipe.cooking.difficulty !== "easy").length).toBeGreaterThanOrEqual(15);
+  });
+
+  it("keeps time-sensitive ingredient states explicit", () => {
+    const ingredientIds = new Set(ingredients.map((item) => item.id));
+    const usedIds = new Set(recipes.flatMap((recipe) => recipe.ingredients.map((item) => item.ingredientId)));
+    expect([...ingredientIds]).toEqual(expect.arrayContaining(["dry-lentil", "cooked-chickpea", "cooked-black-bean", "cooked-rice"]));
+    expect(["lentil", "chickpea", "black-bean"].some((id) => ingredientIds.has(id))).toBe(false);
+    expect([...usedIds]).toEqual(expect.arrayContaining(["dry-lentil", "cooked-chickpea", "cooked-black-bean", "cooked-rice"]));
+    const friedRice = recipes.find((recipe) => recipe.slug === "korean-kimchi-fried-rice");
+    expect(friedRice?.ingredients.find((item) => item.ingredientId === "cooked-rice")?.note).toContain("冷却");
+  });
+
+  it("rejects implausibly short recipes that declare slow dry legumes", () => {
+    const cookedChickpea = ingredients.find((item) => item.id === "cooked-chickpea")!;
+    const dryChickpea = { ...cookedChickpea, id: "dry-chickpea", name: "干鹰嘴豆", aliases: ["鹰嘴豆干"] };
+    const source = recipes.find((recipe) => recipe.slug === "indian-chana-masala-home")!;
+    const recipe: Recipe = {
+      ...source,
+      id: "short-dry-chickpea",
+      slug: "short-dry-chickpea",
+      ingredients: source.ingredients.map((item) => item.ingredientId === "cooked-chickpea"
+        ? { ...item, ingredientId: "dry-chickpea" }
+        : item),
+    };
+    expect(validateRecipes([recipe], [...ingredients, dryChickpea])).toContainEqual({
+      recipeId: recipe.id,
+      field: "cooking.totalTime",
+      message: "dry-chickpea 必须把浸泡和煮制计入总时间，不能短于 120 分钟",
+    });
   });
 
   it("passes a cross-regional quality sample of 15 new recipes", () => {

@@ -2,7 +2,7 @@
 
 ## Ingredient
 
-当前包含 72 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。
+当前包含 73 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。
 
 - `id` 使用稳定的英文 kebab-case，名称和别名仅用于展示与搜索。
 - `nutritionPer100g` 所有字段均为非负有限数；当前值是用于产品验证的公开常识级估算，不代表特定品牌、产地、烹饪状态或医学建议。
@@ -12,7 +12,8 @@
 - `g` 直接按克计算，`kg` 乘以 1000。`ml` 不做通用 1:1 假设；它与 `piece`、`tsp`、`tbsp` 一样，必须使用当前食材自己的正有限近似克重。缺失或非法换算数据会产生领域错误，不会返回 0 或猜测密度。
 - 使用非重量默认单位的食材必须提供对应近似克重。数据校验同时检查重复 ID/名称、非法营养值、非法价格和无效换算重量。
 - 当前类别是面向 MVP 筛选的粗粒度烹饪分类；例如豆类归入 `protein`、块茎归入 `vegetable` 并使用 `staple` 标签。若后续需要食品学分类或多维筛选，应另行升级 schema，而不是改变现有类别含义。
-- 当前 72 种食材覆盖 100 道菜谱的主要类别；自动化校验继续阻止悬空 Ingredient ID。
+- 当 raw / dry / cooked / canned / frozen 状态会显著改变营养、重量、时间或推荐匹配时，状态必须体现在稳定 ID 和显示名称中，不能由 recipe 文案隐含。当前使用 `dry-lentil`、`cooked-chickpea`、`cooked-black-bean`、`cooked-rice`；日常熟豆 recipe 不再引用含义模糊的干豆 ID。
+- 当前 73 种食材覆盖 100 道菜谱的主要类别；自动化校验继续阻止悬空 Ingredient ID。
 
 ## Recipe
 
@@ -38,6 +39,7 @@
 - `culture.sources` 使用轻量 reference 对象（`title`、可选 `url / publisher / accessedAt`），只解决“能追溯到哪里”这一需求，不引入 CMS 或 citation engine。
 - Legacy compatibility strategy：现有 filters / recommendation / detail UI 继续通过 `lib/taxonomy.ts` 派生 cuisine、technique 和 tag 语义，但这些都是 adapter，不再是 recipe data 的第二套 source of truth。
 - `cooking.oil`、`salt`、`addedSugar` 是配方级显式用量，并由校验器与食材明细或营养估算核对；含韩式辣酱、泡菜或面包的 recipe 会保留相应 added-sugar estimate。
+- Recipe time contract：`cooking.totalTime` 表示用户已经拥有 `recipe.ingredients` 所声明状态的食材后，从开始准备到可以食用所需的主动操作与必要等待时间；它必须等于 `prepTime + cookTime`。核心流程不能依赖未计时的浸泡、解冻、腌制、预煮或冷却。
 - `nutrition` 不存储在静态 Recipe 中，营养和成本分别由 Nutrition Engine 与 Cost Engine 根据食材用量计算。
 - Recipe 数据仍标记为 `demo-estimated`。步骤和 `why` 已完成人工可读性检查，但时间、营养和成本仍用于产品验证，不是专业餐饮、医学或实时价格数据。
 - V1 optional 语义：只要 optional 食材已出现在传给 engine 的列表中且带有用量，就计入营养和成本；若用户未选择它，调用方应在计算前从输入列表移除。
@@ -56,7 +58,7 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 ## Validation
 
-`validateIngredients` 与 `validateRecipes` 分别负责静态实体规则；`validateDataset` 组合两者并检查完整 Ingredient/Recipe 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性及运行时元数据等跨字段规则。
+`validateIngredients` 与 `validateRecipes` 分别负责静态实体规则；`validateDataset` 组合两者并检查完整 Ingredient/Recipe 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性及运行时元数据等跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
 
 ## Recommendation
 

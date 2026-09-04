@@ -16,6 +16,9 @@
 - `lib/nutrition.ts`：营养估算引擎
 - `lib/cost.ts`：成本估算引擎
 - `lib/recommendation.ts`：规则推荐、评分、解释与部分 application helper
+- `types/taxonomy.ts`：taxonomy v2 与 cultural metadata 契约
+- `data/taxonomy.ts`：machine value registry 与中英 label source
+- `lib/taxonomy.ts`：taxonomy helper、兼容派生标签与展示适配
 - `lib/display-labels.ts`：稳定 machine value 的展示映射
 - `lib/formatters.ts`：展示层估算文案和精度格式
 - `lib/recipe-detail.ts`：详情页 view model 聚合
@@ -70,17 +73,15 @@
 
 这对 MVP 是合理的，但 M5 要重做首页体验时，推荐把“用户表达条件 -> 生成 criteria -> 调用 shared recommendation -> 组织视图模型”这条链条拆得更清楚，避免消费者体验重设计时被旧工作台式布局绑住。
 
-#### 3. 内容 schema 仍停留在 MVP 粒度
+#### 3. 内容 schema 正在从 MVP 粒度升级，但图像与更广覆盖仍未完成
 
-当前 schema 对 M1-M4 足够，但对 M5 明显不足：
+Issue #17 已把 taxonomy v2 放进 framework-independent 层，但 M5 内容域仍有未完成部分：
 
-- `cuisine` 仍是单个字符串，且当前只有粗粒度分类
-- 没有 `country / region / subCuisine`
-- 没有 `mealType / flavorProfile / occasion / season`
-- 没有 `story / origin / culturalContext`
 - 没有图片 schema
+- cultural metadata 目前只在少量 recipe 上示例性使用
+- taxonomy registry 目前只覆盖现有 30 道菜与近期扩展必需值，不是完整世界料理百科
 
-这不是代码 bug，而是内容域模型尚未升级。
+这意味着内容域已经脱离“只有 `cuisine` / `tags` / `method`”的 MVP 状态，但距离 100+ recipes 与图片系统仍有后续工作。
 
 ### 当前前端边界
 
@@ -124,7 +125,13 @@ Mobile App
 
 ### Taxonomy v2
 
-Taxonomy 的 schema、validation 和 fallback 规则应定义在 `types/` 与 `lib/` 的 framework-independent 层，而不是放进页面组件或 UI 文案中。
+Taxonomy 的 schema、validation、registry 与 fallback/compatibility helper 应定义在 `types/`、`data/` 与 `lib/` 的 framework-independent 层，而不是放进页面组件或 UI 文案中。当前已采用：
+
+- `types/taxonomy.ts` 保存契约
+- `data/taxonomy.ts` 保存 registry 与 localized labels
+- `lib/taxonomy.ts` 提供 recommendation/filter/detail page 所需的派生 helper
+
+这样可以在不改动 UI filter contract 的前提下，让 taxonomy 成为真正的 source of truth。
 
 ### Image system
 
@@ -149,6 +156,7 @@ Taxonomy 的 schema、validation 和 fallback 规则应定义在 `types/` 与 `l
 ### 现在应该做的事
 
 - 新增 schema 时优先保持纯 TypeScript、无框架依赖
+- taxonomy / provenance / cultural metadata 优先落在 shared core 种子层，再由 Web 详情页做轻量 view-model 适配
 - 把 Web-specific view model 适配层和纯领域逻辑在文档与代码上区分开
 - 避免在 `app/` 或 `components/` 中新增不可复用的业务规则
 - 为未来 `apps/web` + `apps/mobile` / `packages/core` 的迁移留下清晰边界

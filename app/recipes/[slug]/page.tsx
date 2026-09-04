@@ -6,6 +6,7 @@ import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { createRecipeDetailViewModel, getRecipeBySlug } from "@/lib/recipe-detail";
 import { SITE_NAME } from "@/lib/site";
+import { getRecipeLegacyCategoryLabel } from "@/lib/taxonomy";
 
 export function generateStaticParams() {
   return recipes.map(({ slug }) => ({ slug }));
@@ -40,7 +41,13 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
             <span aria-current="page">{recipe.name}</span>
           </nav>
           <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-end">
-            <div><p className="text-sm font-semibold text-emerald-200">{recipe.cuisine} · {recipe.category} · {recipe.cooking.method}</p><h1 className="mt-3 text-4xl font-bold leading-tight sm:text-6xl">{recipe.name}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-emerald-50/80">{recipe.description}</p></div>
+            <div>
+              <p className="text-sm font-semibold text-emerald-200">
+                {[detail.taxonomy.origin, detail.taxonomy.cuisine, detail.taxonomy.subCuisine, detail.taxonomy.dishType, detail.taxonomy.techniques[0]].filter(Boolean).join(" · ")}
+              </p>
+              <h1 className="mt-3 text-4xl font-bold leading-tight sm:text-6xl">{recipe.name}</h1>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-emerald-50/80">{recipe.description}</p>
+            </div>
             <div aria-hidden="true" className="h-44 rounded-3xl bg-gradient-to-br from-amber-200 via-orange-100 to-emerald-200 shadow-inner" />
           </div>
         </div>
@@ -48,6 +55,20 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
 
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <div>
+          {(detail.culture?.summary || detail.culture?.originNote || detail.culture?.traditionalContext || detail.culture?.modernContext) && (
+            <section className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8" aria-labelledby="story-title">
+              <p className="text-sm font-semibold text-emerald-700">ABOUT THIS DISH</p>
+              <h2 id="story-title" className="mt-2 text-3xl font-bold">这道菜</h2>
+              <div className="mt-5 space-y-4 leading-7 text-stone-700">
+                {detail.culture?.summary && <p>{detail.culture.summary}</p>}
+                {detail.culture?.originNote && <p><span className="font-semibold text-stone-900">来源说明：</span>{detail.culture.originNote}</p>}
+                {detail.culture?.traditionalContext && <p><span className="font-semibold text-stone-900">传统语境：</span>{detail.culture.traditionalContext}</p>}
+                {detail.culture?.modernContext && <p><span className="font-semibold text-stone-900">现代语境：</span>{detail.culture.modernContext}</p>}
+                {detail.culture?.sources.length ? <p className="text-sm text-stone-500">参考来源：{detail.culture.sources.join("、")}</p> : null}
+              </div>
+            </section>
+          )}
+
           <section aria-labelledby="ingredients-title"><h2 id="ingredients-title" className="text-3xl font-bold">准备食材</h2><p className="mt-2 text-stone-600">配方为 {recipe.servings} 人份，保留原始计量单位。</p><ul className="mt-5 grid gap-3 sm:grid-cols-2">{detail.ingredients.map((item) => <li key={item.id} className="rounded-2xl border border-stone-200 bg-white p-4"><div className="flex items-baseline justify-between gap-3"><span className="font-semibold">{item.name}{item.optional && <span className="ml-2 text-xs font-normal text-emerald-700">可选</span>}</span><span className="shrink-0 text-stone-700">{item.amount}</span></div>{item.note && <p className="mt-2 text-sm leading-6 text-stone-500">备注：{item.note}</p>}</li>)}</ul></section>
 
           <section className="mt-12" aria-labelledby="steps-title"><p className="text-sm font-semibold text-emerald-700">DO &amp; UNDERSTAND</p><h2 id="steps-title" className="mt-2 text-3xl font-bold">步骤与为什么</h2><ol className="mt-6 space-y-5">{detail.steps.map((step) => <li key={step.order} className="rounded-3xl border border-stone-200 bg-white p-5 sm:p-7"><div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-emerald-800 px-3 py-1 text-sm font-bold text-white">步骤 {step.order}</span>{step.heat && <span className="rounded-full bg-orange-100 px-3 py-1 text-sm text-orange-900">{step.heat}</span>}{step.duration && <span className="rounded-full bg-stone-100 px-3 py-1 text-sm text-stone-700">{step.duration}</span>}</div><p className="mt-5 text-lg font-semibold leading-8 text-stone-900">{step.instruction}</p><div className="mt-5 rounded-2xl border-l-4 border-amber-500 bg-amber-50 p-4"><h3 className="font-bold text-amber-950">为什么这样做？</h3><p className="mt-2 leading-7 text-amber-950">{step.why}</p></div></li>)}</ol></section>
@@ -56,7 +77,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-5 lg:self-start" aria-label="菜谱摘要">
-          <InfoPanel title="基础信息"><DefinitionList items={[["份数", `${recipe.servings} 人份`], ["难度", getDifficultyLabel(recipe.cooking.difficulty)], ["技法", recipe.cooking.method], ["菜系", recipe.cuisine], ["类别", recipe.category]]} /></InfoPanel>
+          <InfoPanel title="基础信息"><DefinitionList items={[["份数", `${recipe.servings} 人份`], ["难度", getDifficultyLabel(recipe.cooking.difficulty)], ["技法", detail.taxonomy.techniques.join("、")], ["菜系", detail.taxonomy.cuisine], ["类别", getRecipeLegacyCategoryLabel(recipe)], ["来源", detail.taxonomy.origin ?? "未特别标注"]]} /></InfoPanel>
           <InfoPanel title="时间"><DefinitionList items={[["准备", detail.times.prep], ["烹饪", detail.times.cook], ["总计", detail.times.total]]} /></InfoPanel>
           <InfoPanel title="每份营养估算"><DefinitionList items={detail.nutrition.map((item) => [item.label, item.value])} /></InfoPanel>
           <InfoPanel title="关注指标"><DefinitionList items={detail.limits.map((item) => [item.label, `${item.value} · ${item.scope}`])} /></InfoPanel>

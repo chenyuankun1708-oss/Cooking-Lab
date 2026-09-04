@@ -159,6 +159,11 @@ describe("soft preferences and score", () => {
     expect(buildRecommendationExplanation(result)).toBe(result.explanation);
   });
 
+  it("does not claim that no preference was set when an active preference misses", () => {
+    const result = evaluate({ preferredCuisine: "不存在的菜系" });
+    expect(result.explanation).toBe("满足全部硬性条件，但未命中当前软偏好。");
+  });
+
   it("uses different missing-ingredient wording for one vs many missing ingredients", () => {
     const oneMissing = evaluate({ availableIngredients: requiredIds().slice(0, -1) });
     const severalMissing = evaluate({ availableIngredients: requiredIds().slice(0, 1) });

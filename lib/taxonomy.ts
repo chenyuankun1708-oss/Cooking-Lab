@@ -1,4 +1,4 @@
-import { browseTags, cuisines, dietaryTags, dishTypes, flavorCharacteristics, getTaxonomyLabel, mealOccasions, regions, subCuisines, tasteProfiles, techniques } from "@/data/taxonomy";
+import { browseTags, countries, cuisines, dietaryTags, dishTypes, flavorCharacteristics, getTaxonomyLabel, mealOccasions, regions, subCuisines, tasteProfiles, techniques } from "@/data/taxonomy";
 import type { Recipe } from "@/types/recipe";
 import type { SupportedLocale } from "@/types/taxonomy";
 import { localIngredientRepository } from "./ingredient-repository";
@@ -94,15 +94,23 @@ export function getRecipeTagLabels(recipe: Recipe, locale: SupportedLocale = "zh
 }
 
 export function listRecipeCuisineOptions(recipes: readonly Recipe[]) {
-  return [...new Set(recipes.map((recipe) => recipe.taxonomy.cuisine.cuisineId))]
-    .sort()
-    .map((id) => ({ id, label: cuisines[id]?.label["zh-CN"] ?? id }));
+  return countOptions(recipes.map((recipe) => recipe.taxonomy.cuisine.cuisineId), cuisines);
 }
 
 export function listRecipeTechniqueOptions(recipes: readonly Recipe[]) {
-  return [...new Set(recipes.flatMap((recipe) => recipe.taxonomy.techniques))]
-    .sort()
-    .map((id) => ({ id, label: techniques[id]?.label["zh-CN"] ?? id }));
+  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.techniques), techniques);
+}
+
+export function listRecipeCountryOptions(recipes: readonly Recipe[]) {
+  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.origin?.countryId ?? []), countries);
+}
+
+export function listRecipeRegionOptions(recipes: readonly Recipe[]) {
+  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.origin?.regionId ?? []), regions);
+}
+
+export function listRecipeDishTypeOptions(recipes: readonly Recipe[]) {
+  return countOptions(recipes.map((recipe) => recipe.taxonomy.mealType.dishTypeId), dishTypes);
 }
 
 export function getFlavorProfileLabels(recipe: Recipe, locale: SupportedLocale = "zh-CN") {
@@ -120,4 +128,12 @@ export function getCuisineHierarchyLabels(recipe: Recipe, locale: SupportedLocal
       : undefined,
     region: recipe.taxonomy.origin?.regionId ? regions[recipe.taxonomy.origin.regionId]?.label[locale] ?? recipe.taxonomy.origin.regionId : undefined,
   };
+}
+
+function countOptions(ids: readonly string[], registry: Readonly<Record<string, { label: Record<SupportedLocale, string> }>>) {
+  const counts = new Map<string, number>();
+  for (const id of ids) counts.set(id, (counts.get(id) ?? 0) + 1);
+  return [...counts]
+    .map(([id, count]) => ({ id, label: registry[id]?.label["zh-CN"] ?? id, count }))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, "zh-CN"));
 }

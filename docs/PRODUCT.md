@@ -44,7 +44,7 @@
 
 M0-M4 已完成，当前 Public Beta 已具备：
 
-- 30 道结构化 `demo-estimated` 菜谱与 30 种基础食材
+- 100 道结构化 `demo-estimated` 菜谱与 73 种食材
 - 本地营养、成本、单位换算和推荐引擎
 - 首页多条件料理决策
 - `/recipes` 全量目录
@@ -69,26 +69,13 @@ M5 `Content, Brand & Experience` 的目标不是简单增加几个功能，而�
 - 更有品牌感和辨识度
 - 更适合长期扩展到 Web + Mobile
 
-本轮 M5 只完成：
-
-- 规划
-- 架构审计
-- 文档更新
-- GitHub Issue 体系建立
-
-本轮 M5 不完成：
-
-- 大规模 UI 开发
-- 批量新增 100 道菜
-- 批量加入图片
-- 最终品牌命名
-- Mobile App 开发
+M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展、image system，并在 Issue #21 落地消费者 Web 重设计。本阶段仍不完成最终品牌命名、完整 100 张图片覆盖或 Mobile App 开发。
 
 ## 体验方向
 
-### 首页 v2 方向
+### 首页 v2 实现
 
-当前首页以筛选面板为主，较强地传达了工具感。下一版首页应保留推荐引擎的核心能力，但信息架构更偏内容和发现：
+首页保留推荐引擎的核心能力，同时采用更偏内容和发现的信息架构：
 
 - Hero prompt：`今晚，想吃点什么？`
 - 快速表达条件
@@ -103,9 +90,9 @@ M5 `Content, Brand & Experience` 的目标不是简单增加几个功能，而�
 
 推荐引擎仍然是核心，但 UI 不应继续被“左侧筛选 / 右侧结果”的工作台式结构完全主导。
 
-### Recipe Detail v2 方向
+### Recipe Detail v2 实现
 
-未来详情页应从“工程化详情页”向“内容型料理页面”演进，优先考虑：
+详情页已经从工程化 sidebar 布局改为内容型料理页面，当前顺序为：
 
 - Hero image
 - Recipe name
@@ -113,16 +100,13 @@ M5 `Content, Brand & Experience` 的目标不是简单增加几个功能，而�
 - 一句话简介
 - time / difficulty / nutrition / cost
 - 这道菜
-- story / origin / cultural context（仅在可靠时出现）
-- 为什么这样做
-- cooking science
 - ingredients
 - steps
-- why for important steps
+- why for every structured step
+- cooking principles
+- nutrition / limiting metrics / cost
 - tools
-- variations
-- future substitutions
-- related recipes
+- story / origin / cultural context（仅在已有可靠内容时出现）
 
 ### Brand / Visual 方向
 

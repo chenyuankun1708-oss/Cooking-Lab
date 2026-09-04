@@ -30,7 +30,7 @@ export interface RecipeDetailViewModel {
     originNote?: string;
     traditionalContext?: string;
     modernContext?: string;
-    sources: string[];
+    sources: Array<{ title: string; url?: string; publisher?: string }>;
   };
   ingredients: Array<{ id: string; name: string; amount: string; note?: string; optional: boolean }>;
   tools: string[];
@@ -62,7 +62,11 @@ export function buildRecipeDetailDisplay(detail: RecipeDetailModel): RecipeDetai
           originNote: recipe.culture.originNote,
           traditionalContext: recipe.culture.traditionalContext,
           modernContext: recipe.culture.modernContext,
-          sources: (recipe.culture.sources ?? []).map((source) => source.title),
+          sources: (recipe.culture.sources ?? []).map((source) => ({
+            title: source.title,
+            url: source.url,
+            publisher: source.publisher,
+          })),
         }
       : undefined,
     ingredients: detail.ingredients.map((item) => ({

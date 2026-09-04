@@ -140,7 +140,8 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 
 - `fill` 配合稳定 aspect-ratio 容器，避免 layout shift
 - card sizes：mobile `100vw`，tablet `50vw`，desktop `33vw/25vw`
-- detail hero sizes：mobile `100vw`，desktop `18rem`
+- detail hero sizes：mobile `100vw`，desktop 最大约 `64rem`
+- homepage food hero：唯一首屏 LCP 图片，使用 `100vw` 并 preload
 - detail hero 作为当前页面 LCP 候选使用 `preload`
 - card 图片不 preload，保持默认 lazy loading
 - 不使用已被 Next 16 文档替代的全局 `priority` 策略
@@ -152,7 +153,7 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 
 无 `heroImageId`、引用缺失或浏览器加载失败时，`RecipeImage` 显示固定比例的暖中性色 fallback、Recipe 首字和 cuisine label。fallback 不改变周围布局，也不会用无来源的默认 food photo 冒充菜品。
 
-当前 100 道 Recipe 均无已审核 hero，因此全部安全使用 fallback。随着 registry 增长，无需修改组件或页面结构。
+当前 10 道 Recipe 具备已审核 hero，其余 90 道继续安全使用同尺寸 fallback。两种状态使用相同 card/detail frame，不改变周围布局。
 
 ## Validation
 
@@ -201,4 +202,12 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 
 ## Sample Assets
 
-Issue #20 没有加入真实 sample asset。当前没有一张经过项目授权核验的现成照片，与其用随机网络图片演示，不如由空 registry 和可测试 fallback 证明 pipeline。第一批真实图片应在后续独立 content task 中按上述流程加入。
+Issue #21 加入第一批 10 张真实 seed assets，用于验证首页、card、detail 和响应式裁切：
+
+- 中国：番茄炒蛋、家常麻婆豆腐、川味拍黄瓜
+- 日韩：日式味噌豆腐汤、韩式拌饭家庭版
+- 东南亚：泰式罗勒鸡、越式牛肉米粉汤家庭版
+- 欧洲：法式普罗旺斯炖蔬菜、番茄罗勒意面
+- 其他地区：黎巴嫩风味鹰嘴豆泥
+
+全部来源于 Wikimedia Commons 的原始 file page，授权为 CC0、CC BY 或 CC BY-SA。`data/recipe-images.ts` 逐张记录 author、source URL、license URL、attribution、alt 与 focal point；served asset 统一裁切为 `1500 x 1000` WebP。原始图片不进入仓库。

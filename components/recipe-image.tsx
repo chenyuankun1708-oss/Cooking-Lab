@@ -6,7 +6,7 @@ import type { RecipeImage as RecipeImageAsset } from "@/types/image";
 
 const imageSizes = {
   card: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw",
-  hero: "(max-width: 1024px) 100vw, 18rem",
+  hero: "(max-width: 1024px) 100vw, 64rem",
 } as const;
 
 interface RecipeImageProps {
@@ -25,12 +25,12 @@ export function RecipeImage({ image, fallbackInitial, fallbackLabel, variant, pr
     return (
       <div
         aria-hidden="true"
-        className={`${frameClass} flex w-full items-center justify-center overflow-hidden rounded-2xl border border-stone-200 bg-[#f1eadf] text-center text-stone-700`}
+        className={`${frameClass} flex w-full items-center justify-center overflow-hidden rounded-md border border-stone-200 bg-[#efe9db] text-center text-stone-700`}
         data-image-state="fallback"
       >
         <div className="px-4">
-          <span className="block text-4xl font-semibold text-[#9b4f34]">{fallbackInitial}</span>
-          <span className="mt-2 block text-xs font-semibold">{fallbackLabel}</span>
+          <span className="block text-4xl font-semibold text-[#a64631]">{fallbackInitial}</span>
+          <span className="mt-2 block text-xs font-semibold text-stone-600">{fallbackLabel}</span>
         </div>
       </div>
     );
@@ -39,7 +39,7 @@ export function RecipeImage({ image, fallbackInitial, fallbackLabel, variant, pr
   const focalPoint = image.focalPoint ?? { x: 0.5, y: 0.5 };
   return (
     <figure>
-      <div className={`${frameClass} relative w-full overflow-hidden rounded-2xl bg-stone-100`}>
+      <div className={`${frameClass} relative w-full overflow-hidden rounded-md bg-stone-100`}>
         <Image
           alt={image.alt}
           fill
@@ -52,7 +52,7 @@ export function RecipeImage({ image, fallbackInitial, fallbackLabel, variant, pr
         />
       </div>
       {variant === "hero" && (image.attribution || image.sourceUrl || image.licenseUrl) ? (
-        <figcaption className="mt-2 flex flex-wrap justify-end gap-x-2 text-right text-xs text-emerald-100/80">
+        <figcaption className="mt-2 flex flex-wrap justify-end gap-x-2 text-right text-xs leading-5 text-stone-500">
           {image.attribution ? <span>{image.attribution}</span> : null}
           {image.sourceUrl ? <a className="underline underline-offset-2" href={image.sourceUrl} rel="noreferrer" target="_blank">来源</a> : null}
           {image.licenseUrl ? <a className="underline underline-offset-2" href={image.licenseUrl} rel="noreferrer" target="_blank">{image.license}</a> : null}

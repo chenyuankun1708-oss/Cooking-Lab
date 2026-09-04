@@ -12,6 +12,7 @@ const coreRecipes: Recipe[] = [
     slug: "tomato-scrambled-eggs",
     name: "番茄炒蛋",
     description: "分段处理鸡蛋和番茄，兼顾嫩度与自然酸甜汁水。",
+    heroImageId: "tomato-scrambled-eggs-hero",
     taxonomy: {
       countryId: "china",
       cuisineId: "chinese",

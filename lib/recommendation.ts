@@ -224,7 +224,10 @@ export function buildRecommendationExplanation(input: Pick<RecommendationResult,
     .filter(([key, value]) => key !== "ingredientFit" && value && value.score > 0)
     .map(([, value]) => value!.explanation);
   if (preferenceMatches.length) parts.push(preferenceMatches.join("，"));
-  return parts.length ? `${parts.join("；")}，因此优先推荐。` : "满足全部硬性条件，当前未设置其他偏好。";
+  if (parts.length) return `${parts.join("；")}，因此优先推荐。`;
+  return Object.keys(input.scoreBreakdown).length
+    ? "满足全部硬性条件，但未命中当前软偏好。"
+    : "满足全部硬性条件，当前未设置其他偏好。";
 }
 
 export function discoverRecipes(recipes: Recipe[], criteria: RecommendationCriteria,

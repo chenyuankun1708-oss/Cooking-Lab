@@ -13,6 +13,7 @@ const sharedCoreFiles = [
   "lib/image-validation.ts",
   "lib/nutrition.ts",
   "lib/recipe-detail.ts",
+  "lib/recipe-exploration.ts",
   "lib/recipe-images.ts",
   "lib/recipe-validation.ts",
   "lib/recommendation.ts",

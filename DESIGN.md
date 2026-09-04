@@ -2,8 +2,8 @@
 
 ## Source of truth
 
-- Status: Draft
-- Last refreshed: 2026-09-04
+- Status: Implemented baseline for Issue #21
+- Last refreshed: 2026-09-05
 - Primary product surfaces:
   - consumer homepage
   - recipe catalog
@@ -64,7 +64,7 @@
   - Create a visual system that can stretch across Web and future mobile surfaces.
 - Non-goals:
   - Final brand naming in this phase
-  - Full UI implementation in this issue
+  - New account, household, planning, persistence, AI, or mobile features
   - Paid design-service level brand identity execution
 - Success signals:
   - Homepage feels food-first instead of filter-first.
@@ -107,6 +107,13 @@
   - recommendation and inspiration third
   - metadata and calculations after the user is oriented
 
+### Implemented route decisions
+
+- `/` now follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> technique exploration -> estimate note.
+- `/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
+- `/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context.
+- Navigation remains limited to Home, Recipes, and the real technique section. No future-feature links or empty routes are exposed.
+
 ## Design principles
 
 - Principle 1: Food first.
@@ -137,8 +144,9 @@
   - tighter spacing inside cards
   - strong vertical rhythm for mobile scrolling
 - Shape/radius/elevation:
-  - medium radii, not pill-heavy
-  - low to medium elevation
+  - cards and framed content use a maximum 8 px radius
+  - pills are reserved for filter choices and segmented controls
+  - low elevation appears only on interactive recipe cards
   - image containers should feel tactile, not glassy
 - Motion:
   - subtle fade and rise
@@ -153,14 +161,15 @@
 ## Components
 
 - Existing components to reuse:
-  - `RecipeCard` information model
-  - `RecipeDiscovery` recommendation logic and filter semantics
+  - `RecipeCard` recipe and recommendation result contract
+  - `RecipeDiscovery` criteria semantics and deterministic recommendation adapter
   - existing footer, disclaimers, and metadata patterns
 - New/changed components:
-  - hero prompt module
-  - visual-first recipe card variants
-  - homepage section blocks for inspiration, cuisine exploration, technique exploration, and stories
-  - detail page hero media and content rails
+  - `SiteHeader` and `HomeHero`
+  - visual-first catalog and recommendation card variants
+  - homepage inspiration, cuisine, and technique sections
+  - progressive recommendation disclosure for secondary and advanced criteria
+  - detail page editorial reading flow without a sticky metric sidebar
 - Variants and states:
   - catalog card
   - recommendation card
@@ -239,15 +248,17 @@
   - keep tokens modest and practical
   - prefer a small semantic role system over large theme matrices
 - Performance constraints:
-  - future layouts must account for responsive image loading
+  - only the homepage LCP image and current detail hero preload
+  - recipe cards lazy-load images with responsive `sizes`
+  - catalog filtering remains server-rendered; no second 100-recipe client payload is introduced
 - Compatibility constraints:
   - current production is already live and stable; design changes must remain progressive
 - Test/screenshot expectations:
   - future UI work should validate core routes on mobile and desktop screenshots
   - browser smoke coverage should remain part of release readiness
 
-## Open questions
+## Resolved and deferred decisions
 
-- [ ] Which specific typography pair best expresses the confirmed A 70% + C 30% direction across Chinese and Latin text?
-- [ ] How much of the "lab" identity should appear in homepage copy versus staying mostly in detail and knowledge surfaces?
-- [ ] At what later milestone should a future character be evaluated: household MVP, assistant layer, or retention-focused release?
+- Typography uses the system UI stack for Chinese and Latin text in M5; no font dependency was added.
+- The "lab" identity appears through explainability, structured facts, and cooking principles rather than interface jargon.
+- Character or mascot exploration remains deferred beyond M5 and is not represented in the current product UI.

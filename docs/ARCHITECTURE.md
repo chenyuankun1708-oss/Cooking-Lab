@@ -16,6 +16,7 @@
 - `lib/nutrition.ts`：营养估算引擎
 - `lib/cost.ts`：成本估算引擎
 - `lib/recommendation.ts`：规则推荐、评分、解释与部分 application helper
+- `lib/recipe-exploration.ts`：目录搜索与 taxonomy/time 组合过滤的纯 application helper
 - `types/taxonomy.ts`：taxonomy v2 与 cultural metadata 契约
 - `data/taxonomy.ts`：machine value registry 与中英 label source
 - `lib/taxonomy.ts`：taxonomy helper、兼容派生标签与展示适配
@@ -55,26 +56,26 @@
 
 未来 Mobile 可以直接消费 application model，或建立自己的 display adapter，不需要复用 Web 字符串。
 
-#### 2. `components/recipe-discovery.tsx` 直接驱动推荐体验
+#### 2. `components/recipe-discovery.tsx` 驱动渐进式推荐体验
 
-当前首页发现体验只有一个真正的 client component，这是好事；但它也意味着：
+首页发现体验仍只有一个真正需要状态的 client component。它负责把交互输入组装成 `RecommendationCriteria` 并调用 application helper，但评分、硬限制、营养和成本计算仍全部留在 `lib/`。
 
 - 筛选 UI
 - application criteria state
 - recommendation helper 调用
-- 当前首页的工具式 IA
+- 当前首页的 progressive disclosure 状态
 
 被集中在一个组件中。
 
-这对 MVP 是合理的，但 M5 要重做首页体验时，推荐把“用户表达条件 -> 生成 criteria -> 调用 shared recommendation -> 组织视图模型”这条链条拆得更清楚，避免消费者体验重设计时被旧工作台式布局绑住。
+目录探索不复用这条 client boundary。`/recipes` 通过 URL 参数和 `lib/recipe-exploration.ts` 在服务器端过滤，保持 SSG/SSR 优势，也没有复制 taxonomy source of truth。
 
-#### 3. 内容 schema 正在从 MVP 粒度升级，但图像与更广覆盖仍未完成
+#### 3. 内容 schema 已进入 100 道菜与 seed image 阶段
 
-Issue #17 已把 taxonomy v2 放进 framework-independent 层，但 M5 内容域仍有未完成部分：
+Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framework-independent 层。当前仍有未完成部分：
 
-- 没有图片 schema
+- 只有 10 道 recipe 具备已审核 hero image，其他 90 道继续使用稳定 fallback
 - cultural metadata 目前只在少量 recipe 上示例性使用
-- taxonomy registry 目前只覆盖现有 30 道菜与近期扩展必需值，不是完整世界料理百科
+- taxonomy registry 只覆盖当前数据集需要的稳定语义，不追求成为完整世界料理百科
 
 这意味着内容域已经脱离“只有 `cuisine` / `tags` / `method`”的 MVP 状态，但距离 100+ recipes 与图片系统仍有后续工作。
 

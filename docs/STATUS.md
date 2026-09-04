@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，当前进入 M5 `Content, Brand & Experience` 的内容建模与后续体验重设计准备阶段。
+Cooking Lab Public Beta v0.1 已上线，当前正在完成 M5 `Content, Brand & Experience` 的消费者 Web 重设计。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -15,6 +15,9 @@ Production URL：
 - GitHub Issue #7 已于 2026-09-03 自动关闭
 - GitHub PR #22 已于 2026-09-03 merge 到 `main`
 - GitHub Issue #16 已于 2026-09-03 closed
+- GitHub PR #26 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #20 已关闭
+- GitHub Issue #21 当前 open，工作分支为 `feature/issue-21-consumer-web-redesign`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -49,10 +52,10 @@ Issue #18 shared core audit 已完成代码侧最小调整：
 
 ### 当前耦合点
 
-- `app/` 与 `components/` 是纯 Web 展示层，但首页交互当前高度依赖工具式筛选布局
-- `components/recipe-discovery.tsx` 直接消费 recommendation helper，适合当前 MVP，但未来首页重设计时需要更清晰的 application adapter
+- `app/` 与 `components/` 是纯 Web 展示层；首页推荐已经改为 progressive disclosure，不再使用固定 dashboard sidebar
+- `components/recipe-discovery.tsx` 只负责 criteria state 与展示，继续消费原有 deterministic recommendation helper
 - recipe detail 已拆为 framework-independent application model 与 Web display adapter
-- image asset schema、license registry 与 Web adapter 已建立，真实 hero asset 尚待后续 content batches 补齐
+- image asset schema、license registry 与 Web adapter 已建立，当前已有 10 张逐张核验的 seed hero assets
 - cultural metadata 目前只在少量 recipe 上示例性使用
 
 ### M5 约束
@@ -148,7 +151,7 @@ PR #25 已将数据集扩展到 100 道 recipe，并完成时间与家庭可执�
 
 ## Issue #20 当前产物
 
-当前分支 `feature/issue-20-recipe-image-system` 已建立 Recipe Image System 基础：
+PR #26 已建立 Recipe Image System 基础并 merge 到 `main`：
 
 - `types/image.ts` 定义 framework-independent image、source、license、focal point 与 AI provenance
 - `data/recipe-images.ts` 集中维护可用图片与版权 metadata，Recipe 只保存可选 `heroImageId`
@@ -157,16 +160,28 @@ PR #25 已将数据集扩展到 100 道 recipe，并完成时间与家庭可执�
 - 当前不加入来源未经核验的 sample asset；100 张 hero images 作为后续独立 content batches
 - 完整策略与逐张素材工作流见 `docs/IMAGE_SYSTEM.md`
 
+## Issue #21 当前产物
+
+当前分支 `feature/issue-21-consumer-web-redesign` 已完成：
+
+- Food-first 首页与真实料理 hero
+- 今晚灵感、菜系探索和技法探索内容层级
+- Primary / Secondary / Advanced 渐进式推荐条件
+- 以菜名、描述和推荐理由为主的 Recipe Card v2
+- URL 驱动、服务器端执行的 taxonomy 目录筛选
+- 取消 sticky metric sidebar 的 Recipe Detail v2
+- 10 张来自 Wikimedia Commons、授权和 attribution 完整的 seed images
+- 保持 recommendation、nutrition、cost、taxonomy 与 shared-core 边界不变
+
 ## 当前产品缺口
 
 - 100 道菜已形成第一版料理世界地图，但文化 provenance 与更深 region coverage 仍需持续审核
-- 图片系统已可接入真实料理图，但当前 registry 为空，100 道 hero asset 尚未完成授权核验与内容制作
-- 首页和详情页仍明显带有工具 / dashboard / engineering demo 气质
+- 当前只有 10 / 100 道 recipe 有已审核 hero image，其余 recipe 继续显示设计一致的 fallback
+- 更深的文化 provenance 和地域覆盖仍需作为内容审核持续推进
 - Household、个人口味和长期陪伴能力仍只有方向，没有 schema
 
 ## 下一步
 
-1. 以已确认的品牌方向作为后续 visual prototype / consumer web redesign 的约束输入。
-2. 按 `docs/IMAGE_SYSTEM.md` 的授权与素材流程，分批补齐 100 道 recipe hero images。
-3. Naming exploration 保留，但正式品牌名延后到 M5 visual prototype / redesign 之后再评估。
-4. 在 image system 和体验重设计推进时，持续遵守 “Food first / Knowledge second / Data supports trust” 原则。
+1. 完成 Issue #21 的 browser QA、PR review 与生产部署验证。
+2. 后续按 `docs/IMAGE_SYSTEM.md` 分批补齐剩余 90 道 recipe hero images。
+3. Naming exploration 保留，正式品牌名在 M5 体验验证之后再评估。

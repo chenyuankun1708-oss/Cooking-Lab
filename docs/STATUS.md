@@ -33,6 +33,14 @@ Production URL：
 
 ## 当前架构审计结论
 
+Issue #18 shared core audit 已完成代码侧最小调整：
+
+- `lib/recipe-detail.ts` 现在只返回原始数值、machine values 与可序列化 application data
+- `lib/recipe-detail-display.ts` 承担当前 Web 的中文 label、单位与估算文案
+- 新增 guard tests，防止候选 shared core 引入 React、Next.js、DOM 或样式依赖
+- 新增 serialization tests，覆盖 recipe detail 与 recommendation 公开结果
+- 保留当前单仓库结构；完整审计见 `docs/SHARED_CORE.md`
+
 ### 当前优势
 
 - 大多数领域逻辑仍是框架无关的 TypeScript 模块

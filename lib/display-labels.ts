@@ -1,22 +1,5 @@
 import { browseTags, cuisines, dietaryTags, dishTypes, getTaxonomyLabel, mealOccasions, techniques } from "@/data/taxonomy";
-
-export const toolLabels: Record<string, string> = {
-  "baking-tray": "烤盘",
-  blender: "搅拌机",
-  colander: "滤篮",
-  "cutting-board": "砧板",
-  "frying-pan": "平底锅",
-  "heatproof-bowl": "耐热碗",
-  "heatproof-plate": "耐热盘",
-  knife: "刀",
-  "mixing-bowl": "料理碗",
-  oven: "烤箱",
-  "rice-cooker": "电饭锅",
-  saucepan: "汤锅",
-  spatula: "锅铲",
-  steamer: "蒸锅",
-  tongs: "夹子",
-};
+export { getToolLabel, toolLabels } from "./tool-labels";
 
 export const tagLabels: Record<string, string> = {
   "high-fiber": "高纤维",
@@ -55,7 +38,6 @@ export const unitLabels: Record<string, string> = {
 
 const fallbackLabel = (value: string) => value.replace(/[-_]+/g, " ").trim();
 
-export const getToolLabel = (tool: string) => toolLabels[tool] ?? fallbackLabel(tool);
 export const getTagLabel = (tag: string) => tagLabels[tag] ?? fallbackLabel(tag);
 export const getHeatLabel = (heat: string | undefined) =>
   heat && heat !== "none" ? heatLabels[heat] ?? fallbackLabel(heat) : undefined;

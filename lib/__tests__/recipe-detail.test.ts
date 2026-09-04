@@ -6,7 +6,11 @@ import { formatCalories, formatCost, formatMacro, formatMass, formatSodium } fro
 import type { IngredientRepository } from "../ingredient-repository";
 import { localIngredientRepository } from "../ingredient-repository";
 import { calculateNutrition } from "../nutrition";
-import { createRecipeDetailViewModel, getRecipeBySlug } from "../recipe-detail";
+import { buildRecipeDetailDisplay } from "../recipe-detail-display";
+import { buildRecipeDetail, getRecipeBySlug } from "../recipe-detail";
+
+const createRecipeDetailViewModel = (recipe: (typeof recipes)[number], repository = localIngredientRepository) =>
+  buildRecipeDetailDisplay(buildRecipeDetail(recipe, repository));
 
 describe("recipe catalog and detail presentation", () => {
   it("has 30 unique recipe slugs that all resolve", () => {
@@ -24,6 +28,19 @@ describe("recipe catalog and detail presentation", () => {
     const detail = createRecipeDetailViewModel(recipes[0]);
     expect(detail.ingredients[0]).toMatchObject({ name: "鸡蛋", amount: "3 个" });
     expect(detail.ingredients.every((ingredient) => ingredient.name !== ingredient.id)).toBe(true);
+  });
+
+  it("keeps the application model numeric and leaves display formatting to the web adapter", () => {
+    const model = buildRecipeDetail(recipes[0]);
+    expect(model.times).toEqual({
+      prepMinutes: recipes[0].cooking.prepTime,
+      cookMinutes: recipes[0].cooking.cookTime,
+      totalMinutes: recipes[0].cooking.totalTime,
+    });
+    expect(model.ingredients[0]).toMatchObject({ amount: 3, unit: "piece" });
+    expect(model.cost.wholeEstimated).toEqual(expect.any(Number));
+    expect(JSON.stringify(model)).not.toContain("分钟");
+    expect(JSON.stringify(model)).not.toContain("预计 ¥");
   });
 
   it("formats nutrition on a per-serving basis", () => {

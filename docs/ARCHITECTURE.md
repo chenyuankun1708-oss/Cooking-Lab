@@ -21,7 +21,8 @@
 - `lib/taxonomy.ts`：taxonomy helper、兼容派生标签与展示适配
 - `lib/display-labels.ts`：稳定 machine value 的展示映射
 - `lib/formatters.ts`：展示层估算文案和精度格式
-- `lib/recipe-detail.ts`：详情页 view model 聚合
+- `lib/recipe-detail.ts`：framework-independent 的详情 use case 与数值聚合
+- `lib/recipe-detail-display.ts`：当前 Web 详情页的 label 与展示格式适配
 - `lib/*validation*.ts`：静态数据校验
 - `lib/ingredient-repository.ts`：数据来源抽象
 - `app/`：Next.js 路由、metadata 与页面组合
@@ -48,17 +49,11 @@
 
 ### 当前主要耦合点
 
-#### 1. `lib/recipe-detail.ts` 是 Web view-model 适配层
+#### 1. Recipe detail 已拆分 application 与 Web display
 
-它目前同时承担：
+`lib/recipe-detail.ts` 负责 slug 查找、ingredient lookup、营养/成本聚合和 warning，返回 machine values 与原始数值。`lib/recipe-detail-display.ts` 才负责“分钟”“预计 ¥”等当前 Web 文案、单位 label 和 taxonomy label。
 
-- slug 查找
-- 调用营养与成本引擎
-- machine-value label fallback
-- 时间 / 营养 / 成本的最终展示格式化
-- 详情页 warning 组装
-
-这使它更接近“Web 详情页适配器”，而不是纯领域 core。M5 之后如果要支持 Mobile，推荐把这一层明确视作 application/view-model，而不是继续往里塞更多 shared domain responsibility。
+未来 Mobile 可以直接消费 application model，或建立自己的 display adapter，不需要复用 Web 字符串。
 
 #### 2. `components/recipe-discovery.tsx` 直接驱动推荐体验
 
@@ -171,3 +166,5 @@ Taxonomy 的 schema、validation、registry 与 fallback/compatibility helper �
 - M5 的 taxonomy / image / content schema 已经稳定，值得沉淀为 package
 
 在这些条件出现之前，当前单仓库继续演进是更稳妥的选择。
+
+完整模块地图、guardrails 与迁移触发条件见 `docs/SHARED_CORE.md`。

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ingredients } from "@/data/ingredients";
+import { recipeImages } from "@/data/recipe-images";
 import { recipes } from "@/data/recipes";
 import type { Recipe } from "@/types/recipe";
 import { calculateCost } from "../cost";
@@ -13,7 +14,7 @@ describe("recipe dataset", () => {
   it("contains the planned recipes without dangling ingredient references", () => {
     expect(recipes).toHaveLength(100);
     expect(validateRecipes(recipes, ingredients)).toEqual([]);
-    expect(validateDataset(ingredients, recipes)).toEqual([]);
+    expect(validateDataset(ingredients, recipes, recipeImages)).toEqual([]);
   });
 
   it("covers the planned cooking methods and stable metadata values", () => {

@@ -1,6 +1,6 @@
 # Roadmap
 
-最近更新：2026-09-04
+最近更新：2026-09-05
 
 ## 当前发布状态
 
@@ -55,11 +55,13 @@ GitHub tracking:
 
 在 taxonomy 稳定后，扩展内容覆盖面，形成一个更像“小型世界料理地图”的结构化数据集。
 
-当前已完成 100 道 recipe、72 种 ingredient、16 种 technique 与 20 个 country 状态的覆盖；详细基线见 `docs/RECIPE_COVERAGE.md`。
+当前已完成 100 道 recipe、73 种 ingredient、16 种 technique 与 20 个 country 状态的覆盖；详细基线见 `docs/RECIPE_COVERAGE.md`。
 
 ### D. Recipe image system and visual asset pipeline
 
 建立合法可追溯的图片 schema、来源管理和前端图片策略，为 hero image 和未来内容视觉打底。
+
+当前已建立 shared image contract、集中 license registry、validation、Next/Image adapter 与稳定 fallback。真实 100-image coverage 保留为后续独立 content batches，不在 schema Issue 中批量抓取。
 
 ### E. Consumer Web experience redesign
 

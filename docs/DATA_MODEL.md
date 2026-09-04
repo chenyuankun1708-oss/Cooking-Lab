@@ -37,6 +37,7 @@
 - `dietaryTagIds` 只保存静态事实标签，例如 `vegan`、`vegetarian`；`high-protein`、`high-fiber`、`quick`、`low-oil`、`no-added-sugar` 等通过 helper 从营养或烹饪字段派生，不把易过期的计算结果硬编码回 recipe 数据。
 - `culture?` 是可选的结构化内容块：`summary`、`originNote`、`traditionalContext`、`modernContext`、`sources?`。没有可靠依据时留空，不为了“文化感”编造背景。
 - `culture.sources` 使用轻量 reference 对象（`title`、可选 `url / publisher / accessedAt`），只解决“能追溯到哪里”这一需求，不引入 CMS 或 citation engine。
+- `heroImageId?` 是 Recipe 对集中图片 registry 的可选稳定引用。图片来源、授权、alt、焦点和交付 metadata 不复制进 Recipe；`data/recipe-images.ts` 是 image metadata 的 canonical source of truth。
 - Legacy compatibility strategy：现有 filters / recommendation / detail UI 继续通过 `lib/taxonomy.ts` 派生 cuisine、technique 和 tag 语义，但这些都是 adapter，不再是 recipe data 的第二套 source of truth。
 - `cooking.oil`、`salt`、`addedSugar` 是配方级显式用量，并由校验器与食材明细或营养估算核对；含韩式辣酱、泡菜或面包的 recipe 会保留相应 added-sugar estimate。
 - Recipe time contract：`cooking.totalTime` 表示用户已经拥有 `recipe.ingredients` 所声明状态的食材后，从开始准备到可以食用所需的主动操作与必要等待时间；它必须等于 `prepTime + cookTime`。核心流程不能依赖未计时的浸泡、解冻、腌制、预煮或冷却。
@@ -58,7 +59,7 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 ## Validation
 
-`validateIngredients` 与 `validateRecipes` 分别负责静态实体规则；`validateDataset` 组合两者并检查完整 Ingredient/Recipe 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性及运行时元数据等跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
+`validateIngredients`、`validateRecipes` 与 `validateImageAssets` 分别负责静态实体规则；`validateDataset` 组合三者并检查完整 Ingredient/Recipe/Image 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性、图片授权 metadata 及跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
 
 ## Recommendation
 

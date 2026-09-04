@@ -1,14 +1,22 @@
 import Link from "next/link";
+import { RecipeImage } from "@/components/recipe-image";
+import { recipeImages } from "@/data/recipe-images";
 import { getToolLabel } from "@/lib/display-labels";
 import { formatCalories, formatCost, formatGrams, formatPercent, formatProtein, formatTime } from "@/lib/formatters";
 import { getRecipeCuisineLabel, getRecipeLegacyCategoryLabel, getRecipeOriginLabel, getRecipePrimaryTechniqueLabel } from "@/lib/taxonomy";
+import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
 import type { RecommendationResult } from "@/types/recommendation";
 
 export function RecipeCard({ result, variant = "recommendation" }: { result: RecommendationResult; variant?: "recommendation" | "catalog" }) {
   const { recipe, metrics } = result;
   const geographyLine = getRecipeOriginLabel(recipe);
+  const image = getRecipeHeroImage(recipe, recipeImages);
+  const fallback = getRecipeImageFallback(recipe);
   return (
     <article className="flex h-full flex-col rounded-3xl border border-stone-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg focus-within:ring-2 focus-within:ring-emerald-700">
+      <Link aria-label={`查看 ${recipe.name}`} className="mb-4 block rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" href={`/recipes/${recipe.slug}`}>
+        <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={getRecipeCuisineLabel(recipe)} variant="card" />
+      </Link>
       <div className="mb-4 flex items-center justify-between gap-3">
         {variant === "recommendation" ? <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">{result.score}% 匹配</span> : <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-900">{getRecipePrimaryTechniqueLabel(recipe)}</span>}
         <span className="text-xs text-stone-500">{[geographyLine, getRecipeCuisineLabel(recipe), getRecipeLegacyCategoryLabel(recipe)].filter(Boolean).join(" · ")}</span>

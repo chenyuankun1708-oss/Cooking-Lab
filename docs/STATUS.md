@@ -52,7 +52,7 @@ Issue #18 shared core audit 已完成代码侧最小调整：
 - `app/` 与 `components/` 是纯 Web 展示层，但首页交互当前高度依赖工具式筛选布局
 - `components/recipe-discovery.tsx` 直接消费 recommendation helper，适合当前 MVP，但未来首页重设计时需要更清晰的 application adapter
 - recipe detail 已拆为 framework-independent application model 与 Web display adapter
-- image asset schema 仍未建立
+- image asset schema、license registry 与 Web adapter 已建立，真实 hero asset 尚待后续 content batches 补齐
 - cultural metadata 目前只在少量 recipe 上示例性使用
 
 ### M5 约束
@@ -146,16 +146,27 @@ PR #25 已将数据集扩展到 100 道 recipe，并完成时间与家庭可执�
 - 清除了 10 道 recipe 的隐藏干豆/冷饭前置步骤，并补齐相关 tools 与步骤顺序
 - 30 / 45 / 60 分钟 recommendation 场景均只返回可在声明时间内完成的 recipe
 
+## Issue #20 当前产物
+
+当前分支 `feature/issue-20-recipe-image-system` 已建立 Recipe Image System 基础：
+
+- `types/image.ts` 定义 framework-independent image、source、license、focal point 与 AI provenance
+- `data/recipe-images.ts` 集中维护可用图片与版权 metadata，Recipe 只保存可选 `heroImageId`
+- validation 拒绝悬空引用、非法路径、空 hero alt、缺失 CC attribution 及 NC / ND / unknown / prohibited 授权
+- Web 使用 Next/Image adapter，detail hero preload、card lazy loading，并在无图或加载失败时保持稳定 fallback
+- 当前不加入来源未经核验的 sample asset；100 张 hero images 作为后续独立 content batches
+- 完整策略与逐张素材工作流见 `docs/IMAGE_SYSTEM.md`
+
 ## 当前产品缺口
 
 - 100 道菜已形成第一版料理世界地图，但文化 provenance 与更深 region coverage 仍需持续审核
-- 缺少真实料理图像系统
+- 图片系统已可接入真实料理图，但当前 registry 为空，100 道 hero asset 尚未完成授权核验与内容制作
 - 首页和详情页仍明显带有工具 / dashboard / engineering demo 气质
 - Household、个人口味和长期陪伴能力仍只有方向，没有 schema
 
 ## 下一步
 
 1. 以已确认的品牌方向作为后续 visual prototype / consumer web redesign 的约束输入。
-2. 以已完成的 100 道 recipe coverage 作为 `#20` image system 的内容基础。
+2. 按 `docs/IMAGE_SYSTEM.md` 的授权与素材流程，分批补齐 100 道 recipe hero images。
 3. Naming exploration 保留，但正式品牌名延后到 M5 visual prototype / redesign 之后再评估。
 4. 在 image system 和体验重设计推进时，持续遵守 “Food first / Knowledge second / Data supports trust” 原则。

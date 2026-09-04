@@ -8,7 +8,13 @@
 
 M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展成一个更像“小型世界料理地图”的结构化内容体系。
 
-当前总量：100 道 structured recipes。最终 coverage 见 docs/RECIPE_COVERAGE.md。
+当前总量：100 道 structured recipes，其中 10 道 published recipes。最终 coverage 见 docs/RECIPE_COVERAGE.md，发布规则见 docs/RECIPE_PUBLISHING.md。
+
+## Publishing Strategy
+
+结构完整不等于内容已经适合公开。Recipe 使用 `draft / reviewed / published` 表达人工编辑状态，确定性 eligibility 另行检查 schema、计算、时间、hero、授权、alt、步骤完整性与 culture provenance。只有 `published` 且 eligibility 通过的 Recipe 才进入公开首页、目录、推荐和详情。
+
+当前初始公开集只包含 10 道已有合法 hero 且完成逐道内容深化的 Recipe。其余 90 道继续保留，不为了公开数量降低图片或步骤质量。
 
 ## 当前内容缺口
 
@@ -240,6 +246,8 @@ M5 必须引入真实料理视觉系统，但本轮只定义 schema 和原则，
 - cooking `why` explanations present
 - story / origin 只有在可靠时出现
 - no fake historical claims
+- publication status 必须显式设置，不能由“字段看起来齐全”或“存在图片”自动推断
+- 公开 Recipe 必须通过人工步骤、状态判断、图片准确性和来源复核
 
 ## 推荐的执行顺序
 

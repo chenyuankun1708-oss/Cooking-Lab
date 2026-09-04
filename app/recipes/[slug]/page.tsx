@@ -4,22 +4,24 @@ import { notFound } from "next/navigation";
 import { RecipeImage } from "@/components/recipe-image";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { getPublishedRecipeBySlug, getPublishedRecipeStaticParams } from "@/data/published-recipes";
 import { recipeImages } from "@/data/recipe-images";
-import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
-import { buildRecipeDetail, getRecipeBySlug } from "@/lib/recipe-detail";
+import { buildRecipeDetail } from "@/lib/recipe-detail";
 import { describeFlavorProfile } from "@/lib/flavor";
 import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
 import { SITE_NAME } from "@/lib/site";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return recipes.map(({ slug }) => ({ slug }));
+  return getPublishedRecipeStaticParams();
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const recipe = getRecipeBySlug(slug);
+  const recipe = getPublishedRecipeBySlug(slug);
   if (!recipe) return { title: "菜谱未找到" };
   return {
     title: `${recipe.name} 做法与原理`,
@@ -29,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function RecipePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const recipe = getRecipeBySlug(slug);
+  const recipe = getPublishedRecipeBySlug(slug);
   if (!recipe) notFound();
 
   const detail = buildRecipeDetailDisplay(buildRecipeDetail(recipe));

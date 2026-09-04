@@ -25,6 +25,11 @@ describe("recipe dataset", () => {
     expect(() => JSON.stringify(recipes.map((recipe) => recipe.flavor))).not.toThrow();
   });
 
+  it("gives every recipe one explicit publication status", () => {
+    expect(recipes.every((recipe) => ["draft", "reviewed", "published"].includes(recipe.publication.status))).toBe(true);
+    expect(recipes.filter((recipe) => recipe.publication.status === "published")).toHaveLength(10);
+  });
+
   it("covers the planned cooking methods and stable metadata values", () => {
     const techniqueIds = new Set(recipes.flatMap((recipe) => recipe.taxonomy.techniques));
     for (const techniqueId of ["pan-fry", "stir-fry", "steam", "boil", "simmer", "stew", "braise", "roast", "dress", "rice-cook", "sear", "bake", "blanch", "poach", "grill", "cold-mix"]) {

@@ -53,7 +53,7 @@ export const recipeImages: readonly RecipeImage[] = [
   {
     id: "japanese-miso-tofu-soup-hero",
     src: "/images/recipes/japanese-miso-tofu-soup/hero.webp",
-    alt: "红黑漆碗中的味噌汤，汤面可见豆腐和海带",
+    alt: "红黑漆碗中的味噌豆腐汤，汤面可见豆腐和深绿色配菜",
     role: "hero",
     delivery: "local",
     width: 1500,
@@ -69,7 +69,7 @@ export const recipeImages: readonly RecipeImage[] = [
   {
     id: "korean-bibimbap-home-hero",
     src: "/images/recipes/korean-bibimbap-home/hero.webp",
-    alt: "拌饭碗中分区摆放牛肉、胡萝卜、紫甘蓝和煎蛋",
+    alt: "拌饭碗中分区摆放牛肉、彩色蔬菜和煎蛋",
     role: "hero",
     delivery: "local",
     width: 1500,
@@ -120,7 +120,7 @@ export const recipeImages: readonly RecipeImage[] = [
   {
     id: "french-ratatouille-hero",
     src: "/images/recipes/french-ratatouille/hero.webp",
-    alt: "黑色烤盘中炖软的茄子、西葫芦、番茄和香草",
+    alt: "黑色锅中炖软的茄子、西葫芦、番茄和香草",
     role: "hero",
     delivery: "local",
     width: 1500,

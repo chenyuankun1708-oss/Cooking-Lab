@@ -44,10 +44,10 @@
 
 M0-M4 已完成，当前 Public Beta 已具备：
 
-- 100 道结构化 `demo-estimated` 菜谱与 73 种食材
+- 100 道结构化 `demo-estimated` 菜谱与 73 种食材，其中 10 道通过发布审核并进入公开产品
 - 本地营养、成本、单位换算和推荐引擎
 - 首页多条件料理决策
-- `/recipes` 全量目录
+- `/recipes` 已发布料理目录
 - 详情页步骤、原理与估算信息
 - 公开 Beta 反馈入口
 - Vercel 上线能力与已部署生产环境
@@ -70,6 +70,8 @@ M5 `Content, Brand & Experience` 的目标不是简单增加几个功能，而�
 - 更适合长期扩展到 Web + Mobile
 
 M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展、image system，并在 Issue #21 落地消费者 Web 重设计。本阶段仍不完成最终品牌命名、完整 100 张图片覆盖或 Mobile App 开发。
+
+100 道 structured recipes 是内容储备，不等于 100 道 published recipes。Issue #30 建立独立的 publication status 与技术 eligibility；公开首页、目录、推荐和详情当前只消费 10 道已审核 Recipe，其余内容继续保留为 draft。
 
 ## M5.1 产品自然化
 

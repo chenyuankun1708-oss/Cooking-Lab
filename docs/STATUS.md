@@ -119,6 +119,16 @@ Issue #16 `[M5] Define brand and visual design system` 当前已在品牌规划�
 
 这意味着 M5 的 taxonomy、label strategy 和 cultural metadata contract 已经有了独立 schema，但 image system 与 30 -> 100 数据扩充仍是后续工作。
 
+### Hardening update
+
+在当前 PR review / hardening 阶段，已进一步确认并收紧：
+
+- `recipe.taxonomy` 是唯一 canonical source of truth
+- `quick` 改为由 `totalTime` 派生，不再静态维护
+- `high-protein / high-fiber / low-oil / no-added-sugar` 继续保持 derived attributes
+- 对无 provenance 的文化性断言做了删除或降级为现代 recipe context
+- 详情页只保留最小 taxonomy 适配，不把所有新字段直接铺成 sidebar 信息卡
+
 ## 当前产品缺口
 
 - 当前 30 道菜仍不足以形成真正的内容型产品

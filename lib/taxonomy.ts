@@ -7,6 +7,7 @@ import { calculateNutrition } from "./nutrition";
 const HIGH_PROTEIN_PER_SERVING = 22;
 const HIGH_FIBER_PER_SERVING = 8;
 const LOW_OIL_PER_SERVING = 1.5;
+const QUICK_TOTAL_TIME_MAX_MINUTES = 20;
 
 export function getRecipeCuisineId(recipe: Recipe): string {
   return recipe.taxonomy.cuisine.cuisineId;
@@ -66,6 +67,7 @@ export function getRecipeTagIds(recipe: Recipe): string[] {
 
   if (recipe.taxonomy.mealType.dishTypeId === "staple") tags.add("staple");
   if (recipe.taxonomy.mealType.mealOccasionIds?.includes("breakfast")) tags.add("breakfast");
+  if (recipe.cooking.totalTime <= QUICK_TOTAL_TIME_MAX_MINUTES) tags.add("quick");
 
   const nutrition = calculateNutrition(recipe.ingredients, localIngredientRepository);
   if (nutrition.complete) {

@@ -159,6 +159,9 @@ function validateTaxonomy(recipe: Recipe, report: (recipeId: string, field: stri
   validateTaxonomyList(recipeId, "taxonomy.flavorProfile.characteristicIds", taxonomy.flavorProfile?.characteristicIds, flavorCharacteristics, report);
   validateTaxonomyList(recipeId, "taxonomy.dietaryTagIds", taxonomy.dietaryTagIds, dietaryTags, report);
   validateTaxonomyList(recipeId, "taxonomy.browseTagIds", taxonomy.browseTagIds, browseTags, report);
+  if (taxonomy.browseTagIds?.includes("quick")) {
+    report(recipeId, "taxonomy.browseTagIds", "quick 必须由 totalTime 派生，不应静态维护");
+  }
 }
 
 function validateTaxonomyList(

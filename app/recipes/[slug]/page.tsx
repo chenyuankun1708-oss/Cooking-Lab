@@ -6,6 +6,7 @@ import { recipes } from "@/data/recipes";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { createRecipeDetailViewModel, getRecipeBySlug } from "@/lib/recipe-detail";
 import { SITE_NAME } from "@/lib/site";
+import { getRecipeLegacyCategoryLabel } from "@/lib/taxonomy";
 
 export function generateStaticParams() {
   return recipes.map(({ slug }) => ({ slug }));
@@ -76,11 +77,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-5 lg:self-start" aria-label="菜谱摘要">
-          <InfoPanel title="基础信息"><DefinitionList items={[["份数", `${recipe.servings} 人份`], ["难度", getDifficultyLabel(recipe.cooking.difficulty)], ["技法", detail.taxonomy.techniques.join("、")], ["类别", detail.taxonomy.dishType], ["用餐场景", detail.taxonomy.mealOccasions.join("、") || "不限场景"]]} /></InfoPanel>
-          <InfoPanel title="地域与菜系"><DefinitionList items={[["来源地域", detail.taxonomy.origin ?? "未特别标注"], ["菜系", detail.taxonomy.cuisine], ["细分菜系", detail.taxonomy.subCuisine ?? "未特别标注"]]} /></InfoPanel>
-          {(detail.taxonomy.flavor.tastes.length > 0 || detail.taxonomy.flavor.characteristics.length > 0) && (
-            <InfoPanel title="风味"><DefinitionList items={[["味型", detail.taxonomy.flavor.tastes.join("、") || "未特别标注"], ["口感气质", detail.taxonomy.flavor.characteristics.join("、") || "未特别标注"]]} /></InfoPanel>
-          )}
+          <InfoPanel title="基础信息"><DefinitionList items={[["份数", `${recipe.servings} 人份`], ["难度", getDifficultyLabel(recipe.cooking.difficulty)], ["技法", detail.taxonomy.techniques.join("、")], ["菜系", detail.taxonomy.cuisine], ["类别", getRecipeLegacyCategoryLabel(recipe)], ["来源", detail.taxonomy.origin ?? "未特别标注"]]} /></InfoPanel>
           <InfoPanel title="时间"><DefinitionList items={[["准备", detail.times.prep], ["烹饪", detail.times.cook], ["总计", detail.times.total]]} /></InfoPanel>
           <InfoPanel title="每份营养估算"><DefinitionList items={detail.nutrition.map((item) => [item.label, item.value])} /></InfoPanel>
           <InfoPanel title="关注指标"><DefinitionList items={detail.limits.map((item) => [item.label, `${item.value} · ${item.scope}`])} /></InfoPanel>

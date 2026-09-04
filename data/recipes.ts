@@ -15,11 +15,6 @@ const coreRecipes: Recipe[] = [
       tasteIds: ["savory", "tangy"],
       characteristicIds: ["saucy", "tender"],
       dietaryTagIds: ["vegetarian"],
-      browseTagIds: ["quick"],
-    },
-    culture: {
-      summary: "番茄炒蛋是当代中国家庭厨房里最常见的家常菜之一，跨地域传播广，进入门槛低。",
-      modernContext: "它常被视为入门菜，因为能同时练习火候控制、分段加热和基础调味。",
     },
     servings: 2,
     ingredients: [
@@ -48,12 +43,11 @@ const coreRecipes: Recipe[] = [
       cuisineId: "fusion",
       techniqueIds: ["pan-fry"],
       dishTypeId: "main-dish",
-      tasteIds: ["fresh", "tangy"],
-      characteristicIds: ["light", "tender"],
-      browseTagIds: ["quick"],
+      tasteIds: ["tangy"],
+      characteristicIds: ["fresh", "light", "tender"],
     },
     culture: {
-      summary: "这是一道更偏现代家庭轻食语境的鸡胸做法，强调清爽调味而不是厚重酱汁。",
+      summary: "这是一道面向工作日晚餐的现代轻食鸡胸做法，强调清爽调味而不是厚重酱汁。",
       modernContext: "它适合 Cooking Lab 当前“可解释推荐 + 工作日晚餐”场景，也贴近未来国际化内容面。",
     },
     servings: 1,
@@ -122,7 +116,7 @@ const coreRecipes: Recipe[] = [
       browseTagIds: ["one-pot"],
     },
     culture: {
-      summary: "电饭锅饭属于典型的现代家庭效率菜，依赖家用电器把主食和配菜整合进同一流程。",
+      summary: "这道电饭锅饭用单次吸水焖熟的流程，把主食和配菜整合进同一锅里。",
       modernContext: "它体现了 Cooking Lab 想保留的“实用料理科学”一面：用设备逻辑解释为什么能一次熟成。",
     },
     servings: 2,

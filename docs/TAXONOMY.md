@@ -14,6 +14,7 @@ Recipe Taxonomy v2 的目标不是建立一部料理百科，而是为当前 30 
 
 ## Design rules
 
+- Canonical source of truth: `recipe.taxonomy`
 - country / region 与 cuisine / subCuisine 分离
 - technique、dish type、meal occasion 分离
 - static taxonomy 与 derived attributes 分离
@@ -79,6 +80,7 @@ cuisine: {
 - “电饭锅”不再既是 technique 又是 tool
   - tool: `rice-cooker`
   - technique: `rice-cook`
+- `rice-cook` 表示“吸水焖熟主食及其配料”的过程语义，不等于设备本身；它可以由电饭锅承载，但 source of truth 仍然把设备和 technique 分开。
 
 ## Dish type and meal context
 
@@ -153,7 +155,6 @@ flavorProfile?: {
   - `vegan`
   - `vegetarian`
 - `browseTagIds`
-  - `quick`
   - `one-pot`
   - `vegetable-rich`
 
@@ -163,6 +164,7 @@ flavorProfile?: {
 
 - `high-protein`
 - `high-fiber`
+- `quick`
 - `low-oil`
 - `no-added-sugar`
 - `staple`
@@ -213,6 +215,7 @@ culture?: {
 - structured enough for UI
 - low-claim, low-drama
 - 没有可靠依据就留空
+- 涉及起源、传统、地区习惯等事实性文化主张时，必须有可对应的 provenance；否则只保留非历史性的现代 recipe context，或留空
 
 当前只在少数低争议 recipe 上示例性使用，不追求 30/30 全覆盖。
 
@@ -240,6 +243,14 @@ interface RecipeReference {
 - 兼容层通过 `lib/taxonomy.ts` 从 taxonomy source of truth 派生旧交互所需语义
 
 因此当前 UI 不需要先重写，taxonomy 也已经能成为唯一真实数据源。
+
+## Legacy compatibility strategy
+
+- Canonical: `recipe.taxonomy`
+- Compatibility adapter: `lib/taxonomy.ts` 中的 cuisine / method / tag helper
+- Deprecated: `recipe.cuisine`、`recipe.category`、`recipe.cooking.method`、`recipe.tags` 这类直接存回 recipe 的旧字段
+
+新 recipe 不允许手工维护两套分类数据；旧交互若仍需要 legacy 语义，只能从 taxonomy 派生。
 
 ## Current dataset examples
 

@@ -64,10 +64,10 @@ export const tasteProfiles = createRegistry([
   { id: "umami", label: { "zh-CN": "鲜味", en: "Umami" } },
   { id: "tangy", label: { "zh-CN": "微酸", en: "Tangy" } },
   { id: "sweet", label: { "zh-CN": "自然甜味", en: "Naturally sweet" } },
-  { id: "fresh", label: { "zh-CN": "清新", en: "Fresh" } },
 ] as const);
 
 export const flavorCharacteristics = createRegistry([
+  { id: "fresh", label: { "zh-CN": "清新", en: "Fresh" } },
   { id: "light", label: { "zh-CN": "清爽", en: "Light" } },
   { id: "comforting", label: { "zh-CN": "安慰感", en: "Comforting" } },
   { id: "saucy", label: { "zh-CN": "带汁", en: "Saucy" } },

@@ -26,6 +26,12 @@ describe("recipe dataset", () => {
     expect([...new Set(recipes.map((recipe) => recipe.taxonomy.cuisine.cuisineId))].every((id) => Boolean(cuisines[id]))).toBe(true);
   });
 
+  it("keeps recipe.taxonomy as the canonical source and reserves quick as a derived browse tag", () => {
+    expect(recipes.every((recipe) => "taxonomy" in recipe)).toBe(true);
+    expect(recipes.every((recipe) => !("cuisine" in recipe) && !("category" in recipe) && !("tags" in recipe))).toBe(true);
+    expect(recipes.every((recipe) => recipe.taxonomy.browseTagIds?.includes("quick") !== true)).toBe(true);
+  });
+
   it("resolves taxonomy machine values through localized labels", () => {
     expect(getTaxonomyLabel("cuisines", "chinese", "zh-CN")).toBe("中式");
     expect(getTaxonomyLabel("cuisines", "chinese", "en")).toBe("Chinese");
@@ -87,7 +93,8 @@ describe("recipe dataset", () => {
       "technique 列表不能重复", "存在未注册的 technique ID", "料理类型 ID 不在 taxonomy registry 中",
       "meal occasion 列表不能重复", "存在未注册的 meal occasion ID", "taxonomy.flavorProfile.tasteIds 存在未注册的 ID",
       "taxonomy.flavorProfile.characteristicIds 存在未注册的 ID", "taxonomy.dietaryTagIds 存在未注册的 ID",
-      "taxonomy.browseTagIds 存在未注册的 ID", "文化元数据不能为空字符串", "文化元数据来源标题不能为空",
+      "taxonomy.browseTagIds 存在未注册的 ID", "quick 必须由 totalTime 派生，不应静态维护",
+      "文化元数据不能为空字符串", "文化元数据来源标题不能为空",
     ]));
   });
 });

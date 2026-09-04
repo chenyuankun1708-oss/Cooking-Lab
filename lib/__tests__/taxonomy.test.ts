@@ -48,6 +48,14 @@ describe("taxonomy helpers", () => {
     expect(getRecipeTagLabels(recipe!)).toEqual(expect.arrayContaining(["一锅完成", "纯素"]));
   });
 
+  it("derives quick from total time instead of storing it in browseTagIds", () => {
+    const quickRecipe = recipes.find((recipe) => recipe.slug === "tomato-scrambled-eggs");
+    const slowerRecipe = recipes.find((recipe) => recipe.slug === "mushroom-tofu-rice");
+    expect(quickRecipe?.taxonomy.browseTagIds).toBeUndefined();
+    expect(getRecipeTagIds(quickRecipe!)).toContain("quick");
+    expect(getRecipeTagIds(slowerRecipe!)).not.toContain("quick");
+  });
+
   it("supports optional origin and flavor labels without requiring full hierarchy", () => {
     const chineseRecipe = recipes.find((recipe) => recipe.slug === "tomato-scrambled-eggs");
     const fusionRecipe = recipes.find((recipe) => recipe.slug === "lemon-chicken-breast");
@@ -62,9 +70,9 @@ describe("taxonomy helpers", () => {
   });
 
   it("keeps cultural metadata optional and structured", () => {
-    const withCulture = recipes.find((recipe) => recipe.slug === "tomato-scrambled-eggs");
+    const withCulture = recipes.find((recipe) => recipe.slug === "lemon-chicken-breast");
     const withoutCulture = recipes.find((recipe) => recipe.slug === "broccoli-chicken");
-    expect(withCulture?.culture?.summary).toContain("家常菜");
+    expect(withCulture?.culture?.summary).toContain("现代");
     expect(withCulture?.culture?.sources).toBeUndefined();
     expect(withoutCulture?.culture).toBeUndefined();
   });

@@ -19,6 +19,7 @@
 包含标识、描述、taxonomy、可选文化内容、份数、结构化食材用量、可选营养快照、烹饪时间/油盐糖/难度、厨具、成本元数据、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
 
 - 当前静态数据要求 `id` 与唯一 kebab-case `slug` 一致；Ingredient 引用必须存在，且用量必须能通过现有单位系统换算为克。
+- Canonical source of truth 是 `recipe.taxonomy`。新 recipe 不再维护独立的 `cuisine / category / method / tags` 静态字段。
 - `taxonomy` 是新的 source of truth，字段为：
   - `origin?: { countryId; regionId? }`
   - `cuisine: { cuisineId; subCuisineId? }`
@@ -32,9 +33,10 @@
 - `techniques` 表示烹饪动作或加热方式，例如 `pan-fry`、`stir-fry`、`steam`、`boil`、`simmer`、`stew`、`braise`、`roast`、`dress`、`rice-cook`。旧模型里的“汤”不再作为 technique，而是 `dishTypeId = "soup"`；“电饭锅”拆为 `tool = "rice-cooker"` 与 `technique = "rice-cook"`。
 - `mealType` 把“料理类型”和“用餐场景”拆开：`dishTypeId` 表示主菜、主食、汤、凉菜、配菜；`mealOccasionIds` 表示早餐、午餐、晚餐等场景。
 - `flavorProfile` 目前轻量拆为 `tasteIds` 与 `characteristicIds`，既能表达味型，也能表达口感/体感，不引入完整 flavor ontology。
-- `dietaryTagIds` 只保存静态事实标签，例如 `vegan`、`vegetarian`；`high-protein`、`high-fiber`、`low-oil`、`no-added-sugar` 等通过 helper 从营养或烹饪字段派生，不把易过期的计算结果硬编码回 recipe 数据。
+- `dietaryTagIds` 只保存静态事实标签，例如 `vegan`、`vegetarian`；`high-protein`、`high-fiber`、`quick`、`low-oil`、`no-added-sugar` 等通过 helper 从营养或烹饪字段派生，不把易过期的计算结果硬编码回 recipe 数据。
 - `culture?` 是可选的结构化内容块：`summary`、`originNote`、`traditionalContext`、`modernContext`、`sources?`。没有可靠依据时留空，不为了“文化感”编造背景。
 - `culture.sources` 使用轻量 reference 对象（`title`、可选 `url / publisher / accessedAt`），只解决“能追溯到哪里”这一需求，不引入 CMS 或 citation engine。
+- Legacy compatibility strategy：现有 filters / recommendation / detail UI 继续通过 `lib/taxonomy.ts` 派生 cuisine、technique 和 tag 语义，但这些都是 adapter，不再是 recipe data 的第二套 source of truth。
 - `cooking.oil`、`salt`、`addedSugar` 是配方级显式用量，并由校验器与食材明细核对；当前 30 道菜未使用添加糖食材，因此 `addedSugar` 为 0。
 - `nutrition` 不存储在静态 Recipe 中，营养和成本分别由 Nutrition Engine 与 Cost Engine 根据食材用量计算。
 - Recipe 数据仍标记为 `demo-estimated`。步骤和 `why` 已完成人工可读性检查，但时间、营养和成本仍用于产品验证，不是专业餐饮、医学或实时价格数据。

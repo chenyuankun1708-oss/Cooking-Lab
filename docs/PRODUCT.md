@@ -73,6 +73,8 @@ M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展�
 
 100 道 structured recipes 是内容储备，不等于 100 道 published recipes。Issue #30 建立独立的 publication status 与技术 eligibility；公开首页、目录、推荐和详情当前只消费 10 道已审核 Recipe，其余内容继续保留为 draft。
 
+Issue #31 在 Recipe Detail 尾部加入 deterministic similar-recipe discovery。它根据 canonical Flavor、主食材、cuisine、technique 和 dish type 寻找少量真正有料理逻辑的 published Recipe，不复用用户条件 Recommendation score，也不向用户展示系统分数。当前公开集较小时宁可只显示 1–2 道，或没有结果时隐藏整段，也不为了填满卡片公开 draft 内容。
+
 ## M5.1 产品自然化
 
 Issue #29 开始把用户体验从“参数和数据库描述”转向真实做饭语言：
@@ -120,6 +122,7 @@ Issue #29 开始把用户体验从“参数和数据库描述”转向真实做�
 - nutrition / limiting metrics / cost
 - tools
 - story / origin / cultural context（仅在已有可靠内容时出现）
+- 料理正文与可选文化内容结束后的相近料理探索（只使用 published Recipe）
 
 ### Brand / Visual 方向
 

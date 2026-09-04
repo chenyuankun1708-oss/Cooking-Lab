@@ -21,8 +21,10 @@ Production URL：
 - GitHub Issue #21 已关闭
 - GitHub PR #33 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #29 已关闭
-- GitHub Epic #28 与 Issue #30 当前 open
-- Issue #30 工作分支为 `feature/issue-30-recipe-quality-publishing`
+- GitHub PR #34 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #30 已关闭
+- GitHub Epic #28 与 Issue #31 当前 open
+- Issue #31 工作分支为 `feature/issue-31-similar-recipes`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -191,7 +193,7 @@ PR #33 已合并并建立 M5.1 Flavor 与自然语言基线：
 
 ## Issue #30 当前产物
 
-当前分支已建立 Recipe publishing 与 quality gate：
+PR #34 已合并并建立 Recipe publishing 与 quality gate：
 
 - 100 道 structured recipes 全部保留，publication status 明确区分 `draft / reviewed / published`
 - 技术 eligibility 与编辑发布状态分离，只有 `published` 且通过校验的 Recipe 可公开
@@ -199,6 +201,17 @@ PR #33 已合并并建立 M5.1 Flavor 与自然语言基线：
 - 10 道公开 Recipe 已逐道深化为 4–6 个真实步骤，补齐 sensory cues、doneness、调味时机和失败预防
 - Homepage、catalog、recommendation、taxonomy options、detail lookup 与 SSG 统一消费 `data/published-recipes.ts`
 - 未发布 slug 不生成静态详情，直接进入公开路由时返回 404
+
+## Issue #31 当前产物
+
+当前分支已建立 deterministic similar-recipe discovery：
+
+- `lib/recipe-similarity.ts` 与 Recommendation Engine 完全分离，返回可序列化 score、五维 breakdown 与 signals
+- Flavor / Ingredient 权重合计 0.75；cuisine、technique 与 dish type 只作辅助，时间不参与
+- salt / oil / seasoning 与常见 aromatic ingredient 不计入主食材 overlap；只保留六个有实际用途的 ingredient family
+- 默认 `0.28` threshold 来自当前 10 道 published Recipe 的 pairwise editorial calibration
+- Recipe Detail 末尾只展示达到阈值的 1–4 道 published Recipe；结果不足时不填充低质量卡片
+- Similar Recipe card 只展示图片、料理名、Flavor、自然理由和人类时间，不暴露 similarity score
 
 ## 当前产品缺口
 
@@ -209,6 +222,6 @@ PR #33 已合并并建立 M5.1 Flavor 与自然语言基线：
 
 ## 下一步
 
-1. 完成 Issue #30 验证、PR review 与合并前检查。
-2. 后续内容批次按 publishing contract 逐道补齐步骤、来源和 hero，不以数量替代审核。
-3. #31 Similar Recipes 与 #32 Living Hero 保持独立，不在 Issue #30 中提前实现。
+1. 完成 Issue #31 浏览器 QA、验证与 PR review。
+2. 后续 published 内容批次进入时重新执行 pairwise audit，校准阈值与 family 覆盖。
+3. #32 Living Hero 保持独立，不在 Issue #31 中提前实现。

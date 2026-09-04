@@ -77,6 +77,8 @@ Issue #29 已完成并通过 PR #33 合并：canonical Flavor Profile、自然�
 
 Issue #30 建立 Recipe publishing gate 并完成初始内容深化：保留 100 道 structured recipes，先公开 10 道经图片和人工内容审校的 Recipe；首页、目录、推荐、详情与 SSG 全部基于统一 public source。Similar Recipes 与 Living Hero 继续分别留给 #31 / #32，本 Issue 不提前实现。
 
+Issue #31 建立独立 deterministic Recipe similarity：Flavor 与主食材为主要维度，cuisine、technique 和 dish type 只作辅助；详情页在正文末尾展示通过编辑阈值的少量 published Recipe 和自然理由。它不复用 Recommendation score，不扩大 published set，也不提前实现 #32 Living Hero。
+
 ### F. Shared core audit for future mobile app
 
 审计当前耦合边界，约束后续 M5 工作避免把新领域能力写死在 Next.js 或 React 里。

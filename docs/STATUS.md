@@ -32,7 +32,8 @@ Production URL：
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已完成并关闭；执行顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
 - M8 Epic #60 与 Issues #61–#64 已建立；执行顺序为 `#61 -> #62 -> #63 -> #64`
-- Issue #62 已完成双语 `/{locale}/validation`、默认语言 legacy redirect、双语公开补充反馈 Issue Form 与 Footer 入口；不引入 analytics、数据库、第三方表单或敏感资料收集。公开反馈在页面和表单中均明确为补充证据，不计入方向门槛；结构化 consent 覆盖用途、公开 GitHub 身份、退出/删除限制与敏感资料边界。当前实现已通过本地 test、lint、typecheck、build 和浏览器 QA，待 independent re-review、PR/CI 与 Production 验证。
+- Issue #62 已通过独立代码、隐私、架构与视觉 review；PR #66 已于 2026-09-06 在 2/2 Vercel checks 通过后 merge。Production 的 `/zh-CN/validation` 与 `/en/validation` 返回 200，`/validation` 返回 308 并跳转至中文默认页。双语公开补充反馈只作补充证据，不计入方向门槛；实现不引入 analytics、数据库、第三方表单 backend 或敏感资料收集。
+- Issue #63 已完成零参与者 preflight：当前 0 人联系、0 场有效 session、无方向结论；默认私密渠道为现有一对一私聊，本地 contact/consent/raw notes 隔离目录已按用户授权建立。FileVault 开启且当前没有 Time Machine destination；如果备份状态变化，研究必须在写入参与者数据前暂停并重新取得系统配置授权。
 - Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
 - Issue #52 已通过两轮 independent review（首轮 REVISE、第二轮 PASS）；PR #56 已于 2026-09-05 merge，Issue #52 已关闭
 - Issue #53 已通过 independent review；PR #57 已于 2026-09-05 在 2/2 checks 通过后 merge，Issue #53 已关闭

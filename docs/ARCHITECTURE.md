@@ -313,4 +313,12 @@ Issue #51 只建立共享 contract，不提前修改 UI journey 或 Meal selecti
 
 URL 使用独立 `dc*` allowlist，避免与 `/recipes` 已有 catalog filters 共用 `time` 等参数而产生隐式语义。调用方显式提供当前 vocabulary；builder 汇总 Recipe 与 CulinaryItem 的工具 ID，因此 native item 所需工具不会在 Decision Context 层成为不可表达值。Meal adapter 当前只投影 estimated time 与 closed-world tools，不把 Recipe-only 营养、成本、油盐糖或 soft preferences 传给整餐 engine。
 
-`/{locale}/pairing/[slug]` 为 26 项生成 52 个静态页面，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。
+## M7 Decision Continuity Boundary
+
+Issue #52 将 Decision Context 接到 `Discovery -> Recipe catalog -> Recipe -> Pairing -> Recipe/back -> locale switch`，但不建立账号或浏览器存储。首页 client boundary 以 codec 解析 URL、更新 criteria，并用 `router.replace` 将每次条件变化写回同一路径；复制或刷新 URL 因而可以恢复相同的归一化结果。
+
+`lib/decision-context-navigation.ts` 只接受 `discovery / catalog` 两种来源，并从已有 locale route、归一化 Decision Context 与独立 catalog filters 重建返回链接。它不接受 free-form return URL，也不依赖 history state。`lib/recipe-exploration.ts` 集中解析和稳定序列化 catalog filter；目录会携带 Decision Context，但不会把它宣称为目录 filter。
+
+Recipe 与 Pairing Server Page 为了在首屏生成正确的 scope summary、返回链接和 locale link，会在 request time 读取 query。Next.js 16 因而把这两类页面标记为 dynamic rendering；`generateStaticParams` 与 `dynamicParams = false` 仍只定义现有 locale + content identity，不为 query 创建新路径。Metadata 继续只按 locale + slug 构建 canonical/hreflang，query 不进入索引身份。这是 M7 对决策正确性的局部取舍，不改变 shared core、内容 repository 或 canonical route。
+
+`/{locale}/pairing/[slug]` 的 base content identity 仍为 26 项 × 2 locales；M7 query 只触发这些已知 identity 的 request-time rendering，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。

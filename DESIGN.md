@@ -2,7 +2,7 @@
 
 ## Source of truth
 
-- Status: Active through Issue #67
+- Status: Active through M9 Epic #69
 - Last refreshed: 2026-09-06
 - Primary product surfaces:
   - consumer homepage
@@ -28,6 +28,17 @@
   - Production URL: `https://cooking-lab-pied.vercel.app`
 
 ## Brand
+
+### M9 design read
+
+Reading this as a bilingual culinary decision and knowledge product for everyday home cooks and curious food explorers, with a food-first editorial language and a restrained laboratory sense of order.
+
+- Taste skill: `design-taste-frontend` v2, pinned from `Leonxlnx/taste-skill@ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
+- `DESIGN_VARIANCE: 7`
+- `MOTION_INTENSITY: 3`
+- `VISUAL_DENSITY: 5`
+- Taste is a critique rubric, not the product source of truth. Accessibility, performance, factual integrity and this document override generic skill defaults.
+- M9 removes the separate consumer idea of Recipes versus Stories. A culinary item is the destination; method, serving guidance, nutrition, cultural context, recognition and sources are chapters of that item when applicable.
 
 - Personality:
   - warm
@@ -138,28 +149,28 @@
 ## Visual language
 
 - Color:
-  - semantic surfaces: warm canvas, paper content, herb knowledge, amber story, restrained cocoa for alcoholic-drink introductions
-  - fresh produce-led accents
-  - dark text with strong contrast
-  - restrained success/warning states
+  - neutral rice-white canvas and paper surfaces
+  - true ink text and cool neutral rules
+  - one chili-red interaction and editorial accent per page
+  - food photography supplies the wider color range; UI chrome does not compete with it
 - Typography:
-  - modern humanist or neo-grotesk body text
-  - display typography with editorial personality
+  - Noto Sans SC for body and interface text
+  - Noto Serif SC for display headings where editorial hierarchy matters
+  - headline wrapping is explicitly controlled; desktop hero and catalog titles stay within two lines
   - numeric metrics use a quieter, compact style
 - Spacing/layout rhythm:
   - generous section spacing
   - tighter spacing inside cards
   - strong vertical rhythm for mobile scrolling
 - Shape/radius/elevation:
-  - cards and framed content use a maximum 8 px radius
-  - pills are reserved for filter choices and segmented controls
-  - low elevation appears only on interactive recipe cards
-  - image containers should feel tactile, not glassy
+  - editorial images and content groups are primarily square or 4 px
+  - pills are reserved for filters and status tags
+  - cards use rules and whitespace rather than repeated floating white boxes
+  - shadows are exceptional and never the primary hierarchy device
 - Motion:
-  - subtle fade and rise
-  - small hover states on cards
+  - CSS-only tactile hover and active states
+  - no autoplay hero in M9
   - reduced motion support by default
-  - homepage Hero rotates every 7 seconds with a 700 ms image crossfade; hover, focus, hidden documents, and reduced-motion preferences pause or disable automatic movement
 - Imagery/iconography:
   - editorial food-first photography as the primary visual language
   - modern culinary studio details as a secondary layer on recipe detail and knowledge surfaces

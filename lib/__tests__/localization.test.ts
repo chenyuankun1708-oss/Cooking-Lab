@@ -84,7 +84,7 @@ describe("locale and route architecture", () => {
     expect(languages["zh-CN"]).toBe("https://cooking-lab-pied.vercel.app/zh-CN/recipes/tomato-scrambled-eggs");
     expect(languages.en).toBe("https://cooking-lab-pied.vercel.app/en/recipes/tomato-scrambled-eggs");
     expect(languages["zh-CN"]).not.toBe(languages.en);
-    expect(readFileSync(resolve(process.cwd(), "app/[locale]/layout.tsx"), "utf8")).toContain("<html lang={locale}>");
+    expect(readFileSync(resolve(process.cwd(), "app/[locale]/layout.tsx"), "utf8")).toContain("lang={locale}");
   });
 });
 

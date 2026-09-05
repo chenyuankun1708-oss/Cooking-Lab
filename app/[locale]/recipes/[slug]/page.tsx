@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RecipeImage } from "@/components/recipe-image";
+import { DecisionContextSummary } from "@/components/decision-context-summary";
 import { SimilarRecipeCard } from "@/components/similar-recipe-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ingredients } from "@/data/ingredients";
+import { decisionContextValueAllowlist } from "@/data/decision-context";
 import { getPublishedRecipeBySlug, getPublishedRecipes, getPublishedRecipeStaticParams } from "@/data/published-recipes";
 import { getLocalizedRecipe, getLocalizedRecipes } from "@/data/localization/public-recipes";
 import { recipeImages } from "@/data/recipe-images";
@@ -14,11 +16,18 @@ import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
 import { buildRecipeDetail } from "@/lib/recipe-detail";
 import { describeFlavorProfile } from "@/lib/flavor";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
+import {
+  buildDecisionReturnHref,
+  hasDecisionContext,
+  parseDecisionRouteState,
+  serializeDecisionRouteQuery,
+} from "@/lib/decision-context-navigation";
+import { parseRecipeCatalogFilters } from "@/lib/recipe-exploration";
 import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
 import { describeRecipeSimilarity } from "@/lib/recipe-similarity-display";
 import { rankSimilarRecipes } from "@/lib/recipe-similarity";
 import { SITE_NAME } from "@/lib/site";
-import { getLocalizedPath, isSupportedLocale } from "@/lib/localization";
+import { getLocalizedPath, isSupportedLocale, toURLSearchParams, type RouteSearchParams } from "@/lib/localization";
 import { getMessages } from "@/lib/messages";
 import { supportedLocales, type SupportedLocale } from "@/types/localization";
 
@@ -42,7 +51,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function RecipePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+export default async function RecipePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<RouteSearchParams>;
+}) {
   const { locale: value, slug } = await params;
   const locale = getLocale(value);
   const source = getPublishedRecipeBySlug(slug);
@@ -50,6 +65,18 @@ export default async function RecipePage({ params }: { params: Promise<{ locale:
   if (!recipe) notFound();
   const messages = getMessages(locale);
   const c = recipePageCopy[locale];
+  const routeParams = toURLSearchParams(await searchParams);
+  const decisionState = parseDecisionRouteState(routeParams, decisionContextValueAllowlist);
+  const hasContext = hasDecisionContext(decisionState.context);
+  const localizedRecipes = getLocalizedRecipes(getPublishedRecipes(), locale);
+  const catalogFilters = decisionState.source === "catalog"
+    ? parseRecipeCatalogFilters(routeParams, localizedRecipes)
+    : {};
+  const routeQuery = serializeDecisionRouteQuery(decisionState.context, decisionContextValueAllowlist, {
+    source: decisionState.source,
+    ...(decisionState.source === "catalog" ? { catalogFilters } : {}),
+  });
+  const decisionReturnHref = buildDecisionReturnHref(locale, decisionState, decisionContextValueAllowlist, catalogFilters);
 
   const detail = buildRecipeDetailDisplay(buildRecipeDetail(recipe), locale);
   const image = getRecipeHeroImage(recipe, recipeImages);
@@ -57,7 +84,7 @@ export default async function RecipePage({ params }: { params: Promise<{ locale:
   const calories = detail.nutrition.find((item) => item.label === c.calories)?.value ?? c.incomplete;
   const protein = detail.nutrition.find((item) => item.label === c.protein)?.value ?? c.incomplete;
   const flavor = describeFlavorProfile(recipe.flavor, locale);
-  const similarRecipes = rankSimilarRecipes(recipe, getLocalizedRecipes(getPublishedRecipes(), locale), { ingredients });
+  const similarRecipes = rankSimilarRecipes(recipe, localizedRecipes, { ingredients });
   const taxonomyLine = [
     detail.taxonomy.origin,
     detail.taxonomy.subCuisine ?? detail.taxonomy.cuisine,
@@ -73,14 +100,14 @@ export default async function RecipePage({ params }: { params: Promise<{ locale:
 
   return (
     <main id="main-content">
-      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes/${recipe.slug}`} />
+      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes/${recipe.slug}`} query={routeQuery.toString()} />
 
       <article>
         <div className="mx-auto max-w-6xl px-4 pt-7 sm:px-6 sm:pt-10">
           <nav aria-label={c.breadcrumb} className="flex flex-wrap items-center gap-2 text-sm text-stone-500">
             <Link className="focus-ring font-semibold text-[#235849] hover:underline" href={getLocalizedPath(locale)}>{messages.nav.home}</Link>
             <span aria-hidden="true">/</span>
-            <Link className="focus-ring font-semibold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes")}>{messages.nav.recipes}</Link>
+            <Link className="focus-ring font-semibold text-[#235849] hover:underline" href={decisionState.source === "catalog" ? decisionReturnHref : getLocalizedPath(locale, "/recipes")}>{messages.nav.recipes}</Link>
             <span aria-hidden="true">/</span>
             <span aria-current="page">{recipe.name}</span>
           </nav>
@@ -103,9 +130,15 @@ export default async function RecipePage({ params }: { params: Promise<{ locale:
             <KeyFact label={c.proteinPerServing} value={protein} />
           </dl>
           <p className="mt-3 text-xs leading-5 text-stone-500">{c.estimateNote}</p>
+          {hasContext ? <DecisionContextSummary context={decisionState.context} locale={locale} /> : null}
+          {hasContext ? (
+            <Link className="focus-ring mt-5 inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={decisionReturnHref}>
+              {decisionState.source === "catalog" ? c.returnToCatalog : c.returnToDecision}
+            </Link>
+          ) : null}
           <Link
             className="focus-ring mt-7 inline-flex min-h-11 items-center rounded-md bg-[#235849] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#173f35]"
-            href={getLocalizedPath(locale, `/pairing/${recipe.slug}`)}
+            href={getLocalizedPath(locale, `/pairing/${recipe.slug}`, routeQuery)}
           >
             {c.buildMeal}
           </Link>
@@ -263,6 +296,7 @@ export default async function RecipePage({ params }: { params: Promise<{ locale:
                     result={result}
                     reason={describeRecipeSimilarity(recipe, result, ingredients, locale)}
                     locale={locale}
+                    query={routeQuery}
                   />
                 ))}
               </div>
@@ -327,13 +361,13 @@ const recipePageCopy = {
     caloriesPerServing: "热量 / 份", proteinPerServing: "蛋白质 / 份", estimateNote: "时间、营养和成本为估算值，实际结果会因食材和设备而变化。",
     prepare: "准备", ingredientIntro: (n: number) => `${n} 人份，保留数据中的原始计量单位。`, beforeStart: "开始前", difficulty: "难度", startCooking: "开始做",
     principlesTitle: "把这道菜做好的关键", reference: "作为参考", detailsTitle: "营养、用量与成本", detailsIntro: "营养和成本为估算值，可作为日常比较参考，不构成个体化饮食建议。",
-    incompleteTitle: "部分估算不完整", buildMeal: "搭配这一餐", continue: "继续探索", similarMany: "还想吃点类似的？", similarFew: "还可以试试这些",
+    incompleteTitle: "部分估算不完整", buildMeal: "搭配这一餐", returnToDecision: "回到今晚的决定", returnToCatalog: "回到刚才的料理目录", continue: "继续探索", similarMany: "还想吃点类似的？", similarFew: "还可以试试这些",
   },
   en: {
     breadcrumb: "Breadcrumb", calories: "Calories", protein: "Protein", incomplete: "Estimate incomplete", cookingTime: "Cooking time", servings: "Yield",
     caloriesPerServing: "Calories / serving", proteinPerServing: "Protein / serving", estimateNote: "Time, nutrition, and cost are estimates; actual results vary with ingredients and equipment.",
     prepare: "Prepare", ingredientIntro: (n: number) => `${n} servings in the recipe's declared metric units.`, beforeStart: "Before you start", difficulty: "Difficulty", startCooking: "Cook",
     principlesTitle: "What makes this dish work", reference: "For reference", detailsTitle: "Nutrition, amounts, and cost", detailsIntro: "Nutrition and cost are estimates for everyday comparison, not personalized dietary advice.",
-    incompleteTitle: "Some estimates are incomplete", buildMeal: "Build a meal around this", continue: "Continue exploring", similarMany: "Craving something similar?", similarFew: "Try these next",
+    incompleteTitle: "Some estimates are incomplete", buildMeal: "Build a meal around this", returnToDecision: "Return to tonight's decision", returnToCatalog: "Return to the recipe catalog", continue: "Continue exploring", similarMany: "Craving something similar?", similarFew: "Try these next",
   },
 } as const;

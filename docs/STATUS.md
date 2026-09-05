@@ -31,8 +31,8 @@ Production URL：
 - GitHub Issue #38–#43 已关闭，PR #49 已于 2026-09-05 merge 到 `main`；M6 Epic #37 已完成
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已建立；依赖顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
-- Issue #51 工作分支为 `feature/issue-51-decision-context`
-- Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS），PR #55 已 ready 并等待人工 merge
+- Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
+- Issue #52 工作分支为 `feature/issue-52-decision-continuity`；两轮 independent review 已完成（首轮 REVISE、第二轮 PASS），当前准备 PR
 - `origin/main` 已包含完整 M6 与最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -318,10 +318,21 @@ PR #36 已合并 Living Editorial Hero：
 - vocabulary builder 汇总 published Recipe 与 CulinaryItem 的工具 ID，覆盖 native item 独有工具；非空 tools 维持 closed-world 语义
 - Meal adapter 只映射 `maxTime -> maxTotalTimeMinutes` 与 `availableTools -> availableToolIds`；营养、成本、油盐糖与 soft preferences 不进入整餐 options
 - context-free URL 继续解析为空 context；本 Issue 未修改 Discovery、Recipe、Pairing navigation 或 Meal selection/presentation
-- 全量 225 项测试、lint、typecheck、production build 与 Vercel preview/checks 已通过；PR #55 保持 open/ready，未 merge
+- 全量 225 项测试、lint、typecheck、production build 与 Vercel preview/checks 已通过；PR #55 已 merge
+
+## Issue #52 当前产物
+
+- Discovery 从 allowlisted URL 恢复 criteria，并在不整页刷新的同路由 replace 中持续写回归一化 context
+- Recommendation card、Discover more、Recipe catalog card、Recipe detail、Pairing、返回链接与 locale switch 保留仍适用的 Decision Context
+- Recipe detail 以整餐约束、仅当前 Recipe 与携带偏好三种 scope 展示条件，不把 Recipe 营养/预算/油盐糖升级为 Meal constraint
+- catalog filter 与 Decision Context 保持两套明确 query contract；目录明确说明携带条件不等于目录结果已满足条件
+- 返回来源只允许 `discovery / catalog`，catalog filters 经过 allowlist/normalization 重建；不接受外部或 free-form return URL，不依赖 history state
+- context-free route 继续有效，canonical/hreflang 继续忽略 query；Recipe/Pairing 因 request-time query 改为 dynamic rendering，但不新增 content identity 或 query SSG path
+- 相关纯函数与 journey regression tests、lint、typecheck 和 production build 已通过；真实浏览器已覆盖 Discovery URL hydration、Recipe/Pairing/back、catalog carry-through、locale link 与 console error
+- independent review 首轮发现 Discovery locale switch 会静默丢失当前 context；修复后 locale href 复用既有 codec 的 allowlist、normalization 与稳定序列化，第二轮结论为 PASS
 
 ## 下一步
 
-1. 人工 review 并 merge Issue #51 的 PR #55；merge 前不开始 Issues #52–#54。
-2. #51 merge 后，#52 navigation core 与 #53 engine core 可按已冻结 contract 分工并行，Pairing 页面由单一 owner 顺序集成。
-3. 内容扩张只在 #54 evaluation 证明具体缺口阻止合理结果时另行评审，不作为 M7 默认工作。
+1. 创建 Issue #52 PR，等待 CI 通过后 merge。
+2. 在已冻结的 Decision Context contract 上执行 #53 whole-meal enforcement 与 reliable fallback。
+3. #52/#53 集成后执行 #54 canonical evaluation 与 dogfood；内容扩张只在 evaluation 证明具体缺口阻止合理结果时另行评审。

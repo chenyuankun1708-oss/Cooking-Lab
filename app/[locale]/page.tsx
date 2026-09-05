@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { HomeHero } from "@/components/home-hero";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeDiscovery } from "@/components/recipe-discovery";
@@ -9,6 +10,7 @@ import { StoryCard } from "@/components/story-card";
 import { homepageStoryIds } from "@/data/culinary/story-context";
 import { homeHeroEditorialItems, homepageFeaturedRecipeSlugs } from "@/data/homepage";
 import { ingredients } from "@/data/ingredients";
+import { decisionContextValueAllowlist } from "@/data/decision-context";
 import { getPublishedRecipes, getPublishedRecipesBySlugs } from "@/data/published-recipes";
 import { getLocalizedPublishedStoryPreviews } from "@/data/published-stories";
 import { getLocalizedRecipes } from "@/data/localization/public-recipes";
@@ -65,7 +67,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <RecipeDiscovery recipes={publishedRecipes} ingredients={ingredients} locale={locale} />
+      <Suspense fallback={<DecisionDiscoveryFallback locale={locale} />}>
+        <RecipeDiscovery
+          recipes={publishedRecipes}
+          ingredients={ingredients}
+          locale={locale}
+          decisionContextAllowlist={decisionContextValueAllowlist}
+        />
+      </Suspense>
 
       <section className="border-y border-stone-200 bg-[var(--surface-herb)] py-12 sm:py-16" aria-labelledby="world-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -163,4 +172,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 function getLocale(value: string): SupportedLocale {
   if (!isSupportedLocale(value)) notFound();
   return value;
+}
+
+function DecisionDiscoveryFallback({ locale }: { locale: SupportedLocale }) {
+  return (
+    <section id="decide" className="border-y border-stone-200 bg-[var(--surface-paper)] py-12 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <p className="text-sm font-semibold text-[#a64631]">
+          {locale === "zh-CN" ? "今晚的决定" : "Decide tonight"}
+        </p>
+        <p className="mt-2 text-2xl font-bold text-stone-950">
+          {locale === "zh-CN" ? "正在恢复你的条件…" : "Restoring your conditions…"}
+        </p>
+      </div>
+    </section>
+  );
 }

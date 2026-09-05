@@ -15,7 +15,7 @@
 
 当前 slug 保持 locale-neutral。同一内容在两种语言中使用同一 slug 和 domain ID；语言切换保留 route、slug 与 query。旧 `/`、`/recipes/...`、`/culinary/...`、`/stories/...` 路由只负责重定向到 `zh-CN`，不会形成第二个 canonical URL。
 
-每个本地化页面输出当前 locale canonical 与 `zh-CN` / `en` alternate links。`app/[locale]/layout.tsx` 在服务器端设置 `<html lang>`，公开页面继续静态生成。
+每个本地化页面输出当前 locale canonical 与 `zh-CN` / `en` alternate links。`app/[locale]/layout.tsx` 在服务器端设置 `<html lang>`。M7 的 Decision Context 与独立 catalog filters 在语言切换时保留 machine values，但不进入 canonical/hreflang；Recipe 与 Pairing 页面因此按 request-time query 渲染，不为 query 建立新的可索引 identity 或静态路径。
 
 ## Translation Boundaries
 
@@ -53,6 +53,6 @@
 
 ## Performance And Validation
 
-字典和 editorial translation 在 Server Component/data boundary 解析，浏览器不会收到另一语言的完整内容集合。唯一既有 client boundary 仍是首页 Hero carousel 与 Recommendation interaction；没有新增 i18n、动画或字体依赖。
+字典和 editorial translation 在 Server Component/data boundary 解析，浏览器不会收到另一语言的完整内容集合。首页 Recommendation interaction 在 M7 同步 allowlisted URL context；没有新增 i18n、动画或字体依赖。
 
-测试覆盖 locale parsing、route generation、query-preserving switch、public translation completeness、taxonomy/Flavor/time/unit labels、Recommendation/Similarity/Pairing、Story certainty、Source locator、metadata、canonical/hreflang 和 `<html lang>`。Pairing route 只从当前 locale 的 26 个完整 published item 生成静态页面，view model 不包含另一语言的 consumer copy。
+测试覆盖 locale parsing、route generation、query-preserving switch、public translation completeness、taxonomy/Flavor/time/unit labels、Recommendation/Similarity/Pairing、Story certainty、Source locator、metadata、canonical/hreflang 和 `<html lang>`。Pairing 只接受当前 locale 的 26 个完整 published item，view model 不包含另一语言的 consumer copy；query 不扩大 content identity 集合。

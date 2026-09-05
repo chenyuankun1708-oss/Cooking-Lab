@@ -96,6 +96,8 @@ M7 Issue #51 将 `RecommendationCriteria` 明确为可跨页面携带的 `Decisi
 
 整餐语义当前只包括：`maxTime` 约束页面展示的 deterministic elapsed estimate，而不是现实厨房完成时间保证；非空 `availableTools` 表示用户声明的完整可用工具集合。budget、calories、protein、added sugar、oil 与 salt 仍是 Recipe-only，ingredient/cuisine/tag/method/Flavor 仅携带。Meal adapter 只允许输出 `maxTotalTimeMinutes` 与 `availableToolIds`；在建立 portion、sharing 与 per-diner allocation contract 前，不把 Recipe 的每份营养或成本直接相加解释为整餐 hard constraint。
 
+Issue #52 没有扩展 `DecisionContext` 字段。Journey source 是 URL application metadata，只允许 `discovery / catalog`；catalog 的 `q / cuisine / origin / technique / dish / time / pace / flavor` 仍属于独立浏览状态，不成为 Decision Context 或 Meal constraint。返回链接由这些受限值重新构建，不保存或接受任意 URL。
+
 ## Pairing And Meal Composition
 
 `PairingScoreResult` 保存 score、dimension breakdown、structured reasons/cautions 和选中的 role pair；不保存消费者文案。`MealComposition` 固定 `anchorId`，保存 template/slots、全部 pairings、meal-level breakdown、缺失 slot、准备负担以及 nutrition/cost coverage。`partial-pair` 明确表示当前库不能支撑完整模板，不与 complete 混淆。

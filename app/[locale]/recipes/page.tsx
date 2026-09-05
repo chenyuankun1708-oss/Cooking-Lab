@@ -5,10 +5,16 @@ import { RecipeCard } from "@/components/recipe-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getPublishedRecipes } from "@/data/published-recipes";
+import { decisionContextValueAllowlist } from "@/data/decision-context";
 import { getLocalizedRecipes } from "@/data/localization/public-recipes";
-import { cookingTimeBands, getCookingTimeBand, type CookingTimeBandId } from "@/lib/cooking-time";
+import { cookingTimeBands, getCookingTimeBand } from "@/lib/cooking-time";
 import { listFlavorPreferenceOptions } from "@/lib/flavor";
-import { exploreRecipeCatalog, type RecipeCatalogFilters } from "@/lib/recipe-exploration";
+import {
+  exploreRecipeCatalog,
+  parseRecipeCatalogFilters,
+  type RecipeCatalogFilters,
+} from "@/lib/recipe-exploration";
+import { hasDecisionContext, parseDecisionRouteState, serializeDecisionRouteQuery } from "@/lib/decision-context-navigation";
 import {
   listRecipeCountryOptions,
   listRecipeCuisineOptions,
@@ -16,7 +22,6 @@ import {
   listRecipeRegionOptions,
   listRecipeTechniqueOptions,
 } from "@/lib/taxonomy";
-import { flavorPreferenceIds, type FlavorPreferenceId } from "@/types/flavor";
 import type { SupportedLocale } from "@/types/localization";
 import { getLocalizedPath, isSupportedLocale } from "@/lib/localization";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
@@ -29,19 +34,14 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
   const messages = getMessages(locale);
   const recipes = getLocalizedRecipes(getPublishedRecipes(), locale);
   const raw = await searchParams;
-  const queryString = toSearchParams(raw).toString();
-  const origin = first(raw.origin);
-  const filters: RecipeCatalogFilters = {
-    query: first(raw.q),
-    cuisineId: first(raw.cuisine),
-    techniqueId: first(raw.technique),
-    dishTypeId: first(raw.dish),
-    maxTime: parseMaxTime(first(raw.time)),
-    timeBandId: parseTimeBand(first(raw.pace)),
-    flavorPreferenceId: parseFlavorPreference(first(raw.flavor)),
-    countryId: origin?.startsWith("country:") ? origin.slice("country:".length) : undefined,
-    regionId: origin?.startsWith("region:") ? origin.slice("region:".length) : undefined,
-  };
+  const rawParams = toSearchParams(raw);
+  const filters = parseRecipeCatalogFilters(rawParams, recipes);
+  const decisionState = parseDecisionRouteState(rawParams, decisionContextValueAllowlist);
+  const hasCarriedContext = hasDecisionContext(decisionState.context);
+  const normalizedQuery = serializeDecisionRouteQuery(decisionState.context, decisionContextValueAllowlist, { catalogFilters: filters });
+  const recipeQuery = serializeDecisionRouteQuery(decisionState.context, decisionContextValueAllowlist, { source: "catalog", catalogFilters: filters });
+  const decisionOnlyQuery = serializeDecisionRouteQuery(decisionState.context, decisionContextValueAllowlist);
+  const origin = filters.countryId ? `country:${filters.countryId}` : filters.regionId ? `region:${filters.regionId}` : undefined;
   const catalog = exploreRecipeCatalog(recipes, filters);
   const cuisines = listRecipeCuisineOptions(recipes, locale);
   const countries = listRecipeCountryOptions(recipes, locale);
@@ -55,7 +55,7 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
 
   return (
     <main id="main-content">
-      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes`} query={queryString} />
+      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes`} query={normalizedQuery.toString()} />
       <header className="border-b border-stone-200 bg-[var(--surface-herb)] py-9 sm:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <p className="text-sm font-semibold text-[#a64631]">{messages.catalog.eyebrow}</p>
@@ -71,28 +71,41 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
       </header>
 
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10" aria-labelledby="catalog-title">
+        {hasCarriedContext ? (
+          <div className="mb-7 border-l-4 border-[#235849] bg-[var(--surface-herb)] px-5 py-4 text-sm leading-6 text-stone-700">
+            <p className="font-bold text-stone-950">
+              {locale === "zh-CN" ? "你的决定条件会继续保留" : "Your decision conditions stay with you"}
+            </p>
+            <p className="mt-1">
+              {locale === "zh-CN"
+                ? "下面的目录筛选只用于浏览，不表示整库料理已经满足这些条件；进入具体菜谱后会再次显示适用范围。"
+                : "The catalog filters below are for browsing only. They do not claim every item satisfies your decision conditions; scope is shown again on each recipe."}
+            </p>
+          </div>
+        ) : null}
         <div className="grid gap-7 border-b border-stone-300 pb-7 lg:grid-cols-3">
           <BrowseChoices
             label={messages.catalog.flavor}
             options={flavorOptions}
             selected={filters.flavorPreferenceId}
-            hrefFor={(id) => catalogHref(filters, { flavorPreferenceId: filters.flavorPreferenceId === id ? undefined : id as FlavorPreferenceId }, locale)}
+            hrefFor={(id) => catalogHref(filters, { flavorPreferenceId: filters.flavorPreferenceId === id ? undefined : id as RecipeCatalogFilters["flavorPreferenceId"] }, locale, decisionState.context)}
           />
           <BrowseChoices
             label={messages.catalog.pace}
             options={availableTimeBands.map((band) => ({ id: band.id, label: band.label[locale] }))}
             selected={filters.timeBandId}
-            hrefFor={(id) => catalogHref(filters, { timeBandId: filters.timeBandId === id ? undefined : id as CookingTimeBandId }, locale)}
+            hrefFor={(id) => catalogHref(filters, { timeBandId: filters.timeBandId === id ? undefined : id as RecipeCatalogFilters["timeBandId"] }, locale, decisionState.context)}
           />
           <BrowseChoices
             label={messages.catalog.cuisine}
             options={cuisines.slice(0, 6)}
             selected={filters.cuisineId}
-            hrefFor={(id) => catalogHref(filters, { cuisineId: filters.cuisineId === id ? undefined : id }, locale)}
+            hrefFor={(id) => catalogHref(filters, { cuisineId: filters.cuisineId === id ? undefined : id }, locale, decisionState.context)}
           />
         </div>
 
         <form action={getLocalizedPath(locale, "/recipes")} className="border-y border-stone-300 py-5">
+          {[...decisionOnlyQuery].map(([name, value], index) => <input key={`${name}:${value}:${index}`} name={name} type="hidden" value={value} />)}
           {filters.flavorPreferenceId ? <input name="flavor" type="hidden" value={filters.flavorPreferenceId} /> : null}
           {filters.timeBandId ? <input name="pace" type="hidden" value={filters.timeBandId} /> : null}
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -110,7 +123,7 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
               {messages.catalog.search}
             </button>
             {activeCount ? (
-              <Link className="focus-ring inline-flex min-h-12 items-center justify-center px-3 text-sm font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes")}>
+              <Link className="focus-ring inline-flex min-h-12 items-center justify-center px-3 text-sm font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes", decisionOnlyQuery)}>
                 {messages.catalog.clear}
               </Link>
             ) : null}
@@ -160,7 +173,7 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
                     ? "border-[#235849] bg-[#235849] text-white"
                     : "border-stone-300 bg-white text-stone-700 hover:border-[#235849]"
                 }`}
-                href={catalogHref(filters, { techniqueId: filters.techniqueId === technique.id ? undefined : technique.id }, locale)}
+                href={catalogHref(filters, { techniqueId: filters.techniqueId === technique.id ? undefined : technique.id }, locale, decisionState.context)}
               >
                 {technique.label}
               </Link>
@@ -181,13 +194,13 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
 
         {catalog.length ? (
           <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {catalog.map((result) => <RecipeCard key={result.recipe.id} result={result} variant="catalog" locale={locale} />)}
+            {catalog.map((result) => <RecipeCard key={result.recipe.id} result={result} variant="catalog" locale={locale} query={recipeQuery} />)}
           </div>
         ) : (
           <div className="mt-7 border border-dashed border-stone-400 bg-white px-6 py-14 text-center">
             <h2 className="text-2xl font-bold text-stone-950">{messages.catalog.noResults}</h2>
             <p className="mt-3 text-stone-600">{messages.catalog.noResultsBody}</p>
-            <Link className="focus-ring mt-6 inline-flex min-h-11 items-center rounded-md bg-[#235849] px-5 font-bold text-white" href={getLocalizedPath(locale, "/recipes")}>
+            <Link className="focus-ring mt-6 inline-flex min-h-11 items-center rounded-md bg-[#235849] px-5 font-bold text-white" href={getLocalizedPath(locale, "/recipes", decisionOnlyQuery)}>
               {messages.catalog.reset}
             </Link>
           </div>
@@ -226,36 +239,18 @@ function FilterSelect({
   );
 }
 
-function first(value: string | string[] | undefined): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
-}
-
-function parseMaxTime(value: string | undefined): number | undefined {
-  const parsed = Number(value);
-  return [20, 30, 45, 60].includes(parsed) ? parsed : undefined;
-}
-
-function parseTimeBand(value: string | undefined): CookingTimeBandId | undefined {
-  return cookingTimeBands.some((band) => band.id === value) ? value as CookingTimeBandId : undefined;
-}
-
-function parseFlavorPreference(value: string | undefined): FlavorPreferenceId | undefined {
-  return flavorPreferenceIds.includes(value as FlavorPreferenceId) ? value as FlavorPreferenceId : undefined;
-}
-
-function catalogHref(filters: RecipeCatalogFilters, changes: Partial<RecipeCatalogFilters>, locale: SupportedLocale): string {
+function catalogHref(
+  filters: RecipeCatalogFilters,
+  changes: Partial<RecipeCatalogFilters>,
+  locale: SupportedLocale,
+  context: Parameters<typeof serializeDecisionRouteQuery>[0],
+): string {
   const next = { ...filters, ...changes };
-  const params = new URLSearchParams();
-  if (next.query) params.set("q", next.query);
-  if (next.cuisineId) params.set("cuisine", next.cuisineId);
-  if (next.countryId) params.set("origin", `country:${next.countryId}`);
-  if (next.regionId) params.set("origin", `region:${next.regionId}`);
-  if (next.techniqueId) params.set("technique", next.techniqueId);
-  if (next.dishTypeId) params.set("dish", next.dishTypeId);
-  if (next.maxTime !== undefined) params.set("time", next.maxTime.toString());
-  if (next.timeBandId) params.set("pace", next.timeBandId);
-  if (next.flavorPreferenceId) params.set("flavor", next.flavorPreferenceId);
-  return getLocalizedPath(locale, "/recipes", params);
+  return getLocalizedPath(locale, "/recipes", serializeDecisionRouteQuery(
+    context,
+    decisionContextValueAllowlist,
+    { catalogFilters: next },
+  ));
 }
 
 function BrowseChoices({

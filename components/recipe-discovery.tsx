@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { RecipeCard } from "./recipe-card";
 import { getCuisineLabel, getTagLabel, getTechniqueLabel, getToolLabel } from "@/lib/display-labels";
 import { getIngredientLabel } from "@/data/localization/ingredients";
@@ -14,6 +15,12 @@ import {
 } from "@/lib/recommendation";
 import { buildRelaxationSuggestions } from "@/lib/recommendation-display";
 import { getLocalizedPath } from "@/lib/localization";
+import {
+  parseDecisionContext,
+  serializeDecisionContext,
+  type DecisionContextValueAllowlist,
+} from "@/lib/decision-context";
+import { serializeDecisionRouteQuery } from "@/lib/decision-context-navigation";
 import { getRecipeTagIds, listRecipeCuisineOptions, listRecipeTechniqueOptions } from "@/lib/taxonomy";
 import type { Ingredient } from "@/types/ingredient";
 import type { FlavorPreferenceId } from "@/types/flavor";
@@ -25,9 +32,23 @@ const cookingGoals = ["high-protein", "vegetable-rich", "one-pot", "quick", "hig
 type ListKey = "availableIngredients" | "availableTools" | "preferredTags" | "preferredMethods";
 type NumberKey = "maxTime" | "maxCalories" | "minProtein" | "maxOil" | "maxSalt" | "maxAddedSugar" | "maxCost";
 
-export function RecipeDiscovery({ recipes, ingredients, locale }: { recipes: readonly Recipe[]; ingredients: Ingredient[]; locale: SupportedLocale }) {
+export function RecipeDiscovery({
+  recipes,
+  ingredients,
+  locale,
+  decisionContextAllowlist,
+}: {
+  recipes: readonly Recipe[];
+  ingredients: Ingredient[];
+  locale: SupportedLocale;
+  decisionContextAllowlist: DecisionContextValueAllowlist;
+}) {
   const copy = discoveryCopy[locale];
-  const [criteria, setCriteria] = useState<RecommendationCriteria>(() => resetRecommendationCriteria());
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [criteria, setCriteria] = useState<RecommendationCriteria>(() =>
+    parseDecisionContext(new URLSearchParams(searchParams.toString()), decisionContextAllowlist));
   const [ingredientQuery, setIngredientQuery] = useState("");
   const results = useMemo(() => discoverRecipes(recipes, criteria), [recipes, criteria]);
   const tools = useMemo(() => [...new Set(recipes.flatMap((recipe) => recipe.tools))].sort(), [recipes]);
@@ -41,6 +62,20 @@ export function RecipeDiscovery({ recipes, ingredients, locale }: { recipes: rea
   const activeSummary = summary(criteria, ingredients, locale);
   const suggestions = buildRelaxationSuggestions(criteria, locale);
   const visibleResults = results.slice(0, active ? 12 : 6);
+  const contextQuery = useMemo(
+    () => serializeDecisionContext(criteria, decisionContextAllowlist),
+    [criteria, decisionContextAllowlist],
+  );
+  const recipeQuery = useMemo(
+    () => serializeDecisionRouteQuery(criteria, decisionContextAllowlist, active ? { source: "discovery" } : {}),
+    [active, criteria, decisionContextAllowlist],
+  );
+
+  useEffect(() => {
+    const normalizedQuery = contextQuery.toString();
+    if (normalizedQuery === searchParams.toString()) return;
+    router.replace(normalizedQuery ? `${pathname}?${normalizedQuery}` : pathname, { scroll: false });
+  }, [contextQuery, pathname, router, searchParams]);
 
   const reset = () => {
     setCriteria(resetRecommendationCriteria());
@@ -247,11 +282,11 @@ export function RecipeDiscovery({ recipes, ingredients, locale }: { recipes: rea
         {visibleResults.length ? (
           <>
             <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {visibleResults.map((result) => <RecipeCard key={result.recipe.id} result={result} locale={locale} />)}
+              {visibleResults.map((result) => <RecipeCard key={result.recipe.id} result={result} locale={locale} query={recipeQuery} />)}
             </div>
             {results.length > visibleResults.length ? (
               <p className="mt-7 text-center text-sm text-stone-600">
-                {copy.moreResults}<Link className="focus-ring ml-1 font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes")}>{copy.discoverMore}</Link>
+                {copy.moreResults}<Link className="focus-ring ml-1 font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes", contextQuery)}>{copy.discoverMore}</Link>
               </p>
             ) : null}
           </>

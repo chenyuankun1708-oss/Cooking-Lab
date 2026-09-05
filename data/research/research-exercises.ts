@@ -1,104 +1,23 @@
-import type { Evidence, Source } from "@/types/culinary";
 import type { ResearchRecord } from "@/types/research";
+import { culinaryEvidence } from "@/data/culinary/evidence";
+import { culinarySources } from "@/data/culinary/sources";
 
-export const researchExerciseSources = [
-  {
-    id: "wu-dongpo-pork-study",
-    type: "journal",
-    title: "With No Meat, One Becomes Thin: The Invention and Spread of Dongpo Pork",
-    publisherOrInstitution: "Foundation of Chinese Dietary Culture",
-    authorNames: ["Wu Jen-Shu"],
-    locators: [{
-      kind: "url",
-      url: "https://www.fcdc.org.tw/en-us/summary-detail/%E2%80%9CWith-No-Meat,-One-Becomes-Thin%E2%80%9D:--The-Invention-and-Spread-of-Dongpo-Pork-i.43",
-      accessedAt: "2026-09-05",
-    }],
-    rights: { status: "reference-only", notes: "Claims are summarized in original wording; article prose is not reused." },
-    health: { status: "active", checkedAt: "2026-09-05" },
-    reliability: "authoritative-secondary",
-    editorialNotes: "Historical study used to separate later restaurant narratives from evidence about naming and chronology.",
-  },
-  {
-    id: "unesco-tomyum-kung",
-    type: "official-cultural-institution",
-    title: "Tomyum Kung",
-    publisherOrInstitution: "UNESCO Intangible Cultural Heritage",
-    authorNames: [],
-    publication: { dateText: "Inscribed in 2024" },
-    locators: [{ kind: "url", url: "https://ich.unesco.org/en/RL/tomyum-kung-01879", accessedAt: "2026-09-05" }],
-    rights: { status: "reference-only", notes: "Institutional record is cited; text and media are not copied." },
-    health: { status: "active", checkedAt: "2026-09-05" },
-    reliability: "authoritative-secondary",
-    editorialNotes: "Useful for inscription status and the tradition described by the nomination; not proof of exclusive origin.",
-  },
-  {
-    id: "smithsonian-espresso-machine-history",
-    type: "reputable-media",
-    title: "The Long History of the Espresso Machine",
-    publisherOrInstitution: "Smithsonian Magazine",
-    authorNames: ["Jimmy Stamp"],
-    locators: [{ kind: "url", url: "https://www.smithsonianmag.com/arts-culture/the-long-history-of-the-espresso-machine-126012814/", accessedAt: "2026-09-05" }],
-    rights: { status: "reference-only", notes: "Chronology is cross-checked and restated; narrative prose is not copied." },
-    health: { status: "active", checkedAt: "2026-09-05" },
-    reliability: "general-secondary",
-    editorialNotes: "Provides a sourced overview of Moriondo, Bezzera, Pavoni, and later machine development.",
-  },
-  {
-    id: "sca-changing-espresso-definition",
-    type: "professional-organization",
-    title: "Defining the Ever-Changing Espresso",
-    publisherOrInstitution: "Specialty Coffee Association",
-    authorNames: [],
-    locators: [{ kind: "url", url: "https://sca.coffee/sca-news/25-magazine/issue-3/defining-ever-changing-espresso-25-magazine-issue-3-zyx36", accessedAt: "2026-09-05" }],
-    rights: { status: "reference-only", notes: "Survey findings and changing definitions are referenced without copying prose." },
-    health: { status: "active", checkedAt: "2026-09-05" },
-    reliability: "authoritative-secondary",
-    editorialNotes: "Documents contemporary professional variation; it does not establish a single timeless espresso definition.",
-  },
-] as const satisfies readonly Source[];
+const exerciseSourceIds = new Set([
+  "wu-dongpo-pork-study",
+  "unesco-tomyum-kung",
+  "smithsonian-espresso-machine-history",
+  "sca-changing-espresso-definition",
+]);
+const exerciseEvidenceIds = new Set([
+  "dongpo-naming-chronology",
+  "dongpo-later-narratives",
+  "tomyum-unesco-tradition",
+  "espresso-machine-chronology",
+  "espresso-definition-change",
+]);
 
-export const researchExerciseEvidence = [
-  {
-    id: "dongpo-naming-chronology",
-    sourceId: "wu-dongpo-pork-study",
-    relation: "contradicts",
-    strength: "strong",
-    locators: [{ kind: "section", value: "Abstract" }],
-    editorialNote: "The study reports that Su Shi's preparation was not then called Dongpo Pork and dates the term later.",
-  },
-  {
-    id: "dongpo-later-narratives",
-    sourceId: "wu-dongpo-pork-study",
-    relation: "context",
-    strength: "strong",
-    locators: [{ kind: "section", value: "Abstract" }],
-    editorialNote: "The study describes later restaurant promotion and fictionalized origin narratives.",
-  },
-  {
-    id: "tomyum-unesco-tradition",
-    sourceId: "unesco-tomyum-kung",
-    relation: "supports",
-    strength: "strong",
-    locators: [{ kind: "section", value: "Description" }],
-    editorialNote: "The official inscription record describes the dish, ingredient knowledge, and Central Plains riverside context.",
-  },
-  {
-    id: "espresso-machine-chronology",
-    sourceId: "smithsonian-espresso-machine-history",
-    relation: "supports",
-    strength: "strong",
-    locators: [{ kind: "section", value: "Machine development chronology" }],
-    editorialNote: "The article distinguishes several inventors and technical stages instead of one unchanged invention event.",
-  },
-  {
-    id: "espresso-definition-change",
-    sourceId: "sca-changing-espresso-definition",
-    relation: "context",
-    strength: "strong",
-    locators: [{ kind: "section", value: "Survey and definition discussion" }],
-    editorialNote: "Professional preparation parameters and definitions vary over time and across practitioners.",
-  },
-] as const satisfies readonly Evidence[];
+export const researchExerciseSources = culinarySources.filter(({ id }) => exerciseSourceIds.has(id));
+export const researchExerciseEvidence = culinaryEvidence.filter(({ id }) => exerciseEvidenceIds.has(id));
 
 export const researchExercises = [
   {

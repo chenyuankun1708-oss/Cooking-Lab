@@ -32,6 +32,8 @@ export const aromaVocabulary = registry<AromaId>([
   { id: "citrusy", category: "aroma", label: { "zh-CN": "柑橘香", en: "Citrusy" }, description: { "zh-CN": "柠檬、青柠等带来的明亮香气", en: "Bright aroma from lemon, lime, or similar citrus" } },
   { id: "fermented", category: "aroma", label: { "zh-CN": "发酵香", en: "Fermented" }, description: { "zh-CN": "味噌、泡菜、豆瓣酱等发酵调料的香气", en: "Aroma from miso, kimchi, bean paste, and similar ferments" } },
   { id: "spiced", category: "aroma", label: { "zh-CN": "辛香", en: "Spiced" }, description: { "zh-CN": "孜然、姜黄、综合香料等形成的复合香气", en: "Layered aroma from cumin, turmeric, spice blends, and similar seasonings" } },
+  { id: "fruity", category: "aroma", label: { "zh-CN": "果香", en: "Fruity" }, description: { "zh-CN": "水果、果皮或发酵形成的清晰果香", en: "A clear fruit note from fruit, peel, or fermentation" } },
+  { id: "floral", category: "aroma", label: { "zh-CN": "花香", en: "Floral" }, description: { "zh-CN": "茶、香料或花朵带来的轻柔花香", en: "A gentle floral note from tea, spices, or flowers" } },
 ]);
 
 export const textureVocabulary = registry<TextureId>([

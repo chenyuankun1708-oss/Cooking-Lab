@@ -281,7 +281,7 @@ export interface Evidence {
   editorialNote: string;
 }
 
-interface CulinaryItemBase<TType extends CulinaryItemType> {
+export interface CulinaryItemBase<TType extends CulinaryItemType> {
   id: string;
   slug: string;
   itemType: TType;

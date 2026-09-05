@@ -24,6 +24,8 @@ export const countries = createRegistry([
   { id: "spain", label: { "zh-CN": "西班牙", en: "Spain" } },
   { id: "thailand", label: { "zh-CN": "泰国", en: "Thailand" } },
   { id: "united-states", label: { "zh-CN": "美国", en: "United States" } },
+  { id: "united-kingdom", label: { "zh-CN": "英国", en: "United Kingdom" } },
+  { id: "morocco", label: { "zh-CN": "摩洛哥", en: "Morocco" } },
   { id: "vietnam", label: { "zh-CN": "越南", en: "Vietnam" } },
 ] as const);
 
@@ -34,7 +36,10 @@ export const regions = createRegistry([
   { id: "northwest-china", parentId: "china", label: { "zh-CN": "中国西北", en: "Northwest China" } },
   { id: "sichuan", parentId: "china", label: { "zh-CN": "四川", en: "Sichuan" } },
   { id: "hunan", parentId: "china", label: { "zh-CN": "湖南", en: "Hunan" } },
+  { id: "zhejiang", parentId: "china", label: { "zh-CN": "浙江", en: "Zhejiang" } },
+  { id: "fujian", parentId: "china", label: { "zh-CN": "福建", en: "Fujian" } },
   { id: "yunnan", parentId: "china", label: { "zh-CN": "云南", en: "Yunnan" } },
+  { id: "andalusia", parentId: "spain", label: { "zh-CN": "安达卢西亚", en: "Andalusia" } },
   { id: "valencia", parentId: "spain", label: { "zh-CN": "瓦伦西亚", en: "Valencia" } },
   { id: "northern-thailand", parentId: "thailand", label: { "zh-CN": "泰国北部", en: "Northern Thailand" } },
 ] as const);
@@ -68,6 +73,9 @@ export const cuisines = createRegistry([
   { id: "vietnamese", label: { "zh-CN": "越南料理", en: "Vietnamese" } },
   { id: "yunnan", label: { "zh-CN": "云南菜", en: "Yunnan" } },
   { id: "american", label: { "zh-CN": "美国料理", en: "American" } },
+  { id: "british", label: { "zh-CN": "英国料理", en: "British" } },
+  { id: "moroccan", label: { "zh-CN": "摩洛哥料理", en: "Moroccan" } },
+  { id: "zhejiang", label: { "zh-CN": "浙菜", en: "Zhejiang" } },
 ] as const);
 
 export const subCuisines = createRegistry([

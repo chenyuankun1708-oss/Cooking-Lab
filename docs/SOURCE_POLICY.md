@@ -92,3 +92,9 @@ Story Claim owns the publishable semantic assertion and language class. These re
 `primary | authoritative-secondary | general-secondary | contested` is an editorial assessment of the Source's role for a specific research context. It is not a confidence percentage. A primary source can be biased, mistaken, period-bound, or unable to prove a modern claim. An authoritative secondary source can still describe only one institution's interpretation. Conflicting Evidence remains present; it is not deleted to manufacture certainty.
 
 AI-generated prose, search snippets and unattributed summaries are never Evidence. They may suggest search terms but cannot close a research question.
+
+## Production Use In #40
+
+当前 6 个 production Story 使用 7 个具体 Source。每个 claim 只陈述来源能支持的窄事实或传统；东坡肉保留 disputed attribution，UNESCO 名录不被扩大为唯一 origin 证明，Espresso 明确为多阶段发展。Fino 的官方产区资料只支持酒花膜下生物熟成这一窄生产事实。
+
+没有可靠 source 的 item 不创建 Story。现代 preparation、Flavor 和服务说明可以作为原创编辑内容发布，但不得借空 Story、provider 首页或随意 URL 冒充文化 provenance。图片 license 继续由独立 image registry 管理，文字 Source 权利状态不会自动授权页面内图片。

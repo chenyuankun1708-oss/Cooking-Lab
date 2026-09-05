@@ -294,3 +294,9 @@ taxonomy: {
   mealType: { dishTypeId: "main-dish" },
 }
 ```
+
+## M6 Culinary Extensions
+
+Issue #40 只增加首批 native CulinaryItem 实际需要的最小节点：UK、Morocco、Zhejiang、Fujian、Andalusia，以及 British、Moroccan、Zhejiang cuisine。更细的 dessert/tea/coffee/drink 形态保存在独立 `culinaryForms` registry；它们不回写或扩散成 Recipe legacy fields。
+
+当真实内容需要新的 country、region、cuisine、form 或 serving context 时，先增加稳定 registry node 和 label，再允许 item 引用。不要从 UI 文案反向制造 taxonomy ID，也不要为了覆盖未来所有料理一次性建立全球 ontology。

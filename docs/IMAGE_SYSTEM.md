@@ -112,6 +112,7 @@ Issue #20 不调用付费图像 API，不批量生成图片。未来生成任务
 public/images/recipes/{recipe-slug}/hero.webp
 public/images/recipes/{recipe-slug}/hero-2.webp
 public/images/recipes/{recipe-slug}/step-01.webp
+public/images/culinary/{culinary-item-slug}/hero.webp
 ```
 
 规则：lowercase、kebab-case、目录与 recipe slug 一致，不保留来源网站随机文件名，也不把作者或 license 塞进文件名。
@@ -217,3 +218,9 @@ Issue #21 加入第一批 10 张真实 seed assets，用于验证首页、card�
 全部来源于 Wikimedia Commons 的原始 file page，授权为 CC0、CC BY 或 CC BY-SA。`data/recipe-images.ts` 逐张记录 author、source URL、license URL、attribution、alt 与 focal point；served asset 统一裁切为 `1500 x 1000` WebP。原始图片不进入仓库。
 
 Issue #30 再次逐张检查这 10 张图片的本地文件、授权记录、alt 与食物主体，并将它们作为初始 published set 的必要条件。本轮没有新增图片；90 道无已审核 hero 的 Recipe 保持 draft，不再由公开 UI fallback 掩盖发布缺口。Publishing eligibility 会拒绝缺失 hero、受限 license、无意义 alt、悬空引用或本地文件不存在的 `published` Recipe。
+
+## Culinary Library Assets
+
+Issue #40 新增 16 张 native CulinaryItem hero，全部从具体 Wikimedia Commons file page 逐张核验，并保存 author、source URL、exact CC license URL、attribution、alt、尺寸与 focal point。served assets 统一为 `public/images/culinary/{slug}/hero.webp` 下的 1500 x 1000 WebP；原始下载文件不进入仓库。
+
+`validateImageAssets()` 同时接受 recipe 与 culinary 两种本地路径，`validateCulinaryImageReferences()` 检查 primary role、ID 完整性和 slug 对齐。统一 publishing context 还注入本地文件存在性检查。当前共 26 / 26 个统一公开条目有合格 hero，但现有 Recipe Web 页面仍只消费原有 10 张 Recipe 图片。

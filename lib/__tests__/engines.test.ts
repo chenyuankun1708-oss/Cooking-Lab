@@ -157,7 +157,7 @@ describe("ingredient repository", () => {
   it("provides lookup and read-only listing without domain rules", () => {
     expect(localIngredientRepository.getById("egg")?.name).toBe("鸡蛋");
     expect(localIngredientRepository.getById("missing")).toBeUndefined();
-    expect(localIngredientRepository.list()).toHaveLength(73);
+    expect(localIngredientRepository.list()).toHaveLength(102);
   });
 });
 

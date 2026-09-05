@@ -28,8 +28,8 @@ Production URL：
 - GitHub PR #36 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #32 与 Epic #28 已关闭
 - GitHub PR #44 已于 2026-09-05 merge 到 `main`
-- GitHub Issue #38 已关闭；Epic #37 与 Issue #39 当前 open
-- Issue #38 工作分支为 `feature/issue-38-culinary-knowledge-model`
+- GitHub Issue #38 与 #39 已关闭；Epic #37 与 Issue #40 当前 open
+- Issue #40 工作分支为 `feature/issue-40-expand-culinary-library`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -39,7 +39,7 @@ Production URL：
 
 - Next.js / TypeScript / Tailwind Web 应用骨架
 - Ingredient、Recipe、Nutrition、Recommendation 类型系统
-- 73 种 `demo-estimated` 食材与 100 道结构化菜谱
+- 102 种 `demo-estimated` 食材、100 道结构化 Recipe 与 16 个 native CulinaryItem
 - Unit Conversion、Nutrition Engine、Cost Engine 与 Dataset Validation
 - 硬限制 + 软偏好的确定性 Recommendation Engine
 - 首页即时料理决策、已发布目录、稳定 slug 详情页
@@ -266,8 +266,18 @@ PR #36 已合并 Living Editorial Hero：
 - 更深的文化 provenance 和地域覆盖仍需作为内容审核持续推进
 - Household、个人口味和长期陪伴能力仍只有方向，没有 schema
 
+## Issue #40 当前产物
+
+- 新增 16 个 native CulinaryItem，与 10 个 adapted published Recipe 组成 26 项统一公开 repository
+- 六种 item type 均有真实 production data；preparation 覆盖 cooking、assembly、baking、brewing、extraction、mixing 与 serving guidance
+- 新增 29 种食材和 16 张 1500 x 1000 本地 WebP，逐项保存 Wikimedia file page、作者、CC license 与 attribution
+- 6 个 Story 通过 Claim -> Evidence -> Source 发布，东坡肉保留争议归属，其余无可靠文化主张的条目不创建 Story
+- dish/dessert 保持 nutrition/cost gate；plain tea 与成品酒明确使用 applicability，酒类没有虚构 cooking steps、购买链接或健康收益
+- `getPublishedCulinaryItems()` 提供统一 public boundary；现有 homepage、catalog、detail、recommendation、similarity 与 SSG 仍使用原 Recipe source
+- 新增跨类型 validation、publishing、identity、draft exclusion、provenance、image、ingredient、pairing、translation 和 adapter compatibility tests
+
 ## 下一步
 
-1. 完成 Issue #39 review，确认研究决策记录、rights policy 和三个 exercises 足以支撑后续内容批次。
-2. #39 merge 前不开始 #40；后续按 Epic #37 依赖顺序推进内容扩充。
+1. 完成 Issue #40 review，确认首批 portfolio、图片权利、provenance 与统一 repository 门禁。
+2. #40 merge 前不开始 #41、#42 或 #43。
 3. 在多人编辑、更新历史和大规模 many-to-many provenance 成为真实需求前，不引入数据库、Prisma 或 CMS。

@@ -1,0 +1,68 @@
+import type { Evidence } from "@/types/culinary";
+
+export const culinaryEvidence = [
+  {
+    id: "dongpo-naming-chronology",
+    sourceId: "wu-dongpo-pork-study",
+    relation: "contradicts",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Abstract" }],
+    editorialNote: "The study reports that Su Shi's preparation was not then called Dongpo Pork and dates the term later.",
+  },
+  {
+    id: "dongpo-later-narratives",
+    sourceId: "wu-dongpo-pork-study",
+    relation: "context",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Abstract" }],
+    editorialNote: "The study describes later restaurant promotion and fictionalized origin narratives.",
+  },
+  {
+    id: "tomyum-unesco-tradition",
+    sourceId: "unesco-tomyum-kung",
+    relation: "supports",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Description" }],
+    editorialNote: "The official inscription record describes the dish, ingredient knowledge, and Central Plains riverside context.",
+  },
+  {
+    id: "espresso-machine-chronology",
+    sourceId: "smithsonian-espresso-machine-history",
+    relation: "supports",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Machine development chronology" }],
+    editorialNote: "The article distinguishes several inventors and technical stages instead of one unchanged invention event.",
+  },
+  {
+    id: "espresso-definition-change",
+    sourceId: "sca-changing-espresso-definition",
+    relation: "context",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Survey and definition discussion" }],
+    editorialNote: "Professional preparation parameters and definitions vary over time and across practitioners.",
+  },
+  {
+    id: "china-tea-processing-tradition",
+    sourceId: "unesco-china-tea-processing",
+    relation: "supports",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Description" }],
+    editorialNote: "The inscription describes locally adapted knowledge around tea cultivation, leaf selection, processing, drinking, and sharing.",
+  },
+  {
+    id: "japan-sake-koji-tradition",
+    sourceId: "unesco-japan-sake-making",
+    relation: "supports",
+    strength: "strong",
+    locators: [{ kind: "section", value: "Description" }],
+    editorialNote: "The inscription identifies koji-based sake-making knowledge and skills as a living practice in Japan.",
+  },
+  {
+    id: "fino-flor-biological-ageing",
+    sourceId: "sherry-wines-biological-ageing",
+    relation: "supports",
+    strength: "primary",
+    locators: [{ kind: "section", value: "Biological ageing" }],
+    editorialNote: "The denomination's production guide states that Fino is biologically aged beneath a surface layer of flor yeast.",
+  },
+] as const satisfies readonly Evidence[];

@@ -1,6 +1,7 @@
 import type { RecipeImage } from "@/types/image";
 import { recipeImageLicenses, recipeImageRoles, recipeImageSources } from "@/types/image";
 import type { Recipe } from "@/types/recipe";
+import type { CulinaryItem } from "@/types/culinary";
 import { isPositiveFinite, isSlug } from "./validation-utils";
 
 export interface ImageValidationIssue {
@@ -21,7 +22,7 @@ const licenses = new Set<string>(recipeImageLicenses);
 const aspectRatios = new Set(["3:2", "4:3", "16:9", "1:1"]);
 const licensesRequiringAttribution = new Set(["cc-by", "cc-by-sa"]);
 const restrictedLicenses = new Set(["cc-by-nc", "cc-by-nd", "cc-by-nc-sa", "cc-by-nc-nd", "unknown", "prohibited"]);
-const localRecipeImagePath = /^\/images\/recipes\/[a-z0-9]+(?:-[a-z0-9]+)*\/(?:hero(?:-[2-9][0-9]*)?|thumbnail(?:-[2-9][0-9]*)?|step-[0-9]{2}|ingredient-[a-z0-9]+(?:-[a-z0-9]+)*|editorial-[a-z0-9]+(?:-[a-z0-9]+)*)\.(?:webp|avif)$/;
+const localImagePath = /^\/images\/(?:recipes|culinary)\/[a-z0-9]+(?:-[a-z0-9]+)*\/(?:hero(?:-[2-9][0-9]*)?|thumbnail(?:-[2-9][0-9]*)?|step-[0-9]{2}|ingredient-[a-z0-9]+(?:-[a-z0-9]+)*|editorial-[a-z0-9]+(?:-[a-z0-9]+)*)\.(?:webp|avif)$/;
 
 export function validateImageAssets(images: readonly RecipeImage[]): ImageValidationIssue[] {
   const issues: ImageValidationIssue[] = [];
@@ -44,7 +45,7 @@ export function validateImageAssets(images: readonly RecipeImage[]): ImageValida
     if (image.role === "hero" && !image.alt.trim()) report(imageId, "alt", "Hero image alt 不能为空");
 
     if (image.delivery === "local") {
-      if (!localRecipeImagePath.test(image.src)) report(imageId, "src", "本地图片路径必须符合 recipe asset naming convention");
+      if (!localImagePath.test(image.src)) report(imageId, "src", "本地图片路径必须符合 recipe 或 culinary asset naming convention");
     } else if (image.delivery === "remote") {
       if (!isHttpsUrl(image.src)) report(imageId, "src", "远程图片必须使用有效 HTTPS URL");
     } else {
@@ -99,6 +100,38 @@ export function validateRecipeImageReferences(
     }
     if (image.delivery === "local" && !image.src.startsWith(`/images/recipes/${recipe.slug}/`)) {
       issues.push({ recipeId: recipe.id, field: "heroImageId", message: "本地 hero image 路径必须与 recipe slug 对齐" });
+    }
+  }
+
+  return issues;
+}
+
+export function validateCulinaryImageReferences(
+  items: readonly CulinaryItem[],
+  images: readonly RecipeImage[],
+): RecipeImageReferenceIssue[] {
+  const issues: RecipeImageReferenceIssue[] = [];
+  const imageById = new Map(images.map((image) => [image.id, image]));
+
+  for (const item of items) {
+    if (item.images.availability === "none") continue;
+    const { primaryImageId, imageIds } = item.images.references;
+    for (const imageId of imageIds) {
+      if (!imageById.has(imageId)) {
+        issues.push({ recipeId: item.id, field: "images.imageIds", message: `不存在的 image ID: ${imageId}` });
+      }
+    }
+    const primary = imageById.get(primaryImageId);
+    if (!primary) continue;
+    if (primary.role !== "hero") {
+      issues.push({ recipeId: item.id, field: "images.primaryImageId", message: "Primary image 必须引用 hero role 图片" });
+    }
+    if (
+      primary.delivery === "local" &&
+      !primary.src.startsWith(`/images/culinary/${item.slug}/`) &&
+      !primary.src.startsWith(`/images/recipes/${item.slug}/`)
+    ) {
+      issues.push({ recipeId: item.id, field: "images.primaryImageId", message: "本地 primary image 路径必须与 CulinaryItem slug 对齐" });
     }
   }
 

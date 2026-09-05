@@ -10,6 +10,9 @@ export function SiteFooter() {
           <p className="mt-2 text-sm leading-6 text-stone-600">{BETA_DISCLAIMER}</p>
         </div>
         <nav aria-label="页脚导航" className="flex flex-col gap-3 text-sm font-semibold text-[#235849]">
+          <Link className="focus-ring inline-flex min-h-11 items-center hover:underline" href="/stories">
+            读读料理故事
+          </Link>
           <Link className="focus-ring inline-flex min-h-11 items-center hover:underline" href="/recipes">
             继续逛料理
           </Link>

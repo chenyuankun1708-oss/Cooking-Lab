@@ -15,9 +15,17 @@ interface RecipeImageProps {
   fallbackLabel: string;
   variant: keyof typeof imageSizes;
   preload?: boolean;
+  showAttribution?: boolean;
 }
 
-export function RecipeImage({ image, fallbackInitial, fallbackLabel, variant, preload = false }: RecipeImageProps) {
+export function RecipeImage({
+  image,
+  fallbackInitial,
+  fallbackLabel,
+  variant,
+  preload = false,
+  showAttribution = true,
+}: RecipeImageProps) {
   const [failed, setFailed] = useState(false);
   const frameClass = variant === "card" ? "aspect-[4/3]" : "aspect-[3/2]";
 
@@ -51,11 +59,11 @@ export function RecipeImage({ image, fallbackInitial, fallbackLabel, variant, pr
           style={{ objectFit: "cover", objectPosition: `${focalPoint.x * 100}% ${focalPoint.y * 100}%` }}
         />
       </div>
-      {variant === "hero" && (image.attribution || image.sourceUrl || image.licenseUrl) ? (
-        <figcaption className="mt-2 flex flex-wrap justify-end gap-x-2 text-right text-xs leading-5 text-stone-500">
+      {showAttribution && variant === "hero" && (image.attribution || image.sourceUrl || image.licenseUrl) ? (
+        <figcaption className="mt-2 flex flex-wrap items-center justify-end gap-x-2 text-right text-xs leading-5 text-stone-500">
           {image.attribution ? <span>{image.attribution}</span> : null}
-          {image.sourceUrl ? <a className="underline underline-offset-2" href={image.sourceUrl} rel="noreferrer" target="_blank">来源</a> : null}
-          {image.licenseUrl ? <a className="underline underline-offset-2" href={image.licenseUrl} rel="noreferrer" target="_blank">{image.license}</a> : null}
+          {image.sourceUrl ? <a className="inline-flex min-h-11 items-center underline underline-offset-2" href={image.sourceUrl} rel="noreferrer" target="_blank">来源</a> : null}
+          {image.licenseUrl ? <a className="inline-flex min-h-11 items-center underline underline-offset-2" href={image.licenseUrl} rel="noreferrer" target="_blank">{image.license}</a> : null}
         </figcaption>
       ) : null}
     </figure>

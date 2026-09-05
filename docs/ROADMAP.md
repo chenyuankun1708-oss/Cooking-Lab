@@ -126,6 +126,8 @@ Issue #38 先建立 Culinary Knowledge Model 与低风险 migration architecture
 
 Issue #39 在 #38 contract 上建立可重复的人工/半自动研究链：evaluated source catalog、rights policy、source health、ResearchRecord、八类研究模板和三个真实 mini exercises。它只验证研究到 publication candidate 的基础设施，不发布新内容，也不引入 crawler、scheduler、database、CMS 或 Story UI。
 
-Issue #40 已实现第一批跨类型 production portfolio：16 个 native CulinaryItem 与 10 个 adapted published Recipe 组成 26 项统一公开 repository，覆盖六种 item type、七种 preparation kind、14 个 country ID、6 个可追溯 Story 和 26 张合格 hero。当前 Web runtime 保持 Recipe public source，不提前实施 #41 Story Experience、#42 双语/视觉体验或 #43 Meal Engine。
+Issue #40 已实现第一批跨类型 production portfolio：16 个 native CulinaryItem 与 10 个 adapted published Recipe 组成 26 项统一公开 repository，覆盖六种 item type、七种 preparation kind、14 个 country ID、6 个可追溯 Story 和 26 张合格 hero。
+
+Issue #41 建立紧凑 `/stories`、六篇 `/stories/[slug]` 阅读页和 16 个 native `/culinary/[slug]` 最小详情页。Recipe 继续使用原 canonical route；Story related exploration 采用 published-only deterministic signals，来源 UI 不暴露编辑内部 provenance。它不提前实现 #42 双语/全站视觉体验或 #43 Meal Engine。
 
 后续顺序遵循 Epic #37：先完成 knowledge model，再建设可审阅的 content source/provenance pipeline，之后才扩充 dish/dessert/drink library、Story experience、双语体验与 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 #38 提前实施。

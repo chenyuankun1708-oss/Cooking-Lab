@@ -268,3 +268,9 @@ Issue #40 不再按“再加多少道菜”衡量内容扩张，而是同时审�
 生产 Story 只在 claim 能连接具体 Evidence/Source 时出现。Preparation 文案必须使用状态与完成信号，必要浸泡、冷藏或静置计入 total time；成品酒使用 serving guidance，不写假的 cooking steps。dish/dessert 保持 nutrition/cost 门禁，plain tea 与成品酒可使用明确的 `not-modeled` applicability。
 
 统一 public boundary 由 `getPublishedCulinaryItems()` 提供，但当前 Web 仍使用原有 10 个 published Recipe。内容模型可以先丰富，UI 不必在 #40 展示所有字段或提前进入 #41/#42/#43。
+
+## M6 Story Reading Strategy
+
+Issue #41 审计后的 6 篇 production Story 均保留独立页面，但长度服从证据：东坡肉、冬阴功与 Espresso 使用三段正文；龙井、清酒与 Fino 只使用两段，不为统一篇幅补写起源、发明人或年代。当前不新增 Story，因为六篇已经足够验证探索体验，而优先候选仍需重新走 #39 research pipeline。
+
+Consumer copy 必须保持 Claim kind 边界。documented tradition 不能被改写成唯一起源，disputed attribution 不能被改写成确定发明，legend/folklore 必须显式说明其传说性质。来源区只展示读者重新定位所需的信息；reliability、rights、health、Evidence strength 和编辑内部说明继续留在 provenance system。完整体验规则见 `docs/STORY_EXPERIENCE.md`。

@@ -188,10 +188,16 @@ Database adapter ---/
 
 Publishing gate 已从 skeleton 收紧为按类型检查 preparation、ingredient、nutrition/cost applicability、taxonomy、pairing、image asset 和可达 Story provenance。成品酒使用 serving guidance；必要浸泡、冷藏和静置进入 total time。完整 portfolio 与暂缓候选见 `docs/CULINARY_PORTFOLIO.md`。
 
+## Issue #41 Consumer Use
+
+Story 继续是独立 domain entity，`StoryCopy` 采用 `title / dek / sections`，publication status 与 technical eligibility 分离。前台通过 `lib/story-experience.ts` 构建可序列化 consumer model，不直接暴露 Story/Evidence/Source registry。Claim kind 被转为自然、不夸大证据的阅读提示；Source 只投影 bibliographic identity、必要 locator 与 link。
+
+Story related exploration 使用 explicit references、geography、cuisine、technique、ingredients 与 item/story type 的固定权重和阈值；输入只来自 26 个 published CulinaryItems 与 6 个 published Stories。低相关结果为空时不填充。Recipe 的 canonical route 仍为 `/recipes/[slug]`，只有 native item 使用 `/culinary/[slug]`。完整决策见 `docs/STORY_EXPERIENCE.md`。
+
 ## Explicit Non-goals
 
 - 不实现 Pairing/Meal Engine
-- 不做 Story UI、双语切换或视觉改版
+- 不做双语切换或 #42 全站视觉改版
 - 不引入数据库、Prisma、CMS、抓取或 AI 内容生成
 - 不把 100 个 Recipe 进行 big-bang rewrite
 - 不改变 recommendation、similarity、homepage、catalog、detail 或 SSG 的现有 Recipe runtime

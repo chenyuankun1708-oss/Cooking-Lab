@@ -132,7 +132,7 @@ describe("Culinary Knowledge domain", () => {
     const story: Story = {
       id: "sample-origin-story",
       type: "origin",
-      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "来源故事", body: "仅用于 contract 测试。" } }] },
+      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "来源故事", dek: "仅用于 contract 测试。", sections: [{ heading: "争议", paragraphs: ["存在多个说法。"] }] } }] },
       claims: [{
         id: "sample-origin-claim",
         kind: "disputed-attribution",
@@ -140,6 +140,7 @@ describe("Culinary Knowledge domain", () => {
         evidenceIds: [] as unknown as [string, ...string[]],
       }],
       relatedEntities: [],
+      publication: { status: "published" },
     };
     expect(validateStory(story)).toEqual(expect.arrayContaining([
       expect.objectContaining({ field: "claims.0.evidenceIds" }),
@@ -171,7 +172,7 @@ describe("Culinary Knowledge domain", () => {
     const story: Story = {
       id: "sample-tradition-story",
       type: "everyday-life-festival",
-      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "饮食语境", body: "一段经过独立改写的编辑正文。" } }] },
+      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "饮食语境", dek: "一段经过独立改写的编辑正文。", sections: [{ heading: "传统", paragraphs: ["来源记录了这一饮食语境。"] }] } }] },
       claims: [{
         id: "sample-tradition-claim",
         kind: "documented-tradition",
@@ -179,6 +180,7 @@ describe("Culinary Knowledge domain", () => {
         evidenceIds: [evidence.id],
       }],
       relatedEntities: [{ type: "culinary-item", id: item.id }],
+      publication: { status: "published" },
     };
     const withStory = { ...item, storyIds: [story.id] };
     const context = { ...publishingContext, stories: [story], evidence: [evidence], sources: [source] };
@@ -210,7 +212,7 @@ describe("Culinary Knowledge domain", () => {
     const story: Story = {
       id: "rights-review-story",
       type: "origin",
-      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "来源审核", body: "测试正文。" } }] },
+      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "来源审核", dek: "测试正文。", sections: [{ heading: "审核", paragraphs: ["测试段落。"] }] } }] },
       claims: [{
         id: "rights-review-claim",
         kind: "documented-fact",
@@ -218,6 +220,7 @@ describe("Culinary Knowledge domain", () => {
         evidenceIds: [evidence.id],
       }],
       relatedEntities: [],
+      publication: { status: "published" },
     };
     const result = evaluateCulinaryItemPublishingEligibility(
       { ...item, storyIds: [story.id] },

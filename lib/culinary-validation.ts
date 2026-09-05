@@ -160,7 +160,13 @@ export function validateStory(story: Story): CulinaryValidationIssue[] {
   const report = (field: string, message: string) => issues.push({ entityId: story.id || "<unknown>", field, message });
   if (!isSlug(story.id)) report("id", "Story ID 必须使用 kebab-case");
   if (!storyTypes.includes(story.type)) report("type", "未知 Story type");
-  validateTranslations(story.content, "content", report, (value) => Boolean(value.title.trim() && value.body.trim()));
+  if (!publicationStatuses.includes(story.publication.status)) report("publication.status", "未知 publication status");
+  validateTranslations(story.content, "content", report, (value) => Boolean(
+    value.title.trim()
+    && value.dek.trim()
+    && value.sections.length
+    && value.sections.every((section) => section.heading.trim() && section.paragraphs.length && section.paragraphs.every((paragraph) => paragraph.trim())),
+  ));
   const claimIds = story.claims.map((claim) => claim.id);
   validateUniqueIds(claimIds, "claims", report);
   story.claims.forEach((claim, index) => {
@@ -169,6 +175,11 @@ export function validateStory(story: Story): CulinaryValidationIssue[] {
     if (!claim.evidenceIds.length) report(`claims.${index}.evidenceIds`, "文化主张必须引用 evidence");
     validateUniqueIds(claim.evidenceIds, `claims.${index}.evidenceIds`, report);
     validateTranslations(claim.content, `claims.${index}.content`, report, (value) => Boolean(value.statement.trim()));
+  });
+  const relatedEntityKeys = story.relatedEntities.map((entity) => `${entity.type}:${entity.id}`);
+  if (new Set(relatedEntityKeys).size !== relatedEntityKeys.length) report("relatedEntities", "Related entity 不能重复");
+  story.relatedEntities.forEach((entity, index) => {
+    if (!isSlug(entity.id)) report(`relatedEntities.${index}.id`, "Related entity ID 必须使用 kebab-case");
   });
   return issues;
 }

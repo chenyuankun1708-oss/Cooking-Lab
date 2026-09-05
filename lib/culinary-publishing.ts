@@ -64,7 +64,7 @@ export function evaluateCulinaryItemPublishingEligibility(
   const storyById = new Map(context.stories.map((story) => [story.id, story]));
   const evidenceById = new Map(context.evidence.map((record) => [record.id, record]));
   const sourceById = new Map(context.sources.map((source) => [source.id, source]));
-  const referencedEvidenceIds = new Set(item.evidenceIds);
+  const referencedEvidenceIds = new Set<string>();
 
   for (const storyId of item.storyIds) {
     const story = storyById.get(storyId);
@@ -81,7 +81,7 @@ export function evaluateCulinaryItemPublishingEligibility(
   for (const evidenceId of referencedEvidenceIds) {
     const record = evidenceById.get(evidenceId);
     if (!record) {
-      issues.push({ code: "reference-integrity", field: "evidenceIds", message: `不存在的 Evidence ID: ${evidenceId}` });
+      issues.push({ code: "reference-integrity", field: "story.claims.evidenceIds", message: `不存在的 Evidence ID: ${evidenceId}` });
       continue;
     }
     validateEvidence(record, new Set(sourceById.keys())).forEach((issue) => add("evidence-invalid", issue));

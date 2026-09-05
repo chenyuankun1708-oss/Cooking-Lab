@@ -71,7 +71,6 @@ export function adaptRecipeToCulinaryItem(recipe: Recipe): DishItem {
       ? { availability: "available", references: { primaryImageId: recipe.heroImageId, imageIds: [recipe.heroImageId] } }
       : { availability: "none" },
     storyIds: [],
-    evidenceIds: [],
     pairing: {
       mealRoleIds: role ? [role] : [],
       servingContextIds: [...(recipe.taxonomy.mealType.mealOccasionIds ?? [])],

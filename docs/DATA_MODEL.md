@@ -6,6 +6,10 @@
 
 `RecipePublicationStatus` 现在复用共享 `PublicationStatus`，`SupportedLocale / LocalizedLabel` 也从共享 localization contract re-export，因此现有 imports 与行为不变。完整 schema、类型限制、迁移矩阵和 persistence boundary 见 `docs/CULINARY_KNOWLEDGE_MODEL.md`。
 
+M6 provenance contract 不要求 Source 拥有 URL。每个 Source 必须至少包含一种可重新定位的 locator：HTTPS URL、DOI、ISBN、archive/catalog identity 或 physical citation；书籍、手稿、印刷期刊和馆藏可以完全离线。Evidence 的 page/chapter/section/paragraph/timestamp/folio locator 只负责 Source 内部的精确位置。
+
+`CulinaryItem` 不保存无语义的 generic evidence ID 列表。当前 factual provenance 只通过 `Story Claim -> Evidence -> Source` 表达；未来只有在出现明确的 item field assertion 用例后才增加窄 `ItemClaim`。
+
 ## Ingredient
 
 当前包含 73 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。

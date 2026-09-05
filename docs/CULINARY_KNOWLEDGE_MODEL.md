@@ -18,7 +18,7 @@ CulinaryItemBase
   identity: id + slug + itemType
   content: TranslationSet<CulinaryItemCopy>
   taxonomy + flavor + images
-  storyIds + evidenceIds
+  storyIds
   pairing + publication
   nutrition + cost applicability
           |
@@ -74,13 +74,27 @@ Story 是独立、可复用实体，一个 CulinaryItem 可引用多个 Story。
 
 三个概念不混用：
 
-- `Source`：书籍、期刊、档案馆、博物馆、政府/教育机构、专业组织、出版社、可靠媒体或生产者文档的 metadata。
+- `Source`：书籍、期刊、档案馆、博物馆、政府/教育机构、专业组织、出版社、可靠媒体或生产者文档的 metadata 与可重新定位标识。
 - `Source.rights`：public domain、open license、获得许可、仅作事实参考或 unknown；这是版权/使用边界，不代表事实强度。
-- `Evidence`：把一个 Source 以 `supports / contradicts / context` 关系连接到 claim，并记录证据强度、locator 与编辑判断。
+- `Evidence`：把一个 Source 以 `supports / contradicts / context` 关系连接到 claim，并记录证据强度、细粒度 locator 与编辑判断。
+
+Source 不绑定网页。`Source.locators` 是非空 discriminated list，可组合：
+
+- HTTPS URL + accessed date
+- DOI
+- ISBN
+- archive/catalog identifier + collection + holding institution
+- physical citation + optional holding institution
+
+题名、作者、出版/馆藏机构和可选 publication metadata 与 locator 一起形成 bibliographic identity。实体书、手稿、馆藏和印刷期刊不需要虚构 URL；但完全没有可重新定位 locator 的 Source 无效。URL 若存在，必须是无嵌入凭据的 HTTPS 地址。
+
+`Evidence.locators` 只定位 Source 内支持 claim 的具体位置，支持 page、chapter、section、paragraph、timestamp、folio 与 other。它可以组合多个定位，例如 chapter + page；当整项 Source 都与 claim 有关时可以为空。Source locator 回答“如何找到这份来源”，Evidence locator 回答“依据在来源中的哪里”。
 
 `Source.reliability` 是编辑评估，不是自动真值。AI 生成文字不能成为 Evidence。图片 provenance 继续由现有 image registry 管理，不用文本 Source 的 rights 替代图片授权。
 
-发布校验只遍历当前 item 实际引用的 Story、Evidence 与 Source；registry 中无关的草稿或待修来源不会阻止其他 item 发布。
+发布校验只遍历当前 item 引用的 Story，再沿 Story Claim -> Evidence -> Source 验证；registry 中无关的草稿或待修来源不会阻止其他 item 发布。
+
+Issue #38 review 后删除了 generic `CulinaryItem.evidenceIds`。当前没有 item-level assertion 的真实 use case，裸 evidence ID 无法表达它支持名称、来源、taxonomy 还是其他事实。暂时只保留语义明确的 Story Claim 链；若 #39 出现非 Story 的 provenance 需求，再以最小 `ItemClaim` contract 建模，而不是恢复无主语的 evidence list。
 
 ## Translation Model
 

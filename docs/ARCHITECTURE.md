@@ -227,6 +227,8 @@ Future clients -> application repositories -> CulinaryItem / Story / Evidence
                                            -> existing Flavor/Nutrition/Cost engines
 ```
 
-`Recipe` 仍是当前 100 条数据和 10 条公开内容的 source of truth。`CulinaryItem` 不成为第二份静态数据，也不要求现有页面双读；adapter 只进行可验证投影。Story、Source 与 Evidence 使用 ID reference 保持实体生命周期独立，Translation 使用 locale entry，不让 locale 进入字段名。
+`Recipe` 仍是当前 100 条数据和 10 条公开内容的 source of truth。`CulinaryItem` 不成为第二份静态数据，也不要求现有页面双读；adapter 只进行可验证投影。Story Claim、Evidence 与 Source 使用 ID reference 保持实体生命周期独立，Source 通过 URL/DOI/ISBN/archive/physical citation locator 与持久化方式解耦。Translation 使用 locale entry，不让 locale 进入字段名。
+
+Provenance traversal 只有一条明确路径：`CulinaryItem.storyIds -> Story.claims -> Evidence -> Source`。没有泛化的 `item.evidenceIds`；当且仅当后续出现 Story 之外的明确 field assertion 用例时，再引入最小 ItemClaim，而不是建立模糊的 knowledge graph。
 
 Persistence 明确停在 port/adapter 边界：domain 接收和返回普通可序列化 TypeScript 值；未来数据库 schema、ORM model、filesystem 检查和 Web formatting 都属于外层 adapter。当前没有足够 use case 定义稳定 repository 方法，因此本 Issue 记录边界但不制造空接口或引入基础设施。完整决策与迁移矩阵见 `docs/CULINARY_KNOWLEDGE_MODEL.md`。

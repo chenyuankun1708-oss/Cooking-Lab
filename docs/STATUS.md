@@ -237,6 +237,9 @@ PR #36 已合并 Living Editorial Hero：
 - cooking、baking、brewing、extraction、mixing、assembly、serving guidance 与 no consumer preparation 使用不同 contract
 - Story/Claim、Source/Evidence、Translation 与 Pairing signals 是独立、可序列化 domain concepts
 - documented fact、documented tradition、disputed attribution 与 legend/folklore 在 claim 层明确区分并要求 Evidence reference
+- Source locator 支持 HTTPS URL、DOI、ISBN、archive/catalog identity 与 physical citation，离线来源不再被迫提供 URL
+- Evidence locator 独立表达 page/chapter/section/paragraph/timestamp/folio 等来源内部位置
+- 删除无明确 assertion 语义的 `CulinaryItem.evidenceIds`，当前 provenance 只走 Story Claim -> Evidence -> Source
 - Recipe -> DishItem adapter 可投影现有 100 条数据；没有建立第二份静态 source，也没有自动把 legacy culture 升级为 Story
 - item-type publishing skeleton 允许无 cooking steps 的酒/饮品发布，同时保持 dish/dessert nutrition/cost gate
 - Domain guard 覆盖新增 types/lib，继续禁止 React、Next、DOM、filesystem 与数据库依赖

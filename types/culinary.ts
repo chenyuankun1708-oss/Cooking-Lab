@@ -217,25 +217,44 @@ export type SourceRights =
   | { status: "reference-only"; notes: string }
   | { status: "unknown"; notes: string };
 
+export type SourceLocator =
+  | { kind: "url"; url: string; accessedAt: string }
+  | { kind: "doi"; doi: string }
+  | { kind: "isbn"; isbn: string }
+  | { kind: "archive"; identifier: string; collection: string; holdingInstitution: string }
+  | { kind: "physical-citation"; citation: string; holdingInstitution?: string };
+
+export interface SourcePublicationMetadata {
+  dateText?: string;
+  edition?: string;
+  volume?: string;
+  issue?: string;
+}
+
 export interface Source {
   id: string;
   type: SourceType;
   title: string;
   publisherOrInstitution: string;
   authorNames: string[];
-  url: string;
-  accessedAt: string;
+  publication?: SourcePublicationMetadata;
+  locators: [SourceLocator, ...SourceLocator[]];
   rights: SourceRights;
   reliability: "primary" | "authoritative-secondary" | "general-secondary" | "contested";
   editorialNotes: string;
 }
+
+export type EvidenceLocator = {
+  kind: "page" | "chapter" | "section" | "paragraph" | "timestamp" | "folio" | "other";
+  value: string;
+};
 
 export interface Evidence {
   id: string;
   sourceId: string;
   relation: "supports" | "contradicts" | "context";
   strength: "primary" | "strong" | "limited" | "contested";
-  locator?: string;
+  locators: EvidenceLocator[];
   editorialNote: string;
 }
 
@@ -248,7 +267,6 @@ interface CulinaryItemBase<TType extends CulinaryItemType> {
   flavor: FlavorProfile;
   images: CulinaryImages;
   storyIds: string[];
-  evidenceIds: string[];
   pairing: PairingSignals;
   publication: EditorialPublication;
   nutrition: CulinaryNutrition;

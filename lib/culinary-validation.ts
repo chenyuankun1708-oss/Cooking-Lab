@@ -48,7 +48,6 @@ export function validateCulinaryItem(item: CulinaryItem): CulinaryValidationIssu
   validateUniqueIds(item.taxonomy.techniqueIds, "taxonomy.techniqueIds", report);
   validateUniqueIds(item.taxonomy.formIds, "taxonomy.formIds", report);
   validateUniqueIds(item.storyIds, "storyIds", report);
-  validateUniqueIds(item.evidenceIds, "evidenceIds", report);
   validateUniqueIds(item.pairing.mealRoleIds, "pairing.mealRoleIds", report);
   if (item.pairing.mealRoleIds.some((id) => !mealRoleIds.includes(id))) report("pairing.mealRoleIds", "存在未知 meal role ID");
 
@@ -111,15 +110,20 @@ export function validateSource(source: Source): CulinaryValidationIssue[] {
   if (!sourceTypes.includes(source.type)) report("type", "未知 source type");
   if (!source.title.trim()) report("title", "Source title 不能为空");
   if (!source.publisherOrInstitution.trim()) report("publisherOrInstitution", "Source publisher/institution 不能为空");
-  if (!isHttpsUrl(source.url)) report("url", "Source URL 必须是 HTTPS");
-  if (!isIsoDate(source.accessedAt)) report("accessedAt", "accessedAt 必须是有效 YYYY-MM-DD");
   if (source.authorNames.some((name) => !name.trim())) report("authorNames", "Source author name 不能为空");
+  if (!source.locators.length) report("locators", "Source 必须至少有一个可重新定位的 locator");
+  source.locators.forEach((locator, index) => validateSourceLocator(locator, `locators.${index}`, report));
+  if (source.publication) {
+    for (const [field, value] of Object.entries(source.publication)) {
+      if (value !== undefined && !value.trim()) report(`publication.${field}`, "Publication metadata 不能是空字符串");
+    }
+  }
   if (!source.editorialNotes.trim()) report("editorialNotes", "Source 必须记录 editorial assessment");
   if (!new Set(["primary", "authoritative-secondary", "general-secondary", "contested"]).has(source.reliability)) {
     report("reliability", "未知 source reliability assessment");
   }
   if (source.rights.status === "public-domain" && !source.rights.basis.trim()) report("rights.basis", "Public domain 必须记录依据");
-  if (source.rights.status === "open-license" && (!source.rights.licenseId.trim() || !isHttpsUrl(source.rights.licenseUrl))) {
+  if (source.rights.status === "open-license" && (!source.rights.licenseId.trim() || !isSafeHttpsUrl(source.rights.licenseUrl))) {
     report("rights", "Open license 必须记录 license ID 与 HTTPS URL");
   }
   if ("notes" in source.rights && !source.rights.notes.trim()) report("rights.notes", "Rights notes 不能为空");
@@ -133,6 +137,12 @@ export function validateEvidence(evidence: Evidence, sourceIds: ReadonlySet<stri
   if (!sourceIds.has(evidence.sourceId)) report("sourceId", "Evidence 引用了不存在的 Source");
   if (!new Set(["supports", "contradicts", "context"]).has(evidence.relation)) report("relation", "未知 evidence relation");
   if (!new Set(["primary", "strong", "limited", "contested"]).has(evidence.strength)) report("strength", "未知 evidence strength");
+  evidence.locators.forEach((locator, index) => {
+    if (!new Set(["page", "chapter", "section", "paragraph", "timestamp", "folio", "other"]).has(locator.kind)) {
+      report(`locators.${index}.kind`, "未知 evidence locator kind");
+    }
+    if (!locator.value.trim()) report(`locators.${index}.value`, "Evidence locator value 不能为空");
+  });
   if (!evidence.editorialNote.trim()) report("editorialNote", "Evidence 必须记录 editorial assessment");
   return issues;
 }
@@ -158,9 +168,40 @@ function validateUniqueIds(values: readonly string[], field: string, report: (fi
   if (values.some((value) => !isSlug(value))) report(field, "ID 必须使用 kebab-case");
 }
 
-function isHttpsUrl(value: string): boolean {
+function validateSourceLocator(
+  locator: Source["locators"][number],
+  field: string,
+  report: (field: string, message: string) => void,
+) {
+  if (locator.kind === "url") {
+    if (!isSafeHttpsUrl(locator.url)) report(`${field}.url`, "Web locator 必须是无凭据的 HTTPS URL");
+    if (!isIsoDate(locator.accessedAt)) report(`${field}.accessedAt`, "Web locator accessedAt 必须是有效 YYYY-MM-DD");
+    return;
+  }
+  if (locator.kind === "doi") {
+    if (!/^10\.\d{4,9}\/\S+$/i.test(locator.doi.trim())) report(`${field}.doi`, "DOI 格式无效");
+    return;
+  }
+  if (locator.kind === "isbn") {
+    if (!/^(?:\d{9}[\dX]|\d{13})$/i.test(locator.isbn.replace(/[\s-]/g, ""))) report(`${field}.isbn`, "ISBN 格式无效");
+    return;
+  }
+  if (locator.kind === "archive") {
+    if (!locator.identifier.trim() || !locator.collection.trim() || !locator.holdingInstitution.trim()) {
+      report(field, "Archive locator 必须包含 identifier、collection 与 holding institution");
+    }
+    return;
+  }
+  if (!locator.citation.trim()) report(`${field}.citation`, "Physical citation 不能为空");
+  if (locator.holdingInstitution !== undefined && !locator.holdingInstitution.trim()) {
+    report(`${field}.holdingInstitution`, "Holding institution 不能是空字符串");
+  }
+}
+
+function isSafeHttpsUrl(value: string): boolean {
   try {
-    return new URL(value).protocol === "https:";
+    const url = new URL(value);
+    return url.protocol === "https:" && Boolean(url.hostname) && !url.username && !url.password;
   } catch {
     return false;
   }

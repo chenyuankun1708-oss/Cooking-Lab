@@ -5,7 +5,7 @@ import type { AlcoholicDrinkItem, CulinaryItem, Evidence, Source, Story } from "
 import type { TranslationSet } from "@/types/localization";
 import { adaptRecipeToCulinaryItem } from "../culinary-item-adapter";
 import { evaluateCulinaryItemPublishingEligibility, isCulinaryItemPubliclyVisible } from "../culinary-publishing";
-import { validateCulinaryItem, validateStory } from "../culinary-validation";
+import { validateCulinaryItem, validateSource, validateStory } from "../culinary-validation";
 import { resolveTranslation } from "../localization";
 
 const publishingContext = {
@@ -48,7 +48,6 @@ describe("Culinary Knowledge domain", () => {
       flavor: recipes[0].flavor,
       images: { availability: "available", references: { primaryImageId: "wine-fixture", imageIds: ["wine-fixture"] } },
       storyIds: [],
-      evidenceIds: [],
       pairing: { mealRoleIds: ["drink"], servingContextIds: ["dinner"], cuisineIds: [], facets: [{ dimension: "temperature", value: "room" }] },
       publication: { status: "published" },
       nutrition: { applicability: "not-modeled", reason: "out-of-scope" },
@@ -132,8 +131,7 @@ describe("Culinary Knowledge domain", () => {
       title: "Sample institutional source",
       publisherOrInstitution: "Example University",
       authorNames: [],
-      url: "https://example.edu/source",
-      accessedAt: "2026-09-05",
+      locators: [{ kind: "url", url: "https://example.edu/source", accessedAt: "2026-09-05" }],
       rights: { status: "reference-only", notes: "Facts may be cited; prose is not copied." },
       reliability: "authoritative-secondary",
       editorialNotes: "Fixture used to verify provenance references.",
@@ -143,6 +141,7 @@ describe("Culinary Knowledge domain", () => {
       sourceId: source.id,
       relation: "supports",
       strength: "strong",
+      locators: [{ kind: "page", value: "42" }, { kind: "section", value: "Food traditions" }],
       editorialNote: "The source directly documents the stated tradition.",
     };
     const story: Story = {
@@ -170,13 +169,49 @@ describe("Culinary Knowledge domain", () => {
       title: "",
       publisherOrInstitution: "",
       authorNames: [],
-      url: "http://invalid.example",
-      accessedAt: "",
+      locators: [{ kind: "url", url: "http://invalid.example", accessedAt: "" }],
       rights: { status: "unknown", notes: "" },
       reliability: "contested",
       editorialNotes: "",
     } as Source;
     expect(evaluateCulinaryItemPublishingEligibility(item, { ...publishingContext, sources: [unrelatedDraftSource] }).issues).toEqual([]);
+  });
+
+  it("supports web and offline Source locators without binding provenance to a URL", () => {
+    const webSource: Source = {
+      id: "web-source",
+      type: "museum",
+      title: "Collection article",
+      publisherOrInstitution: "Example Museum",
+      authorNames: [],
+      locators: [{ kind: "url", url: "https://museum.example.org/collection/article", accessedAt: "2026-09-05" }],
+      rights: { status: "reference-only", notes: "Used only as a factual reference." },
+      reliability: "authoritative-secondary",
+      editorialNotes: "Published by the holding institution.",
+    };
+    const physicalBook: Source = {
+      id: "physical-cookbook",
+      type: "book",
+      title: "A Historical Cookbook",
+      publisherOrInstitution: "Example Press",
+      authorNames: ["Example Author"],
+      publication: { dateText: "1927", edition: "First edition" },
+      locators: [{
+        kind: "physical-citation",
+        citation: "Example Author, A Historical Cookbook, Example Press, 1927",
+        holdingInstitution: "Example City Library",
+      }],
+      rights: { status: "reference-only", notes: "Consulted as a physical research source." },
+      reliability: "primary",
+      editorialNotes: "Bibliographic and holding information permits relocation.",
+    };
+    const unlocatable = { ...physicalBook, id: "unlocatable-source", locators: [] } as unknown as Source;
+
+    expect(validateSource(webSource)).toEqual([]);
+    expect(validateSource(physicalBook)).toEqual([]);
+    expect(validateSource(unlocatable)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ field: "locators" }),
+    ]));
   });
 
   it("keeps nutrition and cost eligibility for dish and dessert content", () => {

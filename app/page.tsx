@@ -4,9 +4,12 @@ import { HomeHero } from "@/components/home-hero";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeDiscovery } from "@/components/recipe-discovery";
 import { SiteFooter } from "@/components/site-footer";
+import { StoryCard } from "@/components/story-card";
+import { homepageStoryIds } from "@/data/culinary/story-context";
 import { homeHeroEditorialItems, homepageFeaturedRecipeSlugs } from "@/data/homepage";
 import { ingredients } from "@/data/ingredients";
 import { getPublishedRecipes, getPublishedRecipesBySlugs } from "@/data/published-recipes";
+import { getPublishedStoryPreviews } from "@/data/published-stories";
 import { recipeImages } from "@/data/recipe-images";
 import { buildHomeHeroItems } from "@/lib/homepage-hero";
 import { recommendationEngine } from "@/lib/recommendation";
@@ -28,6 +31,8 @@ export default function Home() {
   const allTechniqueOptions = listRecipeTechniqueOptions(publishedRecipes);
   const cuisineOptions = featuredCuisineIds.flatMap((id) => allCuisineOptions.find((option) => option.id === id) ?? []);
   const techniqueOptions = featuredTechniqueIds.flatMap((id) => allTechniqueOptions.find((option) => option.id === id) ?? []);
+  const storyPreviews = getPublishedStoryPreviews();
+  const featuredStories = homepageStoryIds.flatMap((id) => storyPreviews.find((story) => story.id === id) ?? []);
 
   return (
     <main id="main-content">
@@ -82,6 +87,28 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-stone-200 bg-white py-14 sm:py-20" aria-labelledby="home-stories-title">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold text-[#a64631]">料理背后的故事</p>
+              <h2 id="home-stories-title" className="mt-2 text-3xl font-bold leading-tight text-stone-950 sm:text-5xl">
+                一碗汤、一杯茶，也有它们走过的路
+              </h2>
+              <p className="mt-4 leading-7 text-stone-600">
+                顺着菜名、地方与制作方式，读读能被资料支持的线索，也保留那些还没有定论的部分。
+              </p>
+            </div>
+            <Link className="focus-ring min-h-11 py-3 text-sm font-bold text-[#235849] hover:underline" href="/stories">
+              走进料理故事
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredStories.map((story) => <StoryCard key={story.id} story={story} />)}
           </div>
         </div>
       </section>

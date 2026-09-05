@@ -28,8 +28,8 @@ Production URL：
 - GitHub PR #36 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #32 与 Epic #28 已关闭
 - GitHub PR #44 已于 2026-09-05 merge 到 `main`
-- GitHub Issue #38 与 #39 已关闭；Epic #37 与 Issue #40 当前 open
-- Issue #40 工作分支为 `feature/issue-40-expand-culinary-library`
+- GitHub Issue #38、#39 与 #40 已关闭；Epic #37 与 Issue #41 当前 open
+- Issue #41 工作分支为 `feature/issue-41-story-exploration`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -276,8 +276,18 @@ PR #36 已合并 Living Editorial Hero：
 - `getPublishedCulinaryItems()` 提供统一 public boundary；现有 homepage、catalog、detail、recommendation、similarity 与 SSG 仍使用原 Recipe source
 - 新增跨类型 validation、publishing、identity、draft exclusion、provenance、image、ingredient、pairing、translation 和 adapter compatibility tests
 
+## Issue #41 当前产物
+
+- 新增紧凑 `/stories` 入口、六篇 Story 阅读页与首页三篇代表内容，不把当前小规模内容包装成大型门户
+- `StoryCopy` 使用 `dek + sections` 并拥有独立 publication；Story publishing gate 检查 reviewed translation、公开 CulinaryItem、Evidence 与 Source 链
+- claim-aware 文案分别保留 disputed attribution、documented tradition 与 documented fact 的证据边界
+- consumer source 只展示题名、作者/机构/出版信息、必要 locator 与 link，不暴露 reliability、rights、health、strength、ID 或 editorial notes
+- related items/stories 使用 geography、cuisine、technique、ingredient、type 和 explicit entity 的 deterministic published-only 信号，低相关时隐藏
+- 16 个 native item 获得最小 `/culinary/[slug]` 页面；10 个 Recipe 继续以 `/recipes/[slug]` 为唯一 canonical URL
+- 没有新增 Story、图片系统、client payload、数据库、CMS、双语 UI 或 Meal Engine
+
 ## 下一步
 
-1. 完成 Issue #40 review，确认首批 portfolio、图片权利、provenance 与统一 repository 门禁。
-2. #40 merge 前不开始 #41、#42 或 #43。
+1. 完成 Issue #41 review，确认阅读体验、claim-aware 语言、来源投影、路由与关联阈值。
+2. #41 merge 前不开始 #42 或 #43。
 3. 在多人编辑、更新历史和大规模 many-to-many provenance 成为真实需求前，不引入数据库、Prisma 或 CMS。

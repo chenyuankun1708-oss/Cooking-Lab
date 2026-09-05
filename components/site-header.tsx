@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BETA_FEEDBACK_URL } from "@/lib/site";
 
-export function SiteHeader({ active, inverse = false }: { active?: "home" | "recipes"; inverse?: boolean }) {
+export function SiteHeader({ active, inverse = false }: { active?: "home" | "recipes" | "stories"; inverse?: boolean }) {
   const textClass = inverse ? "text-white" : "text-stone-950";
   const mutedClass = inverse ? "text-white/82 hover:text-white" : "text-stone-600 hover:text-stone-950";
 
@@ -18,8 +18,8 @@ export function SiteHeader({ active, inverse = false }: { active?: "home" | "rec
           <Link aria-current={active === "recipes" ? "page" : undefined} className="focus-ring inline-flex min-h-11 items-center hover:underline" href="/recipes">
             料理
           </Link>
-          <Link className="focus-ring min-h-11 items-center hover:underline sm:inline-flex" href="/#techniques">
-            技法
+          <Link aria-current={active === "stories" ? "page" : undefined} className="focus-ring inline-flex min-h-11 items-center hover:underline" href="/stories">
+            故事
           </Link>
           <a className="focus-ring min-h-11 items-center hover:underline md:inline-flex" href={BETA_FEEDBACK_URL} rel="noreferrer" target="_blank">
             Beta 反馈

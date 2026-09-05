@@ -12,6 +12,10 @@ Issue #39 增加 `Source.health` 观察状态与轻量 `ResearchRecord`。health
 
 `CulinaryItem` 不保存无语义的 generic evidence ID 列表。当前 factual provenance 只通过 `Story Claim -> Evidence -> Source` 表达；未来只有在出现明确的 item field assertion 用例后才增加窄 `ItemClaim`。
 
+Issue #41 将 `StoryCopy` 明确为 `title + dek + non-empty sections`，并为 Story 增加独立 `publication.status`。Domain Story 仍保存 claim、Evidence 与 related entity ID；消费者页面不直接读取这些 registry，而由 application helper 投影为 title、正文、claim-aware explanation、context labels、相关公开内容与克制的 source citation。该 view model 不包含内部 reliability、rights、health、Evidence strength、ID 或 editorial note。
+
+路由身份不写回 domain object：10 个 adapted Recipe 仍使用 `/recipes/[slug]`，16 个 native item 使用 `/culinary/[slug]`，6 篇 Story 使用 `/stories/[slug]`。这避免同一个 Recipe 出现两个 canonical URL，也不创建新的持久化字段。
+
 ## Ingredient
 
 当前包含 102 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量只补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材。

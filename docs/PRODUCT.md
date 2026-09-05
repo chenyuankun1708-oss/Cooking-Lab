@@ -101,6 +101,8 @@ Pairing signals 只为后续 Meal Engine 准备结构化输入；#38 不组合�
 
 Issue #40 首次把该模型用于生产内容：在保留 100 structured / 10 published Recipe 与现有 Web 行为的同时，新增 16 个 native CulinaryItem，覆盖 dish、dessert、tea、coffee、non-alcoholic drink 与 alcoholic drink。统一 repository 现在输出 26 个可发布条目；Story 只出现在有明确 Evidence/Source 链路的 6 个条目上，其他内容不为追求覆盖而制造历史叙事。此数据边界尚未触发 #41 Story Experience、#42 双语/视觉改造或 #43 Meal Engine。
 
+Issue #41 把这 6 篇 Story 变成第二条核心消费路径：`Home -> Stories -> Story detail -> related CulinaryItem / Story`。Story 页面以阅读为主，不展示营养、成本或内部 provenance 枚举；现有 Recipe 保持 `/recipes/[slug]`，16 个 native item 只增加必要的 `/culinary/[slug]` 落点，避免重复 canonical URL，也不提前实施 #42 全站改版。
+
 ## 体验方向
 
 ### 首页 v2 实现

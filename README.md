@@ -11,6 +11,7 @@ Cooking Lab 是一个帮助用户根据现有食材、时间、营养、预算�
 - 自然时间分组与精确分钟并存
 - 已发布菜谱目录
 - 菜谱详情页与步骤原理说明
+- 6 篇有 provenance 的料理故事、Story 阅读页与 16 个 native CulinaryItem 的最小详情页
 - 公开 Beta 反馈入口
 
 ## Tech Stack
@@ -62,6 +63,7 @@ npm run build
 - [docs/PRODUCT.md](docs/PRODUCT.md)
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
+- [docs/STORY_EXPERIENCE.md](docs/STORY_EXPERIENCE.md)
 - [docs/RECOMMENDATION.md](docs/RECOMMENDATION.md)
 - [docs/STATUS.md](docs/STATUS.md)
 

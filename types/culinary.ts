@@ -165,9 +165,15 @@ export const claimKinds = [
 ] as const;
 export type ClaimKind = (typeof claimKinds)[number];
 
+export interface StorySectionCopy {
+  heading: string;
+  paragraphs: [string, ...string[]];
+}
+
 export interface StoryCopy {
   title: string;
-  body: string;
+  dek: string;
+  sections: [StorySectionCopy, ...StorySectionCopy[]];
 }
 
 export interface StoryClaimCopy {
@@ -194,6 +200,7 @@ export interface Story {
   content: TranslationSet<StoryCopy>;
   claims: StoryClaim[];
   relatedEntities: RelatedEntityReference[];
+  publication: EditorialPublication;
 }
 
 export const sourceTypes = [

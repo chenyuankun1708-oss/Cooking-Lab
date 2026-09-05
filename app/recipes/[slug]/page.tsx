@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${recipe.name} 做法与原理`,
     description: `${recipe.name} 的食材、步骤、做饭时间与每份营养估算，来自 ${SITE_NAME}。`,
+    alternates: { canonical: `/recipes/${recipe.slug}` },
   };
 }
 

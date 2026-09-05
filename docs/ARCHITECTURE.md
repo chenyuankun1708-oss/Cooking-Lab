@@ -262,3 +262,22 @@ data/culinary/items/* --------------------+
 `data/culinary/` 按 item type 和 provenance concern 拆分，避免单个巨型 data file。`lib/culinary-library-validation.ts` 负责跨 item 的 ID/slug 唯一性和 public filtering；`lib/culinary-publishing.ts` 按类型验证 preparation、nutrition/cost、图片与可达 provenance。filesystem 检查仍由 `data/published-culinary-items.ts` 通过回调注入，domain 不 import Node filesystem。
 
 统一 repository 当前包含 10 个 adapted Recipe 和 16 个 native item。现有 homepage、catalog、detail、recommendation、similarity 与 SSG 不切换读取源，因此 #40 没有造成双维护，也没有提前实施 #41 Story UI、#42 visual/bilingual experience 或 #43 Meal Engine。
+
+## M6 Story Experience Boundary
+
+Issue #41 在统一 public boundary 上增加独立阅读路径，同时保持 domain、application 与 Web 分层：
+
+```text
+Story / Evidence / Source registries
+          + published CulinaryItems
+                    |
+                    v
+      story publishing + view-model helpers
+                    |
+                    v
+       Server routes and presentation components
+```
+
+`lib/story-publishing.ts` 负责 Story publication、reviewed translation 与 Story -> CulinaryItem / Evidence / Source 完整性。`lib/story-experience.ts`、`lib/culinary-routes.ts` 和 `lib/culinary-detail.ts` 是 framework-independent application helpers；`data/published-stories.ts` 在服务器端组合 registry 并只输出 consumer view model。React 不读取 raw Evidence/Source，consumer source 不包含 reliability、rights、health、strength、IDs 或 editorial notes。
+
+Canonical route 由内容来源决定：adapted Recipe 继续使用 `/recipes/[slug]`，native CulinaryItem 使用 `/culinary/[slug]`，Story 使用 `/stories/[slug]`。`/culinary` 只生成 16 个 native static params，不为 Recipe 建立重复 URL；Recommendation、Recipe similarity 与现有 Recipe catalog 仍不改 source。详细体验与关联规则见 `docs/STORY_EXPERIENCE.md`。

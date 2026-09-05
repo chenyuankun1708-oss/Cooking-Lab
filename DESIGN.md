@@ -8,6 +8,8 @@
   - consumer homepage
   - recipe catalog
   - recipe detail
+  - story catalog and reading pages
+  - native CulinaryItem detail
   - recommendation entry and result presentation
 - Evidence reviewed:
   - `docs/PRODUCT.md`
@@ -95,12 +97,15 @@
 - Primary navigation:
   - Home
   - Recipes
-  - Recommendation entry points
-  - Learning / story surfaces on the homepage first, dedicated routes later
+  - Stories
+  - Beta feedback
 - Core routes/screens:
   - `/`
   - `/recipes`
   - `/recipes/[slug]`
+  - `/stories`
+  - `/stories/[slug]`
+  - `/culinary/[slug]` for native CulinaryItems only
 - Content hierarchy:
   - appetite first
   - decision prompt second
@@ -112,7 +117,9 @@
 - `/` now follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> technique exploration -> estimate note.
 - `/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
 - `/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context -> nearby recipe discovery.
-- Navigation remains limited to Home, Recipes, and the real technique section. No future-feature links or empty routes are exposed.
+- `/stories` is a compact editorial discovery surface; `/stories/[slug]` prioritizes reading, related exploration and restrained sources.
+- `/culinary/[slug]` is the minimal destination for native items linked from Stories. Adapted Recipes keep `/recipes/[slug]` as their only canonical URL.
+- Navigation remains limited to Home, Recipes, Stories, and Beta feedback. Technique discovery remains a homepage section rather than a competing primary route.
 
 ## Design principles
 

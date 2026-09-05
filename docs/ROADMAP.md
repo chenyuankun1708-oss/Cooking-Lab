@@ -79,6 +79,8 @@ Issue #30 建立 Recipe publishing gate 并完成初始内容深化：保留 100
 
 Issue #31 建立独立 deterministic Recipe similarity：Flavor 与主食材为主要维度，cuisine、technique 和 dish type 只作辅助；详情页在正文末尾展示通过编辑阈值的少量 published Recipe 和自然理由。它不复用 Recommendation score，不扩大 published set，也不提前实现 #32 Living Hero。
 
+Issue #32 已完成 Living Editorial Hero 实现并进入 PR 前验证：五道 published Recipe 以固定编辑顺序、自然文案、Flavor 和 human time 呈现；自动轮换克制且支持手动控制、暂停、页面可见性与 reduced motion。M5.1 的 implementation Issues 至此完成代码侧交付，Epic #28 保持 open，等待 #32 merge 后的 Product Owner Review。
+
 ### F. Shared core audit for future mobile app
 
 审计当前耦合边界，约束后续 M5 工作避免把新领域能力写死在 Next.js 或 React 里。

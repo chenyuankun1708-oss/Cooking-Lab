@@ -152,6 +152,7 @@
   - subtle fade and rise
   - small hover states on cards
   - reduced motion support by default
+  - homepage Hero rotates every 7 seconds with a 700 ms image crossfade; hover, focus, hidden documents, and reduced-motion preferences pause or disable automatic movement
 - Imagery/iconography:
   - editorial food-first photography as the primary visual language
   - modern culinary studio details as a secondary layer on recipe detail and knowledge surfaces
@@ -166,8 +167,9 @@
   - existing footer, disclaimers, and metadata patterns
 - New/changed components:
   - `SiteHeader` and `HomeHero`
-- visual-first catalog and recommendation card variants
-- lightweight similar-recipe cards with image, flavor, natural reason, and human cooking time
+  - `HomeHeroCarousel` as the small client-only rotation boundary inside the server-rendered homepage
+  - visual-first catalog and recommendation card variants
+  - lightweight similar-recipe cards with image, flavor, natural reason, and human cooking time
   - homepage inspiration, cuisine, and technique sections
   - progressive recommendation disclosure for secondary and advanced criteria
   - detail page editorial reading flow without a sticky metric sidebar
@@ -186,6 +188,7 @@
   - WCAG 2.2 AA for contrast, focus, sizing, and navigation
 - Keyboard/focus behavior:
   - homepage quick filters and cards must remain keyboard reachable
+  - Hero previous, next, and position controls are 44 px buttons with recipe-specific accessible labels
   - focus rings need visible contrast on image-heavy layouts
 - Contrast/readability:
   - avoid low-contrast beige-on-beige combinations
@@ -196,6 +199,7 @@
 - Reduced motion and sensory considerations:
   - no essential meaning in animation
   - gentle transitions only
+  - reduced motion keeps manual Hero controls but disables automatic rotation and image transitions
 
 ## Responsive behavior
 
@@ -250,6 +254,7 @@
   - prefer a small semantic role system over large theme matrices
 - Performance constraints:
   - only the homepage LCP image and current detail hero preload
+  - the homepage Hero initially mounts the LCP image and its next editorial image, then prepares later images as the sequence advances
   - recipe cards lazy-load images with responsive `sizes`
   - catalog filtering remains server-rendered; no second 100-recipe client payload is introduced
 - Compatibility constraints:

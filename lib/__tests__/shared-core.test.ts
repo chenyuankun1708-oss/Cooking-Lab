@@ -14,6 +14,8 @@ const sharedCoreFiles = [
   "lib/image-validation.ts",
   "lib/flavor.ts",
   "lib/flavor-validation.ts",
+  "lib/homepage-hero-rotation.ts",
+  "lib/homepage-hero.ts",
   "lib/nutrition.ts",
   "lib/recipe-detail.ts",
   "lib/recipe-exploration.ts",

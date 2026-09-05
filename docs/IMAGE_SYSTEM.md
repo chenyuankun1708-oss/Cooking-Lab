@@ -141,13 +141,15 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 - `fill` 配合稳定 aspect-ratio 容器，避免 layout shift
 - card sizes：mobile `100vw`，tablet `50vw`，desktop `33vw/25vw`
 - detail hero sizes：mobile `100vw`，desktop 最大约 `64rem`
-- homepage food hero：唯一首屏 LCP 图片，使用 `100vw` 并 preload
+- homepage Living Hero：只有确定性的首张番茄炒蛋图片使用 `100vw` 并 preload
+- Hero 初始只挂载当前图和下一张 lazy image；后续图片随序列推进或手动选择再挂载，不一次请求全部五张大图
+- 图片切换前必须确认实际像素已经加载；慢图或失败图继续保留上一张和稳定深色底，不闪白、不改变 Hero 高度
 - detail hero 作为当前页面 LCP 候选使用 `preload`
 - card 图片不 preload，保持默认 lazy loading
 - 不使用已被 Next 16 文档替代的全局 `priority` 策略
 - 本地 WebP/AVIF 交给 Next Image Optimization，不添加自定义 loader
 
-后续 #21 若增加首页首屏 food hero，只预加载真实 LCP 图片，不能把列表首屏所有图片都设为 preload。
+Living Hero 的五道料理全部来自当前 published set 并继续使用同一 image registry、focal point、source、author、license 和 attribution。韩式拌饭的 `focalPoint.x` 调整为 `0.34`，让移动端窄裁切保留碗主体；没有为单张图增加 CSS 特判。
 
 ## Fallback
 

@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1 与 M6 `Culinary Knowledge Platform` 已完成。当前进入 M7 `Decision Continuity & Meal Reliability`，先修复从单道 Recipe 到整餐决策时的条件连续性与可信度问题。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M7 readiness verdict 为 `ready for bounded external validation`；外部验证尚未开始，需作为后续独立 Goal 评审。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -30,11 +30,11 @@ Production URL：
 - GitHub PR #44 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #38–#43 已关闭，PR #49 已于 2026-09-05 merge 到 `main`；M6 Epic #37 已完成
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
-- M7 Epic #50 与 Issues #51–#54 已建立；依赖顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
+- M7 Epic #50 与 Issues #51–#54 已完成并关闭；执行顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
 - Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
 - Issue #52 已通过两轮 independent review（首轮 REVISE、第二轮 PASS）；PR #56 已于 2026-09-05 merge，Issue #52 已关闭
 - Issue #53 已通过 independent review；PR #57 已于 2026-09-05 在 2/2 checks 通过后 merge，Issue #53 已关闭
-- Issue #54 工作分支为 `feature/issue-54-m7-evaluation`
+- Issue #54 已通过 independent culinary/product review；PR #58 已于 2026-09-05 在 2/2 checks 通过后 merge，Issue #54 已关闭
 - `origin/main` 已包含完整 M6 与最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -357,5 +357,5 @@ PR #36 已合并 Living Editorial Hero：
 
 ## 下一步
 
-1. 创建 Issue #54 PR，等待 CI 通过并 merge。
-2. 确认 #51–#54 全部关闭后更新并关闭 M7 Epic #50。
+1. 等待 Product Director review M7 readiness verdict 与 residual risks。
+2. 如后续明确批准，单独定义 bounded external validation Goal；不自动启动内容扩张、招募或新的 whole-meal constraints。

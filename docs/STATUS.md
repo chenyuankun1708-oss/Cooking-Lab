@@ -32,6 +32,7 @@ Production URL：
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已建立；依赖顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
 - Issue #51 工作分支为 `feature/issue-51-decision-context`
+- Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS），PR #55 已 ready 并等待人工 merge
 - `origin/main` 已包含完整 M6 与最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -317,9 +318,10 @@ PR #36 已合并 Living Editorial Hero：
 - vocabulary builder 汇总 published Recipe 与 CulinaryItem 的工具 ID，覆盖 native item 独有工具；非空 tools 维持 closed-world 语义
 - Meal adapter 只映射 `maxTime -> maxTotalTimeMinutes` 与 `availableTools -> availableToolIds`；营养、成本、油盐糖与 soft preferences 不进入整餐 options
 - context-free URL 继续解析为空 context；本 Issue 未修改 Discovery、Recipe、Pairing navigation 或 Meal selection/presentation
+- 全量 225 项测试、lint、typecheck、production build 与 Vercel preview/checks 已通过；PR #55 保持 open/ready，未 merge
 
 ## 下一步
 
-1. 完成 Issue #51 的全量验证、独立 review 与 PR；人工 merge 前不开始 Issues #52–#54。
+1. 人工 review 并 merge Issue #51 的 PR #55；merge 前不开始 Issues #52–#54。
 2. #51 merge 后，#52 navigation core 与 #53 engine core 可按已冻结 contract 分工并行，Pairing 页面由单一 owner 顺序集成。
 3. 内容扩张只在 #54 evaluation 证明具体缺口阻止合理结果时另行评审，不作为 M7 默认工作。

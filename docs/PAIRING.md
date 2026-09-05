@@ -57,6 +57,12 @@ Meal score 不只是 anchor pair 之和。它检查全部 item pair，并独立�
 
 这不是复杂 scheduler。未来如需步骤依赖、炉口资源或精确并行排程，应单独建模，不能把当前估算解释为厨房保证。
 
+## M7 Whole-meal Constraints And Recovery
+
+Public Pairing 只执行两个 whole-meal hard constraints：`maxTime` 约束当前页面展示的 coordinated elapsed estimate，非空 `availableTools` 是用户声明的完整可用工具集合。每个候选返回结构化 `satisfied / exceeded` outcome；工具失败保留 exact missing tool IDs。预算、calories、protein、added sugar、oil 与 salt 继续只约束 anchor Recipe，不进入 Meal engine。
+
+候选选择顺序为：合格 complete → 合格 partial → explicit empty。Complete 不会越过 hard constraint；partial 从所有达到 pairing 门槛且满足条件的 candidate 中选择。空结果区分 quality threshold 与 constraint exceeded，并只提供“移除整餐预计时间条件”或“移除整餐可用工具条件”这两种 allowlisted recovery。放宽不会静默发生；用户选择后 URL 保留原 `dc*` context，并额外记录稳定排序的 `relaxMeal` 值。
+
 ## Nutrition, Cost And Alcohol
 
 Nutrition/cost 仅汇总具备可比较数据的 item，coverage 为 `complete / partial / unavailable`。unknown、not applicable 与 zero 保持不同；plain tea 或 finished alcohol 缺失数据时绝不按零计算。
@@ -65,7 +71,7 @@ Nutrition/cost 仅汇总具备可比较数据的 item，coverage 为 `complete /
 
 ## Consumer And Localization
 
-`/{locale}/pairing/[slug]` 为 26 项内容生成 `26 x 2 = 52` 个静态页面。Recipe 与 native CulinaryItem 详情页使用“搭配这一餐 / Build a meal around this”进入；Similarity 区域继续独立存在。页面展示 anchor、首选组合、理由、注意项、准备/营养/成本摘要、确定性 alternatives，以及存在时的中性酒精或无酒精替代。
+`/{locale}/pairing/[slug]` 的内容身份仍限制为 26 项 × 2 locales；因为 M7 在 Server Page 读取 request-time query，页面按已知 locale + slug 动态渲染，而 query 不创建额外内容身份。Recipe 与 native CulinaryItem 详情页使用“搭配这一餐 / Build a meal around this”进入；Similarity 区域继续独立存在。页面展示 anchor、作用域明确的 Decision Context、首选组合、理由、注意项、准备/营养/成本摘要、确定性 alternatives，以及存在时的中性酒精或无酒精替代。整餐 elapsed 文案始终明确为 estimate。
 
 Engine 不 import locale 字典、React、Next、DOM、CSS、filesystem 或 database。`lib/meal-composition-display.ts` 才将 reason/caution/template/coverage/tool ID 转为 `zh-CN / en` 文案，公开读取由 locale-complete published repository 控制。
 

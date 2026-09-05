@@ -103,3 +103,5 @@ Issue #52 没有扩展 `DecisionContext` 字段。Journey source 是 URL applica
 `PairingScoreResult` 保存 score、dimension breakdown、structured reasons/cautions 和选中的 role pair；不保存消费者文案。`MealComposition` 固定 `anchorId`，保存 template/slots、全部 pairings、meal-level breakdown、缺失 slot、准备负担以及 nutrition/cost coverage。`partial-pair` 明确表示当前库不能支撑完整模板，不与 complete 混淆。
 
 `PreparationTime.activeMinutes` 表示主动操作时间，必须介于 prep 与 total contract 允许的范围内。整餐 nutrition/cost 使用 `complete / partial / unavailable`，unknown/not-applicable 不等于 zero。Pairing identity、Flavor/taxonomy ID、meal role 与 serving context 均保持 locale-independent；显示标签由 adapter 解析。完整 contract 见 `types/pairing.ts` 与 `docs/PAIRING.md`。
+
+M7 Issue #53 增加两种且仅两种 whole-meal constraint outcome：`estimated-elapsed-time` 与 `available-tools`。每个启用的条件返回 `satisfied / exceeded`；时间 outcome 同时记录展示用 estimate 与 limit，工具 outcome 记录稳定排序的 available、required 与 exact missing IDs。`MealCompositionResult.emptyReason` 区分 pairing quality 不足与 constraints exceeded，`relaxationOptions` 只包含单独移除后能产生合格结果的条件。Recipe-only 营养、预算、油盐糖字段不进入这些类型。

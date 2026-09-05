@@ -23,8 +23,10 @@ Production URL：
 - GitHub Issue #29 已关闭
 - GitHub PR #34 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #30 已关闭
-- GitHub Epic #28 与 Issue #31 当前 open
-- Issue #31 工作分支为 `feature/issue-31-similar-recipes`
+- GitHub PR #35 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #31 已关闭
+- GitHub Epic #28 与 Issue #32 当前 open
+- Issue #32 工作分支为 `feature/issue-32-living-homepage-hero`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -204,7 +206,7 @@ PR #34 已合并并建立 Recipe publishing 与 quality gate：
 
 ## Issue #31 当前产物
 
-当前分支已建立 deterministic similar-recipe discovery：
+PR #35 已合并并建立 deterministic similar-recipe discovery：
 
 - `lib/recipe-similarity.ts` 与 Recommendation Engine 完全分离，返回可序列化 score、五维 breakdown 与 signals
 - Flavor / Ingredient 权重合计 0.75；cuisine、technique 与 dish type 只作辅助，时间不参与
@@ -212,6 +214,18 @@ PR #34 已合并并建立 Recipe publishing 与 quality gate：
 - 默认 `0.28` threshold 来自当前 10 道 published Recipe 的 pairwise editorial calibration
 - Recipe Detail 末尾只展示达到阈值的 1–4 道 published Recipe；结果不足时不填充低质量卡片
 - Similar Recipe card 只展示图片、料理名、Flavor、自然理由和人类时间，不暴露 similarity score
+
+## Issue #32 当前产物
+
+当前分支已完成 Living Editorial Hero 实现，PR 待创建：
+
+- `data/homepage.ts` 集中维护五道 published Hero recipe 与短 editorial line，顺序固定且不伪装个性化
+- Server homepage 构建只含展示字段的 Hero view model，小型 client carousel 不读取 raw recipes 或 filesystem
+- 自动轮换为 7 秒，图片使用 700 ms crossfade；previous、next 与五个 indicator 均为 44 px button
+- hover、focus 与 document hidden 暂停 timer，手动操作后重新计时；reduced motion 禁用自动轮换并移除视觉 transition
+- 只有首张 LCP 图片 preload，初始仅准备当前和下一张图片，后续随轮换逐张挂载
+- active recipe link、alt、Flavor、human time、source、author、license 与 attribution 随 slide 一致更新
+- 375 / 390 / 768 / 1024 / 1440 五个断点已逐张检查 crop、对比度、稳定高度与控制位置
 
 ## 当前产品缺口
 
@@ -222,6 +236,6 @@ PR #34 已合并并建立 Recipe publishing 与 quality gate：
 
 ## 下一步
 
-1. 完成 Issue #31 浏览器 QA、验证与 PR review。
-2. 后续 published 内容批次进入时重新执行 pairwise audit，校准阈值与 family 覆盖。
-3. #32 Living Hero 保持独立，不在 Issue #31 中提前实现。
+1. 完成 Issue #32 最终验证、PR 创建与 review。
+2. #32 merge 后执行一次 Product Owner Review，观察真实首页节奏、图片加载与 editorial set。
+3. Epic #28 在 Product Owner Review 前保持 open，不开始新的 implementation Issue。

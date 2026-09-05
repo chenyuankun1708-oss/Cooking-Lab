@@ -4,10 +4,11 @@ import { HomeHero } from "@/components/home-hero";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeDiscovery } from "@/components/recipe-discovery";
 import { SiteFooter } from "@/components/site-footer";
-import { homepageFeaturedRecipeSlugs } from "@/data/homepage";
+import { homeHeroEditorialItems, homepageFeaturedRecipeSlugs } from "@/data/homepage";
 import { ingredients } from "@/data/ingredients";
 import { getPublishedRecipes, getPublishedRecipesBySlugs } from "@/data/published-recipes";
 import { recipeImages } from "@/data/recipe-images";
+import { buildHomeHeroItems } from "@/lib/homepage-hero";
 import { recommendationEngine } from "@/lib/recommendation";
 import { listRecipeCuisineOptions, listRecipeTechniqueOptions } from "@/lib/taxonomy";
 
@@ -20,7 +21,7 @@ const featuredTechniqueIds = ["pan-fry", "stir-fry", "steam", "stew", "roast", "
 
 export default function Home() {
   const publishedRecipes = getPublishedRecipes();
-  const heroImage = recipeImages.find((image) => image.id === "italian-tomato-basil-pasta-hero");
+  const heroItems = buildHomeHeroItems(homeHeroEditorialItems, publishedRecipes, recipeImages);
   const featuredResults = getPublishedRecipesBySlugs(homepageFeaturedRecipeSlugs)
     .map((recipe) => recommendationEngine.rank([recipe], {})[0]);
   const allCuisineOptions = listRecipeCuisineOptions(publishedRecipes);
@@ -30,7 +31,7 @@ export default function Home() {
 
   return (
     <main id="main-content">
-      <HomeHero image={heroImage} />
+      <HomeHero items={heroItems} />
 
       <section className="py-14 sm:py-20" aria-labelledby="tonight-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">

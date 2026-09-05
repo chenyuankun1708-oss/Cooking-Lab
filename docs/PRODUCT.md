@@ -75,6 +75,8 @@ M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展�
 
 Issue #31 在 Recipe Detail 尾部加入 deterministic similar-recipe discovery。它根据 canonical Flavor、主食材、cuisine、technique 和 dish type 寻找少量真正有料理逻辑的 published Recipe，不复用用户条件 Recommendation score，也不向用户展示系统分数。当前公开集较小时宁可只显示 1–2 道，或没有结果时隐藏整段，也不为了填满卡片公开 draft 内容。
 
+Issue #32 把首页静态单图升级为 Living Editorial Hero。五道由编辑确定、视觉与料理节奏不同的 published Recipe 按固定顺序轮换，文案结合人工 editorial line、canonical Flavor 与 human time；它不伪装个性化，也不改变推荐、发布或图片门禁。
+
 ## M5.1 产品自然化
 
 Issue #29 开始把用户体验从“参数和数据库描述”转向真实做饭语言：
@@ -93,6 +95,7 @@ Issue #29 开始把用户体验从“参数和数据库描述”转向真实做�
 首页保留推荐引擎的核心能力，同时采用更偏内容和发现的信息架构：
 
 - Hero prompt：`今晚，想吃点什么？`
+- Living Hero：番茄炒蛋、味噌豆腐汤、韩式拌饭、普罗旺斯炖蔬菜和鹰嘴豆泥的克制轮换
 - 快速表达条件
 - 立即进入推荐
 - 今日灵感

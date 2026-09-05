@@ -32,6 +32,8 @@
 - `lib/recipe-publishing.ts`：framework-independent publication eligibility 与可见性规则
 - `lib/recipe-similarity.ts`：独立于 Recommendation 的 deterministic Recipe similarity、breakdown 与 signals
 - `lib/recipe-similarity-display.ts`：把 similarity signals 转为当前 Web 使用的自然中文理由
+- `lib/homepage-hero.ts`：把 published Recipe、Flavor、human time 与 image metadata 组合为可序列化 Hero view model
+- `lib/homepage-hero-rotation.ts`：与 React 无关的 index、wrap、timing 与 auto-rotation policy
 - `data/published-recipes.ts`：当前 Web 的唯一公开 Recipe adapter，并负责本地 hero 文件存在性注入
 - `lib/*validation*.ts`：静态数据校验
 - `lib/ingredient-repository.ts`：数据来源抽象
@@ -66,14 +68,17 @@
 
 未来 Mobile 可以直接消费 application model，或建立自己的 display adapter，不需要复用 Web 字符串。
 
-#### 2. `components/recipe-discovery.tsx` 驱动渐进式推荐体验
+#### 2. 首页交互保持小型 client boundaries
 
-首页发现体验仍只有一个真正需要状态的 client component。它负责把交互输入组装成 `RecommendationCriteria` 并调用 application helper，但评分、硬限制、营养和成本计算仍全部留在 `lib/`。
+`app/page.tsx` 继续是 Server Component。它从 `getPublishedRecipes()` 构建 Hero view model 和推荐数据，只把五道可序列化 Hero item 传给 `components/home-hero-carousel.tsx`；该 client component 只负责 active index、timer、visibility、reduced motion 和 controls，不 import raw recipes、filesystem validation 或 100 道数据。
+
+`components/recipe-discovery.tsx` 是另一个局部 client boundary。它负责把交互输入组装成 `RecommendationCriteria` 并调用 application helper，但评分、硬限制、营养和成本计算仍全部留在 `lib/`。
 
 - 筛选 UI
 - application criteria state
 - recommendation helper 调用
 - 当前首页的 progressive disclosure 状态
+- Living Hero 的轻量轮换状态
 
 被集中在一个组件中。
 
@@ -104,6 +109,8 @@ Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framewor
 Homepage、catalog、recommendation input、taxonomy option counts、detail lookup 与 SSG params 不再直接读取 raw `recipes`。本地文件检查留在 Node data adapter，通过回调注入纯 eligibility helper，因此核心发布规则仍可被未来客户端复用。
 
 Recipe Detail 的相近料理遵循同一公开边界：页面把 `getPublishedRecipes()` 显式传入纯 `rankSimilarRecipes()`，similarity core 不 import raw recipes、published adapter 或 Recommendation Engine。Core 返回可序列化 score、dimension breakdown 和 signals；Web display adapter 与轻量 card 才负责中文理由、图片和布局。
+
+Living Hero 同样不绕过公开边界：`data/homepage.ts` 只保存少量 slug 与 editorial line，`buildHomeHeroItems()` 对 published 状态、重复 slug 与 hero image 做 fail-fast 检查。初始 item 与轮换顺序固定，因此 SSR、hydration 和 LCP 都可预测。
 
 ### 当前前端边界
 

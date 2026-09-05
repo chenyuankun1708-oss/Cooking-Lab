@@ -75,7 +75,7 @@ export const recipeImages: readonly RecipeImage[] = [
     width: 1500,
     height: 1000,
     aspectRatio: "3:2",
-    focalPoint: { x: 0.46, y: 0.55 },
+    focalPoint: { x: 0.34, y: 0.55 },
     source: "public-domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Seoul_Bibimbap_(beef)_-_Time_For_Kimchi.jpg",
     author: "Andy Li",

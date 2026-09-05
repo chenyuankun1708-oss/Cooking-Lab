@@ -2,6 +2,8 @@ import type { CulinaryItem, MealRoleId, PairingWeight } from "@/types/culinary";
 import { emptyNutrition, type Nutrition } from "@/types/nutrition";
 import type {
   MealComposition,
+  MealConstraintId,
+  MealConstraintOutcome,
   MealCompositionItem,
   MealCompositionResult,
   MealCostEstimate,
@@ -79,13 +81,30 @@ export function composeMealsAround(
   context: MealCompositionContext,
   options: MealCompositionOptions = {},
 ): MealCompositionResult {
-  if (anchor.publication.status !== "published") return { anchor, alternatives: [] };
+  const result = composeMealCandidates(anchor, library, context, options);
+  if (result.primary) return result;
+  return {
+    ...result,
+    relaxationOptions: activeConstraintIds(options).filter((constraintId) =>
+      Boolean(composeMealCandidates(anchor, library, context, relaxConstraint(options, constraintId)).primary)),
+  };
+}
+
+function composeMealCandidates(
+  anchor: CulinaryItem,
+  library: readonly CulinaryItem[],
+  context: MealCompositionContext,
+  options: MealCompositionOptions,
+): MealCompositionResult {
+  if (anchor.publication.status !== "published") {
+    return { anchor, alternatives: [], emptyReason: { kind: "quality-threshold" }, relaxationOptions: [] };
+  }
   const excludeAlcohol = options.excludeAlcohol ?? true;
   const minimumPairingScore = options.minimumPairingScore ?? 0.44;
   const minimumMealScore = options.minimumMealScore ?? 0.5;
   const limit = Math.max(1, options.limit ?? 3);
   const candidates = uniquePublishedCandidates(anchor, library, excludeAlcohol);
-  const meals: MealComposition[] = [];
+  const completeCandidates: MealComposition[] = [];
 
   for (const template of mealTemplates) {
     for (const anchorSlot of template.slots) {
@@ -114,24 +133,42 @@ export function composeMealsAround(
       for (const selected of cartesian(slotCandidates).map((parts) => parts.flat())) {
         if (new Set(selected.map(({ item }) => item.id)).size !== selected.length) continue;
         const meal = scoreMealComposition(template, selected, anchor.id, context, options);
-        if (meal.score >= minimumMealScore && meetsConstraints(meal, options)) meals.push(meal);
+        if (meal.score >= minimumMealScore) completeCandidates.push(meal);
       }
     }
   }
 
-  const ranked = deduplicateMeals(meals)
+  const ranked = deduplicateMeals(completeCandidates)
     .sort((left, right) => right.score - left.score || compareText(mealIdentity(left), mealIdentity(right)));
-  if (ranked.length) {
-    const selected = ranked.slice(0, limit);
+  const compliantComplete = ranked.filter(meetsConstraints);
+  if (compliantComplete.length) {
+    const selected = compliantComplete.slice(0, limit);
     if (!excludeAlcohol && !selected.some(hasAlcohol) && limit > 1) {
-      const alcoholicAlternative = ranked.find(hasAlcohol);
+      const alcoholicAlternative = compliantComplete.find(hasAlcohol);
       if (alcoholicAlternative) selected[selected.length - 1] = alcoholicAlternative;
     }
-    return { anchor, primary: selected[0], alternatives: selected.slice(1) };
+    return { anchor, primary: selected[0], alternatives: selected.slice(1), relaxationOptions: [] };
   }
 
-  const partial = buildPartialMeal(anchor, candidates, context, options, minimumPairingScore);
-  return partial && meetsConstraints(partial, options) ? { anchor, primary: partial, alternatives: [] } : { anchor, alternatives: [] };
+  const partialCandidates = buildPartialMeals(anchor, candidates, context, options, minimumPairingScore);
+  const partial = partialCandidates.find(meetsConstraints);
+  if (partial) return { anchor, primary: partial, alternatives: [], relaxationOptions: [] };
+
+  const recoveryCandidate = [...ranked, ...partialCandidates]
+    .sort((left, right) =>
+      exceededConstraintCount(left) - exceededConstraintCount(right) ||
+      Number(right.completeness === "complete") - Number(left.completeness === "complete") ||
+      right.score - left.score ||
+      compareText(mealIdentity(left), mealIdentity(right)))[0];
+  const outcomes = recoveryCandidate?.constraintOutcomes.filter(({ status }) => status === "exceeded") ?? [];
+  return {
+    anchor,
+    alternatives: [],
+    emptyReason: outcomes.length
+      ? { kind: "constraints-exceeded", outcomes }
+      : { kind: "quality-threshold" },
+    relaxationOptions: [],
+  };
 }
 
 export function scoreMealComposition(
@@ -174,7 +211,7 @@ export function scoreMealComposition(
   ));
   const missingSlotIds = template.slots.filter((templateSlot) => !items.some(({ slotId }) => slotId === templateSlot.id)).map(({ id }) => id);
 
-  return {
+  const meal: MealComposition = {
     templateId: template.id,
     completeness: missingSlotIds.length ? "partial" : "complete",
     anchorId,
@@ -186,9 +223,40 @@ export function scoreMealComposition(
     reasons: uniqueReasons(pairings.flatMap(({ reasons }) => reasons)),
     cautions: uniqueCautions(pairings.flatMap(({ cautions }) => cautions)),
     preparation,
+    constraintOutcomes: [],
     nutrition: calculateMealNutrition(items.map(({ item }) => item), context.ingredientRepository),
     cost: calculateMealCost(items.map(({ item }) => item), context.ingredientRepository),
   };
+  return { ...meal, constraintOutcomes: evaluateMealConstraints(meal, options) };
+}
+
+export function evaluateMealConstraints(
+  meal: Pick<MealComposition, "items" | "preparation">,
+  options: Pick<MealCompositionOptions, "maxTotalTimeMinutes" | "availableToolIds">,
+): MealConstraintOutcome[] {
+  const outcomes: MealConstraintOutcome[] = [];
+  if (options.maxTotalTimeMinutes !== undefined) {
+    outcomes.push({
+      constraintId: "estimated-elapsed-time",
+      status: meal.preparation.estimatedElapsedMinutes <= options.maxTotalTimeMinutes ? "satisfied" : "exceeded",
+      limitMinutes: options.maxTotalTimeMinutes,
+      estimatedElapsedMinutes: meal.preparation.estimatedElapsedMinutes,
+    });
+  }
+  if (options.availableToolIds?.length) {
+    const availableToolIds = [...new Set(options.availableToolIds)].sort(compareText);
+    const available = new Set(availableToolIds);
+    const requiredToolIds = [...new Set(meal.items.flatMap(({ item }) => getToolIds(item)))].sort(compareText);
+    const missingToolIds = requiredToolIds.filter((id) => !available.has(id));
+    outcomes.push({
+      constraintId: "available-tools",
+      status: missingToolIds.length ? "exceeded" : "satisfied",
+      availableToolIds,
+      requiredToolIds,
+      missingToolIds,
+    });
+  }
+  return outcomes;
 }
 
 export function auditPairingReadiness(items: readonly CulinaryItem[]): PairingReadinessAudit {
@@ -315,28 +383,30 @@ export function findNonAlcoholicDrinkAlternative(
     .sort((left, right) => right.score - left.score || compareText(left.candidate.id, right.candidate.id))[0]?.candidate;
 }
 
-function buildPartialMeal(
+function buildPartialMeals(
   anchor: CulinaryItem,
   candidates: readonly CulinaryItem[],
   context: MealCompositionContext,
   options: MealCompositionOptions,
   minimumPairingScore: number,
-): MealComposition | undefined {
-  const pairing = candidates
+): MealComposition[] {
+  return candidates
     .map((candidate) => scorePairing(anchor, candidate, { servingContextId: options.servingContextId }))
     .filter((result) => result.eligible && result.score >= minimumPairingScore)
-    .sort((left, right) => right.score - left.score || compareText(left.candidate.id, right.candidate.id))[0];
-  if (!pairing?.roles) return undefined;
-  const items = [
-    { item: anchor, slotId: roleToSlot(pairing.roles[0]), roleId: pairing.roles[0] },
-    { item: pairing.candidate, slotId: roleToSlot(pairing.roles[1]), roleId: pairing.roles[1] },
-  ];
-  const template: MealTemplateDefinition = {
-    id: "main-drink",
-    slots: [slot("main", "main", "staple", "soup"), slot("drink", "drink"), slot("dessert", "dessert")],
-  };
-  const scored = scoreMealComposition(template, items, anchor.id, context, options);
-  return { ...scored, templateId: "partial-pair", completeness: "partial" };
+    .sort((left, right) => right.score - left.score || compareText(left.candidate.id, right.candidate.id))
+    .flatMap((pairing) => {
+      if (!pairing.roles) return [];
+      const items = [
+        { item: anchor, slotId: roleToSlot(pairing.roles[0]), roleId: pairing.roles[0] },
+        { item: pairing.candidate, slotId: roleToSlot(pairing.roles[1]), roleId: pairing.roles[1] },
+      ];
+      const template: MealTemplateDefinition = {
+        id: "main-drink",
+        slots: [slot("main", "main", "staple", "soup"), slot("drink", "drink"), slot("dessert", "dessert")],
+      };
+      const scored = scoreMealComposition(template, items, anchor.id, context, options);
+      return [{ ...scored, templateId: "partial-pair" as const, completeness: "partial" as const }];
+    });
 }
 
 function getItemNutrition(item: CulinaryItem, repository: IngredientRepository): { kind: "available"; value: Nutrition } | { kind: "unknown" } | { kind: "not-applicable" } {
@@ -371,13 +441,32 @@ function uniquePublishedCandidates(anchor: CulinaryItem, library: readonly Culin
   });
 }
 
-function meetsConstraints(meal: MealComposition, options: MealCompositionOptions): boolean {
-  if (options.maxTotalTimeMinutes !== undefined && meal.preparation.estimatedElapsedMinutes > options.maxTotalTimeMinutes) return false;
-  if (options.availableToolIds?.length) {
-    const available = new Set(options.availableToolIds);
-    if (meal.items.some(({ item }) => getToolIds(item).some((id) => !available.has(id)))) return false;
-  }
-  return true;
+function meetsConstraints(meal: MealComposition): boolean {
+  return meal.constraintOutcomes.every(({ status }) => status === "satisfied");
+}
+
+function exceededConstraintCount(meal: MealComposition): number {
+  return meal.constraintOutcomes.filter(({ status }) => status === "exceeded").length;
+}
+
+function activeConstraintIds(options: MealCompositionOptions): MealConstraintId[] {
+  return [
+    ...(options.maxTotalTimeMinutes !== undefined ? ["estimated-elapsed-time" as const] : []),
+    ...(options.availableToolIds?.length ? ["available-tools" as const] : []),
+  ];
+}
+
+function relaxConstraint(options: MealCompositionOptions, constraintId: MealConstraintId): MealCompositionOptions {
+  const {
+    maxTotalTimeMinutes,
+    availableToolIds,
+    ...rest
+  } = options;
+  return {
+    ...rest,
+    ...(constraintId !== "estimated-elapsed-time" && maxTotalTimeMinutes !== undefined ? { maxTotalTimeMinutes } : {}),
+    ...(constraintId !== "available-tools" && availableToolIds?.length ? { availableToolIds } : {}),
+  };
 }
 
 function calculateRepetitionPenalty(items: readonly CulinaryItem[]): number {

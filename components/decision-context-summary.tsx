@@ -2,8 +2,18 @@ import type { DecisionContext } from "@/types/decision-context";
 import type { SupportedLocale } from "@/types/localization";
 import { describeDecisionContext } from "@/lib/decision-context-display";
 
-export function DecisionContextSummary({ context, locale }: { context: DecisionContext; locale: SupportedLocale }) {
-  const entries = describeDecisionContext(context, locale);
+export function DecisionContextSummary({
+  context,
+  locale,
+  surface = "recipe",
+  anchorIsRecipe = true,
+}: {
+  context: DecisionContext;
+  locale: SupportedLocale;
+  surface?: "recipe" | "pairing";
+  anchorIsRecipe?: boolean;
+}) {
+  const entries = describeDecisionContext(context, locale, { surface, anchorIsRecipe });
   if (!entries.length) return null;
 
   return (
@@ -13,8 +23,12 @@ export function DecisionContextSummary({ context, locale }: { context: DecisionC
       </h2>
       <p className="mt-1 text-xs leading-5 text-stone-500">
         {locale === "zh-CN"
-          ? "整餐只执行明确支持的条件；每份营养、预算与用量仍只描述当前菜谱。"
-          : "Only supported constraints apply to the whole meal; per-serving nutrition, budget, and amounts still describe this recipe only."}
+          ? surface === "pairing" && !anchorIsRecipe
+            ? "整餐只执行明确支持的条件；菜谱专属条件在这个原生料理起点上仅保留、不执行。"
+            : `整餐只执行明确支持的条件；每份营养、预算与用量仍只描述${surface === "pairing" ? "起点菜谱" : "当前菜谱"}。`
+          : surface === "pairing" && !anchorIsRecipe
+            ? "Only supported constraints apply to the whole meal; Recipe-only conditions are carried but not applied to this native culinary anchor."
+            : `Only supported constraints apply to the whole meal; per-serving nutrition, budget, and amounts still describe ${surface === "pairing" ? "the anchor recipe" : "this recipe"} only.`}
       </p>
       <ul className="mt-3 flex flex-wrap gap-2">
         {entries.map((entry) => (

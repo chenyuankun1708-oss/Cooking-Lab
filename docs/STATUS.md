@@ -32,7 +32,8 @@ Production URL：
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已建立；依赖顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
 - Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
-- Issue #52 工作分支为 `feature/issue-52-decision-continuity`；两轮 independent review 已完成（首轮 REVISE、第二轮 PASS），当前准备 PR
+- Issue #52 已通过两轮 independent review（首轮 REVISE、第二轮 PASS）；PR #56 已于 2026-09-05 merge，Issue #52 已关闭
+- Issue #53 工作分支为 `feature/issue-53-meal-reliability`；independent review 已 PASS，当前准备 PR
 - `origin/main` 已包含完整 M6 与最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -331,8 +332,18 @@ PR #36 已合并 Living Editorial Hero：
 - 相关纯函数与 journey regression tests、lint、typecheck 和 production build 已通过；真实浏览器已覆盖 Discovery URL hydration、Recipe/Pairing/back、catalog carry-through、locale link 与 console error
 - independent review 首轮发现 Discovery locale switch 会静默丢失当前 context；修复后 locale href 复用既有 codec 的 allowlist、normalization 与稳定序列化，第二轮结论为 PASS
 
+## Issue #53 当前产物
+
+- public Pairing adapter 消费归一化 Decision Context，并且仍只把 `maxTime / availableTools` 映射为 whole-meal options
+- Meal candidates 返回 `estimated-elapsed-time / available-tools` 的结构化 satisfied/exceeded outcomes；工具失败包含 exact missing IDs
+- complete 与 partial 共用 hard-constraint gate；partial 从 constraint-eligible candidates 中选择，可取代违规 complete
+- 没有合格 complete/partial 时区分 constraint empty 与 quality empty，不再用完整形式覆盖真实失败
+- `relaxMeal` 只允许显式移除 time 或 tools 条件，稳定排序并保留原 `dc*` context；无用户选择时不放宽
+- Pairing 页面显示条件 scope、具体空结果原因与已选择的 relaxation；elapsed 始终标为 estimate
+- 全量 239 项测试、lint、typecheck、production build 与 `git diff --check` 已通过；英文时间空结果/显式恢复、中文工具空结果与 locale continuity 已完成浏览器验证
+- independent review 结论为 PASS；已知 residual risk 是既有每 slot 8 个候选的 bounded ranking 在未来大内容库可能产生保守 false-empty，但不会放行违反 hard constraint 的结果
+
 ## 下一步
 
-1. 创建 Issue #52 PR，等待 CI 通过后 merge。
-2. 在已冻结的 Decision Context contract 上执行 #53 whole-meal enforcement 与 reliable fallback。
-3. #52/#53 集成后执行 #54 canonical evaluation 与 dogfood；内容扩张只在 evaluation 证明具体缺口阻止合理结果时另行评审。
+1. 创建 Issue #53 PR，等待 CI 通过后 merge。
+2. #52/#53 集成后执行 #54 canonical evaluation 与 dogfood；内容扩张只在 evaluation 证明具体缺口阻止合理结果时另行评审。

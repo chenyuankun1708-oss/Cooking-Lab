@@ -85,6 +85,10 @@ describe("Decision Context journey continuity", () => {
     ]);
     expect(entries.find(({ field }) => field === "maxTime")?.text).toMatch(/estimated/i);
     expect(entries.find(({ field }) => field === "maxCalories")?.scopeLabel).toBe("Current recipe only");
+    expect(describeDecisionContext({ maxCalories: 600 }, "en", {
+      surface: "pairing",
+      anchorIsRecipe: false,
+    })[0]?.scopeLabel).toBe("Not applied to this meal");
   });
 
   it("keeps route metadata query-free and static params bounded to content identities", () => {

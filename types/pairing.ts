@@ -90,6 +90,28 @@ export interface MealPreparationBurden {
   overlappingToolIds: string[];
 }
 
+export const mealConstraintIds = ["estimated-elapsed-time", "available-tools"] as const;
+export type MealConstraintId = (typeof mealConstraintIds)[number];
+
+export type MealConstraintOutcome =
+  | {
+      constraintId: "estimated-elapsed-time";
+      status: "satisfied" | "exceeded";
+      limitMinutes: number;
+      estimatedElapsedMinutes: number;
+    }
+  | {
+      constraintId: "available-tools";
+      status: "satisfied" | "exceeded";
+      availableToolIds: string[];
+      requiredToolIds: string[];
+      missingToolIds: string[];
+    };
+
+export type MealCompositionEmptyReason =
+  | { kind: "quality-threshold" }
+  | { kind: "constraints-exceeded"; outcomes: MealConstraintOutcome[] };
+
 export interface MealScoreBreakdown {
   pairCompatibility: number;
   roleCompleteness: number;
@@ -112,6 +134,7 @@ export interface MealComposition {
   reasons: PairingReason[];
   cautions: PairingCaution[];
   preparation: MealPreparationBurden;
+  constraintOutcomes: MealConstraintOutcome[];
   nutrition: MealNutritionEstimate;
   cost: MealCostEstimate;
 }
@@ -120,4 +143,6 @@ export interface MealCompositionResult {
   anchor: CulinaryItem;
   primary?: MealComposition;
   alternatives: MealComposition[];
+  emptyReason?: MealCompositionEmptyReason;
+  relaxationOptions: MealConstraintId[];
 }

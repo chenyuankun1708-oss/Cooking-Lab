@@ -1,5 +1,13 @@
 import { aromaVocabulary, tasteVocabulary, textureVocabulary } from "@/data/flavor";
-import type { MealComposition, MealCompositionResult, PairingCaution, PairingReason } from "@/types/pairing";
+import type {
+  MealComposition,
+  MealCompositionEmptyReason,
+  MealCompositionResult,
+  MealConstraintId,
+  MealConstraintOutcome,
+  PairingCaution,
+  PairingReason,
+} from "@/types/pairing";
 import type { SupportedLocale } from "@/types/localization";
 import { formatCalories, formatCost, formatMacro, formatSodium, formatTime } from "./formatters";
 import { buildCulinaryItemSummary, type CulinaryItemSummary, type StoryExperienceContext } from "./story-experience";
@@ -39,6 +47,11 @@ export interface MealCompositionPageModel {
   anchor: CulinaryItemSummary;
   primary?: MealCompositionDisplay;
   alternatives: MealCompositionDisplay[];
+  emptyReason?: {
+    kind: MealCompositionEmptyReason["kind"];
+    details: string[];
+  };
+  relaxationOptions: Array<{ constraintId: MealConstraintId; label: string }>;
 }
 
 const copy = {
@@ -49,12 +62,17 @@ const copy = {
     complete: "组成完整", partial: "当前内容库只支持部分组合",
     simple: "准备较轻松", moderate: "需要协调几项准备", involved: "准备负担较高",
     active: (value: string) => `主动操作约 ${value}`,
-    elapsed: (value: string) => `协调制作约 ${value}`,
+    elapsed: (value: string) => `预计协调用时约 ${value}`,
     parallel: (value: string) => `其中约 ${value} 可与必要等待并行`,
     tools: (ids: string) => `共用工具：${ids}`,
     nutritionComplete: "全部项目均有估算", nutritionPartial: "部分项目有估算", nutritionUnavailable: "暂无可汇总估算",
     costComplete: "全部项目均有成本估算", costPartial: "部分项目有成本估算", costUnavailable: "暂无可汇总成本",
     labels: { calories: "能量", protein: "蛋白质", fat: "脂肪", carbs: "碳水", fiber: "膳食纤维", sodium: "钠" },
+    qualityEmpty: "当前内容库没有达到搭配质量门槛的候选。",
+    timeExceeded: (actual: number, limit: number) => `当前最接近的候选预计需要 ${actual} 分钟，超过你声明的 ${limit} 分钟上限。`,
+    toolsExceeded: (tools: string) => `当前最接近的候选还需要这些未声明可用的工具：${tools}。`,
+    relaxTime: "移除整餐预计时间条件",
+    relaxTools: "移除整餐可用工具条件",
   },
   en: {
     templates: { "main-drink": "Main and drink", "starter-main-drink": "Starter, main, and drink", "main-drink-dessert": "Main, drink, and dessert", "drink-dessert": "Drink and dessert", "partial-pair": "Best available two-item pairing" },
@@ -63,12 +81,17 @@ const copy = {
     complete: "Complete composition", partial: "The current library supports a partial composition",
     simple: "Light preparation", moderate: "A few preparations to coordinate", involved: "More involved preparation",
     active: (value: string) => `About ${value} active`,
-    elapsed: (value: string) => `About ${value} elapsed when coordinated`,
+    elapsed: (value: string) => `Estimated coordinated time: about ${value}`,
     parallel: (value: string) => `About ${value} can overlap necessary waiting`,
     tools: (ids: string) => `Shared tools: ${ids}`,
     nutritionComplete: "All items included in the estimate", nutritionPartial: "Partial estimate", nutritionUnavailable: "No comparable estimate available",
     costComplete: "All items included in the cost estimate", costPartial: "Partial cost estimate", costUnavailable: "No comparable cost estimate available",
     labels: { calories: "Energy", protein: "Protein", fat: "Fat", carbs: "Carbs", fiber: "Fiber", sodium: "Sodium" },
+    qualityEmpty: "The current library has no candidate that clears the pairing quality threshold.",
+    timeExceeded: (actual: number, limit: number) => `The nearest current candidate is estimated at ${actual} min, above your ${limit} min limit.`,
+    toolsExceeded: (tools: string) => `The nearest current candidate also requires tools you did not declare available: ${tools}.`,
+    relaxTime: "Remove the estimated meal-time condition",
+    relaxTools: "Remove the available-tools condition",
   },
 } as const;
 
@@ -81,7 +104,29 @@ export function buildMealCompositionPageModel(
     anchor: buildCulinaryItemSummary(result.anchor, context),
     primary: result.primary ? buildMealDisplay(result.primary, context, locale) : undefined,
     alternatives: result.alternatives.map((meal) => buildMealDisplay(meal, context, locale)),
+    emptyReason: result.emptyReason
+      ? {
+          kind: result.emptyReason.kind,
+          details: result.emptyReason.kind === "quality-threshold"
+            ? [copy[locale].qualityEmpty]
+            : result.emptyReason.outcomes.map((outcome) => describeConstraintOutcome(outcome, locale)),
+        }
+      : undefined,
+    relaxationOptions: result.relaxationOptions.map((constraintId) => ({
+      constraintId,
+      label: constraintId === "estimated-elapsed-time" ? copy[locale].relaxTime : copy[locale].relaxTools,
+    })),
   };
+}
+
+export function describeConstraintOutcome(outcome: MealConstraintOutcome, locale: SupportedLocale): string {
+  const c = copy[locale];
+  if (outcome.constraintId === "estimated-elapsed-time") {
+    return c.timeExceeded(outcome.estimatedElapsedMinutes, outcome.limitMinutes);
+  }
+  return c.toolsExceeded(
+    outcome.missingToolIds.map((id) => getToolLabel(id, locale)).join(locale === "zh-CN" ? "、" : ", "),
+  );
 }
 
 export function describePairingReason(reason: PairingReason, locale: SupportedLocale): string {

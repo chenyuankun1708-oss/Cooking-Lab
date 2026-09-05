@@ -322,3 +322,9 @@ Issue #52 将 Decision Context 接到 `Discovery -> Recipe catalog -> Recipe -> 
 Recipe 与 Pairing Server Page 为了在首屏生成正确的 scope summary、返回链接和 locale link，会在 request time 读取 query。Next.js 16 因而把这两类页面标记为 dynamic rendering；`generateStaticParams` 与 `dynamicParams = false` 仍只定义现有 locale + content identity，不为 query 创建新路径。Metadata 继续只按 locale + slug 构建 canonical/hreflang，query 不进入索引身份。这是 M7 对决策正确性的局部取舍，不改变 shared core、内容 repository 或 canonical route。
 
 `/{locale}/pairing/[slug]` 的 base content identity 仍为 26 项 × 2 locales；M7 query 只触发这些已知 identity 的 request-time rendering，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。
+
+## M7 Meal Reliability Boundary
+
+Issue #53 让 public Pairing adapter 接受归一化 `DecisionContext`，并继续只通过 #51 adapter 把 `maxTime` 与非空 `availableTools` 投影到 Meal engine。Engine 为每个候选生成 locale-independent constraint outcomes；complete 和 partial 使用同一 hard-constraint gate，partial 会在全部合格 pair 中选择，而不是先取 unconstrained top pair 再检查。若没有合格 complete 或 partial，result 明确区分 quality empty 与 constraint empty，并携带用于解释的结构化 exceeded outcome。
+
+Pairing route 的 `relaxMeal` 只接受 `estimated-elapsed-time / available-tools`，按稳定顺序归一化，并且只有用户点击具体的移除条件链接后才生效。原 Decision Context 仍保留在 URL；relaxation 是当前 Pairing route metadata，不回写或改写 Decision Context，也不升级 Recipe-only constraints。该机制不是通用 rule framework，不支持任意参数、隐式 widening 或 kitchen scheduling。

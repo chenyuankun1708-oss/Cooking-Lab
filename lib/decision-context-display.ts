@@ -15,11 +15,17 @@ export interface DecisionContextDisplayEntry {
 export function describeDecisionContext(
   context: DecisionContext,
   locale: SupportedLocale,
+  options: { surface?: "recipe" | "pairing"; anchorIsRecipe?: boolean } = {},
 ): DecisionContextDisplayEntry[] {
   const entries: DecisionContextDisplayEntry[] = [];
   const add = (field: keyof DecisionContext, text: string) => {
     const scope = displayScope(field);
-    entries.push({ field, scope, scopeLabel: scopeLabels[locale][scope], text });
+    const scopeLabel = scope === "recipe" && options.surface === "pairing"
+      ? options.anchorIsRecipe
+        ? pairingRecipeScopeLabels[locale].anchorRecipe
+        : pairingRecipeScopeLabels[locale].notApplied
+      : scopeLabels[locale][scope];
+    entries.push({ field, scope, scopeLabel, text });
   };
   const join = (values: readonly string[]) => values.join(locale === "zh-CN" ? "、" : ", ");
 
@@ -65,4 +71,9 @@ function displayScope(field: keyof DecisionContext): DecisionContextDisplayEntry
 const scopeLabels = {
   "zh-CN": { meal: "整餐约束", recipe: "仅当前菜谱", carried: "带入后续选择" },
   en: { meal: "Whole-meal constraint", recipe: "Current recipe only", carried: "Carried preference" },
+} as const;
+
+const pairingRecipeScopeLabels = {
+  "zh-CN": { anchorRecipe: "仅起点菜谱", notApplied: "本次整餐不执行" },
+  en: { anchorRecipe: "Anchor recipe only", notApplied: "Not applied to this meal" },
 } as const;

@@ -68,3 +68,7 @@ Flavor 始终是 soft preference。即使没有完全命中所选口味，只要
 - 工具仍是二元可行性约束，尚未建模可替代工具。
 - 100 道 recipe 的 Flavor Profile 是基于当前配方的人工编辑判断，尚未经过用户研究或感官实验校准。
 - 营养、价格、时间和单位换算仍是 `demo-estimated`，不是医学或实时市场数据。
+
+## Pairing Is A Separate Engine
+
+Recommendation 从用户限制与偏好中选择一份 Recipe；Similarity 衡量两份 Recipe 有多像；Pairing 固定一个 CulinaryItem，寻找承担不同餐桌角色、风味连续且有有意义对比的组合。三者可以读取同一 canonical Flavor/taxonomy，但不得共享 score、weight 或 threshold。Pairing 规则、meal-level repetition 与 preparation burden 见 `docs/PAIRING.md`。

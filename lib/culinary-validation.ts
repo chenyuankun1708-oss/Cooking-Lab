@@ -86,9 +86,10 @@ export function validateCulinaryItem(item: CulinaryItem): CulinaryValidationIssu
   }
 
   if (isProceduralPreparation(item.preparation)) {
-    const { prepMinutes, processMinutes, totalMinutes } = item.preparation.time;
-    if (![prepMinutes, processMinutes, totalMinutes].every(isNonNegativeFinite)) report("preparation.time", "Preparation time 必须是非负有限数");
+    const { prepMinutes, processMinutes, totalMinutes, activeMinutes } = item.preparation.time;
+    if (![prepMinutes, processMinutes, totalMinutes, activeMinutes].every(isNonNegativeFinite)) report("preparation.time", "Preparation time 必须是非负有限数");
     if (totalMinutes !== prepMinutes + processMinutes) report("preparation.time.totalMinutes", "总时间必须等于准备与过程时间之和");
+    if (activeMinutes < prepMinutes || activeMinutes > totalMinutes) report("preparation.time.activeMinutes", "主动时间必须介于准备时间与总时间之间");
     if (!isPositiveFinite(item.preparation.yield.amount)) report("preparation.yield.amount", "产出数量必须是正有限数");
     if (!item.preparation.inputs.length) report("preparation.inputs", "Procedural preparation 必须声明 inputs");
     validateUniqueIds(item.preparation.inputs.map(({ ingredientId }) => ingredientId), "preparation.inputs", report);

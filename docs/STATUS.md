@@ -28,9 +28,9 @@ Production URL：
 - GitHub PR #36 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #32 与 Epic #28 已关闭
 - GitHub PR #44 已于 2026-09-05 merge 到 `main`
-- GitHub Issue #38、#39、#40 与 #41 已关闭；Epic #37 与 Issue #42 当前 open
+- GitHub Issue #38、#39、#40、#41 与 #42 已关闭；Epic #37 与 Issue #43 当前 open
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
-- Issue #42 工作分支为 `feature/issue-42-localization-visual-system`
+- Issue #43 工作分支为 `feature/issue-43-meal-composition`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -298,8 +298,18 @@ PR #36 已合并 Living Editorial Hero：
 - 浏览器 QA 覆盖 16 个中英文页面在 375、390、768、1024、1440 px 的 80 个视口，无横向溢出、裁切或 console error
 - 未开始 Pairing/Meal Engine、数据库、CMS、AI 翻译、imperial units、账号或 Mobile
 
+## Issue #43 当前产物
+
+- 新增独立 Pairing 与 Meal Composition core，不复用 Recommendation/Similarity score；固定 anchor 并只消费 locale-complete published items
+- 当前启用 main+drink、starter+main+drink、main+drink+dessert、drink+dessert；内容不足时返回 partial 或空结果，不读取 90 个 draft
+- pair score 输出 Flavor complement/continuity、weight、texture、temperature、cuisine、role、context 的 structured reasons/cautions；meal score 另行处理全部 pair、角色完整度、重复、进程与准备现实性
+- preparation 显式记录 active minutes，并汇总 coordinated/sequential elapsed、parallelizable time、procedural/serving-only 数量与 tool overlap
+- nutrition/cost 使用 complete/partial/unavailable，unknown 与 not-applicable 不按零计算；默认 composition 排除酒精，并在真实候选存在时提供中性酒精或无酒精替代
+- 新增 52 个 `/{locale}/pairing/[slug]` SSG 页面，Recipe/native detail CTA 与 Similarity 文案保持明确分离；消费者不显示 raw score
+- readiness audit 确认 10/26 为 drink、只有 3 个 dessert、3 个 starter assignment 和 1 个共享 side；四道式与独立 side template 暂不开放
+
 ## 下一步
 
-1. 完成 Issue #42 PR review，确认英文 editorial copy、metadata、route compatibility 与视觉 QA。
-2. #42 merge 前不开始 #43。
+1. 完成 Issue #43 PR review，重点校准代表 anchor 的 pairing quality、双语理由与移动端层级。
+2. Issue #43 合并前不启动 M7 内容扩张；后续优先补 `docs/PAIRING_CONTENT_GAPS.md` 中的真实 role/Flavor 缺口。
 3. 在多人编辑、更新历史和大规模 many-to-many provenance 成为真实需求前，不引入数据库、Prisma 或 CMS。

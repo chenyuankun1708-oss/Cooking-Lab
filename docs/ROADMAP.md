@@ -132,4 +132,6 @@ Issue #41 建立紧凑 `/stories`、六篇 `/stories/[slug]` 阅读页和 16 个
 
 Issue #42 建立 `zh-CN / en` locale route、strict reviewed public translation、双语 Recommendation/Similarity presentation 与 canonical/hreflang metadata。10 道 published Recipe、16 个 native CulinaryItem 和 6 篇 Story 全部覆盖英文；90 道 draft Recipe 保持不变。视觉以更亮 Hero、语义 surface、紧凑首页/目录和 Story/饮品层级继续演进，没有引入 i18n dependency、字体或动画库。
 
-后续顺序遵循 Epic #37：knowledge model、source/provenance、跨类型 library、Story experience 与双语体验完成后，才进入后续 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 M6 前置实施。
+Issue #43 建立 deterministic Pairing / Meal Composition：固定 anchor、独立 pair/meal score、四个受当前内容支撑的模板、准备负担、partial nutrition/cost、默认无酒精与双语静态消费页。内容 audit 明确不开放四道式和独立 side 模板，并把 starter、side、dessert 与无酒精晚餐饮品缺口记录到 `docs/PAIRING_CONTENT_GAPS.md`。
+
+Epic #37 的 knowledge model、source/provenance、跨类型 library、Story、双语体验与 Pairing/Meal Engine 已按依赖顺序完成实现。数据库、CMS、自动抓取、weekly planner、shopping list 和 Mobile app 仍不由 M6 前置实施。

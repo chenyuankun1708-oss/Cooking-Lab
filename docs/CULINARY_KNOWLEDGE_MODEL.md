@@ -196,7 +196,6 @@ Story related exploration 使用 explicit references、geography、cuisine、tec
 
 ## Explicit Non-goals
 
-- 不实现 Pairing/Meal Engine
 - 不引入数据库、Prisma、CMS、抓取或 AI 内容生成
 - 不把 100 个 Recipe 进行 big-bang rewrite
 - 不改变 recommendation、similarity、homepage、catalog、detail 或 SSG 的现有 Recipe runtime
@@ -204,3 +203,7 @@ Story related exploration 使用 explicit references、geography、cuisine、tec
 ## Issue #42 Consumer Localization
 
 Web 使用显式 `/zh-CN` 与 `/en` route segment，但 locale 不进入 `CulinaryItem` ID、slug、taxonomy 或 Flavor canonical fields。UI chrome、editorial translation 和 generated explanation 分属 message dictionary、reviewed translation registry 与 display adapter；Source title/locator value 保持 bibliographic identity，只有 UI label 本地化。完整 policy 见 `docs/LOCALIZATION.md`。
+
+## Issue #43 Pairing Use
+
+原有 `pairing.mealRoleIds / servingContextIds / cuisineIds / facets` 现在是 Pairing Engine 的 canonical input。Pair score 与 meal-level score 独立于 Similarity；engine 固定 anchor、只接收调用方提供的 published library，并返回 locale-independent structured reasons/cautions。Preparation 新增显式 `activeMinutes`，使 cooking、assembly、brewing、extraction、mixing 与 serving guidance 可以按真实负担组合。没有引入通用 Meal God Object、knowledge graph、数据库或 AI 推理；详见 `docs/PAIRING.md`。

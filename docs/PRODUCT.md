@@ -105,6 +105,8 @@ Issue #41 把这 6 篇 Story 变成第二条核心消费路径：`Home -> Storie
 
 Issue #42 建立完整的 `zh-CN / en` 消费体验。公开路由使用 locale 前缀，语言切换保留内容 identity 与筛选条件；10 道 published Recipe、16 个 native CulinaryItem 和 6 篇 Story 都有 reviewed English copy，90 道 draft Recipe 不为覆盖率批量翻译。视觉继续沿用 Fresh Editorial 70% + Modern Culinary Lab 30%，通过更亮的 food-first Hero、语义 surface 和更紧凑的目录/首页节奏演进，而不是重新设计产品。
 
+Issue #43 建立独立于 Similarity 的 deterministic Pairing / Meal Composition。用户从 Recipe 或 native CulinaryItem 详情固定当前料理，再查看结构化风味、餐桌角色、口感、轻重与现实准备负担共同形成的首选和少量 alternatives。默认组合不依赖酒精；营养与成本缺失不会按零计算；当前内容不足时允许 partial 或空结果，不用 draft/filler 补齐。
+
 ## 体验方向
 
 ### 首页 v2 实现

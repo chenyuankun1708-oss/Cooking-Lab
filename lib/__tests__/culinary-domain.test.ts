@@ -128,6 +128,20 @@ describe("Culinary Knowledge domain", () => {
     ]));
   });
 
+  it("rejects active preparation time outside the declared elapsed window", () => {
+    const dish = adaptRecipeToCulinaryItem(recipes[0]);
+    const invalid = {
+      ...dish,
+      preparation: {
+        ...dish.preparation,
+        time: { ...dish.preparation.time, activeMinutes: dish.preparation.time.totalMinutes + 1 },
+      },
+    };
+    expect(validateCulinaryItem(invalid)).toContainEqual(expect.objectContaining({
+      field: "preparation.time.activeMinutes",
+    }));
+  });
+
   it("requires evidence references for factual, traditional, disputed, and folklore claims", () => {
     const story: Story = {
       id: "sample-origin-story",

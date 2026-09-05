@@ -103,6 +103,12 @@ export default async function RecipePage({ params }: { params: Promise<{ locale:
             <KeyFact label={c.proteinPerServing} value={protein} />
           </dl>
           <p className="mt-3 text-xs leading-5 text-stone-500">{c.estimateNote}</p>
+          <Link
+            className="focus-ring mt-7 inline-flex min-h-11 items-center rounded-md bg-[#235849] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#173f35]"
+            href={getLocalizedPath(locale, `/pairing/${recipe.slug}`)}
+          >
+            {c.buildMeal}
+          </Link>
         </header>
 
         <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 sm:pb-20">
@@ -321,13 +327,13 @@ const recipePageCopy = {
     caloriesPerServing: "热量 / 份", proteinPerServing: "蛋白质 / 份", estimateNote: "时间、营养和成本为估算值，实际结果会因食材和设备而变化。",
     prepare: "准备", ingredientIntro: (n: number) => `${n} 人份，保留数据中的原始计量单位。`, beforeStart: "开始前", difficulty: "难度", startCooking: "开始做",
     principlesTitle: "把这道菜做好的关键", reference: "作为参考", detailsTitle: "营养、用量与成本", detailsIntro: "营养和成本为估算值，可作为日常比较参考，不构成个体化饮食建议。",
-    incompleteTitle: "部分估算不完整", continue: "继续探索", similarMany: "还想吃点类似的？", similarFew: "还可以试试这些",
+    incompleteTitle: "部分估算不完整", buildMeal: "搭配这一餐", continue: "继续探索", similarMany: "还想吃点类似的？", similarFew: "还可以试试这些",
   },
   en: {
     breadcrumb: "Breadcrumb", calories: "Calories", protein: "Protein", incomplete: "Estimate incomplete", cookingTime: "Cooking time", servings: "Yield",
     caloriesPerServing: "Calories / serving", proteinPerServing: "Protein / serving", estimateNote: "Time, nutrition, and cost are estimates; actual results vary with ingredients and equipment.",
     prepare: "Prepare", ingredientIntro: (n: number) => `${n} servings in the recipe's declared metric units.`, beforeStart: "Before you start", difficulty: "Difficulty", startCooking: "Cook",
     principlesTitle: "What makes this dish work", reference: "For reference", detailsTitle: "Nutrition, amounts, and cost", detailsIntro: "Nutrition and cost are estimates for everyday comparison, not personalized dietary advice.",
-    incompleteTitle: "Some estimates are incomplete", continue: "Continue exploring", similarMany: "Craving something similar?", similarFew: "Try these next",
+    incompleteTitle: "Some estimates are incomplete", buildMeal: "Build a meal around this", continue: "Continue exploring", similarMany: "Craving something similar?", similarFew: "Try these next",
   },
 } as const;

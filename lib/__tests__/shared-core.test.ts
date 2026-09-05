@@ -8,6 +8,7 @@ import { RuleRecommendationEngine } from "../recommendation";
 const sharedCoreFiles = [
   "lib/cost.ts",
   "lib/culinary-item-adapter.ts",
+  "lib/culinary-pairing.ts",
   "lib/culinary-detail.ts",
   "lib/culinary-library-validation.ts",
   "lib/culinary-publishing.ts",
@@ -24,6 +25,7 @@ const sharedCoreFiles = [
   "lib/homepage-hero.ts",
   "lib/nutrition.ts",
   "lib/localization.ts",
+  "lib/meal-composition.ts",
   "lib/recipe-detail.ts",
   "lib/recipe-exploration.ts",
   "lib/recipe-images.ts",
@@ -59,6 +61,7 @@ const sharedCoreFiles = [
   "types/flavor.ts",
   "types/image.ts",
   "types/nutrition.ts",
+  "types/pairing.ts",
   "types/localization.ts",
   "types/publication.ts",
   "types/recipe.ts",

@@ -89,3 +89,9 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 ## Recommendation
 
 输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具与匹配信号的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签、技法与 Flavor 是归一化加权软偏好。Flavor 只改变合格料理的顺序，不会成为硬排除条件。core 不保存中文/英文 explanation；当前 Web 通过 `lib/recommendation-display.ts` 按 locale 生成自然理由。详细口径与权重见 `docs/RECOMMENDATION.md`。
+
+## Pairing And Meal Composition
+
+`PairingScoreResult` 保存 score、dimension breakdown、structured reasons/cautions 和选中的 role pair；不保存消费者文案。`MealComposition` 固定 `anchorId`，保存 template/slots、全部 pairings、meal-level breakdown、缺失 slot、准备负担以及 nutrition/cost coverage。`partial-pair` 明确表示当前库不能支撑完整模板，不与 complete 混淆。
+
+`PreparationTime.activeMinutes` 表示主动操作时间，必须介于 prep 与 total contract 允许的范围内。整餐 nutrition/cost 使用 `complete / partial / unavailable`，unknown/not-applicable 不等于 zero。Pairing identity、Flavor/taxonomy ID、meal role 与 serving context 均保持 locale-independent；显示标签由 adapter 解析。完整 contract 见 `types/pairing.ts` 与 `docs/PAIRING.md`。

@@ -62,6 +62,7 @@ export interface PreparationTime {
   prepMinutes: number;
   processMinutes: number;
   totalMinutes: number;
+  activeMinutes: number;
 }
 
 export interface PreparationYield {

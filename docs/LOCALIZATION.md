@@ -22,7 +22,7 @@
 - UI chrome：`lib/messages.ts` 的 typed dictionary。
 - Domain labels：taxonomy、Flavor、tool、time 和 unit registry/display helper。
 - Editorial content：locale-keyed `TranslationSet<T>` 或独立 reviewed public translation registry。
-- Generated explanations：Recommendation 与 Similarity core 只返回结构化结果，`lib/recommendation-display.ts` 和 `lib/recipe-similarity-display.ts` 负责自然语言。
+- Generated explanations：Recommendation、Similarity 与 Pairing core 只返回结构化结果，各自 display adapter 负责自然语言。
 - Metadata：每个 route 在服务器端使用当前 locale 的 title、description、canonical 和 alternates。
 
 不增加 `nameZh/nameEn` 一类字段，也不把 React、Next.js 或浏览器 API 引入 domain。
@@ -39,6 +39,7 @@
 | 16 native CulinaryItem details | complete | complete |
 | Story catalog / 6 Story details | complete | complete |
 | Recommendation / Similarity explanations | complete | complete |
+| 26 Pairing pages / explanations | complete | complete |
 
 其余 90 道 draft Recipe 保持原数据，不在本 Issue 批量翻译。未来新增公开 locale 时，应先通过对应内容 completeness gate。
 
@@ -54,4 +55,4 @@
 
 字典和 editorial translation 在 Server Component/data boundary 解析，浏览器不会收到另一语言的完整内容集合。唯一既有 client boundary 仍是首页 Hero carousel 与 Recommendation interaction；没有新增 i18n、动画或字体依赖。
 
-测试覆盖 locale parsing、route generation、query-preserving switch、public translation completeness、taxonomy/Flavor/time/unit labels、Recommendation/Similarity、Story certainty、Source locator、metadata、canonical/hreflang 和 `<html lang>`。浏览器 QA 覆盖 16 个中英文页面在 375、390、768、1024 与 1440 px 的 80 个视口。
+测试覆盖 locale parsing、route generation、query-preserving switch、public translation completeness、taxonomy/Flavor/time/unit labels、Recommendation/Similarity/Pairing、Story certainty、Source locator、metadata、canonical/hreflang 和 `<html lang>`。Pairing route 只从当前 locale 的 26 个完整 published item 生成静态页面，view model 不包含另一语言的 consumer copy。

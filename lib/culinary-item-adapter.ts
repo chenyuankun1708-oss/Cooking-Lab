@@ -43,6 +43,7 @@ export function adaptRecipeToCulinaryItem(recipe: Recipe): DishItem {
       prepMinutes: recipe.cooking.prepTime,
       processMinutes: recipe.cooking.cookTime,
       totalMinutes: recipe.cooking.totalTime,
+      activeMinutes: recipe.cooking.prepTime + recipe.cooking.cookTime,
     },
     yield: { amount: recipe.servings, unit: "serving" },
     inputs: recipe.ingredients.map((ingredient) => ({ ...ingredient, optional: ingredient.optional ?? false })),
@@ -79,13 +80,29 @@ export function adaptRecipeToCulinaryItem(recipe: Recipe): DishItem {
       mealRoleIds: role ? [role] : [],
       servingContextIds,
       cuisineIds: [recipe.taxonomy.cuisine.cuisineId],
-      facets: [],
+      facets: deriveRecipePairingFacets(recipe),
     },
     publication: { ...recipe.publication },
     nutrition: { applicability: "applicable", source: "ingredient-derived" },
     cost: { source: "ingredient-derived", currency: "CNY" },
     preparation,
   };
+}
+
+function deriveRecipePairingFacets(recipe: Recipe): DishItem["pairing"]["facets"] {
+  const characters = new Set(recipe.flavor.characterIds ?? []);
+  const weight = characters.has("hearty")
+    ? "rich"
+    : characters.has("light") || characters.has("refreshing") || characters.has("clean-tasting")
+      ? "light"
+      : "medium";
+  const temperature = recipe.taxonomy.mealType.dishTypeId === "cold-dish" ? "cold" : "hot";
+  const primaryTexture = recipe.flavor.textureIds?.[0];
+  return [
+    { dimension: "weight", value: weight },
+    { dimension: "temperature", value: temperature },
+    ...(primaryTexture ? [{ dimension: "texture" as const, value: primaryTexture }] : []),
+  ];
 }
 
 function getPreparationKind(recipe: Recipe): Extract<ProceduralPreparationKind, "cooking" | "baking" | "assembly"> {

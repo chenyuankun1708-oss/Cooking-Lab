@@ -90,6 +90,12 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具与匹配信号的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签、技法与 Flavor 是归一化加权软偏好。Flavor 只改变合格料理的顺序，不会成为硬排除条件。core 不保存中文/英文 explanation；当前 Web 通过 `lib/recommendation-display.ts` 按 locale 生成自然理由。详细口径与权重见 `docs/RECOMMENDATION.md`。
 
+## Decision Context
+
+M7 Issue #51 将 `RecommendationCriteria` 明确为可跨页面携带的 `DecisionContext`，但不建立第二套条件数据模型。`types/decision-context.ts` 穷举每个字段的稳定 `dc*` query key、值类型与作用域；`lib/decision-context.ts` 负责 allowlisted parse/serialize、确定性归一化、稳定排序与 Meal adapter。未知 key/ID 被丢弃；重复列表值去重；重复 hard limit 采用更严格的合法值，避免畸形 URL 静默放宽条件。无 `dc*` 参数的旧 URL 继续解析为空 context。
+
+整餐语义当前只包括：`maxTime` 约束页面展示的 deterministic elapsed estimate，而不是现实厨房完成时间保证；非空 `availableTools` 表示用户声明的完整可用工具集合。budget、calories、protein、added sugar、oil 与 salt 仍是 Recipe-only，ingredient/cuisine/tag/method/Flavor 仅携带。Meal adapter 只允许输出 `maxTotalTimeMinutes` 与 `availableToolIds`；在建立 portion、sharing 与 per-diner allocation contract 前，不把 Recipe 的每份营养或成本直接相加解释为整餐 hard constraint。
+
 ## Pairing And Meal Composition
 
 `PairingScoreResult` 保存 score、dimension breakdown、structured reasons/cautions 和选中的 role pair；不保存消费者文案。`MealComposition` 固定 `anchorId`，保存 template/slots、全部 pairings、meal-level breakdown、缺失 slot、准备负担以及 nutrition/cost coverage。`partial-pair` 明确表示当前库不能支撑完整模板，不与 complete 混淆。

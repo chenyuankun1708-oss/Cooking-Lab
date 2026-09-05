@@ -22,6 +22,7 @@
 - `lib/nutrition.ts`：营养估算引擎
 - `lib/cost.ts`：成本估算引擎
 - `lib/recommendation.ts`：规则推荐、评分、解释与部分 application helper
+- `types/decision-context.ts` / `lib/decision-context.ts`：M7 framework-independent 条件作用域、allowlisted URL codec、vocabulary builder 与 Meal adapter
 - `lib/recipe-exploration.ts`：目录搜索与 taxonomy/time 组合过滤的纯 application helper
 - `types/flavor.ts`：framework-independent Flavor Profile、稳定 ID 与 preference contract
 - `data/flavor.ts`：Flavor vocabulary、localized labels 与用户偏好映射
@@ -305,5 +306,11 @@ published composition adapter -> locale display model -> Server route/components
 ```
 
 `lib/culinary-pairing.ts` 与 `lib/meal-composition.ts` 不依赖 Similarity、Recommendation、React、Next、DOM、filesystem 或 locale 文案。前者评估两个不同餐桌角色是否协调，后者检查全部 pair、角色完整度、整餐重复、weight/texture、准备负担及可用数据汇总。`data/published-meal-compositions.ts` 注入 Ingredient repository 并强制 locale-complete public boundary；`lib/meal-composition-display.ts` 才解析双语理由和工具标签。
+
+## M7 Decision Context Boundary
+
+Issue #51 只建立共享 contract，不提前修改 UI journey 或 Meal selection。`DecisionContext` 复用 `RecommendationCriteria`；字段定义集中在 `types/decision-context.ts`，纯 codec、normalization、vocabulary construction 与 Meal adapter 位于 `lib/decision-context.ts`。它不依赖 React、Next、浏览器状态、filesystem 或 locale 文案，并进入 shared-core guard。
+
+URL 使用独立 `dc*` allowlist，避免与 `/recipes` 已有 catalog filters 共用 `time` 等参数而产生隐式语义。调用方显式提供当前 vocabulary；builder 汇总 Recipe 与 CulinaryItem 的工具 ID，因此 native item 所需工具不会在 Decision Context 层成为不可表达值。Meal adapter 当前只投影 estimated time 与 closed-world tools，不把 Recipe-only 营养、成本、油盐糖或 soft preferences 传给整餐 engine。
 
 `/{locale}/pairing/[slug]` 为 26 项生成 52 个静态页面，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。

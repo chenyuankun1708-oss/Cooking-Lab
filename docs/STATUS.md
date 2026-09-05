@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5 与 M5.1 已完成，当前进入 M6 `Culinary Knowledge Platform` 的基础架构阶段。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1 与 M6 `Culinary Knowledge Platform` 已完成。当前进入 M7 `Decision Continuity & Meal Reliability`，先修复从单道 Recipe 到整餐决策时的条件连续性与可信度问题。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -28,10 +28,12 @@ Production URL：
 - GitHub PR #36 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #32 与 Epic #28 已关闭
 - GitHub PR #44 已于 2026-09-05 merge 到 `main`
-- GitHub Issue #38、#39、#40、#41 与 #42 已关闭；Epic #37 与 Issue #43 当前 open
+- GitHub Issue #38–#43 已关闭，PR #49 已于 2026-09-05 merge 到 `main`；M6 Epic #37 已完成
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
-- Issue #43 工作分支为 `feature/issue-43-meal-composition`
-- `main` 已包含最新 Public Beta 代码
+- M7 Epic #50 与 Issues #51–#54 已建立；依赖顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
+- Issue #51 工作分支为 `feature/issue-51-decision-context`
+- Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS），PR #55 已 ready 并等待人工 merge
+- `origin/main` 已包含完整 M6 与最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
 - M5 已启动
@@ -308,8 +310,18 @@ PR #36 已合并 Living Editorial Hero：
 - 新增 52 个 `/{locale}/pairing/[slug]` SSG 页面，Recipe/native detail CTA 与 Similarity 文案保持明确分离；消费者不显示 raw score
 - readiness audit 确认 10/26 为 drink、只有 3 个 dessert、3 个 starter assignment 和 1 个共享 side；四道式与独立 side template 暂不开放
 
+## Issue #51 当前产物
+
+- 新增 `DecisionContext` 字段契约，穷举全部 `RecommendationCriteria` 的稳定 `dc*` query key、value kind 与 Recipe/Meal scope
+- 新增 framework-independent allowlisted URL codec：scalar/list round-trip、稳定字段/值排序、未知值过滤与 malformed number 归一化
+- 重复 max limit 采用更小合法值，重复 `minProtein` 采用更大合法值，避免畸形 query 意外放宽 hard constraint
+- vocabulary builder 汇总 published Recipe 与 CulinaryItem 的工具 ID，覆盖 native item 独有工具；非空 tools 维持 closed-world 语义
+- Meal adapter 只映射 `maxTime -> maxTotalTimeMinutes` 与 `availableTools -> availableToolIds`；营养、成本、油盐糖与 soft preferences 不进入整餐 options
+- context-free URL 继续解析为空 context；本 Issue 未修改 Discovery、Recipe、Pairing navigation 或 Meal selection/presentation
+- 全量 225 项测试、lint、typecheck、production build 与 Vercel preview/checks 已通过；PR #55 保持 open/ready，未 merge
+
 ## 下一步
 
-1. 完成 Issue #43 PR review，重点校准代表 anchor 的 pairing quality、双语理由与移动端层级。
-2. Issue #43 合并前不启动 M7 内容扩张；后续优先补 `docs/PAIRING_CONTENT_GAPS.md` 中的真实 role/Flavor 缺口。
-3. 在多人编辑、更新历史和大规模 many-to-many provenance 成为真实需求前，不引入数据库、Prisma 或 CMS。
+1. 人工 review 并 merge Issue #51 的 PR #55；merge 前不开始 Issues #52–#54。
+2. #51 merge 后，#52 navigation core 与 #53 engine core 可按已冻结 contract 分工并行，Pairing 页面由单一 owner 顺序集成。
+3. 内容扩张只在 #54 evaluation 证明具体缺口阻止合理结果时另行评审，不作为 M7 默认工作。

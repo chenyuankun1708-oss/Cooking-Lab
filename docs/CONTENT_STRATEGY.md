@@ -158,6 +158,8 @@ Recipe 当前使用轻量 optional 结构：
 
 目标不是建立 citation engine，而是避免未来在 recipe detail 上出现无法追溯的文化说明。当前 100 道菜只对少数低争议、容易确认语境的菜品给出 cultural metadata 示例，其余留空。
 
+上面的 `Recipe.culture.sources` 是 legacy Recipe 的轻量兼容结构，不是 M6 的长期 provenance model。新的文化/历史内容必须先经过 `ResearchRecord`，再沿 `Story Claim -> Evidence -> Source` 保存；不得把未经研究的 legacy culture 自动升级为 Story。完整研究流程、八类问题模板与三个 mini exercises 见 `docs/CONTENT_RESEARCH.md`，来源和版权规则见 `docs/SOURCE_POLICY.md`。
+
 ## Recipe Detail v2 Content Surface
 
 未来详情页内容面建议包含：

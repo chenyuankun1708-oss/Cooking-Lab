@@ -201,21 +201,43 @@ export const sourceTypes = [
   "journal",
   "archive",
   "museum",
+  "library",
   "government",
+  "official-cultural-institution",
   "educational-institution",
+  "open-educational-resource",
+  "open-media",
   "professional-organization",
   "publisher",
   "reputable-media",
   "producer-documentation",
+  "patent",
 ] as const;
 export type SourceType = (typeof sourceTypes)[number];
 
 export type SourceRights =
   | { status: "public-domain"; basis: string }
-  | { status: "open-license"; licenseId: string; licenseUrl: string; notes: string }
+  | {
+      status: "open-license";
+      licenseId: string;
+      licenseUrl: string;
+      attribution: string;
+      adaptationStatus: "unmodified" | "adapted" | "not-reusing";
+      shareAlikeRequired: boolean;
+      notes: string;
+    }
   | { status: "permission-granted"; notes: string }
   | { status: "reference-only"; notes: string }
   | { status: "unknown"; notes: string };
+
+export const sourceHealthStatuses = ["active", "unreachable", "moved", "superseded", "rights-changed"] as const;
+export type SourceHealthStatus = (typeof sourceHealthStatuses)[number];
+
+export interface SourceHealth {
+  status: SourceHealthStatus;
+  checkedAt: string;
+  notes?: string;
+}
 
 export type SourceLocator =
   | { kind: "url"; url: string; accessedAt: string }
@@ -240,6 +262,7 @@ export interface Source {
   publication?: SourcePublicationMetadata;
   locators: [SourceLocator, ...SourceLocator[]];
   rights: SourceRights;
+  health: SourceHealth;
   reliability: "primary" | "authoritative-secondary" | "general-secondary" | "contested";
   editorialNotes: string;
 }

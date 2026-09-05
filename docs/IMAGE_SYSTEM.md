@@ -73,6 +73,8 @@ M5 Recipe 只接入一张可选 hero。其他 role 先保留稳定语义，不�
 
 搜索引擎只能帮助发现原始来源。最终记录必须指向原始 source page，而不是搜索结果页或图片代理 URL。
 
+M6 的文字 Source Registry 与图片 registry 保持分离：文章、博物馆页面或书籍的 `Source.rights` 不自动授权页面内图片。Image research 使用 `docs/CONTENT_RESEARCH.md` 的独立模板，并继续逐图执行本文件的 source page、作者、exact license、attribution、主体匹配与改编权限检查。开放资源的 provider-level 风险评估见 `docs/SOURCE_POLICY.md`。
+
 ## License Model
 
 可上线 license：

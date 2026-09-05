@@ -8,6 +8,8 @@
 
 M6 provenance contract 不要求 Source 拥有 URL。每个 Source 必须至少包含一种可重新定位的 locator：HTTPS URL、DOI、ISBN、archive/catalog identity 或 physical citation；书籍、手稿、印刷期刊和馆藏可以完全离线。Evidence 的 page/chapter/section/paragraph/timestamp/folio locator 只负责 Source 内部的精确位置。
 
+Issue #39 增加 `Source.health` 观察状态与轻量 `ResearchRecord`。health 记录可达性/迁移/取代/权利变化，不是可信度；ResearchRecord 保存 accepted/rejected source decisions、considered claims、unresolved questions、reviewer/date 和 editorial decision。Open-license rights 必须显式记录 exact license、attribution、adaptation status 与 share-alike requirement。`data/research/*` 是流程验证与 evaluated catalog，不进入当前 production Recipe/Story 数据源。
+
 `CulinaryItem` 不保存无语义的 generic evidence ID 列表。当前 factual provenance 只通过 `Story Claim -> Evidence -> Source` 表达；未来只有在出现明确的 item field assertion 用例后才增加窄 `ItemClaim`。
 
 ## Ingredient

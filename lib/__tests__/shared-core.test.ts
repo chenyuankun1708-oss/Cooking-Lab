@@ -7,6 +7,7 @@ import { RuleRecommendationEngine } from "../recommendation";
 
 const sharedCoreFiles = [
   "lib/cost.ts",
+  "lib/decision-context.ts",
   "lib/culinary-item-adapter.ts",
   "lib/culinary-pairing.ts",
   "lib/culinary-detail.ts",
@@ -58,6 +59,7 @@ const sharedCoreFiles = [
   "data/taxonomy.ts",
   "types/ingredient.ts",
   "types/culinary.ts",
+  "types/decision-context.ts",
   "types/flavor.ts",
   "types/image.ts",
   "types/nutrition.ts",

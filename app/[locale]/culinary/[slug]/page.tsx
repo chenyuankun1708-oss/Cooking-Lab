@@ -76,6 +76,12 @@ export default async function CulinaryItemPage({ params }: { params: Promise<{ l
             <h1 className={`mt-3 text-4xl font-bold leading-tight sm:text-6xl ${immersiveIntro ? "text-white" : "text-stone-950"}`}>{detail.name}</h1>
             <p className={`mx-auto mt-5 max-w-3xl text-base leading-8 sm:text-lg ${immersiveIntro ? "text-white/78" : "text-stone-600"}`}>{detail.description}</p>
             {detail.flavorLabel ? <p className={`mt-4 font-semibold ${immersiveIntro ? "text-[#f4d98b]" : "text-[#235849]"}`}>{detail.flavorLabel}</p> : null}
+            <Link
+              className={`focus-ring mt-7 inline-flex min-h-11 items-center rounded-md px-5 py-2.5 text-sm font-semibold ${immersiveIntro ? "bg-[#f4d98b] text-stone-950 hover:bg-white" : "bg-[#235849] text-white hover:bg-[#173f35]"}`}
+              href={getLocalizedPath(locale, `/pairing/${detail.slug}`)}
+            >
+              {c.buildMeal}
+            </Link>
           </div>
         </header>
 
@@ -179,6 +185,6 @@ function isTranslated(item: NonNullable<ReturnType<typeof getPublishedNativeCuli
 }
 
 const culinaryPageCopy = {
-  "zh-CN": { breadcrumb: "面包屑导航", preparation: "准备方式", totalTime: "总时间", yield: "产出", method: "怎样完成", cue: "看到这样", serveware: "用到的杯具", behind: "料理背后", storyTitle: "顺着它的故事继续读" },
-  en: { breadcrumb: "Breadcrumb", preparation: "Preparation", totalTime: "Total time", yield: "Yield", method: "How to make it", cue: "Look for", serveware: "Serve with", behind: "Behind the item", storyTitle: "Continue through its story" },
+  "zh-CN": { breadcrumb: "面包屑导航", preparation: "准备方式", totalTime: "总时间", yield: "产出", method: "怎样完成", cue: "看到这样", serveware: "用到的杯具", behind: "料理背后", storyTitle: "顺着它的故事继续读", buildMeal: "搭配这一餐" },
+  en: { breadcrumb: "Breadcrumb", preparation: "Preparation", totalTime: "Total time", yield: "Yield", method: "How to make it", cue: "Look for", serveware: "Serve with", behind: "Behind the item", storyTitle: "Continue through its story", buildMeal: "Build a meal around this" },
 } as const;

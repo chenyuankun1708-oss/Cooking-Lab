@@ -38,7 +38,7 @@ export const nativeDessertItems = [
     }),
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 290, totalMinutes: 305 },
+      time: { prepMinutes: 15, processMinutes: 290, totalMinutes: 305, activeMinutes: 35 },
       yield: { amount: 4, unit: "serving" },
       inputs: [
         input("glutinous-rice", 250),
@@ -94,7 +94,7 @@ export const nativeDessertItems = [
     }),
     preparation: {
       kind: "assembly",
-      time: { prepMinutes: 35, processMinutes: 370, totalMinutes: 405 },
+      time: { prepMinutes: 35, processMinutes: 370, totalMinutes: 405, activeMinutes: 35 },
       yield: { amount: 8, unit: "serving" },
       inputs: [
         input("egg", 3, "piece", { note: "只用蛋黄" }),
@@ -150,7 +150,7 @@ export const nativeDessertItems = [
     }),
     preparation: {
       kind: "baking",
-      time: { prepMinutes: 15, processMinutes: 50, totalMinutes: 65 },
+      time: { prepMinutes: 15, processMinutes: 50, totalMinutes: 65, activeMinutes: 25 },
       yield: { amount: 6, unit: "serving" },
       inputs: [
         input("apple", 720),

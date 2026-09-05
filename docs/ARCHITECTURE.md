@@ -289,3 +289,21 @@ Issue #42 将所有公开页面移动到 `app/[locale]`，只支持 canonical `z
 `lib/messages.ts` 负责 UI chrome，`data/localization/*` 负责 reviewed public editorial copy，taxonomy/Flavor/tool/unit helper 负责稳定 ID 到 label 的解析。公开英文不走中文 fallback；未完成翻译的内容不会进入英文 public output。Recommendation 与 Similarity core 只返回可序列化结构数据，人类语言分别由 display adapter 生成，因此 shared core 不再拼中文句子。
 
 字典和 editorial copy 在服务器端解析，现有 client JS 边界没有扩大，也没有引入 i18n dependency。完整 route、coverage、fallback 与 metadata 规则见 `docs/LOCALIZATION.md`。
+
+## M6 Pairing And Meal Composition Boundary
+
+Issue #43 增加独立 shared-core 路径：
+
+```text
+localized published CulinaryItems
+          |
+          v
+culinary-pairing -> meal-composition
+          |
+          v
+published composition adapter -> locale display model -> Server route/components
+```
+
+`lib/culinary-pairing.ts` 与 `lib/meal-composition.ts` 不依赖 Similarity、Recommendation、React、Next、DOM、filesystem 或 locale 文案。前者评估两个不同餐桌角色是否协调，后者检查全部 pair、角色完整度、整餐重复、weight/texture、准备负担及可用数据汇总。`data/published-meal-compositions.ts` 注入 Ingredient repository 并强制 locale-complete public boundary；`lib/meal-composition-display.ts` 才解析双语理由和工具标签。
+
+`/{locale}/pairing/[slug]` 为 26 项生成 52 个静态页面，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。

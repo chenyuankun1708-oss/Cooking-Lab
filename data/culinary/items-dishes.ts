@@ -39,7 +39,7 @@ export const nativeDishItems = [
     }),
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 20, processMinutes: 120, totalMinutes: 140 },
+      time: { prepMinutes: 20, processMinutes: 120, totalMinutes: 140, activeMinutes: 50 },
       yield: { amount: 4, unit: "serving" },
       inputs: [
         input("pork-belly", 800),
@@ -98,7 +98,7 @@ export const nativeDishItems = [
     }),
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 20, totalMinutes: 35 },
+      time: { prepMinutes: 15, processMinutes: 20, totalMinutes: 35, activeMinutes: 30 },
       yield: { amount: 4, unit: "serving" },
       inputs: [
         input("shrimp", 400),
@@ -157,7 +157,7 @@ export const nativeDishItems = [
     }),
     preparation: {
       kind: "assembly",
-      time: { prepMinutes: 15, processMinutes: 0, totalMinutes: 15 },
+      time: { prepMinutes: 15, processMinutes: 0, totalMinutes: 15, activeMinutes: 15 },
       yield: { amount: 4, unit: "serving" },
       inputs: [
         input("tomato", 500),

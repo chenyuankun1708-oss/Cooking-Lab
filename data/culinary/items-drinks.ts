@@ -40,7 +40,7 @@ export const nativeTeaItems = [
     }),
     preparation: {
       kind: "brewing",
-      time: { prepMinutes: 2, processMinutes: 5, totalMinutes: 7 },
+      time: { prepMinutes: 2, processMinutes: 5, totalMinutes: 7, activeMinutes: 6 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("longjing-tea-leaf", 4), input("drinking-water", 300, "ml")],
       toolIds: ["kettle", "gaiwan", "scale"],
@@ -83,7 +83,7 @@ export const nativeTeaItems = [
     }),
     preparation: {
       kind: "brewing",
-      time: { prepMinutes: 5, processMinutes: 15, totalMinutes: 20 },
+      time: { prepMinutes: 5, processMinutes: 15, totalMinutes: 20, activeMinutes: 13 },
       yield: { amount: 2, unit: "serving" },
       inputs: [
         input("black-tea-leaf", 6), input("drinking-water", 250, "ml"), input("milk", 250, "ml"),
@@ -129,7 +129,7 @@ export const nativeTeaItems = [
     }),
     preparation: {
       kind: "brewing",
-      time: { prepMinutes: 5, processMinutes: 10, totalMinutes: 15 },
+      time: { prepMinutes: 5, processMinutes: 10, totalMinutes: 15, activeMinutes: 10 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("gunpowder-green-tea-leaf", 6), input("fresh-mint", 25), input("granulated-sugar", 50), input("drinking-water", 750, "ml")],
       toolIds: ["kettle", "teapot"],
@@ -172,7 +172,7 @@ export const nativeTeaItems = [
     }),
     preparation: {
       kind: "brewing",
-      time: { prepMinutes: 2, processMinutes: 5, totalMinutes: 7 },
+      time: { prepMinutes: 2, processMinutes: 5, totalMinutes: 7, activeMinutes: 6 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("lapsang-souchong-tea-leaf", 4), input("drinking-water", 300, "ml")],
       toolIds: ["kettle", "teapot", "timer"],
@@ -219,7 +219,7 @@ export const nativeCoffeeItems = [
     }),
     preparation: {
       kind: "extraction",
-      time: { prepMinutes: 3, processMinutes: 2, totalMinutes: 5 },
+      time: { prepMinutes: 3, processMinutes: 2, totalMinutes: 5, activeMinutes: 5 },
       yield: { amount: 1, unit: "serving" },
       inputs: [input("ground-coffee", 18), input("drinking-water", 40, "ml")],
       toolIds: ["espresso-machine", "portafilter", "scale", "timer"],
@@ -262,7 +262,7 @@ export const nativeCoffeeItems = [
     }),
     preparation: {
       kind: "brewing",
-      time: { prepMinutes: 5, processMinutes: 12, totalMinutes: 17 },
+      time: { prepMinutes: 5, processMinutes: 12, totalMinutes: 17, activeMinutes: 10 },
       yield: { amount: 1, unit: "serving" },
       inputs: [input("ground-coffee", 25), input("drinking-water", 100, "ml"), input("sweetened-condensed-milk", 45), input("ice", 150)],
       toolIds: ["phin-filter", "kettle", "glass", "scale"],
@@ -309,7 +309,7 @@ export const nativeNonAlcoholicDrinkItems = [
     }),
     preparation: {
       kind: "brewing",
-      time: { prepMinutes: 5, processMinutes: 75, totalMinutes: 80 },
+      time: { prepMinutes: 5, processMinutes: 75, totalMinutes: 80, activeMinutes: 15 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("dried-hibiscus", 25), input("drinking-water", 1000, "ml"), input("granulated-sugar", 60), input("lime", 1, "piece"), input("ice", 300)],
       toolIds: ["saucepan", "fine-strainer", "pitcher", "refrigerator"],
@@ -353,7 +353,7 @@ export const nativeNonAlcoholicDrinkItems = [
     }),
     preparation: {
       kind: "mixing",
-      time: { prepMinutes: 5, processMinutes: 2, totalMinutes: 7 },
+      time: { prepMinutes: 5, processMinutes: 2, totalMinutes: 7, activeMinutes: 7 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("yogurt", 400), input("drinking-water", 200, "ml"), input("ice", 100), input("salt", 2), input("cumin", 2)],
       toolIds: ["blender", "glass"],

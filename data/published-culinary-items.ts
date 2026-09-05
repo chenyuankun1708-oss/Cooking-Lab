@@ -15,6 +15,9 @@ import { culinaryStories } from "./culinary/stories";
 import { ingredients } from "./ingredients";
 import { getPublishedRecipes } from "./published-recipes";
 import { recipeImages } from "./recipe-images";
+import { hasCompleteNativeCulinaryTranslation } from "./localization/public-culinary";
+import { hasCompleteRecipeTranslation } from "./localization/public-recipes";
+import type { SupportedLocale } from "@/types/localization";
 
 const allImages = [...recipeImages, ...culinaryImages];
 const candidates: CulinaryItem[] = [
@@ -35,6 +38,7 @@ assertPublishedCulinaryItemsEligible(candidates, publishingContext);
 const publishedItems = Object.freeze(getPubliclyVisibleCulinaryItems(candidates, publishingContext));
 const publishedItemBySlug = new Map(publishedItems.map((item) => [item.slug, item]));
 const nativeItemIds = new Set(nativeCulinaryItems.map((item) => item.id));
+const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));
 const publishedNativeItems = Object.freeze(publishedItems.filter((item) => nativeItemIds.has(item.id)));
 const publishedNativeItemBySlug = new Map(publishedNativeItems.map((item) => [item.slug, item]));
 
@@ -60,4 +64,27 @@ export function getPublishedNativeCulinaryItemBySlug(slug: string): CulinaryItem
 
 export function getPublishedNativeCulinaryItemStaticParams(): Array<{ slug: string }> {
   return publishedNativeItems.map((item) => ({ slug: item.slug }));
+}
+
+export function isPublishedCulinaryItemLocaleComplete(item: CulinaryItem, locale: SupportedLocale): boolean {
+  const recipe = publishedRecipeById.get(item.id);
+  if (recipe) return hasCompleteRecipeTranslation(recipe, locale);
+  const preparation = item.preparation;
+  const hasSteps = "steps" in preparation;
+  return hasCompleteNativeCulinaryTranslation(
+    item.id,
+    locale,
+    hasSteps ? preparation.steps.length : 0,
+    !hasSteps,
+    "inputs" in preparation ? preparation.inputs.filter((input) => input.note).map((input) => input.ingredientId) : [],
+  );
+}
+
+export function getPublishedCulinaryItemsForLocale(locale: SupportedLocale): readonly CulinaryItem[] {
+  return publishedItems.filter((item) => isPublishedCulinaryItemLocaleComplete(item, locale));
+}
+
+export function getPublishedCulinaryItemForLocaleBySlug(slug: string, locale: SupportedLocale): CulinaryItem | undefined {
+  const item = publishedItemBySlug.get(slug);
+  return item && isPublishedCulinaryItemLocaleComplete(item, locale) ? item : undefined;
 }

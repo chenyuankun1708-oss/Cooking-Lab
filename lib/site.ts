@@ -17,3 +17,6 @@ export const REPOSITORY_URL = "https://github.com/chenyuankun1708-oss/Cooking-La
 
 export const BETA_FEEDBACK_URL =
   `${REPOSITORY_URL}/issues/new?template=beta-feedback.md&title=%5BBeta%20Feedback%5D%20`;
+
+export const M8_VALIDATION_FEEDBACK_URL =
+  `${REPOSITORY_URL}/issues/new?template=m8-validation-feedback.yml&title=%5BM8%20Supplemental%20Feedback%5D%20`;

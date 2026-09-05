@@ -2,8 +2,8 @@
 
 ## Source of truth
 
-- Status: Active through Issue #42
-- Last refreshed: 2026-09-05
+- Status: Active through Issue #62
+- Last refreshed: 2026-09-06
 - Primary product surfaces:
   - consumer homepage
   - recipe catalog
@@ -11,6 +11,7 @@
   - story catalog and reading pages
   - native CulinaryItem detail
   - recommendation entry and result presentation
+  - M8 external-validation participant information and start surface
 - Evidence reviewed:
   - `docs/PRODUCT.md`
   - `docs/BRAND_BRIEF.md`
@@ -99,6 +100,7 @@
   - Recipes
   - Stories
   - Beta feedback
+  - External validation remains a footer/research-invitation path, not a permanent primary navigation item
 - Core routes/screens:
   - `/{locale}`
   - `/{locale}/recipes`
@@ -106,6 +108,7 @@
   - `/{locale}/stories`
   - `/{locale}/stories/[slug]`
   - `/{locale}/culinary/[slug]` for native CulinaryItems only
+  - `/{locale}/validation` for invited-study information and supplemental public feedback boundaries
 - Content hierarchy:
   - appetite first
   - decision prompt second
@@ -120,6 +123,7 @@
 - `/{locale}/stories` is a compact editorial discovery surface; `/{locale}/stories/[slug]` prioritizes reading, related exploration and restrained sources.
 - `/{locale}/culinary/[slug]` is the destination for native items linked from Stories. Adapted Recipes keep `/{locale}/recipes/[slug]` as their only canonical URL.
 - Navigation remains limited to Home, Recipes, Stories, and Beta feedback. Technique discovery remains a homepage section rather than a competing primary route.
+- `/{locale}/validation` uses the established editorial section rhythm and semantic surfaces. It separates the invited moderated session from public supplemental feedback before either CTA and does not add analytics, a form backend, or a new primary-navigation category.
 
 ## Design principles
 
@@ -180,6 +184,7 @@
   - homepage inspiration, cuisine, and technique sections
   - progressive recommendation disclosure for secondary and advanced criteria
   - detail page editorial reading flow without a sticky metric sidebar
+  - static validation information page reusing `SiteHeader`, `SiteFooter`, semantic surfaces, link buttons, and bilingual server-rendered copy
 - Variants and states:
   - catalog card
   - recommendation card
@@ -249,6 +254,7 @@
   - avoid admin-panel nouns
   - keep nutrition/cost disclaimers factual and compact
   - build brand warmth through narrator tone and microcopy, not through a mascot-first interface
+  - research copy must say the product is being tested, not the participant; disclose public GitHub identity and non-retractable copies before the supplemental feedback CTA
 
 ## Implementation constraints
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { BETA_DISCLAIMER, BETA_FEEDBACK_URL, REPOSITORY_URL, SITE_DESCRIPTION, SITE_NAME } from "../site";
+import { BETA_DISCLAIMER, BETA_FEEDBACK_URL, M8_VALIDATION_FEEDBACK_URL, REPOSITORY_URL, SITE_DESCRIPTION, SITE_NAME } from "../site";
 
 describe("site beta metadata and feedback", () => {
   it("keeps core site strings present for metadata and disclaimers", () => {
@@ -13,5 +13,7 @@ describe("site beta metadata and feedback", () => {
     expect(REPOSITORY_URL).toBe("https://github.com/chenyuankun1708-oss/Cooking-Lab");
     expect(BETA_FEEDBACK_URL).toContain(REPOSITORY_URL);
     expect(BETA_FEEDBACK_URL).toContain("template=beta-feedback.md");
+    expect(M8_VALIDATION_FEEDBACK_URL).toContain(REPOSITORY_URL);
+    expect(M8_VALIDATION_FEEDBACK_URL).toContain("template=m8-validation-feedback.yml");
   });
 });

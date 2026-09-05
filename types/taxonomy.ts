@@ -1,9 +1,6 @@
-export type SupportedLocale = "zh-CN" | "en";
+import type { LocalizedLabel } from "./localization";
 
-export interface LocalizedLabel {
-  "zh-CN": string;
-  en: string;
-}
+export type { LocalizedLabel, SupportedLocale } from "./localization";
 
 export interface TaxonomyNode {
   id: string;

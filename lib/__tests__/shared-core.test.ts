@@ -7,6 +7,9 @@ import { RuleRecommendationEngine } from "../recommendation";
 
 const sharedCoreFiles = [
   "lib/cost.ts",
+  "lib/culinary-item-adapter.ts",
+  "lib/culinary-publishing.ts",
+  "lib/culinary-validation.ts",
   "lib/cooking-time.ts",
   "lib/dataset-validation.ts",
   "lib/ingredient-repository.ts",
@@ -17,6 +20,7 @@ const sharedCoreFiles = [
   "lib/homepage-hero-rotation.ts",
   "lib/homepage-hero.ts",
   "lib/nutrition.ts",
+  "lib/localization.ts",
   "lib/recipe-detail.ts",
   "lib/recipe-exploration.ts",
   "lib/recipe-images.ts",
@@ -36,9 +40,12 @@ const sharedCoreFiles = [
   "data/recipes.ts",
   "data/taxonomy.ts",
   "types/ingredient.ts",
+  "types/culinary.ts",
   "types/flavor.ts",
   "types/image.ts",
   "types/nutrition.ts",
+  "types/localization.ts",
+  "types/publication.ts",
   "types/recipe.ts",
   "types/recommendation.ts",
   "types/taxonomy.ts",
@@ -51,6 +58,7 @@ describe("shared core boundaries", () => {
       expect(source, file).not.toMatch(/from\s+["'](?:react|next(?:\/[^"']*)?)["']/);
       expect(source, file).not.toMatch(/\b(?:window|document|localStorage|sessionStorage)\b/);
       expect(source, file).not.toMatch(/\.css["']/);
+      expect(source, file).not.toMatch(/from\s+["'](?:node:fs|fs|@prisma\/client|prisma|[^"']*(?:database|sql)[^"']*)["']/i);
       expect(source, file).not.toMatch(/from\s+["'][^"']*(?:display-labels|formatters|recipe-detail-display)["']/);
     }
   });

@@ -88,6 +88,17 @@ Issue #29 开始把用户体验从“参数和数据库描述”转向真实做�
 - step reasoning 融入步骤正文，不重复显示“为什么这样做？”
 - Beta 状态与完整估算免责声明收回 footer，主要内容只保留必要的简短估算提示
 
+## M6 Culinary Knowledge Platform
+
+M5.1 已完成并通过 Product Owner Review，M6 Epic #37 开始把产品从 Recipe 网站扩展为可探索、可决策、可理解的料理知识平台。Issue #38 先建立领域与迁移架构，不扩公开内容、不改 UI：
+
+- `CulinaryItem` 覆盖 dish、dessert、tea、coffee、non-alcoholic drink 与 alcoholic drink
+- 不同类型拥有真实 preparation semantics，饮品不因缺少 cooking steps 被排除
+- Story、Source/Evidence、Translation 与 Pairing signals 成为明确 domain concepts
+- 现有 Recipe 产品通过 adapter 渐进迁移，100 structured / 10 published 基线保持不变
+
+Pairing signals 只为后续 Meal Engine 准备结构化输入；#38 不组合套餐、不重新公开 draft，也不启动数据库、CMS、双语 UI 或内容抓取。
+
 ## 体验方向
 
 ### 首页 v2 实现

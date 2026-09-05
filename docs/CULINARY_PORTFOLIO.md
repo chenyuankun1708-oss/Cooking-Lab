@@ -51,7 +51,7 @@ Story 不是发布配额。只有 6 个条目拥有足以支撑窄主张的 Sour
 
 ### Geography
 
-统一库覆盖 13 个 country ID：China 6、Thailand 3、Italy 3、Japan 2、Vietnam 2、India 2，以及 France、South Korea、Lebanon、Greece、UK、Morocco、Mexico、Spain 各 1。计数可以重叠于 cuisine 分析，但不会把 fusion 或现代改良内容伪装成更具体的传统菜系。
+统一库覆盖 14 个 country ID：China 6、Thailand 3、Italy 3、Japan 2、Vietnam 2、India 2，以及 France、South Korea、Lebanon、Greece、UK、Morocco、Mexico、Spain 各 1。计数可以重叠于 cuisine 分析，但不会把 fusion 或现代改良内容伪装成更具体的传统菜系。
 
 ### Meal Role
 

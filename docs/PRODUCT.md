@@ -44,7 +44,7 @@
 
 M0-M4 已完成，当前 Public Beta 已具备：
 
-- 100 道结构化 `demo-estimated` 菜谱与 73 种食材，其中 10 道通过发布审核并进入公开产品
+- 100 道结构化 `demo-estimated` 菜谱与 102 种食材；10 道 Recipe 维持当前 Web 公开基线，另有 16 个 native CulinaryItem 进入统一公开料理库
 - 本地营养、成本、单位换算和推荐引擎
 - 首页多条件料理决策
 - `/recipes` 已发布料理目录
@@ -98,6 +98,8 @@ M5.1 已完成并通过 Product Owner Review，M6 Epic #37 开始把产品从 Re
 - 现有 Recipe 产品通过 adapter 渐进迁移，100 structured / 10 published 基线保持不变
 
 Pairing signals 只为后续 Meal Engine 准备结构化输入；#38 不组合套餐、不重新公开 draft，也不启动数据库、CMS、双语 UI 或内容抓取。
+
+Issue #40 首次把该模型用于生产内容：在保留 100 structured / 10 published Recipe 与现有 Web 行为的同时，新增 16 个 native CulinaryItem，覆盖 dish、dessert、tea、coffee、non-alcoholic drink 与 alcoholic drink。统一 repository 现在输出 26 个可发布条目；Story 只出现在有明确 Evidence/Source 链路的 6 个条目上，其他内容不为追求覆盖而制造历史叙事。此数据边界尚未触发 #41 Story Experience、#42 双语/视觉改造或 #43 Meal Engine。
 
 ## 体验方向
 

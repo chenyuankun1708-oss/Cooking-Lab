@@ -1,19 +1,23 @@
 import { describe, expect, it } from "vitest";
+import { ingredients } from "@/data/ingredients";
 import { recipeImages } from "@/data/recipe-images";
 import { recipes } from "@/data/recipes";
 import type { AlcoholicDrinkItem, CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
+import type { RecipeImage } from "@/types/image";
 import type { TranslationSet } from "@/types/localization";
 import { adaptRecipeToCulinaryItem } from "../culinary-item-adapter";
-import { evaluateCulinaryItemPublishingEligibility, isCulinaryItemPubliclyVisible } from "../culinary-publishing";
+import { evaluateCulinaryItemPublishingEligibility, isCulinaryItemPubliclyVisible, type CulinaryPublishingContext } from "../culinary-publishing";
 import { validateCulinaryItem, validateSource, validateStory } from "../culinary-validation";
 import { resolveTranslation } from "../localization";
 
 const publishingContext = {
-  imageIds: new Set(recipeImages.map((image) => image.id)),
+  ingredients,
+  images: recipeImages,
+  localAssetExists: () => true,
   stories: [],
   sources: [],
   evidence: [],
-};
+} satisfies CulinaryPublishingContext;
 
 describe("Culinary Knowledge domain", () => {
   it("adapts all 100 recipes without changing their canonical data", () => {
@@ -36,6 +40,18 @@ describe("Culinary Knowledge domain", () => {
   });
 
   it("allows an alcoholic drink to publish without fake cooking steps", () => {
+    const wineImage: RecipeImage = {
+      id: "wine-fixture",
+      src: "/images/culinary/sample-dry-red-wine/hero.webp",
+      alt: "A glass of sample dry red wine",
+      role: "hero",
+      delivery: "local",
+      width: 1500,
+      height: 1000,
+      aspectRatio: "3:2",
+      source: "self-created",
+      license: "self-created",
+    };
     const wine: AlcoholicDrinkItem = {
       id: "sample-dry-red-wine",
       slug: "sample-dry-red-wine",
@@ -44,7 +60,14 @@ describe("Culinary Knowledge domain", () => {
         defaultLocale: "en",
         entries: [{ locale: "en", status: "reviewed", value: { name: "Sample dry red wine", description: "A publishing contract fixture." } }],
       },
-      taxonomy: { techniqueIds: [], formIds: ["wine"], dietaryTagIds: [], browseTagIds: [] },
+      taxonomy: {
+        origin: { countryId: "spain" },
+        cuisine: { cuisineId: "spanish" },
+        techniqueIds: [],
+        formIds: ["fortified-wine"],
+        dietaryTagIds: [],
+        browseTagIds: [],
+      },
       flavor: recipes[0].flavor,
       images: { availability: "available", references: { primaryImageId: "wine-fixture", imageIds: ["wine-fixture"] } },
       storyIds: [],
@@ -58,7 +81,7 @@ describe("Culinary Knowledge domain", () => {
         content: { defaultLocale: "en", entries: [{ locale: "en", status: "reviewed", value: { servingNote: "Serve according to the producer guidance." } }] },
       },
     };
-    const context = { ...publishingContext, imageIds: new Set(["wine-fixture"]) };
+    const context = { ...publishingContext, images: [...recipeImages, wineImage] };
     expect(validateCulinaryItem(wine)).toEqual([]);
     expect(evaluateCulinaryItemPublishingEligibility(wine, context)).toEqual({ itemId: wine.id, eligible: true, issues: [] });
   });

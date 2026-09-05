@@ -2,7 +2,7 @@
 
 ## M6 Model Boundary
 
-当前 production data 仍以 100 道 `Recipe` 为 source of truth。Issue #38 新增 `CulinaryItem` shared base + discriminated union、locale-based Translation、Story/Claim、Source/Evidence 与 Pairing signals contract，并提供 Recipe -> DishItem 的只读 adapter；它没有建立第二份 100 条静态数据。
+现有 100 道配方仍以 `Recipe` 为 source of truth。Issue #38 新增 `CulinaryItem` shared base + discriminated union、locale-based Translation、Story/Claim、Source/Evidence 与 Pairing signals contract，并提供 Recipe -> DishItem 的只读 adapter；它没有建立第二份 100 条静态数据。Issue #40 在 `data/culinary/` 增加 16 个原生内容条目，并由 `data/published-culinary-items.ts` 把 10 个 published Recipe 的 adapter 投影与原生条目组合成 26 项统一 public boundary。
 
 `RecipePublicationStatus` 现在复用共享 `PublicationStatus`，`SupportedLocale / LocalizedLabel` 也从共享 localization contract re-export，因此现有 imports 与行为不变。完整 schema、类型限制、迁移矩阵和 persistence boundary 见 `docs/CULINARY_KNOWLEDGE_MODEL.md`。
 
@@ -14,7 +14,7 @@ Issue #39 增加 `Source.health` 观察状态与轻量 `ResearchRecord`。health
 
 ## Ingredient
 
-当前包含 73 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。
+当前包含 102 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量只补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材。
 
 - `id` 使用稳定的英文 kebab-case，名称和别名仅用于展示与搜索。
 - `nutritionPer100g` 所有字段均为非负有限数；当前值是用于产品验证的公开常识级估算，不代表特定品牌、产地、烹饪状态或医学建议。
@@ -25,7 +25,7 @@ Issue #39 增加 `Source.health` 观察状态与轻量 `ResearchRecord`。health
 - 使用非重量默认单位的食材必须提供对应近似克重。数据校验同时检查重复 ID/名称、非法营养值、非法价格和无效换算重量。
 - 当前类别是面向 MVP 筛选的粗粒度烹饪分类；例如豆类归入 `protein`、块茎归入 `vegetable` 并使用 `staple` 标签。若后续需要食品学分类或多维筛选，应另行升级 schema，而不是改变现有类别含义。
 - 当 raw / dry / cooked / canned / frozen 状态会显著改变营养、重量、时间或推荐匹配时，状态必须体现在稳定 ID 和显示名称中，不能由 recipe 文案隐含。当前使用 `dry-lentil`、`cooked-chickpea`、`cooked-black-bean`、`cooked-rice`；日常熟豆 recipe 不再引用含义模糊的干豆 ID。
-- 当前 73 种食材覆盖 100 道菜谱的主要类别；自动化校验继续阻止悬空 Ingredient ID。
+- 当前 73 种 Recipe 食材覆盖 100 道菜谱的主要类别；新增 29 种 CulinaryItem 食材均被 native item 引用。自动化校验继续阻止两套内容的悬空 Ingredient ID。
 
 ## Recipe
 
@@ -77,6 +77,8 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 `validateIngredients`、`validateRecipes` 与 `validateImageAssets` 分别负责静态实体规则；`validateDataset` 组合三者并检查完整 Ingredient/Recipe/Image 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性、图片授权 metadata 及跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
 
 `evaluateRecipePublishingEligibility` 是更窄的发布 gate：在 Recipe validation 之外验证 nutrition/cost completeness、hero/license/local asset/alt、公开步骤信息量和事实性 culture provenance。更深的 sensory cue、doneness、失败预防与 food accuracy 仍由人工 editorial review 决定，不使用脆弱 NLP 规则自动盖章。当前 public adapter 暴露 10 道 published Recipe，静态详情参数也只有 10 个。
+
+`evaluateCulinaryItemPublishingEligibility` 按 item type 执行统一门禁：所有公开条目需要已审核默认语言、可解析 taxonomy/pairing、合法 primary image 和可达 Story provenance；procedural item 还需完整 ingredient 引用、类型对应的最少步骤和料理 rationale。dish/dessert 必须具备 nutrition 与 cost model；plain tea 和成品酒可以诚实使用 `not-modeled`，成品酒以 serving guidance 发布，不编造 cooking steps。`getPublishedCulinaryItems()` 是 26 项统一读取边界，但当前 Recipe 页面、推荐、相近料理与 SSG 仍继续读取原有 10-item Recipe public source。
 
 ## Recommendation
 

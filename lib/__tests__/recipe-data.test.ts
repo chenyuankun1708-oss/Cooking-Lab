@@ -67,7 +67,7 @@ describe("recipe dataset", () => {
 
   it("uses every ingredient and maintains broad coverage without hard quotas", () => {
     const used = new Set(recipes.flatMap((recipe) => recipe.ingredients.map((item) => item.ingredientId)));
-    expect(ingredients.slice(30).every((ingredient) => used.has(ingredient.id))).toBe(true);
+    expect(ingredients.slice(30, 73).every((ingredient) => used.has(ingredient.id))).toBe(true);
     expect(new Set(recipes.map((recipe) => recipe.taxonomy.origin?.countryId).filter(Boolean)).size).toBeGreaterThanOrEqual(15);
     expect(new Set(recipes.map((recipe) => recipe.taxonomy.cuisine.cuisineId)).size).toBeGreaterThanOrEqual(20);
     expect(new Set(recipes.flatMap((recipe) => recipe.taxonomy.techniques)).size).toBeGreaterThanOrEqual(15);

@@ -12,10 +12,14 @@ const mealRoleByDishType: Readonly<Record<string, MealRoleId | undefined>> = {
   "side-dish": "side",
   staple: "staple",
   soup: "soup",
+  "cold-dish": "starter",
 };
 
 export function adaptRecipeToCulinaryItem(recipe: Recipe): DishItem {
   const role = mealRoleByDishType[recipe.taxonomy.mealType.dishTypeId];
+  const servingContextIds = recipe.taxonomy.mealType.mealOccasionIds?.length
+    ? [...recipe.taxonomy.mealType.mealOccasionIds]
+    : ["lunch", "dinner"];
   const preparationKind = getPreparationKind(recipe);
   const translationStatus = recipe.publication.status === "draft" ? "draft" as const : "reviewed" as const;
   const steps: PreparationStep[] = recipe.steps.map((step) => ({
@@ -73,7 +77,7 @@ export function adaptRecipeToCulinaryItem(recipe: Recipe): DishItem {
     storyIds: [],
     pairing: {
       mealRoleIds: role ? [role] : [],
-      servingContextIds: [...(recipe.taxonomy.mealType.mealOccasionIds ?? [])],
+      servingContextIds,
       cuisineIds: [recipe.taxonomy.cuisine.cuisineId],
       facets: [],
     },

@@ -36,7 +36,7 @@ interface FlavorProfile {
 ```
 
 - Taste：`salty / sweet / sour / bitter / umami / spicy`
-- Aroma：11 个稳定值，包括 `garlicky / herbal / peppery / roasted / tomato-rich / gingery / citrusy / fermented / spiced`
+- Aroma：13 个稳定值，包括 `garlicky / herbal / peppery / smoky / roasted / toasty / tomato-rich / gingery / citrusy / fermented / spiced / fruity / floral`
 - Texture：`crisp / tender / juicy / silky / creamy / chewy / soft / brothy / saucy`
 - Character：`light / refreshing / comforting / warming / hearty / appetizing / rice-friendly / clean-tasting`
 
@@ -64,3 +64,5 @@ Card 和首页优先显示自然分组；详情页显示“自然分组 · 约 N
 ## Validation
 
 Validation 检查 intensity 是否为 `0–4` 整数、所有 ID 是否已注册、列表是否重复、明显冲突的 character 是否并存、profile 是否可 JSON 序列化，以及 100 道 recipe 是否都有唯一 canonical profile。
+
+Issue #40 为 dessert、tea、coffee 和 drink 内容增加 `fruity` 与 `floral` 两个 aroma ID。它们描述可感知香气，不作为 taste，也不引入新的 texture/aroma profile 层级；现有 100 道 Recipe profile 与 recommendation preference contract 保持不变。

@@ -104,3 +104,7 @@ Cooking Lab 的内容是根据可靠资料、料理常识和实际可执行性�
 ## Future Workflow
 
 后续每次发布 Recipe 的顺序是：完成结构字段与时间合同，补齐并核验 hero，完成逐道人工烹饪审校，运行 eligibility，再明确把状态从 `draft` 或 `reviewed` 改为 `published`。增加公开数量必须来自真实完成的内容批次，不建立 CMS，也不以自动分数替代编辑判断。
+
+## CulinaryItem Boundary
+
+Issue #40 没有把 Recipe gate 改造成所有料理类型共用的一张 required-field 清单。Recipe 继续使用本文件的发布规则；native content 由 `evaluateCulinaryItemPublishingEligibility()` 按 item type 验证 preparation、image、Story provenance 与 nutrition/cost applicability。统一 repository 只 adapter 投影已发布 Recipe，不复制或改写 `recipe.publication`。

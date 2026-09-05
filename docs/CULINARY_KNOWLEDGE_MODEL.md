@@ -4,10 +4,10 @@
 
 ## Purpose
 
-M6 把 Cooking Lab 的长期内容边界从单一 `Recipe` 扩展为 `CulinaryItem`，同时保持当前 100 道 structured Recipe、10 道 published Recipe 与所有 Web 行为不变。本文件区分两件事：
+M6 把 Cooking Lab 的长期内容边界从单一 `Recipe` 扩展为 `CulinaryItem`，同时保持当前 100 道 structured Recipe、10 道 published Recipe 与所有 Web 行为不变。Issue #40 已在该兼容边界上新增 16 个 native item，统一公开 repository 共 26 项。本文件区分两件事：
 
 - **Implemented contract**：`types/culinary.ts`、translation fallback、Recipe adapter、validation 与 item-type publishing skeleton 已存在并有测试。
-- **Migration architecture**：Repository、持久化和逐批内容迁移是后续工作；本 Issue 不引入数据库、CMS、双语 UI 或新公开内容。
+- **Migration architecture**：持久化迁移与旧 Recipe 的逐批转换仍是后续工作；当前不引入数据库、CMS 或双语 UI。
 
 ## Domain Model
 
@@ -182,10 +182,16 @@ Database adapter ---/
 4. 消费切换阶段：application repositories 稳定后，逐个切换 catalog/detail/discovery；每次保持 published count 与 SSG contract 可验证。
 5. 最后才 deprecate Recipe-only culture 与命名字段。100 条数据不会一次性重写。
 
+## Issue #40 Production Use
+
+首批 production data 使用同一个 discriminated union 建立 3 个 dish、3 个 dessert、4 个 tea、2 个 coffee、2 个 non-alcoholic drink 与 2 个 alcoholic drink。它们与 10 个 adapted published Recipe 通过 `getPublishedCulinaryItems()` 形成 26 项统一 public boundary；没有复制旧 Recipe。
+
+Publishing gate 已从 skeleton 收紧为按类型检查 preparation、ingredient、nutrition/cost applicability、taxonomy、pairing、image asset 和可达 Story provenance。成品酒使用 serving guidance；必要浸泡、冷藏和静置进入 total time。完整 portfolio 与暂缓候选见 `docs/CULINARY_PORTFOLIO.md`。
+
 ## Explicit Non-goals
 
 - 不实现 Pairing/Meal Engine
-- 不新增 dish、dessert 或 drink 内容
 - 不做 Story UI、双语切换或视觉改版
 - 不引入数据库、Prisma、CMS、抓取或 AI 内容生成
-- 不改变当前 published count、recommendation、similarity、homepage、catalog、detail 或 SSG
+- 不把 100 个 Recipe 进行 big-bang rewrite
+- 不改变 recommendation、similarity、homepage、catalog、detail 或 SSG 的现有 Recipe runtime

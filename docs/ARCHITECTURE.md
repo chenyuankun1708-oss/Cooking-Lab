@@ -245,3 +245,20 @@ Evaluated source catalog -> ResearchRecord -> reviewed Source/Evidence
 ```
 
 ResearchRecord 是 decision history，不是 production knowledge node。Source Registry、Evidence Registry 和 publishable Story 仍保持独立生命周期。Validator 可以检查 locator、rights metadata、重复与断裂引用；可信度、历史解释、版权歧义、文化措辞和最终发布必须人工决定。当前没有网络请求、scheduler、crawler、database 或 CMS。流程细节见 `docs/CONTENT_RESEARCH.md`，版权与 link-rot policy 见 `docs/SOURCE_POLICY.md`。
+
+## M6 Unified Culinary Library
+
+Issue #40 第一次在兼容架构上加入 native production content：
+
+```text
+getPublishedRecipes() -> Recipe adapter --+
+                                         +-> candidates -> publishing gate -> getPublishedCulinaryItems()
+data/culinary/items/* --------------------+
+        |                    |             |
+        +-> images           +-> Story -> Evidence -> Source
+        +-> ingredients / Flavor / taxonomy / pairing
+```
+
+`data/culinary/` 按 item type 和 provenance concern 拆分，避免单个巨型 data file。`lib/culinary-library-validation.ts` 负责跨 item 的 ID/slug 唯一性和 public filtering；`lib/culinary-publishing.ts` 按类型验证 preparation、nutrition/cost、图片与可达 provenance。filesystem 检查仍由 `data/published-culinary-items.ts` 通过回调注入，domain 不 import Node filesystem。
+
+统一 repository 当前包含 10 个 adapted Recipe 和 16 个 native item。现有 homepage、catalog、detail、recommendation、similarity 与 SSG 不切换读取源，因此 #40 没有造成双维护，也没有提前实施 #41 Story UI、#42 visual/bilingual experience 或 #43 Meal Engine。

@@ -195,3 +195,9 @@ Validator 只证明 contract 与引用完整，不证明历史判断、版权结
 目前 3 个 exercises 与小型 registry 使用 TS data modules，domain 与 validator 不依赖 filesystem 或数据库。当出现 hundreds/thousands CulinaryItems、密集 many-to-many Story/Evidence/Source、多人编辑审批、更新历史、大量翻译或持续 source health tracking 时，TS/JSON 将不再适合。
 
 届时通过 repository adapter 持久化 Source、Evidence、ResearchRecord 和 catalog；本 Issue 不提前选择 Postgres、Supabase、Prisma 或 CMS。
+
+## Production Batch #40
+
+第一批 native Culinary Library 将 #39 的流程用于真实发布数据，而不是把 evaluated provider catalog 当作 Evidence。6 个 production Story 各自通过 Claim 引用具体 Evidence，再定位到 7 个具体 Source；Source 包括学术研究、UNESCO 名录、专业组织资料与官方产区文档。没有足够窄、可支持主张的候选保持 `storyIds: []`。
+
+图片研究继续独立：16 张 hero 都指向具体 Wikimedia Commons file page，并逐张记录作者、exact CC license、attribution 与本地改编资产。Wikimedia provider 本身不构成某张图片的授权 Evidence。候选选择、发布矩阵和暂缓理由见 `docs/CULINARY_PORTFOLIO.md`。

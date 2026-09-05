@@ -55,7 +55,7 @@ GitHub tracking:
 
 在 taxonomy 稳定后，扩展内容覆盖面，形成一个更像“小型世界料理地图”的结构化数据集。
 
-当前已完成 100 道 recipe、73 种 ingredient、16 种 technique 与 20 个 country 状态的覆盖；详细基线见 `docs/RECIPE_COVERAGE.md`。
+当前已完成 100 道 recipe、73 种 Recipe ingredient、16 种 technique 与 20 个 country 状态的覆盖；Issue #40 另增加 29 种只服务 native CulinaryItem 的食材，repository 合计 102 种。Recipe 基线见 `docs/RECIPE_COVERAGE.md`。
 
 ### D. Recipe image system and visual asset pipeline
 
@@ -120,10 +120,12 @@ Issue #32 已通过 PR #36 合并：五道 published Recipe 以固定编辑顺�
 
 ## 当前阶段：M6 Culinary Knowledge Platform
 
-GitHub tracking：Epic `#37`，基础架构 `#38`，Content Research / Source & Provenance `#39`。
+GitHub tracking：Epic `#37`，基础架构 `#38`，Content Research / Source & Provenance `#39`，Culinary Library expansion `#40`。
 
 Issue #38 先建立 Culinary Knowledge Model 与低风险 migration architecture：shared base + 六类 discriminated union、不同 preparation semantics、Story/Claim、Source/Evidence、locale Translation、Pairing signals 和 item-type publication。当前 Recipe 通过 adapter 保持兼容，不做 100 条 big-bang rewrite。
 
 Issue #39 在 #38 contract 上建立可重复的人工/半自动研究链：evaluated source catalog、rights policy、source health、ResearchRecord、八类研究模板和三个真实 mini exercises。它只验证研究到 publication candidate 的基础设施，不发布新内容，也不引入 crawler、scheduler、database、CMS 或 Story UI。
+
+Issue #40 已实现第一批跨类型 production portfolio：16 个 native CulinaryItem 与 10 个 adapted published Recipe 组成 26 项统一公开 repository，覆盖六种 item type、七种 preparation kind、14 个 country ID、6 个可追溯 Story 和 26 张合格 hero。当前 Web runtime 保持 Recipe public source，不提前实施 #41 Story Experience、#42 双语/视觉体验或 #43 Meal Engine。
 
 后续顺序遵循 Epic #37：先完成 knowledge model，再建设可审阅的 content source/provenance pipeline，之后才扩充 dish/dessert/drink library、Story experience、双语体验与 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 #38 提前实施。

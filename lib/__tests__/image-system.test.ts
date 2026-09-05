@@ -68,7 +68,7 @@ describe("recipe image system", () => {
       "Image ID 重复",
       "非商业、禁止改编、未知或禁止授权的图片不能进入可用 registry",
       "Hero image alt 不能为空",
-      "本地图片路径必须符合 recipe asset naming convention",
+      "本地图片路径必须符合 recipe 或 culinary asset naming convention",
       "focalPoint x/y 必须在 0 到 1 之间",
     ]));
   });

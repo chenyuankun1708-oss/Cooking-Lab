@@ -1,5 +1,17 @@
 import { validateFlavorProfile } from "./flavor-validation";
 import { isNonNegativeFinite, isPositiveFinite, isSlug } from "./validation-utils";
+import { culinaryForms, servingContexts } from "@/data/culinary/taxonomy";
+import { textureVocabulary } from "@/data/flavor";
+import {
+  browseTags,
+  countries,
+  cuisines,
+  dietaryTags,
+  dishTypes as recipeDishTypes,
+  regions,
+  subCuisines,
+  techniques,
+} from "@/data/taxonomy";
 import {
   claimKinds,
   culinaryItemTypes,
@@ -15,6 +27,8 @@ import {
 } from "@/types/culinary";
 import { publicationStatuses } from "@/types/publication";
 import { supportedLocales, type TranslationSet } from "@/types/localization";
+import type { Unit } from "@/types/ingredient";
+import { emptyNutrition } from "@/types/nutrition";
 
 export interface CulinaryValidationIssue {
   entityId: string;
@@ -23,6 +37,9 @@ export interface CulinaryValidationIssue {
 }
 
 const proceduralKinds = new Set(["cooking", "baking", "brewing", "extraction", "mixing", "assembly"]);
+const units = new Set<Unit>(["g", "kg", "ml", "piece", "tbsp", "tsp"]);
+const pairingWeights = new Set(["light", "medium", "rich"]);
+const servingTemperatures = new Set(["cold", "cool", "room", "warm", "hot"]);
 const allowedPreparationKinds: Readonly<Record<CulinaryItem["itemType"], ReadonlySet<string>>> = {
   dish: new Set(["cooking", "baking", "assembly"]),
   dessert: new Set(["cooking", "baking", "assembly"]),
@@ -46,11 +63,21 @@ export function validateCulinaryItem(item: CulinaryItem): CulinaryValidationIssu
   }
 
   for (const issue of validateFlavorProfile(item.flavor)) report(`flavor.${issue.field}`, issue.message);
+  validateCulinaryTaxonomy(item, report);
   validateUniqueIds(item.taxonomy.techniqueIds, "taxonomy.techniqueIds", report);
   validateUniqueIds(item.taxonomy.formIds, "taxonomy.formIds", report);
   validateUniqueIds(item.storyIds, "storyIds", report);
   validateUniqueIds(item.pairing.mealRoleIds, "pairing.mealRoleIds", report);
   if (item.pairing.mealRoleIds.some((id) => !mealRoleIds.includes(id))) report("pairing.mealRoleIds", "存在未知 meal role ID");
+  validateUniqueIds(item.pairing.servingContextIds, "pairing.servingContextIds", report);
+  if (item.pairing.servingContextIds.some((id) => !(id in servingContexts))) report("pairing.servingContextIds", "存在未知 serving context ID");
+  validateUniqueIds(item.pairing.cuisineIds, "pairing.cuisineIds", report);
+  if (item.pairing.cuisineIds.some((id) => !(id in cuisines))) report("pairing.cuisineIds", "存在未知 pairing cuisine ID");
+  item.pairing.facets.forEach((facet, index) => {
+    if (facet.dimension === "weight" && !pairingWeights.has(facet.value)) report(`pairing.facets.${index}.value`, "未知 pairing weight");
+    if (facet.dimension === "temperature" && !servingTemperatures.has(facet.value)) report(`pairing.facets.${index}.value`, "未知 serving temperature");
+    if (facet.dimension === "texture" && !(facet.value in textureVocabulary)) report(`pairing.facets.${index}.value`, "未知 pairing texture ID");
+  });
 
   if (item.images.availability === "available") {
     const { primaryImageId, imageIds } = item.images.references;
@@ -64,6 +91,14 @@ export function validateCulinaryItem(item: CulinaryItem): CulinaryValidationIssu
     if (totalMinutes !== prepMinutes + processMinutes) report("preparation.time.totalMinutes", "总时间必须等于准备与过程时间之和");
     if (!isPositiveFinite(item.preparation.yield.amount)) report("preparation.yield.amount", "产出数量必须是正有限数");
     if (!item.preparation.inputs.length) report("preparation.inputs", "Procedural preparation 必须声明 inputs");
+    validateUniqueIds(item.preparation.inputs.map(({ ingredientId }) => ingredientId), "preparation.inputs", report);
+    item.preparation.inputs.forEach((input, index) => {
+      if (!isPositiveFinite(input.amount)) report(`preparation.inputs.${index}.amount`, "Input amount 必须是正有限数");
+      if (!units.has(input.unit)) report(`preparation.inputs.${index}.unit`, "Input unit 不在当前 schema 中");
+      if (typeof input.optional !== "boolean") report(`preparation.inputs.${index}.optional`, "Input optional 必须是布尔值");
+      if (input.note !== undefined && !input.note.trim()) report(`preparation.inputs.${index}.note`, "Input note 不能是空字符串");
+    });
+    validateUniqueIds(item.preparation.toolIds, "preparation.toolIds", report);
     item.preparation.steps.forEach((step, index) => {
       if (step.order !== index + 1) report(`preparation.steps.${index}.order`, "步骤序号必须连续");
       validateTranslations(step.content, `preparation.steps.${index}.content`, report, (value) => Boolean(value.instruction.trim()));
@@ -73,9 +108,16 @@ export function validateCulinaryItem(item: CulinaryItem): CulinaryValidationIssu
     });
   } else if (item.preparation.kind === "serving-guidance") {
     if (!isNonNegativeFinite(item.preparation.estimatedMinutes)) report("preparation.estimatedMinutes", "Serving time 必须是非负有限数");
+    validateUniqueIds(item.preparation.toolIds, "preparation.toolIds", report);
     validateTranslations(item.preparation.content, "preparation.content", report, (value) => Boolean(value.guidance.trim()));
   } else if (item.preparation.kind === "no-consumer-preparation") {
     validateTranslations(item.preparation.content, "preparation.content", report, (value) => Boolean(value.servingNote.trim()));
+  }
+
+  if (item.nutrition.applicability === "applicable" && item.nutrition.source === "declared-estimate") {
+    for (const field of Object.keys(emptyNutrition()) as Array<keyof ReturnType<typeof emptyNutrition>>) {
+      if (!isNonNegativeFinite(item.nutrition.value[field])) report(`nutrition.value.${field}`, "Nutrition estimate 必须是非负有限数");
+    }
   }
 
   try {
@@ -84,6 +126,33 @@ export function validateCulinaryItem(item: CulinaryItem): CulinaryValidationIssu
     report("item", "CulinaryItem 必须可 JSON 序列化");
   }
   return issues;
+}
+
+function validateCulinaryTaxonomy(
+  item: CulinaryItem,
+  report: (field: string, message: string) => void,
+) {
+  const { taxonomy } = item;
+  if (taxonomy.origin) {
+    if (!(taxonomy.origin.countryId in countries)) report("taxonomy.origin.countryId", "国家 ID 不在 taxonomy registry 中");
+    if (taxonomy.origin.regionId) {
+      const region = regions[taxonomy.origin.regionId];
+      if (!region) report("taxonomy.origin.regionId", "地域 ID 不在 taxonomy registry 中");
+      else if (region.parentId !== taxonomy.origin.countryId) report("taxonomy.origin.regionId", "地域与所属国家不匹配");
+    }
+  }
+  if (taxonomy.cuisine) {
+    if (!(taxonomy.cuisine.cuisineId in cuisines)) report("taxonomy.cuisine.cuisineId", "菜系 ID 不在 taxonomy registry 中");
+    if (taxonomy.cuisine.subCuisineId) {
+      const subCuisine = subCuisines[taxonomy.cuisine.subCuisineId];
+      if (!subCuisine) report("taxonomy.cuisine.subCuisineId", "子菜系 ID 不在 taxonomy registry 中");
+      else if (subCuisine.parentId !== taxonomy.cuisine.cuisineId) report("taxonomy.cuisine.subCuisineId", "子菜系与父级菜系不匹配");
+    }
+  }
+  if (taxonomy.techniqueIds.some((id) => !(id in techniques))) report("taxonomy.techniqueIds", "存在未知 technique ID");
+  if (taxonomy.formIds.some((id) => !(id in culinaryForms) && !(id in recipeDishTypes))) report("taxonomy.formIds", "存在未知 culinary form ID");
+  if (taxonomy.dietaryTagIds.some((id) => !(id in dietaryTags))) report("taxonomy.dietaryTagIds", "存在未知 dietary tag ID");
+  if (taxonomy.browseTagIds.some((id) => !(id in browseTags))) report("taxonomy.browseTagIds", "存在未知 browse tag ID");
 }
 
 export function validateStory(story: Story): CulinaryValidationIssue[] {

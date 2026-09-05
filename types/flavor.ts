@@ -13,6 +13,8 @@ export const aromaIds = [
   "citrusy",
   "fermented",
   "spiced",
+  "fruity",
+  "floral",
 ] as const;
 export const textureIds = ["crisp", "tender", "juicy", "silky", "creamy", "chewy", "soft", "brothy", "saucy"] as const;
 export const flavorCharacterIds = [

@@ -8,7 +8,7 @@
 
 M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展成一个更像“小型世界料理地图”的结构化内容体系。
 
-当前总量：100 道 structured recipes，其中 10 道 published recipes。最终 coverage 见 docs/RECIPE_COVERAGE.md，发布规则见 docs/RECIPE_PUBLISHING.md。
+当前总量：100 道 structured recipes，其中 10 道 published recipes；另有 16 个 native CulinaryItem，与 adapted Recipe 组成 26 项统一公开料理库。Recipe coverage 见 `docs/RECIPE_COVERAGE.md`，新库组合见 `docs/CULINARY_PORTFOLIO.md`。
 
 ## Publishing Strategy
 
@@ -260,3 +260,11 @@ M5 必须引入真实料理视觉系统，但本轮只定义 schema 和原则，
 5. 最后在消费者 Web 重设计中统一展示
 
 这样可以避免先堆大量内容，再回头做 schema 返工。
+
+## M6 Culinary Portfolio Strategy
+
+Issue #40 不再按“再加多少道菜”衡量内容扩张，而是同时审计 item type、meal role、地理语境、Flavor、Story 价值、图片权利和 pairing usefulness。首批 16 个 native item 有意补入 3 个 dessert、4 个 tea、2 个 coffee、2 个 non-alcoholic drink 和 2 个 alcoholic drink；3 个 dish 只用于补 main、soup 与 starter/side 的组合能力。
+
+生产 Story 只在 claim 能连接具体 Evidence/Source 时出现。Preparation 文案必须使用状态与完成信号，必要浸泡、冷藏或静置计入 total time；成品酒使用 serving guidance，不写假的 cooking steps。dish/dessert 保持 nutrition/cost 门禁，plain tea 与成品酒可使用明确的 `not-modeled` applicability。
+
+统一 public boundary 由 `getPublishedCulinaryItems()` 提供，但当前 Web 仍使用原有 10 个 published Recipe。内容模型可以先丰富，UI 不必在 #40 展示所有字段或提前进入 #41/#42/#43。

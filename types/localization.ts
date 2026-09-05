@@ -1,5 +1,6 @@
 export const supportedLocales = ["zh-CN", "en"] as const;
 export type SupportedLocale = (typeof supportedLocales)[number];
+export type Locale = SupportedLocale;
 
 export interface LocalizedLabel {
   "zh-CN": string;

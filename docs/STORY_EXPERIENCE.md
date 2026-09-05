@@ -47,11 +47,15 @@ Domain `Story` 使用 locale-based `dek + sections`，拥有独立 publication s
 
 ## Routes And Canonical URLs
 
-- Story：`/stories/[slug]`
-- adapted Recipe：继续以 `/recipes/[slug]` 为唯一 canonical URL
-- native CulinaryItem：使用 `/culinary/[slug]`
+- Story：`/{locale}/stories/[slug]`
+- adapted Recipe：继续以 `/{locale}/recipes/[slug]` 为唯一 canonical URL
+- native CulinaryItem：使用 `/{locale}/culinary/[slug]`
 
-`/culinary/[slug]` 只生成 16 个 native item 的静态页面，不为 10 个 Recipe 创建重复页面。native detail 是 #41 所需的最小落点：identity、type、Flavor、preparation/serving 与 Story links；它不是 #42 的全站改版，也没有新增 `/culinary` catalog。
+`/{locale}/culinary/[slug]` 只生成 16 个 native item 的静态页面，不为 10 个 Recipe 创建重复页面。无 locale 的旧路径重定向到 `zh-CN`，不会成为第二个 canonical URL；当前仍不新增 `/culinary` catalog。
+
+## Bilingual Story Policy
+
+六篇公开 Story 都有 reviewed `zh-CN / en` title、dek、sections 与 claim statement。翻译必须保留 documented fact、documented tradition、disputed attribution 与 legend/folklore 的 certainty，不能把“被记录的传统”提升为唯一起源或把争议归属写成事实。Source title 优先保留正式题名，Evidence locator value 不翻译，只本地化 locator label。
 
 ## Related Exploration
 
@@ -76,4 +80,4 @@ Domain `Story` 使用 locale-based `dek + sections`，拥有独立 publication s
 
 ## Scope
 
-Issue #41 不实现双语 UI、全站视觉重设计、完整 Culinary catalog、People/Place/Ingredient encyclopedia、地图、数据库、CMS、抓取、个性化、社交、AI 故事或 Meal Engine。
+Issue #41/#42 仍不实现完整 Culinary catalog、People/Place/Ingredient encyclopedia、地图、数据库、CMS、抓取、个性化、社交、AI 故事或 Meal Engine。

@@ -1,4 +1,5 @@
 import type { RecipeImage } from "@/types/image";
+import type { SupportedLocale } from "@/types/localization";
 import type { Recipe } from "@/types/recipe";
 
 export interface RecipeImageFallback {
@@ -18,4 +19,9 @@ export function getRecipeImageFallback(recipe: Recipe): RecipeImageFallback {
     initial: [...label][0] ?? "食",
     label: label || "Cooking Lab",
   };
+}
+
+export function formatImageAttribution(attribution: string, locale: SupportedLocale): string {
+  if (locale === "zh-CN") return attribution;
+  return attribution.replaceAll("，", ", ").replaceAll("裁切处理", "cropped");
 }

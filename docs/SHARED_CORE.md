@@ -31,8 +31,8 @@ Application 输出必须由 plain object、array、string、number、boolean 与
 
 ### Web Adapter
 
-- lib/recipe-detail-display.ts: 将 detail model 转成当前详情页需要的中文 label 与格式化字符串
-- lib/display-labels.ts: 当前 Web 使用的单位、难度等显示映射，并兼容 re-export tool label helper
+- lib/recipe-detail-display.ts: 将 detail model 转成当前详情页需要的 locale-aware label 与格式化字符串
+- lib/display-labels.ts: 当前 Web 使用的双语单位、难度等显示映射，并兼容 re-export tool label helper
 - lib/formatters.ts: 当前 Web 的时间、营养、成本与质量文案
 - app/、components/: Next.js 路由、metadata、React state、markup 与样式
 
@@ -44,7 +44,7 @@ Application 输出必须由 plain object、array、string、number、boolean 与
 
 - lib/recipe-detail.ts 原先混合数值聚合与“15 分钟”“预计 ¥12.5”等 Web 文案；现已拆成 buildRecipeDetail() 与 buildRecipeDetailDisplay()。
 - Nutrition、cost、unit conversion、taxonomy 与 validation 没有 framework coupling，无需移动文件。
-- Recommendation engine 不依赖 React 或 Next.js，权重集中、输入输出可序列化。它仍生成中文 explanation；由于完整拆分 reason codes 会扩大类型和 UI 改动，本轮保留为 application-level presentation debt。
+- Recommendation engine 不依赖 React 或 Next.js，权重集中、输入输出可序列化。Issue #42 已移除 core 中的中文 explanation 和显示名称，改由 locale-aware display adapter 生成说明。
 - Taxonomy registry 与 locale label lookup 是 framework-independent 数据能力；Web formatter 继续独立存在，不引入 i18n framework。
 - 内部使用 Map、Set 与 UnitConversionError 不构成跨客户端问题；公开 calculation、detail 与 recommendation 结果保持 plain data。
 

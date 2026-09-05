@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { RecipeImage as RecipeImageAsset } from "@/types/image";
+import type { SupportedLocale } from "@/types/localization";
+import { formatImageAttribution } from "@/lib/recipe-images";
 
 const imageSizes = {
   card: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw",
@@ -16,6 +18,9 @@ interface RecipeImageProps {
   variant: keyof typeof imageSizes;
   preload?: boolean;
   showAttribution?: boolean;
+  alt?: string;
+  sourceLabel?: string;
+  locale?: SupportedLocale;
 }
 
 export function RecipeImage({
@@ -25,6 +30,9 @@ export function RecipeImage({
   variant,
   preload = false,
   showAttribution = true,
+  alt,
+  sourceLabel = "来源",
+  locale = "zh-CN",
 }: RecipeImageProps) {
   const [failed, setFailed] = useState(false);
   const frameClass = variant === "card" ? "aspect-[4/3]" : "aspect-[3/2]";
@@ -49,7 +57,7 @@ export function RecipeImage({
     <figure>
       <div className={`${frameClass} relative w-full overflow-hidden rounded-md bg-stone-100`}>
         <Image
-          alt={image.alt}
+          alt={alt ?? image.alt}
           fill
           loading={preload ? undefined : "lazy"}
           onError={() => setFailed(true)}
@@ -61,8 +69,8 @@ export function RecipeImage({
       </div>
       {showAttribution && variant === "hero" && (image.attribution || image.sourceUrl || image.licenseUrl) ? (
         <figcaption className="mt-2 flex flex-wrap items-center justify-end gap-x-2 text-right text-xs leading-5 text-stone-500">
-          {image.attribution ? <span>{image.attribution}</span> : null}
-          {image.sourceUrl ? <a className="inline-flex min-h-11 items-center underline underline-offset-2" href={image.sourceUrl} rel="noreferrer" target="_blank">来源</a> : null}
+          {image.attribution ? <span>{formatImageAttribution(image.attribution, locale)}</span> : null}
+          {image.sourceUrl ? <a className="inline-flex min-h-11 items-center underline underline-offset-2" href={image.sourceUrl} rel="noreferrer" target="_blank">{sourceLabel}</a> : null}
           {image.licenseUrl ? <a className="inline-flex min-h-11 items-center underline underline-offset-2" href={image.licenseUrl} rel="noreferrer" target="_blank">{image.license}</a> : null}
         </figcaption>
       ) : null}

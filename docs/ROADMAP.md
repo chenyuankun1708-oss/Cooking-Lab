@@ -130,4 +130,6 @@ Issue #40 已实现第一批跨类型 production portfolio：16 个 native Culin
 
 Issue #41 建立紧凑 `/stories`、六篇 `/stories/[slug]` 阅读页和 16 个 native `/culinary/[slug]` 最小详情页。Recipe 继续使用原 canonical route；Story related exploration 采用 published-only deterministic signals，来源 UI 不暴露编辑内部 provenance。它不提前实现 #42 双语/全站视觉体验或 #43 Meal Engine。
 
-后续顺序遵循 Epic #37：先完成 knowledge model，再建设可审阅的 content source/provenance pipeline，之后才扩充 dish/dessert/drink library、Story experience、双语体验与 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 #38 提前实施。
+Issue #42 建立 `zh-CN / en` locale route、strict reviewed public translation、双语 Recommendation/Similarity presentation 与 canonical/hreflang metadata。10 道 published Recipe、16 个 native CulinaryItem 和 6 篇 Story 全部覆盖英文；90 道 draft Recipe 保持不变。视觉以更亮 Hero、语义 surface、紧凑首页/目录和 Story/饮品层级继续演进，没有引入 i18n dependency、字体或动画库。
+
+后续顺序遵循 Epic #37：knowledge model、source/provenance、跨类型 library、Story experience 与双语体验完成后，才进入后续 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 M6 前置实施。

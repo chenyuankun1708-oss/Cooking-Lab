@@ -1,5 +1,8 @@
 import type { CulinaryItem } from "@/types/culinary";
 import type { Ingredient, Unit } from "@/types/ingredient";
+import type { SupportedLocale } from "@/types/localization";
+import { getLocalizedCulinaryCopy } from "@/data/localization/public-culinary";
+import { getIngredientLabel } from "@/data/localization/ingredients";
 import { describeFlavorProfile } from "./flavor";
 import { resolveTranslation } from "./localization";
 import { getToolLabel } from "./tool-labels";
@@ -47,33 +50,35 @@ export interface CulinaryDetailModel {
   stories: StoryPreview[];
 }
 
-const preparationLabels: Readonly<Record<CulinaryItem["preparation"]["kind"], string>> = {
-  cooking: "烹饪",
-  baking: "烘焙",
-  brewing: "冲泡",
-  extraction: "萃取",
-  mixing: "调制",
-  assembly: "组合",
-  "serving-guidance": "服务建议",
-  "no-consumer-preparation": "开启即用",
+const preparationLabels: Readonly<Record<CulinaryItem["preparation"]["kind"], Record<SupportedLocale, string>>> = {
+  cooking: { "zh-CN": "烹饪", en: "Cooking" },
+  baking: { "zh-CN": "烘焙", en: "Baking" },
+  brewing: { "zh-CN": "冲泡", en: "Brewing" },
+  extraction: { "zh-CN": "萃取", en: "Extraction" },
+  mixing: { "zh-CN": "调制", en: "Mixing" },
+  assembly: { "zh-CN": "组合", en: "Assembly" },
+  "serving-guidance": { "zh-CN": "服务建议", en: "Serving guidance" },
+  "no-consumer-preparation": { "zh-CN": "开启即用", en: "Ready to serve" },
 };
 
-const unitLabels: Readonly<Record<Unit | "serving" | "ml" | "piece" | "g", string>> = {
-  g: "克",
-  kg: "千克",
-  ml: "毫升",
-  piece: "个",
-  tbsp: "大勺",
-  tsp: "小勺",
-  serving: "份",
+const unitLabels: Readonly<Record<Unit | "serving" | "ml" | "piece" | "g", Record<SupportedLocale, string>>> = {
+  g: { "zh-CN": "克", en: "g" },
+  kg: { "zh-CN": "千克", en: "kg" },
+  ml: { "zh-CN": "毫升", en: "ml" },
+  piece: { "zh-CN": "个", en: "pc" },
+  tbsp: { "zh-CN": "大勺", en: "tbsp" },
+  tsp: { "zh-CN": "小勺", en: "tsp" },
+  serving: { "zh-CN": "份", en: "servings" },
 };
 
 export function buildCulinaryDetailModel(
   item: CulinaryItem,
   ingredients: readonly Ingredient[],
   storyContext: StoryExperienceContext,
+  locale: SupportedLocale = "zh-CN",
 ): CulinaryDetailModel {
-  const copy = resolveTranslation(item.content, "zh-CN").value;
+  const translated = getLocalizedCulinaryCopy(item.id, locale);
+  const copy = translated ?? resolveTranslation(item.content, locale).value;
   const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
   const storyById = new Map(storyContext.stories.map((story) => [story.id, story]));
   return {
@@ -81,12 +86,12 @@ export function buildCulinaryDetailModel(
     slug: item.slug,
     name: copy.name,
     description: copy.description,
-    itemTypeLabel: getCulinaryItemTypeLabel(item.itemType),
-    placeLabel: getCulinaryItemPlaceLabel(item),
-    flavorLabel: describeFlavorProfile(item.flavor),
+    itemTypeLabel: getCulinaryItemTypeLabel(item.itemType, locale),
+    placeLabel: getCulinaryItemPlaceLabel(item, locale),
+    flavorLabel: describeFlavorProfile(item.flavor, locale),
     image: getCulinaryItemHeroImage(item, storyContext.images),
     fallbackInitial: [...copy.name][0] ?? "食",
-    preparation: buildPreparation(item, ingredientById),
+    preparation: buildPreparation(item, ingredientById, locale, translated),
     stories: item.storyIds.flatMap((storyId) => {
       const story = storyById.get(storyId);
       return story ? [buildStoryPreview(story, storyContext)] : [];
@@ -94,30 +99,30 @@ export function buildCulinaryDetailModel(
   };
 }
 
-function buildPreparation(item: CulinaryItem, ingredientById: ReadonlyMap<string, Ingredient>): CulinaryDetailPreparation {
+function buildPreparation(item: CulinaryItem, ingredientById: ReadonlyMap<string, Ingredient>, locale: SupportedLocale, translated?: ReturnType<typeof getLocalizedCulinaryCopy>): CulinaryDetailPreparation {
   const preparation = item.preparation;
   if ("inputs" in preparation) {
     return {
       kind: "procedural",
-      label: preparationLabels[preparation.kind],
-      totalTimeLabel: `${preparation.time.totalMinutes} 分钟`,
-      yieldLabel: `${preparation.yield.amount} ${unitLabels[preparation.yield.unit]}`,
-      tools: preparation.toolIds.map(getToolLabel),
+      label: preparationLabels[preparation.kind][locale],
+      totalTimeLabel: `${preparation.time.totalMinutes} ${locale === "zh-CN" ? "分钟" : "min"}`,
+      yieldLabel: `${preparation.yield.amount} ${unitLabels[preparation.yield.unit][locale]}`,
+      tools: preparation.toolIds.map((tool) => getToolLabel(tool, locale)),
       inputs: preparation.inputs.map((input) => ({
         id: input.ingredientId,
-        name: ingredientById.get(input.ingredientId)?.name ?? input.ingredientId,
-        amount: `${input.amount} ${unitLabels[input.unit]}`,
+        name: getIngredientLabel(input.ingredientId, ingredientById.get(input.ingredientId)?.name, locale),
+        amount: `${input.amount} ${unitLabels[input.unit][locale]}`,
         optional: input.optional,
-        note: input.note,
+        note: locale === "zh-CN" ? input.note : translated?.inputNotes?.[input.ingredientId],
       })),
-      steps: preparation.steps.map((step) => {
-        const copy = resolveTranslation(step.content, "zh-CN").value;
+      steps: preparation.steps.map((step, index) => {
+        const copy = translated?.steps?.[index] ?? resolveTranslation(step.content, locale).value;
         return {
           order: step.order,
           instruction: copy.instruction,
           rationale: copy.rationale,
           stateCue: copy.stateCue,
-          durationLabel: step.durationMinutes === undefined ? undefined : `${step.durationMinutes} 分钟`,
+          durationLabel: step.durationMinutes === undefined ? undefined : `${step.durationMinutes} ${locale === "zh-CN" ? "分钟" : "min"}`,
         };
       }),
     };
@@ -125,15 +130,15 @@ function buildPreparation(item: CulinaryItem, ingredientById: ReadonlyMap<string
   if (preparation.kind === "serving-guidance") {
     return {
       kind: "guidance",
-      label: preparationLabels[preparation.kind],
-      estimatedTimeLabel: `${preparation.estimatedMinutes} 分钟`,
-      tools: preparation.toolIds.map(getToolLabel),
-      guidance: resolveTranslation(preparation.content, "zh-CN").value.guidance,
+      label: preparationLabels[preparation.kind][locale],
+      estimatedTimeLabel: `${preparation.estimatedMinutes} ${locale === "zh-CN" ? "分钟" : "min"}`,
+      tools: preparation.toolIds.map((tool) => getToolLabel(tool, locale)),
+      guidance: translated?.guidance ?? resolveTranslation(preparation.content, locale).value.guidance,
     };
   }
   return {
     kind: "ready",
-    label: preparationLabels[preparation.kind],
-    guidance: resolveTranslation(preparation.content, "zh-CN").value.servingNote,
+    label: preparationLabels[preparation.kind][locale],
+    guidance: translated?.guidance ?? resolveTranslation(preparation.content, locale).value.servingNote,
   };
 }

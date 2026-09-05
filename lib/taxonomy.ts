@@ -93,24 +93,24 @@ export function getRecipeTagLabels(recipe: Recipe, locale: SupportedLocale = "zh
   });
 }
 
-export function listRecipeCuisineOptions(recipes: readonly Recipe[]) {
-  return countOptions(recipes.map((recipe) => recipe.taxonomy.cuisine.cuisineId), cuisines);
+export function listRecipeCuisineOptions(recipes: readonly Recipe[], locale: SupportedLocale = "zh-CN") {
+  return countOptions(recipes.map((recipe) => recipe.taxonomy.cuisine.cuisineId), cuisines, locale);
 }
 
-export function listRecipeTechniqueOptions(recipes: readonly Recipe[]) {
-  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.techniques), techniques);
+export function listRecipeTechniqueOptions(recipes: readonly Recipe[], locale: SupportedLocale = "zh-CN") {
+  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.techniques), techniques, locale);
 }
 
-export function listRecipeCountryOptions(recipes: readonly Recipe[]) {
-  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.origin?.countryId ?? []), countries);
+export function listRecipeCountryOptions(recipes: readonly Recipe[], locale: SupportedLocale = "zh-CN") {
+  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.origin?.countryId ?? []), countries, locale);
 }
 
-export function listRecipeRegionOptions(recipes: readonly Recipe[]) {
-  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.origin?.regionId ?? []), regions);
+export function listRecipeRegionOptions(recipes: readonly Recipe[], locale: SupportedLocale = "zh-CN") {
+  return countOptions(recipes.flatMap((recipe) => recipe.taxonomy.origin?.regionId ?? []), regions, locale);
 }
 
-export function listRecipeDishTypeOptions(recipes: readonly Recipe[]) {
-  return countOptions(recipes.map((recipe) => recipe.taxonomy.mealType.dishTypeId), dishTypes);
+export function listRecipeDishTypeOptions(recipes: readonly Recipe[], locale: SupportedLocale = "zh-CN") {
+  return countOptions(recipes.map((recipe) => recipe.taxonomy.mealType.dishTypeId), dishTypes, locale);
 }
 
 export function getCuisineHierarchyLabels(recipe: Recipe, locale: SupportedLocale = "zh-CN") {
@@ -123,10 +123,10 @@ export function getCuisineHierarchyLabels(recipe: Recipe, locale: SupportedLocal
   };
 }
 
-function countOptions(ids: readonly string[], registry: Readonly<Record<string, { label: Record<SupportedLocale, string> }>>) {
+function countOptions(ids: readonly string[], registry: Readonly<Record<string, { label: Record<SupportedLocale, string> }>>, locale: SupportedLocale) {
   const counts = new Map<string, number>();
   for (const id of ids) counts.set(id, (counts.get(id) ?? 0) + 1);
   return [...counts]
-    .map(([id, count]) => ({ id, label: registry[id]?.label["zh-CN"] ?? id, count }))
-    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, "zh-CN"));
+    .map(([id, count]) => ({ id, label: registry[id]?.label[locale] ?? id, count }))
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, locale));
 }

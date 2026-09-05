@@ -103,6 +103,8 @@ Issue #40 首次把该模型用于生产内容：在保留 100 structured / 10 p
 
 Issue #41 把这 6 篇 Story 变成第二条核心消费路径：`Home -> Stories -> Story detail -> related CulinaryItem / Story`。Story 页面以阅读为主，不展示营养、成本或内部 provenance 枚举；现有 Recipe 保持 `/recipes/[slug]`，16 个 native item 只增加必要的 `/culinary/[slug]` 落点，避免重复 canonical URL，也不提前实施 #42 全站改版。
 
+Issue #42 建立完整的 `zh-CN / en` 消费体验。公开路由使用 locale 前缀，语言切换保留内容 identity 与筛选条件；10 道 published Recipe、16 个 native CulinaryItem 和 6 篇 Story 都有 reviewed English copy，90 道 draft Recipe 不为覆盖率批量翻译。视觉继续沿用 Fresh Editorial 70% + Modern Culinary Lab 30%，通过更亮的 food-first Hero、语义 surface 和更紧凑的目录/首页节奏演进，而不是重新设计产品。
+
 ## 体验方向
 
 ### 首页 v2 实现

@@ -5,7 +5,6 @@ import type { RecommendationCriteria } from "@/types/recommendation";
 import type { IngredientRepository } from "../ingredient-repository";
 import { getRecipeCuisineId, getRecipePrimaryTechniqueId, getRecipeTagIds } from "../taxonomy";
 import {
-  buildRecommendationExplanation,
   discoverRecipes,
   hasActiveCriteria,
   INGREDIENT_CATEGORY_WEIGHTS,
@@ -13,6 +12,7 @@ import {
   resetRecommendationCriteria,
   RuleRecommendationEngine,
 } from "../recommendation";
+import { buildRecommendationExplanation } from "../recommendation-display";
 
 const engine = new RuleRecommendationEngine();
 const target = recipes[0];
@@ -56,13 +56,14 @@ describe("hard constraints", () => {
     expect(result.metrics.saltPerServing).toBe(target.cooking.salt / target.servings);
   });
 
-  it("makes missing tools a hard feasibility failure with names", () => {
+  it("makes missing tools a structured hard feasibility failure", () => {
     const availableTools = target.tools.slice(1);
     const result = evaluate({ availableTools });
     expect(result.eligible).toBe(false);
     expect(result.missingTools).toContainEqual(expect.objectContaining({ id: target.tools[0] }));
-    expect(result.hardFailures.find(({ criterion }) => criterion === "availableTools")?.message).toContain(result.missingTools[0].name);
-    expect(result.explanation).toMatch(/暂时不合适/);
+    expect(result.hardFailures).toContainEqual({ criterion: "availableTools", reason: "missing-tools" });
+    expect(buildRecommendationExplanation(result, "zh-CN")).toMatch(/暂时不合适/);
+    expect(buildRecommendationExplanation(result, "en")).toMatch(/missing tools/);
   });
 
   it("never lets a perfect soft score override a hard failure", () => {
@@ -92,8 +93,8 @@ describe("ingredient fit", () => {
     expect(oneMissing.missingIngredients).toHaveLength(1);
     expect(severalMissing.missingIngredients.length).toBeGreaterThan(1);
     expect(oneMissing.ingredientMatch.fit).toBeGreaterThan(severalMissing.ingredientMatch.fit);
-    expect(oneMissing.explanation).toContain("只缺");
-    expect(severalMissing.explanation).toContain("还缺");
+    expect(buildRecommendationExplanation(oneMissing, "zh-CN")).toContain("只缺");
+    expect(buildRecommendationExplanation(severalMissing, "zh-CN")).toContain("还缺");
   });
 
   it("does not penalize missing optional ingredients", () => {
@@ -136,7 +137,7 @@ describe("soft preferences and score", () => {
     const result = evaluate({ preferredTags: [targetTagIds[0], "missing-tag"] });
     expect(result.scoreBreakdown.tags?.score).toBe(0.5);
     expect(result.score).toBe(50);
-    expect(result.unmatchedConditions).toContain("有 1 个饮食方向合拍");
+    expect(buildRecommendationExplanation(result, "zh-CN")).toContain("饮食方向合拍");
   });
 
   it("scores method preferences", () => {
@@ -151,7 +152,7 @@ describe("soft preferences and score", () => {
     expect(ranked[0].recipe.slug).toBe(spicy.slug);
     expect(ranked[0].scoreBreakdown.flavor!.score).toBeGreaterThan(ranked[1].scoreBreakdown.flavor!.score);
     expect(ranked.every((result) => result.eligible)).toBe(true);
-    expect(ranked[0].explanation).toMatch(/辣味|椒香|鲜味/);
+    expect(buildRecommendationExplanation(ranked[0], "zh-CN")).toMatch(/辣味|椒香|鲜味/);
   });
 
   it("does not mutate recipes or flavor preferences while scoring", () => {
@@ -174,22 +175,25 @@ describe("soft preferences and score", () => {
 
   it("keeps explanation consistent with structured breakdown and missing ingredients", () => {
     const result = evaluate({ availableIngredients: requiredIds().slice(0, -1), preferredCuisine: targetCuisineId });
-    expect(result.explanation).toContain(`${result.ingredientMatch.availableRequired}/${result.ingredientMatch.totalRequired}`);
-    expect(result.explanation).toContain(result.missingIngredients[0].name);
-    expect(result.explanation).toContain(result.scoreBreakdown.cuisine!.explanation);
-    expect(buildRecommendationExplanation(result)).toBe(result.explanation);
+    const zh = buildRecommendationExplanation(result, "zh-CN");
+    const en = buildRecommendationExplanation(result, "en");
+    expect(zh).toContain(`${result.ingredientMatch.availableRequired}/${result.ingredientMatch.totalRequired}`);
+    expect(zh).toContain("盐");
+    expect(zh).toContain("中式");
+    expect(en).toContain("salt");
+    expect(en).toContain("Chinese");
   });
 
   it("does not claim that no preference was set when an active preference misses", () => {
     const result = evaluate({ preferredCuisine: "不存在的菜系" });
-    expect(result.explanation).toBe("基本条件合适，不过没有完全碰上当前口味和偏好。");
+    expect(buildRecommendationExplanation(result, "zh-CN")).toBe("基本条件合适，不过没有完全碰上当前口味和偏好。");
   });
 
   it("uses different missing-ingredient wording for one vs many missing ingredients", () => {
     const oneMissing = evaluate({ availableIngredients: requiredIds().slice(0, -1) });
     const severalMissing = evaluate({ availableIngredients: requiredIds().slice(0, 1) });
-    expect(oneMissing.explanation).toContain("只缺");
-    expect(severalMissing.explanation).toContain("还缺");
+    expect(buildRecommendationExplanation(oneMissing, "zh-CN")).toContain("只缺");
+    expect(buildRecommendationExplanation(severalMissing, "zh-CN")).toContain("还缺");
   });
 });
 
@@ -201,7 +205,7 @@ describe("safety, reset, and determinism", () => {
     const result = incompleteEngine.rank([target], { maxCalories: 600 })[0];
     expect(result.eligible).toBe(false);
     expect(result.hardFailures[0]).toMatchObject({ criterion: "maxCalories" });
-    expect(result.hardFailures[0].message).toMatch(/不完整/);
+    expect(result.hardFailures[0].reason).toBe("estimate-incomplete");
   });
 
   it("excludes incomplete cost when budget is active", () => {

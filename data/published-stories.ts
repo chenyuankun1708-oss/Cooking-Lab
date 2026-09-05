@@ -9,6 +9,7 @@ import { recipeImages } from "./recipe-images";
 import { buildStoryPageModel, buildStoryPreview, type StoryExperienceContext } from "@/lib/story-experience";
 import { assertPublishedStoriesEligible, getPubliclyVisibleStories } from "@/lib/story-publishing";
 import type { Story } from "@/types/culinary";
+import type { SupportedLocale } from "@/types/localization";
 
 const items = getPublishedCulinaryItems();
 const publishingContext = { items, evidence: culinaryEvidence, sources: culinarySources };
@@ -43,11 +44,16 @@ export function getPublishedStoryPreviews() {
   return publishedStories.map((story) => buildStoryPreview(story, experienceContext));
 }
 
-export function getPublishedStoryPageModel(id: string) {
-  const story = storyById.get(id);
-  return story ? buildStoryPageModel(story, experienceContext) : undefined;
+export function getLocalizedPublishedStoryPreviews(locale: SupportedLocale) {
+  const context = { ...experienceContext, locale };
+  return publishedStories.map((story) => buildStoryPreview(story, context));
 }
 
-export function getStoryExperienceContext(): StoryExperienceContext {
-  return experienceContext;
+export function getPublishedStoryPageModel(id: string, locale: SupportedLocale = "zh-CN") {
+  const story = storyById.get(id);
+  return story ? buildStoryPageModel(story, { ...experienceContext, locale }) : undefined;
+}
+
+export function getStoryExperienceContext(locale: SupportedLocale = "zh-CN"): StoryExperienceContext {
+  return { ...experienceContext, locale };
 }

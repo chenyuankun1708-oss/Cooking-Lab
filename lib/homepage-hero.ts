@@ -4,6 +4,8 @@ import { getRecipeHeroImage } from "./recipe-images";
 import type { HomeHeroEditorialItem } from "@/data/homepage";
 import type { RecipeImage } from "@/types/image";
 import type { Recipe } from "@/types/recipe";
+import type { SupportedLocale } from "@/types/localization";
+import { getLocalizedPath } from "./localization";
 
 export interface HomeHeroItem {
   slug: string;
@@ -19,6 +21,7 @@ export function buildHomeHeroItems(
   config: readonly HomeHeroEditorialItem[],
   publishedRecipes: readonly Recipe[],
   images: readonly RecipeImage[],
+  locale: SupportedLocale = "zh-CN",
 ): HomeHeroItem[] {
   const recipeBySlug = new Map(publishedRecipes.map((recipe) => [recipe.slug, recipe]));
   const seenSlugs = new Set<string>();
@@ -38,10 +41,10 @@ export function buildHomeHeroItems(
     return {
       slug,
       name: recipe.name,
-      editorialLine,
-      flavor: describeFlavorProfile(recipe.flavor, "zh-CN", 3),
-      time: formatHumanCookingTime(recipe.cooking.totalTime),
-      href: `/recipes/${recipe.slug}`,
+      editorialLine: editorialLine[locale],
+      flavor: describeFlavorProfile(recipe.flavor, locale, 3),
+      time: formatHumanCookingTime(recipe.cooking.totalTime, locale),
+      href: getLocalizedPath(locale, `/recipes/${recipe.slug}`),
       image,
     };
   });

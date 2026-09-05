@@ -19,7 +19,7 @@ describe("homepage hero editorial boundary", () => {
     expect(homeHeroRecipeSlugs).toHaveLength(5);
     expect(new Set(homeHeroRecipeSlugs).size).toBe(homeHeroRecipeSlugs.length);
     expect(heroItems.map(({ slug }) => slug)).toEqual(homeHeroRecipeSlugs);
-    expect(homeHeroEditorialItems.every(({ editorialLine }) => editorialLine.trim().length > 0)).toBe(true);
+    expect(homeHeroEditorialItems.every(({ editorialLine }) => editorialLine["zh-CN"].trim().length > 0 && editorialLine.en.trim().length > 0)).toBe(true);
     expect(heroItems.every(({ image }) => image.role === "hero" && Boolean(image.src))).toBe(true);
     expect(JSON.parse(JSON.stringify(heroItems))).toHaveLength(5);
   });
@@ -27,7 +27,7 @@ describe("homepage hero editorial boundary", () => {
   it("keeps the initial item deterministic and exposes active display data", () => {
     expect(heroItems[0].slug).toBe("tomato-scrambled-eggs");
     expect(heroItems[0]).toMatchObject({
-      href: "/recipes/tomato-scrambled-eggs",
+      href: "/zh-CN/recipes/tomato-scrambled-eggs",
       editorialLine: expect.any(String),
       flavor: expect.any(String),
       time: expect.stringContaining("分钟"),
@@ -44,7 +44,7 @@ describe("homepage hero editorial boundary", () => {
       recipeImages,
     )).toThrow(/unique/);
     expect(() => buildHomeHeroItems(
-      [{ slug: "not-published", editorialLine: "test" }],
+      [{ slug: "not-published", editorialLine: { "zh-CN": "test", en: "test" } }],
       getPublishedRecipes(),
       recipeImages,
     )).toThrow(/published/);

@@ -103,9 +103,14 @@ describe("Decision Context journey continuity", () => {
 
   it("updates Discovery URLs with replace and preserves normalized queries in journey links", () => {
     const source = readFileSync(resolve(process.cwd(), "components/recipe-discovery.tsx"), "utf8");
+    const header = readFileSync(resolve(process.cwd(), "components/discovery-site-header.tsx"), "utf8");
     expect(source).toContain("router.replace(");
     expect(source).toContain("parseDecisionContext(");
     expect(source).toContain("serializeDecisionRouteQuery(");
     expect(source).toContain("query={recipeQuery}");
+    expect(header).toContain("useSearchParams()");
+    expect(header).toContain("parseDecisionContext(");
+    expect(header).toContain("serializeDecisionContext(");
+    expect(header).toContain("query={query}");
   });
 });

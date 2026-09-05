@@ -15,10 +15,12 @@ export function RecipeCard({
   result,
   variant = "recommendation",
   locale,
+  query,
 }: {
   result: RecommendationResult;
   variant?: "recommendation" | "catalog";
   locale: SupportedLocale;
+  query?: URLSearchParams | string;
 }) {
   const { recipe, metrics } = result;
   const image = getRecipeHeroImage(recipe, recipeImages);
@@ -33,7 +35,7 @@ export function RecipeCard({
       <Link
         aria-label={locale === "zh-CN" ? `查看 ${recipe.name}，${flavor}，${formatHumanCookingTime(recipe.cooking.totalTime, locale)}` : `View ${recipe.name}, ${flavor}, ${formatHumanCookingTime(recipe.cooking.totalTime, locale)}`}
         className="focus-ring flex h-full flex-col rounded-lg focus:outline-none"
-        href={getLocalizedPath(locale, `/recipes/${recipe.slug}`)}
+        href={getLocalizedPath(locale, `/recipes/${recipe.slug}`, query)}
       >
         <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={recipe.name} alt={recipe.name} variant="card" />
         <div className="flex flex-1 flex-col p-4 sm:p-5">

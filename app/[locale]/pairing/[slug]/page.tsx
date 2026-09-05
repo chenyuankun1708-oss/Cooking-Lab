@@ -5,10 +5,20 @@ import { MealCompositionAlternative, MealCompositionView } from "@/components/me
 import { RecipeImage } from "@/components/recipe-image";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { decisionContextValueAllowlist } from "@/data/decision-context";
+import { getPublishedRecipes } from "@/data/published-recipes";
+import { getLocalizedRecipes } from "@/data/localization/public-recipes";
 import { getPublishedCulinaryItemsForLocale } from "@/data/published-culinary-items";
 import { getPublishedPairingExperience } from "@/data/published-meal-compositions";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
-import { getLocalizedPath, isSupportedLocale } from "@/lib/localization";
+import {
+  appendQueryToHref,
+  buildDecisionReturnHref,
+  parseDecisionRouteState,
+  serializeDecisionRouteQuery,
+} from "@/lib/decision-context-navigation";
+import { parseRecipeCatalogFilters } from "@/lib/recipe-exploration";
+import { getLocalizedPath, isSupportedLocale, toURLSearchParams, type RouteSearchParams } from "@/lib/localization";
 import { getMessages } from "@/lib/messages";
 import { supportedLocales, type SupportedLocale } from "@/types/localization";
 
@@ -34,25 +44,42 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function PairingPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+export default async function PairingPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<RouteSearchParams>;
+}) {
   const { locale: value, slug } = await params;
   const locale = getLocale(value);
   const experience = getPublishedPairingExperience(slug, locale);
   if (!experience) notFound();
   const messages = getMessages(locale);
   const c = pairingPageCopy[locale];
+  const routeParams = toURLSearchParams(await searchParams);
+  const decisionState = parseDecisionRouteState(routeParams, decisionContextValueAllowlist);
+  const catalogFilters = decisionState.source === "catalog"
+    ? parseRecipeCatalogFilters(routeParams, getLocalizedRecipes(getPublishedRecipes(), locale))
+    : {};
+  const routeQuery = serializeDecisionRouteQuery(decisionState.context, decisionContextValueAllowlist, {
+    source: decisionState.source,
+    ...(decisionState.source === "catalog" ? { catalogFilters } : {}),
+  });
+  const decisionReturnHref = buildDecisionReturnHref(locale, decisionState, decisionContextValueAllowlist, catalogFilters);
+  const anchorHref = appendQueryToHref(experience.anchor.href, routeQuery);
 
   return (
     <main id="main-content">
-      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/pairing/${slug}`} />
+      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/pairing/${slug}`} query={routeQuery.toString()} />
       <article>
         <header className="bg-[var(--surface-paper)] px-4 py-10 sm:px-6 sm:py-14">
           <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
             <div className="order-2 lg:order-1">
               <nav aria-label={c.breadcrumb} className="flex flex-wrap items-center gap-2 text-sm text-stone-500">
-                <Link className="focus-ring inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes")}>{messages.nav.recipes}</Link>
+                <Link className="focus-ring inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={decisionState.source === "catalog" ? decisionReturnHref : getLocalizedPath(locale, "/recipes")}>{messages.nav.recipes}</Link>
                 <span aria-hidden="true">/</span>
-                <Link className="focus-ring inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={experience.anchor.href}>{experience.anchor.name}</Link>
+                <Link className="focus-ring inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={anchorHref}>{experience.anchor.name}</Link>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{c.breadcrumbCurrent}</span>
               </nav>
@@ -122,7 +149,7 @@ export default async function PairingPage({ params }: { params: Promise<{ locale
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
               <p className="text-sm font-semibold text-[#a64631]">{c.alternativeDrink}</p>
               <h2 id="non-alcoholic-alternative-title" className="mt-2 text-3xl font-bold text-stone-950 sm:text-4xl">{c.nonAlcoholicTitle}</h2>
-              <Link className="focus-ring mt-6 inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={experience.nonAlcoholicAlternative.href}>
+              <Link className="focus-ring mt-6 inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={appendQueryToHref(experience.nonAlcoholicAlternative.href, routeQuery)}>
                 {experience.nonAlcoholicAlternative.name}
               </Link>
               <p className="mt-2 max-w-2xl leading-7 text-stone-600">{experience.nonAlcoholicAlternative.description}</p>

@@ -9,7 +9,7 @@ import type { RecipeSimilarityResult } from "@/lib/recipe-similarity";
 import type { SupportedLocale } from "@/types/localization";
 import { getLocalizedPath } from "@/lib/localization";
 
-export function SimilarRecipeCard({ result, reason, locale }: { result: RecipeSimilarityResult; reason: string; locale: SupportedLocale }) {
+export function SimilarRecipeCard({ result, reason, locale, query }: { result: RecipeSimilarityResult; reason: string; locale: SupportedLocale; query?: URLSearchParams | string }) {
   const { recipe } = result;
   const image = getRecipeHeroImage(recipe, recipeImages);
   const fallback = getRecipeImageFallback(recipe);
@@ -20,7 +20,7 @@ export function SimilarRecipeCard({ result, reason, locale }: { result: RecipeSi
       <Link
         aria-label={locale === "zh-CN" ? `查看 ${recipe.name}，${reason}` : `View ${recipe.name}. ${reason}`}
         className="focus-ring flex h-full flex-col rounded-lg focus:outline-none"
-        href={getLocalizedPath(locale, `/recipes/${recipe.slug}`)}
+        href={getLocalizedPath(locale, `/recipes/${recipe.slug}`, query)}
       >
         <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={recipe.name} alt={recipe.name} variant="card" />
         <div className="flex flex-1 flex-col p-4 sm:p-5">

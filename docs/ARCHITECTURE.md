@@ -12,8 +12,11 @@
 
 - `types/`：共享的 Ingredient、Recipe、Nutrition、Recommendation 契约
 - `types/culinary.ts`：M6 CulinaryItem discriminated union，以及 Story、Source、Evidence、Translation 与 Pairing contracts
+- `types/research.ts`：source catalog、research decisions、considered claims 与 ResearchRecord contract
 - `lib/culinary-item-adapter.ts`：现有 Recipe 到 DishItem 的只读渐进迁移 adapter
 - `lib/culinary-validation.ts` / `lib/culinary-publishing.ts`：framework-independent schema 与 item-type publishing skeleton
+- `lib/research-validation.ts`：framework-independent source catalog / research registry validation 与 deterministic reference collection
+- `data/research/`：非生产的 evaluated source catalog 与三个 workflow exercises
 - `data/`：本地静态 demo 数据
 - `lib/unit-conversion.ts`：单位换算纯函数
 - `lib/nutrition.ts`：营养估算引擎
@@ -232,3 +235,13 @@ Future clients -> application repositories -> CulinaryItem / Story / Evidence
 Provenance traversal 只有一条明确路径：`CulinaryItem.storyIds -> Story.claims -> Evidence -> Source`。没有泛化的 `item.evidenceIds`；当且仅当后续出现 Story 之外的明确 field assertion 用例时，再引入最小 ItemClaim，而不是建立模糊的 knowledge graph。
 
 Persistence 明确停在 port/adapter 边界：domain 接收和返回普通可序列化 TypeScript 值；未来数据库 schema、ORM model、filesystem 检查和 Web formatting 都属于外层 adapter。当前没有足够 use case 定义稳定 repository 方法，因此本 Issue 记录边界但不制造空接口或引入基础设施。完整决策与迁移矩阵见 `docs/CULINARY_KNOWLEDGE_MODEL.md`。
+
+Issue #39 在此边界内增加人工/半自动 research pipeline，不改变运行时依赖方向：
+
+```text
+Evaluated source catalog -> ResearchRecord -> reviewed Source/Evidence
+                                             -> Draft Story Claim
+                                             -> existing Culinary publishing traversal
+```
+
+ResearchRecord 是 decision history，不是 production knowledge node。Source Registry、Evidence Registry 和 publishable Story 仍保持独立生命周期。Validator 可以检查 locator、rights metadata、重复与断裂引用；可信度、历史解释、版权歧义、文化措辞和最终发布必须人工决定。当前没有网络请求、scheduler、crawler、database 或 CMS。流程细节见 `docs/CONTENT_RESEARCH.md`，版权与 link-rot policy 见 `docs/SOURCE_POLICY.md`。

@@ -133,6 +133,7 @@ describe("Culinary Knowledge domain", () => {
       authorNames: [],
       locators: [{ kind: "url", url: "https://example.edu/source", accessedAt: "2026-09-05" }],
       rights: { status: "reference-only", notes: "Facts may be cited; prose is not copied." },
+      health: { status: "active", checkedAt: "2026-09-05" },
       reliability: "authoritative-secondary",
       editorialNotes: "Fixture used to verify provenance references.",
     };
@@ -161,6 +162,51 @@ describe("Culinary Knowledge domain", () => {
     expect(evaluateCulinaryItemPublishingEligibility(withStory, context).issues).toEqual([]);
   });
 
+  it("keeps unresolved or changed source rights out of publishing eligibility", () => {
+    const item = adaptRecipeToCulinaryItem(recipes[0]);
+    const source: Source = {
+      id: "rights-review-source",
+      type: "book",
+      title: "Rights review source",
+      publisherOrInstitution: "Example Press",
+      authorNames: ["Example Author"],
+      locators: [{ kind: "isbn", isbn: "978-1-4028-9462-6" }],
+      rights: { status: "unknown", notes: "Rights review is pending." },
+      health: { status: "rights-changed", checkedAt: "2026-09-05", notes: "The publisher changed its reuse terms." },
+      reliability: "authoritative-secondary",
+      editorialNotes: "The source can remain in research while rights are reviewed.",
+    };
+    const evidence: Evidence = {
+      id: "rights-review-evidence",
+      sourceId: source.id,
+      relation: "supports",
+      strength: "strong",
+      locators: [{ kind: "page", value: "42" }],
+      editorialNote: "Fixture evidence.",
+    };
+    const story: Story = {
+      id: "rights-review-story",
+      type: "origin",
+      content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { title: "来源审核", body: "测试正文。" } }] },
+      claims: [{
+        id: "rights-review-claim",
+        kind: "documented-fact",
+        content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { statement: "测试主张。" } }] },
+        evidenceIds: [evidence.id],
+      }],
+      relatedEntities: [],
+    };
+    const result = evaluateCulinaryItemPublishingEligibility(
+      { ...item, storyIds: [story.id] },
+      { ...publishingContext, stories: [story], sources: [source], evidence: [evidence] },
+    );
+
+    expect(result.issues).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: "source-invalid", field: "rights" }),
+      expect.objectContaining({ code: "source-invalid", field: "health" }),
+    ]));
+  });
+
   it("validates only provenance reachable from the current item", () => {
     const item = adaptRecipeToCulinaryItem(recipes[0]);
     const unrelatedDraftSource = {
@@ -171,6 +217,7 @@ describe("Culinary Knowledge domain", () => {
       authorNames: [],
       locators: [{ kind: "url", url: "http://invalid.example", accessedAt: "" }],
       rights: { status: "unknown", notes: "" },
+      health: { status: "active", checkedAt: "2026-09-05" },
       reliability: "contested",
       editorialNotes: "",
     } as Source;
@@ -186,6 +233,7 @@ describe("Culinary Knowledge domain", () => {
       authorNames: [],
       locators: [{ kind: "url", url: "https://museum.example.org/collection/article", accessedAt: "2026-09-05" }],
       rights: { status: "reference-only", notes: "Used only as a factual reference." },
+      health: { status: "active", checkedAt: "2026-09-05" },
       reliability: "authoritative-secondary",
       editorialNotes: "Published by the holding institution.",
     };
@@ -202,6 +250,7 @@ describe("Culinary Knowledge domain", () => {
         holdingInstitution: "Example City Library",
       }],
       rights: { status: "reference-only", notes: "Consulted as a physical research source." },
+      health: { status: "active", checkedAt: "2026-09-05" },
       reliability: "primary",
       editorialNotes: "Bibliographic and holding information permits relocation.",
     };

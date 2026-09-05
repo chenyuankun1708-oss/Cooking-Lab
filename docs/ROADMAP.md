@@ -120,8 +120,10 @@ Issue #32 已通过 PR #36 合并：五道 published Recipe 以固定编辑顺�
 
 ## 当前阶段：M6 Culinary Knowledge Platform
 
-GitHub tracking：Epic `#37`，基础架构 `#38`。
+GitHub tracking：Epic `#37`，基础架构 `#38`，Content Research / Source & Provenance `#39`。
 
 Issue #38 先建立 Culinary Knowledge Model 与低风险 migration architecture：shared base + 六类 discriminated union、不同 preparation semantics、Story/Claim、Source/Evidence、locale Translation、Pairing signals 和 item-type publication。当前 Recipe 通过 adapter 保持兼容，不做 100 条 big-bang rewrite。
+
+Issue #39 在 #38 contract 上建立可重复的人工/半自动研究链：evaluated source catalog、rights policy、source health、ResearchRecord、八类研究模板和三个真实 mini exercises。它只验证研究到 publication candidate 的基础设施，不发布新内容，也不引入 crawler、scheduler、database、CMS 或 Story UI。
 
 后续顺序遵循 Epic #37：先完成 knowledge model，再建设可审阅的 content source/provenance pipeline，之后才扩充 dish/dessert/drink library、Story experience、双语体验与 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 #38 提前实施。

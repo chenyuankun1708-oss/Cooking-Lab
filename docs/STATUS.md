@@ -27,7 +27,8 @@ Production URL：
 - GitHub Issue #31 已关闭
 - GitHub PR #36 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #32 与 Epic #28 已关闭
-- GitHub Epic #37 与 Issue #38 当前 open
+- GitHub PR #44 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #38 已关闭；Epic #37 与 Issue #39 当前 open
 - Issue #38 工作分支为 `feature/issue-38-culinary-knowledge-model`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
@@ -245,6 +246,19 @@ PR #36 已合并 Living Editorial Hero：
 - Domain guard 覆盖新增 types/lib，继续禁止 React、Next、DOM、filesystem 与数据库依赖
 - 当前 homepage、catalog、detail、recommendation、similarity、published adapter 与 SSG 均不切换数据源
 
+## Issue #39 当前产物
+
+当前分支建立 M6 Content Research / Source & Provenance 基础：
+
+- `SourceType` 仅按真实 audit 扩展 library、official cultural institution、open educational resource、open media 与 patent
+- Source health 记录 active/unreachable/moved/superseded/rights-changed；它与 editorial reliability 分离
+- Open-license rights 明确 exact license、attribution、adaptation status 与 share-alike obligation
+- `ResearchRecord` 保存 candidate source 接受/拒绝、claim disposition、未决问题、reviewer/date 与编辑决定
+- evaluated catalog 审计 11 个真实 provider/resource；可访问、事实参考、文字复用与图片授权明确分离
+- 东坡肉人物归属、冬阴功文化语境和 espresso 发展史三个 typed exercises 验证 supports/contradicts/context 与 claim language
+- research validator 覆盖 locator、rights、重复引用、缺失 Evidence、断裂 Source 和 accepted-source boundary
+- 当前没有新 CulinaryItem/Story 发布，没有网络任务、crawler、scheduler、database、CMS 或 UI 改动
+
 ## 当前产品缺口
 
 - 100 道菜已形成第一版料理世界地图，但文化 provenance 与更深 region coverage 仍需持续审核
@@ -254,6 +268,6 @@ PR #36 已合并 Living Editorial Hero：
 
 ## 下一步
 
-1. 完成 Issue #38 review，在不改变当前 Recipe runtime 的前提下确认 domain contract 与迁移矩阵。
-2. #38 merge 后再按 Epic #37 依赖顺序规划 Content Research / Source & Provenance Engine。
-3. 在 repository use cases 与持久化需求明确前，不引入数据库、Prisma 或 CMS。
+1. 完成 Issue #39 review，确认研究决策记录、rights policy 和三个 exercises 足以支撑后续内容批次。
+2. #39 merge 前不开始 #40；后续按 Epic #37 依赖顺序推进内容扩充。
+3. 在多人编辑、更新历史和大规模 many-to-many provenance 成为真实需求前，不引入数据库、Prisma 或 CMS。

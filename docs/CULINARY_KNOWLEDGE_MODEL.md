@@ -74,7 +74,7 @@ Story 是独立、可复用实体，一个 CulinaryItem 可引用多个 Story。
 
 三个概念不混用：
 
-- `Source`：书籍、期刊、档案馆、博物馆、政府/教育机构、专业组织、出版社、可靠媒体或生产者文档的 metadata 与可重新定位标识。
+- `Source`：书籍、期刊、档案馆、博物馆、图书馆、政府/文化/教育机构、开放教育/媒体、专业组织、出版社、可靠媒体、专利或生产者文档的 metadata 与可重新定位标识。
 - `Source.rights`：public domain、open license、获得许可、仅作事实参考或 unknown；这是版权/使用边界，不代表事实强度。
 - `Evidence`：把一个 Source 以 `supports / contradicts / context` 关系连接到 claim，并记录证据强度、细粒度 locator 与编辑判断。
 
@@ -92,9 +92,15 @@ Source 不绑定网页。`Source.locators` 是非空 discriminated list，可组
 
 `Source.reliability` 是编辑评估，不是自动真值。AI 生成文字不能成为 Evidence。图片 provenance 继续由现有 image registry 管理，不用文本 Source 的 rights 替代图片授权。
 
+`Source.health` 以 `active / unreachable / moved / superseded / rights-changed` 和检查日期记录最后一次可达性或权利观察。它不是 reliability；断开的网页不会自动推翻一份有 DOI/ISBN/馆藏 identity 的证据，primary source 也不会因为 URL 可访问就自动可信。非 active 状态必须说明变化，`rights-changed` 必须触发人工权利复核。
+
+Open-license Source 还必须记录 exact license、HTTPS license URL、attribution、是否改编以及 share-alike obligation。`reference-only` 明确表示只允许研究事实并以原创措辞表达，不允许复制原站 prose。
+
 发布校验只遍历当前 item 引用的 Story，再沿 Story Claim -> Evidence -> Source 验证；registry 中无关的草稿或待修来源不会阻止其他 item 发布。
 
 Issue #38 review 后删除了 generic `CulinaryItem.evidenceIds`。当前没有 item-level assertion 的真实 use case，裸 evidence ID 无法表达它支持名称、来源、taxonomy 还是其他事实。暂时只保留语义明确的 Story Claim 链；若 #39 出现非 Story 的 provenance 需求，再以最小 `ItemClaim` contract 建模，而不是恢复无主语的 evidence list。
+
+Issue #39 的三个真实 research exercises 没有发现非 Story item assertion 的必要用例，因此继续保留该决定。新增 `ResearchRecord` 只记录研究问题、来源接受/拒绝、considered claims、未决问题与编辑决定；它不会挂到 CulinaryItem，也不会取代 publishable Story Claim。完整工作流与来源政策见 `docs/CONTENT_RESEARCH.md`、`docs/SOURCE_POLICY.md`。
 
 ## Translation Model
 

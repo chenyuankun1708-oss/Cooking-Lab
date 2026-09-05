@@ -86,7 +86,15 @@ export function evaluateCulinaryItemPublishingEligibility(
     }
     validateEvidence(record, new Set(sourceById.keys())).forEach((issue) => add("evidence-invalid", issue));
     const source = sourceById.get(record.sourceId);
-    if (source) validateSource(source).forEach((issue) => add("source-invalid", issue));
+    if (source) {
+      validateSource(source).forEach((issue) => add("source-invalid", issue));
+      if (source.rights.status === "unknown") {
+        issues.push({ code: "source-invalid", field: "rights", message: `Source ${source.id} 的 rights 尚未完成评估` });
+      }
+      if (source.health.status === "rights-changed") {
+        issues.push({ code: "source-invalid", field: "health", message: `Source ${source.id} 的 rights 已变化，必须重新审核` });
+      }
+    }
   }
 
   return { itemId: item.id, eligible: issues.length === 0, issues };

@@ -4,6 +4,7 @@ import {
   claimKinds,
   culinaryItemTypes,
   mealRoleIds,
+  sourceHealthStatuses,
   sourceTypes,
   storyTypes,
   type CulinaryItem,
@@ -126,7 +127,18 @@ export function validateSource(source: Source): CulinaryValidationIssue[] {
   if (source.rights.status === "open-license" && (!source.rights.licenseId.trim() || !isSafeHttpsUrl(source.rights.licenseUrl))) {
     report("rights", "Open license 必须记录 license ID 与 HTTPS URL");
   }
+  if (source.rights.status === "open-license") {
+    if (!source.rights.attribution.trim()) report("rights.attribution", "Open license 必须记录 attribution 文本");
+    if (!new Set(["unmodified", "adapted", "not-reusing"]).has(source.rights.adaptationStatus)) {
+      report("rights.adaptationStatus", "未知 open-license adaptation status");
+    }
+  }
   if ("notes" in source.rights && !source.rights.notes.trim()) report("rights.notes", "Rights notes 不能为空");
+  if (!sourceHealthStatuses.includes(source.health.status)) report("health.status", "未知 source health status");
+  if (!isIsoDate(source.health.checkedAt)) report("health.checkedAt", "Source health checkedAt 必须是有效 YYYY-MM-DD");
+  if (source.health.status !== "active" && !source.health.notes?.trim()) {
+    report("health.notes", "非 active Source health 必须说明状态变化");
+  }
   return issues;
 }
 
@@ -168,7 +180,7 @@ function validateUniqueIds(values: readonly string[], field: string, report: (fi
   if (values.some((value) => !isSlug(value))) report(field, "ID 必须使用 kebab-case");
 }
 
-function validateSourceLocator(
+export function validateSourceLocator(
   locator: Source["locators"][number],
   field: string,
   report: (field: string, message: string) => void,
@@ -198,7 +210,7 @@ function validateSourceLocator(
   }
 }
 
-function isSafeHttpsUrl(value: string): boolean {
+export function isSafeHttpsUrl(value: string): boolean {
   try {
     const url = new URL(value);
     return url.protocol === "https:" && Boolean(url.hostname) && !url.username && !url.password;
@@ -207,7 +219,7 @@ function isSafeHttpsUrl(value: string): boolean {
   }
 }
 
-function isIsoDate(value: string): boolean {
+export function isIsoDate(value: string): boolean {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
 }
 

@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5 消费者 Web 重设计已合并，当前进入 M5.1 `Product Naturalization & Content Quality`。
+Cooking Lab Public Beta v0.1 已上线，M5 与 M5.1 已完成，当前进入 M6 `Culinary Knowledge Platform` 的基础架构阶段。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -25,8 +25,10 @@ Production URL：
 - GitHub Issue #30 已关闭
 - GitHub PR #35 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #31 已关闭
-- GitHub Epic #28 与 Issue #32 当前 open
-- Issue #32 工作分支为 `feature/issue-32-living-homepage-hero`
+- GitHub PR #36 已于 2026-09-05 merge 到 `main`
+- GitHub Issue #32 与 Epic #28 已关闭
+- GitHub Epic #37 与 Issue #38 当前 open
+- Issue #38 工作分支为 `feature/issue-38-culinary-knowledge-model`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -217,7 +219,7 @@ PR #35 已合并并建立 deterministic similar-recipe discovery：
 
 ## Issue #32 当前产物
 
-当前分支已完成 Living Editorial Hero 实现，PR 待创建：
+PR #36 已合并 Living Editorial Hero：
 
 - `data/homepage.ts` 集中维护五道 published Hero recipe 与短 editorial line，顺序固定且不伪装个性化
 - Server homepage 构建只含展示字段的 Hero view model，小型 client carousel 不读取 raw recipes 或 filesystem
@@ -226,6 +228,22 @@ PR #35 已合并并建立 deterministic similar-recipe discovery：
 - 只有首张 LCP 图片 preload，初始仅准备当前和下一张图片，后续随轮换逐张挂载
 - active recipe link、alt、Flavor、human time、source、author、license 与 attribution 随 slide 一致更新
 - 375 / 390 / 768 / 1024 / 1440 五个断点已逐张检查 crop、对比度、稳定高度与控制位置
+
+## Issue #38 当前产物
+
+当前分支已建立 M6 Culinary Knowledge Model 的可执行架构基线：
+
+- `CulinaryItem` 使用 shared base + dish/dessert/tea/coffee/non-alcoholic drink/alcoholic drink discriminated union
+- cooking、baking、brewing、extraction、mixing、assembly、serving guidance 与 no consumer preparation 使用不同 contract
+- Story/Claim、Source/Evidence、Translation 与 Pairing signals 是独立、可序列化 domain concepts
+- documented fact、documented tradition、disputed attribution 与 legend/folklore 在 claim 层明确区分并要求 Evidence reference
+- Source locator 支持 HTTPS URL、DOI、ISBN、archive/catalog identity 与 physical citation，离线来源不再被迫提供 URL
+- Evidence locator 独立表达 page/chapter/section/paragraph/timestamp/folio 等来源内部位置
+- 删除无明确 assertion 语义的 `CulinaryItem.evidenceIds`，当前 provenance 只走 Story Claim -> Evidence -> Source
+- Recipe -> DishItem adapter 可投影现有 100 条数据；没有建立第二份静态 source，也没有自动把 legacy culture 升级为 Story
+- item-type publishing skeleton 允许无 cooking steps 的酒/饮品发布，同时保持 dish/dessert nutrition/cost gate
+- Domain guard 覆盖新增 types/lib，继续禁止 React、Next、DOM、filesystem 与数据库依赖
+- 当前 homepage、catalog、detail、recommendation、similarity、published adapter 与 SSG 均不切换数据源
 
 ## 当前产品缺口
 
@@ -236,6 +254,6 @@ PR #35 已合并并建立 deterministic similar-recipe discovery：
 
 ## 下一步
 
-1. 完成 Issue #32 最终验证、PR 创建与 review。
-2. #32 merge 后执行一次 Product Owner Review，观察真实首页节奏、图片加载与 editorial set。
-3. Epic #28 在 Product Owner Review 前保持 open，不开始新的 implementation Issue。
+1. 完成 Issue #38 review，在不改变当前 Recipe runtime 的前提下确认 domain contract 与迁移矩阵。
+2. #38 merge 后再按 Epic #37 依赖顺序规划 Content Research / Source & Provenance Engine。
+3. 在 repository use cases 与持久化需求明确前，不引入数据库、Prisma 或 CMS。

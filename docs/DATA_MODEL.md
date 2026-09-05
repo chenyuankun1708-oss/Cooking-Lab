@@ -1,5 +1,15 @@
 # Data Model
 
+## M6 Model Boundary
+
+当前 production data 仍以 100 道 `Recipe` 为 source of truth。Issue #38 新增 `CulinaryItem` shared base + discriminated union、locale-based Translation、Story/Claim、Source/Evidence 与 Pairing signals contract，并提供 Recipe -> DishItem 的只读 adapter；它没有建立第二份 100 条静态数据。
+
+`RecipePublicationStatus` 现在复用共享 `PublicationStatus`，`SupportedLocale / LocalizedLabel` 也从共享 localization contract re-export，因此现有 imports 与行为不变。完整 schema、类型限制、迁移矩阵和 persistence boundary 见 `docs/CULINARY_KNOWLEDGE_MODEL.md`。
+
+M6 provenance contract 不要求 Source 拥有 URL。每个 Source 必须至少包含一种可重新定位的 locator：HTTPS URL、DOI、ISBN、archive/catalog identity 或 physical citation；书籍、手稿、印刷期刊和馆藏可以完全离线。Evidence 的 page/chapter/section/paragraph/timestamp/folio locator 只负责 Source 内部的精确位置。
+
+`CulinaryItem` 不保存无语义的 generic evidence ID 列表。当前 factual provenance 只通过 `Story Claim -> Evidence -> Source` 表达；未来只有在出现明确的 item field assertion 用例后才增加窄 `ItemClaim`。
+
 ## Ingredient
 
 当前包含 73 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。
@@ -18,6 +28,8 @@
 ## Recipe
 
 当前包含 100 道 Recipe；每道包含标识、描述、publication、taxonomy、可选文化内容、份数、结构化食材用量、烹饪时间/油盐糖/难度、厨具、成本元数据、步骤和原理。每一步有 `instruction` 与关键差异字段 `why`。
+
+M6 期间这些字段继续 canonical；不得同时手工维护 Recipe 与 CulinaryItem 两份内容。迁移只通过 adapter 或后续 repository mapper 完成。`culture` 将来会由 source-backed Story/Claim/Evidence 取代，但未经 provenance 审核的旧文本不会自动升级为事实性 Story。
 
 - 当前静态数据要求 `id` 与唯一 kebab-case `slug` 一致；Ingredient 引用必须存在，且用量必须能通过现有单位系统换算为克。
 - `publication.status` 是 `draft / reviewed / published` 三态编辑决定。它不代表技术校验结果；只有 `published` 且通过 publishing eligibility 的 Recipe 才可公开。

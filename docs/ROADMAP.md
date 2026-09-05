@@ -18,7 +18,7 @@
 
 M4 已结束于“可公开访问的 Public Beta 成功上线”，不再停留在 deployment-ready 状态。
 
-## 当前阶段
+## 已完成的 M5 / M5.1
 
 ### M5 Content, Brand & Experience
 
@@ -79,7 +79,7 @@ Issue #30 建立 Recipe publishing gate 并完成初始内容深化：保留 100
 
 Issue #31 建立独立 deterministic Recipe similarity：Flavor 与主食材为主要维度，cuisine、technique 和 dish type 只作辅助；详情页在正文末尾展示通过编辑阈值的少量 published Recipe 和自然理由。它不复用 Recommendation score，不扩大 published set，也不提前实现 #32 Living Hero。
 
-Issue #32 已完成 Living Editorial Hero 实现并进入 PR 前验证：五道 published Recipe 以固定编辑顺序、自然文案、Flavor 和 human time 呈现；自动轮换克制且支持手动控制、暂停、页面可见性与 reduced motion。M5.1 的 implementation Issues 至此完成代码侧交付，Epic #28 保持 open，等待 #32 merge 后的 Product Owner Review。
+Issue #32 已通过 PR #36 合并：五道 published Recipe 以固定编辑顺序、自然文案、Flavor 和 human time 呈现；自动轮换克制且支持手动控制、暂停、页面可见性与 reduced motion。M5.1 Epic #28 已关闭。
 
 ### F. Shared core audit for future mobile app
 
@@ -117,3 +117,11 @@ Issue #32 已完成 Living Editorial Hero 实现并进入 PR 前验证：五道 
 - Native app
 
 这些方向会受 M5 的 taxonomy、内容、品牌和架构决策影响，但不会在本轮一次性实现。
+
+## 当前阶段：M6 Culinary Knowledge Platform
+
+GitHub tracking：Epic `#37`，基础架构 `#38`。
+
+Issue #38 先建立 Culinary Knowledge Model 与低风险 migration architecture：shared base + 六类 discriminated union、不同 preparation semantics、Story/Claim、Source/Evidence、locale Translation、Pairing signals 和 item-type publication。当前 Recipe 通过 adapter 保持兼容，不做 100 条 big-bang rewrite。
+
+后续顺序遵循 Epic #37：先完成 knowledge model，再建设可审阅的 content source/provenance pipeline，之后才扩充 dish/dessert/drink library、Story experience、双语体验与 Pairing/Meal Engine。数据库、CMS、自动抓取和 Mobile app 不由 #38 提前实施。

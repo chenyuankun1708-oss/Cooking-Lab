@@ -3,6 +3,7 @@
 ## 当前产品状态
 
 - 当前阶段：Cooking Lab Public Beta v0.1
+- 当前工作：M8 Bounded External Validation，验证真实目标用户是否从核心料理决策体验获得足够价值
 - Production URL：[https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
 - `Cooking Lab` 目前仍是工程名和 working title，不代表最终消费者品牌名
 
@@ -59,6 +60,13 @@ M0-M4 已完成，当前 Public Beta 已具备：
 - 推荐必须可解释，用户能理解为什么被推荐或被排除
 - 营养、成本、时间等信息明确标注为估算，不伪装成医学或实时精度
 - AI 未来可以作为交互层和增强层，但不替代底层结构化数据与规则引擎
+- 内部正确性与真实用户价值分开验证；自动化、dogfood 和代理模拟不能替代外部用户证据
+
+## M8 有界外部验证
+
+M8 不先选择下一项功能，而是让 6–8 名真实或潜在家庭做饭用户用自己的现实条件完成一次料理决策。研究分别判断 Recipe 决策、解释与估算信任、近期复用价值和 Pairing 增量价值，并按预先声明的 Continue / Repair / Narrow / Pivot / Inconclusive 规则决定下一阶段。
+
+本轮是形成性研究，不证明统计显著性、市场规模、长期留存或产品市场契合。默认只做受限保存的假名化文字笔记，不录音录像；公开仓库只保留进一步去标识化的观察，不保存姓名、联系方式、医疗信息或其他敏感资料。完整协议见 `docs/M8_EXTERNAL_VALIDATION.md`。
 
 ## M5 目标
 

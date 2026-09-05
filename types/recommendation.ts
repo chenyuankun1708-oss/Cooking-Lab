@@ -25,14 +25,13 @@ export type ScoreDimensionKey = "ingredientFit" | "cuisine" | "tags" | "methods"
 
 export interface HardConstraintFailure {
   criterion: HardConstraintKey;
-  message: string;
+  reason: "limit-exceeded" | "estimate-incomplete" | "missing-tools";
 }
 
 export interface ScoreDimension {
   score: number;
   weight: number;
   contribution: number;
-  explanation: string;
 }
 
 export interface IngredientMatch {
@@ -41,7 +40,7 @@ export interface IngredientMatch {
   fit: number;
   weightedAvailable: number;
   weightedTotal: number;
-  missingIngredients: Array<{ id: string; name: string; category?: IngredientCategory }>;
+  missingIngredients: Array<{ id: string; category?: IngredientCategory }>;
 }
 
 export interface RecipeMetrics {
@@ -60,13 +59,10 @@ export interface RecommendationResult {
   eligible: boolean;
   score: number;
   scoreBreakdown: Partial<Record<ScoreDimensionKey, ScoreDimension>>;
-  matchedConditions: string[];
-  unmatchedConditions: string[];
   hardFailures: HardConstraintFailure[];
   ingredientMatch: IngredientMatch;
   missingIngredients: IngredientMatch["missingIngredients"];
-  missingTools: Array<{ id: string; name: string }>;
-  explanation: string;
+  missingTools: Array<{ id: string }>;
   metrics: RecipeMetrics;
 }
 

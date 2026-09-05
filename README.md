@@ -12,6 +12,7 @@ Cooking Lab 是一个帮助用户根据现有食材、时间、营养、预算�
 - 已发布菜谱目录
 - 菜谱详情页与步骤原理说明
 - 6 篇有 provenance 的料理故事、Story 阅读页与 16 个 native CulinaryItem 的最小详情页
+- `zh-CN` / `en` 双语公开体验、显式 locale URL 与同内容语言切换
 - 公开 Beta 反馈入口
 
 ## Tech Stack
@@ -37,7 +38,7 @@ npm ci
 npm run dev
 ```
 
-打开 [http://localhost:3000](http://localhost:3000)。
+打开 [http://localhost:3000](http://localhost:3000)，旧入口会重定向到默认中文页面；也可直接访问 `/zh-CN` 或 `/en`。
 
 ## Validation
 
@@ -64,6 +65,7 @@ npm run build
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - [docs/DATA_MODEL.md](docs/DATA_MODEL.md)
 - [docs/STORY_EXPERIENCE.md](docs/STORY_EXPERIENCE.md)
+- [docs/LOCALIZATION.md](docs/LOCALIZATION.md)
 - [docs/RECOMMENDATION.md](docs/RECOMMENDATION.md)
 - [docs/STATUS.md](docs/STATUS.md)
 

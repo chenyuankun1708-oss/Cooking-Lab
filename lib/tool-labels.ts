@@ -1,3 +1,5 @@
+import type { SupportedLocale } from "@/types/localization";
+
 export const toolLabels: Readonly<Record<string, string>> = Object.freeze({
   "baking-tray": "烤盘",
   "baking-dish": "烤皿",
@@ -39,4 +41,17 @@ export const toolLabels: Readonly<Record<string, string>> = Object.freeze({
 
 const fallbackLabel = (value: string) => value.replace(/[-_]+/g, " ").trim();
 
-export const getToolLabel = (tool: string) => toolLabels[tool] ?? fallbackLabel(tool);
+const englishToolLabels: Readonly<Record<string, string>> = Object.freeze({
+  "baking-tray": "baking tray", "baking-dish": "baking dish", blender: "blender", colander: "colander",
+  "cutting-board": "cutting board", "frying-pan": "frying pan", "fine-strainer": "fine strainer",
+  "espresso-machine": "espresso machine", gaiwan: "gaiwan", glass: "glass", "grill-pan": "grill pan",
+  "heavy-pot": "heavy pot", "heatproof-bowl": "heatproof bowl", "heatproof-plate": "heatproof plate",
+  knife: "knife", kettle: "kettle", "mixing-bowl": "mixing bowl", oven: "oven", "phin-filter": "phin filter",
+  pitcher: "pitcher", portafilter: "portafilter", refrigerator: "refrigerator", "rice-cooker": "rice cooker",
+  "sake-cup": "sake cup", saucepan: "saucepan", scale: "scale", "small-saucepan": "small saucepan",
+  "soup-pot": "soup pot", "square-dish": "square dish", spatula: "spatula", steamer: "steamer",
+  teapot: "teapot", timer: "timer", tongs: "tongs", whisk: "whisk", "wine-glass": "wine glass",
+});
+
+export const getToolLabel = (tool: string, locale: SupportedLocale = "zh-CN") =>
+  locale === "zh-CN" ? toolLabels[tool] ?? fallbackLabel(tool) : englishToolLabels[tool] ?? fallbackLabel(tool);

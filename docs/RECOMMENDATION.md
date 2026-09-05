@@ -35,7 +35,7 @@ Flavor 始终是 soft preference。即使没有完全命中所选口味，只要
 
 `ingredientFit = 已有必需食材权重之和 / 全部必需食材权重之和`
 
-结果同时保留未加权的 `availableRequired / totalRequired`、加权分子分母，以及包含 ID、名称和类别的 `missingIngredients`。可选食材不影响 fit 或缺失列表。
+结果同时保留未加权的 `availableRequired / totalRequired`、加权分子分母，以及只包含稳定 ID 与可选类别的 `missingIngredients`。显示名称由 locale-aware adapter 解析；可选食材不影响 fit 或缺失列表。
 
 ## Score
 
@@ -49,7 +49,7 @@ Flavor 始终是 soft preference。即使没有完全命中所选口味，只要
 
 每个已启用维度先得到 0–1 分数：`score = Σ(dimension score × weight) / Σ(active weight) × 100`，最终显示为整数。未启用任何软偏好时，中性分数为 100，表示料理满足全部已启用硬限制，而不是声称它是绝对最佳选择。
 
-`scoreBreakdown` 为每个启用维度返回 score、weight、contribution 和解释。具体权重不会暴露为 UI 控件，也不会散落在组件中。
+`scoreBreakdown` 为每个启用维度返回 score、weight 和 contribution。具体权重不会暴露为 UI 控件，也不会散落在组件中。
 
 ## Ordering
 
@@ -57,13 +57,7 @@ Flavor 始终是 soft preference。即使没有完全命中所选口味，只要
 
 ## Explanations and Excluded Results
 
-每个 evaluation 分别提供：
-
-- `matchedConditions`：已通过的硬条件和完全符合的软偏好。
-- `unmatchedConditions`：部分或未符合的软偏好。
-- `hardFailures`：导致排除的结构化硬条件。
-- `missingIngredients`、`missingTools`：用户可直接采取行动的缺失项。
-- `explanation`：由上述结构化结果确定性生成的简短中文说明。
+每个 evaluation 提供结构化 `hardFailures`、`missingIngredients`、`missingTools`、`ingredientMatch` 与 `scoreBreakdown`。core 不保存本地化名称、matched/unmatched 句子或 `explanation`；`lib/recommendation-display.ts` 根据这些 machine values 确定性生成 `zh-CN / en` 说明。
 
 `RuleRecommendationEngine.rank()` 保留 eligible 与 excluded 两类 evaluation，便于测试和未来诊断；`discoverRecipes()` 只把 eligible 结果交给首页。条件冲突导致零结果时，UI 根据已启用的硬条件提供放宽方向，不用违反限制的菜谱填充。
 

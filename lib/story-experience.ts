@@ -1,7 +1,10 @@
 import { countries, cuisines, regions } from "@/data/taxonomy";
+import { getLocalizedCulinaryCopy } from "@/data/localization/public-culinary";
+import { getRecipeEditorialCopy } from "@/data/localization/public-recipes";
+import { getLocalizedStoryTranslation } from "@/data/localization/public-stories";
 import type { CulinaryItem, Evidence, RelatedEntityType, Source, Story } from "@/types/culinary";
 import type { RecipeImage } from "@/types/image";
-import type { SupportedLocale } from "@/types/localization";
+import type { LocalizedLabel, SupportedLocale } from "@/types/localization";
 import { resolveTranslation } from "./localization";
 import { getCulinaryItemHref } from "./culinary-routes";
 
@@ -57,33 +60,33 @@ export interface StoryExperienceContext {
   sources: readonly Source[];
   images: readonly RecipeImage[];
   recipeItemIds: ReadonlySet<string>;
-  storyTypeLabels: Readonly<Record<Story["type"], string>>;
-  relatedEntityLabels: Readonly<Partial<Record<RelatedEntityType, Readonly<Record<string, string>>>>>;
+  storyTypeLabels: Readonly<Record<Story["type"], LocalizedLabel>>;
+  relatedEntityLabels: Readonly<Partial<Record<RelatedEntityType, Readonly<Record<string, LocalizedLabel>>>>>;
   locale?: SupportedLocale;
 }
 
-const itemTypeLabels: Readonly<Record<CulinaryItem["itemType"], string>> = {
-  dish: "料理",
-  dessert: "甜品",
-  tea: "茶",
-  coffee: "咖啡",
-  "non-alcoholic-drink": "无酒精饮品",
-  "alcoholic-drink": "酒精饮品",
+const itemTypeLabels: Readonly<Record<CulinaryItem["itemType"], LocalizedLabel>> = {
+  dish: { "zh-CN": "料理", en: "Dish" },
+  dessert: { "zh-CN": "甜品", en: "Dessert" },
+  tea: { "zh-CN": "茶", en: "Tea" },
+  coffee: { "zh-CN": "咖啡", en: "Coffee" },
+  "non-alcoholic-drink": { "zh-CN": "无酒精饮品", en: "Non-alcoholic drink" },
+  "alcoholic-drink": { "zh-CN": "酒精饮品", en: "Alcoholic drink" },
 };
 
-const evidenceLocatorLabels: Readonly<Record<Evidence["locators"][number]["kind"], string>> = {
-  page: "页码",
-  chapter: "章节",
-  section: "段落",
-  paragraph: "段落",
-  timestamp: "时间点",
-  folio: "叶码",
-  other: "位置",
+const evidenceLocatorLabels: Readonly<Record<Evidence["locators"][number]["kind"], LocalizedLabel>> = {
+  page: { "zh-CN": "页码", en: "Page" },
+  chapter: { "zh-CN": "章节", en: "Chapter" },
+  section: { "zh-CN": "段落", en: "Section" },
+  paragraph: { "zh-CN": "段落", en: "Paragraph" },
+  timestamp: { "zh-CN": "时间点", en: "Timestamp" },
+  folio: { "zh-CN": "叶码", en: "Folio" },
+  other: { "zh-CN": "位置", en: "Locator" },
 };
 
 export function buildStoryPreview(story: Story, context: StoryExperienceContext): StoryPreview {
   const locale = context.locale ?? "zh-CN";
-  const copy = resolveTranslation(story.content, locale).value;
+  const copy = getLocalizedStoryTranslation(story.id, locale)?.story ?? resolveTranslation(story.content, locale).value;
   const relatedItems = findExplicitStoryItems(story, context.items);
   const leadItem = relatedItems[0];
   const image = leadItem ? getItemHeroImage(leadItem, context.images) : undefined;
@@ -93,12 +96,12 @@ export function buildStoryPreview(story: Story, context: StoryExperienceContext)
   );
   return {
     id: story.id,
-    href: `/stories/${story.id}`,
+    href: `/${locale}/stories/${story.id}`,
     title: copy.title,
     dek: copy.dek,
-    typeLabel: context.storyTypeLabels[story.type],
-    readingTimeLabel: `约 ${Math.max(2, Math.ceil(characterCount / 400))} 分钟`,
-    relatedItemName: leadItem ? resolveTranslation(leadItem.content, locale).value.name : "料理故事",
+    typeLabel: context.storyTypeLabels[story.type][locale],
+    readingTimeLabel: locale === "zh-CN" ? `约 ${Math.max(2, Math.ceil(characterCount / 400))} 分钟` : `${Math.max(2, Math.ceil(characterCount / 850))} min read`,
+    relatedItemName: leadItem ? resolveItemCopy(leadItem, locale).name : locale === "zh-CN" ? "料理故事" : "Culinary story",
     image,
     fallbackInitial: [...copy.title][0] ?? "故",
   };
@@ -106,7 +109,7 @@ export function buildStoryPreview(story: Story, context: StoryExperienceContext)
 
 export function buildStoryPageModel(story: Story, context: StoryExperienceContext): StoryPageModel {
   const locale = context.locale ?? "zh-CN";
-  const copy = resolveTranslation(story.content, locale).value;
+  const copy = getLocalizedStoryTranslation(story.id, locale)?.story ?? resolveTranslation(story.content, locale).value;
   const explicitItems = findExplicitStoryItems(story, context.items);
   const relatedItems = rankRelatedItems(explicitItems, context.items)
     .filter((item) => !explicitItems.some((explicit) => explicit.id === item.id))
@@ -117,10 +120,10 @@ export function buildStoryPageModel(story: Story, context: StoryExperienceContex
   return {
     ...buildStoryPreview(story, context),
     sections: copy.sections.map((section) => ({ heading: section.heading, paragraphs: [...section.paragraphs] })),
-    evidenceContext: getClaimAwareContext(story),
+    evidenceContext: getClaimAwareContext(story, locale),
     contextChips: story.relatedEntities.flatMap((entity) => {
       if (entity.type === "culinary-item") return [];
-      const label = context.relatedEntityLabels[entity.type]?.[entity.id];
+      const label = context.relatedEntityLabels[entity.type]?.[entity.id]?.[locale];
       return label ? [{ type: entity.type, label }] : [];
     }),
     culinaryItems: explicitItems.map((item) => buildCulinaryItemSummary(item, context)),
@@ -128,27 +131,27 @@ export function buildStoryPageModel(story: Story, context: StoryExperienceContex
     relatedStories: rankRelatedStories(story, explicitItems, context)
       .slice(0, 2)
       .map((candidate) => buildStoryPreview(candidate, context)),
-    sources: collectConsumerSources(story, evidenceById, sourceById),
+    sources: collectConsumerSources(story, evidenceById, sourceById, locale),
   };
 }
 
 export function buildCulinaryItemSummary(item: CulinaryItem, context: StoryExperienceContext): CulinaryItemSummary {
   const locale = context.locale ?? "zh-CN";
-  const copy = resolveTranslation(item.content, locale).value;
+  const copy = resolveItemCopy(item, locale);
   return {
     id: item.id,
     name: copy.name,
     description: copy.description,
-    href: getCulinaryItemHref(item, context.recipeItemIds),
-    itemTypeLabel: getCulinaryItemTypeLabel(item.itemType),
+    href: getCulinaryItemHref(item, context.recipeItemIds, locale),
+    itemTypeLabel: getCulinaryItemTypeLabel(item.itemType, locale),
     placeLabel: getCulinaryItemPlaceLabel(item, locale),
     image: getItemHeroImage(item, context.images),
     fallbackInitial: [...copy.name][0] ?? "食",
   };
 }
 
-export function getCulinaryItemTypeLabel(itemType: CulinaryItem["itemType"]): string {
-  return itemTypeLabels[itemType];
+export function getCulinaryItemTypeLabel(itemType: CulinaryItem["itemType"], locale: SupportedLocale = "zh-CN"): string {
+  return itemTypeLabels[itemType][locale];
 }
 
 export function getCulinaryItemPlaceLabel(item: CulinaryItem, locale: SupportedLocale = "zh-CN"): string | undefined {
@@ -159,18 +162,18 @@ export function getCulinaryItemHeroImage(item: CulinaryItem, images: readonly Re
   return getItemHeroImage(item, images);
 }
 
-export function getClaimAwareContext(story: Story): string {
+export function getClaimAwareContext(story: Story, locale: SupportedLocale = "zh-CN"): string {
   const kinds = new Set(story.claims.map((claim) => claim.kind));
   if (kinds.has("legend-folklore")) {
-    return "这里记录的是被讲述的传说或民间故事，不把它当作已被证实的历史事实。";
+    return locale === "zh-CN" ? "这里记录的是被讲述的传说或民间故事，不把它当作已被证实的历史事实。" : "This records legend or folklore as it is told, not as verified historical fact.";
   }
   if (kinds.has("disputed-attribution")) {
-    return "关于人物与发明归属，现有资料仍有争议。正文保留了可以确认的关联，也明确标出了不能由证据直接推出的部分。";
+    return locale === "zh-CN" ? "关于人物与发明归属，现有资料仍有争议。正文保留了可以确认的关联，也明确标出了不能由证据直接推出的部分。" : "Attribution to a person or inventor remains disputed. The story preserves documented links and marks what the evidence cannot establish.";
   }
   if (kinds.has("documented-tradition")) {
-    return "这篇故事谈论的是被机构或文献记录的传统与实践，不由此推导唯一发源地、最早发明者或精确年代。";
+    return locale === "zh-CN" ? "这篇故事谈论的是被机构或文献记录的传统与实践，不由此推导唯一发源地、最早发明者或精确年代。" : "This story concerns a tradition documented by institutions or texts; it does not infer one birthplace, first inventor, or exact date.";
   }
-  return "正文中的具体历史或技术主张来自可重新定位的资料；编辑性连接和阅读提示不作为新的历史断言。";
+  return locale === "zh-CN" ? "正文中的具体历史或技术主张来自可重新定位的资料；编辑性连接和阅读提示不作为新的历史断言。" : "Specific historical and technical claims come from retrievable sources; editorial transitions are not new historical assertions.";
 }
 
 function findExplicitStoryItems(story: Story, items: readonly CulinaryItem[]): CulinaryItem[] {
@@ -243,6 +246,7 @@ function collectConsumerSources(
   story: Story,
   evidenceById: ReadonlyMap<string, Evidence>,
   sourceById: ReadonlyMap<string, Source>,
+  locale: SupportedLocale,
 ): ConsumerSource[] {
   const evidenceBySource = new Map<string, Evidence[]>();
   for (const evidenceId of new Set(story.claims.flatMap((claim) => claim.evidenceIds))) {
@@ -254,15 +258,25 @@ function collectConsumerSources(
     const source = sourceById.get(sourceId);
     if (!source) return [];
     const locatorLabel = [...new Set(records.flatMap((record) => record.locators.map(
-      (locator) => `${evidenceLocatorLabels[locator.kind]}：${locator.value}`,
+      (locator) => `${evidenceLocatorLabels[locator.kind][locale]}: ${locator.value}`,
     )))].join("；") || undefined;
     return [{
       title: source.title,
-      byline: [source.authorNames.join("、"), source.publisherOrInstitution, source.publication?.dateText].filter(Boolean).join(" · "),
+      byline: [source.authorNames.join(locale === "zh-CN" ? "、" : ", "), source.publisherOrInstitution, source.publication?.dateText].filter(Boolean).join(" · "),
       locatorLabel,
       href: getSourceHref(source),
     }];
   });
+}
+
+function resolveItemCopy(item: CulinaryItem, locale: SupportedLocale) {
+  if (locale === "en") {
+    const native = getLocalizedCulinaryCopy(item.id, locale);
+    if (native) return native;
+    const recipe = getRecipeEditorialCopy(item.slug, locale);
+    if (recipe) return recipe;
+  }
+  return resolveTranslation(item.content, locale).value;
 }
 
 function getSourceHref(source: Source): string | undefined {

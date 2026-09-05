@@ -7,50 +7,62 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ingredients } from "@/data/ingredients";
 import { getPublishedRecipeBySlug, getPublishedRecipes, getPublishedRecipeStaticParams } from "@/data/published-recipes";
+import { getLocalizedRecipe, getLocalizedRecipes } from "@/data/localization/public-recipes";
 import { recipeImages } from "@/data/recipe-images";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
 import { buildRecipeDetail } from "@/lib/recipe-detail";
 import { describeFlavorProfile } from "@/lib/flavor";
+import { buildLocaleAlternates } from "@/lib/locale-metadata";
 import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
 import { describeRecipeSimilarity } from "@/lib/recipe-similarity-display";
 import { rankSimilarRecipes } from "@/lib/recipe-similarity";
 import { SITE_NAME } from "@/lib/site";
+import { getLocalizedPath, isSupportedLocale } from "@/lib/localization";
+import { getMessages } from "@/lib/messages";
+import { supportedLocales, type SupportedLocale } from "@/types/localization";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getPublishedRecipeStaticParams();
+  return supportedLocales.flatMap((locale) => getPublishedRecipeStaticParams().map(({ slug }) => ({ locale, slug })));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const recipe = getPublishedRecipeBySlug(slug);
-  if (!recipe) return { title: "菜谱未找到" };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale: value, slug } = await params;
+  const locale = getLocale(value);
+  const source = getPublishedRecipeBySlug(slug);
+  const recipe = source ? getLocalizedRecipe(source, locale) : undefined;
+  if (!recipe) return { title: locale === "zh-CN" ? "菜谱未找到" : "Recipe not found" };
+  const path = `/recipes/${recipe.slug}`;
   return {
-    title: `${recipe.name} 做法与原理`,
-    description: `${recipe.name} 的食材、步骤、做饭时间与每份营养估算，来自 ${SITE_NAME}。`,
-    alternates: { canonical: `/recipes/${recipe.slug}` },
+    title: locale === "zh-CN" ? `${recipe.name} 做法与原理` : `${recipe.name}: method and cooking notes`,
+    description: locale === "zh-CN" ? `${recipe.name} 的食材、步骤、做饭时间与每份营养估算，来自 ${SITE_NAME}。` : `Ingredients, method, cooking time, and estimated nutrition for ${recipe.name} from ${SITE_NAME}.`,
+    alternates: buildLocaleAlternates(locale, path),
   };
 }
 
-export default async function RecipePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const recipe = getPublishedRecipeBySlug(slug);
+export default async function RecipePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale: value, slug } = await params;
+  const locale = getLocale(value);
+  const source = getPublishedRecipeBySlug(slug);
+  const recipe = source ? getLocalizedRecipe(source, locale) : undefined;
   if (!recipe) notFound();
+  const messages = getMessages(locale);
+  const c = recipePageCopy[locale];
 
-  const detail = buildRecipeDetailDisplay(buildRecipeDetail(recipe));
+  const detail = buildRecipeDetailDisplay(buildRecipeDetail(recipe), locale);
   const image = getRecipeHeroImage(recipe, recipeImages);
   const fallback = getRecipeImageFallback(recipe);
-  const calories = detail.nutrition.find((item) => item.label === "热量")?.value ?? "估算不完整";
-  const protein = detail.nutrition.find((item) => item.label === "蛋白质")?.value ?? "估算不完整";
-  const flavor = describeFlavorProfile(recipe.flavor);
-  const similarRecipes = rankSimilarRecipes(recipe, getPublishedRecipes(), { ingredients });
+  const calories = detail.nutrition.find((item) => item.label === c.calories)?.value ?? c.incomplete;
+  const protein = detail.nutrition.find((item) => item.label === c.protein)?.value ?? c.incomplete;
+  const flavor = describeFlavorProfile(recipe.flavor, locale);
+  const similarRecipes = rankSimilarRecipes(recipe, getLocalizedRecipes(getPublishedRecipes(), locale), { ingredients });
   const taxonomyLine = [
     detail.taxonomy.origin,
     detail.taxonomy.subCuisine ?? detail.taxonomy.cuisine,
     detail.taxonomy.dishType,
-    detail.taxonomy.techniques.join("、"),
+    detail.taxonomy.techniques.join(locale === "zh-CN" ? "、" : ", "),
   ].filter(Boolean).join(" · ");
   const hasCulture = Boolean(
     detail.culture?.summary ||
@@ -61,19 +73,19 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
 
   return (
     <main id="main-content">
-      <SiteHeader active="recipes" />
+      <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes/${recipe.slug}`} />
 
       <article>
         <div className="mx-auto max-w-6xl px-4 pt-7 sm:px-6 sm:pt-10">
-          <nav aria-label="面包屑导航" className="flex flex-wrap items-center gap-2 text-sm text-stone-500">
-            <Link className="focus-ring font-semibold text-[#235849] hover:underline" href="/">首页</Link>
+          <nav aria-label={c.breadcrumb} className="flex flex-wrap items-center gap-2 text-sm text-stone-500">
+            <Link className="focus-ring font-semibold text-[#235849] hover:underline" href={getLocalizedPath(locale)}>{messages.nav.home}</Link>
             <span aria-hidden="true">/</span>
-            <Link className="focus-ring font-semibold text-[#235849] hover:underline" href="/recipes">料理</Link>
+            <Link className="focus-ring font-semibold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes")}>{messages.nav.recipes}</Link>
             <span aria-hidden="true">/</span>
             <span aria-current="page">{recipe.name}</span>
           </nav>
           <div className="mt-6">
-            <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={fallback.label} variant="hero" preload />
+            <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={recipe.name} alt={recipe.name} locale={locale} sourceLabel={messages.common.imageSource} variant="hero" preload />
           </div>
         </div>
 
@@ -85,27 +97,27 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-stone-600 sm:text-lg">{recipe.description}</p>
           {flavor ? <p className="mt-4 font-semibold text-[#235849]">{flavor}</p> : null}
           <dl className="mt-8 grid grid-cols-2 border-y border-stone-300 text-left sm:grid-cols-4">
-            <KeyFact label="做饭时间" value={detail.times.humanTotal} />
-            <KeyFact label="份量" value={`${recipe.servings} 人份`} />
-            <KeyFact label="热量 / 份" value={calories} />
-            <KeyFact label="蛋白质 / 份" value={protein} />
+            <KeyFact label={c.cookingTime} value={detail.times.humanTotal} />
+            <KeyFact label={c.servings} value={`${recipe.servings} ${locale === "zh-CN" ? "人份" : "servings"}`} />
+            <KeyFact label={c.caloriesPerServing} value={calories} />
+            <KeyFact label={c.proteinPerServing} value={protein} />
           </dl>
-          <p className="mt-3 text-xs leading-5 text-stone-500">时间、营养和成本为估算值，实际结果会因食材和设备而变化。</p>
+          <p className="mt-3 text-xs leading-5 text-stone-500">{c.estimateNote}</p>
         </header>
 
         <div className="mx-auto max-w-6xl px-4 pb-14 sm:px-6 sm:pb-20">
           <div className="grid gap-12 lg:grid-cols-[20rem_minmax(0,1fr)] lg:gap-16">
             <section aria-labelledby="ingredients-title">
-              <p className="text-sm font-semibold text-[#a64631]">准备</p>
-              <h2 id="ingredients-title" className="mt-2 text-3xl font-bold text-stone-950">食材</h2>
-              <p className="mt-3 text-sm leading-6 text-stone-600">{recipe.servings} 人份，保留数据中的原始计量单位。</p>
+              <p className="text-sm font-semibold text-[#a64631]">{c.prepare}</p>
+              <h2 id="ingredients-title" className="mt-2 text-3xl font-bold text-stone-950">{messages.detail.ingredients}</h2>
+              <p className="mt-3 text-sm leading-6 text-stone-600">{c.ingredientIntro(recipe.servings)}</p>
               <ul className="mt-6 border-t border-stone-300">
                 {detail.ingredients.map((item) => (
                   <li key={item.id} className="border-b border-stone-200 py-4">
                     <div className="flex items-baseline justify-between gap-4">
                       <span className="font-semibold text-stone-900">
                         {item.name}
-                        {item.optional ? <span className="ml-2 text-xs font-normal text-[#235849]">可选</span> : null}
+                        {item.optional ? <span className="ml-2 text-xs font-normal text-[#235849]">{messages.common.optional}</span> : null}
                       </span>
                       <span className="shrink-0 text-sm text-stone-700">{item.amount}</span>
                     </div>
@@ -115,20 +127,20 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               </ul>
 
               <div className="mt-8 border-t border-stone-300 pt-6">
-                <h3 className="font-bold text-stone-950">开始前</h3>
+                <h3 className="font-bold text-stone-950">{c.beforeStart}</h3>
                 <dl className="mt-3 space-y-2 text-sm">
-                  <CompactFact label="准备" value={detail.times.prep} />
-                  <CompactFact label="烹饪" value={detail.times.cook} />
-                  <CompactFact label="难度" value={getDifficultyLabel(recipe.cooking.difficulty)} />
+                  <CompactFact label={messages.detail.prep} value={detail.times.prep} />
+                  <CompactFact label={messages.detail.cook} value={detail.times.cook} />
+                  <CompactFact label={c.difficulty} value={getDifficultyLabel(recipe.cooking.difficulty, locale)} />
                 </dl>
-                <h3 className="mt-6 font-bold text-stone-950">厨具</h3>
-                <p className="mt-2 text-sm leading-6 text-stone-600">{detail.tools.join("、")}</p>
+                <h3 className="mt-6 font-bold text-stone-950">{messages.detail.tools}</h3>
+                <p className="mt-2 text-sm leading-6 text-stone-600">{detail.tools.join(locale === "zh-CN" ? "、" : ", ")}</p>
               </div>
             </section>
 
             <section aria-labelledby="steps-title">
-              <p className="text-sm font-semibold text-[#a64631]">开始做</p>
-              <h2 id="steps-title" className="mt-2 text-3xl font-bold text-stone-950">步骤</h2>
+              <p className="text-sm font-semibold text-[#a64631]">{c.startCooking}</p>
+              <h2 id="steps-title" className="mt-2 text-3xl font-bold text-stone-950">{messages.detail.steps}</h2>
               <ol className="mt-6 border-t border-stone-300">
                 {detail.steps.map((step) => (
                   <li key={step.order} className="grid gap-4 border-b border-stone-300 py-7 sm:grid-cols-[3rem_1fr] sm:gap-6">
@@ -152,9 +164,9 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
 
         <section className="bg-[#173f35] py-12 text-white sm:py-16" aria-labelledby="principles-title">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <p className="text-sm font-semibold text-[#f4d98b]">关键原理</p>
+            <p className="text-sm font-semibold text-[#f4d98b]">{messages.detail.principles}</p>
             <div className="mt-2 grid gap-7 lg:grid-cols-[0.7fr_1.3fr]">
-              <h2 id="principles-title" className="text-3xl font-bold leading-tight sm:text-5xl">把这道菜做好的关键</h2>
+              <h2 id="principles-title" className="text-3xl font-bold leading-tight sm:text-5xl">{c.principlesTitle}</h2>
               <ul className="border-t border-white/30">
                 {recipe.principles.map((principle, index) => (
                   <li key={principle} className="grid grid-cols-[2rem_1fr] gap-3 border-b border-white/30 py-4 leading-7">
@@ -168,28 +180,28 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         </section>
 
         <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="details-title">
-          <p className="text-sm font-semibold text-[#a64631]">作为参考</p>
-          <h2 id="details-title" className="mt-2 text-3xl font-bold text-stone-950">营养、用量与成本</h2>
-          <p className="mt-3 max-w-2xl leading-7 text-stone-600">营养和成本为估算值，可作为日常比较参考，不构成个体化饮食建议。</p>
+          <p className="text-sm font-semibold text-[#a64631]">{c.reference}</p>
+          <h2 id="details-title" className="mt-2 text-3xl font-bold text-stone-950">{c.detailsTitle}</h2>
+          <p className="mt-3 max-w-2xl leading-7 text-stone-600">{c.detailsIntro}</p>
 
           <div className="mt-8 grid border-y border-stone-300 md:grid-cols-3 md:divide-x md:divide-stone-300">
-            <SecondarySection title="每份营养估算">
+            <SecondarySection title={messages.detail.nutrition}>
               <DefinitionList items={detail.nutrition} />
             </SecondarySection>
-            <SecondarySection title="关注用量">
+            <SecondarySection title={messages.detail.limits}>
               <DefinitionList items={detail.limits.map((item) => ({ label: `${item.label}（${item.scope}）`, value: item.value }))} />
             </SecondarySection>
-            <SecondarySection title="预计成本">
+            <SecondarySection title={messages.detail.cost}>
               <DefinitionList items={[
-                { label: "整道", value: detail.cost.whole },
-                { label: "每份", value: detail.cost.perServing },
+                { label: locale === "zh-CN" ? "整道" : "Whole recipe", value: detail.cost.whole },
+                { label: locale === "zh-CN" ? "每份" : "Per serving", value: detail.cost.perServing },
               ]} />
             </SecondarySection>
           </div>
 
           {detail.warnings.length ? (
             <section className="mt-8 border-l-4 border-[#e5bd53] bg-[#fff9e8] p-5" aria-labelledby="estimate-warning">
-              <h2 id="estimate-warning" className="font-bold text-stone-950">部分估算不完整</h2>
+              <h2 id="estimate-warning" className="font-bold text-stone-950">{c.incompleteTitle}</h2>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-stone-700">
                 {detail.warnings.map((warning) => <li key={warning}>{warning}</li>)}
               </ul>
@@ -234,16 +246,17 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         {similarRecipes.length ? (
           <section className="border-t border-stone-200 bg-[#f2f0e8] py-14 sm:py-20" aria-labelledby="similar-recipes-title">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
-              <p className="text-sm font-semibold text-[#a64631]">继续探索</p>
+              <p className="text-sm font-semibold text-[#a64631]">{c.continue}</p>
               <h2 id="similar-recipes-title" className="mt-2 text-3xl font-bold text-stone-950 sm:text-4xl">
-                {similarRecipes.length >= 3 ? "还想吃点类似的？" : "还可以试试这些"}
+                {similarRecipes.length >= 3 ? c.similarMany : c.similarFew}
               </h2>
               <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
                 {similarRecipes.map((result) => (
                   <SimilarRecipeCard
                     key={result.recipe.slug}
                     result={result}
-                    reason={describeRecipeSimilarity(recipe, result, ingredients)}
+                    reason={describeRecipeSimilarity(recipe, result, ingredients, locale)}
+                    locale={locale}
                   />
                 ))}
               </div>
@@ -252,7 +265,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         ) : null}
 
       </article>
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </main>
   );
 }
@@ -296,3 +309,25 @@ function DefinitionList({ items }: { items: Array<{ label: string; value: string
     </dl>
   );
 }
+
+function getLocale(value: string): SupportedLocale {
+  if (!isSupportedLocale(value)) notFound();
+  return value;
+}
+
+const recipePageCopy = {
+  "zh-CN": {
+    breadcrumb: "面包屑导航", calories: "热量", protein: "蛋白质", incomplete: "估算不完整", cookingTime: "做饭时间", servings: "份量",
+    caloriesPerServing: "热量 / 份", proteinPerServing: "蛋白质 / 份", estimateNote: "时间、营养和成本为估算值，实际结果会因食材和设备而变化。",
+    prepare: "准备", ingredientIntro: (n: number) => `${n} 人份，保留数据中的原始计量单位。`, beforeStart: "开始前", difficulty: "难度", startCooking: "开始做",
+    principlesTitle: "把这道菜做好的关键", reference: "作为参考", detailsTitle: "营养、用量与成本", detailsIntro: "营养和成本为估算值，可作为日常比较参考，不构成个体化饮食建议。",
+    incompleteTitle: "部分估算不完整", continue: "继续探索", similarMany: "还想吃点类似的？", similarFew: "还可以试试这些",
+  },
+  en: {
+    breadcrumb: "Breadcrumb", calories: "Calories", protein: "Protein", incomplete: "Estimate incomplete", cookingTime: "Cooking time", servings: "Yield",
+    caloriesPerServing: "Calories / serving", proteinPerServing: "Protein / serving", estimateNote: "Time, nutrition, and cost are estimates; actual results vary with ingredients and equipment.",
+    prepare: "Prepare", ingredientIntro: (n: number) => `${n} servings in the recipe's declared metric units.`, beforeStart: "Before you start", difficulty: "Difficulty", startCooking: "Cook",
+    principlesTitle: "What makes this dish work", reference: "For reference", detailsTitle: "Nutrition, amounts, and cost", detailsIntro: "Nutrition and cost are estimates for everyday comparison, not personalized dietary advice.",
+    incompleteTitle: "Some estimates are incomplete", continue: "Continue exploring", similarMany: "Craving something similar?", similarFew: "Try these next",
+  },
+} as const;

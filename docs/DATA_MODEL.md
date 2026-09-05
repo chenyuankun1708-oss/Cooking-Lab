@@ -16,6 +16,8 @@ Issue #41 将 `StoryCopy` 明确为 `title + dek + non-empty sections`，并为 
 
 路由身份不写回 domain object：10 个 adapted Recipe 仍使用 `/recipes/[slug]`，16 个 native item 使用 `/culinary/[slug]`，6 篇 Story 使用 `/stories/[slug]`。这避免同一个 Recipe 出现两个 canonical URL，也不创建新的持久化字段。
 
+Issue #42 不改变这些 domain identities，只在 Web route 外层增加 `/zh-CN` 与 `/en`。UI chrome 使用 typed message dictionary；公开 editorial translation 使用 locale-keyed reviewed entries。通用 `resolveTranslation` 可以服务编辑/迁移场景，但 consumer publication 使用 strict reviewed lookup，英文缺失时不回退中文。`RecommendationResult` 不再保存展示句子或本地化名称，只保存 criterion、reason、IDs、metrics 与 score breakdown；Web display adapter 按 locale 生成解释。
+
 ## Ingredient
 
 当前包含 102 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量只补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材。
@@ -86,4 +88,4 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 ## Recommendation
 
-输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具、匹配项、不匹配项和解释的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签、技法与 Flavor 是归一化加权软偏好。Flavor 只改变合格料理的顺序，不会成为硬排除条件。当前 recommendation/filter compatibility 继续通过 taxonomy helper 暴露 `cuisine`、`technique` 和派生 `tag` 语义，避免在 M5 期间破坏现有交互。详细口径与权重见 `docs/RECOMMENDATION.md`，未来仍应通过用户研究校准。
+输入 `RecommendationCriteria`，输出带 `eligible`、`score`、结构化 breakdown、硬失败、缺失食材/厨具与匹配信号的 `RecommendationResult`。时间、每份热量/蛋白质/油盐糖/成本及已声明厨具是硬限制；食材匹配、菜系、标签、技法与 Flavor 是归一化加权软偏好。Flavor 只改变合格料理的顺序，不会成为硬排除条件。core 不保存中文/英文 explanation；当前 Web 通过 `lib/recommendation-display.ts` 按 locale 生成自然理由。详细口径与权重见 `docs/RECOMMENDATION.md`。

@@ -126,7 +126,7 @@ describe("canonical public recipe source", () => {
   });
 
   it("routes public application surfaces away from the raw recipe dataset", () => {
-    for (const file of ["app/page.tsx", "app/recipes/page.tsx", "app/recipes/[slug]/page.tsx"]) {
+    for (const file of ["app/[locale]/page.tsx", "app/[locale]/recipes/page.tsx", "app/[locale]/recipes/[slug]/page.tsx"]) {
       expect(readFileSync(resolve(process.cwd(), file), "utf8"), file).not.toContain("@/data/recipes");
     }
   });

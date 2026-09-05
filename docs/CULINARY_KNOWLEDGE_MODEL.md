@@ -4,10 +4,10 @@
 
 ## Purpose
 
-M6 把 Cooking Lab 的长期内容边界从单一 `Recipe` 扩展为 `CulinaryItem`，同时保持当前 100 道 structured Recipe、10 道 published Recipe 与所有 Web 行为不变。Issue #40 已在该兼容边界上新增 16 个 native item，统一公开 repository 共 26 项。本文件区分两件事：
+M6 把 Cooking Lab 的长期内容边界从单一 `Recipe` 扩展为 `CulinaryItem`，同时保持当前 100 道 structured Recipe、10 道 published Recipe 与核心 Web 行为不变。Issue #40 已在该兼容边界上新增 16 个 native item，统一公开 repository 共 26 项；Issue #42 为全部公开内容增加 reviewed `zh-CN / en` presentation。本文件区分两件事：
 
 - **Implemented contract**：`types/culinary.ts`、translation fallback、Recipe adapter、validation 与 item-type publishing skeleton 已存在并有测试。
-- **Migration architecture**：持久化迁移与旧 Recipe 的逐批转换仍是后续工作；当前不引入数据库、CMS 或双语 UI。
+- **Migration architecture**：持久化迁移与旧 Recipe 的逐批转换仍是后续工作；当前不引入数据库或 CMS。
 
 ## Domain Model
 
@@ -113,7 +113,7 @@ TranslationSet<T> = {
 }
 ```
 
-Fallback 顺序是：请求 locale -> item 的 `defaultLocale` -> 第一条可用 translation。发布时默认语言必须是 `reviewed`；缺少英文不会阻止当前中文 Recipe 的渐进迁移。未来新增 locale 只扩 registry 与 translation entry，不扩字段名。
+通用 domain resolver 的 fallback 顺序是：请求 locale -> item 的 `defaultLocale` -> 第一条可用 translation，它服务编辑、迁移与内部 adapter。公开 consumer publication 使用更严格的 reviewed lookup：请求语言缺失时不回退，内容不进入该 locale 的 public output。Issue #42 已为 10 道 published Recipe、16 个 native CulinaryItem 与 6 篇 Story 补齐 reviewed English copy；90 道 draft Recipe 保持不变。未来新增 locale 只扩 registry 与 translation entry，不扩字段名。
 
 Taxonomy/Flavor 保存 locale-independent canonical ID；label registry 和 client display adapter 负责翻译。当前 URL 继续使用稳定、locale-neutral slug；若未来需要本地化 URL，应建立 route alias/repository，不修改 canonical item ID，也不把 localized slug 塞进 domain base。
 
@@ -197,7 +197,10 @@ Story related exploration 使用 explicit references、geography、cuisine、tec
 ## Explicit Non-goals
 
 - 不实现 Pairing/Meal Engine
-- 不做双语切换或 #42 全站视觉改版
 - 不引入数据库、Prisma、CMS、抓取或 AI 内容生成
 - 不把 100 个 Recipe 进行 big-bang rewrite
 - 不改变 recommendation、similarity、homepage、catalog、detail 或 SSG 的现有 Recipe runtime
+
+## Issue #42 Consumer Localization
+
+Web 使用显式 `/zh-CN` 与 `/en` route segment，但 locale 不进入 `CulinaryItem` ID、slug、taxonomy 或 Flavor canonical fields。UI chrome、editorial translation 和 generated explanation 分属 message dictionary、reviewed translation registry 与 display adapter；Source title/locator value 保持 bibliographic identity，只有 UI label 本地化。完整 policy 见 `docs/LOCALIZATION.md`。

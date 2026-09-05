@@ -37,7 +37,7 @@
 - `lib/recipe-detail-display.ts`：当前 Web 详情页的 label 与展示格式适配
 - `lib/recipe-publishing.ts`：framework-independent publication eligibility 与可见性规则
 - `lib/recipe-similarity.ts`：独立于 Recommendation 的 deterministic Recipe similarity、breakdown 与 signals
-- `lib/recipe-similarity-display.ts`：把 similarity signals 转为当前 Web 使用的自然中文理由
+- `lib/recipe-similarity-display.ts`：把 similarity signals 转为当前 Web 使用的 `zh-CN / en` 自然理由
 - `lib/homepage-hero.ts`：把 published Recipe、Flavor、human time 与 image metadata 组合为可序列化 Hero view model
 - `lib/homepage-hero-rotation.ts`：与 React 无关的 index、wrap、timing 与 auto-rotation policy
 - `data/published-recipes.ts`：当前 Web 的唯一公开 Recipe adapter，并负责本地 hero 文件存在性注入
@@ -76,7 +76,7 @@
 
 #### 2. 首页交互保持小型 client boundaries
 
-`app/page.tsx` 继续是 Server Component。它从 `getPublishedRecipes()` 构建 Hero view model 和推荐数据，只把五道可序列化 Hero item 传给 `components/home-hero-carousel.tsx`；该 client component 只负责 active index、timer、visibility、reduced motion 和 controls，不 import raw recipes、filesystem validation 或 100 道数据。
+`app/[locale]/page.tsx` 继续是 Server Component。它从 locale-filtered published data 构建 Hero view model 和推荐数据，只把五道可序列化 Hero item 传给 `components/home-hero-carousel.tsx`；该 client component 只负责 active index、timer、visibility、reduced motion 和 controls，不 import raw recipes、filesystem validation 或 100 道数据。
 
 `components/recipe-discovery.tsx` 是另一个局部 client boundary。它负责把交互输入组装成 `RecommendationCriteria` 并调用 application helper，但评分、硬限制、营养和成本计算仍全部留在 `lib/`。
 
@@ -281,3 +281,11 @@ Story / Evidence / Source registries
 `lib/story-publishing.ts` 负责 Story publication、reviewed translation 与 Story -> CulinaryItem / Evidence / Source 完整性。`lib/story-experience.ts`、`lib/culinary-routes.ts` 和 `lib/culinary-detail.ts` 是 framework-independent application helpers；`data/published-stories.ts` 在服务器端组合 registry 并只输出 consumer view model。React 不读取 raw Evidence/Source，consumer source 不包含 reliability、rights、health、strength、IDs 或 editorial notes。
 
 Canonical route 由内容来源决定：adapted Recipe 继续使用 `/recipes/[slug]`，native CulinaryItem 使用 `/culinary/[slug]`，Story 使用 `/stories/[slug]`。`/culinary` 只生成 16 个 native static params，不为 Recipe 建立重复 URL；Recommendation、Recipe similarity 与现有 Recipe catalog 仍不改 source。详细体验与关联规则见 `docs/STORY_EXPERIENCE.md`。
+
+## M6 Localized Web Boundary
+
+Issue #42 将所有公开页面移动到 `app/[locale]`，只支持 canonical `zh-CN / en`。旧无 locale 路由位于 `app/(legacy)`，仅服务器重定向到默认中文 URL；domain ID 与 slug 不变，canonical/hreflang 由 route metadata 生成。
+
+`lib/messages.ts` 负责 UI chrome，`data/localization/*` 负责 reviewed public editorial copy，taxonomy/Flavor/tool/unit helper 负责稳定 ID 到 label 的解析。公开英文不走中文 fallback；未完成翻译的内容不会进入英文 public output。Recommendation 与 Similarity core 只返回可序列化结构数据，人类语言分别由 display adapter 生成，因此 shared core 不再拼中文句子。
+
+字典和 editorial copy 在服务器端解析，现有 client JS 边界没有扩大，也没有引入 i18n dependency。完整 route、coverage、fallback 与 metadata 规则见 `docs/LOCALIZATION.md`。

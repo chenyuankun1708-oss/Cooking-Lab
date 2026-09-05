@@ -2,7 +2,7 @@
 
 ## Source of truth
 
-- Status: Implemented baseline for Issue #21
+- Status: Active through Issue #42
 - Last refreshed: 2026-09-05
 - Primary product surfaces:
   - consumer homepage
@@ -18,11 +18,11 @@
   - `docs/ROADMAP.md`
   - `docs/STATUS.md`
   - `docs/BRAND_DIRECTIONS.md`
-  - `app/page.tsx`
-  - `app/layout.tsx`
+  - `app/[locale]/page.tsx`
+  - `app/[locale]/layout.tsx`
   - `app/globals.css`
-  - `app/recipes/page.tsx`
-  - `app/recipes/[slug]/page.tsx`
+  - `app/[locale]/recipes/page.tsx`
+  - `app/[locale]/recipes/[slug]/page.tsx`
   - `components/recipe-discovery.tsx`
   - `components/recipe-card.tsx`
   - Production URL: `https://cooking-lab-pied.vercel.app`
@@ -100,12 +100,12 @@
   - Stories
   - Beta feedback
 - Core routes/screens:
-  - `/`
-  - `/recipes`
-  - `/recipes/[slug]`
-  - `/stories`
-  - `/stories/[slug]`
-  - `/culinary/[slug]` for native CulinaryItems only
+  - `/{locale}`
+  - `/{locale}/recipes`
+  - `/{locale}/recipes/[slug]`
+  - `/{locale}/stories`
+  - `/{locale}/stories/[slug]`
+  - `/{locale}/culinary/[slug]` for native CulinaryItems only
 - Content hierarchy:
   - appetite first
   - decision prompt second
@@ -114,11 +114,11 @@
 
 ### Implemented route decisions
 
-- `/` now follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> technique exploration -> estimate note.
-- `/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
-- `/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context -> nearby recipe discovery.
-- `/stories` is a compact editorial discovery surface; `/stories/[slug]` prioritizes reading, related exploration and restrained sources.
-- `/culinary/[slug]` is the minimal destination for native items linked from Stories. Adapted Recipes keep `/recipes/[slug]` as their only canonical URL.
+- `/{locale}` follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> stories -> technique exploration -> estimate note.
+- `/{locale}/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
+- `/{locale}/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context -> nearby recipe discovery.
+- `/{locale}/stories` is a compact editorial discovery surface; `/{locale}/stories/[slug]` prioritizes reading, related exploration and restrained sources.
+- `/{locale}/culinary/[slug]` is the destination for native items linked from Stories. Adapted Recipes keep `/{locale}/recipes/[slug]` as their only canonical URL.
 - Navigation remains limited to Home, Recipes, Stories, and Beta feedback. Technique discovery remains a homepage section rather than a competing primary route.
 
 ## Design principles
@@ -138,7 +138,7 @@
 ## Visual language
 
 - Color:
-  - warm neutral backgrounds
+  - semantic surfaces: warm canvas, paper content, herb knowledge, amber story, restrained cocoa for alcoholic-drink introductions
   - fresh produce-led accents
   - dark text with strong contrast
   - restrained success/warning states
@@ -264,6 +264,7 @@
   - the homepage Hero initially mounts the LCP image and its next editorial image, then prepares later images as the sequence advances
   - recipe cards lazy-load images with responsive `sizes`
   - catalog filtering remains server-rendered; no second 100-recipe client payload is introduced
+  - locale dictionaries and editorial content resolve server-side; do not ship both public languages to client components
 - Compatibility constraints:
   - current production is already live and stable; design changes must remain progressive
 - Test/screenshot expectations:

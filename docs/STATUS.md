@@ -28,8 +28,9 @@ Production URL：
 - GitHub PR #36 已于 2026-09-05 merge 到 `main`
 - GitHub Issue #32 与 Epic #28 已关闭
 - GitHub PR #44 已于 2026-09-05 merge 到 `main`
-- GitHub Issue #38、#39 与 #40 已关闭；Epic #37 与 Issue #41 当前 open
-- Issue #41 工作分支为 `feature/issue-41-story-exploration`
+- GitHub Issue #38、#39、#40 与 #41 已关闭；Epic #37 与 Issue #42 当前 open
+- GitHub PR #47 已于 2026-09-05 merge 到 `main`
+- Issue #42 工作分支为 `feature/issue-42-localization-visual-system`
 - `main` 已包含最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
@@ -286,8 +287,19 @@ PR #36 已合并 Living Editorial Hero：
 - 16 个 native item 获得最小 `/culinary/[slug]` 页面；10 个 Recipe 继续以 `/recipes/[slug]` 为唯一 canonical URL
 - 没有新增 Story、图片系统、client payload、数据库、CMS、双语 UI 或 Meal Engine
 
+## Issue #42 当前产物
+
+- 所有公开页面使用 `/zh-CN` 与 `/en` locale route；旧 URL 服务器重定向到默认中文，canonical/hreflang 和 `<html lang>` 按 locale 输出
+- UI message、domain label、editorial translation 与 generated explanation 明确分层，没有新增 `nameZh/nameEn` 或 i18n dependency
+- 10 道 published Recipe、16 个 native CulinaryItem 与 6 篇 Story 均有 reviewed English consumer copy；90 道 draft Recipe 保持不变
+- Recommendation/Similarity core 只输出结构化 reason data，中文和英文解释由 display adapter 生成
+- Story 英文版保留 documented tradition、disputed attribution 与 evidence boundary；Source title/locator value 不被随意翻译
+- Hero 更亮；canvas/paper/herb/story/cocoa 语义 surface、首页节奏、目录密度和 Story/饮品详情层级完成克制演进
+- 浏览器 QA 覆盖 16 个中英文页面在 375、390、768、1024、1440 px 的 80 个视口，无横向溢出、裁切或 console error
+- 未开始 Pairing/Meal Engine、数据库、CMS、AI 翻译、imperial units、账号或 Mobile
+
 ## 下一步
 
-1. 完成 Issue #41 review，确认阅读体验、claim-aware 语言、来源投影、路由与关联阈值。
-2. #41 merge 前不开始 #42 或 #43。
+1. 完成 Issue #42 PR review，确认英文 editorial copy、metadata、route compatibility 与视觉 QA。
+2. #42 merge 前不开始 #43。
 3. 在多人编辑、更新历史和大规模 many-to-many provenance 成为真实需求前，不引入数据库、Prisma 或 CMS。

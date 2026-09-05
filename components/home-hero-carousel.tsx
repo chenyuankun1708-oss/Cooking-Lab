@@ -12,8 +12,12 @@ import {
   shouldAutoRotateHomeHero,
 } from "@/lib/homepage-hero-rotation";
 import type { HomeHeroItem } from "@/lib/homepage-hero";
+import type { SupportedLocale } from "@/types/localization";
+import { getMessages } from "@/lib/messages";
+import { formatImageAttribution } from "@/lib/recipe-images";
 
-export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroItem[]; header: ReactNode }) {
+export function HomeHeroCarousel({ items, header, locale }: { items: readonly HomeHeroItem[]; header: ReactNode; locale: SupportedLocale }) {
+  const messages = getMessages(locale);
   const [activeIndex, setActiveIndex] = useState(0);
   const [pendingIndex, setPendingIndex] = useState<number | null>(null);
   const [renderedIndices, setRenderedIndices] = useState(() => items.length > 1 ? [0, 1] : [0]);
@@ -103,7 +107,7 @@ export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroIt
         {items.map((item, index) => renderedIndices.includes(index) ? (
           <Image
             key={item.image.id}
-            alt={index === activeIndex ? item.image.alt : ""}
+            alt={index === activeIndex ? item.name : ""}
             aria-hidden={index === activeIndex ? undefined : true}
             className={`object-cover transition-opacity ease-out motion-reduce:transition-none ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
             data-hero-image={item.slug}
@@ -122,18 +126,18 @@ export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroIt
           />
         ) : null)}
       </div>
-      <div className="absolute inset-0 bg-black/38" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/36 to-black/18" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/58 via-black/18 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/38 via-transparent to-black/8" aria-hidden="true" />
 
       {header}
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-4 pb-5 pt-8 sm:px-6 sm:pb-8 lg:pb-10">
-        <div className="max-w-4xl">
+        <div className="max-w-4xl [text-shadow:0_1px_18px_rgba(0,0,0,0.42)]">
           <p className="h-12 max-w-2xl overflow-hidden text-sm font-semibold leading-6 text-[#f4d98b] sm:h-8 sm:text-base">
             {activeItem.editorialLine}
           </p>
           <h1 id="home-title" className="mt-1 text-4xl font-bold leading-[1.14] sm:text-6xl lg:text-7xl">
-            今晚，想吃点什么？
+            {messages.home.title}
           </h1>
           <div className="mt-3 min-h-16 sm:mt-4 sm:min-h-20">
             <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{activeItem.name}</h2>
@@ -144,20 +148,20 @@ export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroIt
 
           <div className="mt-4 flex flex-wrap gap-3 sm:mt-5">
             <Link className="focus-ring inline-flex min-h-11 items-center rounded-md bg-[#f4d98b] px-5 font-semibold text-[#173f35] hover:bg-[#ffe8a7]" href="#decide">
-              决定今晚吃什么
+              {messages.home.decide}
             </Link>
             <Link className="focus-ring inline-flex min-h-11 items-center rounded-md border border-white/70 px-5 font-semibold text-white hover:bg-white/12" href={activeItem.href}>
-              今晚做这个
+              {messages.home.cookThis}
             </Link>
           </div>
         </div>
 
-        <div className="mt-4 flex items-center gap-1" aria-label="切换今晚的料理" role="group">
+        <div className="mt-4 flex items-center gap-1" aria-label={messages.home.carousel} role="group">
           <button
-            aria-label="上一道料理"
+            aria-label={messages.home.previous}
             className="focus-ring inline-flex size-11 items-center justify-center rounded-md border border-white/55 text-xl font-bold text-white hover:bg-white/12"
             onClick={() => requestIndex(getPreviousHomeHeroIndex(activeIndex, items.length), true)}
-            title="上一道料理"
+            title={messages.home.previous}
             type="button"
           >
             <span aria-hidden="true">←</span>
@@ -166,7 +170,7 @@ export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroIt
             <button
               key={item.slug}
               aria-current={index === activeIndex ? "true" : undefined}
-              aria-label={`查看第 ${index + 1} 道料理：${item.name}`}
+              aria-label={messages.home.viewItem(index + 1, item.name)}
               className="focus-ring inline-flex size-11 items-center justify-center rounded-md hover:bg-white/12"
               onClick={() => requestIndex(index, true)}
               type="button"
@@ -175,10 +179,10 @@ export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroIt
             </button>
           ))}
           <button
-            aria-label="下一道料理"
+            aria-label={messages.home.next}
             className="focus-ring inline-flex size-11 items-center justify-center rounded-md border border-white/55 text-xl font-bold text-white hover:bg-white/12"
             onClick={() => requestIndex(getNextHomeHeroIndex(activeIndex, items.length), true)}
-            title="下一道料理"
+            title={messages.home.next}
             type="button"
           >
             <span aria-hidden="true">→</span>
@@ -186,8 +190,8 @@ export function HomeHeroCarousel({ items, header }: { items: readonly HomeHeroIt
         </div>
 
         <p className="mt-3 h-10 overflow-hidden text-xs leading-5 text-white/72 sm:h-5">
-          {activeItem.image.attribution}
-          {activeItem.image.sourceUrl ? <> · <a className="focus-ring underline" href={activeItem.image.sourceUrl} rel="noreferrer" target="_blank">图片来源</a></> : null}
+          {formatImageAttribution(activeItem.image.attribution ?? "", locale)}
+          {activeItem.image.sourceUrl ? <> · <a className="focus-ring underline" href={activeItem.image.sourceUrl} rel="noreferrer" target="_blank">{messages.common.imageSource}</a></> : null}
           {activeItem.image.licenseUrl ? <> · <a className="focus-ring underline" href={activeItem.image.licenseUrl} rel="noreferrer" target="_blank">{activeItem.image.license}</a></> : null}
         </p>
       </div>

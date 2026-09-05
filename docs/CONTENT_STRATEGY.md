@@ -16,6 +16,12 @@ M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展�
 
 当前初始公开集只包含 10 道已有合法 hero 且完成逐道内容深化的 Recipe。其余 90 道继续保留，不为了公开数量降低图片或步骤质量。
 
+## Localization Publishing Strategy
+
+公开语言也是 publication gate。`zh-CN` 与 `en` 可以有不同完成状态；consumer 页面只发布关键 editorial copy 已完整 review 的 locale，不在英文页面回退中文。当前 10 道 published Recipe、16 个 native CulinaryItem 与 6 篇 Story 均完成英文审校，90 道 draft Recipe 不批量翻译。
+
+翻译必须保持料理动作自然、计量语义准确，并维持 Story Claim 的 certainty。Source 正式题名与 locator value 不为界面一致性随意改写；只本地化 UI label。新增 locale 或内容时继续遵循 `research -> editorial review -> locale completeness -> publication`，不使用 AI 翻译结果直接发布。
+
 ## 当前内容缺口
 
 当前数据已经覆盖多种核心技法，但整体仍明显偏向 MVP 验证用途：

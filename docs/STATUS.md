@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M7 readiness verdict 为 `ready for bounded external validation`；M8 `Bounded External Validation` 已获明确 Goal 授权并进入研究协议阶段。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M7 readiness verdict `ready for bounded external validation` 仅表示产品具备开展有界验证的条件。Product Director 已取消并取代 M8 真人研究计划；当前没有新的产品 Goal。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -31,8 +31,9 @@ Production URL：
 - GitHub Issue #38–#43 已关闭，PR #49 已于 2026-09-05 merge 到 `main`；M6 Epic #37 已完成
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已完成并关闭；执行顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
-- M8 Epic #60 与 Issues #61–#64 已建立；执行顺序为 `#61 -> #62 -> #63 -> #64`
-- Issue #62 已完成双语 `/{locale}/validation`、默认语言 legacy redirect、双语公开补充反馈 Issue Form 与 Footer 入口；不引入 analytics、数据库、第三方表单或敏感资料收集。公开反馈在页面和表单中均明确为补充证据，不计入方向门槛；结构化 consent 覆盖用途、公开 GitHub 身份、退出/删除限制与敏感资料边界。当前实现已通过本地 test、lint、typecheck、build 和浏览器 QA，待 independent re-review、PR/CI 与 Production 验证。
+- M8 Epic #60 与 Issues #61–#64 曾用于规划有界外部验证；Product Director 在招募前取消该阶段，#63、#64 与 Epic #60 以 `cancelled / superseded` 收口
+- PR #66 曾上线双语 validation 页面、legacy redirect、公开补充反馈表单与 Footer 入口。由于这些内容只服务已取消的真人研究，Issue #67 已将其安全撤下；PR #66 中与研究无关的 Header 44px 触控目标改进保留
+- M8 最终真实状态为 0 人联系、0 场 scheduled、0 场 session、0 条参与者数据、无产品方向结论；没有开展招募、moderated session 或异步测试
 - Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
 - Issue #52 已通过两轮 independent review（首轮 REVISE、第二轮 PASS）；PR #56 已于 2026-09-05 merge，Issue #52 已关闭
 - Issue #53 已通过 independent review；PR #57 已于 2026-09-05 在 2/2 checks 通过后 merge，Issue #53 已关闭
@@ -357,17 +358,14 @@ PR #36 已合并 Living Editorial Hero：
 - independent culinary/product review 结论为 PASS，无 unresolved major finding；跨菜系接受度与番茄重复感列为外部 dogfood residual risks
 - 详细证据见 `docs/M7_EVALUATION.md`
 
-## Issue #61 当前产物
+## M8 已取消阶段的历史产物
 
-- M8 已冻结 6–8 名真实或潜在家庭做饭用户的形成性验证边界；少于 6 个有效 moderated session 时结论必须为 `inconclusive`
-- 目标用户、筛选、真实晚餐任务、双语参与者说明、consent、P01–P08 记录结构、数据最小化与删除规则已形成可执行协议
-- 方向规则预先定义 Continue / Repair / Pivot / Inconclusive，Pairing 作为独立 modifier 判断 Narrow 或谨慎继续
-- 方向阈值只接受研究人员实时观察的 Production 使用；异步、代理、自动化、内部 dogfood、AI 生成或转述意见不进入分母
-- safety/privacy stop 具有最高优先级，并要求新协议、consent、授权与 round ID，禁止拼接 stopped round 达到门槛
-- 独立 product/research review 经三轮收紧后最终 `PASS`；外部方法依据和完整协议见 `docs/M8_EXTERNAL_VALIDATION.md`
+- Issue #61 曾冻结 6–8 名目标用户的形成性研究协议、证据边界与隐私门禁；协议通过独立 product/research review，但从未执行
+- Issue #62 曾提供研究专用公开入口，后因 Product Director 取消 M8 而由 Issue #67 撤下；通用 Beta feedback 保留
+- 取消发生在任何联系或数据产生之前，因此不存在 participant roster 映射、consent、raw notes 或去标识化研究结果
+- `docs/M8_EXTERNAL_VALIDATION.md` 仅作为未执行方案与隐私设计的历史记录，不是当前操作流程
 
 ## 下一步
 
-1. 完成 Issue #61，冻结目标用户、任务、consent、数据边界与方向决策规则。
-2. 通过 Issue #62 准备安全的双语参与入口，再由 Issue #63 获取 6–8 个真实目标用户 session。
-3. Issue #64 只能按预先声明的规则综合结果；样本不足时结论必须为 `inconclusive`，不自动启动内容扩张、账号或新的 whole-meal constraints。
+- M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导下一阶段产品工作。
+- 当前没有新的产品 Goal；后续方向等待 Product Director 另行决定。

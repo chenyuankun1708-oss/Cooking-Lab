@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { homeHeroEditorialItems } from "@/data/homepage";
@@ -56,13 +56,25 @@ describe("locale and route architecture", () => {
       "app/(legacy)/culinary/[slug]/page.tsx",
       "app/(legacy)/stories/page.tsx",
       "app/(legacy)/stories/[slug]/page.tsx",
-      "app/(legacy)/validation/page.tsx",
     ];
     for (const file of files) {
       const source = readFileSync(resolve(process.cwd(), file), "utf8");
       expect(source, file).toContain("permanentRedirect(");
       expect(source, file).toContain("zh-CN");
     }
+  });
+
+  it("keeps the retired external-study entrypoints out of public routing", () => {
+    const retiredFiles = [
+      ".github/ISSUE_TEMPLATE/m8-validation-feedback.yml",
+      "app/(legacy)/validation/page.tsx",
+      "app/[locale]/validation/page.tsx",
+    ];
+    for (const file of retiredFiles) {
+      expect(existsSync(resolve(process.cwd(), file)), file).toBe(false);
+    }
+    expect(readFileSync(resolve(process.cwd(), "components/site-footer.tsx"), "utf8"))
+      .not.toContain('getLocalizedPath(locale, "/validation")');
   });
 
   it("builds one canonical and two hreflang alternates per localized path", () => {

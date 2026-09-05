@@ -142,10 +142,10 @@ M6 已完成；M7 随后修复了 Discovery、Recipe、Pairing、返回与 local
 
 Epic #37 的 knowledge model、source/provenance、跨类型 library、Story、双语体验与 Pairing/Meal Engine 已按依赖顺序完成实现。数据库、CMS、自动抓取、weekly planner、shopping list 和 Mobile app 仍不由 M6 前置实施。
 
-## 当前阶段：M8 Bounded External Validation
+## 已取消：M8 Bounded External Validation
 
-GitHub tracking：Epic `#60`，研究协议 `#61`，双语参与入口 `#62`，真实目标用户验证 `#63`，证据综合与方向决策 `#64`。
+GitHub tracking：Epic `#60`，研究协议 `#61`，双语参与入口 `#62`，真实目标用户验证 `#63`，证据综合与方向决策 `#64`；清理工作为 `#67`。
 
-M8 不预设下一项功能。它先冻结目标用户、consent、数据最小化、任务与 Continue / Repair / Narrow / Pivot / Inconclusive 规则，再让 6–8 名真实或潜在家庭做饭用户使用当前 Production。内部 dogfood、代理模拟、自动化测试或泛泛意见都不能替代真实参与者证据。
+Product Director 在任何参与者联系、session 或数据产生之前取消并取代了 M8。Cooking Lab 当前阶段不招募参与者、不执行真人研究，也不继续建设研究流程。已上线但只服务该研究的 validation 页面、Footer 入口与专用反馈表单由 Issue #67 撤下。
 
-如果核心料理决策有明确价值而 Pairing 没有，下一阶段可以缩小 Pairing；如果价值信号存在但被集中摩擦阻挡，先做最小修复再验证；如果样本不足，只补足研究，不机械进入旧 Roadmap 中的账号、Household、Planner、内容扩张或 AI companion。
+M7 的 `ready for bounded external validation` 只保留为 readiness 结论，不代表下一阶段必须执行用户研究。M8 没有产生外部用户证据或产品方向结论；清理完成后不自动启动新的产品 Goal。

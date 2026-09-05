@@ -30,6 +30,8 @@
 - `lib/recipe-detail.ts`：framework-independent 的详情 use case 与数值聚合
 - `lib/recipe-detail-display.ts`：当前 Web 详情页的 label 与展示格式适配
 - `lib/recipe-publishing.ts`：framework-independent publication eligibility 与可见性规则
+- `lib/recipe-similarity.ts`：独立于 Recommendation 的 deterministic Recipe similarity、breakdown 与 signals
+- `lib/recipe-similarity-display.ts`：把 similarity signals 转为当前 Web 使用的自然中文理由
 - `data/published-recipes.ts`：当前 Web 的唯一公开 Recipe adapter，并负责本地 hero 文件存在性注入
 - `lib/*validation*.ts`：静态数据校验
 - `lib/ingredient-repository.ts`：数据来源抽象
@@ -100,6 +102,8 @@ Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framewor
 `app/components -> data/published-recipes.ts -> lib/recipe-publishing.ts -> recipes/images/ingredients`
 
 Homepage、catalog、recommendation input、taxonomy option counts、detail lookup 与 SSG params 不再直接读取 raw `recipes`。本地文件检查留在 Node data adapter，通过回调注入纯 eligibility helper，因此核心发布规则仍可被未来客户端复用。
+
+Recipe Detail 的相近料理遵循同一公开边界：页面把 `getPublishedRecipes()` 显式传入纯 `rankSimilarRecipes()`，similarity core 不 import raw recipes、published adapter 或 Recommendation Engine。Core 返回可序列化 score、dimension breakdown 和 signals；Web display adapter 与轻量 card 才负责中文理由、图片和布局。
 
 ### 当前前端边界
 

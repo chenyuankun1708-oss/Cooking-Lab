@@ -2,15 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RecipeImage } from "@/components/recipe-image";
+import { SimilarRecipeCard } from "@/components/similar-recipe-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getPublishedRecipeBySlug, getPublishedRecipeStaticParams } from "@/data/published-recipes";
+import { ingredients } from "@/data/ingredients";
+import { getPublishedRecipeBySlug, getPublishedRecipes, getPublishedRecipeStaticParams } from "@/data/published-recipes";
 import { recipeImages } from "@/data/recipe-images";
 import { getDifficultyLabel } from "@/lib/display-labels";
 import { buildRecipeDetailDisplay } from "@/lib/recipe-detail-display";
 import { buildRecipeDetail } from "@/lib/recipe-detail";
 import { describeFlavorProfile } from "@/lib/flavor";
 import { getRecipeHeroImage, getRecipeImageFallback } from "@/lib/recipe-images";
+import { describeRecipeSimilarity } from "@/lib/recipe-similarity-display";
+import { rankSimilarRecipes } from "@/lib/recipe-similarity";
 import { SITE_NAME } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -40,6 +44,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const calories = detail.nutrition.find((item) => item.label === "热量")?.value ?? "估算不完整";
   const protein = detail.nutrition.find((item) => item.label === "蛋白质")?.value ?? "估算不完整";
   const flavor = describeFlavorProfile(recipe.flavor);
+  const similarRecipes = rankSimilarRecipes(recipe, getPublishedRecipes(), { ingredients });
   const taxonomyLine = [
     detail.taxonomy.origin,
     detail.taxonomy.subCuisine ?? detail.taxonomy.cuisine,
@@ -220,6 +225,26 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
                     </ul>
                   </div>
                 ) : null}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {similarRecipes.length ? (
+          <section className="border-t border-stone-200 bg-[#f2f0e8] py-14 sm:py-20" aria-labelledby="similar-recipes-title">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
+              <p className="text-sm font-semibold text-[#a64631]">继续探索</p>
+              <h2 id="similar-recipes-title" className="mt-2 text-3xl font-bold text-stone-950 sm:text-4xl">
+                {similarRecipes.length >= 3 ? "还想吃点类似的？" : "还可以试试这些"}
+              </h2>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+                {similarRecipes.map((result) => (
+                  <SimilarRecipeCard
+                    key={result.recipe.slug}
+                    result={result}
+                    reason={describeRecipeSimilarity(recipe, result, ingredients)}
+                  />
+                ))}
               </div>
             </div>
           </section>

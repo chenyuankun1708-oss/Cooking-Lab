@@ -19,6 +19,7 @@ const sharedCoreFiles = [
   "lib/recipe-exploration.ts",
   "lib/recipe-images.ts",
   "lib/recipe-publishing.ts",
+  "lib/recipe-similarity.ts",
   "lib/recipe-validation.ts",
   "lib/recommendation.ts",
   "lib/taxonomy.ts",

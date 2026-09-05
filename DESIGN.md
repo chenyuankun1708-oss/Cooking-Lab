@@ -111,7 +111,7 @@
 
 - `/` now follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> technique exploration -> estimate note.
 - `/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
-- `/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context.
+- `/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context -> nearby recipe discovery.
 - Navigation remains limited to Home, Recipes, and the real technique section. No future-feature links or empty routes are exposed.
 
 ## Design principles
@@ -166,7 +166,8 @@
   - existing footer, disclaimers, and metadata patterns
 - New/changed components:
   - `SiteHeader` and `HomeHero`
-  - visual-first catalog and recommendation card variants
+- visual-first catalog and recommendation card variants
+- lightweight similar-recipe cards with image, flavor, natural reason, and human cooking time
   - homepage inspiration, cuisine, and technique sections
   - progressive recommendation disclosure for secondary and advanced criteria
   - detail page editorial reading flow without a sticky metric sidebar

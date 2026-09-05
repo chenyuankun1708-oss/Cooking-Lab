@@ -1,6 +1,6 @@
 # Roadmap
 
-最近更新：2026-09-05
+最近更新：2026-09-06
 
 ## 当前发布状态
 
@@ -15,6 +15,10 @@
 - M2 Web MVP: completed
 - M3 Recommendation Engine: completed
 - M4 Public Beta readiness: completed
+- M5 Content, Brand & Experience: completed
+- M5.1 Product Naturalization & Content Quality: completed
+- M6 Culinary Knowledge Platform: completed
+- M7 Decision Continuity & Meal Reliability: completed
 
 M4 已结束于“可公开访问的 Public Beta 成功上线”，不再停留在 deployment-ready 状态。
 
@@ -118,7 +122,7 @@ Issue #32 已通过 PR #36 合并：五道 published Recipe 以固定编辑顺�
 
 这些方向会受 M5 的 taxonomy、内容、品牌和架构决策影响，但不会在本轮一次性实现。
 
-## 当前阶段：M6 Culinary Knowledge Platform
+## 已完成：M6 Culinary Knowledge Platform
 
 GitHub tracking：Epic `#37`，基础架构 `#38`，Content Research / Source & Provenance `#39`，Culinary Library expansion `#40`。
 
@@ -134,4 +138,14 @@ Issue #42 建立 `zh-CN / en` locale route、strict reviewed public translation�
 
 Issue #43 建立 deterministic Pairing / Meal Composition：固定 anchor、独立 pair/meal score、四个受当前内容支撑的模板、准备负担、partial nutrition/cost、默认无酒精与双语静态消费页。内容 audit 明确不开放四道式和独立 side 模板，并把 starter、side、dessert 与无酒精晚餐饮品缺口记录到 `docs/PAIRING_CONTENT_GAPS.md`。
 
+M6 已完成；M7 随后修复了 Discovery、Recipe、Pairing、返回与 locale switch 之间的 Decision Context 连续性，并使整餐 time/tools 约束、partial/empty 与显式 relaxation 达到内部验证门槛。
+
 Epic #37 的 knowledge model、source/provenance、跨类型 library、Story、双语体验与 Pairing/Meal Engine 已按依赖顺序完成实现。数据库、CMS、自动抓取、weekly planner、shopping list 和 Mobile app 仍不由 M6 前置实施。
+
+## 当前阶段：M8 Bounded External Validation
+
+GitHub tracking：Epic `#60`，研究协议 `#61`，双语参与入口 `#62`，真实目标用户验证 `#63`，证据综合与方向决策 `#64`。
+
+M8 不预设下一项功能。它先冻结目标用户、consent、数据最小化、任务与 Continue / Repair / Narrow / Pivot / Inconclusive 规则，再让 6–8 名真实或潜在家庭做饭用户使用当前 Production。内部 dogfood、代理模拟、自动化测试或泛泛意见都不能替代真实参与者证据。
+
+如果核心料理决策有明确价值而 Pairing 没有，下一阶段可以缩小 Pairing；如果价值信号存在但被集中摩擦阻挡，先做最小修复再验证；如果样本不足，只补足研究，不机械进入旧 Roadmap 中的账号、Household、Planner、内容扩张或 AI companion。

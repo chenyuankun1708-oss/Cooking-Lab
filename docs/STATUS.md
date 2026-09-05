@@ -1,10 +1,10 @@
 # Status
 
-最近更新：2026-09-05
+最近更新：2026-09-06
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M7 readiness verdict 为 `ready for bounded external validation`；外部验证尚未开始，需作为后续独立 Goal 评审。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M7 readiness verdict 为 `ready for bounded external validation`；M8 `Bounded External Validation` 已获明确 Goal 授权并进入研究协议阶段。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -31,6 +31,7 @@ Production URL：
 - GitHub Issue #38–#43 已关闭，PR #49 已于 2026-09-05 merge 到 `main`；M6 Epic #37 已完成
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已完成并关闭；执行顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
+- M8 Epic #60 与 Issues #61–#64 已建立；执行顺序为 `#61 -> #62 -> #63 -> #64`
 - Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
 - Issue #52 已通过两轮 independent review（首轮 REVISE、第二轮 PASS）；PR #56 已于 2026-09-05 merge，Issue #52 已关闭
 - Issue #53 已通过 independent review；PR #57 已于 2026-09-05 在 2/2 checks 通过后 merge，Issue #53 已关闭
@@ -355,7 +356,17 @@ PR #36 已合并 Living Editorial Hero：
 - independent culinary/product review 结论为 PASS，无 unresolved major finding；跨菜系接受度与番茄重复感列为外部 dogfood residual risks
 - 详细证据见 `docs/M7_EVALUATION.md`
 
+## Issue #61 当前产物
+
+- M8 已冻结 6–8 名真实或潜在家庭做饭用户的形成性验证边界；少于 6 个有效 moderated session 时结论必须为 `inconclusive`
+- 目标用户、筛选、真实晚餐任务、双语参与者说明、consent、P01–P08 记录结构、数据最小化与删除规则已形成可执行协议
+- 方向规则预先定义 Continue / Repair / Pivot / Inconclusive，Pairing 作为独立 modifier 判断 Narrow 或谨慎继续
+- 方向阈值只接受研究人员实时观察的 Production 使用；异步、代理、自动化、内部 dogfood、AI 生成或转述意见不进入分母
+- safety/privacy stop 具有最高优先级，并要求新协议、consent、授权与 round ID，禁止拼接 stopped round 达到门槛
+- 独立 product/research review 经三轮收紧后最终 `PASS`；外部方法依据和完整协议见 `docs/M8_EXTERNAL_VALIDATION.md`
+
 ## 下一步
 
-1. 等待 Product Director review M7 readiness verdict 与 residual risks。
-2. 如后续明确批准，单独定义 bounded external validation Goal；不自动启动内容扩张、招募或新的 whole-meal constraints。
+1. 完成 Issue #61，冻结目标用户、任务、consent、数据边界与方向决策规则。
+2. 通过 Issue #62 准备安全的双语参与入口，再由 Issue #63 获取 6–8 个真实目标用户 session。
+3. Issue #64 只能按预先声明的规则综合结果；样本不足时结论必须为 `inconclusive`，不自动启动内容扩张、账号或新的 whole-meal constraints。

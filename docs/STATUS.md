@@ -352,9 +352,10 @@ PR #36 已合并 Living Editorial Hero：
 - 当前 readiness decision 为 `ready for bounded external validation`；六类覆盖是 heuristic，不是统计样本或永久质量门槛
 - evaluation 没有证明任何 named scenario 因 missing content 失败，因此不建议在 M7 内补内容
 - 全量 245 项测试、lint、typecheck、production build 与 production-build 双语 smoke 已通过
-- 详细证据见 `docs/M7_EVALUATION.md`；independent culinary/product review 待完成
+- independent culinary/product review 结论为 PASS，无 unresolved major finding；跨菜系接受度与番茄重复感列为外部 dogfood residual risks
+- 详细证据见 `docs/M7_EVALUATION.md`
 
 ## 下一步
 
-1. 完成 Issue #54 全量验证与 independent culinary/product review；若有合理 finding，修复后复测。
-2. Review PASS 后创建 #54 PR，等待 CI 通过并 merge，再关闭 M7 Epic #50。
+1. 创建 Issue #54 PR，等待 CI 通过并 merge。
+2. 确认 #51–#54 全部关闭后更新并关闭 M7 Epic #50。

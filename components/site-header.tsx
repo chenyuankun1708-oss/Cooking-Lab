@@ -21,10 +21,10 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
           <Link aria-current={active === "home" ? "page" : undefined} className="focus-ring hidden min-h-11 items-center hover:underline sm:inline-flex" href={getLocalizedPath(locale)}>
             {messages.nav.home}
           </Link>
-          <Link aria-current={active === "recipes" ? "page" : undefined} className="focus-ring inline-flex min-h-11 items-center hover:underline" href={getLocalizedPath(locale, "/recipes")}>
+          <Link aria-current={active === "recipes" ? "page" : undefined} className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center hover:underline" href={getLocalizedPath(locale, "/recipes")}>
             {messages.nav.recipes}
           </Link>
-          <Link aria-current={active === "stories" ? "page" : undefined} className="focus-ring inline-flex min-h-11 items-center hover:underline" href={getLocalizedPath(locale, "/stories")}>
+          <Link aria-current={active === "stories" ? "page" : undefined} className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center hover:underline" href={getLocalizedPath(locale, "/stories")}>
             {messages.nav.stories}
           </Link>
           <a className="focus-ring hidden min-h-11 items-center hover:underline lg:inline-flex" href={BETA_FEEDBACK_URL} rel="noreferrer" target="_blank">

@@ -32,6 +32,7 @@ Production URL：
 - GitHub PR #47 已于 2026-09-05 merge 到 `main`
 - M7 Epic #50 与 Issues #51–#54 已完成并关闭；执行顺序为 `#51 -> (#52 core || #53 core) -> Pairing integration -> #54`
 - M8 Epic #60 与 Issues #61–#64 已建立；执行顺序为 `#61 -> #62 -> #63 -> #64`
+- Issue #62 已完成双语 `/{locale}/validation`、默认语言 legacy redirect、双语公开补充反馈 Issue Form 与 Footer 入口；不引入 analytics、数据库、第三方表单或敏感资料收集。公开反馈在页面和表单中均明确为补充证据，不计入方向门槛；结构化 consent 覆盖用途、公开 GitHub 身份、退出/删除限制与敏感资料边界。当前实现已通过本地 test、lint、typecheck、build 和浏览器 QA，待 independent re-review、PR/CI 与 Production 验证。
 - Issue #51 已通过两轮 independent review（首轮 REVISE finding 已修复，第二轮 PASS）；PR #55 已于 2026-09-05 merge，Issue #51 已关闭
 - Issue #52 已通过两轮 independent review（首轮 REVISE、第二轮 PASS）；PR #56 已于 2026-09-05 merge，Issue #52 已关闭
 - Issue #53 已通过 independent review；PR #57 已于 2026-09-05 在 2/2 checks 通过后 merge，Issue #53 已关闭

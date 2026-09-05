@@ -1,0 +1,116 @@
+name: M8 supplemental validation feedback / M8 公开补充验证反馈
+description: Share a public Cooking Lab experience as supplemental evidence / 公开分享 Cooking Lab 使用体验，仅作补充证据
+title: "[M8 Supplemental Feedback] "
+labels:
+  - external-validation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for trying Cooking Lab. We use this report to improve the product and read it only as supplemental evidence. It does not count as one of the live-observed moderated sessions used for the M8 product-direction thresholds.
+
+        感谢你体验 Cooking Lab。我们会用这份记录改进产品，但只把它作为补充证据阅读；它不计入 M8 产品方向门槛要求的实时观察主持式 session。
+
+        GitHub will show your username and response publicly as part of the issue record. You may stop before submitting. After submission, you may edit or close the issue, but public copies in caches, forks, or other replicas may remain and cannot be guaranteed to be fully deleted or withdrawn. Do not include names, email addresses, locations, medical diagnoses, information about minors, or other personal or sensitive information.
+
+        GitHub 会把你的用户名和填写内容作为 Issue 记录公开展示。你可以在提交前随时停止；提交后可以编辑或关闭 Issue，但 cache、fork 或其他公开副本可能继续存在，无法保证完全删除或撤回。请勿填写姓名、邮箱、位置、医疗诊断、未成年人信息或其他个人及敏感资料。
+
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: Before you submit / 提交前确认
+      description: Every item is required. Stop here if you do not agree. / 每一项都必须同意；如有任何一项不同意，请停止提交。
+      options:
+        - label: I am at least 18 and I am submitting voluntarily. / 我已年满 18 岁，并自愿提交。
+          required: true
+        - label: I personally used the public Cooking Lab Production site for a real cooking decision. / 我亲自使用过 Cooking Lab 公开 Production 站点完成一次真实料理决策。
+          required: true
+        - label: I understand that this report is used to improve Cooking Lab, is supplemental evidence only, and does not replace or count as a moderated research session. / 我理解这份记录用于改进 Cooking Lab，仅作补充证据，不替代也不计为主持式研究 session。
+          required: true
+        - label: I understand that this issue, my GitHub username, and my response are public; after submission, copies in caches, forks, or other replicas may not be fully deletable or withdrawable. / 我理解本 Issue、我的 GitHub 用户名和填写内容会公开；提交后，cache、fork 或其他副本可能无法完全删除或撤回。
+          required: true
+        - label: I understand that I may stop before submitting and may later edit or close the issue, without a guarantee that public copies will disappear. / 我理解可以在提交前停止，提交后也可编辑或关闭 Issue，但无法保证公开副本消失。
+          required: true
+        - label: I will not include personal, medical, or other sensitive information. / 我不会填写个人、医疗或其他敏感资料。
+          required: true
+
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Interface language used / 使用的界面语言
+      options:
+        - 中文 / zh-CN
+        - English / en
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device class / 设备类型
+      options:
+        - Mobile phone / 手机
+        - Desktop or laptop / 桌面电脑或笔记本
+        - Tablet / 平板电脑
+    validations:
+      required: true
+
+  - type: dropdown
+    id: cooking-frequency
+    attributes:
+      label: How often do you decide and prepare food for yourself or a household? / 你多久为自己或家庭决定并准备一次餐食？
+      options:
+        - 2–3 times a week / 每周 2–3 次
+        - 4–6 times a week / 每周 4–6 次
+        - Daily or more / 每天或更多
+        - Less than twice a week / 每周少于 2 次
+    validations:
+      required: true
+
+  - type: textarea
+    id: situation
+    attributes:
+      label: The cooking situation / 当时的料理情境
+      description: Describe only non-sensitive constraints such as available time, ordinary ingredients, tools, budget range, or flavor preference. Do not include allergies, diagnoses, or personal details. / 只描述时间、普通食材、厨具、预算范围或口味偏好等非敏感条件；不要填写过敏、诊断或个人资料。
+      placeholder: I needed a weeknight dinner in about 30 minutes using ingredients already at home. / 我想用家里现有食材，在约 30 分钟内完成一顿工作日晚餐。
+    validations:
+      required: true
+
+  - type: input
+    id: final-url
+    attributes:
+      label: Final Cooking Lab URL (optional) / 最终 Cooking Lab URL（可选）
+      description: You may paste the Recipe or Pairing URL if its query contains no information you consider sensitive. / 如果 Recipe 或 Pairing URL 的查询参数不含你认为敏感的信息，可以粘贴在这里。
+      placeholder: https://cooking-lab-pied.vercel.app/...
+
+  - type: textarea
+    id: decision-outcome
+    attributes:
+      label: What did you decide? / 你最后做了什么决定？
+      description: Tell us whether you selected a recipe, needed help, or left without choosing, and what led to that outcome. / 请说明你是否选定料理、是否需要帮助或没有选择就离开，以及什么导致了这个结果。
+    validations:
+      required: true
+
+  - type: textarea
+    id: explanation-trust
+    attributes:
+      label: What felt clear, useful, uncertain, or untrustworthy? / 哪些内容清楚、有用、不确定或不可信？
+      description: Include how you interpreted the recommendation reason, estimates, and constraints. / 请包括你如何理解推荐理由、估算值和条件限制。
+    validations:
+      required: true
+
+  - type: textarea
+    id: pairing
+    attributes:
+      label: Pairing experience / 配餐体验
+      description: If you opened Pairing, describe whether it added value, felt neutral, or reduced trust. If you did not open it, say why. / 如果打开过配餐，请说明它增加了价值、没有影响还是降低了信任；如果没打开，请说明原因。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reuse-trigger
+    attributes:
+      label: A concrete reason to return — or not return / 再次使用或不再使用的具体原因
+      description: Name a situation in the next two weeks when you would use Cooking Lab again, what you would do, and what it would improve over your usual approach. If there is no such situation, say so directly. / 说明未来两周内你会在哪个具体情境再次使用 Cooking Lab、会做什么，以及它比通常做法改善了什么；如果没有这样的情境，请直接说明。
+    validations:
+      required: true

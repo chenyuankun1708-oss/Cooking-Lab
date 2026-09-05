@@ -15,6 +15,7 @@ Cooking Lab 是一个帮助用户根据现有食材、时间、营养、预算�
 - `zh-CN` / `en` 双语公开体验、显式 locale URL 与同内容语言切换
 - 以已选料理为 anchor 的确定性配餐、整餐准备负担与诚实的 partial meal
 - 公开 Beta 反馈入口
+- 双语 M8 外部验证说明与公开补充反馈入口（真实方向门槛仍只采用受邀 moderated session）
 
 ## Tech Stack
 

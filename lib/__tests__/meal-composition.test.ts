@@ -17,10 +17,15 @@ import {
   calculateMealNutrition,
   calculatePreparationBurden,
   composeMealsAround,
+  evaluateMealConstraints,
   findNonAlcoholicDrinkAlternative,
   mealTemplates,
   scoreMealComposition,
 } from "../meal-composition";
+import {
+  appendMealConstraintRelaxations,
+  parseMealConstraintRelaxations,
+} from "../meal-constraint-navigation";
 
 const library = getPublishedCulinaryItems();
 const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
@@ -177,6 +182,145 @@ describe("meal composition", () => {
     expect(unavailableTools.primary).toBeUndefined();
   });
 
+  it("returns structured satisfied and exceeded outcomes with exact missing native-item tools", () => {
+    const template = mealTemplates.find(({ id }) => id === "drink-dessert")!;
+    const meal = scoreMealComposition(template, [
+      { item: item("espresso"), slotId: "drink", roleId: "drink" },
+      { item: item("tiramisu"), slotId: "dessert", roleId: "dessert" },
+    ], "tiramisu", context, {
+      maxTotalTimeMinutes: 405,
+      availableToolIds: ["saucepan"],
+    });
+
+    expect(meal.constraintOutcomes).toContainEqual({
+      constraintId: "estimated-elapsed-time",
+      status: "satisfied",
+      limitMinutes: 405,
+      estimatedElapsedMinutes: 405,
+    });
+    expect(meal.constraintOutcomes).toContainEqual({
+      constraintId: "available-tools",
+      status: "exceeded",
+      availableToolIds: ["saucepan"],
+      requiredToolIds: [
+        "espresso-machine",
+        "heatproof-bowl",
+        "portafilter",
+        "refrigerator",
+        "saucepan",
+        "scale",
+        "square-dish",
+        "timer",
+        "whisk",
+      ],
+      missingToolIds: [
+        "espresso-machine",
+        "heatproof-bowl",
+        "portafilter",
+        "refrigerator",
+        "scale",
+        "square-dish",
+        "timer",
+        "whisk",
+      ],
+    });
+    expect(evaluateMealConstraints(meal, { maxTotalTimeMinutes: 30 })[0]).toMatchObject({
+      constraintId: "estimated-elapsed-time",
+      status: "exceeded",
+      estimatedElapsedMinutes: 405,
+    });
+  });
+
+  it("prefers a constraint-eligible partial over the highest-ranked ineligible pair", () => {
+    const anchor = item("greek-village-salad");
+    const drink = item("longjing-green-tea");
+    if (!("toolIds" in drink.preparation)) throw new Error("Expected procedural test drink");
+    const unavailable = {
+      ...drink,
+      id: "a-unavailable-drink",
+      slug: "a-unavailable-drink",
+      preparation: { ...drink.preparation, toolIds: ["espresso-machine"] },
+    } as CulinaryItem;
+    const eligible = {
+      ...drink,
+      id: "z-eligible-drink",
+      slug: "z-eligible-drink",
+    } as CulinaryItem;
+
+    const result = composeMealsAround(anchor, [anchor, unavailable, eligible], context, {
+      minimumPairingScore: 0,
+      availableToolIds: ["gaiwan", "kettle", "knife", "mixing-bowl", "scale"],
+    });
+
+    expect(result.primary?.completeness).toBe("partial");
+    expect(result.primary?.items.some(({ item: candidate }) => candidate.id === "z-eligible-drink")).toBe(true);
+    expect(result.primary?.constraintOutcomes.every(({ status }) => status === "satisfied")).toBe(true);
+  });
+
+  it("allows a compliant partial to replace a constraint-violating complete meal", () => {
+    const anchor = item("greek-village-salad");
+    const main = item("dongpo-pork");
+    const drink = item("longjing-green-tea");
+    const candidateLibrary = [anchor, main, drink];
+    const unconstrained = composeMealsAround(anchor, candidateLibrary, context, {
+      minimumPairingScore: 0,
+      minimumMealScore: 0,
+    });
+    expect(unconstrained.primary?.completeness).toBe("complete");
+
+    const constrained = composeMealsAround(anchor, candidateLibrary, context, {
+      minimumPairingScore: 0,
+      minimumMealScore: 0,
+      availableToolIds: ["gaiwan", "kettle", "knife", "mixing-bowl", "scale"],
+    });
+    expect(constrained.primary?.completeness).toBe("partial");
+    expect(constrained.primary?.items.some(({ item: candidate }) => candidate.id === main.id)).toBe(false);
+    expect(constrained.primary?.constraintOutcomes).toEqual([expect.objectContaining({
+      constraintId: "available-tools",
+      status: "satisfied",
+    })]);
+  });
+
+  it("accepts a complete primary only at or within both declared hard constraints", () => {
+    const anchor = item("dongpo-pork");
+    const baseline = composeMealsAround(anchor, library, context).primary!;
+    const requiredToolIds = [...new Set(baseline.items.flatMap(({ item: candidate }) =>
+      "toolIds" in candidate.preparation ? candidate.preparation.toolIds : []))].sort();
+    const constrained = composeMealsAround(anchor, library, context, {
+      maxTotalTimeMinutes: baseline.preparation.estimatedElapsedMinutes,
+      availableToolIds: requiredToolIds,
+    });
+    expect(constrained.primary?.completeness).toBe("complete");
+    expect(constrained.primary?.constraintOutcomes).toEqual([
+      expect.objectContaining({ constraintId: "estimated-elapsed-time", status: "satisfied" }),
+      expect.objectContaining({ constraintId: "available-tools", status: "satisfied", missingToolIds: [] }),
+    ]);
+  });
+
+  it("returns explicit constraint and quality empty states without treating completeness as an override", () => {
+    const constrained = composeMealsAround(item("tiramisu"), library, context, { maxTotalTimeMinutes: 30 });
+    expect(constrained.primary).toBeUndefined();
+    expect(constrained.emptyReason).toEqual({
+      kind: "constraints-exceeded",
+      outcomes: [{
+        constraintId: "estimated-elapsed-time",
+        status: "exceeded",
+        limitMinutes: 30,
+        estimatedElapsedMinutes: 405,
+      }],
+    });
+    expect(constrained.relaxationOptions).toEqual(["estimated-elapsed-time"]);
+
+    const anchor = item("greek-village-salad");
+    const trueEmpty = composeMealsAround(anchor, [anchor], context, { minimumPairingScore: 0 });
+    expect(trueEmpty.primary).toBeUndefined();
+    expect(trueEmpty).toMatchObject({
+      alternatives: [],
+      emptyReason: { kind: "quality-threshold" },
+      relaxationOptions: [],
+    });
+  });
+
   it("offers a real non-alcoholic replacement for an alcoholic anchor", () => {
     const result = composeMealsAround(item("fino-sherry"), library, context, { excludeAlcohol: false });
     expect(result.primary).toBeDefined();
@@ -226,6 +370,50 @@ describe("pairing presentation", () => {
     ].join(" ");
     expect(visibleText).not.toMatch(/[\u3400-\u9fff]/);
     expect(JSON.stringify(english)).not.toContain('"score"');
+  });
+
+  it("applies only approved whole-meal fields and requires explicit relaxation", () => {
+    const recipeOnly = getPublishedPairingExperience("dongpo-pork", "en", {
+      decisionContext: {
+        maxCalories: 1,
+        minProtein: 999,
+        maxAddedSugar: 0,
+        maxOil: 0,
+        maxSalt: 0,
+        maxCost: 0,
+      },
+    });
+    expect(recipeOnly?.primary).toEqual(getPublishedPairingExperience("dongpo-pork", "en")?.primary);
+
+    const constrained = getPublishedPairingExperience("tiramisu", "en", {
+      decisionContext: { maxTime: 30 },
+    });
+    expect(constrained?.primary).toBeUndefined();
+    expect(constrained?.relaxationOptions.map(({ constraintId }) => constraintId)).toEqual(["estimated-elapsed-time"]);
+
+    const relaxed = getPublishedPairingExperience("tiramisu", "en", {
+      decisionContext: { maxTime: 30 },
+      relaxedConstraintIds: ["estimated-elapsed-time"],
+    });
+    expect(relaxed?.primary).toBeDefined();
+    expect(relaxed?.appliedRelaxationIds).toEqual(["estimated-elapsed-time"]);
+    expect(relaxed?.primary?.preparation.elapsedTimeLabel).toContain("Estimated");
+
+    const irrelevantRelaxation = getPublishedPairingExperience("dongpo-pork", "en", {
+      decisionContext: { maxCalories: 1 },
+      relaxedConstraintIds: ["available-tools"],
+    });
+    expect(irrelevantRelaxation?.appliedRelaxationIds).toEqual([]);
+  });
+
+  it("allowlists and stably orders explicit Pairing relaxation query values", () => {
+    const parsed = parseMealConstraintRelaxations(new URLSearchParams(
+      "relaxMeal=available-tools&relaxMeal=unknown&relaxMeal=estimated-elapsed-time&relaxMeal=available-tools",
+    ));
+    expect(parsed).toEqual(["estimated-elapsed-time", "available-tools"]);
+    expect(appendMealConstraintRelaxations(new URLSearchParams("dcMaxTime=30"), parsed).toString()).toBe(
+      "dcMaxTime=30&relaxMeal=estimated-elapsed-time&relaxMeal=available-tools",
+    );
   });
 
   it("wires 52 locale-complete SSG pages and distinct detail-page entry points", async () => {

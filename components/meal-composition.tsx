@@ -3,8 +3,9 @@ import type { MealCompositionDisplay } from "@/lib/meal-composition-display";
 import type { SupportedLocale } from "@/types/localization";
 import { getMessages } from "@/lib/messages";
 import { RecipeImage } from "./recipe-image";
+import { appendQueryToHref } from "@/lib/decision-context-navigation";
 
-export function MealCompositionView({ meal, locale }: { meal: MealCompositionDisplay; locale: SupportedLocale }) {
+export function MealCompositionView({ meal, locale, query }: { meal: MealCompositionDisplay; locale: SupportedLocale; query?: URLSearchParams }) {
   const messages = getMessages(locale);
   const c = mealViewCopy[locale];
   return (
@@ -20,7 +21,7 @@ export function MealCompositionView({ meal, locale }: { meal: MealCompositionDis
       <div className="mt-7 grid gap-5 md:grid-cols-3">
         {meal.items.map((item) => (
           <article className="overflow-hidden rounded-lg border border-stone-200 bg-white" key={`${item.slotLabel}:${item.id}`}>
-            <Link className="focus-ring group block rounded-lg" href={item.href}>
+            <Link className="focus-ring group block rounded-lg" href={appendQueryToHref(item.href, query ?? new URLSearchParams())}>
               <RecipeImage image={item.image} fallbackInitial={item.fallbackInitial} fallbackLabel={item.name} alt={item.name} locale={locale} variant="card" showAttribution={false} />
               <div className="p-5">
                 <p className="text-xs font-semibold text-[#a64631]">{item.slotLabel}</p>
@@ -77,7 +78,7 @@ export function MealCompositionView({ meal, locale }: { meal: MealCompositionDis
   );
 }
 
-export function MealCompositionAlternative({ meal, locale }: { meal: MealCompositionDisplay; locale: SupportedLocale }) {
+export function MealCompositionAlternative({ meal, locale, query }: { meal: MealCompositionDisplay; locale: SupportedLocale; query?: URLSearchParams }) {
   const c = mealViewCopy[locale];
   return (
     <article className="rounded-lg border border-stone-200 bg-white p-5">
@@ -86,7 +87,7 @@ export function MealCompositionAlternative({ meal, locale }: { meal: MealComposi
       <ul className="mt-4 divide-y divide-stone-200">
         {meal.items.map((item) => (
           <li className="py-3" key={`${item.slotLabel}:${item.id}`}>
-            <Link className="focus-ring inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={item.href}>{item.slotLabel} · {item.name}</Link>
+            <Link className="focus-ring inline-flex min-h-11 items-center font-semibold text-[#235849] hover:underline" href={appendQueryToHref(item.href, query ?? new URLSearchParams())}>{item.slotLabel} · {item.name}</Link>
           </li>
         ))}
       </ul>

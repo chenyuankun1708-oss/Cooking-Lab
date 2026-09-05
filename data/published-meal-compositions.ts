@@ -16,7 +16,7 @@ import { toMealCompositionOptions } from "@/lib/decision-context";
 import type { IngredientRepository } from "@/lib/ingredient-repository";
 import type { DecisionContext } from "@/types/decision-context";
 import type { SupportedLocale } from "@/types/localization";
-import type { MealConstraintId } from "@/types/pairing";
+import { mealConstraintIds, type MealConstraintId } from "@/types/pairing";
 
 const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
 const ingredientRepository: IngredientRepository = {
@@ -46,10 +46,11 @@ export function getPublishedPairingExperience(
   { decisionContext = {}, relaxedConstraintIds = [] }: PublishedPairingOptions = {},
 ) {
   const constrainedOptions = toMealCompositionOptions(decisionContext, decisionContextValueAllowlist);
-  const appliedRelaxationIds = relaxedConstraintIds.filter((id) =>
-    id === "estimated-elapsed-time"
+  const requestedRelaxations = new Set(relaxedConstraintIds);
+  const appliedRelaxationIds = mealConstraintIds.filter((id) =>
+    requestedRelaxations.has(id) && (id === "estimated-elapsed-time"
       ? constrainedOptions.maxTotalTimeMinutes !== undefined
-      : Boolean(constrainedOptions.availableToolIds?.length),
+      : Boolean(constrainedOptions.availableToolIds?.length)),
   );
   const mealOptions = applyConstraintRelaxations(constrainedOptions, appliedRelaxationIds);
   const defaultComposition = composePublishedMeal(slug, locale, { ...mealOptions, excludeAlcohol: true });
@@ -68,7 +69,7 @@ export function getPublishedPairingExperience(
     alcoholicAlternative,
     nonAlcoholicAlternative: nonAlcoholicItem ? buildCulinaryItemSummary(nonAlcoholicItem, storyContext) : undefined,
     anchorIsAlcoholic: result.anchor.itemType === "alcoholic-drink",
-    appliedRelaxationIds: [...new Set(appliedRelaxationIds)],
+    appliedRelaxationIds,
   };
 }
 

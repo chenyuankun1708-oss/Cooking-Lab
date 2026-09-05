@@ -404,6 +404,12 @@ describe("pairing presentation", () => {
       relaxedConstraintIds: ["available-tools"],
     });
     expect(irrelevantRelaxation?.appliedRelaxationIds).toEqual([]);
+
+    const stableRelaxations = getPublishedPairingExperience("tiramisu", "en", {
+      decisionContext: { maxTime: 30, availableTools: ["kettle"] },
+      relaxedConstraintIds: ["available-tools", "estimated-elapsed-time", "available-tools"],
+    });
+    expect(stableRelaxations?.appliedRelaxationIds).toEqual(["estimated-elapsed-time", "available-tools"]);
   });
 
   it("allowlists and stably orders explicit Pairing relaxation query values", () => {

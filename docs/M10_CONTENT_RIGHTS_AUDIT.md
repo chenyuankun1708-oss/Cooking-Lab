@@ -9,6 +9,13 @@ M10 gate 对每个 published item 遍历 identity、preparation、nutrition、co
 
 当前结果为 `PASS`，但这是工程与编辑风险控制结论，不是法律意见，也不替代收费、餐厅合作、酒类推广或大规模数据库导入前的专业律师复核。
 
+## Production 收口验证
+
+- PR #84 于 2026-09-06 merge，merge commit 为 `de4ea4164d89c6cf2665b0769ab00b94d89bb808`；main GitHub Quality workflow 与 Vercel Production deployment 均成功。
+- `zh-CN` 与 `en` 的“内容来源与权利”页面、Fino、Junmai、Espresso 详情及稳定 `#sources` 在 390 / 1440 px Production 浏览器烟测通过，无横向溢出或 console error。
+- 两种语言料理库各返回 50 项；100 个 Production 详情 URL 全部为 200，均包含 `#sources`、准确 canonical 与安全来源链接。
+- `/content-rights` 在 Production 永久导向 `/zh-CN/content-rights`。Production 成功构建同一 merge commit，证明统一 gate 已处于真实发布流程，而非仅存在于本地测试。
+
 ## 迁移矩阵
 
 | 内容块 | 当前分类 | 权利依据与限制 | Production 结论 |

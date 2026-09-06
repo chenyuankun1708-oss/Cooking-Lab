@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7 与 M9 的统一料理体验已完成。M8 真人研究计划已取消且没有产生参与者数据。当前执行 M10 Epic #78 `Commercial-ready Content Rights / Provenance / Attribution Gate`；500+ 内容扩充与 Taste UI 大升级暂停到 M10 完成之后。本阶段不开展用户研究。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完成。M8 真人研究计划已取消且没有产生参与者数据。当前没有活动中的新产品 Goal；500+ 内容扩充、Taste UI 大升级、M11 与其他新 Goal 均未启动。本阶段不开展用户研究。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -44,9 +44,10 @@ Production URL：
 - M5 Epic #15 已按实际完成状态关闭
 - M9 Epic #69 与 Issues #70–#75 已完成；PR #76 已合并
 - M9 PR #76 已合并；PR #77 仅记录 Production closeout，仍独立等待 merge 确认
-- M10 Epic #78 与 Issues #79–#83 已建立；当前分支为 `codex/m10-content-rights`
+- M10 PR #84 已于 2026-09-06 merge；Epic #78 与 Issues #79–#83 已关闭
+- M10 Production closeout 由 Issue #85 记录
 
-## M10 当前实现状态
+## M10 完成状态
 
 - 已新增统一 `ContentArtifact / RightsAssessment / AttributionRequirement / UsageDecision` 及 dataset、nutrition、cost、AI、external media、restaurant 与 product-profile contract
 - Recipe 公开边界和完整 CulinaryItem 公开边界均接入确定性 content-rights gate；任一 unknown、NC/ND、rights-changed、署名缺失、复审过期、AI/数据库/媒体规则失败会阻止测试和 production build
@@ -55,8 +56,9 @@ Production URL：
 - 料理详情已增加稳定 `#sources`、内容身份、消费级来源、图片许可与改编声明；新增双语 `/content-rights` 与 legacy 永久重定向
 - 独立图片权利复核发现旧 Fino、Junmai 与 Espresso Hero 的品牌包装/商业小包装风险，已替换为无品牌酒桶与酒花、无标识清酒器具和公有领域白色咖啡杯，并登记逐图构图、商标与隐私判断
 - 最终 M10 audit 为 50 个 published item、256 个 artifact、256 个 UsageDecision、0 个 blocked issue；独立代码/内容权利复审结论为 PASS
-- 本地最终门禁通过：typecheck、lint、275 项测试、258 页 production build，以及 375/1440 px 双语权利页与 Fino/Junmai/Espresso 详情烟测；无横向溢出或 console error
-- 500+ 扩充、批量 Story、详情章节导航与 Taste UI 大升级继续暂停
+- merge commit `de4ea4164d89c6cf2665b0769ab00b94d89bb808` 的 main CI 与 Vercel Production deployment 均通过；Production 在 390/1440 px 完成双语权利页及 Fino/Junmai/Espresso 详情烟测，无横向溢出或 console error
+- Production 两种语言目录各返回 50 项；100 个双语详情 URL 全部为 200，均有稳定 `#sources`、正确 canonical 和安全来源链接；legacy `/content-rights` 永久导向 `/zh-CN/content-rights`
+- 500+ 扩充、批量 Story、详情章节导航、Taste UI 大升级、M11 与其他新 Goal 未启动；后续方向由 Product Director 决定
 
 ## M9 当前实现状态
 
@@ -396,4 +398,5 @@ PR #36 已合并 Living Editorial Hero：
 ## 下一步
 
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
-- M9 PR #76 已达到 PR ready：本地质量门禁、独立 review 与 GitHub CI 均通过。按 Codex Autonomy V1 等待明确 merge 确认，不自动 merge；合并后的 Production 双语烟测尚未执行。
+- M10 已完成并收口；当前不自动启动 500+ 内容扩充、Taste UI 大升级、M11 或其他新 Goal。
+- 下一个 Goal 由 Product Director 决定。

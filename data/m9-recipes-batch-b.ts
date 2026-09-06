@@ -1,7 +1,9 @@
 import type { Recipe, RecipeStep } from "@/types/recipe";
 
 interface M9RecipeEditorialOverride {
+  name?: string;
   description?: string;
+  tools?: Recipe["tools"];
   steps: RecipeStep[];
   principles: string[];
 }
@@ -105,6 +107,7 @@ export const m9BatchBOverrides: Readonly<Record<string, M9RecipeEditorialOverrid
   "greek-lemon-oregano-chicken": {
     name: "希腊风味柠檬牛至鸡",
     description: "柠檬、牛至和蒜调味的烤纹锅鸡腿肉块，是受希腊常见风味组合启发的家庭版本。",
+    tools: ["knife", "cutting-board", "grill-pan", "tongs"],
     steps: steps([
       ["鸡腿肉切成约 3 厘米、大小接近的块，擦干后抹油、盐、蒜和牛至；柠檬留到最后。", "统一尺寸有助于肉块同步熟透；提前加入大量柠檬汁会让表面更湿，不利于烤纹形成。"],
       ["烤纹锅充分预热至水滴接触后迅速蒸发，把鸡肉单层铺开，肉块之间留出空隙。", "单层和空隙能维持锅温，让每块鸡肉接触热锅而不是互相挤压出水。"],
@@ -140,7 +143,9 @@ export function applyM9BatchBOverride(recipe: Recipe): Recipe {
   if (!override) return recipe;
   return {
     ...recipe,
+    ...(override.name ? { name: override.name } : {}),
     ...(override.description ? { description: override.description } : {}),
+    ...(override.tools ? { tools: [...override.tools] } : {}),
     heroImageId: `${recipe.slug}-hero`,
     publication: { status: "published" },
     steps: override.steps,

@@ -137,6 +137,33 @@ describe("M11 content Batch A candidate boundary", () => {
     }
   });
 
+  it("keeps disputed geography, product-profile claims, and signature techniques honest", () => {
+    const byId = new Map(m11BatchAItems.map((item) => [item.id, item]));
+    const doubleSkinMilk = byId.get("double-skin-milk")!;
+    expect("steps" in doubleSkinMilk.preparation ? doubleSkinMilk.preparation.steps : []).toHaveLength(5);
+    expect(JSON.stringify(doubleSkinMilk.preparation)).toContain("第一层奶皮");
+    expect(JSON.stringify(doubleSkinMilk.preparation)).toContain("first milk skin");
+
+    for (const itemId of ["mango-pomelo-sago", "hong-kong-egg-tart", "cha-chaan-teng-lemon-coke", "hong-kong-iced-lemon-tea", "yuenyeung"]) {
+      expect(byId.get(itemId)?.taxonomy.origin?.regionId, itemId).not.toBe("guangdong");
+    }
+    expect(byId.get("flat-white")?.taxonomy.origin?.countryId).toBe("trans-tasman");
+    expect(byId.get("cha-chaan-teng-lemon-coke")?.taxonomy.formIds).toContain("lemon-cola");
+
+    for (const itemId of ["darjeeling-first-flush-profile", "ethiopia-yirgacheffe-washed-profile", "rioja-reserva-profile"]) {
+      const item = byId.get(itemId)!;
+      expect(item.flavor.tastes, itemId).toEqual({});
+      expect(item.flavor.aromaIds, itemId).toEqual([]);
+      expect(item.flavor.textureIds, itemId).toEqual([]);
+      expect(item.flavor.characterIds, itemId).toEqual([]);
+    }
+    expect(byId.get("rioja-reserva-profile")?.taxonomy.dietaryTagIds).not.toContain("vegan");
+
+    const openCantoneseSources = m11BatchASources.filter((source) => source.publisherOrInstitution === "Open Cantonese");
+    expect(openCantoneseSources.length).toBeGreaterThan(0);
+    expect(openCantoneseSources.every((source) => source.type === "open-educational-resource" && source.reliability === "general-secondary")).toBe(true);
+  });
+
   it("authors every procedural plan duration without inferring task kind from prose", () => {
     const proceduralItems = m11BatchAItems.filter((item) => "steps" in item.preparation);
     expect(Object.keys(m11BatchAMealPlanStepMetadata).sort()).toEqual(proceduralItems.map((item) => item.id).sort());

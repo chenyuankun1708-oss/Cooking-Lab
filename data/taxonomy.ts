@@ -29,6 +29,7 @@ export const countries = createRegistry([
   { id: "vietnam", label: { "zh-CN": "越南", en: "Vietnam" } },
   { id: "ethiopia", label: { "zh-CN": "埃塞俄比亚", en: "Ethiopia" } },
   { id: "australia", label: { "zh-CN": "澳大利亚", en: "Australia" } },
+  { id: "trans-tasman", label: { "zh-CN": "澳大利亚 / 新西兰", en: "Australia / New Zealand" } },
 ] as const);
 
 export const regions = createRegistry([

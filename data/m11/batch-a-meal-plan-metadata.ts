@@ -95,9 +95,11 @@ export const m11BatchAMealPlanStepMetadata = Object.freeze({
     3: { kind: "active", durationMinutes: 5 }, 4: { kind: "active", durationMinutes: 4 },
   },
   "double-skin-milk": {
-    1: { kind: "active", durationMinutes: 8 }, 2: { kind: "active", durationMinutes: 7 },
-    3: { kind: "wait", durationMinutes: 20, resourceIds: ["steamer"] },
-    4: { kind: "prepare-ahead", durationMinutes: 15, resourceIds: ["refrigerator"] },
+    1: { kind: "active", durationMinutes: 5 },
+    2: { kind: "wait", durationMinutes: 10 },
+    3: { kind: "active", durationMinutes: 10 },
+    4: { kind: "wait", durationMinutes: 20, resourceIds: ["steamer"] },
+    5: { kind: "prepare-ahead", durationMinutes: 15, resourceIds: ["refrigerator"] },
   },
   "mango-pomelo-sago": {
     1: { kind: "active", durationMinutes: 20 }, 2: { kind: "active", durationMinutes: 10 },

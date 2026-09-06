@@ -31,6 +31,7 @@ export const culinaryForms = createRegistry([
   { id: "milk-espresso", label: { "zh-CN": "奶咖", en: "Milk espresso" } },
   { id: "coffee-profile", label: { "zh-CN": "咖啡产品档案", en: "Coffee profile" } },
   { id: "carbonated-tea-drink", label: { "zh-CN": "茶味碳酸饮品", en: "Carbonated tea drink" } },
+  { id: "lemon-cola", label: { "zh-CN": "柠檬可乐", en: "Lemon cola" } },
   { id: "citrus-tea", label: { "zh-CN": "柑橘茶饮", en: "Citrus tea" } },
   { id: "iced-black-tea", label: { "zh-CN": "冰红茶饮", en: "Iced black tea" } },
   { id: "tea-coffee-blend", label: { "zh-CN": "茶咖混合饮", en: "Tea-coffee blend" } },

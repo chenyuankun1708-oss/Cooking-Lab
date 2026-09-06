@@ -6,11 +6,11 @@
 - Last refreshed: 2026-09-06
 - Primary product surfaces:
   - consumer homepage
-  - recipe catalog
-  - recipe detail
-  - story catalog and reading pages
-  - native CulinaryItem detail
+  - unified culinary library
+  - unified culinary detail
+  - embedded story and recognition chapters
   - recommendation entry and result presentation
+  - deterministic pairing
 - Evidence reviewed:
   - `docs/PRODUCT.md`
   - `docs/BRAND_BRIEF.md`
@@ -107,16 +107,19 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
 
 - Primary navigation:
   - Home
-  - Recipes
-  - Stories
+  - Culinary library
+  - Tonight's choice
+  - Language
+- Footer utility:
   - Beta feedback
 - Core routes/screens:
   - `/{locale}`
   - `/{locale}/recipes`
   - `/{locale}/recipes/[slug]`
-  - `/{locale}/stories`
-  - `/{locale}/stories/[slug]`
-  - `/{locale}/culinary/[slug]` for native CulinaryItems only
+  - `/{locale}/pairing/[slug]`
+  - `/{locale}/stories` redirects to `/{locale}/recipes?story=available`
+  - `/{locale}/stories/[slug]` redirects to the corresponding story anchor within the culinary detail
+  - `/{locale}/culinary/[slug]` redirects permanently to the canonical recipe route
 - Content hierarchy:
   - appetite first
   - decision prompt second
@@ -125,12 +128,12 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
 
 ### Implemented route decisions
 
-- `/{locale}` follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> stories -> technique exploration -> estimate note.
+- `/{locale}` follows: food hero -> progressive cooking decision -> representative culinary items -> cuisine and technique exploration -> estimate note.
 - `/{locale}/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
-- `/{locale}/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context -> nearby recipe discovery.
-- `/{locale}/stories` is a compact editorial discovery surface; `/{locale}/stories/[slug]` prioritizes reading, related exploration and restrained sources.
-- `/{locale}/culinary/[slug]` is the destination for native items linked from Stories. Adapted Recipes keep `/{locale}/recipes/[slug]` as their only canonical URL.
-- Navigation remains limited to Home, Recipes, Stories, and Beta feedback. Technique discovery remains a homepage section rather than a competing primary route.
+- `/{locale}/recipes/[slug]` follows: identity and tags -> type-correct preparation or serving guidance -> principles and state cues -> embedded story or recognition -> nutrition and cost -> sources -> pairing.
+- Stories are not a parallel content type in navigation. They remain structured domain objects and appear as chapters of the culinary item they explain.
+- Every public culinary item uses `/{locale}/recipes/[slug]` as its canonical consumer URL. Legacy culinary and story routes only preserve inbound links through permanent redirects.
+- Navigation remains limited to Home, Culinary library, Tonight's choice, and Language. Beta feedback stays in the Footer.
 
 ## Design principles
 
@@ -185,7 +188,9 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - existing footer, disclaimers, and metadata patterns
 - New/changed components:
   - `SiteHeader` and `HomeHero`
-  - `HomeHeroCarousel` as the small client-only rotation boundary inside the server-rendered homepage
+  - static editorial Hero with one preloaded LCP image and no automatic carousel
+  - `CulinaryCard` and `NativeCulinaryDetailPage` as cross-type consumer surfaces
+  - `EmbeddedStories` for evidence-backed cultural and recognition chapters
   - visual-first catalog and recommendation card variants
   - lightweight similar-recipe cards with image, flavor, natural reason, and human cooking time
   - homepage inspiration, cuisine, and technique sections
@@ -206,7 +211,7 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - WCAG 2.2 AA for contrast, focus, sizing, and navigation
 - Keyboard/focus behavior:
   - homepage quick filters and cards must remain keyboard reachable
-  - Hero previous, next, and position controls are 44 px buttons with recipe-specific accessible labels
+  - all interactive targets, including source and attribution links, provide at least 44 px touch height
   - focus rings need visible contrast on image-heavy layouts
 - Contrast/readability:
   - avoid low-contrast beige-on-beige combinations
@@ -217,7 +222,7 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
 - Reduced motion and sensory considerations:
   - no essential meaning in animation
   - gentle transitions only
-  - reduced motion keeps manual Hero controls but disables automatic rotation and image transitions
+  - reduced motion removes non-essential transitions; the static Hero requires no motion-specific control
 
 ## Responsive behavior
 

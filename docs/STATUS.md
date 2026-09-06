@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M7 readiness verdict `ready for bounded external validation` 仅表示产品具备开展有界验证的条件。Product Director 已取消并取代 M8 真人研究计划；当前没有新的产品 Goal。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M8 真人研究计划已取消且没有产生参与者数据。当前执行 M9 Epic #69 `统一料理体验与内容扩充`，目标是以统一料理信息架构、编辑式视觉与 50 项双语内容完成下一版 PR；本阶段不开展用户研究。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -41,7 +41,20 @@ Production URL：
 - `origin/main` 已包含完整 M6 与最新 Public Beta 代码
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
-- M5 已启动
+- M5 Epic #15 已按实际完成状态关闭
+- M9 Epic #69 与 Issues #70–#75 已建立；工作分支为 `feature/m9-unified-culinary-experience`
+
+## M9 当前实现状态
+
+- `duckduckgo-search` 已从用户 Skill 目录移至废纸篓；后续不调用
+- `design-taste-frontend` v2 已从 `Leonxlnx/taste-skill` 固定 commit `ccbc15639c97057cbfcf32ecebc38ef716e4bb37` 安装，仅作为 UI 审计规范
+- 24 道 draft Recipe 已完成 4–6 个步骤、状态提示、失败预防、英文审校、closed ResearchRecord、每项至少两个独立来源和合法本地 Hero
+- 公开边界现为 34 个 adapted Recipe + 16 个 native CulinaryItem，`zh-CN` 与 `en` 各恰好 50 项，覆盖六种料理类型
+- `/recipes` 已成为统一料理库，`/recipes/[slug]` 是所有类型的 canonical 详情；旧 `/culinary` 与 `/stories` 路由使用永久重定向
+- Story、获奖记录和消费级来源嵌入对应料理页；成品饮品不生成虚假步骤，未建模营养与成本不按零显示
+- 首页、目录、详情与 Pairing 已改为米白、墨黑、单一辣椒红的编辑式视觉；首页取消自动轮播，只预加载首个 Hero
+- 推荐引擎仍只处理 published Recipe；全部料理可浏览并参与确定性 Pairing
+- 本地最新验证：typecheck、lint、260 项测试、production build、五档响应式 QA、独立 code review 与独立 visual review 已通过；PR CI 尚待收口
 
 ## 已完成能力
 
@@ -367,5 +380,5 @@ PR #36 已合并 Living Editorial Hero：
 
 ## 下一步
 
-- M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导下一阶段产品工作。
-- 当前没有新的产品 Goal；后续方向等待 Product Director 另行决定。
+- M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
+- 当前下一步是完成 M9 最终浏览器 QA、独立 review、PR 与 CI，并按 Codex Autonomy V1 停在 PR ready，不 merge。

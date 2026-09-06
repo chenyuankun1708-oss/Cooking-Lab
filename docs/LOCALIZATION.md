@@ -34,14 +34,14 @@
 | Surface | zh-CN | en |
 | --- | --- | --- |
 | Homepage / navigation / footer | complete | complete |
-| Recipe catalog / filters | complete | complete |
-| 10 published Recipe details | complete | complete |
+| Unified culinary catalog / filters | complete | complete |
+| 50 published culinary details | complete | complete |
 | 16 native CulinaryItem details | complete | complete |
 | Story catalog / 6 Story details | complete | complete |
 | Recommendation / Similarity explanations | complete | complete |
-| 26 Pairing pages / explanations | complete | complete |
+| 50 Pairing pages / explanations | complete | complete |
 
-其余 90 道 draft Recipe 保持原数据，不在本 Issue 批量翻译。未来新增公开 locale 时，应先通过对应内容 completeness gate。
+其余 66 道 draft Recipe 保持原数据，不在 M9 批量翻译。未来新增公开 locale 时，应先通过对应内容 completeness gate。
 
 ## Editorial Rules
 
@@ -55,4 +55,4 @@
 
 字典和 editorial translation 在 Server Component/data boundary 解析，浏览器不会收到另一语言的完整内容集合。首页 Recommendation interaction 在 M7 同步 allowlisted URL context；没有新增 i18n、动画或字体依赖。
 
-测试覆盖 locale parsing、route generation、query-preserving switch、public translation completeness、taxonomy/Flavor/time/unit labels、Recommendation/Similarity/Pairing、Story certainty、Source locator、metadata、canonical/hreflang 和 `<html lang>`。Pairing 只接受当前 locale 的 26 个完整 published item，view model 不包含另一语言的 consumer copy；query 不扩大 content identity 集合。
+测试覆盖 locale parsing、route generation、query-preserving switch、public translation completeness、taxonomy/Flavor/time/unit labels、Recommendation/Similarity/Pairing、Story certainty、Source locator、metadata、canonical/hreflang 和 `<html lang>`。Pairing 只接受当前 locale 的 50 个完整 published item，view model 不包含另一语言的 consumer copy；query 不扩大 content identity 集合。英文 Recipe 详情直接消费已审 Recipe translation，不从中文 adapter 回退名称、步骤或原理。

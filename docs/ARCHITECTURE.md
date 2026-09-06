@@ -23,7 +23,7 @@
 - `lib/cost.ts`：成本估算引擎
 - `lib/recommendation.ts`：规则推荐、评分、解释与部分 application helper
 - `types/decision-context.ts` / `lib/decision-context.ts`：M7 framework-independent 条件作用域、allowlisted URL codec、vocabulary builder 与 Meal adapter
-- `lib/recipe-exploration.ts`：目录搜索与 taxonomy/time 组合过滤的纯 application helper
+- `lib/culinary-exploration.ts`：跨六种料理类型的目录搜索与 taxonomy/time/story 组合过滤 application helper
 - `types/flavor.ts`：framework-independent Flavor Profile、稳定 ID 与 preference contract
 - `data/flavor.ts`：Flavor vocabulary、localized labels 与用户偏好映射
 - `data/recipe-flavors.ts`：100 道 recipe 的 canonical Flavor Profile 数据
@@ -40,8 +40,8 @@
 - `lib/recipe-similarity.ts`：独立于 Recommendation 的 deterministic Recipe similarity、breakdown 与 signals
 - `lib/recipe-similarity-display.ts`：把 similarity signals 转为当前 Web 使用的 `zh-CN / en` 自然理由
 - `lib/homepage-hero.ts`：把 published Recipe、Flavor、human time 与 image metadata 组合为可序列化 Hero view model
-- `lib/homepage-hero-rotation.ts`：与 React 无关的 index、wrap、timing 与 auto-rotation policy
-- `data/published-recipes.ts`：当前 Web 的唯一公开 Recipe adapter，并负责本地 hero 文件存在性注入
+- `data/published-recipes.ts`：Recommendation 使用的公开 Recipe adapter
+- `data/published-culinary-items.ts`：Catalog、detail 与 Pairing 使用的统一公开料理边界，并负责本地 Hero 文件存在性注入
 - `lib/*validation*.ts`：静态数据校验
 - `lib/ingredient-repository.ts`：数据来源抽象
 - `app/`：Next.js 路由、metadata 与页面组合
@@ -77,7 +77,7 @@
 
 #### 2. 首页交互保持小型 client boundaries
 
-`app/[locale]/page.tsx` 继续是 Server Component。它从 locale-filtered published data 构建 Hero view model 和推荐数据，只把五道可序列化 Hero item 传给 `components/home-hero-carousel.tsx`；该 client component 只负责 active index、timer、visibility、reduced motion 和 controls，不 import raw recipes、filesystem validation 或 100 道数据。
+`app/[locale]/page.tsx` 继续是 Server Component。它从 locale-filtered published data 构建 Hero view model 和推荐数据；`components/home-hero.tsx` 只渲染第一项静态编辑 Hero，因此没有 timer、visibility 或轮播状态，也只预加载一个 LCP 图片。
 
 `components/recipe-discovery.tsx` 是另一个局部 client boundary。它负责把交互输入组装成 `RecommendationCriteria` 并调用 application helper，但评分、硬限制、营养和成本计算仍全部留在 `lib/`。
 
@@ -85,11 +85,11 @@
 - application criteria state
 - recommendation helper 调用
 - 当前首页的 progressive disclosure 状态
-- Living Hero 的轻量轮换状态
+- 静态 Hero 的可序列化展示模型
 
 被集中在一个组件中。
 
-目录探索不复用这条 client boundary。`/recipes` 通过 URL 参数和 `lib/recipe-exploration.ts` 在服务器端按 taxonomy、Flavor 与时间过滤，保持 SSR 优势，也没有复制 source of truth。
+目录探索不复用这条 client boundary。`/recipes` 通过 URL 参数和 `lib/culinary-exploration.ts` 在服务器端按类型、taxonomy、Flavor、时间与 Story 过滤，保持 SSR 优势，也没有复制 source of truth。
 
 #### 3. Flavor 与 taxonomy 分离
 
@@ -99,7 +99,7 @@
 
 Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framework-independent 层。当前仍有未完成部分：
 
-- 只有 10 道 recipe 具备已审核 hero image 并进入公开集合，其他 90 道保留为 draft
+- 34 道 Recipe 具备已审核 Hero 并进入公开集合，其他 66 道保留为 draft
 - cultural metadata 目前只在少量 recipe 上示例性使用
 - taxonomy registry 只覆盖当前数据集需要的稳定语义，不追求成为完整世界料理百科
 
@@ -109,15 +109,15 @@ Issue #17 到 #21 已把 taxonomy、100 道菜与 image registry 放进 framewor
 
 `data/recipes.ts` 保留全部 100 道内容数据，用于 validation、coverage 和后续编辑。`lib/recipe-publishing.ts` 纯粹评估技术 eligibility，`recipe.publication.status` 记录独立的人工编辑决定；只有两者同时通过的 Recipe 才由 `data/published-recipes.ts` 暴露。
 
-公开依赖方向为：
+Recipe-only 推荐依赖方向为：
 
 `app/components -> data/published-recipes.ts -> lib/recipe-publishing.ts -> recipes/images/ingredients`
 
-Homepage、catalog、recommendation input、taxonomy option counts、detail lookup 与 SSG params 不再直接读取 raw `recipes`。本地文件检查留在 Node data adapter，通过回调注入纯 eligibility helper，因此核心发布规则仍可被未来客户端复用。
+Homepage Recommendation 不直接读取 raw `recipes`。Catalog、detail 与 Pairing 通过 `data/published-culinary-items.ts` 读取 50 项统一边界；本地文件检查留在 Node data adapter，通过回调注入纯 eligibility helper，因此核心发布规则仍可被未来客户端复用。
 
 Recipe Detail 的相近料理遵循同一公开边界：页面把 `getPublishedRecipes()` 显式传入纯 `rankSimilarRecipes()`，similarity core 不 import raw recipes、published adapter 或 Recommendation Engine。Core 返回可序列化 score、dimension breakdown 和 signals；Web display adapter 与轻量 card 才负责中文理由、图片和布局。
 
-Living Hero 同样不绕过公开边界：`data/homepage.ts` 只保存少量 slug 与 editorial line，`buildHomeHeroItems()` 对 published 状态、重复 slug 与 hero image 做 fail-fast 检查。初始 item 与轮换顺序固定，因此 SSR、hydration 和 LCP 都可预测。
+静态 Hero 同样不绕过公开边界：`data/homepage.ts` 只保存少量 slug 与 editorial line，`buildHomeHeroItems()` 对 published 状态、重复 slug 与 Hero image 做 fail-fast 检查。页面只渲染第一项，因此 SSR、hydration、LCP preload 与 CLS 都可预测。
 
 ### 当前前端边界
 
@@ -231,7 +231,7 @@ Future clients -> application repositories -> CulinaryItem / Story / Evidence
                                            -> existing Flavor/Nutrition/Cost engines
 ```
 
-`Recipe` 仍是当前 100 条数据和 10 条公开内容的 source of truth。`CulinaryItem` 不成为第二份静态数据，也不要求现有页面双读；adapter 只进行可验证投影。Story Claim、Evidence 与 Source 使用 ID reference 保持实体生命周期独立，Source 通过 URL/DOI/ISBN/archive/physical citation locator 与持久化方式解耦。Translation 使用 locale entry，不让 locale 进入字段名。
+`Recipe` 仍是当前 100 条配方和 34 条公开 Recipe 的 source of truth。`CulinaryItem` 不成为第二份静态 Recipe 数据；adapter 只进行可验证投影，再与 16 个 native item 组成 50 项 public boundary。Story Claim、Evidence 与 Source 使用 ID reference 保持实体生命周期独立，Source 通过 URL/DOI/ISBN/archive/physical citation locator 与持久化方式解耦。Translation 使用 locale entry，不让 locale 进入字段名。
 
 Provenance traversal 只有一条明确路径：`CulinaryItem.storyIds -> Story.claims -> Evidence -> Source`。没有泛化的 `item.evidenceIds`；当且仅当后续出现 Story 之外的明确 field assertion 用例时，再引入最小 ItemClaim，而不是建立模糊的 knowledge graph。
 
@@ -262,7 +262,7 @@ data/culinary/items/* --------------------+
 
 `data/culinary/` 按 item type 和 provenance concern 拆分，避免单个巨型 data file。`lib/culinary-library-validation.ts` 负责跨 item 的 ID/slug 唯一性和 public filtering；`lib/culinary-publishing.ts` 按类型验证 preparation、nutrition/cost、图片与可达 provenance。filesystem 检查仍由 `data/published-culinary-items.ts` 通过回调注入，domain 不 import Node filesystem。
 
-统一 repository 当前包含 10 个 adapted Recipe 和 16 个 native item。现有 homepage、catalog、detail、recommendation、similarity 与 SSG 不切换读取源，因此 #40 没有造成双维护，也没有提前实施 #41 Story UI、#42 visual/bilingual experience 或 #43 Meal Engine。
+统一 repository 当前包含 34 个 adapted Recipe 和 16 个 native item。M9 的 catalog、detail、Story redirects、Pairing 与静态参数统一读取该 public boundary；Recommendation 仍读取 Recipe-only source，因为其条件、营养和成本规则只对可执行 Recipe 成立。
 
 ## M6 Story Experience Boundary
 
@@ -281,7 +281,7 @@ Story / Evidence / Source registries
 
 `lib/story-publishing.ts` 负责 Story publication、reviewed translation 与 Story -> CulinaryItem / Evidence / Source 完整性。`lib/story-experience.ts`、`lib/culinary-routes.ts` 和 `lib/culinary-detail.ts` 是 framework-independent application helpers；`data/published-stories.ts` 在服务器端组合 registry 并只输出 consumer view model。React 不读取 raw Evidence/Source，consumer source 不包含 reliability、rights、health、strength、IDs 或 editorial notes。
 
-Canonical route 由内容来源决定：adapted Recipe 继续使用 `/recipes/[slug]`，native CulinaryItem 使用 `/culinary/[slug]`，Story 使用 `/stories/[slug]`。`/culinary` 只生成 16 个 native static params，不为 Recipe 建立重复 URL；Recommendation、Recipe similarity 与现有 Recipe catalog 仍不改 source。详细体验与关联规则见 `docs/STORY_EXPERIENCE.md`。
+Canonical route 由内容 identity 而非旧存储来源决定：全部 public CulinaryItem 使用 `/recipes/[slug]`。`/culinary/[slug]` 永久重定向到对应 canonical route；Story 列表和详情分别重定向到有故事筛选与详情内 Story anchor。Story、Claim、Evidence 和 Source 仍是结构化 domain objects，不因消费层嵌入而压平。Recommendation 保持 Recipe-only，Pairing 可跨全部 public item。详细体验与关联规则见 `docs/STORY_EXPERIENCE.md`。
 
 ## M6 Localized Web Boundary
 
@@ -321,7 +321,7 @@ Issue #52 将 Decision Context 接到 `Discovery -> Recipe catalog -> Recipe -> 
 
 Recipe 与 Pairing Server Page 为了在首屏生成正确的 scope summary、返回链接和 locale link，会在 request time 读取 query。Next.js 16 因而把这两类页面标记为 dynamic rendering；`generateStaticParams` 与 `dynamicParams = false` 仍只定义现有 locale + content identity，不为 query 创建新路径。Metadata 继续只按 locale + slug 构建 canonical/hreflang，query 不进入索引身份。这是 M7 对决策正确性的局部取舍，不改变 shared core、内容 repository 或 canonical route。
 
-`/{locale}/pairing/[slug]` 的 base content identity 仍为 26 项 × 2 locales；M7 query 只触发这些已知 identity 的 request-time rendering，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。
+`/{locale}/pairing/[slug]` 的 base content identity 为 50 项 × 2 locales；M7 query 只触发这些已知 identity 的 request-time rendering，不建立 client builder。候选 slot 先 bounded ranking，再组合少量模板；未来规模增长时可按 role/context 索引并采用 beam search，不需要现在引入数据库或 vector search。完整规则见 `docs/PAIRING.md`。
 
 ## M7 Meal Reliability Boundary
 

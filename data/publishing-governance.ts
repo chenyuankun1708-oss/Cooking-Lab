@@ -27,9 +27,9 @@ export const publishingGovernancePolicyVersion = "m10.1-risk-based-2026-09-06";
 
 // This value is a committed review checkpoint, not a runtime-derived PASS. Any
 // content artifact change invalidates the attestation and blocks publication.
-const m10BaselineReviewedArtifactSetVersion = "clv1-f5c87a7ef999023e";
-const m10BaselineReviewedCommit = "de4ea4164d89c6cf2665b0769ab00b94d89bb808";
-const m10BaselineBatchId = "m10-existing-50-independent-review";
+const currentReviewedArtifactSetVersion = "clv1-aadce6e32f7b0028";
+const currentReviewedCommit = "47ac94efb6a9ebbb50104498435fed15acfc4a96";
+const currentReviewBatchId = "issue-96-all-50-primary-review-47ac94e-run-1";
 const weakImageFidelityItemIds = new Set([
   "cantonese-mushroom-steamed-chicken",
   "malaysian-turmeric-chicken",
@@ -38,16 +38,16 @@ const weakImageFidelityItemIds = new Set([
 
 const author: ReviewActorIdentity = {
   actorType: "agent",
-  actorId: "codex-agent:m10-implementation",
-  runId: "m10-pr84-implementation",
-  contextId: "m10-root-implementation-context",
+  actorId: "/root",
+  runId: "issue-96-governance-implementation-2026-09-06",
+  contextId: "/root/m11-risk-based-governance",
 };
 
 const reviewer: ReviewActorIdentity = {
   actorType: "agent",
-  actorId: "codex-agent:m10-independent-content-rights-reviewer",
-  runId: "m10-pr84-independent-review-final",
-  contextId: "m10-independent-review-context",
+  actorId: "/root/m11_primary_readonly_final",
+  runId: "issue-96-all-50-primary-review-47ac94e-run-1",
+  contextId: "/root/m11_primary_readonly_final/47ac94e-primary-context-1",
 };
 
 const historicalSamplingItemIds = [
@@ -232,16 +232,16 @@ export function createPublishingGovernanceRegistry(
     "visual-image",
   ];
   const attestations = dimensions.map((dimension): ReviewAttestation => ({
-    id: `attestation-${m10BaselineBatchId}-${dimension}`,
-    batchId: m10BaselineBatchId,
+    id: `attestation-${currentReviewBatchId}-${dimension}`,
+    batchId: currentReviewBatchId,
     dimension,
     itemIds,
-    artifactSetVersion: m10BaselineReviewedArtifactSetVersion,
+    artifactSetVersion: currentReviewedArtifactSetVersion,
     author,
     reviewer,
-    reviewedCommit: m10BaselineReviewedCommit,
-    evidenceReference: "docs/M10_CONTENT_RIGHTS_AUDIT.md",
-    rubricVersion: "m10-independent-content-rights-review-v1",
+    reviewedCommit: currentReviewedCommit,
+    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559402886",
+    rubricVersion: "m10.1-all-50-five-dimension-primary-review-v1",
     policyVersion: publishingGovernancePolicyVersion,
     reviewedAt: "2026-09-06",
     verdict: "pass",

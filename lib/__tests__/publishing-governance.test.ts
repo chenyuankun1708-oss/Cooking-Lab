@@ -182,6 +182,7 @@ describe("risk-based publishing governance", () => {
       })]));
     expect(issueCodes(registry)).toContain("missing-sampling-coverage");
     expect(issueCodes(registry)).toContain("sampling-class-frozen");
+    expect(issueCodes(registry)).not.toContain("sampling-metrics-invalid");
   });
 
   it("accepts a complete low-risk agent-review fixture without claiming human review", () => {

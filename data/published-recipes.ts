@@ -8,6 +8,9 @@ import { applyM9RecipePublicationOverrides } from "./m9-published-recipes";
 import { m9PromotedRecipeSlugs } from "./m9-published-recipes";
 import { hasCompleteRecipeTranslation } from "./localization/public-recipes";
 import { assertM9RecipesPublicationReady } from "@/lib/m9-recipe-publishing";
+import { adaptRecipeToCulinaryItem } from "@/lib/culinary-item-adapter";
+import { assertContentRightsReady, getContentRightsEvaluationDate } from "@/lib/content-rights";
+import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
 import {
   assertPublishedRecipesEligible,
   getPubliclyVisibleRecipes,
@@ -30,6 +33,29 @@ assertM9RecipesPublicationReady({
   hasCompleteEnglishTranslation: (recipe) => hasCompleteRecipeTranslation(recipe, "en"),
 });
 assertPublishedRecipesEligible(publicationCandidates, publishingContext);
+
+const publishedRecipeCandidates = publicationCandidates.filter((recipe) => recipe.publication.status === "published");
+const recipeRightsItems = publishedRecipeCandidates.map(adaptRecipeToCulinaryItem);
+const recipeRightsRegistry = createContentRightsRegistry({
+  items: recipeRightsItems,
+  auditedItemIds: m10AuditedCulinaryItemIds.filter((id) => recipeRightsItems.some((item) => item.id === id)),
+  images: recipeImages,
+  ingredients,
+  stories: [],
+  evidence: m9RecipeResearchRegistry.evidence,
+  sources: m9RecipeResearchRegistry.sources,
+  researchRecords: m9RecipeResearchRegistry.records,
+});
+assertContentRightsReady(recipeRightsRegistry, {
+  items: recipeRightsItems,
+  images: recipeImages,
+  ingredients,
+  stories: [],
+  evidence: m9RecipeResearchRegistry.evidence,
+  sources: m9RecipeResearchRegistry.sources,
+  researchRecords: m9RecipeResearchRegistry.records,
+  now: getContentRightsEvaluationDate(),
+});
 
 const publishedRecipes = Object.freeze(getPubliclyVisibleRecipes(publicationCandidates, publishingContext));
 const publishedRecipeBySlug = new Map(publishedRecipes.map((recipe) => [recipe.slug, recipe]));

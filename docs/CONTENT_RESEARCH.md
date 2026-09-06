@@ -1,12 +1,18 @@
 # Content Research Workflow
 
-最近更新：2026-09-05
+最近更新：2026-09-06
+
+> M10 在本工作流末端增加统一 commercial-use gate。研究质量与内容权利是两个不同维度：可靠 Source 不自动授权复制，开放许可也不自动证明 claim 真实。完整政策见 `docs/CONTENT_RIGHTS_POLICY.md`。
 
 ## Purpose And Scope
 
 Cooking Lab 的内容研究链路是：
 
 `Research question -> candidate sources -> source evaluation -> rights evaluation -> evidence capture -> claim classification -> original editorial draft -> editorial review -> publication candidate -> publishing gate`
+
+M10 后的发布链实际为：
+
+`ResearchRecord / Source / Evidence -> ContentArtifact -> RightsAssessment -> AttributionRequirement -> UsageDecision -> unified Production validator`
 
 它用于稳定地产出可追溯、可重新定位、经过权利审核的 Culinary Knowledge。当前实现是人工/半自动工作流、类型 contract、确定性 validation 和三个 research exercises；没有 crawler、定时任务、AI 内容生成、CMS、数据库或新公开内容。
 

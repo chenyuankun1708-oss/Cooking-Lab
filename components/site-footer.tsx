@@ -17,6 +17,9 @@ export function SiteFooter({ locale }: { locale: SupportedLocale }) {
           <Link className="focus-ring inline-flex min-h-11 items-center hover:underline" href={getLocalizedPath(locale, "/recipes")}>
             {messages.footer.recipes}
           </Link>
+          <Link className="focus-ring inline-flex min-h-11 items-center hover:underline" href={getLocalizedPath(locale, "/content-rights")}>
+            {messages.footer.contentRights}
+          </Link>
           <a className="focus-ring inline-flex min-h-11 items-center hover:underline" href={BETA_FEEDBACK_URL} rel="noreferrer" target="_blank">
             {messages.footer.feedback}
           </a>

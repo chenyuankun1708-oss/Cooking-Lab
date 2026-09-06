@@ -18,6 +18,9 @@ import { recipeImages } from "./recipe-images";
 import { hasCompleteNativeCulinaryTranslation } from "./localization/public-culinary";
 import { hasCompleteRecipeTranslation } from "./localization/public-recipes";
 import type { SupportedLocale } from "@/types/localization";
+import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
+import { assertContentRightsReady, createContentRightsAuditReport, evaluateContentRightsRegistry, getContentRightsEvaluationDate } from "@/lib/content-rights";
+import { m9RecipeResearchRecords, m9RecipeResearchSources } from "./research/m9-recipe-research";
 
 const allImages = [...recipeImages, ...culinaryImages];
 const candidates: CulinaryItem[] = [
@@ -34,6 +37,34 @@ const publishingContext: CulinaryPublishingContext = {
 };
 
 assertPublishedCulinaryItemsEligible(candidates, publishingContext);
+
+const allSources = [...culinarySources, ...m9RecipeResearchSources];
+const allEvidence = [...culinaryEvidence];
+export const contentRightsSources = Object.freeze(allSources);
+export const contentRightsRegistry = createContentRightsRegistry({
+  items: candidates,
+  auditedItemIds: m10AuditedCulinaryItemIds,
+  images: allImages,
+  ingredients,
+  stories: culinaryStories,
+  evidence: allEvidence,
+  sources: allSources,
+  researchRecords: m9RecipeResearchRecords,
+});
+const contentRightsContext = {
+  items: candidates,
+  images: allImages,
+  ingredients,
+  stories: culinaryStories,
+  evidence: allEvidence,
+  sources: allSources,
+  researchRecords: m9RecipeResearchRecords,
+  now: getContentRightsEvaluationDate(),
+} as const;
+assertContentRightsReady(contentRightsRegistry, contentRightsContext);
+export const contentRightsAuditReport = createContentRightsAuditReport(
+  evaluateContentRightsRegistry(contentRightsRegistry, contentRightsContext),
+);
 
 const publishedItems = Object.freeze(getPubliclyVisibleCulinaryItems(candidates, publishingContext));
 const publishedItemBySlug = new Map(publishedItems.map((item) => [item.slug, item]));

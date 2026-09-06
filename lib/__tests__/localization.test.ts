@@ -56,6 +56,7 @@ describe("locale and route architecture", () => {
       "app/(legacy)/culinary/[slug]/page.tsx",
       "app/(legacy)/stories/page.tsx",
       "app/(legacy)/stories/[slug]/page.tsx",
+      "app/(legacy)/content-rights/page.tsx",
     ];
     for (const file of files) {
       const source = readFileSync(resolve(process.cwd(), file), "utf8");

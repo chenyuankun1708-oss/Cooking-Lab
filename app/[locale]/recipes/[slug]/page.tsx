@@ -5,6 +5,8 @@ import { decisionContextValueAllowlist } from "@/data/decision-context";
 import { ingredients } from "@/data/ingredients";
 import { getLocalizedRecipe } from "@/data/localization/public-recipes";
 import {
+  contentRightsRegistry,
+  contentRightsSources,
   getPublishedCulinaryItemForLocaleBySlug,
   getPublishedCulinaryItemsForLocale,
 } from "@/data/published-culinary-items";
@@ -12,7 +14,6 @@ import { getPublishedRecipeBySlug } from "@/data/published-recipes";
 import { getStoryExperienceContext } from "@/data/published-stories";
 import {
   m9RecipeResearchRecords,
-  m9RecipeResearchSources,
 } from "@/data/research/m9-recipe-research";
 import { buildCulinaryDetailModel } from "@/lib/culinary-detail";
 import { parseCulinaryCatalogFilters } from "@/lib/culinary-exploration";
@@ -51,6 +52,8 @@ export async function generateMetadata({
   const recipe = sourceRecipe ? getLocalizedRecipe(sourceRecipe, locale) : undefined;
   const detail = buildCulinaryDetailModel(item, ingredients, getStoryExperienceContext(locale), locale, {
     ...(recipe ? { recipe } : {}),
+    rightsRegistry: contentRightsRegistry,
+    researchSources: contentRightsSources,
   });
   const path = `/recipes/${item.slug}`;
   return {
@@ -89,7 +92,8 @@ export default async function CulinaryDetailRoute({
   const detail = buildCulinaryDetailModel(item, ingredients, getStoryExperienceContext(locale), locale, {
     ...(recipe ? { recipe } : {}),
     researchRecords: m9RecipeResearchRecords,
-    researchSources: m9RecipeResearchSources,
+    researchSources: contentRightsSources,
+    rightsRegistry: contentRightsRegistry,
   });
   const hasContext = hasDecisionContext(decisionState.context);
   const returnHref = hasContext

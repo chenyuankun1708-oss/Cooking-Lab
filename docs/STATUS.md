@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M8 真人研究计划已取消且没有产生参与者数据。当前执行 M9 Epic #69 `统一料理体验与内容扩充`，目标是以统一料理信息架构、编辑式视觉与 50 项双语内容完成下一版 PR；本阶段不开展用户研究。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7 与 M9 的统一料理体验已完成。M8 真人研究计划已取消且没有产生参与者数据。当前执行 M10 Epic #78 `Commercial-ready Content Rights / Provenance / Attribution Gate`；500+ 内容扩充与 Taste UI 大升级暂停到 M10 完成之后。本阶段不开展用户研究。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -42,7 +42,21 @@ Production URL：
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
 - M5 Epic #15 已按实际完成状态关闭
-- M9 Epic #69 与 Issues #70–#75 已建立；PR #76 已提交，工作分支为 `feature/m9-unified-culinary-experience`
+- M9 Epic #69 与 Issues #70–#75 已完成；PR #76 已合并
+- M9 PR #76 已合并；PR #77 仅记录 Production closeout，仍独立等待 merge 确认
+- M10 Epic #78 与 Issues #79–#83 已建立；当前分支为 `codex/m10-content-rights`
+
+## M10 当前实现状态
+
+- 已新增统一 `ContentArtifact / RightsAssessment / AttributionRequirement / UsageDecision` 及 dataset、nutrition、cost、AI、external media、restaurant 与 product-profile contract
+- Recipe 公开边界和完整 CulinaryItem 公开边界均接入确定性 content-rights gate；任一 unknown、NC/ND、rights-changed、署名缺失、复审过期、AI/数据库/媒体规则失败会阻止测试和 production build
+- 当前 50 项无 grandfathering：34 个 adapted Recipe、16 个 native CulinaryItem、50 张 Hero、6 个 Story 和实际使用的 89 种食材均进入 audit coverage
+- 当前营养继续明确为 Cooking Lab 演示性编辑估算；USDA FoodData Central 只登记为未来 CC0 versioned-download dataset，未伪称为现有数值来源
+- 料理详情已增加稳定 `#sources`、内容身份、消费级来源、图片许可与改编声明；新增双语 `/content-rights` 与 legacy 永久重定向
+- 独立图片权利复核发现旧 Fino、Junmai 与 Espresso Hero 的品牌包装/商业小包装风险，已替换为无品牌酒桶与酒花、无标识清酒器具和公有领域白色咖啡杯，并登记逐图构图、商标与隐私判断
+- 最终 M10 audit 为 50 个 published item、256 个 artifact、256 个 UsageDecision、0 个 blocked issue；独立代码/内容权利复审结论为 PASS
+- 本地最终门禁通过：typecheck、lint、275 项测试、258 页 production build，以及 375/1440 px 双语权利页与 Fino/Junmai/Espresso 详情烟测；无横向溢出或 console error
+- 500+ 扩充、批量 Story、详情章节导航与 Taste UI 大升级继续暂停
 
 ## M9 当前实现状态
 
@@ -55,7 +69,7 @@ Production URL：
 - 首页、目录、详情与 Pairing 已改为米白、墨黑、单一辣椒红的编辑式视觉；首页取消自动轮播，只预加载首个 Hero
 - 推荐引擎仍只处理 published Recipe；全部料理可浏览并参与确定性 Pairing
 - 本地最新验证：typecheck、lint、260 项测试、production build、五档响应式 QA、独立 code review 与独立 visual review 已通过
-- PR #76 的 Vercel 与 Preview Comments checks 已通过，mergeable 状态为 `MERGEABLE`；Preview 受 Vercel SSO 保护，Production 上线烟测需在获得明确 merge 确认并部署后执行
+- PR #76 已合并并部署；PR #77 仅负责把 M9 Production closeout 记录带回 `main`
 
 ## 已完成能力
 

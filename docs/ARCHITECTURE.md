@@ -328,3 +328,15 @@ Recipe 与 Pairing Server Page 为了在首屏生成正确的 scope summary、�
 Issue #53 让 public Pairing adapter 接受归一化 `DecisionContext`，并继续只通过 #51 adapter 把 `maxTime` 与非空 `availableTools` 投影到 Meal engine。Engine 为每个候选生成 locale-independent constraint outcomes；complete 和 partial 使用同一 hard-constraint gate，partial 会在全部合格 pair 中选择，而不是先取 unconstrained top pair 再检查。若没有合格 complete 或 partial，result 明确区分 quality empty 与 constraint empty，并携带用于解释的结构化 exceeded outcome。
 
 Pairing route 的 `relaxMeal` 只接受 `estimated-elapsed-time / available-tools`，按稳定顺序归一化，并且只有用户点击具体的移除条件链接后才生效。原 Decision Context 仍保留在 URL；relaxation 是当前 Pairing route metadata，不回写或改写 Decision Context，也不升级 Recipe-only constraints。该机制不是通用 rule framework，不支持任意参数、隐式 widening 或 kitchen scheduling。
+## M10 Content-rights boundary
+
+M10 将内容权利建立为 framework-independent shared core：
+
+`UI -> CulinaryDetail consumer disclosure -> published Culinary repository -> Content rights validator -> ContentArtifact / RightsAssessment / UsageDecision registries`
+
+- `types/content-rights.ts` 定义独立 artifact、四项用途权限、风险维度、署名、数据集、营养/成本 provenance、AI、外部媒体、餐厅身份和产品档案。
+- `data/content-rights.ts` 从当前 published candidates 构建稳定 registry；它不导入 published repository，避免循环依赖。
+- `lib/content-rights.ts` 是确定性门禁，不依赖 React、Next.js、DOM、文件系统或网络。
+- `data/published-recipes.ts` 在 Recipe 进入推荐消费者前运行 recipe-scope gate；`data/published-culinary-items.ts` 对统一 50 项运行完整 gate。
+- Web 只消费 `ConsumerRightsDisclosure`，不暴露内部风险备注、合同或个人信息。
+- CC BY-SA 隔离发生在具体 asset-file / isolated-dataset 边界，不污染专有核心内容库。

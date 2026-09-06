@@ -82,6 +82,7 @@ export const publishingGovernanceRegistry = createPublishingGovernanceRegistry({
   images: allImages,
   sources: allSources,
   evidence: allEvidence,
+  stories: culinaryStories,
   researchRecords: m9RecipeResearchRecords,
   ingredients,
   contentPackages: publishedLocalContentPackages,
@@ -94,6 +95,7 @@ const publishingGovernanceContext = {
   images: allImages,
   sources: allSources,
   evidence: allEvidence,
+  stories: culinaryStories,
   researchRecords: m9RecipeResearchRecords,
   ingredients,
   contentPaths: publishedLocalContentPackages.map((contentPackage) => ({

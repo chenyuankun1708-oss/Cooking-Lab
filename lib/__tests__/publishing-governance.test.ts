@@ -17,6 +17,7 @@ import type { PublishingGovernanceRegistry, ReviewAttestation } from "@/types/pu
 import {
   createArtifactSetVersion,
   createSamplingEquivalenceClasses,
+  deriveEquivalenceClassKeys,
   evaluatePublishingGovernance,
   type PublishingGovernanceContext,
 } from "../publishing-governance";
@@ -42,6 +43,7 @@ const context: PublishingGovernanceContext = {
   images: allImages,
   sources: contentRightsSources,
   evidence: culinaryEvidence,
+  stories: culinaryStories,
   researchRecords: m9RecipeResearchRecords,
   ingredients,
   contentPaths: publishedLocalContentPackages.map((contentPackage) => ({
@@ -63,6 +65,7 @@ function readyRegistry(): PublishingGovernanceRegistry {
     images: allImages,
     sources: contentRightsSources,
     evidence: culinaryEvidence,
+    stories: culinaryStories,
     researchRecords: m9RecipeResearchRecords,
     ingredients,
     contentPackages: publishedLocalContentPackages,
@@ -131,6 +134,7 @@ describe("risk-based publishing governance", () => {
       images: allImages,
       sources: contentRightsSources,
       evidence: culinaryEvidence,
+      stories: culinaryStories,
       researchRecords: m9RecipeResearchRecords,
       ingredients,
       contentPackages: publishedLocalContentPackages,
@@ -225,6 +229,10 @@ describe("risk-based publishing governance", () => {
     researchRecord.editorialDecision += " changed";
     expect(issueCodes(readyRegistry(), researchContext)).toContain("stale-review-attestation");
 
+    const storyContext = structuredClone(context);
+    storyContext.stories[0].content.entries[0].value.dek += " changed";
+    expect(issueCodes(readyRegistry(), storyContext)).toContain("stale-review-attestation");
+
     const rightsContext = structuredClone(context);
     rightsContext.rightsRegistry.assessments[0].authorityVersion += "-changed";
     expect(issueCodes(readyRegistry(), rightsContext)).toContain("stale-review-attestation");
@@ -271,6 +279,123 @@ describe("risk-based publishing governance", () => {
     const imageBytesContext = structuredClone(context);
     imageBytesContext.imageAssetVersions[0].sha256 = "0".repeat(64);
     expect(issueCodes(readyRegistry(), imageBytesContext)).toContain("stale-review-attestation");
+  });
+
+  it("fingerprints used dataset and cost assessments plus transitive AI input artifacts", () => {
+    const item = items.find((entry) =>
+      "inputs" in entry.preparation
+      && entry.preparation.inputs.length > 0
+      && contentRightsRegistry.artifacts.some((artifact) =>
+        artifact.subject.type === "culinary-item"
+        && artifact.subject.id === entry.id
+        && artifact.sourceIds.length > 0))!;
+    const itemIds = [item.id];
+
+    const costContext = structuredClone(context);
+    const ingredientId = "inputs" in item.preparation ? item.preparation.inputs[0].ingredientId : "";
+    const costProvenanceId = costContext.ingredients.find((entry) => entry.id === ingredientId)!.costProvenanceId;
+    const costAssessmentId = costContext.rightsRegistry.costs.find((entry) => entry.id === costProvenanceId)!.rightsAssessmentId;
+    const costVersion = createArtifactSetVersion(itemIds, costContext);
+    costContext.rightsRegistry.assessments.find((entry) => entry.id === costAssessmentId)!.authorityVersion += "-changed";
+    expect(createArtifactSetVersion(itemIds, costContext)).not.toBe(costVersion);
+
+    const datasetContext = structuredClone(context);
+    const dataset = datasetContext.rightsRegistry.datasets[0];
+    Object.assign(datasetContext.rightsRegistry, {
+      nutrition: datasetContext.rightsRegistry.nutrition.map((entry) => entry.ingredientId === ingredientId
+        ? {
+            ingredientId,
+            kind: "dataset" as const,
+            datasetId: dataset.id,
+            upstreamRecordId: "test-food-code",
+            basis: "per-100g" as const,
+            conversionMethod: "identity-per-100g",
+            accessedAt: "2026-09-06",
+            reviewer: "test-fixture",
+          }
+        : entry),
+    });
+    const datasetVersion = createArtifactSetVersion(itemIds, datasetContext);
+    datasetContext.rightsRegistry.assessments.find((entry) => entry.id === dataset.rightsAssessmentId)!.authorityVersion += "-changed";
+    expect(createArtifactSetVersion(itemIds, datasetContext)).not.toBe(datasetVersion);
+
+    const aiContext = structuredClone(context);
+    const outputArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.subject.id === item.id)!;
+    const inputArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.subject.id !== item.id)!;
+    Object.assign(aiContext.rightsRegistry, {
+      ai: [{
+        id: "test-transitive-ai-record",
+        artifactId: outputArtifact.id,
+        provider: "test-provider",
+        model: "test-model",
+        modelVersion: "test-model-v1",
+        generatedAt: "2026-09-06",
+        termsUrl: "https://example.test/terms",
+        termsEffectiveDate: "2026-09-01",
+        promptTemplateVersion: "test-prompt-v1",
+        inputArtifactIds: [inputArtifact.id],
+        inputRightsReviewed: true,
+        reviewAttestationIds: ["test-attestation"],
+        similarityReview: "passed",
+        trademarkReview: "not-applicable",
+      }],
+    });
+    const aiVersion = createArtifactSetVersion(itemIds, aiContext);
+    inputArtifact.version += "-changed";
+    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
+
+    const mediaContext = structuredClone(context);
+    const sourcedArtifact = mediaContext.rightsRegistry.artifacts.find((entry) =>
+      entry.subject.type === "culinary-item"
+      && entry.subject.id === item.id
+      && entry.sourceIds.length > 0)!;
+    const mediaAssessmentId = mediaContext.rightsRegistry.datasets[0].rightsAssessmentId;
+    Object.assign(mediaContext.rightsRegistry, {
+      externalMedia: [{
+        id: "test-external-media",
+        sourceId: sourcedArtifact.sourceIds[0],
+        platform: "youtube" as const,
+        url: "https://www.youtube.com/watch?v=test",
+        use: "reference-only" as const,
+        timestamp: "01:23",
+        downloaded: false as const,
+        transcriptStored: false as const,
+        screenshotStored: false as const,
+        automatedCollection: false as const,
+        privacyReview: "not-required" as const,
+        rightsAssessmentId: mediaAssessmentId,
+      }],
+    });
+    const mediaVersion = createArtifactSetVersion(itemIds, mediaContext);
+    mediaContext.rightsRegistry.assessments.find((entry) => entry.id === mediaAssessmentId)!.authorityVersion += "-media-changed";
+    expect(createArtifactSetVersion(itemIds, mediaContext)).not.toBe(mediaVersion);
+  });
+
+  it("creates distinct sampling classes for image domains, license authorities, and cost transforms", () => {
+    const item = items.find((entry) => entry.id === "huevos-rancheros-home")!;
+    const originalKeys = deriveEquivalenceClassKeys(item, context);
+    expect(originalKeys).toContain("image-source-domain:commons.wikimedia.org");
+    expect(originalKeys.some((key) => key.startsWith("rights-authority:open-license:"))).toBe(true);
+    expect(originalKeys.some((key) => key.startsWith("cost-transform:"))).toBe(true);
+
+    const changedContext = structuredClone(context);
+    const imageId = item.images.availability === "available" ? item.images.references.primaryImageId : "";
+    changedContext.images.find((entry) => entry.id === imageId)!.sourceUrl = "https://images.example.test/new-origin";
+    const openAssessment = changedContext.rightsRegistry.assessments.find((entry) =>
+      entry.basis.kind === "open-license"
+      && changedContext.rightsRegistry.artifacts.some((artifact) => artifact.subject.id === imageId && artifact.rightsAssessmentId === entry.id))!;
+    openAssessment.authorityVersion += "-new-license-version";
+    changedContext.rightsRegistry.costs[0].methodology += " New conversion path.";
+    const changedKeys = deriveEquivalenceClassKeys(item, changedContext);
+
+    expect(changedKeys).toContain("image-source-domain:images.example.test");
+    expect(changedKeys).not.toContain("image-source-domain:commons.wikimedia.org");
+    expect(changedKeys.filter((key) => key.startsWith("rights-authority:open-license:"))).not.toEqual(
+      originalKeys.filter((key) => key.startsWith("rights-authority:open-license:")),
+    );
+    expect(changedKeys.filter((key) => key.startsWith("cost-transform:"))).not.toEqual(
+      originalKeys.filter((key) => key.startsWith("cost-transform:")),
+    );
   });
 
   it("publishes CC0 and public-domain image provenance without inventing a license obligation", () => {

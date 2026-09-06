@@ -72,7 +72,7 @@ GitHub tracking:
 
 在 taxonomy 稳定后，扩展内容覆盖面，形成一个更像“小型世界料理地图”的结构化数据集。
 
-当前已完成 100 道 recipe、73 种 Recipe ingredient、16 种 technique 与 20 个 country 状态的覆盖；Issue #40 另增加 29 种只服务 native CulinaryItem 的食材，repository 合计 102 种。Recipe 基线见 `docs/RECIPE_COVERAGE.md`。
+当前已完成 100 道 recipe、73 种 Recipe ingredient、16 种 technique 与 20 个 country 状态的覆盖；Issue #40 另增加 29 种只服务 native CulinaryItem 的食材，M10.1 图片/料理一致性修订补入烤花生，repository 合计 103 种。Recipe 基线见 `docs/RECIPE_COVERAGE.md`。
 
 ### D. Recipe image system and visual asset pipeline
 

@@ -1,4 +1,4 @@
-import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
+import type { CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
 import type { ContentArtifact, ContentRightsRegistry } from "@/types/content-rights";
 import type { Ingredient } from "@/types/ingredient";
 import type { RecipeImage } from "@/types/image";
@@ -48,6 +48,7 @@ export interface PublishingGovernanceContext {
   images: readonly RecipeImage[];
   sources: readonly Source[];
   evidence: readonly Evidence[];
+  stories: readonly Story[];
   researchRecords: readonly ResearchRecord[];
   ingredients: readonly Ingredient[];
   contentPaths: readonly PublishingContentPath[];
@@ -84,14 +85,21 @@ export function createArtifactSetVersion(
 ): string {
   const itemIdSet = new Set(itemIds);
   const items = context.items.filter((item) => itemIdSet.has(item.id)).sort((left, right) => left.id.localeCompare(right.id));
-  const artifacts = uniqueById(items.flatMap((item) => getItemArtifacts(item, context.rightsRegistry)));
+  const artifactIds = new Set(items.flatMap((item) => getItemArtifacts(item, context.rightsRegistry).map((artifact) => artifact.id)));
+  let discoveredAiInput = true;
+  while (discoveredAiInput) {
+    discoveredAiInput = false;
+    for (const record of context.rightsRegistry.ai) {
+      if (!artifactIds.has(record.artifactId)) continue;
+      for (const inputArtifactId of record.inputArtifactIds) {
+        if (artifactIds.has(inputArtifactId)) continue;
+        artifactIds.add(inputArtifactId);
+        discoveredAiInput = true;
+      }
+    }
+  }
+  const artifacts = context.rightsRegistry.artifacts.filter((artifact) => artifactIds.has(artifact.id)).sort(byId);
   const decisions = uniqueById(artifacts.flatMap((artifact) => context.rightsRegistry.decisions.filter((decision) => decision.id === artifact.usageDecisionId)));
-  const assessmentIds = new Set([
-    ...artifacts.map((artifact) => artifact.rightsAssessmentId),
-    ...decisions.flatMap((decision) => decision.assessmentIds),
-  ]);
-  const assessments = context.rightsRegistry.assessments.filter((assessment) => assessmentIds.has(assessment.id)).sort(byId);
-  const artifactIds = new Set(artifacts.map((artifact) => artifact.id));
   const attributions = context.rightsRegistry.attributions.filter((entry) => artifactIds.has(entry.artifactId)).sort(byId);
   const evidenceIds = new Set(artifacts.flatMap((artifact) => artifact.evidenceIds));
   const evidence = context.evidence.filter((entry) => evidenceIds.has(entry.id)).sort(byId);
@@ -101,6 +109,7 @@ export function createArtifactSetVersion(
   ]);
   const sources = context.sources.filter((source) => sourceIds.has(source.id)).sort(byId);
   const storyIds = new Set(items.flatMap((item) => item.storyIds));
+  const stories = context.stories.filter((story) => storyIds.has(story.id)).sort(byId);
   const researchRecords = context.researchRecords
     .filter((record) => itemIdSet.has(record.subject.id) || storyIds.has(record.subject.id))
     .sort(byId);
@@ -118,6 +127,15 @@ export function createArtifactSetVersion(
   const externalMedia = context.rightsRegistry.externalMedia.filter((entry) => sourceIds.has(entry.sourceId)).sort(byId);
   const restaurants = context.rightsRegistry.restaurants.filter((entry) => itemIdSet.has(entry.culinaryItemId)).sort((left, right) => left.culinaryItemId.localeCompare(right.culinaryItemId));
   const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => itemIdSet.has(entry.culinaryItemId)).sort(byId);
+  const assessmentIds = new Set([
+    ...artifacts.map((artifact) => artifact.rightsAssessmentId),
+    ...decisions.flatMap((decision) => decision.assessmentIds),
+    ...datasets.map((dataset) => dataset.rightsAssessmentId),
+    ...costs.map((cost) => cost.rightsAssessmentId),
+    ...externalMedia.map((media) => media.rightsAssessmentId),
+    ...productProfiles.map((profile) => profile.rightsAssessmentId),
+  ]);
+  const assessments = context.rightsRegistry.assessments.filter((assessment) => assessmentIds.has(assessment.id)).sort(byId);
   const contentPaths = context.contentPaths.filter((entry) => itemIdSet.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
   const localizationVersions = context.localizationVersions.filter((entry) => itemIdSet.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
   return createContentVersion({
@@ -129,6 +147,7 @@ export function createArtifactSetVersion(
     decisions,
     sources,
     evidence,
+    stories,
     researchRecords,
     images,
     imageAssetVersions,
@@ -156,16 +175,40 @@ export function deriveEquivalenceClassKeys(item: CulinaryItem, context: Publishi
       .flatMap((locator) => locator.kind === "url" ? [safeSourceDomain(locator.url)] : []),
   );
   const derivations = new Set(artifacts.map((artifact) => artifact.derivation));
-  const assessmentIds = new Set(artifacts.flatMap((artifact) => {
-    const decision = context.rightsRegistry.decisions.find((entry) => entry.id === artifact.usageDecisionId);
-    return [artifact.rightsAssessmentId, ...(decision?.assessmentIds ?? [])];
-  }));
-  const rightsBases = new Set(context.rightsRegistry.assessments.filter((entry) => assessmentIds.has(entry.id)).map((entry) => entry.basis.kind));
-  const aiRecords = artifacts.flatMap((artifact) => context.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
   const ingredientIds = new Set("inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []);
-  const nutritionTransforms = context.rightsRegistry.nutrition
-    .filter((entry) => ingredientIds.has(entry.ingredientId))
+  const nutritionRecords = context.rightsRegistry.nutrition.filter((entry) => ingredientIds.has(entry.ingredientId));
+  const datasetIds = new Set(nutritionRecords.flatMap((entry) => entry.kind === "dataset" ? [entry.datasetId] : []));
+  const datasets = context.rightsRegistry.datasets.filter((entry) => datasetIds.has(entry.id));
+  const costIds = new Set([...ingredientIds]
+    .map((ingredientId) => context.ingredients.find((ingredient) => ingredient.id === ingredientId)?.costProvenanceId)
+    .filter((id): id is string => Boolean(id)));
+  const costs = context.rightsRegistry.costs.filter((entry) => costIds.has(entry.id));
+  const externalMedia = context.rightsRegistry.externalMedia.filter((entry) =>
+    artifacts.some((artifact) => artifact.sourceIds.includes(entry.sourceId)));
+  const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => entry.culinaryItemId === item.id);
+  const assessmentIds = new Set([
+    ...artifacts.flatMap((artifact) => {
+      const decision = context.rightsRegistry.decisions.find((entry) => entry.id === artifact.usageDecisionId);
+      return [artifact.rightsAssessmentId, ...(decision?.assessmentIds ?? [])];
+    }),
+    ...datasets.map((dataset) => dataset.rightsAssessmentId),
+    ...costs.map((cost) => cost.rightsAssessmentId),
+    ...externalMedia.map((media) => media.rightsAssessmentId),
+    ...productProfiles.map((profile) => profile.rightsAssessmentId),
+  ]);
+  const rightsBases = new Set(context.rightsRegistry.assessments.filter((entry) => assessmentIds.has(entry.id)).map((entry) => entry.basis.kind));
+  const rightsAuthorities = new Set(context.rightsRegistry.assessments
+    .filter((entry) => assessmentIds.has(entry.id))
+    .map((entry) => `${rightsBasisIdentity(entry.basis)}:${entry.authorityVersion}`));
+  const aiRecords = artifacts.flatMap((artifact) => context.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
+  const nutritionTransforms = nutritionRecords
     .map((entry) => entry.kind === "dataset" ? `dataset:${entry.datasetId}:${entry.conversionMethod}` : `editorial:${entry.method}`);
+  const costTransforms = costs
+    .map((entry) => `${entry.method}:${entry.id}:${createContentVersion({
+      geography: entry.geography,
+      currency: entry.currency,
+      methodology: entry.methodology,
+    })}`);
   const localization = context.localizationVersions.find((entry) => entry.itemId === item.id);
   const translationStatus = (localization?.localeVersions ?? [])
     .map((entry) => `${entry.locale}-${entry.status}`)
@@ -175,14 +218,18 @@ export function deriveEquivalenceClassKeys(item: CulinaryItem, context: Publishi
   const keys = [
     `content-type:${item.itemType}`,
     `image-license:${image?.license ?? "none"}`,
+    ...(image?.licenseUrl ? [`image-license-authority:${image.license}:${image.licenseUrl}`] : []),
     `image-source:${image?.source ?? "none"}`,
+    ...(image?.sourceUrl ? [`image-source-domain:${safeSourceDomain(image.sourceUrl)}`] : []),
     `nutrition:${item.nutrition.applicability === "applicable" ? item.nutrition.source : item.nutrition.applicability}`,
     `cost:${item.cost.source}`,
     `translation-path:${contentPath}:${translationStatus}`,
     ...[...domains].sort().map((domain) => `source-domain:${domain}`),
     ...[...derivations].sort().map((derivation) => `derivation:${derivation}`),
     ...[...rightsBases].sort().map((basis) => `rights-basis:${basis}`),
+    ...[...rightsAuthorities].sort().map((authority) => `rights-authority:${authority}`),
     ...nutritionTransforms.sort().map((transform) => `data-transform:${transform}`),
+    ...costTransforms.sort().map((transform) => `cost-transform:${transform}`),
     ...aiRecords.map((record) => `model-prompt:${record.provider}/${record.model}/${record.modelVersion}/${record.promptTemplateVersion}`),
   ];
   return [...new Set(keys)].sort();
@@ -796,6 +843,23 @@ function safeSourceDomain(url: string): string {
     return new URL(url).hostname || "invalid-url";
   } catch {
     return "invalid-url";
+  }
+}
+
+function rightsBasisIdentity(basis: ContentRightsRegistry["assessments"][number]["basis"]): string {
+  switch (basis.kind) {
+    case "open-license":
+      return `${basis.kind}:${basis.licenseId}`;
+    case "terms":
+      return `${basis.kind}:${basis.provider}:${basis.effectiveDate ?? "undated"}`;
+    case "permission":
+      return `${basis.kind}:${basis.permissionReferenceId}`;
+    case "public-domain":
+      return `${basis.kind}:${basis.basis}`;
+    case "reference-only":
+      return `${basis.kind}:${basis.boundary}`;
+    case "first-party":
+      return `${basis.kind}:${basis.owner}`;
   }
 }
 

@@ -45,7 +45,7 @@
 
 M0-M4 已完成，当前 Public Beta 已具备：
 
-- 100 道结构化 `demo-estimated` 菜谱与 102 种食材；M9 分支将 34 道已审 Recipe 与 16 个 native CulinaryItem 组成 50 项统一公开料理库
+- 100 道结构化 `demo-estimated` 菜谱与 103 种食材；M9 分支将 34 道已审 Recipe 与 16 个 native CulinaryItem 组成 50 项统一公开料理库
 - 本地营养、成本、单位换算和推荐引擎
 - 首页多条件料理决策
 - `/recipes` 已发布料理目录

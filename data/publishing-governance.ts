@@ -1,5 +1,5 @@
 import { createArtifactSetVersion, deriveEquivalenceClassKeys } from "@/lib/publishing-governance";
-import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
+import type { CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
 import type { ContentRightsRegistry } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
 import type { Ingredient } from "@/types/ingredient";
@@ -44,6 +44,7 @@ export interface CreatePublishingGovernanceRegistryInput {
   images: readonly RecipeImage[];
   sources: readonly Source[];
   evidence: readonly Evidence[];
+  stories: readonly Story[];
   researchRecords: readonly ResearchRecord[];
   ingredients: readonly Ingredient[];
   contentPackages: readonly LocalContentPackageV1[];
@@ -61,6 +62,7 @@ export function createPublishingGovernanceRegistry(
     images: input.images,
     sources: input.sources,
     evidence: input.evidence,
+    stories: input.stories,
     researchRecords: input.researchRecords,
     ingredients: input.ingredients,
     contentPaths: input.contentPackages.map((contentPackage) => ({

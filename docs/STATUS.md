@@ -89,7 +89,7 @@ Production URL：
 
 - Next.js / TypeScript / Tailwind Web 应用骨架
 - Ingredient、Recipe、Nutrition、Recommendation 类型系统
-- 102 种 `demo-estimated` 食材、100 道结构化 Recipe 与 16 个 native CulinaryItem
+- 103 种 `demo-estimated` 食材、100 道结构化 Recipe 与 16 个 native CulinaryItem
 - Unit Conversion、Nutrition Engine、Cost Engine 与 Dataset Validation
 - 硬限制 + 软偏好的确定性 Recommendation Engine
 - 首页即时料理决策、已发布目录、稳定 slug 详情页

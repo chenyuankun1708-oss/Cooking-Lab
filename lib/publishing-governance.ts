@@ -278,6 +278,7 @@ export function deriveEquivalenceClassKeys(
     ...(image?.licenseUrl ? [`image-license-authority:${image.license}:${image.licenseUrl}`] : []),
     `image-source:${image?.source ?? "none"}`,
     ...(image?.sourceUrl ? [`image-source-domain:${safeSourceDomain(image.sourceUrl)}`] : []),
+    `visual-fidelity:${item.itemType}`,
     `nutrition:${item.nutrition.applicability === "applicable" ? item.nutrition.source : item.nutrition.applicability}`,
     `cost:${item.cost.source}`,
     `translation-path:${contentPath}:${translationStatus}`,
@@ -770,6 +771,14 @@ function validateSamplingBatch(
     if (sample.equivalenceClassKeys.some((key) => !seenClassKeys.has(key))) {
       report("missing-sampling-coverage", `${batch.id}:${sample.itemId}`, "Sample evidence references a class outside the recorded batch");
     }
+    for (const finding of sample.findings) {
+      if (
+        !finding.equivalenceClassKeys.length
+        || finding.equivalenceClassKeys.some((key) => !sample.equivalenceClassKeys.includes(key) || !expectedClassKeys.has(key))
+      ) {
+        report("missing-sampling-coverage", `${batch.id}:${sample.itemId}`, `Sampling finding ${finding.code} must identify an affected class represented by the sample`);
+      }
+    }
   }
 }
 
@@ -805,8 +814,9 @@ function validateSamplingHistory(
         .filter((finding) => finding.severity === "major")
         .flatMap((finding) => finding.equivalenceClassKeys),
       ...batch.samples
-        .filter((sample) => sample.findings.some((finding) => finding.severity === "major"))
-        .flatMap((sample) => sample.equivalenceClassKeys),
+        .flatMap((sample) => sample.findings
+          .filter((finding) => finding.severity === "major")
+          .flatMap((finding) => finding.equivalenceClassKeys)),
     ]);
 
     for (const [key, state] of states) {

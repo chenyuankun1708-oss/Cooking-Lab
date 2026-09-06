@@ -98,7 +98,7 @@ export interface SamplingQaSample {
   equivalenceClassKeys: [string, ...string[]];
   dimensions: [Exclude<ReviewDimension, "human-approval">, ...Exclude<ReviewDimension, "human-approval">[]];
   verdict: "pass" | "revise" | "block";
-  findings: ReviewFinding[];
+  findings: SamplingQaFinding[];
 }
 
 export interface SamplingQaBatch {

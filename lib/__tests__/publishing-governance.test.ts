@@ -529,7 +529,7 @@ describe("risk-based publishing governance", () => {
   });
 
   it("publishes CC0 and public-domain image provenance without inventing a license obligation", () => {
-    const item = items.find((entry) => entry.id === "thai-green-papaya-salad")!;
+    const item = items.find((entry) => entry.id === "yunnan-mushroom-chicken-stew")!;
     const imageId = item.images.availability === "available" ? item.images.references.primaryImageId : undefined;
     const disclosure = buildConsumerRightsDisclosure(item.id, imageId, item.storyIds, contentRightsRegistry, "en");
     const provenance = disclosure.attributions.find((entry) => entry.disclosureKind === "provenance-only");
@@ -735,15 +735,17 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
   });
 
-  it("freezes every sampled risk class after a resolved sample-level major finding until two clean full reviews", () => {
+  it("freezes only the affected classes named by a sample-level major finding", () => {
     const registry = readyRegistry();
     const sample = registry.samplingBatches[0].samples.find((entry) => entry.equivalenceClassKeys.length > 1)!;
+    const frozenKey = sample.equivalenceClassKeys[0];
     sample.findings = [{
       code: "sample-major-escape",
       kind: "quality",
       severity: "major",
       summary: "A resolved major issue was discovered in this sampled item.",
       disposition: "resolved",
+      equivalenceClassKeys: [frozenKey],
     }];
     registry.samplingBatches[0].metrics.escapeCount = 1;
     registry.samplingBatches[0].metrics.reworkItemCount = 1;
@@ -753,13 +755,13 @@ describe("risk-based publishing governance", () => {
 
     const oneClean = makeNextSamplingBatch(registry, "sample-major-clean-2");
     oneClean.samples.forEach((entry) => { entry.findings = []; });
-    for (const classKey of sample.equivalenceClassKeys) setFullReview(oneClean, classKey);
+    setFullReview(oneClean, frozenKey);
     registry.samplingBatches = [...registry.samplingBatches, oneClean];
     expect(issueCodes(registry)).toContain("sampling-class-frozen");
 
     const twoClean = makeNextSamplingBatch(registry, "sample-major-clean-3");
     twoClean.samples.forEach((entry) => { entry.findings = []; });
-    for (const classKey of sample.equivalenceClassKeys) setFullReview(twoClean, classKey);
+    setFullReview(twoClean, frozenKey);
     registry.samplingBatches = [...registry.samplingBatches, twoClean];
     expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
   });
@@ -772,6 +774,7 @@ describe("risk-based publishing governance", () => {
       severity: "major",
       summary: "This major finding must be represented by the escape metric.",
       disposition: "resolved",
+      equivalenceClassKeys: [uncounted.samplingBatches[0].samples[0].equivalenceClassKeys[0]],
     }];
     expect(issueCodes(uncounted)).toContain("sampling-metrics-invalid");
 
@@ -789,6 +792,7 @@ describe("risk-based publishing governance", () => {
       severity: "minor",
       summary: "A resolved disagreement required rework.",
       disposition: "resolved",
+      equivalenceClassKeys: [sample.equivalenceClassKeys[0]],
     }];
     expect(issueCodes(disagreement)).toContain("sampling-metrics-invalid");
 
@@ -825,7 +829,14 @@ describe("risk-based publishing governance", () => {
     historical.artifactSetVersion = "clv1-0000000000000000";
     historical.verdict = "revise";
     historical.samples[0].verdict = "revise";
-    historical.samples[0].findings = [{ code: "historical-finding", kind: "quality", severity: "minor", summary: "Fixed later.", disposition: "unresolved" }];
+    historical.samples[0].findings = [{
+      code: "historical-finding",
+      kind: "quality",
+      severity: "minor",
+      summary: "Fixed later.",
+      disposition: "unresolved",
+      equivalenceClassKeys: [historical.samples[0].equivalenceClassKeys[0]],
+    }];
     const current = structuredClone(registry.samplingBatches[0]);
     current.id = "sampling-current-pass";
     current.batchId = "current-pass";

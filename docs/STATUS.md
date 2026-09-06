@@ -383,4 +383,4 @@ PR #36 已合并 Living Editorial Hero：
 ## 下一步
 
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
-- M9 已完成并上线：PR #76 已合并，Production 双语烟测通过，Epic #69 可收口。按照 Product Director 要求不启动新的产品 Goal。
+- M9 已完成并上线：PR #76 已合并，Production 双语烟测通过，Epic #69 已收口。按照 Product Director 要求不启动新的产品 Goal。

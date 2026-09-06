@@ -69,7 +69,7 @@ describe("M10 Production content-rights gate", () => {
     const incomplete = cloneRegistry();
     incomplete.assessments[0].reviewDueAt = undefined;
     incomplete.assessments[0].reviewer = "";
-    incomplete.artifacts[0].review.reviewer = "";
+    incomplete.artifacts[0].version = "";
     incomplete.decisions[0].decidedAt = "";
     expect(issueCodes(incomplete)).toContain("review-incomplete");
 
@@ -374,7 +374,7 @@ describe("M10 Production content-rights gate", () => {
     expect(issueCodes(regenerated, { ...context, items: unlinkedItems })).toContain("missing-artifact");
   });
 
-  it("blocks generated artifacts without dated terms, cleared inputs, human review, and similarity review", () => {
+  it("blocks generated artifacts without dated terms, cleared inputs, review attestations, and similarity review", () => {
     const registry = cloneRegistry();
     const artifact = registry.artifacts[0];
     artifact.derivation = "generated";
@@ -391,10 +391,11 @@ describe("M10 Production content-rights gate", () => {
       promptTemplateVersion: "",
       inputArtifactIds: [],
       inputRightsReviewed: false,
-      humanReview: "required",
+      reviewAttestationIds: [] as unknown as [string, ...string[]],
       similarityReview: "required",
       trademarkReview: "required",
     }];
+    Object.assign(registry.ai[0], { humanReview: "passed" });
     const codes = issueCodes(registry);
     expect(codes).toContain("ai-review-incomplete");
     expect(codes).toContain("ai-input-rights-unknown");
@@ -460,6 +461,7 @@ function registryWithValidProductProfile(): ContentRightsRegistry {
   const decisionId = `usage-${artifactId}`;
   registry.artifacts = [...registry.artifacts, {
     id: artifactId,
+    version: "clv1-test-product-profile",
     subject: { type: "product-profile", id: "test-product-profile" },
     kind: "product-profile",
     derivation: "factual-synthesis",
@@ -468,7 +470,6 @@ function registryWithValidProductProfile(): ContentRightsRegistry {
     rightsAssessmentId: assessmentId,
     usageDecisionId: decisionId,
     attributionRequirementIds: [],
-    review: { expression: "passed", culinary: "not-applicable", reviewer: "test reviewer", reviewedAt: "2026-09-06" },
   }];
   registry.assessments = [...registry.assessments, {
     ...structuredClone(registry.assessments[0]),

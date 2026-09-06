@@ -14,7 +14,8 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - Taste Redesign - Overhaul 已覆盖首页、目录、详情、Pairing 和 Plan；主题选择跟随系统并在可用时本地保存。
 - 最新 412 px local Production 实测：英文 LCP 244 ms / CLS 0 / INP 152 ms，中文 LCP 216 ms / CLS 0 / INP 160 ms；Lighthouse accessibility 为 1.00。该结果是可复现 lab evidence，不代替 merge 后的 Production field observation。
 - 当前 50 项各自通过 content package module 进入 repository，独立提交的 deterministic manifest、`content:audit` 与 M10 gate 共同阻止过期 identity/Story/Hero/usage decisions。
-- 完整 120 项验收仍缺 70 个经独立人工内容审校的内容包。M10 要求 AI 辅助表达记录 provenance 并通过 human review；实现 agent 不能自证该门禁，因此不会伪造 120 项已完成。
+- PR #95 已独立 merge 并交付 M11 工程、计划体验、内容包容量边界与 Taste 视觉升级；新增 70 项仍未发布。
+- Product Director 已批准 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。Issue #96 负责先让 schema、validator、CI 与文档 fail closed，生效前不得发布新增内容。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -410,4 +411,4 @@ PR #36 已合并 Living Editorial Hero：
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
 - M10 已完成并继续作为 M11 的强制发布门禁。
 - M11 工程、内容包基础和视觉升级进入 PR 交付；Epic #87 与内容 Issues #91/#92 保持开放。
-- 完整 120 项发布仍等待独立人工 editorial review 产能。没有该证据时，70 个新增内容包不得进入公开 manifest。
+- 完整 120 项发布现在等待 Issue #96 的 M10.1 fail-closed governance 先落地，再按 LOW/MEDIUM/HIGH 路由完成 70 项独立 agent review、sampling QA 或适用的人类/专家/法律 checkpoint。新门禁生效前不得把新增内容放入公开 manifest。

@@ -36,11 +36,12 @@ The manifest is a release index, not an alternative content database. Existing r
 ## Editorial and AI gate
 
 - AI output is never Evidence.
-- AI-assisted expression requires an `AiGenerationRecord`, reviewed inputs, similarity/trademark review where applicable, and independent human editorial review before publication.
-- The implementation agent cannot mark its own copy as human-reviewed.
+- AI-assisted expression requires an `AiGenerationRecord`, reviewed inputs, similarity/trademark review where applicable, and current risk-based `ReviewAttestation` coverage before publication.
+- LOW content may use one genuinely independent agent context across all applicable dimensions. MEDIUM requires separate rights/provenance and content/visual reviewer contexts. HIGH remains blocked without the applicable human, expert, or legal checkpoint.
+- The implementation context cannot mark its own copy reviewed. Agent review is recorded as `actorType: agent` and never represented as human review, culinary field testing, legal opinion, or human approval.
 - Unreviewed packages stay draft and do not enter `getPublishedCulinaryItems()` or the public manifest.
 - Reference-only video may support manual fact checking by URL and timestamp; no video, subtitle, transcript, or frame is stored.
 
 ## Scale limits
 
-The manifest and validator are linear in item/artifact count and introduce no network access at build time. Capacity beyond 500 items does not require a CMS or database. Operationally, CI duration and human editorial throughput should be measured before choosing a later storage migration.
+The manifest and validators are linear in item/artifact count and introduce no network access at build time. Capacity beyond 500 items does not require a CMS or database. Operationally, CI duration, independent review throughput, sampling escape rate, disagreement and rework should be measured before choosing a later storage migration.

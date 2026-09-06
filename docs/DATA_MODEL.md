@@ -84,6 +84,8 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 `evaluateRecipePublishingEligibility` 是更窄的发布 gate：在 Recipe validation 之外验证 nutrition/cost completeness、hero/license/local asset/alt、公开步骤信息量和事实性 culture provenance。M9 额外要求新增 published Recipe 具备 closed ResearchRecord、至少两个独立 accepted Source、完整英文审校与 4–6 个可执行步骤。更深的 sensory cue、doneness、失败预防与 food accuracy 仍由人工 editorial review 决定，不使用脆弱 NLP 规则自动盖章。当前 public adapter 暴露 34 道 published Recipe。
 
+M10.1 将 review identity 从 `reviewed` 状态和自由文本 reviewer 中拆出为 `ReviewAttestation`。Attestation 分别记录六个 review dimension、author/reviewer actor-run-context、reviewed commit、artifact-set version、rubric/policy、verdict 与 findings。LOW 可以由真正独立的 agent review；MEDIUM 需要分离 context；HIGH 保留人类、领域专家或法律 checkpoint。`ContentArtifact.version` 与 committed attestation 不匹配时 public repository fail closed；agent review 不能表示为 human approval、culinary field test 或 legal opinion。
+
 `evaluateCulinaryItemPublishingEligibility` 按 item type 执行统一门禁：所有公开条目需要已审核默认语言、可解析 taxonomy/pairing、合法 primary image 和可达 Story provenance；procedural item 还需完整 ingredient 引用、类型对应的最少步骤和料理 rationale。dish/dessert 必须具备 nutrition 与 cost model；plain tea 和成品酒可以诚实使用 `not-modeled`，成品酒以 serving guidance 或无需消费者制作发布，不编造 cooking steps。`getPublishedCulinaryItems()` 是 50 项统一读取边界，只有推荐引擎继续使用 Recipe-only public source。
 
 ## Recommendation

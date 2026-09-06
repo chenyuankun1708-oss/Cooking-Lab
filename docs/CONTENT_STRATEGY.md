@@ -170,7 +170,7 @@ Recipe 当前使用轻量 optional 结构：
 
 M11 使用逐项本地内容包与独立提交的 deterministic manifest 作为 500+ 扩展边界，具体合同见 `docs/CONTENT_BUNDLES.md`。当前 50 项各有 package module，并通过 legacy adapter 保持原数据与公开顺序；未来新条目可以直接使用 standalone package，而不改变 repository 接口。
 
-内容包必须在进入 published repository 前完成双语、Story claim、图片、营养/成本 provenance、相似推荐、搭配信号和 M10 usage decision。计划新增 70 项不能由实现 agent 自行标记为人工审校完成；AI 辅助表达必须记录 provenance 并通过独立人工 editorial review。未完成该 checkpoint 的条目保持 draft，不以满足数量目标为理由降低门禁。
+内容包必须在进入 published repository 前完成双语、Story claim、图片、营养/成本 provenance、相似推荐、搭配信号、M10 usage decision 与 M10.1 risk-based ReviewAttestation。实现 context 不能审查自己的输出；LOW 需要独立 agent 全维度 PASS 与 sampling QA，MEDIUM 需要分离的双 reviewer context，HIGH 继续进入明确的人类、专家或法律 checkpoint。未完成门禁的条目保持 draft，不以满足数量目标为理由降低权利标准。
 
 ## Recipe Detail v2 Content Surface
 

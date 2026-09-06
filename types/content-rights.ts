@@ -82,6 +82,7 @@ export type ContentSubject =
 
 export interface ContentArtifact {
   id: string;
+  version: string;
   subject: ContentSubject;
   kind: ContentArtifactKind;
   derivation: ContentDerivation;
@@ -90,12 +91,6 @@ export interface ContentArtifact {
   rightsAssessmentId: string;
   usageDecisionId: string;
   attributionRequirementIds: string[];
-  review: {
-    expression: "passed" | "not-applicable" | "required";
-    culinary: "passed" | "not-applicable" | "required";
-    reviewer: string;
-    reviewedAt: string;
-  };
 }
 
 export interface UsageDecision {
@@ -174,7 +169,7 @@ export interface AiGenerationRecord {
   promptTemplateVersion: string;
   inputArtifactIds: string[];
   inputRightsReviewed: boolean;
-  humanReview: "passed" | "required";
+  reviewAttestationIds: [string, ...string[]];
   similarityReview: "passed" | "required";
   trademarkReview: "passed" | "not-applicable" | "required";
 }

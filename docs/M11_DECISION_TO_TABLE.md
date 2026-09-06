@@ -29,9 +29,9 @@ M11 turns a recommendation, culinary detail, or deterministic pairing into one l
 
 The package/manifest foundation routes the current 50 public items through one module per item while preserving their previous order. A committed release manifest fails Production for stale identity, Story, Hero, reviewed locale, or M10 usage decisions. The legacy adapter is an explicit zero-content-change migration boundary; new batches can be standalone packages behind the same repository interface.
 
-Publishing the planned additional 70 items is not yet truthful under the existing M10 policy. New expression authored with AI assistance requires recorded AI provenance plus independent human editorial review; the implementation agent cannot certify its own output as human-reviewed. Those items therefore remain outside the public manifest until that checkpoint is supplied or the Product Director changes the content-production boundary.
+The Product Director approved the M10.1 risk-based governance migration in Issue #96. LOW AI-assisted content may publish only after deterministic gates, a genuinely independent all-dimension agent review and risk-equivalence-class sampling QA; MEDIUM requires separated reviewer contexts; HIGH remains blocked or enters the applicable human, expert or legal checkpoint. The implementation context cannot review its own output, and agent review is never labeled human review.
 
-This is an editorial governance dependency, not an engineering or licensing bypass. Current 50-item Production content is unchanged.
+The additional 70 items remain outside the public manifest until Issue #96 is merged and active in CI. This is a fail-closed sequencing rule, not a licensing bypass. Current 50-item Production content is unchanged.
 
 ## Design contract
 
@@ -47,6 +47,6 @@ Design read: a bilingual culinary decision product for home cooks, using Fresh E
 
 ## Definition of done
 
-The engineering/design portion is complete when lint, typecheck, tests, production build, local bilingual smoke tests, responsive screenshots, independent code review, and independent visual review pass. The full 120-item M11 acceptance criterion additionally requires the independent human content review described above.
+The engineering/design portion is complete when lint, typecheck, tests, production build, local bilingual smoke tests, responsive screenshots, independent code review, and independent visual review pass. The full 120-item M11 acceptance criterion additionally requires the risk-based review and sampling governance in `docs/PUBLISHING_GOVERNANCE.md`.
 
 Latest local Production lab evidence at a 412 px viewport records English LCP 244 ms, CLS 0, and INP 152 ms; Chinese records LCP 216 ms, CLS 0, and INP 160 ms. Lighthouse accessibility is 1.00 after contrast and accessible-name fixes. These measurements are pre-merge lab evidence, not Production field data.

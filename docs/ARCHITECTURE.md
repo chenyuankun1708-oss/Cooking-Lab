@@ -338,6 +338,12 @@ M10 将内容权利建立为 framework-independent shared core：
 - `data/content-rights.ts` 从当前 published candidates 构建稳定 registry；它不导入 published repository，避免循环依赖。
 - `lib/content-rights.ts` 是确定性门禁，不依赖 React、Next.js、DOM、文件系统或网络。
 - `data/published-recipes.ts` 在 Recipe 进入推荐消费者前运行 recipe-scope gate；`data/published-culinary-items.ts` 对统一 50 项运行完整 gate。
+
+M10.1 在 content-rights gate 之后增加独立的 risk-based publishing governance gate：
+
+`published candidates -> M10 rights gate -> artifact versions -> risk classification -> ReviewAttestation coverage -> sampling QA -> public repository`
+
+`ContentArtifact.version` 来自实际 item、Story 或图片内容。Committed attestation 保存 artifact-set version，因此内容修改、policy 变化或 review scope 改变都会使旧 PASS 失效。LOW 需要一个与 author actor/run/context 均不同的 reviewer context 覆盖全部适用 dimension；MEDIUM 将 rights/provenance 与 content/visual 分给不同 context；HIGH 需要适用的非 agent checkpoint。完整政策见 `docs/PUBLISHING_GOVERNANCE.md`。
 - Web 只消费 `ConsumerRightsDisclosure`，不暴露内部风险备注、合同或个人信息。
 - CC BY-SA 隔离发生在具体 asset-file / isolated-dataset 边界，不污染专有核心内容库。
 

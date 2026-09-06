@@ -102,12 +102,7 @@ export function evaluateContentRightsRegistry(
       report("missing-reference", artifact.id, "rightsAssessmentId", "Artifact assessment must identify the same artifact");
     }
     if (!decision) report("missing-reference", artifact.id, "usageDecisionId", `Missing decision ${artifact.usageDecisionId}`);
-    if (artifact.review.expression === "required" || artifact.review.culinary === "required") {
-      report("review-incomplete", artifact.id, "review", "Expression and culinary reviews must be resolved before Production");
-    }
-    if (!artifact.review.reviewer.trim() || !isIsoDate(artifact.review.reviewedAt)) {
-      report("review-incomplete", artifact.id, "review", "Artifact review requires a reviewer and ISO review date");
-    }
+    if (!artifact.version.trim()) report("review-incomplete", artifact.id, "version", "Artifact requires a deterministic content version");
     for (const attributionId of artifact.attributionRequirementIds) {
       const attribution = attributions.get(attributionId);
       if (!attribution) report("missing-reference", artifact.id, "attributionRequirementIds", `Missing attribution ${attributionId}`);
@@ -299,8 +294,8 @@ function validateAi(
     if (!record.provider.trim() || !record.model.trim() || !record.modelVersion.trim() || !record.promptTemplateVersion.trim() || !isHttps(record.termsUrl) || !isIsoDate(record.termsEffectiveDate) || !isIsoDate(record.generatedAt)) {
       report("ai-review-incomplete", artifact.id, "ai.terms", "AI provider, model version, and dated terms are required");
     }
-    if (record.humanReview !== "passed" || record.similarityReview !== "passed" || record.trademarkReview === "required") {
-      report("ai-review-incomplete", artifact.id, "ai.review", "Human, similarity, and trademark reviews must pass");
+    if (!record.reviewAttestationIds.length || record.similarityReview !== "passed" || record.trademarkReview === "required") {
+      report("ai-review-incomplete", artifact.id, "ai.review", "Risk-based review attestations, similarity review, and trademark review must be present before Production");
     }
     if (!record.inputRightsReviewed) report("ai-input-rights-unknown", artifact.id, "ai.inputRightsReviewed", "AI inputs must have cleared rights");
     for (const inputId of record.inputArtifactIds) {

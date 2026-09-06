@@ -23,6 +23,12 @@ import { m9RecipeResearchRecords, m9RecipeResearchSources } from "./research/m9-
 import { assertContentBundleManifestReady } from "@/lib/content-bundle";
 import { publishedContentBundleManifest } from "./content-bundle-manifest";
 import { publishedLocalContentPackages } from "./content-packages";
+import { createPublishingGovernanceRegistry } from "./publishing-governance";
+import {
+  assertPublishingGovernanceReady,
+  createPublishingGovernanceReport,
+  evaluatePublishingGovernance,
+} from "@/lib/publishing-governance";
 
 export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
@@ -65,6 +71,17 @@ const contentRightsContext = {
 assertContentRightsReady(contentRightsRegistry, contentRightsContext);
 export const contentRightsAuditReport = createContentRightsAuditReport(
   evaluateContentRightsRegistry(contentRightsRegistry, contentRightsContext),
+);
+export const publishingGovernanceRegistry = createPublishingGovernanceRegistry({
+  items: candidates,
+  rightsRegistry: contentRightsRegistry,
+  images: allImages,
+  sources: allSources,
+});
+const publishingGovernanceContext = { items: candidates, rightsRegistry: contentRightsRegistry } as const;
+assertPublishingGovernanceReady(publishingGovernanceRegistry, publishingGovernanceContext);
+export const publishingGovernanceAuditReport = createPublishingGovernanceReport(
+  evaluatePublishingGovernance(publishingGovernanceRegistry, publishingGovernanceContext),
 );
 
 const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));

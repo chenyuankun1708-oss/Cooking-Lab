@@ -10,6 +10,7 @@ import type {
 import type { Ingredient } from "@/types/ingredient";
 import type { RecipeImage, RecipeImageLicense } from "@/types/image";
 import type { ResearchRecord } from "@/types/research";
+import { createContentVersion } from "@/lib/content-version";
 
 const assessedAt = "2026-09-06";
 const reviewDueAt = "2027-03-06";
@@ -50,23 +51,23 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     for (const kind of ["identity", "preparation"] as const) {
       addFirstPartyArtifact({
         id: `${item.id}-${kind}`,
+        version: createContentVersion({ kind, item, sourceIds }),
         subject: { type: "culinary-item", id: item.id },
         kind,
         derivation,
         sourceIds,
         evidenceIds: [],
-        culinaryReview: kind === "preparation" ? "passed" : "not-applicable",
       }, artifacts, assessments, decisions);
     }
     for (const kind of ["nutrition", "cost"] as const) {
       addFirstPartyArtifact({
         id: `${item.id}-${kind}`,
+        version: createContentVersion({ kind, item }),
         subject: { type: "culinary-item", id: item.id },
         kind,
         derivation: "original",
         sourceIds: [],
         evidenceIds: [],
-        culinaryReview: "passed",
       }, artifacts, assessments, decisions);
     }
   }
@@ -79,12 +80,12 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     }));
     addFirstPartyArtifact({
       id: `${story.id}-story`,
+      version: createContentVersion({ kind: "story", story, sourceIds, evidenceIds }),
       subject: { type: "story", id: story.id },
       kind: "story",
       derivation: "factual-synthesis",
       sourceIds,
       evidenceIds,
-      culinaryReview: "not-applicable",
     }, artifacts, assessments, decisions);
   }
 
@@ -205,7 +206,7 @@ export const m10AuditedCulinaryItemIds = Object.freeze([
 ] as const);
 
 function addFirstPartyArtifact(
-  input: Pick<ContentArtifact, "id" | "subject" | "kind" | "derivation" | "sourceIds" | "evidenceIds"> & { culinaryReview: ContentArtifact["review"]["culinary"] },
+  input: Pick<ContentArtifact, "id" | "version" | "subject" | "kind" | "derivation" | "sourceIds" | "evidenceIds">,
   artifacts: ContentArtifact[],
   assessments: RightsAssessment[],
   decisions: UsageDecision[],
@@ -217,7 +218,6 @@ function addFirstPartyArtifact(
     rightsAssessmentId,
     usageDecisionId,
     attributionRequirementIds: [],
-    review: { expression: "passed", culinary: input.culinaryReview, reviewer, reviewedAt: assessedAt },
   });
   assessments.push(firstPartyAssessment(rightsAssessmentId, { type: "artifact", id: input.id }));
   decisions.push({
@@ -249,6 +249,7 @@ function addImageArtifact(
   const attributionRequirementIds = needsAttribution ? [attributionId] : [];
   artifacts.push({
     id: artifactId,
+    version: createContentVersion({ kind: "image", image }),
     subject: { type: "image", id: image.id },
     kind: "image",
     derivation: image.source === "ai-generated" ? "generated" : image.source === "self-created" ? "original" : "adaptation",
@@ -257,7 +258,6 @@ function addImageArtifact(
     rightsAssessmentId,
     usageDecisionId,
     attributionRequirementIds,
-    review: { expression: "passed", culinary: "not-applicable", reviewer, reviewedAt: assessedAt },
   });
   assessments.push({
     id: rightsAssessmentId,

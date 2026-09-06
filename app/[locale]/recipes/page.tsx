@@ -53,12 +53,12 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
     <main id="main-content">
       <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes`} query={normalizedQuery.toString()} />
       <header className="hero-surface border-b border-[var(--line)] py-8 sm:py-10">
-        <div className="mx-auto grid max-w-7xl gap-4 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.46fr)] lg:items-end lg:gap-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div>
           <p className="editorial-kicker">{copy.eyebrow}</p>
           <h1 className="mt-3 max-w-[18ch] text-4xl leading-[1.05] text-stone-950 sm:text-6xl">{copy.heading}</h1>
           </div>
-          <p className="max-w-xl text-base leading-7 text-stone-600 lg:pb-1">{copy.intro}</p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-stone-600">{copy.intro}</p>
         </div>
       </header>
 
@@ -70,7 +70,7 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
           </div>
         ) : null}
 
-        <nav aria-label={copy.quickFilters} className="grid gap-4 border-b border-[var(--line)] pb-5 lg:grid-cols-[1.1fr_1.4fr_1fr]">
+        <nav aria-label={copy.quickFilters} className="hidden gap-4 border-b border-[var(--line)] pb-5 md:grid lg:grid-cols-[1.1fr_1.4fr_1fr]">
           <BrowseChoices
             label={copy.type}
             options={typeOptions}
@@ -178,7 +178,7 @@ function BrowseChoices({ label, options, selected, hrefFor }: { label: string; o
   return (
     <div>
       <p className="text-sm font-semibold text-stone-700">{label}</p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="horizontal-rail -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0">
         {options.map((option) => (
           <Link aria-current={selected === option.id ? "page" : undefined} className={`focus-ring inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold transition active:translate-y-px ${selected === option.id ? "border-[var(--foreground)] bg-[var(--foreground)] text-white" : "border-stone-400 text-stone-800 hover:border-[var(--tomato)] hover:text-[var(--tomato)]"}`} href={hrefFor(option.id)} key={option.id}>
             {option.label}

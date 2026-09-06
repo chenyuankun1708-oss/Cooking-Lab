@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CulinaryDetailModel } from "@/lib/culinary-detail";
 import { getLocalizedPath } from "@/lib/localization";
-import { encodeMealPlanSharePayload } from "@/lib/meal-plan-codec";
+import { encodeMealPlanAddPayload } from "@/lib/meal-plan-codec";
 import type { DecisionContext } from "@/types/decision-context";
 import type { SupportedLocale } from "@/types/localization";
 import { mealPlanSchemaVersion } from "@/types/meal-plan";
@@ -30,7 +30,7 @@ export function NativeCulinaryDetailPage({
 }) {
   const copy = detailCopy[locale];
   const identity = [detail.itemTypeLabel, detail.placeLabel, detail.flavorLabel].filter(Boolean);
-  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanSharePayload({ version: mealPlanSchemaVersion, items: [{ slug: detail.slug, servings: detail.defaultServings }] }));
+  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanAddPayload({ version: mealPlanSchemaVersion, items: [{ slug: detail.slug, servings: detail.defaultServings }] }));
   const sections = [
     { id: "preparation", label: copy.sectionPreparation, visible: true },
     { id: "principles", label: copy.sectionPrinciples, visible: detail.principles.length > 0 },
@@ -70,7 +70,7 @@ export function NativeCulinaryDetailPage({
         </header>
 
         <nav aria-label={copy.sectionNavigation} className="sticky top-0 z-10 border-y border-[var(--line)] bg-[var(--surface-paper)]/95 backdrop-blur">
-          <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2 sm:px-6">
+          <div className="horizontal-rail mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2 sm:px-6">
             {sections.map((section) => <a className="focus-ring inline-flex min-h-11 shrink-0 items-center px-3 text-sm font-bold text-stone-700 hover:text-[var(--tomato)]" href={`#${section.id}`} key={section.id}>{section.label}</a>)}
           </div>
         </nav>

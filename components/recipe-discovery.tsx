@@ -275,7 +275,7 @@ export function RecipeDiscovery({
 
         {activeSummary.length ? (
           <p className="mt-4 border-l-2 border-[var(--tomato)] pl-3 text-sm leading-6 text-stone-600">
-            <span className="font-semibold text-stone-900">{copy.selectedSummary}</span>{activeSummary.join(" · ")}
+            <span className="font-semibold text-stone-900">{copy.selectedSummary}</span>{activeSummary.join(locale === "zh-CN" ? "、" : ", ")}
           </p>
         ) : null}
 

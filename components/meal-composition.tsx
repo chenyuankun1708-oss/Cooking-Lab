@@ -4,26 +4,29 @@ import type { SupportedLocale } from "@/types/localization";
 import { getMessages } from "@/lib/messages";
 import { RecipeImage } from "./recipe-image";
 import { appendQueryToHref } from "@/lib/decision-context-navigation";
-import { encodeMealPlanSharePayload } from "@/lib/meal-plan-codec";
+import { encodeMealPlanAddPayload } from "@/lib/meal-plan-codec";
 import { getLocalizedPath } from "@/lib/localization";
 import { mealPlanSchemaVersion } from "@/types/meal-plan";
 
 export function MealCompositionView({ meal, locale, query }: { meal: MealCompositionDisplay; locale: SupportedLocale; query?: URLSearchParams }) {
   const messages = getMessages(locale);
   const c = mealViewCopy[locale];
-  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanSharePayload({
+  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanAddPayload({
     version: mealPlanSchemaVersion,
     items: meal.items.map((item) => ({ slug: item.href.split("/").filter(Boolean).at(-1) ?? item.id, servings: 2 })),
     template: meal.templateId,
   }));
   return (
     <div>
-      <div className="grid gap-3 border-b border-[var(--line)] pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+      <div className="grid gap-5 border-b border-[var(--line)] pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
         <div>
-          <p className="editorial-kicker">{meal.completenessLabel}</p>
-          <h2 className="mt-3 max-w-3xl text-3xl leading-tight text-stone-950 sm:text-5xl">{meal.templateLabel}</h2>
+          <p className="text-sm font-semibold text-stone-500">{meal.completenessLabel}</p>
+          <h2 className="mt-2 max-w-3xl text-3xl leading-tight text-stone-950 sm:text-5xl">{meal.templateLabel}</h2>
         </div>
-        <p className="pb-1 text-sm font-semibold text-stone-600">{meal.preparation.levelLabel}</p>
+        <div className="flex flex-col items-start gap-3 sm:items-end">
+          <p className="text-sm font-semibold text-stone-600">{meal.preparation.levelLabel}</p>
+          <Link className="focus-ring inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-[4px] bg-stone-950 px-5 font-bold text-white hover:bg-[var(--tomato)]" href={planHref}>{c.addMealToPlan}</Link>
+        </div>
       </div>
 
       <div className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-[1.2fr_0.9fr] lg:grid-cols-[1.25fr_1fr_1fr]">
@@ -64,7 +67,7 @@ export function MealCompositionView({ meal, locale, query }: { meal: MealComposi
 
       <div className="grid border-b border-[var(--line)] md:grid-cols-3">
         <section className="py-7 md:pr-7" aria-labelledby="pairing-preparation-title">
-          <p className="editorial-kicker">{c.practicality}</p>
+          <p className="text-sm font-semibold text-stone-500">{c.practicality}</p>
           <h3 id="pairing-preparation-title" className="mt-2 text-xl font-bold text-stone-950">{c.preparation}</h3>
           <p className="mt-4 text-sm leading-6 text-stone-700">{meal.preparation.activeTimeLabel}</p>
           <p className="mt-1 text-sm leading-6 text-stone-700">{meal.preparation.elapsedTimeLabel}</p>
@@ -72,7 +75,7 @@ export function MealCompositionView({ meal, locale, query }: { meal: MealComposi
           {meal.preparation.toolOverlapLabel ? <p className="mt-3 text-xs leading-5 text-stone-500">{meal.preparation.toolOverlapLabel}</p> : null}
         </section>
         <section className="border-t border-[var(--line)] py-7 md:border-l md:border-t-0 md:px-7" aria-labelledby="pairing-nutrition-title">
-          <p className="editorial-kicker">{meal.nutrition.coverageLabel}</p>
+          <p className="text-sm font-semibold text-stone-500">{meal.nutrition.coverageLabel}</p>
           <h3 id="pairing-nutrition-title" className="mt-2 text-xl font-bold text-stone-950">{c.nutrition}</h3>
           {meal.nutrition.metrics.length ? (
             <dl className="mt-4 grid grid-cols-2 gap-x-5 gap-y-3 text-sm">
@@ -81,12 +84,11 @@ export function MealCompositionView({ meal, locale, query }: { meal: MealComposi
           ) : <p className="mt-4 text-sm leading-6 text-stone-500">{c.noEstimate}</p>}
         </section>
         <section className="border-t border-[var(--line)] py-7 md:border-l md:border-t-0 md:pl-7" aria-labelledby="pairing-cost-title">
-          <p className="editorial-kicker">{meal.cost.coverageLabel}</p>
+          <p className="text-sm font-semibold text-stone-500">{meal.cost.coverageLabel}</p>
           <h3 id="pairing-cost-title" className="mt-2 text-xl font-bold text-stone-950">{c.cost}</h3>
           {meal.cost.valueLabel ? <p className="mt-4 text-lg font-bold text-stone-900">{meal.cost.valueLabel}</p> : <p className="mt-4 text-sm leading-6 text-stone-500">{c.noEstimate}</p>}
         </section>
       </div>
-      <div className="pt-7"><Link className="focus-ring inline-flex min-h-11 items-center justify-center rounded-[4px] bg-stone-950 px-5 font-bold text-white hover:bg-[var(--tomato)]" href={planHref}>{c.addMealToPlan}</Link></div>
     </div>
   );
 }
@@ -95,8 +97,8 @@ export function MealCompositionAlternative({ meal, locale, query }: { meal: Meal
   const c = mealViewCopy[locale];
   return (
     <article className="border-t border-[var(--line)] pt-6">
-      <p className="editorial-kicker">{meal.completenessLabel}</p>
-      <h3 className="mt-3 text-2xl leading-tight text-stone-950">{meal.templateLabel}</h3>
+      <p className="text-sm font-semibold text-stone-500">{meal.completenessLabel}</p>
+      <h3 className="mt-2 text-2xl leading-tight text-stone-950">{meal.templateLabel}</h3>
       <ul className="mt-5 divide-y divide-[var(--line)] border-y border-[var(--line)]">
         {meal.items.map((item) => (
           <li className="py-3" key={`${item.slotLabel}:${item.id}`}>

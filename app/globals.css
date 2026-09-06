@@ -109,6 +109,14 @@ button, summary { -webkit-tap-highlight-color: transparent; }
 
 a { text-underline-offset: 0.2em; }
 
+.horizontal-rail {
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.horizontal-rail::-webkit-scrollbar { display: none; }
+.horizontal-rail > * { scroll-snap-align: start; }
+
 ::selection { background: #efc5bd; color: var(--foreground); }
 
 .focus-ring:focus-visible {

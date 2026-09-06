@@ -8,7 +8,7 @@ import {
   getPublishedCulinaryItemsForLocale,
 } from "./published-culinary-items";
 import { getPublishedRecipeBySlug } from "./published-recipes";
-import { buildMealPlan, type MealPlanBuildItem } from "@/lib/meal-plan";
+import { buildMealPlan, type MealPlanBuildItem, type MealPlanStepMetadataRegistry } from "@/lib/meal-plan";
 import { resolveTranslation } from "@/lib/localization";
 import { getToolLabel } from "@/lib/tool-labels";
 import type { SupportedLocale } from "@/types/localization";
@@ -20,11 +20,16 @@ export interface MealPlanCatalog {
   ingredientLabels: Record<string, string>;
   taskLabels: Record<string, { instruction: string; stateCue?: string }>;
   toolLabels: Record<string, string>;
-  stepMetadata: typeof mealPlanStepMetadata;
+  stepMetadata: MealPlanStepMetadataRegistry;
 }
 
-export function getPublishedMealPlanCatalog(locale: SupportedLocale): MealPlanCatalog {
-  const items = getPublishedCulinaryItemsForLocale(locale);
+export function getPublishedMealPlanCatalog(
+  locale: SupportedLocale,
+  itemIds?: readonly string[],
+): MealPlanCatalog {
+  const selectedIds = itemIds ? new Set(itemIds) : undefined;
+  const items = getPublishedCulinaryItemsForLocale(locale)
+    .filter((item) => !selectedIds || selectedIds.has(item.id));
   const buildItems: MealPlanBuildItem[] = [];
   const itemLabels: MealPlanCatalog["itemLabels"] = {};
   const ingredientLabels: Record<string, string> = {};
@@ -69,7 +74,11 @@ export function getPublishedMealPlanCatalog(locale: SupportedLocale): MealPlanCa
       }
     }
   }
-  return { buildItems, itemLabels, ingredientLabels, taskLabels, toolLabels, stepMetadata: mealPlanStepMetadata };
+  const stepMetadata = Object.fromEntries(items.flatMap((item) => {
+    const metadata = mealPlanStepMetadata[item.id as keyof typeof mealPlanStepMetadata];
+    return metadata ? [[item.id, metadata] as const] : [];
+  }));
+  return { buildItems, itemLabels, ingredientLabels, taskLabels, toolLabels, stepMetadata };
 }
 
 export function buildPublishedMealPlan(

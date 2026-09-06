@@ -1,6 +1,7 @@
 import type { Unit } from "./ingredient";
 
 export const mealPlanSchemaVersion = 1 as const;
+export const mealPlanMaxItems = 8;
 
 export type MealPlanTaskKind = "active" | "wait" | "prepare-ahead" | "serve";
 

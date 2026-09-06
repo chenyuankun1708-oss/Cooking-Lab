@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { nativeCulinaryItems } from "@/data/culinary/items";
-import { buildMealPlan, MealPlanError, mergeShoppingLines, scheduleMealPlanTasks, type MealPlanBuildItem } from "@/lib/meal-plan";
-import { decodeMealPlanSharePayload, encodeMealPlanSharePayload, parseMealPlanLocalState } from "@/lib/meal-plan-codec";
-import { mealPlanSchemaVersion, type MealPlanTask } from "@/types/meal-plan";
+import { buildMealPlan, MealPlanError, mergeMealPlanSelections, mergeShoppingLines, resolveIncomingMealPlanSelections, scheduleMealPlanTasks, type MealPlanBuildItem } from "@/lib/meal-plan";
+import { decodeMealPlanAddPayload, decodeMealPlanSharePayload, encodeMealPlanAddPayload, encodeMealPlanSharePayload, migrateMealPlanV0Selections, parseMealPlanLocalState } from "@/lib/meal-plan-codec";
+import { mealPlanMaxItems, mealPlanSchemaVersion, type MealPlanTask } from "@/types/meal-plan";
 
 describe("meal plan", () => {
   it("scales servings and safely merges compatible units", () => {
@@ -15,6 +15,32 @@ describe("meal plan", () => {
       expect.objectContaining({ ingredientId: "milk", amount: 25, unit: "ml", optional: false }),
       expect.objectContaining({ ingredientId: "milk", amount: 10, unit: "g" }),
     ]));
+  });
+
+  it("adds new decisions to the local plan without replacing existing items", () => {
+    expect(mergeMealPlanSelections(
+      [{ itemId: "tomato-scrambled-eggs", servings: 2 }],
+      [
+        { itemId: "home-mapo-tofu", servings: 4 },
+        { itemId: "tomato-scrambled-eggs", servings: 6 },
+      ],
+    )).toEqual([
+      { itemId: "tomato-scrambled-eggs", servings: 2 },
+      { itemId: "home-mapo-tofu", servings: 4 },
+    ]);
+  });
+
+  it("keeps add links additive while shared plans replace local selections exactly", () => {
+    const local = [{ itemId: "tomato-scrambled-eggs", servings: 2 }];
+    const incoming = [{ itemId: "home-mapo-tofu", servings: 4 }];
+    expect(resolveIncomingMealPlanSelections(local, incoming, "merge")).toEqual({
+      selections: [...local, ...incoming],
+      limitExceeded: false,
+    });
+    expect(resolveIncomingMealPlanSelections(local, incoming, "replace")).toEqual({
+      selections: incoming,
+      limitExceeded: false,
+    });
   });
 
   it("builds procedural and ready-to-serve tasks without invented steps", () => {
@@ -64,6 +90,20 @@ describe("meal plan", () => {
     expect(result.find((entry) => entry.id === "c")?.startOffsetMinutes).toBe(10);
   });
 
+  it("uses the earliest free resource interval independent of input order", () => {
+    const tasks: MealPlanTask[] = [
+      task("prep", [], [], 100),
+      task("oven-late", ["prep"], ["oven"], 10),
+      task("oven-now", [], ["oven"], 10),
+    ];
+    const forward = scheduleMealPlanTasks(tasks);
+    const reverse = scheduleMealPlanTasks(tasks.toReversed());
+
+    expect(forward).toEqual(reverse);
+    expect(forward.find((entry) => entry.id === "oven-now")?.startOffsetMinutes).toBe(0);
+    expect(forward.find((entry) => entry.id === "oven-late")?.startOffsetMinutes).toBe(100);
+  });
+
   it("rejects cyclic dependencies", () => {
     expect(() => scheduleMealPlanTasks([
       task("a", ["b"], [], 1),
@@ -71,10 +111,68 @@ describe("meal plan", () => {
     ])).toThrowError(MealPlanError);
   });
 
+  it("allocates remaining canonical time when step durations are partially authored", () => {
+    const recipeLike: MealPlanBuildItem = {
+      id: "partial-duration",
+      slug: "partial-duration",
+      preparation: {
+        kind: "cooking" as const,
+        time: { prepMinutes: 5, processMinutes: 15, totalMinutes: 20, activeMinutes: 20 },
+        yield: { amount: 2, unit: "serving" as const },
+        inputs: [],
+        toolIds: [],
+        steps: [
+          { order: 1, durationMinutes: 5, content: { defaultLocale: "en" as const, entries: [{ locale: "en" as const, status: "reviewed" as const, value: { instruction: "One" } }] } },
+          { order: 2, content: { defaultLocale: "en" as const, entries: [{ locale: "en" as const, status: "reviewed" as const, value: { instruction: "Two" } }] } },
+          { order: 3, content: { defaultLocale: "en" as const, entries: [{ locale: "en" as const, status: "reviewed" as const, value: { instruction: "Three" } }] } },
+        ],
+      },
+    };
+
+    const plan = buildMealPlan([recipeLike], [{ itemId: "partial-duration", servings: 2 }]);
+    expect(plan.timeline.map((entry) => entry.durationMinutes)).toEqual([5, 8, 7]);
+    expect(plan.totalMinutes).toBe(20);
+  });
+
+  it("includes metadata-authored durations when allocating remaining canonical time", () => {
+    const recipeLike: MealPlanBuildItem = {
+      id: "metadata-duration",
+      slug: "metadata-duration",
+      preparation: {
+        kind: "cooking" as const,
+        time: { prepMinutes: 5, processMinutes: 15, totalMinutes: 20, activeMinutes: 20 },
+        yield: { amount: 2, unit: "serving" as const },
+        inputs: [],
+        toolIds: [],
+        steps: [
+          { order: 1, content: { defaultLocale: "en" as const, entries: [{ locale: "en" as const, status: "reviewed" as const, value: { instruction: "One" } }] } },
+          { order: 2, content: { defaultLocale: "en" as const, entries: [{ locale: "en" as const, status: "reviewed" as const, value: { instruction: "Two" } }] } },
+          { order: 3, content: { defaultLocale: "en" as const, entries: [{ locale: "en" as const, status: "reviewed" as const, value: { instruction: "Three" } }] } },
+        ],
+      },
+    };
+
+    const plan = buildMealPlan([recipeLike], [{ itemId: "metadata-duration", servings: 2 }], {
+      stepMetadata: { "metadata-duration": { 1: { kind: "wait", durationMinutes: 6 } } },
+    });
+    expect(plan.timeline.map((entry) => entry.durationMinutes)).toEqual([6, 7, 7]);
+    expect(plan.totalMinutes).toBe(20);
+  });
+
   it("round trips the public share payload and rejects unsafe input", () => {
     const query = encodeMealPlanSharePayload({ version: mealPlanSchemaVersion, items: [{ slug: "mango-sticky-rice", servings: 4 }], template: "drink-dessert" });
     expect(decodeMealPlanSharePayload(new URLSearchParams(query))).toEqual({ version: 1, items: [{ slug: "mango-sticky-rice", servings: 4 }], template: "drink-dessert" });
     expect(decodeMealPlanSharePayload(new URLSearchParams("v=1&items=../../secret:2"))).toBeUndefined();
+    const addQuery = encodeMealPlanAddPayload({ version: mealPlanSchemaVersion, items: [{ slug: "home-mapo-tofu", servings: 2 }] });
+    expect(decodeMealPlanAddPayload(new URLSearchParams(addQuery))).toEqual({ version: 1, items: [{ slug: "home-mapo-tofu", servings: 2 }] });
+    expect(decodeMealPlanSharePayload(new URLSearchParams(addQuery))).toBeUndefined();
+  });
+
+  it("uses one eight-item limit for building, merging, local state and sharing", () => {
+    const selections = Array.from({ length: mealPlanMaxItems + 1 }, (_, index) => ({ itemId: `item-${index}`, servings: 1 }));
+    expect(() => buildMealPlan([], selections)).toThrowError(expect.objectContaining({ code: "TOO_MANY_ITEMS" }));
+    expect(() => mergeMealPlanSelections(selections.slice(0, mealPlanMaxItems), [selections.at(-1)!])).toThrowError(expect.objectContaining({ code: "TOO_MANY_ITEMS" }));
+    expect(() => encodeMealPlanSharePayload({ version: mealPlanSchemaVersion, items: selections.map(({ itemId, servings }) => ({ slug: itemId, servings })) })).toThrow();
   });
 
   it("fails closed for corrupt or obsolete local state", () => {
@@ -85,6 +183,21 @@ describe("meal plan", () => {
       plan: { schemaVersion: 1, id: "bad", selections: [], shopping: [], timeline: [], totalMinutes: "10" },
       checkedShoppingLineIds: [], completedTaskIds: [], updatedAt: new Date().toISOString(),
     }))).toBeUndefined();
+  });
+
+  it("migrates the pre-release v0 selection-only state into the v1 rebuild path", () => {
+    const raw = JSON.stringify({
+      schemaVersion: 0,
+      selections: [
+        { itemId: "mango-sticky-rice", servings: 2 },
+        { itemId: "fino-sherry", servings: 1 },
+      ],
+    });
+    expect(migrateMealPlanV0Selections(raw)).toEqual([
+      { itemId: "mango-sticky-rice", servings: 2 },
+      { itemId: "fino-sherry", servings: 1 },
+    ]);
+    expect(migrateMealPlanV0Selections(JSON.stringify({ schemaVersion: 0, selections: [{ itemId: "../../bad", servings: 1 }] }))).toBeUndefined();
   });
 
   it("restores a deeply validated plan including local-only progress and timer state", () => {
@@ -103,6 +216,8 @@ describe("meal plan", () => {
     expect(parseMealPlanLocalState(JSON.stringify(invalidReference))).toBeUndefined();
     const duplicateSelection = { ...state, plan: { ...plan, selections: [...plan.selections, plan.selections[0]] } };
     expect(parseMealPlanLocalState(JSON.stringify(duplicateSelection))).toBeUndefined();
+    const excessiveSelections = { ...state, plan: { ...plan, selections: Array.from({ length: 25 }, (_, index) => ({ itemId: `item-${index}`, servings: 1 })) } };
+    expect(parseMealPlanLocalState(JSON.stringify(excessiveSelections))).toBeUndefined();
   });
 });
 

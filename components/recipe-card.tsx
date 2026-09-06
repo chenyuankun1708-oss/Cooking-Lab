@@ -10,7 +10,7 @@ import type { RecommendationResult } from "@/types/recommendation";
 import type { SupportedLocale } from "@/types/localization";
 import { getLocalizedPath } from "@/lib/localization";
 import { buildRecommendationExplanation } from "@/lib/recommendation-display";
-import { encodeMealPlanSharePayload } from "@/lib/meal-plan-codec";
+import { encodeMealPlanAddPayload } from "@/lib/meal-plan-codec";
 import { mealPlanSchemaVersion } from "@/types/meal-plan";
 
 export function RecipeCard({
@@ -32,7 +32,7 @@ export function RecipeCard({
   const flavor = describeFlavorProfile(recipe.flavor, locale, 2);
   const hasSpecificMatch = Object.keys(result.scoreBreakdown).length > 0;
   const detailHref = getLocalizedPath(locale, `/recipes/${recipe.slug}`, query);
-  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanSharePayload({ version: mealPlanSchemaVersion, items: [{ slug: recipe.slug, servings: recipe.servings }] }));
+  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanAddPayload({ version: mealPlanSchemaVersion, items: [{ slug: recipe.slug, servings: recipe.servings }] }));
 
   return (
     <article className="editorial-card group h-full min-w-0 pt-4">

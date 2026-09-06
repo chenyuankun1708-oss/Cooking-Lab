@@ -1,6 +1,7 @@
 import type { CulinaryItem, PreparationStep } from "@/types/culinary";
 import type { Unit } from "@/types/ingredient";
 import {
+  mealPlanMaxItems,
   mealPlanSchemaVersion,
   type MealPlanSelection,
   type MealPlanShoppingLine,
@@ -27,7 +28,7 @@ export type MealPlanBuildItem = Pick<CulinaryItem, "id" | "slug" | "preparation"
 
 export class MealPlanError extends Error {
   constructor(
-    public readonly code: "EMPTY_SELECTION" | "UNKNOWN_ITEM" | "INVALID_SERVINGS" | "DUPLICATE_ITEM" | "INVALID_DEPENDENCY",
+    public readonly code: "EMPTY_SELECTION" | "TOO_MANY_ITEMS" | "UNKNOWN_ITEM" | "INVALID_SERVINGS" | "DUPLICATE_ITEM" | "INVALID_DEPENDENCY",
     message: string,
   ) {
     super(message);
@@ -41,6 +42,7 @@ export function buildMealPlan(
   options: BuildMealPlanOptions = {},
 ): MealPlanV1 {
   if (!selections.length) throw new MealPlanError("EMPTY_SELECTION", "A meal plan needs at least one culinary item.");
+  if (selections.length > mealPlanMaxItems) throw new MealPlanError("TOO_MANY_ITEMS", `A meal plan supports up to ${mealPlanMaxItems} items.`);
   const itemsById = new Map(library.map((item) => [item.id, item]));
   const selectedIds = new Set<string>();
   const shopping: MealPlanShoppingLine[] = [];
@@ -127,26 +129,77 @@ export function mergeShoppingLines(lines: readonly MealPlanShoppingLine[]): Meal
   return [...merged.values()].sort((a, b) => a.id.localeCompare(b.id));
 }
 
+export function mergeMealPlanSelections(
+  current: readonly MealPlanSelection[],
+  incoming: readonly MealPlanSelection[],
+): MealPlanSelection[] {
+  const merged = current.map((selection) => ({ ...selection }));
+  const existingIds = new Set(merged.map((selection) => selection.itemId));
+  for (const selection of incoming) {
+    if (existingIds.has(selection.itemId)) continue;
+    merged.push({ ...selection });
+    existingIds.add(selection.itemId);
+  }
+  if (merged.length > mealPlanMaxItems) throw new MealPlanError("TOO_MANY_ITEMS", `A meal plan supports up to ${mealPlanMaxItems} items.`);
+  return merged;
+}
+
+export function resolveIncomingMealPlanSelections(
+  current: readonly MealPlanSelection[],
+  incoming: readonly MealPlanSelection[],
+  mode: "merge" | "replace",
+): { selections: MealPlanSelection[]; limitExceeded: boolean } {
+  if (!incoming.length) return { selections: current.map((selection) => ({ ...selection })), limitExceeded: false };
+  if (mode === "replace") return { selections: incoming.map((selection) => ({ ...selection })), limitExceeded: false };
+  try {
+    return { selections: mergeMealPlanSelections(current, incoming), limitExceeded: false };
+  } catch (error) {
+    if (error instanceof MealPlanError && error.code === "TOO_MANY_ITEMS") {
+      return { selections: current.map((selection) => ({ ...selection })), limitExceeded: true };
+    }
+    throw error;
+  }
+}
+
 export function scheduleMealPlanTasks(tasks: readonly MealPlanTask[]): MealPlanTask[] {
   const scheduled: MealPlanTask[] = [];
   const pending = new Map(tasks.map((task) => [task.id, { ...task, dependencyIds: [...task.dependencyIds], resourceIds: [...task.resourceIds] }]));
+  if (pending.size !== tasks.length) {
+    throw new MealPlanError("INVALID_DEPENDENCY", "Meal plan task IDs must be unique.");
+  }
   while (pending.size) {
-    let progressed = false;
-    for (const [id, task] of pending) {
-      const dependencies = task.dependencyIds.map((dependencyId) => scheduled.find((entry) => entry.id === dependencyId));
-      if (dependencies.some((dependency) => !dependency)) continue;
-      const dependencyEnd = Math.max(0, ...dependencies.map((dependency) => dependency!.startOffsetMinutes + dependency!.durationMinutes));
-      const resourceEnd = Math.max(0, ...scheduled
-        .filter((entry) => entry.resourceIds.some((resourceId) => task.resourceIds.includes(resourceId)))
-        .map((entry) => entry.startOffsetMinutes + entry.durationMinutes));
-      task.startOffsetMinutes = Math.max(dependencyEnd, resourceEnd);
+    const ready = [...pending.values()]
+      .filter((task) => task.dependencyIds.every((dependencyId) => scheduled.some((entry) => entry.id === dependencyId)))
+      .sort((left, right) => left.id.localeCompare(right.id));
+    if (!ready.length) throw new MealPlanError("INVALID_DEPENDENCY", "Meal plan tasks contain a missing or cyclic dependency.");
+    for (const task of ready) {
+      const dependencies = task.dependencyIds.map((dependencyId) => scheduled.find((entry) => entry.id === dependencyId)!);
+      const dependencyEnd = Math.max(0, ...dependencies.map((dependency) => dependency.startOffsetMinutes + dependency.durationMinutes));
+      task.startOffsetMinutes = findEarliestResourceSlot(task, scheduled, dependencyEnd);
       scheduled.push(task);
-      pending.delete(id);
-      progressed = true;
+      pending.delete(task.id);
     }
-    if (!progressed) throw new MealPlanError("INVALID_DEPENDENCY", "Meal plan tasks contain a missing or cyclic dependency.");
   }
   return scheduled.sort((a, b) => a.startOffsetMinutes - b.startOffsetMinutes || a.id.localeCompare(b.id));
+}
+
+function findEarliestResourceSlot(
+  task: MealPlanTask,
+  scheduled: readonly MealPlanTask[],
+  earliestStart: number,
+): number {
+  if (!task.durationMinutes || !task.resourceIds.length) return earliestStart;
+  const occupied = scheduled
+    .filter((entry) => entry.durationMinutes > 0 && entry.resourceIds.some((resourceId) => task.resourceIds.includes(resourceId)))
+    .map((entry) => ({ start: entry.startOffsetMinutes, end: entry.startOffsetMinutes + entry.durationMinutes }))
+    .sort((left, right) => left.start - right.start || left.end - right.end);
+  let candidate = earliestStart;
+  for (const interval of occupied) {
+    if (interval.end <= candidate) continue;
+    if (interval.start >= candidate + task.durationMinutes) break;
+    candidate = interval.end;
+  }
+  return candidate;
 }
 
 function buildProceduralTasks(
@@ -156,9 +209,12 @@ function buildProceduralTasks(
   fallbackActiveMinutes: number,
   metadata: Readonly<Record<number, MealPlanStepMetadata>> | undefined,
 ): MealPlanTask[] {
-  const hasAuthoredDurations = steps.some((step) => step.durationMinutes !== undefined);
-  const baseDuration = hasAuthoredDurations ? 0 : Math.floor(fallbackActiveMinutes / steps.length);
-  const durationRemainder = hasAuthoredDurations ? 0 : fallbackActiveMinutes - baseDuration * steps.length;
+  const getAuthoredDuration = (step: PreparationStep) => metadata?.[step.order]?.durationMinutes ?? step.durationMinutes;
+  const authoredDuration = steps.reduce((total, step) => total + (getAuthoredDuration(step) ?? 0), 0);
+  const missingDurationCount = steps.filter((step) => getAuthoredDuration(step) === undefined).length;
+  const unallocatedDuration = Math.max(0, fallbackActiveMinutes - authoredDuration);
+  const baseDuration = missingDurationCount ? Math.floor(unallocatedDuration / missingDurationCount) : 0;
+  let durationRemainder = missingDurationCount ? unallocatedDuration - baseDuration * missingDurationCount : 0;
   return steps.map((step, index) => {
     const explicit = metadata?.[step.order];
     const previousStep = steps[index - 1];
@@ -168,7 +224,7 @@ function buildProceduralTasks(
       itemId,
       stepOrder: step.order,
       kind: explicit?.kind ?? "active",
-      durationMinutes: explicit?.durationMinutes ?? step.durationMinutes ?? baseDuration + (index < durationRemainder ? 1 : 0),
+      durationMinutes: getAuthoredDuration(step) ?? baseDuration + (durationRemainder-- > 0 ? 1 : 0),
       startOffsetMinutes: 0,
       dependencyIds: dependencyOrders.map((order) => `${itemId}:step:${order}`),
       resourceIds: [...(explicit?.resourceIds ?? defaultResources)],

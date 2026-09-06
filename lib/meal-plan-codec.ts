@@ -1,20 +1,34 @@
-import { mealPlanSchemaVersion, type MealPlanLocalStateV1, type MealPlanSharePayloadV1 } from "@/types/meal-plan";
+import { mealPlanMaxItems, mealPlanSchemaVersion, type MealPlanLocalStateV1, type MealPlanSelection, type MealPlanSharePayloadV1 } from "@/types/meal-plan";
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const maxSharedItems = 8;
-
 export function encodeMealPlanSharePayload(payload: MealPlanSharePayloadV1): string {
-  assertSharePayload(payload);
+  return encodePayload(payload, "items");
+}
+
+export function encodeMealPlanAddPayload(payload: MealPlanSharePayloadV1): string {
+  return encodePayload(payload, "add");
+}
+
+function encodePayload(payload: MealPlanSharePayloadV1, itemParameter: "items" | "add"): string {
+  assertPayload(payload);
   const params = new URLSearchParams();
   params.set("v", String(mealPlanSchemaVersion));
-  params.set("items", payload.items.map(({ slug, servings }) => `${slug}:${servings}`).join(","));
+  params.set(itemParameter, payload.items.map(({ slug, servings }) => `${slug}:${servings}`).join(","));
   if (payload.template) params.set("template", payload.template);
   return params.toString();
 }
 
 export function decodeMealPlanSharePayload(input: URLSearchParams): MealPlanSharePayloadV1 | undefined {
+  return decodePayload(input, "items");
+}
+
+export function decodeMealPlanAddPayload(input: URLSearchParams): MealPlanSharePayloadV1 | undefined {
+  return decodePayload(input, "add");
+}
+
+function decodePayload(input: URLSearchParams, itemParameter: "items" | "add"): MealPlanSharePayloadV1 | undefined {
   if (input.get("v") !== String(mealPlanSchemaVersion)) return undefined;
-  const rawItems = input.get("items");
+  const rawItems = input.get(itemParameter);
   if (!rawItems) return undefined;
   const items = rawItems.split(",").map((entry) => {
     const separator = entry.lastIndexOf(":");
@@ -23,14 +37,14 @@ export function decodeMealPlanSharePayload(input: URLSearchParams): MealPlanShar
     const servings = Number(entry.slice(separator + 1));
     return slugPattern.test(slug) && validServings(servings) ? { slug, servings } : undefined;
   });
-  if (!items.length || items.length > maxSharedItems || items.some((item) => !item)) return undefined;
+  if (!items.length || items.length > mealPlanMaxItems || items.some((item) => !item)) return undefined;
   const payload: MealPlanSharePayloadV1 = {
     version: mealPlanSchemaVersion,
     items: items as Array<{ slug: string; servings: number }>,
     ...(input.get("template") ? { template: input.get("template")! } : {}),
   };
   try {
-    assertSharePayload(payload);
+    assertPayload(payload);
     return payload;
   } catch {
     return undefined;
@@ -44,7 +58,7 @@ export function parseMealPlanLocalState(value: string | null): MealPlanLocalStat
     if (!isRecord(parsed) || parsed.schemaVersion !== mealPlanSchemaVersion || !isRecord(parsed.plan)) return undefined;
     if (parsed.plan.schemaVersion !== mealPlanSchemaVersion || typeof parsed.plan.id !== "string" || !parsed.plan.id.trim()) return undefined;
     if (!isStringArray(parsed.checkedShoppingLineIds) || !isStringArray(parsed.completedTaskIds) || !isIsoDateTime(parsed.updatedAt)) return undefined;
-    if (!Array.isArray(parsed.plan.selections) || !Array.isArray(parsed.plan.shopping) || !Array.isArray(parsed.plan.timeline)) return undefined;
+    if (!Array.isArray(parsed.plan.selections) || !parsed.plan.selections.length || parsed.plan.selections.length > mealPlanMaxItems || !Array.isArray(parsed.plan.shopping) || !Array.isArray(parsed.plan.timeline)) return undefined;
     if (!isFiniteNonNegative(parsed.plan.totalMinutes)) return undefined;
 
     const selectionsValid = parsed.plan.selections.every((selection) =>
@@ -96,8 +110,26 @@ export function parseMealPlanLocalState(value: string | null): MealPlanLocalStat
   }
 }
 
-function assertSharePayload(payload: MealPlanSharePayloadV1): void {
-  if (payload.version !== mealPlanSchemaVersion || !payload.items.length || payload.items.length > maxSharedItems) {
+export function migrateMealPlanV0Selections(value: string | null): MealPlanSelection[] | undefined {
+  if (!value) return undefined;
+  try {
+    const parsed = JSON.parse(value) as unknown;
+    if (!isRecord(parsed) || parsed.schemaVersion !== 0 || !Array.isArray(parsed.selections)) return undefined;
+    if (!parsed.selections.length || parsed.selections.length > mealPlanMaxItems) return undefined;
+    const selections = parsed.selections.map((selection) => {
+      if (!isRecord(selection) || typeof selection.itemId !== "string" || !slugPattern.test(selection.itemId) || !validServings(selection.servings)) return undefined;
+      return { itemId: selection.itemId, servings: selection.servings };
+    });
+    if (selections.some((selection) => !selection)) return undefined;
+    const migrated = selections as MealPlanSelection[];
+    return new Set(migrated.map((selection) => selection.itemId)).size === migrated.length ? migrated : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function assertPayload(payload: MealPlanSharePayloadV1): void {
+  if (payload.version !== mealPlanSchemaVersion || !payload.items.length || payload.items.length > mealPlanMaxItems) {
     throw new Error("Invalid meal plan share payload.");
   }
   const seen = new Set<string>();

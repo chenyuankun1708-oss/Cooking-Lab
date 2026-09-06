@@ -21,16 +21,16 @@ export function ThemeToggle({ locale, inverse = false }: { locale: SupportedLoca
   return (
     <button
       aria-label={label}
-      className={`focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-[4px] border text-sm font-bold ${inverse ? "border-white/55 text-white" : "border-stone-300 text-stone-800"}`}
+      className={`focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-[4px] border px-2 text-sm font-bold ${inverse ? "border-white/55 text-white" : "border-stone-300 text-stone-800"}`}
       onClick={() => {
         document.documentElement.dataset.theme = next;
-        window.localStorage.setItem(key, next);
+        try { window.localStorage.setItem(key, next); } catch { /* Theme still applies for this visit. */ }
         setTheme(next);
       }}
       title={label}
       type="button"
     >
-      <span aria-hidden="true">{locale === "zh-CN" ? (theme === "dark" ? "浅" : "暗") : (theme === "dark" ? "L" : "D")}</span>
+      <span aria-hidden="true">{locale === "zh-CN" ? (theme === "dark" ? "浅" : "暗") : (theme === "dark" ? "Light" : "Dark")}</span>
     </button>
   );
 }

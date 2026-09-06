@@ -39,7 +39,10 @@ export function describeFlavorProfile(profile: FlavorProfile, locale: SupportedL
     ...(profile.textureIds ?? []).map((id) => textureVocabulary[id].label[locale]),
     ...(profile.characterIds ?? []).map((id) => flavorCharacterVocabulary[id].label[locale]),
   ];
-  return [...new Set([...tastes, ...supporting])].filter(Boolean).slice(0, limit).join(" · ");
+  return [...new Set([...tastes, ...supporting])]
+    .filter(Boolean)
+    .slice(0, limit)
+    .join(locale === "zh-CN" ? "、" : ", ");
 }
 
 export function getFlavorProfileLabels(profile: FlavorProfile, locale: SupportedLocale = "zh-CN") {

@@ -283,7 +283,7 @@ function getItemPlaceLabel(item: CulinaryItem, locale: SupportedLocale): string 
     countryId ? countries[countryId]?.label[locale] : undefined,
     cuisineId ? cuisines[cuisineId]?.label[locale] : undefined,
   ].filter((label): label is string => Boolean(label));
-  return [...new Set(labels)].join(" · ") || undefined;
+  return [...new Set(labels)].join(locale === "zh-CN" ? "、" : ", ") || undefined;
 }
 
 function collectConsumerSources(
@@ -306,7 +306,9 @@ function collectConsumerSources(
     )))].join("；") || undefined;
     return [{
       title: source.title,
-      byline: [source.authorNames.join(locale === "zh-CN" ? "、" : ", "), source.publisherOrInstitution, source.publication?.dateText].filter(Boolean).join(" · "),
+      byline: [source.authorNames.join(locale === "zh-CN" ? "、" : ", "), source.publisherOrInstitution, source.publication?.dateText]
+        .filter(Boolean)
+        .join(locale === "zh-CN" ? "、" : ", "),
       locatorLabel,
       href: getSourceHref(source),
     }];

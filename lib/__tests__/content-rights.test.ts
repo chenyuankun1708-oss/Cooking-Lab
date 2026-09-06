@@ -434,7 +434,7 @@ describe("M10 Production content-rights gate", () => {
     const usedIngredientIds = new Set(items.flatMap((item) => "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []));
     const nutritionIds = new Set(contentRightsRegistry.nutrition.map((entry) => entry.ingredientId));
     const costIds = new Set(contentRightsRegistry.costs.map((entry) => entry.id));
-    expect(usedIngredientIds.size).toBe(89);
+    expect(usedIngredientIds.size).toBe(93);
     for (const ingredientId of usedIngredientIds) {
       const ingredient = ingredients.find((entry) => entry.id === ingredientId)!;
       expect(nutritionIds.has(ingredientId), ingredientId).toBe(true);

@@ -21,6 +21,7 @@ import type {
   ReviewDimension,
   SamplingQaBatch,
   SamplingQaFinding,
+  SamplingQaSample,
 } from "@/types/publishing-governance";
 import { m10AuditedCulinaryItemIds } from "./content-rights";
 
@@ -28,11 +29,13 @@ export const publishingGovernancePolicyVersion = "m10.1-risk-based-2026-09-06";
 
 // This value is a committed review checkpoint, not a runtime-derived PASS. Any
 // content artifact change invalidates the attestation and blocks publication.
-const currentReviewedArtifactSetVersion = "clv1-cb1aa4def15f2c08";
-const currentLowRiskArtifactSetVersion = "clv1-d1b3d06f1c1ad5e7";
+const currentReviewedArtifactSetVersion = "clv1-271de8aee026edb3";
+const currentLowRiskArtifactSetVersion = "clv1-47cb77371633608e";
 const currentMediumRiskArtifactSetVersion = "clv1-284cf465a54bc99a";
-const currentReviewedCommit = "9c018f6be00be66ea89d59e37d0feab2da0a2995";
-const currentReviewBatchId = "issue-96-risk-split-primary-review-9c018f6-run-1";
+const currentReviewedCommit = "849a313a6fb2e67a4595b9878ab3f325bca1438c";
+const currentReviewBatchId = "issue-96-risk-split-primary-review-849a313-run-1";
+const priorRecoveryArtifactSetVersion = "clv1-cb1aa4def15f2c08";
+const priorRecoveryReviewedCommit = "9c018f6be00be66ea89d59e37d0feab2da0a2995";
 const weakImageFidelityItemIds = new Set([
   "cantonese-mushroom-steamed-chicken",
   "malaysian-turmeric-chicken",
@@ -49,8 +52,8 @@ const author: ReviewActorIdentity = {
 const reviewer: ReviewActorIdentity = {
   actorType: "agent",
   actorId: "/root/m11_primary_readonly_final",
-  runId: "issue-96-risk-split-primary-review-9c018f6-run-1",
-  contextId: "/root/m11_primary_readonly_final/9c018f6-risk-split-primary-context-1",
+  runId: "issue-96-risk-split-primary-review-849a313-run-1",
+  contextId: "/root/m11_primary_readonly_final/849a313-risk-split-primary-context-1",
 };
 
 const mediumContentVisualReviewer: ReviewActorIdentity = {
@@ -174,15 +177,42 @@ function createHistoricalSamplingBatch(
   };
 }
 
-function createRecoverySamplingBatch2(
+function createFullDishRecoveryCoverage(
   riskClassifications: readonly PublishingRiskClassification[],
-): SamplingQaBatch {
-  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
+  findingsByItemId: Readonly<Record<string, SamplingQaFinding[]>> = {},
+  revisedItemIds: ReadonlySet<string> = new Set<string>(),
+): Pick<SamplingQaBatch, "equivalenceClasses" | "samples"> {
   const equivalenceClasses = createSamplingEquivalenceClasses(riskClassifications);
   const visualDish = equivalenceClasses.find((entry) => entry.key === "visual-fidelity:dish");
   if (!visualDish) throw new Error("Recovery sampling requires the visual-fidelity:dish class");
   visualDish.sampledItemIds = [...visualDish.itemIds];
+  const sampledItemIds = [...new Set(equivalenceClasses.flatMap((entry) => entry.sampledItemIds))].sort();
+  const dimensions = [
+    "rights-license",
+    "provenance",
+    "factual-culinary",
+    "editorial",
+    "visual-image",
+  ] as const;
+  const samples = sampledItemIds.map((itemId): SamplingQaSample => ({
+    itemId,
+    equivalenceClassKeys: equivalenceClasses
+      .filter((entry) => entry.sampledItemIds.includes(itemId))
+      .map((entry) => entry.key) as [string, ...string[]],
+    dimensions: [...dimensions],
+    verdict: revisedItemIds.has(itemId) ? "revise" : "pass",
+    findings: findingsByItemId[itemId] ?? [],
+  }));
+  return {
+    equivalenceClasses,
+    samples: samples as [SamplingQaSample, ...SamplingQaSample[]],
+  };
+}
 
+function createRecoverySamplingBatch2(
+  riskClassifications: readonly PublishingRiskClassification[],
+): SamplingQaBatch {
+  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
   const resolvedFindingsByItemId: Record<string, SamplingQaFinding[]> = {
     "cantonese-mushroom-steamed-chicken": [{
       code: "medium-review-visual-rework-resolution-verified",
@@ -217,23 +247,10 @@ function createRecoverySamplingBatch2(
       equivalenceClassKeys: ["visual-fidelity:dish"],
     }],
   };
-  const sampledItemIds = [...new Set(equivalenceClasses.flatMap((entry) => entry.sampledItemIds))].sort();
-  const dimensions = [
-    "rights-license",
-    "provenance",
-    "factual-culinary",
-    "editorial",
-    "visual-image",
-  ] as const;
-  const samples = sampledItemIds.map((itemId) => ({
-    itemId,
-    equivalenceClassKeys: equivalenceClasses
-      .filter((entry) => entry.sampledItemIds.includes(itemId))
-      .map((entry) => entry.key) as [string, ...string[]],
-    dimensions: [...dimensions] as [typeof dimensions[number], ...typeof dimensions[number][]],
-    verdict: "pass" as const,
-    findings: resolvedFindingsByItemId[itemId] ?? [],
-  }));
+  const { equivalenceClasses, samples } = createFullDishRecoveryCoverage(
+    riskClassifications,
+    resolvedFindingsByItemId,
+  );
 
   return {
     id: "sampling-m10-existing-50-9c018f6-recovery-2",
@@ -242,7 +259,7 @@ function createRecoverySamplingBatch2(
     previousBatchId: "sampling-m10-existing-50-81afe4c-revise",
     policyVersion: publishingGovernancePolicyVersion,
     itemIds,
-    artifactSetVersion: currentReviewedArtifactSetVersion,
+    artifactSetVersion: priorRecoveryArtifactSetVersion,
     equivalenceClasses,
     author,
     auditor: {
@@ -251,7 +268,7 @@ function createRecoverySamplingBatch2(
       runId: "issue-96-sampling-recovery-batch-2-9c018f6-run-2",
       contextId: "/root/m11_sampling_reaudit_default/9c018f6-recovery-2",
     },
-    reviewedCommit: currentReviewedCommit,
+    reviewedCommit: priorRecoveryReviewedCommit,
     evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559746893",
     rubricVersion: "m10.1-sampling-content-visual-audit-v1",
     verdict: "pass",
@@ -279,10 +296,6 @@ function createRecoverySamplingBatch3(
   riskClassifications: readonly PublishingRiskClassification[],
 ): SamplingQaBatch {
   const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
-  const equivalenceClasses = createSamplingEquivalenceClasses(riskClassifications);
-  const visualDish = equivalenceClasses.find((entry) => entry.key === "visual-fidelity:dish");
-  if (!visualDish) throw new Error("Recovery sampling requires the visual-fidelity:dish class");
-  visualDish.sampledItemIds = [...visualDish.itemIds];
   const finding: SamplingQaFinding = {
     code: "hero-alt-container-and-pepper-color-mismatch",
     kind: "quality",
@@ -291,23 +304,11 @@ function createRecoverySamplingBatch3(
     disposition: "unresolved",
     equivalenceClassKeys: ["visual-fidelity:dish"],
   };
-  const sampledItemIds = [...new Set(equivalenceClasses.flatMap((entry) => entry.sampledItemIds))].sort();
-  const dimensions = [
-    "rights-license",
-    "provenance",
-    "factual-culinary",
-    "editorial",
-    "visual-image",
-  ] as const;
-  const samples = sampledItemIds.map((itemId) => ({
-    itemId,
-    equivalenceClassKeys: equivalenceClasses
-      .filter((entry) => entry.sampledItemIds.includes(itemId))
-      .map((entry) => entry.key) as [string, ...string[]],
-    dimensions: [...dimensions] as [typeof dimensions[number], ...typeof dimensions[number][]],
-    verdict: itemId === "hunan-chili-pork" ? "revise" as const : "pass" as const,
-    findings: itemId === "hunan-chili-pork" ? [finding] : [],
-  }));
+  const { equivalenceClasses, samples } = createFullDishRecoveryCoverage(
+    riskClassifications,
+    { "hunan-chili-pork": [finding] },
+    new Set(["hunan-chili-pork"]),
+  );
 
   return {
     id: "sampling-m10-existing-50-9c018f6-recovery-3",
@@ -316,7 +317,7 @@ function createRecoverySamplingBatch3(
     previousBatchId: "sampling-m10-existing-50-9c018f6-recovery-2",
     policyVersion: publishingGovernancePolicyVersion,
     itemIds,
-    artifactSetVersion: currentReviewedArtifactSetVersion,
+    artifactSetVersion: priorRecoveryArtifactSetVersion,
     equivalenceClasses,
     author,
     auditor: {
@@ -325,10 +326,101 @@ function createRecoverySamplingBatch3(
       runId: "issue-96-sampling-recovery-batch-3-9c018f6-run-3",
       contextId: "/root/m11_sampling_reaudit_default/9c018f6-recovery-3",
     },
-    reviewedCommit: currentReviewedCommit,
+    reviewedCommit: priorRecoveryReviewedCommit,
     evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559813212",
     rubricVersion: "m10.1-sampling-content-visual-audit-v1",
     verdict: "revise",
+    samples,
+    findings: [],
+    auditorModifiedContent: false,
+    metrics: {
+      escapeCount: 0,
+      reviewerDisagreementCount: 0,
+      reworkItemCount: 0,
+      provenanceLicenseNoveltyCount: 0,
+      reworkItemIds: [],
+      provenanceLicenseNoveltyClassKeys: [],
+    },
+    auditedAt: "2026-09-06",
+  };
+}
+
+function createRecoverySamplingBatch4(
+  riskClassifications: readonly PublishingRiskClassification[],
+): SamplingQaBatch {
+  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
+  const finding: SamplingQaFinding = {
+    code: "hero-alt-container-and-pepper-color-rework-resolution-verified",
+    kind: "quality",
+    severity: "minor",
+    summary: "Verified that the corrected Hunan chili pork Hero alt now matches the black cooking vessel, pork slices, and visible green chilies.",
+    disposition: "resolved",
+    equivalenceClassKeys: ["visual-fidelity:dish"],
+  };
+  const { equivalenceClasses, samples } = createFullDishRecoveryCoverage(
+    riskClassifications,
+    { "hunan-chili-pork": [finding] },
+  );
+
+  return {
+    id: "sampling-m10-existing-50-849a313-recovery-4",
+    batchId: "m10-existing-50-sampling-recovery-4",
+    sequence: 4,
+    previousBatchId: "sampling-m10-existing-50-9c018f6-recovery-3",
+    policyVersion: publishingGovernancePolicyVersion,
+    itemIds,
+    artifactSetVersion: currentReviewedArtifactSetVersion,
+    equivalenceClasses,
+    author,
+    auditor: {
+      actorType: "agent",
+      actorId: "/root/m11_sampling_reaudit_default",
+      runId: "issue-96-sampling-recovery-batch-4-849a313-run-4",
+      contextId: "/root/m11_sampling_reaudit_default/849a313-recovery-4",
+    },
+    reviewedCommit: currentReviewedCommit,
+    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559892456",
+    rubricVersion: "m10.1-sampling-content-visual-audit-v1",
+    verdict: "pass",
+    samples,
+    findings: [],
+    auditorModifiedContent: false,
+    metrics: {
+      escapeCount: 0,
+      reviewerDisagreementCount: 0,
+      reworkItemCount: 1,
+      provenanceLicenseNoveltyCount: 0,
+      reworkItemIds: ["hunan-chili-pork"],
+      provenanceLicenseNoveltyClassKeys: [],
+    },
+    auditedAt: "2026-09-06",
+  };
+}
+
+function createRecoverySamplingBatch5(
+  riskClassifications: readonly PublishingRiskClassification[],
+): SamplingQaBatch {
+  const { equivalenceClasses, samples } = createFullDishRecoveryCoverage(riskClassifications);
+  return {
+    id: "sampling-m10-existing-50-849a313-recovery-5",
+    batchId: "m10-existing-50-sampling-recovery-5",
+    sequence: 5,
+    previousBatchId: "sampling-m10-existing-50-849a313-recovery-4",
+    policyVersion: publishingGovernancePolicyVersion,
+    itemIds: [...m10AuditedCulinaryItemIds] as [string, ...string[]],
+    artifactSetVersion: currentReviewedArtifactSetVersion,
+    equivalenceClasses,
+    author,
+    auditor: {
+      actorType: "agent",
+      actorId: "/root/m11_sampling_reaudit_default",
+      runId: "issue-96-sampling-recovery-batch-5-849a313-run-5",
+      contextId: "/root/m11_sampling_reaudit_default/849a313-recovery-5",
+    },
+    reviewedCommit: currentReviewedCommit,
+    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559928563",
+    rubricVersion: "m10.1-sampling-content-visual-audit-v1",
+    verdict: "pass",
     samples,
     findings: [],
     auditorModifiedContent: false,
@@ -415,7 +507,7 @@ export function createPublishingGovernanceRegistry(
     culinaryFieldTest: false,
     legalOpinion: false,
   } as const;
-  const primaryEvidenceReference = "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559696601";
+  const primaryEvidenceReference = "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559853300";
   const mediumEvidenceReference = "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559696752";
   const rightsDimensions: ReviewDimension[] = ["rights-license", "provenance"];
   const contentDimensions: ReviewDimension[] = ["factual-culinary", "editorial", "visual-image"];
@@ -485,6 +577,8 @@ export function createPublishingGovernanceRegistry(
       createHistoricalSamplingBatch(riskClassifications),
       createRecoverySamplingBatch2(riskClassifications),
       createRecoverySamplingBatch3(riskClassifications),
+      createRecoverySamplingBatch4(riskClassifications),
+      createRecoverySamplingBatch5(riskClassifications),
     ],
   };
 }

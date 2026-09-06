@@ -60,4 +60,4 @@ Sampling 不使用固定百分比。每批必须覆盖新增或改变的风险�
 
 Artifact-set version 覆盖实际料理、Story、Source、Evidence、RightsAssessment、UsageDecision、Attribution、AI metadata、营养/成本 dataset 与转换、内容路径、图片 metadata 及本地图片文件 SHA-256。Committed attestation 保存对应 version；任一内容或依赖证据修改、scope 改变、policy 变化、缺少 risk classification、缺少适用 dimension、MEDIUM 独立性不足、HIGH 缺少 checkpoint 或 sampling coverage 不完整都会使 Production import、测试与 build 失败。历史 sampling record 可以保留其原始 artifact version，但不能为已经改变的当前 item 提供 publication coverage。
 
-当前 M10 50 项的 migration 记录明确标为独立 agent review，不标为 human review、field test 或 legal opinion。旧 M10 review 不能被追溯包装成 sampling PASS，因此 registry 在新审计完成前不包含 sampling batch，Production import 会按设计 fail closed。M10.1 必须使用本次真实、逐项留痕的独立 sampling audit。未来批次使用新的 batch attestation，不修改旧 checkpoint 来“继承”PASS。
+当前 M10 50 项的 migration 记录明确标为独立 agent review，不标为 human review、field test 或 legal opinion。旧 M10 review 没有被追溯包装成 sampling PASS；registry 保留首次 major escape、修复复核和后续 alt mismatch 的完整历史，并只在当前 artifact version 完成连续两个 clean、100% `visual-fidelity:dish` recovery batch 后解除冻结。当前 50 项由五批真实逐项审计记录覆盖，最终 registry 为 `ready=true`。未来批次必须追加新的 batch attestation，不得修改旧 checkpoint 来“继承”PASS。

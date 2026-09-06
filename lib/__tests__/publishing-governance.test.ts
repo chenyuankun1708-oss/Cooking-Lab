@@ -154,7 +154,7 @@ function issueCodes(registry: PublishingGovernanceRegistry, customContext = cont
 }
 
 describe("risk-based publishing governance", () => {
-  it("keeps the real M10 migration fail closed while preserving recovery audit history", () => {
+  it("preserves failed sampling history and clears only after two current clean recovery batches", () => {
     const registry = createPublishingGovernanceRegistry({
       items,
       rightsRegistry: contentRightsRegistry,
@@ -168,7 +168,7 @@ describe("risk-based publishing governance", () => {
       localizationVersions: contentLocalizationVersions,
       imageAssetVersions: contentImageAssetVersions,
     });
-    expect(registry.samplingBatches).toHaveLength(3);
+    expect(registry.samplingBatches).toHaveLength(5);
     expect(registry.samplingBatches[0]).toMatchObject({
       artifactSetVersion: "clv1-f30d9a1f9213c90c",
       reviewedCommit: "81afe4c16abd66e93dab9a4afb75f4e6624bfab6",
@@ -198,9 +198,22 @@ describe("risk-based publishing governance", () => {
         severity: "minor",
         disposition: "unresolved",
       })]));
-    expect(issueCodes(registry)).toContain("missing-sampling-coverage");
-    expect(issueCodes(registry)).toContain("sampling-class-frozen");
+    expect(registry.samplingBatches[3]).toMatchObject({
+      id: "sampling-m10-existing-50-849a313-recovery-4",
+      previousBatchId: "sampling-m10-existing-50-9c018f6-recovery-3",
+      verdict: "pass",
+      metrics: { escapeCount: 0, reworkItemCount: 1 },
+    });
+    expect(registry.samplingBatches[4]).toMatchObject({
+      id: "sampling-m10-existing-50-849a313-recovery-5",
+      previousBatchId: "sampling-m10-existing-50-849a313-recovery-4",
+      verdict: "pass",
+      metrics: { escapeCount: 0, reworkItemCount: 0 },
+    });
+    expect(issueCodes(registry)).not.toContain("missing-sampling-coverage");
+    expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
     expect(issueCodes(registry)).not.toContain("sampling-metrics-invalid");
+    expect(evaluatePublishingGovernance(registry, context).ready).toBe(true);
   });
 
   it("accepts a complete low-risk agent-review fixture without claiming human review", () => {

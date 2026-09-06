@@ -5,7 +5,7 @@
 
 ## 结论
 
-M10 gate 对每个 published item 遍历 identity、preparation、nutrition、cost、primary image 与关联 Story。当前注册表覆盖 50 个 item、50 张本地 Hero、6 个 Story、当前公开料理使用的 89 种食材 nutrition provenance，以及 1 个第一方价格估算方法。所有公开 artifact 均有 `UsageDecision`；CI 和 production build 会在任一必需块缺失或出现 blocked reason 时失败。
+M10 gate 对每个 published item 遍历 identity、preparation、nutrition、cost、primary image 与关联 Story。当前注册表覆盖 50 个 item、50 张本地 Hero、6 个 Story、当前公开料理使用的 93 种食材 nutrition provenance，以及 1 个第一方价格估算方法。所有公开 artifact 均有 `UsageDecision`；CI 和 production build 会在任一必需块缺失或出现 blocked reason 时失败。
 
 当前结果为 `PASS`，但这是工程与编辑风险控制结论，不是法律意见，也不替代收费、餐厅合作、酒类推广或大规模数据库导入前的专业律师复核。
 
@@ -24,7 +24,7 @@ M10 gate 对每个 published item 遍历 identity、preparation、nutrition、co
 | 16 个 native CulinaryItem identity / preparation | Cooking Lab original editorial | 当前不声称餐厅官方配方或品牌合作；命名、说明和步骤为第一方编辑文字 | allowed |
 | 6 个 Story | factual synthesis | 每个 claim 保持 Story → Evidence → Source 连接；争议、传说和事实分类不压平 | allowed |
 | 50 张 Hero | open-license / CC0 / public domain adaptation | 逐文件许可；CC BY 显示署名；CC BY-SA 以 asset-file 隔离并显示改编声明 | allowed-with-obligations |
-| 营养 | first-party editorial estimate | 89 种实际使用食材均有 provenance ID；不声称来自 USDA；显示演示估算限制 | allowed |
+| 营养 | first-party editorial estimate | 93 种实际使用食材均有 provenance ID；不声称来自 USDA；显示演示估算限制 | allowed |
 | 成本 | first-party estimate | 中国大陆参考市场、CNY、2026-09 方法版本；未抽取零售数据库 | allowed |
 | USDA FDC | future dataset only | CC0 / public domain；登记为 `not-yet-imported`，当前数值未使用 | not in current values |
 | 餐厅官方配方 | none | 没有书面授权记录，不使用 `official-authorized-recipe` | not published |

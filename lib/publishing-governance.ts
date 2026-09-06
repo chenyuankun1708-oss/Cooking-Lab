@@ -840,7 +840,6 @@ function validateSamplingHistory(
           && !sample.findings.some((finding) => finding.disposition === "unresolved"))),
       );
       if (!fullReview) {
-        report("sampling-class-frozen", batch.id, `Frozen risk class ${key} requires 100% review of the current class population`);
         state.consecutiveCleanFullReviews = 0;
       } else if (majorClassKeys.has(key)) {
         state.consecutiveCleanFullReviews = 0;

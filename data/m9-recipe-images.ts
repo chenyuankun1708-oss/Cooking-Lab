@@ -39,7 +39,7 @@ export const m9RecipeImages: readonly RecipeImage[] = [
   {
     id: "hunan-chili-pork-hero",
     src: "/images/recipes/hunan-chili-pork/hero.webp",
-    alt: "白盘中炒香的猪肉片和青红辣椒",
+    alt: "黑色锅具中炒香的猪肉片和青辣椒",
     role: "hero",
     delivery: "local",
     width: 1500,

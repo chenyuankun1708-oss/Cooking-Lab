@@ -42,7 +42,7 @@ Production URL：
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
 - M5 Epic #15 已按实际完成状态关闭
-- M9 Epic #69 与 Issues #70–#75 已建立；工作分支为 `feature/m9-unified-culinary-experience`
+- M9 Epic #69 与 Issues #70–#75 已建立；PR #76 已提交，工作分支为 `feature/m9-unified-culinary-experience`
 
 ## M9 当前实现状态
 
@@ -54,7 +54,8 @@ Production URL：
 - Story、获奖记录和消费级来源嵌入对应料理页；成品饮品不生成虚假步骤，未建模营养与成本不按零显示
 - 首页、目录、详情与 Pairing 已改为米白、墨黑、单一辣椒红的编辑式视觉；首页取消自动轮播，只预加载首个 Hero
 - 推荐引擎仍只处理 published Recipe；全部料理可浏览并参与确定性 Pairing
-- 本地最新验证：typecheck、lint、260 项测试、production build、五档响应式 QA、独立 code review 与独立 visual review 已通过；PR CI 尚待收口
+- 本地最新验证：typecheck、lint、260 项测试、production build、五档响应式 QA、独立 code review 与独立 visual review 已通过
+- PR #76 的 Vercel 与 Preview Comments checks 已通过，mergeable 状态为 `MERGEABLE`；Preview 受 Vercel SSO 保护，Production 上线烟测需在获得明确 merge 确认并部署后执行
 
 ## 已完成能力
 
@@ -381,4 +382,4 @@ PR #36 已合并 Living Editorial Hero：
 ## 下一步
 
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
-- 当前下一步是完成 M9 最终浏览器 QA、独立 review、PR 与 CI，并按 Codex Autonomy V1 停在 PR ready，不 merge。
+- M9 PR #76 已达到 PR ready：本地质量门禁、独立 review 与 GitHub CI 均通过。按 Codex Autonomy V1 等待明确 merge 确认，不自动 merge；合并后的 Production 双语烟测尚未执行。

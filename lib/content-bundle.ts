@@ -24,8 +24,11 @@ export function createContentBundleManifest(
     const primaryImageId = item.images.availability === "available"
       ? item.images.references.primaryImageId
       : "";
+    const productProfileIds = registry.productProfiles
+      .filter((profile) => profile.culinaryItemId === item.id)
+      .map((profile) => profile.id);
     const usageDecisionIds = registry.artifacts
-      .filter((artifact) => isArtifactInItemBundle(artifact.subject, item.id, item.storyIds, primaryImageId))
+      .filter((artifact) => isArtifactInItemBundle(artifact.subject, item.id, item.storyIds, primaryImageId, productProfileIds))
       .map((artifact) => decisionsByArtifactId.get(artifact.id))
       .filter((decision) => decision !== undefined)
       .map((decision) => decision.id)
@@ -87,7 +90,15 @@ export function validateContentBundleManifest(
     if (!entry.primaryImageId.trim()) report("missing-primary-image", "Published content bundle requires a primary Hero image");
     if (!entry.usageDecisionIds.length) report("missing-usage-decision", "Published content bundle requires rights usage decisions");
     const expectedDecisionIds = registry.artifacts
-      .filter((artifact) => isArtifactInItemBundle(artifact.subject, entry.itemId, entry.storyIds, entry.primaryImageId))
+      .filter((artifact) => isArtifactInItemBundle(
+        artifact.subject,
+        entry.itemId,
+        entry.storyIds,
+        entry.primaryImageId,
+        registry.productProfiles
+          .filter((profile) => profile.culinaryItemId === entry.itemId)
+          .map((profile) => profile.id),
+      ))
       .map((artifact) => artifact.usageDecisionId)
       .sort();
     if (entry.usageDecisionIds.join(",") !== expectedDecisionIds.join(",")) {
@@ -123,10 +134,12 @@ function isArtifactInItemBundle(
   itemId: string,
   storyIds: readonly string[],
   primaryImageId: string,
+  productProfileIds: readonly string[],
 ): boolean {
   if (subject.type === "culinary-item") return subject.id === itemId;
   if (subject.type === "story") return storyIds.includes(subject.id);
   if (subject.type === "image") return subject.id === primaryImageId;
+  if (subject.type === "product-profile") return productProfileIds.includes(subject.id);
   return false;
 }
 

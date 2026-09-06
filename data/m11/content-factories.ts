@@ -208,7 +208,10 @@ export function m11OriginalHero(itemId: string, alt: string): RecipeImage {
   };
 }
 
-export function defineStandaloneContentPackage(item: CulinaryItem): LocalContentPackageV1 {
+export function defineStandaloneContentPackage(
+  item: CulinaryItem,
+  options: { productProfileIds?: readonly string[] } = {},
+): LocalContentPackageV1 {
   if (item.images.availability !== "available") {
     throw new Error(`Standalone package ${item.id} requires a primary image`);
   }
@@ -218,6 +221,7 @@ export function defineStandaloneContentPackage(item: CulinaryItem): LocalContent
     ...baseDecisionIds,
     `usage-${item.images.references.primaryImageId}-image`,
     ...item.storyIds.map((storyId) => `usage-${storyId}-story`),
+    ...(options.productProfileIds ?? []).map((profileId) => `usage-${profileId}-product-profile`),
   ].sort();
   return Object.freeze({
     version: localContentPackageVersion,

@@ -111,6 +111,11 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(rightsRegistry.restaurants).toHaveLength(8);
     expect(rightsRegistry.productProfiles).toHaveLength(3);
 
+    for (const profile of m11BatchAProductProfiles) {
+      const contentPackage = m11BatchAContentPackages.find((entry) => entry.itemId === profile.culinaryItemId)!;
+      expect(contentPackage.manifestEntry.usageDecisionIds).toContain(`usage-${profile.id}-product-profile`);
+    }
+
     for (const itemId of [...m11BatchARestaurantIdentities, ...m11BatchAProductProfiles].map((entry) => entry.culinaryItemId)) {
       const item = rightsPreflightItems.find((entry) => entry.id === itemId)!;
       expect(deriveMinimumPublishingRisk(item, rightsRegistry).level, itemId).toBe("medium");

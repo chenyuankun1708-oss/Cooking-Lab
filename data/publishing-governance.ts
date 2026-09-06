@@ -11,7 +11,7 @@ import type { RecipeImage } from "@/types/image";
 import type { Ingredient } from "@/types/ingredient";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
 import type { ImageAssetVersion } from "@/lib/image-asset-version";
-import type { PublishingLocalizationVersion } from "@/lib/publishing-governance";
+import type { PublishingGovernanceContext, PublishingLocalizationVersion } from "@/lib/publishing-governance";
 import type { ResearchRecord } from "@/types/research";
 import type {
   PublishingGovernanceRegistry,
@@ -456,11 +456,10 @@ export interface CreatePublishingGovernanceRegistryInput {
   imageAssetVersions: readonly ImageAssetVersion[];
 }
 
-export function createPublishingGovernanceRegistry(
+export function createPublishingGovernanceContext(
   input: CreatePublishingGovernanceRegistryInput,
-): PublishingGovernanceRegistry {
-  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
-  const context = {
+): PublishingGovernanceContext {
+  return {
     items: input.items,
     rightsRegistry: input.rightsRegistry,
     images: input.images,
@@ -480,6 +479,28 @@ export function createPublishingGovernanceRegistry(
     localizationVersions: input.localizationVersions,
     imageAssetVersions: input.imageAssetVersions,
   };
+}
+
+export function mergePublishingGovernanceRegistries(
+  ...registries: readonly PublishingGovernanceRegistry[]
+): PublishingGovernanceRegistry {
+  if (!registries.length) throw new Error("At least one publishing governance registry is required");
+  if (registries.some((registry) => registry.policyVersion !== publishingGovernancePolicyVersion)) {
+    throw new Error("Publishing governance registries must use the active policy version");
+  }
+  return {
+    policyVersion: publishingGovernancePolicyVersion,
+    attestations: registries.flatMap((registry) => registry.attestations),
+    riskClassifications: registries.flatMap((registry) => registry.riskClassifications),
+    samplingBatches: registries.flatMap((registry) => registry.samplingBatches).sort((left, right) => left.sequence - right.sequence),
+  };
+}
+
+export function createPublishingGovernanceRegistry(
+  input: CreatePublishingGovernanceRegistryInput,
+): PublishingGovernanceRegistry {
+  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
+  const context = createPublishingGovernanceContext(input);
   const riskClassifications = input.items
     .filter((item) => itemIds.includes(item.id))
     .map((item): PublishingRiskClassification => {

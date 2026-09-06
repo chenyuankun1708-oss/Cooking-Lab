@@ -450,7 +450,7 @@ const seeds: readonly Seed[] = [
     claimEn: "This entry records yuenyeung as a Hong Kong cha chaan teng tea-and-coffee drink without claiming a sole originating shop or proprietary ratio.",
     sources: [
       { title: "Vocabulary: Drinks in Cha Chaan Teng", publisher: "Open Cantonese", url: "https://opencantonese.org/books/cantonese-life-1/unit-6/lesson-29/29-8-vocabulary-drinks-in-cha-chaan-teng", locator: "Drink list: 鴛鴦 as a milk-tea and coffee mixture", note: "Direct educational source for yuenyeung identity in cha chaan teng ordering language; linked audio and video are not used.", type: "open-educational-resource", reliability: "general-secondary", uses: ["identity", "culture"] },
-      { title: "Coffee or Tea? Order a Yuen Yeung – the Off-menu, Half-half Hybrid Served at Cafes across Hong Kong", publisher: "South China Morning Post", url: "https://www.scmp.com/magazines/style/leisure/article/3052122/coffee-or-tea-order-yuen-yeung-menu-half-half-hybrid-served", locator: "Hong Kong tea-and-coffee identity and competing origin accounts", note: "Authored feature supports the bounded drink identity and disputed attribution; no prose, shop ratio, or branded expression is reused.", type: "reputable-media", reliability: "general-secondary", uses: ["identity", "culture"] },
+      { title: "Coffee or tea? Order a yuen yeung – the off-menu, half-half hybrid served at cafes across Hong Kong", publisher: "South China Morning Post", url: "https://www.scmp.com/magazines/style/leisure/article/3052122/coffee-or-tea-order-yuen-yeung-menu-half-half-hybrid-served", locator: "Hong Kong tea-and-coffee identity and competing origin accounts", note: "Authored feature supports the bounded drink identity and disputed attribution; no prose, shop ratio, or branded expression is reused.", type: "reputable-media", reliability: "general-secondary", uses: ["identity", "culture"] },
       { title: "Yuenyeung", publisher: "Wikipedia contributors", url: "https://en.wikipedia.org/wiki/Yuenyeung", locator: "Tea-coffee composition and Hong Kong context", note: "Independent general cross-check for composition and context; no source wording or ratios are reused.", type: "open-educational-resource", reliability: "general-secondary", uses: ["identity", "culture"] },
       { title: "Pour-over Coffee", publisher: "National Coffee Association USA", url: "https://www.aboutcoffee.org/brewing/pour-over-coffee/", locator: "Water, grind, freshness, and filter-brewing variables", note: "Independent professional coffee-preparation cross-check; no source wording or fixed ratio is reused.", type: "professional-organization", uses: ["preparation"] },
     ],
@@ -909,10 +909,6 @@ export const batchANonDishResearchRecords: readonly ResearchRecord[] = Object.fr
   evidenceIds: (seed.storyEvidenceIndexes ?? [0, 1]).map((index) => evidenceId(seed.id, index)) as [string, ...string[]],
 })));
 
-export const batchANonDishPackages: readonly LocalContentPackageV1[] = Object.freeze(
-  batchANonDishItems.map(defineStandaloneContentPackage),
-);
-
 export const batchANonDishPairingTargets = Object.freeze({
   "double-skin-milk": ["longjing-green-tea", "vietnamese-iced-coffee"],
   "mango-pomelo-sago": ["thai-basil-chicken", "tomyum-kung"],
@@ -996,3 +992,17 @@ export const batchANonDishProductProfiles: readonly ProductProfile[] = Object.fr
     rightsAssessmentId: "rights-rioja-reserva-regional-profile-2026-09-v1-product-profile",
   },
 ]);
+
+const productProfileIdsByItemId = new Map<string, string[]>();
+for (const profile of batchANonDishProductProfiles) {
+  productProfileIdsByItemId.set(profile.culinaryItemId, [
+    ...(productProfileIdsByItemId.get(profile.culinaryItemId) ?? []),
+    profile.id,
+  ]);
+}
+
+export const batchANonDishPackages: readonly LocalContentPackageV1[] = Object.freeze(
+  batchANonDishItems.map((item) => defineStandaloneContentPackage(item, {
+    productProfileIds: productProfileIdsByItemId.get(item.id) ?? [],
+  })),
+);

@@ -136,23 +136,47 @@ export function NativeCulinaryDetailPage({
           </div>
         </section>
 
-        {detail.sources.length ? (
-          <section className="border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="sources-title">
+          <section id="sources" className="scroll-mt-24 border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="sources-title">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
               <h2 id="sources-title" className="text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.sources}</h2>
               <p className="mt-4 max-w-2xl leading-7 text-stone-600">{copy.sourcesIntro}</p>
-              <ol className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
-                {detail.sources.map((source) => (
-                  <li className="border-t border-[var(--line)] pt-4 text-sm leading-6" key={source.id}>
-                    {source.href ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={source.href} rel="noreferrer" target="_blank">{source.title}</a> : <p className="font-bold text-stone-950">{source.title}</p>}
-                    <p className="mt-1 text-stone-600">{source.byline}</p>
-                    <p className="mt-2 text-xs text-stone-500">{source.uses.join(locale === "zh-CN" ? "、" : ", ")}</p>
-                  </li>
-                ))}
-              </ol>
+              {detail.rights ? (
+                <div className="mt-8 border-y border-[var(--line)] py-5">
+                  <p className="font-bold text-stone-950">{detail.rights.identityLabel}</p>
+                  <p className="mt-2 max-w-3xl text-sm leading-6 text-stone-600">{detail.rights.identityDescription}</p>
+                </div>
+              ) : null}
+              {detail.sources.length ? (
+                <ol className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
+                  {detail.sources.map((source) => (
+                    <li className="border-t border-[var(--line)] pt-4 text-sm leading-6" key={source.id}>
+                      {source.href ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={source.href} rel="noreferrer" target="_blank">{source.title}</a> : <p className="font-bold text-stone-950">{source.title}</p>}
+                      <p className="mt-1 text-stone-600">{source.byline}</p>
+                      <p className="mt-2 text-xs text-stone-500">{source.uses.join(locale === "zh-CN" ? "、" : ", ")}</p>
+                    </li>
+                  ))}
+                </ol>
+              ) : <p className="mt-7 text-sm leading-6 text-stone-600">{copy.noExternalSources}</p>}
+              {detail.rights?.attributions.length ? (
+                <div className="mt-10">
+                  <h3 className="text-xl font-bold text-stone-950">{copy.attributions}</h3>
+                  <ul className="mt-4 space-y-4 border-t border-[var(--line)] pt-4">
+                    {detail.rights.attributions.map((attribution) => (
+                      <li className="text-sm leading-6 text-stone-600" key={attribution.id}>
+                        <p>{attribution.notice}</p>
+                        {attribution.modificationNotice ? <p className="mt-1 text-xs text-stone-500">{attribution.modificationNotice}</p> : null}
+                        <p className="mt-2 flex flex-wrap gap-4">
+                          <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={attribution.sourceUrl} rel="noreferrer" target="_blank">{copy.originalFile}</a>
+                          {attribution.licenseUrl ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={attribution.licenseUrl} rel="noreferrer" target="_blank">{attribution.licenseId}</a> : null}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              <Link className="focus-ring mt-8 inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={getLocalizedPath(locale, "/content-rights")}>{copy.policy}</Link>
             </div>
           </section>
-        ) : null}
 
         <section className="border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="pairing-title">
           <div className="mx-auto grid max-w-6xl gap-7 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
@@ -193,6 +217,6 @@ function costText(detail: CulinaryDetailModel, locale: SupportedLocale): string 
 }
 
 const detailCopy = {
-  "zh-CN": { breadcrumb: "面包屑导航", home: "首页", library: "料理库", flavor: "风味", preparationEyebrow: "从成品到餐桌", principles: "把这道料理做好的关键", pairing: "搭配这一餐", pairingTitle: (name: string) => `围绕${name}完成一餐`, pairingDescription: "保留这道料理作为起点，再平衡餐桌角色、风味和真实的准备节奏。", next: "下一步", imageSource: "图片来源", totalTime: "总时间", yield: "产出", ingredients: "食材", optional: "可选", tools: "工具", method: "准备方法", cue: "状态提示", guidanceLabel: "服务方式", readyLabel: "无需制作", reference: "估算信息", estimates: "营养与成本", nutrition: "营养估算", cost: "成本估算", estimateNote: "营养值为估算，不构成医疗建议。", costNote: "成本按静态参考价格估算。", sources: "来源", sourcesIntro: "以下资料用于核对料理身份、做法、安全边界或文化语境，页面文字为独立编辑。" },
-  en: { breadcrumb: "Breadcrumb", home: "Home", library: "Culinary library", flavor: "Flavor", preparationEyebrow: "From item to table", principles: "What makes this item work", pairing: "Build a pairing", pairingTitle: (name: string) => `Complete a meal around ${name}`, pairingDescription: "Keep this item as the anchor, then balance table roles, flavor, and a preparation rhythm that works in a real kitchen.", next: "Next", imageSource: "Image source", totalTime: "Total time", yield: "Yield", ingredients: "Ingredients", optional: "optional", tools: "Tools", method: "Preparation", cue: "Look for", guidanceLabel: "How to serve", readyLabel: "No preparation needed", reference: "Estimated information", estimates: "Nutrition and cost", nutrition: "Nutrition estimate", cost: "Cost estimate", estimateNote: "Nutrition is estimated and is not medical advice.", costNote: "Cost uses static reference prices.", sources: "Sources", sourcesIntro: "These references support identity, preparation, safety boundaries, or cultural context. Page copy is independently edited." },
+  "zh-CN": { breadcrumb: "面包屑导航", home: "首页", library: "料理库", flavor: "风味", preparationEyebrow: "从成品到餐桌", principles: "把这道料理做好的关键", pairing: "搭配这一餐", pairingTitle: (name: string) => `围绕${name}完成一餐`, pairingDescription: "保留这道料理作为起点，再平衡餐桌角色、风味和真实的准备节奏。", next: "下一步", imageSource: "图片来源", totalTime: "总时间", yield: "产出", ingredients: "食材", optional: "可选", tools: "工具", method: "准备方法", cue: "状态提示", guidanceLabel: "服务方式", readyLabel: "无需制作", reference: "估算信息", estimates: "营养与成本", nutrition: "营养估算", cost: "成本估算", estimateNote: "营养值为估算，不构成医疗建议。", costNote: "成本按静态参考价格估算。", sources: "来源与权利", sourcesIntro: "以下资料用于核对料理身份、做法、安全边界或文化语境；页面文字为独立编辑，图片按逐文件许可展示。", noExternalSources: "该料理当前不依赖外部表达性内容；编辑估算的方法与限制仍受全站权利政策约束。", attributions: "图片与开放内容署名", originalFile: "查看原始文件", policy: "阅读全站内容来源与权利政策" },
+  en: { breadcrumb: "Breadcrumb", home: "Home", library: "Culinary library", flavor: "Flavor", preparationEyebrow: "From item to table", principles: "What makes this item work", pairing: "Build a pairing", pairingTitle: (name: string) => `Complete a meal around ${name}`, pairingDescription: "Keep this item as the anchor, then balance table roles, flavor, and a preparation rhythm that works in a real kitchen.", next: "Next", imageSource: "Image source", totalTime: "Total time", yield: "Yield", ingredients: "Ingredients", optional: "optional", tools: "Tools", method: "Preparation", cue: "Look for", guidanceLabel: "How to serve", readyLabel: "No preparation needed", reference: "Estimated information", estimates: "Nutrition and cost", nutrition: "Nutrition estimate", cost: "Cost estimate", estimateNote: "Nutrition is estimated and is not medical advice.", costNote: "Cost uses static reference prices.", sources: "Sources and rights", sourcesIntro: "These references support identity, preparation, safety boundaries, or cultural context. Page copy is independently edited, and images are shown under file-specific licenses.", noExternalSources: "This item does not currently depend on third-party expressive content; editorial estimate methods and limits still follow the site-wide rights policy.", attributions: "Image and open-content attribution", originalFile: "View original file", policy: "Read the site-wide content sources and rights policy" },
 } as const;

@@ -24,6 +24,8 @@ import { calculateCost } from "./cost";
 import { calculateNutrition } from "./nutrition";
 import type { IngredientRepository } from "./ingredient-repository";
 import { listConsumerResearchSources, type CulinaryDetailSource } from "./research-consumer";
+import type { ContentRightsRegistry } from "@/types/content-rights";
+import { buildConsumerRightsDisclosure, listConsumerRightsSources, type ConsumerRightsDisclosure } from "./content-rights-consumer";
 
 export interface CulinaryDetailStep {
   order: number;
@@ -67,12 +69,14 @@ export interface CulinaryDetailModel {
     | { status: "not-modeled" };
   principles: string[];
   sources: CulinaryDetailSource[];
+  rights?: ConsumerRightsDisclosure;
 }
 
 export interface CulinaryDetailOptions {
   recipe?: Recipe;
   researchRecords?: readonly ResearchRecord[];
   researchSources?: readonly Source[];
+  rightsRegistry?: ContentRightsRegistry;
 }
 
 const preparationLabels: Readonly<Record<CulinaryItem["preparation"]["kind"], Record<SupportedLocale, string>>> = {
@@ -115,6 +119,19 @@ export function buildCulinaryDetailModel(
   const localizedImage = image && locale === "en"
     ? { ...image, alt: `${copy.name}, ready to serve` }
     : image;
+  const rights = options.rightsRegistry
+    ? buildConsumerRightsDisclosure(item.id, image?.id, item.storyIds, options.rightsRegistry, locale)
+    : undefined;
+  const researchSources = listConsumerResearchSources(
+    item.id,
+    options.researchRecords ?? [],
+    options.researchSources ?? [],
+    locale,
+  );
+  const rightsSources = rights
+    ? listConsumerRightsSources(rights, options.researchSources ?? [], locale)
+    : [];
+  const sources = [...new Map([...researchSources, ...rightsSources].map((source) => [source.id, source])).values()];
   return {
     id: item.id,
     slug: item.slug,
@@ -133,12 +150,8 @@ export function buildCulinaryDetailModel(
     nutrition: buildNutrition(item, repository),
     cost: buildCost(item, repository),
     principles: [...(options.recipe?.principles ?? [])],
-    sources: listConsumerResearchSources(
-      item.id,
-      options.researchRecords ?? [],
-      options.researchSources ?? [],
-      locale,
-    ),
+    sources,
+    ...(rights ? { rights } : {}),
   };
 }
 

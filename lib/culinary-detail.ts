@@ -10,6 +10,7 @@ import { describeFlavorProfile } from "./flavor";
 import { resolveTranslation } from "./localization";
 import { getToolLabel } from "./tool-labels";
 import {
+  buildCulinaryItemSummary,
   buildEmbeddedStoryModel,
   buildStoryPreview,
   getCulinaryItemHeroImage,
@@ -53,6 +54,7 @@ export interface CulinaryDetailModel {
   slug: string;
   name: string;
   description: string;
+  defaultServings: number;
   itemTypeLabel: string;
   placeLabel?: string;
   flavorLabel: string;
@@ -70,6 +72,7 @@ export interface CulinaryDetailModel {
   principles: string[];
   sources: CulinaryDetailSource[];
   rights?: ConsumerRightsDisclosure;
+  similarItems: ReturnType<typeof buildCulinaryItemSummary>[];
 }
 
 export interface CulinaryDetailOptions {
@@ -77,6 +80,7 @@ export interface CulinaryDetailOptions {
   researchRecords?: readonly ResearchRecord[];
   researchSources?: readonly Source[];
   rightsRegistry?: ContentRightsRegistry;
+  similarItems?: readonly CulinaryItem[];
 }
 
 const preparationLabels: Readonly<Record<CulinaryItem["preparation"]["kind"], Record<SupportedLocale, string>>> = {
@@ -137,6 +141,7 @@ export function buildCulinaryDetailModel(
     slug: item.slug,
     name: copy.name,
     description: copy.description,
+    defaultServings: "yield" in item.preparation && item.preparation.yield.unit === "serving" ? item.preparation.yield.amount : 1,
     itemTypeLabel: getCulinaryItemTypeLabel(item.itemType, locale),
     placeLabel: getCulinaryItemPlaceLabel(item, locale),
     flavorLabel: describeFlavorProfile(item.flavor, locale),
@@ -152,6 +157,7 @@ export function buildCulinaryDetailModel(
     principles: [...(options.recipe?.principles ?? [])],
     sources,
     ...(rights ? { rights } : {}),
+    similarItems: (options.similarItems ?? []).map((similarItem) => buildCulinaryItemSummary(similarItem, storyContext)),
   };
 }
 

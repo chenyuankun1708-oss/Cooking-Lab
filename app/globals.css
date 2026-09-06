@@ -16,6 +16,23 @@
   --muted: #66635d;
 }
 
+:root[data-theme="dark"] {
+  --background: #171716;
+  --foreground: #f1efe8;
+  --surface-canvas: #171716;
+  --surface-paper: #201f1d;
+  --surface-herb: #292824;
+  --surface-story: #25231f;
+  --surface-cocoa: #111110;
+  --tomato: #ee7868;
+  --green: #ee7868;
+  --green-dark: #ee7868;
+  --sun: #ee7868;
+  --line: #4b4841;
+  --muted: #b8b3aa;
+  color-scheme: dark;
+}
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -52,6 +69,40 @@ h1, h2, .font-display {
 .editorial-card img { transition: transform 420ms cubic-bezier(.2,.7,.2,1); }
 .editorial-card:hover img { transform: scale(1.018); }
 
+.hero-surface {
+  background:
+    linear-gradient(110deg, color-mix(in srgb, var(--surface-paper) 88%, transparent), transparent 58%),
+    var(--surface-canvas);
+}
+
+.hero-image-frame {
+  box-shadow: -18px 18px 0 color-mix(in srgb, var(--tomato) 15%, transparent);
+}
+
+.culinary-index-grid > :nth-child(8n + 1) h3 {
+  font-size: clamp(1.65rem, 2.4vw, 2.45rem);
+}
+
+:root[data-theme="dark"] .text-stone-950,
+:root[data-theme="dark"] .text-stone-900,
+:root[data-theme="dark"] .text-stone-800 { color: #f1efe8; }
+:root[data-theme="dark"] .text-stone-700,
+:root[data-theme="dark"] .text-stone-600 { color: #c7c2b8; }
+:root[data-theme="dark"] .text-stone-500,
+:root[data-theme="dark"] .text-stone-400 { color: #aaa49a; }
+:root[data-theme="dark"] .border-stone-950,
+:root[data-theme="dark"] .border-stone-900,
+:root[data-theme="dark"] .border-stone-500,
+:root[data-theme="dark"] .border-stone-400,
+:root[data-theme="dark"] .border-stone-300,
+:root[data-theme="dark"] .border-stone-200 { border-color: var(--line); }
+:root[data-theme="dark"] .bg-stone-950 { background-color: #f1efe8; color: #171716; }
+:root[data-theme="dark"] .bg-stone-200 { background-color: #302e2a; }
+:root[data-theme="dark"] .bg-white { background-color: var(--surface-paper); }
+:root[data-theme="dark"] .text-white { color: #171716; }
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] input { color: var(--foreground); }
+
 button, input, select { font: inherit; }
 
 button, summary { -webkit-tap-highlight-color: transparent; }
@@ -87,4 +138,8 @@ details > summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
+
+@media (max-width: 767px) {
+  .hero-image-frame { box-shadow: -8px 8px 0 color-mix(in srgb, var(--tomato) 14%, transparent); }
 }

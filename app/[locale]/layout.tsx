@@ -33,7 +33,10 @@ export default async function RootLayout({ children, params }: { children: React
   const locale: SupportedLocale = value;
   const messages = getMessages(locale);
   return (
-    <html className={`${bodyFont.variable} ${displayFont.variable}`} lang={locale}>
+    <html className={`${bodyFont.variable} ${displayFont.variable}`} lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('cooking-lab:theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}})()` }} />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">{messages.skip}</a>
         {children}

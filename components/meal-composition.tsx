@@ -4,10 +4,18 @@ import type { SupportedLocale } from "@/types/localization";
 import { getMessages } from "@/lib/messages";
 import { RecipeImage } from "./recipe-image";
 import { appendQueryToHref } from "@/lib/decision-context-navigation";
+import { encodeMealPlanSharePayload } from "@/lib/meal-plan-codec";
+import { getLocalizedPath } from "@/lib/localization";
+import { mealPlanSchemaVersion } from "@/types/meal-plan";
 
 export function MealCompositionView({ meal, locale, query }: { meal: MealCompositionDisplay; locale: SupportedLocale; query?: URLSearchParams }) {
   const messages = getMessages(locale);
   const c = mealViewCopy[locale];
+  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanSharePayload({
+    version: mealPlanSchemaVersion,
+    items: meal.items.map((item) => ({ slug: item.href.split("/").filter(Boolean).at(-1) ?? item.id, servings: 2 })),
+    template: meal.templateId,
+  }));
   return (
     <div>
       <div className="grid gap-3 border-b border-[var(--line)] pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
@@ -18,18 +26,17 @@ export function MealCompositionView({ meal, locale, query }: { meal: MealComposi
         <p className="pb-1 text-sm font-semibold text-stone-600">{meal.preparation.levelLabel}</p>
       </div>
 
-      <div className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-3">
+      <div className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-[1.2fr_0.9fr] lg:grid-cols-[1.25fr_1fr_1fr]">
         {meal.items.map((item, index) => (
-          <article className="editorial-card pt-4" key={`${item.slotLabel}:${item.id}`}>
+          <article className={`editorial-card pt-4 ${index === 0 ? "md:row-span-2 lg:row-span-1" : ""}`} key={`${item.slotLabel}:${item.id}`}>
             <Link className="focus-ring group block" href={appendQueryToHref(item.href, query ?? new URLSearchParams())}>
               <RecipeImage image={item.image} fallbackInitial={item.fallbackInitial} fallbackLabel={item.name} alt={item.name} locale={locale} variant="card" showAttribution={false} />
               <div className="pb-6 pt-4">
-                <div className="flex items-baseline justify-between gap-4">
+                <div>
                   <p className="text-xs font-semibold text-[var(--tomato)]">{item.slotLabel}</p>
-                  <span className="font-display text-sm text-stone-400" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 </div>
                 <h3 className="mt-2 text-xl font-bold leading-snug text-stone-950 group-hover:underline">{item.name}</h3>
-                <p className="mt-2 text-sm text-stone-500">{[item.itemTypeLabel, item.placeLabel].filter(Boolean).join(" · ")}</p>
+                <p className="mt-2 text-sm text-stone-500">{[item.itemTypeLabel, item.placeLabel].filter(Boolean).join(" / ")}</p>
                 {item.pairingReason ? <p className="mt-4 text-sm leading-6 text-stone-700">{item.pairingReason}</p> : null}
                 <span className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--tomato)]">{messages.stories.openItem}</span>
               </div>
@@ -79,6 +86,7 @@ export function MealCompositionView({ meal, locale, query }: { meal: MealComposi
           {meal.cost.valueLabel ? <p className="mt-4 text-lg font-bold text-stone-900">{meal.cost.valueLabel}</p> : <p className="mt-4 text-sm leading-6 text-stone-500">{c.noEstimate}</p>}
         </section>
       </div>
+      <div className="pt-7"><Link className="focus-ring inline-flex min-h-11 items-center justify-center rounded-[4px] bg-stone-950 px-5 font-bold text-white hover:bg-[var(--tomato)]" href={planHref}>{c.addMealToPlan}</Link></div>
     </div>
   );
 }
@@ -102,6 +110,6 @@ export function MealCompositionAlternative({ meal, locale, query }: { meal: Meal
 }
 
 const mealViewCopy = {
-  "zh-CN": { why: "为什么这样搭", tradeoffs: "需要留意", practicality: "现实厨房", preparation: "准备负担", nutrition: "整餐营养估算", cost: "整餐成本估算", noEstimate: "缺失数据不会按零计入。", roleFallback: "这些项目承担不同餐桌角色。" },
-  en: { why: "Why it works", tradeoffs: "Trade-offs", practicality: "In a real kitchen", preparation: "Preparation burden", nutrition: "Meal nutrition estimate", cost: "Meal cost estimate", noEstimate: "Missing data is never counted as zero.", roleFallback: "These items fill distinct roles at the table." },
+  "zh-CN": { addMealToPlan: "把这餐加入今晚计划", why: "为什么这样搭", tradeoffs: "需要留意", practicality: "现实厨房", preparation: "准备负担", nutrition: "整餐营养估算", cost: "整餐成本估算", noEstimate: "缺失数据不会按零计入。", roleFallback: "这些项目承担不同餐桌角色。" },
+  en: { addMealToPlan: "Add this meal to tonight's plan", why: "Why it works", tradeoffs: "Trade-offs", practicality: "In a real kitchen", preparation: "Preparation burden", nutrition: "Meal nutrition estimate", cost: "Meal cost estimate", noEstimate: "Missing data is never counted as zero.", roleFallback: "These items fill distinct roles at the table." },
 } as const;

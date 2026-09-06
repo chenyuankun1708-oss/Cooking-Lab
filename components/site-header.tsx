@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SupportedLocale } from "@/types/localization";
 import { getAlternateLocale, getLocalizedPath, replacePathLocale } from "@/lib/localization";
 import { getMessages } from "@/lib/messages";
+import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader({ active, inverse = false, locale, currentPath, query }: { active?: "home" | "recipes" | "stories"; inverse?: boolean; locale: SupportedLocale; currentPath: string; query?: string }) {
   const textClass = inverse ? "text-white" : "text-stone-950";
@@ -35,6 +36,7 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
           >
             {alternate === "en" ? "EN" : "中"}
           </Link>
+          <ThemeToggle inverse={inverse} locale={locale} />
         </nav>
       </div>
     </header>

@@ -21,6 +21,7 @@ import type { SupportedLocale } from "@/types/localization";
 import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
 import { assertContentRightsReady, createContentRightsAuditReport, evaluateContentRightsRegistry, getContentRightsEvaluationDate } from "@/lib/content-rights";
 import { m9RecipeResearchRecords, m9RecipeResearchSources } from "./research/m9-recipe-research";
+import { assertContentBundleManifestReady, createContentBundleManifest } from "@/lib/content-bundle";
 
 const allImages = [...recipeImages, ...culinaryImages];
 const candidates: CulinaryItem[] = [
@@ -66,10 +67,21 @@ export const contentRightsAuditReport = createContentRightsAuditReport(
   evaluateContentRightsRegistry(contentRightsRegistry, contentRightsContext),
 );
 
+const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));
 const publishedItems = Object.freeze(getPubliclyVisibleCulinaryItems(candidates, publishingContext));
+export const publishedContentBundleManifest = createContentBundleManifest(
+  publishedItems,
+  contentRightsRegistry,
+  isPublishedCulinaryItemLocaleComplete,
+);
+assertContentBundleManifestReady(
+  publishedContentBundleManifest,
+  publishedItems,
+  contentRightsRegistry,
+  isPublishedCulinaryItemLocaleComplete,
+);
 const publishedItemBySlug = new Map(publishedItems.map((item) => [item.slug, item]));
 const nativeItemIds = new Set(nativeCulinaryItems.map((item) => item.id));
-const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));
 const publishedNativeItems = Object.freeze(publishedItems.filter((item) => nativeItemIds.has(item.id)));
 const publishedNativeItemBySlug = new Map(publishedNativeItems.map((item) => [item.slug, item]));
 

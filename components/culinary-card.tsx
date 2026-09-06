@@ -6,17 +6,19 @@ import { RecipeImage } from "./recipe-image";
 
 export function CulinaryCard({
   entry,
+  featured = false,
   locale,
   query,
 }: {
   entry: CulinaryCatalogEntry;
+  featured?: boolean;
   locale: SupportedLocale;
   query?: URLSearchParams;
 }) {
   const href = query ? appendQueryToHref(entry.href, query) : entry.href;
   const facts = [entry.placeLabel, entry.techniqueLabel, entry.preparationLabel].filter((value): value is string => Boolean(value));
   return (
-    <article className="editorial-card group min-w-0 pt-4">
+    <article className={`editorial-card group min-w-0 pt-4 ${featured ? "sm:col-span-2" : ""}`}>
       <Link
         aria-label={locale === "zh-CN" ? `查看${entry.name}` : `View ${entry.name}`}
         className="focus-ring block"

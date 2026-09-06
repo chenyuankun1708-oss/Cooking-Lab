@@ -2,8 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { decisionContextValueAllowlist } from "@/data/decision-context";
-import { getLocalizedRecipes } from "@/data/localization/public-recipes";
-import { getPublishedRecipes } from "@/data/published-recipes";
+import { getPublishedCulinaryItemsForLocale } from "@/data/published-culinary-items";
 import { describeDecisionContext } from "../decision-context-display";
 import {
   appendQueryToHref,
@@ -12,9 +11,9 @@ import {
   serializeDecisionRouteQuery,
 } from "../decision-context-navigation";
 import { replacePathLocale } from "../localization";
-import { parseRecipeCatalogFilters } from "../recipe-exploration";
+import { parseCulinaryCatalogFilters } from "../culinary-exploration";
 
-const recipes = getLocalizedRecipes(getPublishedRecipes(), "en");
+const culinaryItems = getPublishedCulinaryItemsForLocale("en");
 
 describe("Decision Context journey continuity", () => {
   it("keeps normalized context stable from Discovery through Recipe and Pairing", () => {
@@ -43,16 +42,18 @@ describe("Decision Context journey continuity", () => {
       ["dcSource", "catalog"],
       ["q", "  tofu  "],
       ["cuisine", "chinese"],
+      ["type", "dish"],
+      ["story", "available"],
       ["technique", "unknown-technique"],
       ["returnTo", "https://evil.example/steal"],
     ]);
     const state = parseDecisionRouteState(incoming, decisionContextValueAllowlist);
-    const filters = parseRecipeCatalogFilters(incoming, recipes);
+    const filters = parseCulinaryCatalogFilters(incoming, culinaryItems);
 
     expect(state).toEqual({ context: { maxTime: 45 }, source: "catalog" });
-    expect(filters).toEqual({ query: "tofu", cuisineId: "chinese" });
+    expect(filters).toEqual({ query: "tofu", itemType: "dish", cuisineId: "chinese", story: "available" });
     expect(buildDecisionReturnHref("en", state, decisionContextValueAllowlist, filters))
-      .toBe("/en/recipes?dcMaxTime=45&q=tofu&cuisine=chinese");
+      .toBe("/en/recipes?dcMaxTime=45&q=tofu&type=dish&cuisine=chinese&story=available");
   });
 
   it("restores Discovery directly and preserves machine values across locale switching", () => {

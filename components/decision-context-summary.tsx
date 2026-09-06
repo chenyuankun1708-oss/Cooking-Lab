@@ -33,7 +33,7 @@ export function DecisionContextSummary({
       <ul className="mt-3 flex flex-wrap gap-2">
         {entries.map((entry) => (
           <li className="rounded-full border border-stone-300 bg-white px-3 py-2 text-xs leading-5 text-stone-700" key={entry.field}>
-            <span className="font-bold text-[#235849]">{entry.scopeLabel}</span>
+            <span className="font-bold text-[var(--tomato)]">{entry.scopeLabel}</span>
             <span aria-hidden="true"> · </span>
             {entry.text}
           </li>

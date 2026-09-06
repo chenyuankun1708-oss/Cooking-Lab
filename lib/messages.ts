@@ -3,7 +3,7 @@ import type { SupportedLocale } from "@/types/localization";
 const messages = {
   "zh-CN": {
     skip: "跳到主要内容",
-    nav: { label: "主导航", home: "首页", recipes: "料理", stories: "故事", feedback: "Beta 反馈" },
+    nav: { label: "主导航", home: "首页", recipes: "料理库", decide: "今晚吃什么", stories: "故事", feedback: "Beta 反馈" },
     locale: { label: "选择语言", current: "当前语言：中文", switchLabel: "Switch to English", short: "中" },
     footer: {
       label: "页脚导航",
@@ -72,7 +72,7 @@ const messages = {
   },
   en: {
     skip: "Skip to main content",
-    nav: { label: "Primary navigation", home: "Home", recipes: "Recipes", stories: "Stories", feedback: "Beta feedback" },
+    nav: { label: "Primary navigation", home: "Home", recipes: "Culinary library", decide: "Tonight's choice", stories: "Stories", feedback: "Beta feedback" },
     locale: { label: "Choose language", current: "Current language: English", switchLabel: "切换到中文", short: "EN" },
     footer: {
       label: "Footer navigation",

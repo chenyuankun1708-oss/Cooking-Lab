@@ -3,7 +3,7 @@
 ## 当前产品状态
 
 - 当前阶段：Cooking Lab Public Beta v0.1
-- 当前状态：M8 Bounded External Validation 已取消并完成清理；没有新的产品 Goal
+- 当前状态：M9 `统一料理体验与内容扩充` 正在实现，目标为 50 项双语公开料理与统一消费体验
 - Production URL：[https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
 - `Cooking Lab` 目前仍是工程名和 working title，不代表最终消费者品牌名
 
@@ -45,13 +45,21 @@
 
 M0-M4 已完成，当前 Public Beta 已具备：
 
-- 100 道结构化 `demo-estimated` 菜谱与 102 种食材；10 道 Recipe 维持当前 Web 公开基线，另有 16 个 native CulinaryItem 进入统一公开料理库
+- 100 道结构化 `demo-estimated` 菜谱与 102 种食材；M9 分支将 34 道已审 Recipe 与 16 个 native CulinaryItem 组成 50 项统一公开料理库
 - 本地营养、成本、单位换算和推荐引擎
 - 首页多条件料理决策
 - `/recipes` 已发布料理目录
 - 详情页步骤、原理与估算信息
 - 公开 Beta 反馈入口
 - Vercel 上线能力与已部署生产环境
+
+## M9 统一料理体验与内容扩充
+
+M9 Epic #69 将消费者的信息架构从“Recipe、native CulinaryItem、Story 三套入口”收敛为料理本身。`/{locale}/recipes` 展示全部 50 项公开料理，`/{locale}/recipes/[slug]` 是菜肴、甜品、茶、咖啡与饮品的唯一 canonical 详情页；Story 仍保留结构化 Claim、Evidence 与 Source，但只作为对应料理中的内容章节。
+
+M9 从 90 道 draft 中深化并发布 24 道 Recipe。每项具备 4–6 个真实步骤、状态判断与失败预防、完整英文审校、closed ResearchRecord、至少两个独立来源，以及经过授权与构图复核的本地 Hero。推荐引擎仍只处理满足 Recipe 约束模型的可执行内容；其他料理可参与浏览和确定性搭配，但不会被伪装成可执行烹饪推荐。
+
+视觉采用现代编辑式 food-first 方向：Noto Serif SC 用于展示标题，Noto Sans SC 用于正文与 UI；界面只使用米白、墨黑与单一辣椒红强调色。首页取消自动轮播，目录与详情使用统一比例、间距、4 px 圆角、可见焦点和 44 px 触控目标。
 
 ## 产品原则
 
@@ -79,11 +87,11 @@ M5 `Content, Brand & Experience` 的目标不是简单增加几个功能，而�
 
 M5 当前已经完成 taxonomy v2、shared-core audit、100 道菜数据扩展、image system，并在 Issue #21 落地消费者 Web 重设计。本阶段仍不完成最终品牌命名、完整 100 张图片覆盖或 Mobile App 开发。
 
-100 道 structured recipes 是内容储备，不等于 100 道 published recipes。Issue #30 建立独立的 publication status 与技术 eligibility；公开首页、目录、推荐和详情当前只消费 10 道已审核 Recipe，其余内容继续保留为 draft。
+100 道 structured recipes 是内容储备，不等于 100 道 published recipes。Issue #30 建立独立的 publication status 与技术 eligibility；M9 在原 10 道基础上再发布 24 道，剩余 66 道继续保持 draft。
 
 Issue #31 在 Recipe Detail 尾部加入 deterministic similar-recipe discovery。它根据 canonical Flavor、主食材、cuisine、technique 和 dish type 寻找少量真正有料理逻辑的 published Recipe，不复用用户条件 Recommendation score，也不向用户展示系统分数。当前公开集较小时宁可只显示 1–2 道，或没有结果时隐藏整段，也不为了填满卡片公开 draft 内容。
 
-Issue #32 把首页静态单图升级为 Living Editorial Hero。五道由编辑确定、视觉与料理节奏不同的 published Recipe 按固定顺序轮换，文案结合人工 editorial line、canonical Flavor 与 human time；它不伪装个性化，也不改变推荐、发布或图片门禁。
+Issue #32 曾把首页升级为 Living Editorial Hero。M9 根据视觉审计将其收敛为静态编辑式 Hero，只预加载一个 LCP 图片，减少轮播控制、重遮罩与重复内容造成的干扰；推荐、发布与图片门禁不变。
 
 ## M5.1 产品自然化
 

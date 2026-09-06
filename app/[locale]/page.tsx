@@ -45,19 +45,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <main id="main-content">
       <HomeHero items={heroItems} locale={locale} />
 
-      <section className="bg-[var(--surface-paper)] py-12 sm:py-16" aria-labelledby="tonight-title">
+      <section className="py-14 sm:py-20" aria-labelledby="tonight-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold text-[#a64631]">{messages.home.inspirationEyebrow}</p>
+          <div className="max-w-2xl">
               <h2 id="tonight-title" className="mt-2 text-3xl font-bold leading-tight text-stone-950 sm:text-5xl">
                 {messages.home.inspirationTitle}
               </h2>
               <p className="mt-4 leading-7 text-stone-600">
                 {messages.home.inspirationBody}
               </p>
-            </div>
-            <Link className="focus-ring min-h-11 py-3 text-sm font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes")}>
+            <Link className="focus-ring mt-4 inline-flex min-h-11 items-center text-sm font-bold text-[var(--tomato)] hover:underline" href={getLocalizedPath(locale, "/recipes")}>
               {messages.home.inspirationCta}
             </Link>
           </div>
@@ -76,11 +73,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         />
       </Suspense>
 
-      <section className="border-y border-stone-200 bg-[var(--surface-herb)] py-12 sm:py-16" aria-labelledby="world-title">
+      <section className="border-y border-[var(--line)] py-14 sm:py-20" aria-labelledby="world-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-sm font-semibold text-[#a64631]">{messages.home.worldEyebrow}</p>
               <h2 id="world-title" className="mt-2 text-3xl font-bold leading-tight text-stone-950 sm:text-5xl">
                 {messages.home.worldTitle}
               </h2>
@@ -92,7 +88,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               {cuisineOptions.map((cuisine) => (
                 <li key={cuisine.id} className="border-b border-stone-300 sm:odd:pr-5 sm:even:pl-5">
                   <Link
-                    className="focus-ring flex min-h-20 items-center justify-between gap-4 py-4 text-lg font-bold text-stone-900 hover:text-[#a64631]"
+                    className="focus-ring flex min-h-20 items-center justify-between gap-4 py-4 text-lg font-bold text-stone-900 hover:text-[var(--tomato)]"
                     href={getLocalizedPath(locale, "/recipes", `cuisine=${cuisine.id}`)}
                   >
                     <span>{cuisine.label}</span>
@@ -105,19 +101,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section className="bg-[var(--surface-story)] py-12 sm:py-16" aria-labelledby="home-stories-title">
+      <section className="bg-[var(--surface-story)] py-14 sm:py-20" aria-labelledby="home-stories-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold text-[#a64631]">{messages.home.storiesEyebrow}</p>
+          <div className="max-w-2xl">
+              <p className="editorial-kicker">{messages.home.storiesEyebrow}</p>
               <h2 id="home-stories-title" className="mt-2 text-3xl font-bold leading-tight text-stone-950 sm:text-5xl">
                 {messages.home.storiesTitle}
               </h2>
               <p className="mt-4 leading-7 text-stone-600">
                 {messages.home.storiesBody}
               </p>
-            </div>
-            <Link className="focus-ring min-h-11 py-3 text-sm font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/stories")}>
+            <Link className="focus-ring mt-4 inline-flex min-h-11 items-center text-sm font-bold text-[var(--tomato)] hover:underline" href={getLocalizedPath(locale, "/recipes", "story=available")}>
               {messages.home.storiesCta}
             </Link>
           </div>
@@ -127,28 +121,25 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
-      <section id="techniques" className="border-y border-stone-200 bg-[#173f35] py-12 text-white sm:py-16" aria-labelledby="technique-title">
+      <section id="techniques" className="border-y border-[var(--line)] py-14 sm:py-20" aria-labelledby="technique-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <p className="text-sm font-semibold text-[#f4d98b]">{messages.home.techniqueEyebrow}</p>
-          <div className="mt-2 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-            <div>
+          <div className="max-w-2xl">
               <h2 id="technique-title" className="text-3xl font-bold leading-tight sm:text-5xl">
                 {messages.home.techniqueTitle}
               </h2>
-            </div>
-            <p className="max-w-2xl leading-7 text-white/76">
+            <p className="mt-4 max-w-2xl leading-7 text-stone-600">
               {messages.home.techniqueBody}
             </p>
           </div>
-          <div className="mt-9 grid grid-cols-2 border-l border-t border-white/25 sm:grid-cols-4">
+          <div className="mt-9 grid grid-cols-2 border-l border-t border-[var(--line)] sm:grid-cols-4">
             {techniqueOptions.map((technique) => (
               <Link
                 key={technique.id}
-                className="focus-ring min-h-24 border-b border-r border-white/25 p-4 hover:bg-white/10 sm:p-5"
+                className="focus-ring min-h-24 border-b border-r border-[var(--line)] p-4 text-stone-950 hover:bg-[var(--surface-story)] hover:text-[var(--tomato)] sm:p-5"
                 href={getLocalizedPath(locale, "/recipes", `technique=${technique.id}`)}
               >
                 <span className="block text-xl font-bold">{technique.label}</span>
-                <span className="mt-2 block text-sm text-white/65">{messages.home.techniqueCta}</span>
+                <span className="mt-2 block text-sm text-stone-500">{messages.home.techniqueCta}</span>
               </Link>
             ))}
           </div>
@@ -178,7 +169,7 @@ function DecisionDiscoveryFallback({ locale }: { locale: SupportedLocale }) {
   return (
     <section id="decide" className="border-y border-stone-200 bg-[var(--surface-paper)] py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="text-sm font-semibold text-[#a64631]">
+        <p className="text-sm font-semibold text-[var(--tomato)]">
           {locale === "zh-CN" ? "今晚的决定" : "Decide tonight"}
         </p>
         <p className="mt-2 text-2xl font-bold text-stone-950">

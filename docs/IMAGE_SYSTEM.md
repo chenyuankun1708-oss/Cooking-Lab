@@ -144,21 +144,19 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 - `fill` 配合稳定 aspect-ratio 容器，避免 layout shift
 - card sizes：mobile `100vw`，tablet `50vw`，desktop `33vw/25vw`
 - detail hero sizes：mobile `100vw`，desktop 最大约 `64rem`
-- homepage Living Hero：只有确定性的首张番茄炒蛋图片使用 `100vw` 并 preload
-- Hero 初始只挂载当前图和下一张 lazy image；后续图片随序列推进或手动选择再挂载，不一次请求全部五张大图
-- 图片切换前必须确认实际像素已经加载；慢图或失败图继续保留上一张和稳定深色底，不闪白、不改变 Hero 高度
+- homepage static Hero：只有确定性的第一张图片使用响应式 sizes 并 preload
 - detail hero 作为当前页面 LCP 候选使用 `preload`
 - card 图片不 preload，保持默认 lazy loading
 - 不使用已被 Next 16 文档替代的全局 `priority` 策略
 - 本地 WebP/AVIF 交给 Next Image Optimization，不添加自定义 loader
 
-Living Hero 的五道料理全部来自当前 published set 并继续使用同一 image registry、focal point、source、author、license 和 attribution。韩式拌饭的 `focalPoint.x` 调整为 `0.34`，让移动端窄裁切保留碗主体；没有为单张图增加 CSS 特判。
+首页候选料理全部来自当前 published set 并继续使用同一 image registry、focal point、source、author、license 和 attribution。M9 页面只展示第一项，不再挂载或预取隐藏的大图。
 
 ## Fallback
 
 无 `heroImageId`、引用缺失或浏览器加载失败时，`RecipeImage` 显示固定比例的暖中性色 fallback、Recipe 首字和 cuisine label。fallback 不改变周围布局，也不会用无来源的默认 food photo 冒充菜品。
 
-当前 10 道 Recipe 具备已审核 hero 并进入公开集合。Fallback 仍是图片组件的容错能力，但其余 90 道无已审核 hero 的 Recipe 保持 draft，不会因为存在 fallback 就自动公开。
+当前 34 道 Recipe 具备已审核 Hero 并进入公开集合。Fallback 仍是图片组件的容错能力，但其余 66 道无完整发布审校的 Recipe 保持 draft，不会因为存在 fallback 就自动公开。
 
 ## Validation
 
@@ -223,4 +221,6 @@ Issue #30 再次逐张检查这 10 张图片的本地文件、授权记录、alt
 
 Issue #40 新增 16 张 native CulinaryItem hero，全部从具体 Wikimedia Commons file page 逐张核验，并保存 author、source URL、exact CC license URL、attribution、alt、尺寸与 focal point。served assets 统一为 `public/images/culinary/{slug}/hero.webp` 下的 1500 x 1000 WebP；原始下载文件不进入仓库。
 
-`validateImageAssets()` 同时接受 recipe 与 culinary 两种本地路径，`validateCulinaryImageReferences()` 检查 primary role、ID 完整性和 slug 对齐。统一 publishing context 还注入本地文件存在性检查。当前共 26 / 26 个统一公开条目有合格 hero，但现有 Recipe Web 页面仍只消费原有 10 张 Recipe 图片。
+`validateImageAssets()` 同时接受 recipe 与 culinary 两种本地路径，`validateCulinaryImageReferences()` 检查 primary role、ID 完整性和 slug 对齐。统一 publishing context 还注入本地文件存在性检查。当前共 50 / 50 个统一公开条目有合格 Hero，统一目录和详情都消费同一图片边界。
+
+M9 新增 24 张 Recipe Hero，统一保存为 `public/images/recipes/{slug}/hero.webp` 的 1500 x 1000 WebP，并在 `data/m9-recipe-images.ts` 记录原始文件页、作者、精确许可、attribution 与改编状态。图片审核判断“能否诚实代表当前家庭版本”，而不是要求照片证明具体加热技法；与传统版本存在视觉差异的条目必须在名称或描述中明确家庭改编。图片来源只负责视觉资产权利和画面匹配，不能替代 Recipe identity、preparation 或文化主张的文字 Evidence。

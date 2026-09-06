@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Noto_Sans_SC, Noto_Serif_SC } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
@@ -6,6 +7,20 @@ import { isSupportedLocale } from "@/lib/localization";
 import { getMessages } from "@/lib/messages";
 import { SITE_DESCRIPTIONS, SITE_NAME, SITE_URL } from "@/lib/site";
 import { supportedLocales, type SupportedLocale } from "@/types/localization";
+
+const bodyFont = Noto_Sans_SC({
+  variable: "--font-body",
+  weight: "variable",
+  display: "swap",
+  preload: false,
+});
+
+const displayFont = Noto_Serif_SC({
+  variable: "--font-display",
+  weight: "variable",
+  display: "swap",
+  preload: false,
+});
 
 export function generateStaticParams() {
   return supportedLocales.map((locale) => ({ locale }));
@@ -18,7 +33,7 @@ export default async function RootLayout({ children, params }: { children: React
   const locale: SupportedLocale = value;
   const messages = getMessages(locale);
   return (
-    <html lang={locale}>
+    <html className={`${bodyFont.variable} ${displayFont.variable}`} lang={locale}>
       <body>
         <a className="skip-link" href="#main-content">{messages.skip}</a>
         {children}

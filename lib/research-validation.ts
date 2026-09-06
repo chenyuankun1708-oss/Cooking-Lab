@@ -1,5 +1,7 @@
 import { claimKinds, sourceTypes, type Evidence, type Source } from "@/types/culinary";
 import {
+  researchSourceUses,
+  researchSubjectTypes,
   researchTemplateIds,
   sourceRejectionReasons,
   type ResearchRecord,
@@ -25,6 +27,7 @@ const catalogReuseValues = new Set(["allowed", "prohibited", "item-specific-revi
 const catalogObligationValues = new Set(["required", "not-required", "item-specific-review"]);
 const researchStatuses = new Set(["in-progress", "ready-for-editorial-review", "publication-candidate", "closed"]);
 const claimDispositions = new Set(["include", "exclude", "defer"]);
+const publicationGateStatuses = new Set(["publication-candidate", "closed"]);
 
 export function validateSourceCatalog(entries: readonly SourceCatalogEntry[]): ResearchValidationIssue[] {
   const issues: ResearchValidationIssue[] = [];
@@ -98,6 +101,12 @@ function validateResearchRecord(
   const report = (field: string, message: string) => issues.push({ entityId, field, message });
 
   if (!isSlug(record.id)) report("id", "ResearchRecord ID 必须使用 kebab-case");
+  if (!record.subject || !researchSubjectTypes.includes(record.subject.type)) {
+    report("subject.type", "ResearchRecord subject 必须是 culinary-item 或 story");
+  }
+  if (!record.subject || !isSlug(record.subject.id)) {
+    report("subject.id", "ResearchRecord subject ID 必须使用 kebab-case");
+  }
   if (!researchTemplateIds.includes(record.templateId)) report("templateId", "未知 research template");
   if (!record.question.trim()) report("question", "Research question 不能为空");
   if (!record.sourceDecisions.length) report("sourceDecisions", "ResearchRecord 必须记录 candidate source decisions");
@@ -120,6 +129,18 @@ function validateResearchRecord(
       if (!sourceIds.has(decision.sourceId)) report(`sourceDecisions.${index}.sourceId`, "Accepted decision 引用了不存在的 Source");
       if (acceptedSourceIds.has(decision.sourceId)) report(`sourceDecisions.${index}.sourceId`, "Accepted Source reference 重复");
       acceptedSourceIds.add(decision.sourceId);
+      if (!Array.isArray(decision.uses) || !decision.uses.length) {
+        report(`sourceDecisions.${index}.uses`, "Accepted decision 必须标记至少一种 source use");
+      } else {
+        if (new Set(decision.uses).size !== decision.uses.length) {
+          report(`sourceDecisions.${index}.uses`, "Accepted decision 的 source uses 不能重复");
+        }
+        decision.uses.forEach((use) => {
+          if (!researchSourceUses.includes(use)) {
+            report(`sourceDecisions.${index}.uses`, `未知 source use: ${use}`);
+          }
+        });
+      }
     } else if (decision.disposition === "rejected") {
       if (!decision.candidateName.trim()) report(`sourceDecisions.${index}.candidateName`, "Rejected candidate name 不能为空");
       if (!sourceRejectionReasons.includes(decision.reason)) report(`sourceDecisions.${index}.reason`, "未知 source rejection reason");
@@ -129,6 +150,9 @@ function validateResearchRecord(
     }
   });
   if (!acceptedSourceIds.size) report("sourceDecisions", "ResearchRecord 必须至少接受一个 Source");
+  if (publicationGateStatuses.has(record.status) && acceptedSourceIds.size < 2) {
+    report("sourceDecisions", "Publication candidate 或 closed ResearchRecord 必须接受至少两个独立 Source");
+  }
 
   const claimIds = new Set<string>();
   record.claims.forEach((claim, index) => {

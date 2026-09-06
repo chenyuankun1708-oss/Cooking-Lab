@@ -8,17 +8,17 @@
 
 M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展成一个更像“小型世界料理地图”的结构化内容体系。
 
-当前总量：100 道 structured recipes，其中 10 道 published recipes；另有 16 个 native CulinaryItem，与 adapted Recipe 组成 26 项统一公开料理库。Recipe coverage 见 `docs/RECIPE_COVERAGE.md`，新库组合见 `docs/CULINARY_PORTFOLIO.md`。
+当前总量：100 道 structured recipes，其中 34 道 published recipes；另有 16 个 native CulinaryItem，与 adapted Recipe 组成 50 项统一公开料理库。Recipe coverage 见 `docs/RECIPE_COVERAGE.md`，统一库组合见 `docs/CULINARY_PORTFOLIO.md`。
 
 ## Publishing Strategy
 
 结构完整不等于内容已经适合公开。Recipe 使用 `draft / reviewed / published` 表达人工编辑状态，确定性 eligibility 另行检查 schema、计算、时间、hero、授权、alt、步骤完整性与 culture provenance。只有 `published` 且 eligibility 通过的 Recipe 才进入公开首页、目录、推荐和详情。
 
-当前初始公开集只包含 10 道已有合法 hero 且完成逐道内容深化的 Recipe。其余 90 道继续保留，不为了公开数量降低图片或步骤质量。
+当前公开集包含 34 道具备合法 Hero 且完成逐道内容深化的 Recipe。M9 新增的 24 道还必须具备 closed ResearchRecord 和至少两个独立 accepted Source；其余 66 道继续保留 draft，不为了公开数量降低图片、步骤或来源质量。
 
 ## Localization Publishing Strategy
 
-公开语言也是 publication gate。`zh-CN` 与 `en` 可以有不同完成状态；consumer 页面只发布关键 editorial copy 已完整 review 的 locale，不在英文页面回退中文。当前 10 道 published Recipe、16 个 native CulinaryItem 与 6 篇 Story 均完成英文审校，90 道 draft Recipe 不批量翻译。
+公开语言也是 publication gate。`zh-CN` 与 `en` 可以有不同完成状态；consumer 页面只发布关键 editorial copy 已完整 review 的 locale，不在英文页面回退中文。当前 34 道 published Recipe、16 个 native CulinaryItem 与 6 篇嵌入式 Story 均完成英文审校，66 道 draft Recipe 不批量翻译。
 
 翻译必须保持料理动作自然、计量语义准确，并维持 Story Claim 的 certainty。Source 正式题名与 locator value 不为界面一致性随意改写；只本地化 UI label。新增 locale 或内容时继续遵循 `research -> editorial review -> locale completeness -> publication`，不使用 AI 翻译结果直接发布。
 
@@ -273,7 +273,7 @@ Issue #40 不再按“再加多少道菜”衡量内容扩张，而是同时审�
 
 生产 Story 只在 claim 能连接具体 Evidence/Source 时出现。Preparation 文案必须使用状态与完成信号，必要浸泡、冷藏或静置计入 total time；成品酒使用 serving guidance，不写假的 cooking steps。dish/dessert 保持 nutrition/cost 门禁，plain tea 与成品酒可使用明确的 `not-modeled` applicability。
 
-统一 public boundary 由 `getPublishedCulinaryItems()` 提供，但当前 Web 仍使用原有 10 个 published Recipe。内容模型可以先丰富，UI 不必在 #40 展示所有字段或提前进入 #41/#42/#43。
+统一 public boundary 由 `getPublishedCulinaryItems()` 提供。M9 的目录、统一详情、Story redirect 与 Pairing 已切换到该边界；首页推荐仍有意只消费可执行 published Recipe，避免把成品饮品或无消费者制作步骤的内容送入 Recipe 条件引擎。
 
 ## M6 Story Reading Strategy
 

@@ -22,6 +22,7 @@ export const researchExerciseEvidence = culinaryEvidence.filter(({ id }) => exer
 export const researchExercises = [
   {
     id: "dongpo-pork-attribution-exercise",
+    subject: { type: "story", id: "dongpo-pork-name-and-attribution" },
     templateId: "historical-person-attribution",
     question: "苏轼是否真的发明了东坡肉？",
     sourceDecisions: [
@@ -29,6 +30,7 @@ export const researchExercises = [
         id: "accept-wu-study",
         disposition: "accepted",
         sourceId: "wu-dongpo-pork-study",
+        uses: ["identity", "culture"],
         rationale: "The historical study directly examines naming, chronology, and the later spread of the attribution.",
       },
       {
@@ -51,10 +53,11 @@ export const researchExercises = [
     editorialDecision: "Safe wording must present the Su Shi connection as an attribution with contested direct invention, not as settled fact.",
     reviewer: "Cooking Lab editorial",
     reviewedAt: "2026-09-05",
-    status: "closed",
+    status: "ready-for-editorial-review",
   },
   {
     id: "tomyum-kung-culture-exercise",
+    subject: { type: "story", id: "tomyum-kung-documented-practice" },
     templateId: "story-culture",
     question: "冬阴功的历史与地区饮食背景可以可靠写到什么程度？",
     sourceDecisions: [
@@ -62,6 +65,7 @@ export const researchExercises = [
         id: "accept-unesco-tomyum",
         disposition: "accepted",
         sourceId: "unesco-tomyum-kung",
+        uses: ["identity", "culture"],
         rationale: "The official inscription record identifies the recognized practice and its submitted community context.",
       },
       {
@@ -84,10 +88,11 @@ export const researchExercises = [
     editorialDecision: "Publishable context may describe the documented tradition and inscription, but should not claim an exclusive origin or exact invention date.",
     reviewer: "Cooking Lab editorial",
     reviewedAt: "2026-09-05",
-    status: "closed",
+    status: "ready-for-editorial-review",
   },
   {
     id: "espresso-development-exercise",
+    subject: { type: "story", id: "espresso-developed-through-stages" },
     templateId: "coffee",
     question: "Espresso 应被描述为一次发明，还是持续演进的设备与冲煮体系？",
     sourceDecisions: [
@@ -95,12 +100,14 @@ export const researchExercises = [
         id: "accept-smithsonian-espresso",
         disposition: "accepted",
         sourceId: "smithsonian-espresso-machine-history",
+        uses: ["identity", "culture"],
         rationale: "The edited historical overview identifies multiple technical contributors and stages.",
       },
       {
         id: "accept-sca-espresso",
         disposition: "accepted",
         sourceId: "sca-changing-espresso-definition",
+        uses: ["preparation", "culture"],
         rationale: "The professional organization documents variation in present-day definitions and parameters.",
       },
       {

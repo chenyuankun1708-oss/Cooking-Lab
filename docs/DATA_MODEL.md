@@ -2,19 +2,19 @@
 
 ## M6 Model Boundary
 
-现有 100 道配方仍以 `Recipe` 为 source of truth。Issue #38 新增 `CulinaryItem` shared base + discriminated union、locale-based Translation、Story/Claim、Source/Evidence 与 Pairing signals contract，并提供 Recipe -> DishItem 的只读 adapter；它没有建立第二份 100 条静态数据。Issue #40 在 `data/culinary/` 增加 16 个原生内容条目，并由 `data/published-culinary-items.ts` 把 10 个 published Recipe 的 adapter 投影与原生条目组合成 26 项统一 public boundary。
+现有 100 道配方仍以 `Recipe` 为 source of truth。Issue #38 新增 `CulinaryItem` shared base + discriminated union、locale-based Translation、Story/Claim、Source/Evidence 与 Pairing signals contract，并提供 Recipe -> DishItem 的只读 adapter；它没有建立第二份 100 条静态数据。M9 由 `data/published-culinary-items.ts` 把 34 个 published Recipe 的 adapter 投影与 16 个原生条目组合成 50 项统一 public boundary。
 
 `RecipePublicationStatus` 现在复用共享 `PublicationStatus`，`SupportedLocale / LocalizedLabel` 也从共享 localization contract re-export，因此现有 imports 与行为不变。完整 schema、类型限制、迁移矩阵和 persistence boundary 见 `docs/CULINARY_KNOWLEDGE_MODEL.md`。
 
 M6 provenance contract 不要求 Source 拥有 URL。每个 Source 必须至少包含一种可重新定位的 locator：HTTPS URL、DOI、ISBN、archive/catalog identity 或 physical citation；书籍、手稿、印刷期刊和馆藏可以完全离线。Evidence 的 page/chapter/section/paragraph/timestamp/folio locator 只负责 Source 内部的精确位置。
 
-Issue #39 增加 `Source.health` 观察状态与轻量 `ResearchRecord`。health 记录可达性/迁移/取代/权利变化，不是可信度；ResearchRecord 保存 accepted/rejected source decisions、considered claims、unresolved questions、reviewer/date 和 editorial decision。Open-license rights 必须显式记录 exact license、attribution、adaptation status 与 share-alike requirement。`data/research/*` 是流程验证与 evaluated catalog，不进入当前 production Recipe/Story 数据源。
+Issue #39 增加 `Source.health` 观察状态与轻量 `ResearchRecord`。health 记录可达性/迁移/取代/权利变化，不是可信度；ResearchRecord 保存 subject、accepted/rejected source decisions、用途、considered claims、unresolved questions、reviewer/date 和 editorial decision。Open-license rights 必须显式记录 exact license、attribution、adaptation status 与 share-alike requirement。M9 的 24 道新增 Recipe 通过 `data/research/m9-recipe-research.ts` 关联 closed ResearchRecord 与 accepted Source，消费者详情只投影题名、出版者、链接和用途，不暴露内部评估字段。
 
 `CulinaryItem` 不保存无语义的 generic evidence ID 列表。当前 factual provenance 只通过 `Story Claim -> Evidence -> Source` 表达；未来只有在出现明确的 item field assertion 用例后才增加窄 `ItemClaim`。
 
 Issue #41 将 `StoryCopy` 明确为 `title + dek + non-empty sections`，并为 Story 增加独立 `publication.status`。Domain Story 仍保存 claim、Evidence 与 related entity ID；消费者页面不直接读取这些 registry，而由 application helper 投影为 title、正文、claim-aware explanation、context labels、相关公开内容与克制的 source citation。该 view model 不包含内部 reliability、rights、health、Evidence strength、ID 或 editorial note。
 
-路由身份不写回 domain object：10 个 adapted Recipe 仍使用 `/recipes/[slug]`，16 个 native item 使用 `/culinary/[slug]`，6 篇 Story 使用 `/stories/[slug]`。这避免同一个 Recipe 出现两个 canonical URL，也不创建新的持久化字段。
+路由身份不写回 domain object：全部 50 个 public CulinaryItem 使用 `/recipes/[slug]` 作为唯一 canonical consumer URL。旧 `/culinary/[slug]` 永久重定向到对应料理；Story 列表重定向到 `recipes?story=available`，Story detail 重定向到统一详情的 Story anchor。这避免同一内容存在多个 canonical URL，也不创建新的持久化字段。
 
 Issue #42 不改变这些 domain identities，只在 Web route 外层增加 `/zh-CN` 与 `/en`。UI chrome 使用 typed message dictionary；公开 editorial translation 使用 locale-keyed reviewed entries。通用 `resolveTranslation` 可以服务编辑/迁移场景，但 consumer publication 使用 strict reviewed lookup，英文缺失时不回退中文。`RecommendationResult` 不再保存展示句子或本地化名称，只保存 criterion、reason、IDs、metrics 与 score breakdown；Web display adapter 按 locale 生成解释。
 
@@ -82,9 +82,9 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 
 `validateIngredients`、`validateRecipes` 与 `validateImageAssets` 分别负责静态实体规则；`validateDataset` 组合三者并检查完整 Ingredient/Recipe/Image 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性、图片授权 metadata 及跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
 
-`evaluateRecipePublishingEligibility` 是更窄的发布 gate：在 Recipe validation 之外验证 nutrition/cost completeness、hero/license/local asset/alt、公开步骤信息量和事实性 culture provenance。更深的 sensory cue、doneness、失败预防与 food accuracy 仍由人工 editorial review 决定，不使用脆弱 NLP 规则自动盖章。当前 public adapter 暴露 10 道 published Recipe，静态详情参数也只有 10 个。
+`evaluateRecipePublishingEligibility` 是更窄的发布 gate：在 Recipe validation 之外验证 nutrition/cost completeness、hero/license/local asset/alt、公开步骤信息量和事实性 culture provenance。M9 额外要求新增 published Recipe 具备 closed ResearchRecord、至少两个独立 accepted Source、完整英文审校与 4–6 个可执行步骤。更深的 sensory cue、doneness、失败预防与 food accuracy 仍由人工 editorial review 决定，不使用脆弱 NLP 规则自动盖章。当前 public adapter 暴露 34 道 published Recipe。
 
-`evaluateCulinaryItemPublishingEligibility` 按 item type 执行统一门禁：所有公开条目需要已审核默认语言、可解析 taxonomy/pairing、合法 primary image 和可达 Story provenance；procedural item 还需完整 ingredient 引用、类型对应的最少步骤和料理 rationale。dish/dessert 必须具备 nutrition 与 cost model；plain tea 和成品酒可以诚实使用 `not-modeled`，成品酒以 serving guidance 发布，不编造 cooking steps。`getPublishedCulinaryItems()` 是 26 项统一读取边界，但当前 Recipe 页面、推荐、相近料理与 SSG 仍继续读取原有 10-item Recipe public source。
+`evaluateCulinaryItemPublishingEligibility` 按 item type 执行统一门禁：所有公开条目需要已审核默认语言、可解析 taxonomy/pairing、合法 primary image 和可达 Story provenance；procedural item 还需完整 ingredient 引用、类型对应的最少步骤和料理 rationale。dish/dessert 必须具备 nutrition 与 cost model；plain tea 和成品酒可以诚实使用 `not-modeled`，成品酒以 serving guidance 或无需消费者制作发布，不编造 cooking steps。`getPublishedCulinaryItems()` 是 50 项统一读取边界，只有推荐引擎继续使用 Recipe-only public source。
 
 ## Recommendation
 

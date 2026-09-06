@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { SupportedLocale } from "@/types/localization";
 import { getAlternateLocale, getLocalizedPath, replacePathLocale } from "@/lib/localization";
 import { getMessages } from "@/lib/messages";
-import { BETA_FEEDBACK_URL } from "@/lib/site";
 
 export function SiteHeader({ active, inverse = false, locale, currentPath, query }: { active?: "home" | "recipes" | "stories"; inverse?: boolean; locale: SupportedLocale; currentPath: string; query?: string }) {
   const textClass = inverse ? "text-white" : "text-stone-950";
@@ -11,7 +10,7 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
   const alternate = getAlternateLocale(locale);
 
   return (
-    <header className={`relative z-20 border-b ${inverse ? "border-white/25" : "border-stone-200 bg-[#fbfaf6]"}`}>
+    <header className={`relative z-20 border-b ${inverse ? "border-white/25" : "border-[var(--line)] bg-[var(--surface-paper)]"}`}>
       <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-5 px-4 sm:px-6">
         <Link className={`focus-ring inline-flex min-h-11 shrink-0 items-center text-base font-bold ${textClass}`} href={getLocalizedPath(locale)}>
           Cooking Lab
@@ -24,15 +23,12 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
           <Link aria-current={active === "recipes" ? "page" : undefined} className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center hover:underline" href={getLocalizedPath(locale, "/recipes")}>
             {messages.nav.recipes}
           </Link>
-          <Link aria-current={active === "stories" ? "page" : undefined} className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center hover:underline" href={getLocalizedPath(locale, "/stories")}>
-            {messages.nav.stories}
+          <Link className="focus-ring hidden min-h-11 items-center hover:underline md:inline-flex" href={`${getLocalizedPath(locale)}#decide`}>
+            {messages.nav.decide}
           </Link>
-          <a className="focus-ring hidden min-h-11 items-center hover:underline lg:inline-flex" href={BETA_FEEDBACK_URL} rel="noreferrer" target="_blank">
-            {messages.nav.feedback}
-          </a>
           <Link
             aria-label={messages.locale.switchLabel}
-            className={`focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border px-2 ${inverse ? "border-white/55 text-white" : "border-stone-300 text-stone-800"}`}
+            className={`focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-[4px] border px-2 ${inverse ? "border-white/55 text-white" : "border-stone-300 text-stone-800"}`}
             href={replacePathLocale(currentPath, alternate, query)}
             hrefLang={alternate}
             lang={alternate}

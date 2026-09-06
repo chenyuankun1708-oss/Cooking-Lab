@@ -1,6 +1,8 @@
 import type { SupportedLocale, TranslationSet } from "@/types/localization";
 import type { Recipe } from "@/types/recipe";
 import { resolveReviewedTranslation } from "@/lib/localization";
+import { m9PublicRecipeTranslationsBatchA } from "./m9-public-recipes-batch-a";
+import { m9PublicRecipeTranslationsBatchB } from "./m9-public-recipes-batch-b";
 
 export interface RecipeEditorialCopy {
   name: string;
@@ -15,6 +17,8 @@ const en = (value: RecipeEditorialCopy): TranslationSet<RecipeEditorialCopy> => 
 });
 
 export const publishedRecipeTranslations: Readonly<Record<string, TranslationSet<RecipeEditorialCopy>>> = Object.freeze({
+  ...m9PublicRecipeTranslationsBatchA,
+  ...m9PublicRecipeTranslationsBatchB,
   "tomato-scrambled-eggs": en({
     name: "Tomato and Scrambled Eggs",
     description: "Cook the eggs and tomatoes in stages for tender curds and a naturally sweet-tart sauce.",

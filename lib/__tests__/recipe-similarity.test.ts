@@ -97,7 +97,7 @@ describe("recipe similarity core", () => {
     const results = rankSimilarRecipes(tomatoEggs, published, { ingredients });
     expect(results.length).toBeGreaterThan(0);
     expect(results.every(({ recipe }) => recipe.publication.status === "published")).toBe(true);
-    expect(published).toHaveLength(10);
+    expect(published).toHaveLength(34);
     expect(recipes).toHaveLength(100);
   });
 });
@@ -111,13 +111,13 @@ describe("current published similarity semantics", () => {
   it("connects tofu and fermented savoriness without grouping every Chinese dish", () => {
     const slugs = rankSimilarRecipes(bySlug("home-mapo-tofu"), published, { ingredients })
       .map(({ recipe }) => recipe.slug);
-    expect(slugs).toContain("japanese-miso-tofu-soup");
+    expect(slugs).toContain("korean-tofu-stew-home");
     expect(slugs).not.toContain("tomato-scrambled-eggs");
   });
 
-  it("connects soup, noodle, fresh-spicy, and cold-dish anchors for meaningful reasons", () => {
-    expect(similarSlugs("japanese-miso-tofu-soup")).toContain("vietnamese-beef-noodle-soup-home");
-    expect(similarSlugs("thai-basil-chicken")).toContain("korean-bibimbap-home");
+  it("connects soup, poultry, fresh-spicy, and cold-dish anchors for meaningful reasons", () => {
+    expect(similarSlugs("japanese-miso-tofu-soup")).toContain("korean-tofu-stew-home");
+    expect(similarSlugs("thai-basil-chicken")).toContain("malaysian-turmeric-chicken");
     expect(similarSlugs("sichuan-smashed-cucumber")).toContain("lebanese-hummus-plate");
   });
 

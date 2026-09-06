@@ -2,15 +2,15 @@
 
 ## Source of truth
 
-- Status: Active through Issue #67
+- Status: Active through M9 Epic #69
 - Last refreshed: 2026-09-06
 - Primary product surfaces:
   - consumer homepage
-  - recipe catalog
-  - recipe detail
-  - story catalog and reading pages
-  - native CulinaryItem detail
+  - unified culinary library
+  - unified culinary detail
+  - embedded story and recognition chapters
   - recommendation entry and result presentation
+  - deterministic pairing
 - Evidence reviewed:
   - `docs/PRODUCT.md`
   - `docs/BRAND_BRIEF.md`
@@ -28,6 +28,17 @@
   - Production URL: `https://cooking-lab-pied.vercel.app`
 
 ## Brand
+
+### M9 design read
+
+Reading this as a bilingual culinary decision and knowledge product for everyday home cooks and curious food explorers, with a food-first editorial language and a restrained laboratory sense of order.
+
+- Taste skill: `design-taste-frontend` v2, pinned from `Leonxlnx/taste-skill@ccbc15639c97057cbfcf32ecebc38ef716e4bb37`
+- `DESIGN_VARIANCE: 7`
+- `MOTION_INTENSITY: 3`
+- `VISUAL_DENSITY: 5`
+- Taste is a critique rubric, not the product source of truth. Accessibility, performance, factual integrity and this document override generic skill defaults.
+- M9 removes the separate consumer idea of Recipes versus Stories. A culinary item is the destination; method, serving guidance, nutrition, cultural context, recognition and sources are chapters of that item when applicable.
 
 - Personality:
   - warm
@@ -96,16 +107,19 @@
 
 - Primary navigation:
   - Home
-  - Recipes
-  - Stories
+  - Culinary library
+  - Tonight's choice
+  - Language
+- Footer utility:
   - Beta feedback
 - Core routes/screens:
   - `/{locale}`
   - `/{locale}/recipes`
   - `/{locale}/recipes/[slug]`
-  - `/{locale}/stories`
-  - `/{locale}/stories/[slug]`
-  - `/{locale}/culinary/[slug]` for native CulinaryItems only
+  - `/{locale}/pairing/[slug]`
+  - `/{locale}/stories` redirects to `/{locale}/recipes?story=available`
+  - `/{locale}/stories/[slug]` redirects to the corresponding story anchor within the culinary detail
+  - `/{locale}/culinary/[slug]` redirects permanently to the canonical recipe route
 - Content hierarchy:
   - appetite first
   - decision prompt second
@@ -114,12 +128,12 @@
 
 ### Implemented route decisions
 
-- `/{locale}` follows: food hero -> tonight inspiration -> progressive cooking decision -> cuisine exploration -> stories -> technique exploration -> estimate note.
+- `/{locale}` follows: food hero -> progressive cooking decision -> representative culinary items -> cuisine and technique exploration -> estimate note.
 - `/{locale}/recipes` is a server-rendered exploration page. Search and filters are URL-based and derive their options from canonical taxonomy.
-- `/{locale}/recipes/[slug]` follows: hero -> identity and key facts -> ingredients -> steps and reasons -> principles -> secondary estimates -> optional cultural context -> nearby recipe discovery.
-- `/{locale}/stories` is a compact editorial discovery surface; `/{locale}/stories/[slug]` prioritizes reading, related exploration and restrained sources.
-- `/{locale}/culinary/[slug]` is the destination for native items linked from Stories. Adapted Recipes keep `/{locale}/recipes/[slug]` as their only canonical URL.
-- Navigation remains limited to Home, Recipes, Stories, and Beta feedback. Technique discovery remains a homepage section rather than a competing primary route.
+- `/{locale}/recipes/[slug]` follows: identity and tags -> type-correct preparation or serving guidance -> principles and state cues -> embedded story or recognition -> nutrition and cost -> sources -> pairing.
+- Stories are not a parallel content type in navigation. They remain structured domain objects and appear as chapters of the culinary item they explain.
+- Every public culinary item uses `/{locale}/recipes/[slug]` as its canonical consumer URL. Legacy culinary and story routes only preserve inbound links through permanent redirects.
+- Navigation remains limited to Home, Culinary library, Tonight's choice, and Language. Beta feedback stays in the Footer.
 
 ## Design principles
 
@@ -138,28 +152,28 @@
 ## Visual language
 
 - Color:
-  - semantic surfaces: warm canvas, paper content, herb knowledge, amber story, restrained cocoa for alcoholic-drink introductions
-  - fresh produce-led accents
-  - dark text with strong contrast
-  - restrained success/warning states
+  - neutral rice-white canvas and paper surfaces
+  - true ink text and cool neutral rules
+  - one chili-red interaction and editorial accent per page
+  - food photography supplies the wider color range; UI chrome does not compete with it
 - Typography:
-  - modern humanist or neo-grotesk body text
-  - display typography with editorial personality
+  - Noto Sans SC for body and interface text
+  - Noto Serif SC for display headings where editorial hierarchy matters
+  - headline wrapping is explicitly controlled; desktop hero and catalog titles stay within two lines
   - numeric metrics use a quieter, compact style
 - Spacing/layout rhythm:
   - generous section spacing
   - tighter spacing inside cards
   - strong vertical rhythm for mobile scrolling
 - Shape/radius/elevation:
-  - cards and framed content use a maximum 8 px radius
-  - pills are reserved for filter choices and segmented controls
-  - low elevation appears only on interactive recipe cards
-  - image containers should feel tactile, not glassy
+  - editorial images and content groups are primarily square or 4 px
+  - pills are reserved for filters and status tags
+  - cards use rules and whitespace rather than repeated floating white boxes
+  - shadows are exceptional and never the primary hierarchy device
 - Motion:
-  - subtle fade and rise
-  - small hover states on cards
+  - CSS-only tactile hover and active states
+  - no autoplay hero in M9
   - reduced motion support by default
-  - homepage Hero rotates every 7 seconds with a 700 ms image crossfade; hover, focus, hidden documents, and reduced-motion preferences pause or disable automatic movement
 - Imagery/iconography:
   - editorial food-first photography as the primary visual language
   - modern culinary studio details as a secondary layer on recipe detail and knowledge surfaces
@@ -174,7 +188,9 @@
   - existing footer, disclaimers, and metadata patterns
 - New/changed components:
   - `SiteHeader` and `HomeHero`
-  - `HomeHeroCarousel` as the small client-only rotation boundary inside the server-rendered homepage
+  - static editorial Hero with one preloaded LCP image and no automatic carousel
+  - `CulinaryCard` and `NativeCulinaryDetailPage` as cross-type consumer surfaces
+  - `EmbeddedStories` for evidence-backed cultural and recognition chapters
   - visual-first catalog and recommendation card variants
   - lightweight similar-recipe cards with image, flavor, natural reason, and human cooking time
   - homepage inspiration, cuisine, and technique sections
@@ -195,7 +211,7 @@
   - WCAG 2.2 AA for contrast, focus, sizing, and navigation
 - Keyboard/focus behavior:
   - homepage quick filters and cards must remain keyboard reachable
-  - Hero previous, next, and position controls are 44 px buttons with recipe-specific accessible labels
+  - all interactive targets, including source and attribution links, provide at least 44 px touch height
   - focus rings need visible contrast on image-heavy layouts
 - Contrast/readability:
   - avoid low-contrast beige-on-beige combinations
@@ -206,7 +222,7 @@
 - Reduced motion and sensory considerations:
   - no essential meaning in animation
   - gentle transitions only
-  - reduced motion keeps manual Hero controls but disables automatic rotation and image transitions
+  - reduced motion removes non-essential transitions; the static Hero requires no motion-specific control
 
 ## Responsive behavior
 

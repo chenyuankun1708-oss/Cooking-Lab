@@ -28,6 +28,17 @@ export type SourceRejectionReason = (typeof sourceRejectionReasons)[number];
 export type CatalogReuseDecision = "allowed" | "prohibited" | "item-specific-review";
 export type CatalogObligation = "required" | "not-required" | "item-specific-review";
 
+export const researchSubjectTypes = ["culinary-item", "story"] as const;
+export type ResearchSubjectType = (typeof researchSubjectTypes)[number];
+
+export interface ResearchSubject {
+  type: ResearchSubjectType;
+  id: string;
+}
+
+export const researchSourceUses = ["identity", "preparation", "safety", "culture", "award"] as const;
+export type ResearchSourceUse = (typeof researchSourceUses)[number];
+
 export interface SourceCatalogEntry {
   id: string;
   name: string;
@@ -52,6 +63,7 @@ export type ResearchSourceDecision =
       id: string;
       disposition: "accepted";
       sourceId: string;
+      uses: [ResearchSourceUse, ...ResearchSourceUse[]];
       rationale: string;
     }
   | {
@@ -74,6 +86,7 @@ export interface ResearchClaimAssessment {
 
 export interface ResearchRecord {
   id: string;
+  subject: ResearchSubject;
   templateId: ResearchTemplateId;
   question: string;
   sourceDecisions: ResearchSourceDecision[];

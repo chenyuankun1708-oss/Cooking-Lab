@@ -1,4 +1,5 @@
 import type { RecipeImage } from "@/types/image";
+import { m9RecipeImages } from "./m9-recipe-images";
 
 export const recipeImages: readonly RecipeImage[] = [
   {
@@ -165,4 +166,5 @@ export const recipeImages: readonly RecipeImage[] = [
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
     attribution: "Orenrosenfeld / Wikimedia Commons，裁切处理，CC BY-SA 4.0",
   },
+  ...m9RecipeImages,
 ];

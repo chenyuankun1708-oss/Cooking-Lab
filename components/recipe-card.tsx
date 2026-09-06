@@ -31,21 +31,21 @@ export function RecipeCard({
   const hasSpecificMatch = Object.keys(result.scoreBreakdown).length > 0;
 
   return (
-    <article className="group h-full min-w-0 overflow-hidden rounded-lg border border-stone-200 bg-white transition duration-200 hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-[0_12px_30px_rgba(41,37,31,0.09)]">
+    <article className="editorial-card group h-full min-w-0 pt-4">
       <Link
         aria-label={locale === "zh-CN" ? `查看 ${recipe.name}，${flavor}，${formatHumanCookingTime(recipe.cooking.totalTime, locale)}` : `View ${recipe.name}, ${flavor}, ${formatHumanCookingTime(recipe.cooking.totalTime, locale)}`}
-        className="focus-ring flex h-full flex-col rounded-lg focus:outline-none"
+        className="focus-ring flex h-full flex-col focus:outline-none"
         href={getLocalizedPath(locale, `/recipes/${recipe.slug}`, query)}
       >
         <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={recipe.name} alt={recipe.name} variant="card" />
-        <div className="flex flex-1 flex-col p-4 sm:p-5">
-          <p className="text-xs font-semibold text-[#a64631]">{cuisineAndTechnique}</p>
+        <div className="flex flex-1 flex-col pb-6 pt-4">
+          <p className="text-xs font-semibold text-[var(--tomato)]">{cuisineAndTechnique}</p>
           <h3 className="mt-2 text-xl font-bold leading-snug text-stone-950 group-hover:underline">{recipe.name}</h3>
-          {flavor ? <p className="mt-2 text-sm font-semibold text-[#235849]">{flavor}</p> : null}
+          {flavor ? <p className="mt-2 text-sm font-semibold text-stone-800">{flavor}</p> : null}
           <p className="mt-2 line-clamp-2 text-sm leading-6 text-stone-600">{recipe.description}</p>
 
           {variant === "recommendation" && hasSpecificMatch ? (
-            <p className="mt-4 border-l-2 border-[#e5bd53] pl-3 text-sm leading-6 text-stone-600">
+            <p className="mt-4 border-l-2 border-[var(--tomato)] pl-3 text-sm leading-6 text-stone-600">
               {buildRecommendationExplanation(result, locale)}
             </p>
           ) : null}

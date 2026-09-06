@@ -44,13 +44,15 @@ Translation 的 `reviewed` 与 publication 的 `published` 只表示工作流状
 
 包括权利或商业使用不明、可能大量复现受保护表达、官方授权或品牌关系、医疗健康主张、高风险食品工艺、重要事实冲突、未解决 reviewer disagreement、复杂 trademark/publicity/privacy 或 M10 专业法律 checkpoint。默认 BLOCK；只有对应类型的真人、领域专家或律师 checkpoint 可以解除可解除的风险。`unknown rights` 等 M10 硬阻断不能仅靠 human approval 解除。
 
+风险 reason code 本身也具有最低等级：任何 HIGH reason 都强制 HIGH，任何 MEDIUM reason 至少强制 MEDIUM。不得把高风险原因附在 LOW classification 上，再借 LOW agent 路径绕开相应 checkpoint。
+
 ## Sampling QA
 
 Sampling 不使用固定百分比。每批必须覆盖新增或改变的风险等价类：风险等级与原因、artifact kind、来源域、许可证、内容类型、图片来源、derivation、模型/prompt、营养或成本数据转换、翻译路径、餐厅身份、产品档案，以及外部媒体的平台、使用方式与隐私审查路径。Evidence 引用的 Source 必须闭包进入 artifact provenance、Source RightsAssessment、UsageDecision、fingerprint 和 sampling domain，不能靠省略 `artifact.sourceIds` 绕开。翻译路径至少区分 adapted Recipe、native CulinaryItem 与 standalone package。系统从真实 classified item 中使用确定性的 greedy set cover 选择能覆盖全部等价类的最小候选集合；这不是统计代表性声明，而是风险路径覆盖。新增 license、来源域、模型/prompt、转换或翻译路径会自然增加样本，持续出现 escape、disagreement 或 rework 则通过冻结规则将对应类提升到 100% review。
 
 每个等价类至少有一个真实 sampled item；每个 sampled item 必须留下逐项、全维度、带 verdict 与 findings 的 durable evidence，不能只用批次级 PASS 或虚假 item ID 满足覆盖。sampling auditor 必须与 author 及 primary reviewer 使用不同 actor/run/context。MEDIUM 的逐项双上下文审查不被 sampling 替代。
 
-出现 major finding 时冻结对应风险类，并把该类扩展为 100% re-review。只有完整复审且连续两个批次没有 major finding 后才可解除冻结。每批持续记录 escape count、reviewer disagreement、rework item count 和 provenance/license novelty。Escape 与 disagreement count 必须逐条对应 durable finding；已解决的 sampled-item finding 必须登记 rework item ID；novelty count 必须逐项列出此前未出现的来源、许可证、模型、转换、媒体、餐厅、产品或翻译 class key。计数与明细不一致会 fail closed，避免用全零指标伪装低风险批次。
+出现 major finding 时冻结对应风险类，并把该类扩展为 100% re-review。只有完整复审且连续两个批次没有 major finding 后才可解除冻结。每批持续记录 escape count、reviewer disagreement、rework item count 和 provenance/license novelty。Escape 与 disagreement count 必须逐条对应 durable finding；rework item IDs 必须精确等于带已解决 durable finding 的 reviewed item 集合，不能漏记或虚增；novelty count 必须逐项列出此前未出现的来源、许可证、模型、转换、媒体、餐厅、产品或翻译 class key。计数与明细不一致会 fail closed，避免用全零指标或无证据 rework 伪装低风险批次。
 
 ## Fail-closed enforcement
 

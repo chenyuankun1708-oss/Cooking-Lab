@@ -633,6 +633,20 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(registry)).toContain("high-risk-human-checkpoint");
   });
 
+  it("cannot attach a HIGH reason to a LOW classification to bypass the required checkpoint", () => {
+    const registry = readyRegistry();
+    registry.riskClassifications[0].reasonCodes = [
+      "clear-first-party-or-reference-only-rights",
+      "health-or-medical-claim",
+    ];
+    registry.riskClassifications[0].equivalenceClassKeys = deriveEquivalenceClassKeys(
+      items.find((item) => item.id === registry.riskClassifications[0].itemId)!,
+      context,
+      registry.riskClassifications[0],
+    ) as [string, ...string[]];
+    expect(issueCodes(registry)).toContain("under-classified-risk");
+  });
+
   it("keeps high risk blocked until an explicit non-agent human approval checkpoint", () => {
     const registry = readyRegistry();
     const classification = registry.riskClassifications[0];
@@ -782,6 +796,11 @@ describe("risk-based publishing governance", () => {
     disagreement.samplingBatches[0].metrics.reworkItemCount = 1;
     disagreement.samplingBatches[0].metrics.reworkItemIds = [sample.itemId];
     expect(issueCodes(disagreement)).not.toContain("sampling-metrics-invalid");
+
+    const overcounted = readyRegistry();
+    overcounted.samplingBatches[0].metrics.reworkItemCount = 1;
+    overcounted.samplingBatches[0].metrics.reworkItemIds = [overcounted.samplingBatches[0].itemIds[0]];
+    expect(issueCodes(overcounted)).toContain("sampling-metrics-invalid");
 
     const novelty = readyRegistry();
     novelty.samplingBatches[0].metrics.provenanceLicenseNoveltyCount = 0;

@@ -78,6 +78,24 @@ export interface PublishingGovernanceResult {
 }
 
 const riskRank: Record<PublishingRiskLevel, number> = { low: 0, medium: 1, high: 2 };
+const highRiskReasons = new Set<PublishingRiskReasonCode>([
+  "official-authorization-or-brand-relationship",
+  "health-or-medical-claim",
+  "food-safety-critical-process",
+  "unresolved-material-factual-conflict",
+  "complex-trademark-publicity-or-privacy",
+  "unresolved-reviewer-disagreement",
+  "professional-legal-checkpoint",
+]);
+const mediumRiskReasons = new Set<PublishingRiskReasonCode>([
+  "single-source-deep-adaptation",
+  "resolved-source-conflict",
+  "restaurant-reconstruction",
+  "product-profile",
+  "ai-generated-image",
+  "weak-image-fidelity",
+  "culinary-authenticity-judgment",
+]);
 
 export function createArtifactSetVersion(
   itemIds: readonly string[],
@@ -515,28 +533,18 @@ function validateRiskClassification(
   if (classification.equivalenceClassKeys.join(",") !== expectedClassKeys.join(",")) {
     report("stale-risk-classification", item.id, "Risk equivalence classes do not match current sources, licenses, content, images, AI, data transformations, and translations");
   }
-  const highReasons = new Set<PublishingRiskReasonCode>([
-    "official-authorization-or-brand-relationship",
-    "health-or-medical-claim",
-    "food-safety-critical-process",
-    "unresolved-material-factual-conflict",
-    "complex-trademark-publicity-or-privacy",
-    "unresolved-reviewer-disagreement",
-    "professional-legal-checkpoint",
-  ]);
-  const mediumReasons = new Set<PublishingRiskReasonCode>([
-    "single-source-deep-adaptation",
-    "resolved-source-conflict",
-    "restaurant-reconstruction",
-    "product-profile",
-    "ai-generated-image",
-    "weak-image-fidelity",
-    "culinary-authenticity-judgment",
-  ]);
-  if (classification.level === "high" && !classification.reasonCodes.some((reason) => highReasons.has(reason))) {
+  const reasonMinimumLevel = classification.reasonCodes.some((reason) => highRiskReasons.has(reason))
+    ? "high"
+    : classification.reasonCodes.some((reason) => mediumRiskReasons.has(reason))
+      ? "medium"
+      : "low";
+  if (riskRank[classification.level] < riskRank[reasonMinimumLevel]) {
+    report("under-classified-risk", item.id, `Declared ${classification.level} is below the ${reasonMinimumLevel} minimum required by its own risk reasons`);
+  }
+  if (classification.level === "high" && !classification.reasonCodes.some((reason) => highRiskReasons.has(reason))) {
     report("under-classified-risk", item.id, "HIGH risk requires an explicit high-risk reason code");
   }
-  if (classification.level === "medium" && !classification.reasonCodes.some((reason) => mediumReasons.has(reason))) {
+  if (classification.level === "medium" && !classification.reasonCodes.some((reason) => mediumRiskReasons.has(reason))) {
     report("under-classified-risk", item.id, "MEDIUM risk requires an explicit medium-risk reason code");
   }
 }
@@ -685,10 +693,13 @@ function validateSamplingBatch(
   if (batch.metrics.escapeCount !== expectedEscapeCount || batch.metrics.reviewerDisagreementCount !== expectedDisagreementCount) {
     report("sampling-metrics-invalid", batch.id, "Escape and reviewer-disagreement metrics must exactly match durable findings");
   }
-  for (const sample of batch.samples) {
-    if (sample.findings.some((finding) => finding.disposition === "resolved") && !reworkItemIds.has(sample.itemId)) {
-      report("sampling-metrics-invalid", `${batch.id}:${sample.itemId}`, "A resolved sampled-item finding must identify the reworked item");
-    }
+  const expectedReworkItemIds = new Set(
+    batch.samples
+      .filter((sample) => sample.findings.some((finding) => finding.disposition === "resolved"))
+      .map((sample) => sample.itemId),
+  );
+  if ([...expectedReworkItemIds].sort().join("\0") !== [...reworkItemIds].sort().join("\0")) {
+    report("sampling-metrics-invalid", batch.id, "Rework item IDs must exactly match sampled items with resolved durable findings");
   }
   const seenClassKeys = new Set<string>();
   if (new Set(batch.itemIds).size !== batch.itemIds.length) {

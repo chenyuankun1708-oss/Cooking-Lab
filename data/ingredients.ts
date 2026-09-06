@@ -5,7 +5,7 @@ const nutrition = (
   carbs: number, sugar: number, fiber: number, sodium: number, addedSugar = 0,
 ) => ({ calories, protein, fat, saturatedFat, carbs, sugar, fiber, sodium, addedSugar });
 
-const estimatedIngredients: Omit<Ingredient, "dataQuality">[] = [
+const estimatedIngredients: Omit<Ingredient, "dataQuality" | "nutritionProvenanceId" | "costProvenanceId">[] = [
   {
     id: "egg", name: "鸡蛋", aliases: ["蛋"], category: "protein",
     nutritionPer100g: nutrition(143, 12.6, 9.5, 3.1, 0.7, 0.4, 0, 142),
@@ -245,5 +245,7 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality">[] = [
 
 export const ingredients: Ingredient[] = estimatedIngredients.map((ingredient) => ({
   ...ingredient,
+  nutritionProvenanceId: `cooking-lab-editorial-nutrition-${ingredient.id}`,
+  costProvenanceId: "cooking-lab-cn-price-estimate-2026-09",
   dataQuality: "demo-estimated",
 }));

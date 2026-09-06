@@ -1,6 +1,8 @@
 # Source And Rights Policy
 
-最近更新：2026-09-05
+最近更新：2026-09-06
+
+> M10 的统一商业化门禁与细则以 `docs/CONTENT_RIGHTS_POLICY.md` 为准。本文件继续定义 Source / Evidence / ResearchRecord 的研究职责；旧 M6 publishing 结论不得绕过 M10 `ContentArtifact -> RightsAssessment -> UsageDecision`。
 
 ## Source Audit
 
@@ -98,3 +100,7 @@ AI-generated prose, search snippets and unattributed summaries are never Evidenc
 当前 6 个 production Story 使用 7 个具体 Source。每个 claim 只陈述来源能支持的窄事实或传统；东坡肉保留 disputed attribution，UNESCO 名录不被扩大为唯一 origin 证明，Espresso 明确为多阶段发展。Fino 的官方产区资料只支持酒花膜下生物熟成这一窄生产事实。
 
 没有可靠 source 的 item 不创建 Story。现代 preparation、Flavor 和服务说明可以作为原创编辑内容发布，但不得借空 Story、provider 首页或随意 URL 冒充文化 provenance。图片 license 继续由独立 image registry 管理，文字 Source 权利状态不会自动授权页面内图片。
+
+## M10 Commercial-use Boundary
+
+`Source.rights` 不再单独决定 Production。M10 将 Source 作为 ContentArtifact 的 reference input，并另建 RightsAssessment：reference-only 来源允许保存引用元数据与抽取窄事实，但禁止发布或商业化来源表达；只有经过独立结构、独立文字和人工复核的 factual synthesis artifact 才能得到 allow decision。来源 rights unknown、health rights-changed、过期 assessment 或缺少可执行署名时，统一门禁立即阻止公开。

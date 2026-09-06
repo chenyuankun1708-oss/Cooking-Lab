@@ -49,12 +49,12 @@ const publishingContext: CulinaryPublishingContext = {
 const proceduralKinds = new Set(["cooking", "baking", "brewing", "extraction", "mixing", "assembly"]);
 
 describe("published culinary library", () => {
-  it("adds a balanced native portfolio to the ten adapted published Recipes", () => {
+  it("adds a balanced native portfolio to the 34 adapted published Recipes", () => {
     const published = getPublishedCulinaryItems();
 
     expect(nativeCulinaryItems).toHaveLength(16);
-    expect(published).toHaveLength(26);
-    expect(listPublishedCulinaryItemsByType("dish")).toHaveLength(13);
+    expect(published).toHaveLength(50);
+    expect(listPublishedCulinaryItemsByType("dish")).toHaveLength(37);
     expect(listPublishedCulinaryItemsByType("dessert")).toHaveLength(3);
     expect(listPublishedCulinaryItemsByType("tea")).toHaveLength(4);
     expect(listPublishedCulinaryItemsByType("coffee")).toHaveLength(2);
@@ -153,7 +153,7 @@ describe("published culinary library", () => {
     expect([...nativeIngredientIds].every((id) => ingredientIds.has(id))).toBe(true);
     expect(ingredients.filter((ingredient) => !recipeIngredientIds.has(ingredient.id)).every((ingredient) => nativeIngredientIds.has(ingredient.id))).toBe(true);
     expect(recipes).toHaveLength(100);
-    expect(getPublishedRecipes()).toHaveLength(10);
+    expect(getPublishedRecipes()).toHaveLength(34);
   });
 
   it("rejects duplicate identities and excludes drafts from the public boundary", () => {
@@ -199,7 +199,7 @@ describe("published culinary library", () => {
 
   it("keeps the Recipe adapter compatible and maps cold dishes to a starter role", () => {
     const adapted = getPublishedRecipes().map(adaptRecipeToCulinaryItem);
-    expect(adapted).toHaveLength(10);
+    expect(adapted).toHaveLength(34);
     expect(adapted.every((item) => evaluateCulinaryItemPublishingEligibility(item, publishingContext).eligible)).toBe(true);
     const hummus = adaptRecipeToCulinaryItem(recipes.find((recipe) => recipe.slug === "lebanese-hummus-plate")!);
     expect(hummus.pairing.mealRoleIds).toContain("starter");

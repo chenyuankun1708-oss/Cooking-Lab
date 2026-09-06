@@ -9,9 +9,9 @@
   --surface-story: #eee9df;
   --surface-cocoa: #181716;
   --green: #b93324;
-  --green-dark: #8f251a;
-  --tomato: #d5422f;
-  --sun: #d5422f;
+  --green-dark: #b93324;
+  --tomato: #b93324;
+  --sun: #b93324;
   --line: #cbc8bf;
   --muted: #66635d;
 }
@@ -58,7 +58,7 @@ button, summary { -webkit-tap-highlight-color: transparent; }
 
 a { text-underline-offset: 0.2em; }
 
-::selection { background: #f4d98b; color: #173f35; }
+::selection { background: #efc5bd; color: var(--foreground); }
 
 .focus-ring:focus-visible {
   border-radius: 4px;
@@ -75,7 +75,7 @@ a { text-underline-offset: 0.2em; }
   border-radius: 4px;
   background: white;
   padding: 0.75rem 1rem;
-  color: #173f35;
+  color: var(--tomato);
   font-weight: 700;
 }
 

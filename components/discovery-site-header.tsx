@@ -8,12 +8,14 @@ import type { SupportedLocale } from "@/types/localization";
 export function DiscoverySiteHeader({
   locale,
   allowlist,
+  inverse = false,
 }: {
   locale: SupportedLocale;
   allowlist: DecisionContextValueAllowlist;
+  inverse?: boolean;
 }) {
   const searchParams = useSearchParams();
   const context = parseDecisionContext(new URLSearchParams(searchParams.toString()), allowlist);
   const query = serializeDecisionContext(context, allowlist).toString();
-  return <SiteHeader active="home" inverse locale={locale} currentPath={`/${locale}`} query={query} />;
+  return <SiteHeader active="home" inverse={inverse} locale={locale} currentPath={`/${locale}`} query={query} />;
 }

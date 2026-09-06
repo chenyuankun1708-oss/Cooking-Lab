@@ -105,9 +105,9 @@ describe("culinary pairing score", () => {
 describe("meal composition", () => {
   it("enables only templates supported by the current portfolio", () => {
     const audit = auditPairingReadiness(library);
-    expect(audit.itemCount).toBe(26);
-    expect(audit.roleCounts).toMatchObject({ starter: 3, main: 5, side: 1, staple: 3, soup: 2, dessert: 3, drink: 10 });
-    expect(audit.drinkShare).toBeCloseTo(10 / 26, 5);
+    expect(audit.itemCount).toBe(50);
+    expect(audit.roleCounts).toMatchObject({ starter: 4, main: 18, side: 1, staple: 10, soup: 5, dessert: 3, drink: 10 });
+    expect(audit.drinkShare).toBeCloseTo(10 / 50, 5);
     expect(audit.availableTemplateIds).toEqual(mealTemplates.map(({ id }) => id));
     expect(audit.items.every(({ weight, temperature }) => Boolean(weight && temperature))).toBe(true);
   });
@@ -331,11 +331,11 @@ describe("meal composition", () => {
   });
 
   it("preserves the published library and Recipe regression baseline", () => {
-    expect(getPublishedRecipes()).toHaveLength(10);
+    expect(getPublishedRecipes()).toHaveLength(34);
     expect(nativeCulinaryItems).toHaveLength(16);
-    expect(library).toHaveLength(26);
-    expect(getPublishedCulinaryItemsForLocale("zh-CN")).toHaveLength(26);
-    expect(getPublishedCulinaryItemsForLocale("en")).toHaveLength(26);
+    expect(library).toHaveLength(50);
+    expect(getPublishedCulinaryItemsForLocale("zh-CN")).toHaveLength(50);
+    expect(getPublishedCulinaryItemsForLocale("en")).toHaveLength(50);
   });
 });
 
@@ -422,10 +422,10 @@ describe("pairing presentation", () => {
     );
   });
 
-  it("wires 52 locale-complete SSG pages and distinct detail-page entry points", async () => {
+  it("wires 100 locale-complete Pairing and canonical culinary detail pages", async () => {
     const pairingPage = await import("../../app/[locale]/pairing/[slug]/page");
-    expect(pairingPage.generateStaticParams()).toHaveLength(52);
-    expect(new Set(pairingPage.generateStaticParams().map(({ locale, slug }) => `${locale}:${slug}`)).size).toBe(52);
+    expect(pairingPage.generateStaticParams()).toHaveLength(100);
+    expect(new Set(pairingPage.generateStaticParams().map(({ locale, slug }) => `${locale}:${slug}`)).size).toBe(100);
     const metadata = await pairingPage.generateMetadata({ params: Promise.resolve({ locale: "en", slug: "dongpo-pork" }) });
     const languages = metadata.alternates?.languages as Record<string, string>;
     expect(metadata.alternates?.canonical).toBe("https://cooking-lab-pied.vercel.app/en/pairing/dongpo-pork");
@@ -434,13 +434,16 @@ describe("pairing presentation", () => {
 
     const routeSource = readFileSync(resolve(process.cwd(), "app/[locale]/pairing/[slug]/page.tsx"), "utf8");
     const recipeSource = readFileSync(resolve(process.cwd(), "app/[locale]/recipes/[slug]/page.tsx"), "utf8");
-    const culinarySource = readFileSync(resolve(process.cwd(), "app/[locale]/culinary/[slug]/page.tsx"), "utf8");
+    const nativeDetailSource = readFileSync(resolve(process.cwd(), "components/native-culinary-detail-page.tsx"), "utf8");
+    const culinaryRedirectSource = readFileSync(resolve(process.cwd(), "app/[locale]/culinary/[slug]/page.tsx"), "utf8");
     expect(routeSource).toContain("getPublishedCulinaryItemsForLocale(locale)");
     expect(routeSource).toContain("dynamicParams = false");
     expect(routeSource).toContain("sourceLabel={messages.common.imageSource}");
-    expect(recipeSource).toContain("Build a meal around this");
-    expect(culinarySource).toContain("Build a meal around this");
-    expect(recipeSource).toContain("`/pairing/${recipe.slug}`");
-    expect(culinarySource).toContain("`/pairing/${detail.slug}`");
+    expect(recipeSource).toContain("NativeCulinaryDetailPage");
+    expect(nativeDetailSource).toContain("Build a pairing");
+    expect(nativeDetailSource).toContain("`/pairing/${detail.slug}`");
+    expect(culinaryRedirectSource).toContain("permanentRedirect(");
+    const recipePage = await import("../../app/[locale]/recipes/[slug]/page");
+    expect(recipePage.generateStaticParams()).toHaveLength(100);
   });
 });

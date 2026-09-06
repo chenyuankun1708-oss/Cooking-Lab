@@ -8,5 +8,5 @@ export default async function LegacyCulinaryDetail({
   params: Promise<{ slug: string }>;
   searchParams: Promise<RouteSearchParams>;
 }) {
-  permanentRedirect(getLocalizedPath("zh-CN", `/culinary/${(await params).slug}`, toURLSearchParams(await searchParams)));
+  permanentRedirect(getLocalizedPath("zh-CN", `/recipes/${(await params).slug}`, toURLSearchParams(await searchParams)));
 }

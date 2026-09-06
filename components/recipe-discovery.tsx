@@ -93,10 +93,10 @@ export function RecipeDiscovery({
     setCriteria((current) => ({ ...current, [key]: value ? Number(value) : undefined }));
 
   return (
-    <section id="decide" className="border-y border-stone-200 bg-[var(--surface-paper)] py-12 sm:py-16" aria-labelledby="decision-title">
+    <section id="decide" className="border-y border-[var(--line)] py-14 sm:py-20" aria-labelledby="decision-title">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold text-[#a64631]">{copy.eyebrow}</p>
+          <p className="text-sm font-semibold text-[var(--tomato)]">{copy.eyebrow}</p>
           <h2 id="decision-title" className="mt-2 text-3xl font-bold leading-tight text-stone-950 sm:text-5xl">
             {copy.title}
           </h2>
@@ -142,14 +142,14 @@ export function RecipeDiscovery({
               <details>
                 <summary className="focus-ring flex min-h-11 cursor-pointer items-center justify-between gap-4 text-lg font-bold text-stone-950">
                   <span>{copy.ingredients}</span>
-                  <span className="text-sm font-semibold text-[#235849]">
+                  <span className="text-sm font-semibold text-[var(--tomato)]">
                     {criteria.availableIngredients?.length ? copy.selected(criteria.availableIngredients.length) : copy.chooseIngredients}
                   </span>
                 </summary>
                 <label className="mt-4 block">
                   <span className="sr-only">{copy.searchIngredients}</span>
                   <input
-                    className="min-h-11 w-full rounded-md border border-stone-300 bg-[#fbfaf6] px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b94e35]"
+                    className="min-h-11 w-full rounded-[4px] border border-stone-400 bg-[var(--surface-paper)] px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--tomato)]"
                     onChange={(event) => setIngredientQuery(event.target.value)}
                     placeholder={copy.searchPlaceholder(ingredients.length)}
                     type="search"
@@ -177,7 +177,7 @@ export function RecipeDiscovery({
             <details>
               <summary className="focus-ring flex min-h-11 cursor-pointer items-center justify-between gap-4 font-bold text-stone-900">
                 <span>{copy.more}</span>
-                <span className="text-sm font-semibold text-[#235849]">{copy.moreHint}</span>
+                <span className="text-sm font-semibold text-[var(--tomato)]">{copy.moreHint}</span>
               </summary>
               <div className="grid gap-7 pb-4 pt-5 md:grid-cols-2">
                 <fieldset>
@@ -199,7 +199,7 @@ export function RecipeDiscovery({
                   <label className="text-sm">
                     <span className="mb-1 block text-stone-600">{copy.preferredCuisine}</span>
                     <select
-                      className="min-h-11 w-full rounded-md border border-stone-300 bg-white px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b94e35]"
+                      className="min-h-11 w-full rounded-[4px] border border-stone-400 bg-[var(--surface-paper)] px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--tomato)]"
                       onChange={(event) => setCriteria((current) => ({ ...current, preferredCuisine: event.target.value || undefined }))}
                       value={criteria.preferredCuisine ?? ""}
                     >
@@ -244,7 +244,7 @@ export function RecipeDiscovery({
             <details>
               <summary className="focus-ring flex min-h-11 cursor-pointer items-center justify-between gap-4 font-bold text-stone-900">
                 <span>{copy.nutrition}</span>
-                <span className="text-sm font-semibold text-[#235849]">{copy.optionalDetails}</span>
+                <span className="text-sm font-semibold text-[var(--tomato)]">{copy.optionalDetails}</span>
               </summary>
               <div className="grid gap-4 pb-4 pt-5 sm:grid-cols-2 lg:grid-cols-5">
                 <Select label={copy.calories} onChange={(value) => setNumber("maxCalories", value)} options={[400, 500, 600, 800]} suffix="kcal" value={criteria.maxCalories} anyLabel={copy.any} />
@@ -259,12 +259,12 @@ export function RecipeDiscovery({
 
         <div className="mt-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-[#a64631]">{active ? copy.ranked : copy.start}</p>
+            <p className="text-sm font-semibold text-[var(--tomato)]">{active ? copy.ranked : copy.start}</p>
             <h3 className="mt-1 text-2xl font-bold text-stone-950 sm:text-3xl">{copy.resultsTitle}</h3>
             <p className="mt-2 text-sm text-stone-500" aria-live="polite">{copy.resultCount(results.length)}</p>
           </div>
           <button
-            className="focus-ring min-h-11 px-2 text-sm font-bold text-[#235849] hover:underline disabled:cursor-not-allowed disabled:text-stone-400"
+            className="focus-ring min-h-11 px-2 text-sm font-bold text-[var(--tomato)] hover:underline disabled:cursor-not-allowed disabled:text-stone-400"
             disabled={!active}
             onClick={reset}
             type="button"
@@ -274,7 +274,7 @@ export function RecipeDiscovery({
         </div>
 
         {activeSummary.length ? (
-          <p className="mt-4 border-l-2 border-[#235849] pl-3 text-sm leading-6 text-stone-600">
+          <p className="mt-4 border-l-2 border-[var(--tomato)] pl-3 text-sm leading-6 text-stone-600">
             <span className="font-semibold text-stone-900">{copy.selectedSummary}</span>{activeSummary.join(" · ")}
           </p>
         ) : null}
@@ -286,15 +286,15 @@ export function RecipeDiscovery({
             </div>
             {results.length > visibleResults.length ? (
               <p className="mt-7 text-center text-sm text-stone-600">
-                {copy.moreResults}<Link className="focus-ring ml-1 font-bold text-[#235849] hover:underline" href={getLocalizedPath(locale, "/recipes", contextQuery)}>{copy.discoverMore}</Link>
+                {copy.moreResults}<Link className="focus-ring ml-1 inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={getLocalizedPath(locale, "/recipes", contextQuery)}>{copy.discoverMore}</Link>
               </p>
             ) : null}
           </>
         ) : (
-          <div className="mt-7 border border-dashed border-stone-400 bg-[#fbfaf6] px-6 py-14 text-center">
+          <div className="mt-7 border border-dashed border-stone-400 bg-[var(--surface-paper)] px-6 py-14 text-center">
             <h3 className="text-2xl font-bold text-stone-950">{copy.empty}</h3>
             <p className="mx-auto mt-3 max-w-lg leading-7 text-stone-600">{copy.try}: {suggestions.join(locale === "zh-CN" ? "、" : ", ")}.</p>
-            <button className="focus-ring mt-6 min-h-11 rounded-md bg-[#235849] px-5 font-semibold text-white hover:bg-[#173f35]" onClick={reset} type="button">
+            <button className="focus-ring mt-6 min-h-11 rounded-[4px] bg-stone-950 px-5 font-semibold text-white transition hover:bg-[var(--tomato)] active:translate-y-px" onClick={reset} type="button">
               {copy.resetShort}
             </button>
           </div>
@@ -323,7 +323,7 @@ function Select({
     <label className="text-sm">
       <span className="mb-1 block text-stone-600">{label}</span>
       <select
-        className="min-h-11 w-full rounded-md border border-stone-300 bg-white px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b94e35]"
+        className="min-h-11 w-full rounded-[4px] border border-stone-400 bg-[var(--surface-paper)] px-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--tomato)]"
         onChange={(event) => onChange(event.target.value)}
         value={value ?? ""}
       >
@@ -336,8 +336,8 @@ function Select({
 
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: () => void }) {
   return (
-    <label className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-3 py-2 text-sm font-medium transition focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#b94e35] ${
-      checked ? "border-[#235849] bg-[#235849] text-white" : "border-stone-300 bg-white text-stone-700 hover:border-[#235849]"
+    <label className={`inline-flex min-h-11 cursor-pointer items-center rounded-full border px-3 py-2 text-sm font-medium transition focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[var(--tomato)] ${
+      checked ? "border-stone-950 bg-stone-950 text-white" : "border-stone-400 bg-[var(--surface-paper)] text-stone-700 hover:border-[var(--tomato)] hover:text-[var(--tomato)]"
     }`}>
       <input checked={checked} className="sr-only" onChange={onChange} type="checkbox" />
       {label}
@@ -350,7 +350,7 @@ function ChoiceButton({ active, label, onClick }: { active: boolean; label: stri
     <button
       aria-pressed={active}
       className={`focus-ring min-h-11 rounded-full border px-4 text-sm font-semibold transition ${
-        active ? "border-[#a64631] bg-[#a64631] text-white" : "border-stone-300 bg-white text-stone-700 hover:border-[#a64631]"
+        active ? "border-stone-950 bg-stone-950 text-white" : "border-stone-400 bg-[var(--surface-paper)] text-stone-700 hover:border-[var(--tomato)] hover:text-[var(--tomato)]"
       }`}
       onClick={onClick}
       type="button"

@@ -163,10 +163,11 @@ describe("Story exploration experience", () => {
     expect(getCulinaryItemHref(recipeItem, recipeIds)).toBe(`/recipes/${recipeItem.slug}`);
     expect(isCanonicalCulinaryPath(recipeItem, `/recipes/${recipeItem.slug}`, recipeIds)).toBe(true);
     expect(isCanonicalCulinaryPath(recipeItem, `/culinary/${recipeItem.slug}`, recipeIds)).toBe(false);
-    expect(getCulinaryItemHref(nativeItem, recipeIds)).toBe(`/culinary/${nativeItem.slug}`);
-    expect(isCanonicalCulinaryPath(nativeItem, `/culinary/${nativeItem.slug}`, recipeIds)).toBe(true);
+    expect(getCulinaryItemHref(nativeItem, recipeIds)).toBe(`/recipes/${nativeItem.slug}`);
+    expect(isCanonicalCulinaryPath(nativeItem, `/recipes/${nativeItem.slug}`, recipeIds)).toBe(true);
+    expect(isCanonicalCulinaryPath(nativeItem, `/culinary/${nativeItem.slug}`, recipeIds)).toBe(false);
     expect(getPublishedNativeCulinaryItemStaticParams()).toHaveLength(16);
-    expect(getPublishedRecipes()).toHaveLength(10);
-    expect(publishedItems).toHaveLength(26);
+    expect(getPublishedRecipes()).toHaveLength(34);
+    expect(publishedItems).toHaveLength(50);
   });
 });

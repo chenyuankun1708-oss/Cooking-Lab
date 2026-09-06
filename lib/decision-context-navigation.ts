@@ -1,10 +1,10 @@
 import type { DecisionContext } from "@/types/decision-context";
 import type { SupportedLocale } from "@/types/localization";
-import type { RecipeCatalogFilters } from "./recipe-exploration";
+import type { CulinaryCatalogFilters } from "./culinary-exploration";
 import type { DecisionContextValueAllowlist } from "./decision-context";
 import { parseDecisionContext, serializeDecisionContext } from "./decision-context";
 import { getLocalizedPath } from "./localization";
-import { serializeRecipeCatalogFilters } from "./recipe-exploration";
+import { serializeCulinaryCatalogFilters } from "./culinary-exploration";
 
 export type DecisionJourneySource = "discovery" | "catalog";
 
@@ -15,7 +15,7 @@ export interface DecisionRouteState {
 
 export interface DecisionRouteQueryOptions {
   source?: DecisionJourneySource;
-  catalogFilters?: RecipeCatalogFilters;
+  catalogFilters?: CulinaryCatalogFilters;
 }
 
 export const decisionJourneySourceQueryKey = "dcSource";
@@ -40,7 +40,7 @@ export function serializeDecisionRouteQuery(
   const params = serializeDecisionContext(context, allowlist);
   if (options.source) params.set(decisionJourneySourceQueryKey, options.source);
   if (options.catalogFilters) {
-    for (const [key, value] of serializeRecipeCatalogFilters(options.catalogFilters)) {
+    for (const [key, value] of serializeCulinaryCatalogFilters(options.catalogFilters)) {
       params.append(key, value);
     }
   }
@@ -55,7 +55,7 @@ export function buildDecisionReturnHref(
   locale: SupportedLocale,
   state: DecisionRouteState,
   allowlist: DecisionContextValueAllowlist,
-  catalogFilters: RecipeCatalogFilters = {},
+  catalogFilters: CulinaryCatalogFilters = {},
 ): string {
   if (state.source === "catalog") {
     return getLocalizedPath(locale, "/recipes", serializeDecisionRouteQuery(

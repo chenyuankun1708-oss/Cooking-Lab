@@ -53,6 +53,18 @@ export interface StoryPageModel extends StoryPreview {
   sources: ConsumerSource[];
 }
 
+export interface EmbeddedStoryModel {
+  id: string;
+  anchorId: `story-${string}`;
+  title: string;
+  dek: string;
+  typeLabel: string;
+  sections: Array<{ heading: string; paragraphs: string[] }>;
+  evidenceContext: string;
+  contextChips: StoryContextChip[];
+  sources: ConsumerSource[];
+}
+
 export interface StoryExperienceContext {
   items: readonly CulinaryItem[];
   stories: readonly Story[];
@@ -96,7 +108,7 @@ export function buildStoryPreview(story: Story, context: StoryExperienceContext)
   );
   return {
     id: story.id,
-    href: `/${locale}/stories/${story.id}`,
+    href: leadItem ? `/${locale}/recipes/${leadItem.slug}#story-${story.id}` : `/${locale}/recipes?story=available`,
     title: copy.title,
     dek: copy.dek,
     typeLabel: context.storyTypeLabels[story.type][locale],
@@ -104,6 +116,38 @@ export function buildStoryPreview(story: Story, context: StoryExperienceContext)
     relatedItemName: leadItem ? resolveItemCopy(leadItem, locale).name : locale === "zh-CN" ? "料理故事" : "Culinary story",
     image,
     fallbackInitial: [...copy.title][0] ?? "故",
+  };
+}
+
+export function listStoriesForCulinaryItem(
+  item: CulinaryItem,
+  stories: readonly Story[],
+): Story[] {
+  return stories.filter((story) => findExplicitStoryItems(story, [item]).some((candidate) => candidate.id === item.id));
+}
+
+export function getPrimaryCulinaryItemForStory(
+  story: Story,
+  items: readonly CulinaryItem[],
+): CulinaryItem | undefined {
+  return findExplicitStoryItems(story, items)[0];
+}
+
+export function buildEmbeddedStoryModel(
+  story: Story,
+  context: StoryExperienceContext,
+): EmbeddedStoryModel {
+  const page = buildStoryPageModel(story, context);
+  return {
+    id: story.id,
+    anchorId: `story-${story.id}`,
+    title: page.title,
+    dek: page.dek,
+    typeLabel: page.typeLabel,
+    sections: page.sections,
+    evidenceContext: page.evidenceContext,
+    contextChips: page.contextChips,
+    sources: page.sources,
   };
 }
 

@@ -2,6 +2,7 @@ import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
 import type { ContentArtifact, ContentRightsRegistry } from "@/types/content-rights";
 import type { Ingredient } from "@/types/ingredient";
 import type { RecipeImage } from "@/types/image";
+import type { ResearchRecord } from "@/types/research";
 import type { ImageAssetVersion } from "./image-asset-version";
 import type {
   PublishingGovernanceRegistry,
@@ -47,6 +48,7 @@ export interface PublishingGovernanceContext {
   images: readonly RecipeImage[];
   sources: readonly Source[];
   evidence: readonly Evidence[];
+  researchRecords: readonly ResearchRecord[];
   ingredients: readonly Ingredient[];
   contentPaths: readonly PublishingContentPath[];
   localizationVersions: readonly PublishingLocalizationVersion[];
@@ -98,6 +100,10 @@ export function createArtifactSetVersion(
     ...evidence.map((entry) => entry.sourceId),
   ]);
   const sources = context.sources.filter((source) => sourceIds.has(source.id)).sort(byId);
+  const storyIds = new Set(items.flatMap((item) => item.storyIds));
+  const researchRecords = context.researchRecords
+    .filter((record) => itemIdSet.has(record.subject.id) || storyIds.has(record.subject.id))
+    .sort(byId);
   const imageIds = new Set(items.flatMap((item) => item.images.availability === "available" ? item.images.references.imageIds : []));
   const images = context.images.filter((image) => imageIds.has(image.id)).sort(byId);
   const imageAssetVersions = context.imageAssetVersions.filter((entry) => imageIds.has(entry.imageId)).sort((left, right) => left.imageId.localeCompare(right.imageId));
@@ -123,6 +129,7 @@ export function createArtifactSetVersion(
     decisions,
     sources,
     evidence,
+    researchRecords,
     images,
     imageAssetVersions,
     ingredients,

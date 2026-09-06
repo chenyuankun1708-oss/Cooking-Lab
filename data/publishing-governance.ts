@@ -6,6 +6,7 @@ import type { Ingredient } from "@/types/ingredient";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
 import type { ImageAssetVersion } from "@/lib/image-asset-version";
 import type { PublishingLocalizationVersion } from "@/lib/publishing-governance";
+import type { ResearchRecord } from "@/types/research";
 import type {
   PublishingGovernanceRegistry,
   PublishingRiskClassification,
@@ -43,6 +44,7 @@ export interface CreatePublishingGovernanceRegistryInput {
   images: readonly RecipeImage[];
   sources: readonly Source[];
   evidence: readonly Evidence[];
+  researchRecords: readonly ResearchRecord[];
   ingredients: readonly Ingredient[];
   contentPackages: readonly LocalContentPackageV1[];
   localizationVersions: readonly PublishingLocalizationVersion[];
@@ -59,6 +61,7 @@ export function createPublishingGovernanceRegistry(
     images: input.images,
     sources: input.sources,
     evidence: input.evidence,
+    researchRecords: input.researchRecords,
     ingredients: input.ingredients,
     contentPaths: input.contentPackages.map((contentPackage) => ({
       itemId: contentPackage.itemId,

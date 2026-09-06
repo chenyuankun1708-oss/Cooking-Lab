@@ -34,13 +34,14 @@ const contentRightsRegistry = createContentRightsRegistry({
   researchRecords: m9RecipeResearchRecords,
 });
 const contentImageAssetVersions = createImageAssetVersions(allImages);
-const contentLocalizationVersions = createPublishingLocalizationVersions(publishedLocalContentPackages);
+const contentLocalizationVersions = createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients);
 const context: PublishingGovernanceContext = {
   items,
   rightsRegistry: contentRightsRegistry,
   images: allImages,
   sources: contentRightsSources,
   evidence: culinaryEvidence,
+  researchRecords: m9RecipeResearchRecords,
   ingredients,
   contentPaths: publishedLocalContentPackages.map((contentPackage) => ({
     itemId: contentPackage.itemId,
@@ -61,6 +62,7 @@ function readyRegistry(): PublishingGovernanceRegistry {
     images: allImages,
     sources: contentRightsSources,
     evidence: culinaryEvidence,
+    researchRecords: m9RecipeResearchRecords,
     ingredients,
     contentPackages: publishedLocalContentPackages,
     localizationVersions: contentLocalizationVersions,
@@ -128,6 +130,7 @@ describe("risk-based publishing governance", () => {
       images: allImages,
       sources: contentRightsSources,
       evidence: culinaryEvidence,
+      researchRecords: m9RecipeResearchRecords,
       ingredients,
       contentPackages: publishedLocalContentPackages,
       localizationVersions: contentLocalizationVersions,
@@ -215,6 +218,11 @@ describe("risk-based publishing governance", () => {
     const evidenceContext = structuredClone(context);
     evidenceContext.evidence.find((entry) => entry.id === evidenceArtifact.evidenceIds[0])!.editorialNote += " changed";
     expect(issueCodes(readyRegistry(), evidenceContext)).toContain("stale-review-attestation");
+
+    const researchContext = structuredClone(context);
+    const researchRecord = researchContext.researchRecords.find((entry) => items.some((item) => item.id === entry.subject.id))!;
+    researchRecord.editorialDecision += " changed";
+    expect(issueCodes(readyRegistry(), researchContext)).toContain("stale-review-attestation");
 
     const rightsContext = structuredClone(context);
     rightsContext.rightsRegistry.assessments[0].authorityVersion += "-changed";

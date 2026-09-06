@@ -36,7 +36,7 @@ export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
 const allImages = [...recipeImages, ...culinaryImages];
 export const contentImageAssetVersions = Object.freeze(createImageAssetVersions(allImages));
-export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages));
+export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients));
 const candidates: CulinaryItem[] = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
 const publishingContext: CulinaryPublishingContext = {
   ingredients,
@@ -82,6 +82,7 @@ export const publishingGovernanceRegistry = createPublishingGovernanceRegistry({
   images: allImages,
   sources: allSources,
   evidence: allEvidence,
+  researchRecords: m9RecipeResearchRecords,
   ingredients,
   contentPackages: publishedLocalContentPackages,
   localizationVersions: contentLocalizationVersions,
@@ -93,6 +94,7 @@ const publishingGovernanceContext = {
   images: allImages,
   sources: allSources,
   evidence: allEvidence,
+  researchRecords: m9RecipeResearchRecords,
   ingredients,
   contentPaths: publishedLocalContentPackages.map((contentPackage) => ({
     itemId: contentPackage.itemId,

@@ -1,4 +1,10 @@
-import { createArtifactSetVersion, deriveEquivalenceClassKeys, deriveMinimumPublishingRisk } from "@/lib/publishing-governance";
+import {
+  createArtifactSetVersion,
+  createSamplingEquivalenceClasses,
+  deriveEquivalenceClassKeys,
+  deriveMinimumPublishingRisk,
+  deriveProvenanceLicenseNoveltyClassKeys,
+} from "@/lib/publishing-governance";
 import type { CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
 import type { ContentRightsRegistry } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
@@ -13,6 +19,7 @@ import type {
   ReviewActorIdentity,
   ReviewAttestation,
   ReviewDimension,
+  SamplingQaBatch,
 } from "@/types/publishing-governance";
 import { m10AuditedCulinaryItemIds } from "./content-rights";
 
@@ -42,6 +49,120 @@ const reviewer: ReviewActorIdentity = {
   runId: "m10-pr84-independent-review-final",
   contextId: "m10-independent-review-context",
 };
+
+const historicalSamplingItemIds = [
+  "apple-crumble",
+  "cantonese-mushroom-steamed-chicken",
+  "chaoshan-fish-congee",
+  "dongpo-pork",
+  "espresso",
+  "filipino-chicken-adobo-home",
+  "fino-sherry",
+  "french-lentil-soup",
+  "greek-lemon-oregano-chicken",
+  "hibiscus-agua-fresca",
+  "huevos-rancheros-home",
+  "hunan-chili-pork",
+  "indian-chana-masala-home",
+  "indonesian-chili-eggplant",
+  "japanese-miso-salmon",
+  "japanese-oyakodon",
+  "korean-glass-noodle-stir-fry",
+  "korean-tofu-stew-home",
+  "lebanese-mujadara",
+  "longjing-green-tea",
+  "malaysian-turmeric-chicken",
+  "mexican-black-bean-tacos",
+  "northwest-cumin-lamb",
+  "singapore-chicken-rice-home",
+  "spanish-chickpea-spinach",
+  "spanish-potato-omelet",
+  "thai-green-papaya-salad",
+  "vietnamese-iced-coffee",
+] as const;
+
+function createHistoricalSamplingBatch(
+  riskClassifications: readonly PublishingRiskClassification[],
+): SamplingQaBatch {
+  const auditedItems = new Set<string>(historicalSamplingItemIds);
+  const equivalenceClasses = createSamplingEquivalenceClasses(riskClassifications).map((entry) => {
+    const representative = entry.itemIds.find((itemId) => auditedItems.has(itemId));
+    if (!representative) throw new Error(`Historical sampling audit did not cover class ${entry.key}`);
+    return { ...entry, sampledItemIds: [representative] as [string, ...string[]] };
+  });
+
+  // Preserve all 28 actually inspected samples, even when the deterministic
+  // minimum set changes after a policy taxonomy addition.
+  for (const itemId of historicalSamplingItemIds) {
+    const represented = equivalenceClasses.find((entry) => entry.itemIds.includes(itemId));
+    if (!represented) throw new Error(`Historical sampling item ${itemId} has no equivalence class`);
+    if (!represented.sampledItemIds.includes(itemId)) represented.sampledItemIds.push(itemId);
+  }
+  const visualDish = equivalenceClasses.find((entry) => entry.key === "visual-fidelity:dish");
+  if (!visualDish?.itemIds.includes("thai-green-papaya-salad")) {
+    throw new Error("Historical visual escape must map to the dish fidelity class");
+  }
+  if (!visualDish.sampledItemIds.includes("thai-green-papaya-salad")) {
+    visualDish.sampledItemIds.push("thai-green-papaya-salad");
+  }
+
+  const samples = historicalSamplingItemIds.map((itemId) => ({
+    itemId,
+    equivalenceClassKeys: equivalenceClasses
+      .filter((entry) => entry.sampledItemIds.includes(itemId))
+      .map((entry) => entry.key) as [string, ...string[]],
+    dimensions: ["rights-license", "provenance", "factual-culinary", "editorial", "visual-image"] as [
+      "rights-license",
+      "provenance",
+      "factual-culinary",
+      "editorial",
+      "visual-image",
+    ],
+    verdict: itemId === "thai-green-papaya-salad" ? "revise" as const : "pass" as const,
+    findings: itemId === "thai-green-papaya-salad" ? [{
+      code: "visual-ingredient-mismatch-cashew-peanut",
+      kind: "quality" as const,
+      severity: "major" as const,
+      summary: "The Hero visibly showed cashews while the bilingual content, ingredients, final step, and alt identified peanuts.",
+      disposition: "unresolved" as const,
+      equivalenceClassKeys: ["visual-fidelity:dish"] as [string, ...string[]],
+    }] : [],
+  }));
+  const noveltyClassKeys = deriveProvenanceLicenseNoveltyClassKeys(equivalenceClasses);
+
+  return {
+    id: "sampling-m10-existing-50-81afe4c-revise",
+    batchId: "m10-existing-50-sampling-review-1",
+    sequence: 1,
+    policyVersion: publishingGovernancePolicyVersion,
+    itemIds: [...m10AuditedCulinaryItemIds] as [string, ...string[]],
+    artifactSetVersion: "clv1-f30d9a1f9213c90c",
+    equivalenceClasses: equivalenceClasses as [typeof equivalenceClasses[number], ...typeof equivalenceClasses[number][]],
+    author,
+    auditor: {
+      actorType: "agent",
+      actorId: "/root/m11_sampling_reaudit_default",
+      runId: "issue-96-sampling-content-visual-reaudit-81afe4c",
+      contextId: "/root/m11_sampling_reaudit_default/review-1",
+    },
+    reviewedCommit: "81afe4c16abd66e93dab9a4afb75f4e6624bfab6",
+    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559359576",
+    rubricVersion: "m10.1-sampling-content-visual-audit-v1",
+    verdict: "revise",
+    samples,
+    findings: [],
+    auditorModifiedContent: false,
+    metrics: {
+      escapeCount: 1,
+      reviewerDisagreementCount: 0,
+      reworkItemCount: 0,
+      provenanceLicenseNoveltyCount: noveltyClassKeys.length,
+      reworkItemIds: [],
+      provenanceLicenseNoveltyClassKeys: noveltyClassKeys,
+    },
+    auditedAt: "2026-09-06",
+  };
+}
 
 export interface CreatePublishingGovernanceRegistryInput {
   items: readonly CulinaryItem[];
@@ -137,8 +258,6 @@ export function createPublishingGovernanceRegistry(
     policyVersion: publishingGovernancePolicyVersion,
     attestations,
     riskClassifications,
-    // M10 did not perform risk-equivalence sampling. Keep this empty until a
-    // real M10.1 auditor reviews a frozen commit and leaves item-level evidence.
-    samplingBatches: [],
+    samplingBatches: [createHistoricalSamplingBatch(riskClassifications)],
   };
 }

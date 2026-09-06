@@ -154,7 +154,7 @@ function issueCodes(registry: PublishingGovernanceRegistry, customContext = cont
 }
 
 describe("risk-based publishing governance", () => {
-  it("keeps the real M10 migration fail closed until genuine sampling evidence is recorded", () => {
+  it("keeps the real M10 migration fail closed after preserving a failed sampling audit", () => {
     const registry = createPublishingGovernanceRegistry({
       items,
       rightsRegistry: contentRightsRegistry,
@@ -168,8 +168,20 @@ describe("risk-based publishing governance", () => {
       localizationVersions: contentLocalizationVersions,
       imageAssetVersions: contentImageAssetVersions,
     });
-    expect(registry.samplingBatches).toEqual([]);
+    expect(registry.samplingBatches).toHaveLength(1);
+    expect(registry.samplingBatches[0]).toMatchObject({
+      artifactSetVersion: "clv1-f30d9a1f9213c90c",
+      reviewedCommit: "81afe4c16abd66e93dab9a4afb75f4e6624bfab6",
+      verdict: "revise",
+      metrics: { escapeCount: 1, reworkItemCount: 0 },
+    });
+    expect(registry.samplingBatches[0].samples.find((entry) => entry.itemId === "thai-green-papaya-salad")?.findings)
+      .toEqual(expect.arrayContaining([expect.objectContaining({
+        code: "visual-ingredient-mismatch-cashew-peanut",
+        equivalenceClassKeys: ["visual-fidelity:dish"],
+      })]));
     expect(issueCodes(registry)).toContain("missing-sampling-coverage");
+    expect(issueCodes(registry)).toContain("sampling-class-frozen");
   });
 
   it("accepts a complete low-risk agent-review fixture without claiming human review", () => {

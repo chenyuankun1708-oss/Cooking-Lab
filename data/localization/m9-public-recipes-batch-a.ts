@@ -21,11 +21,11 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
     principles: ["Maintain steady steam", "Judge doneness at the thickest point", "Release the aromatics at the end"],
   }),
   "cantonese-mushroom-steamed-chicken": en({
-    name: "Steamed Chicken with Mushrooms",
-    description: "A Cantonese home-style plate of chicken, mushrooms, ginger, and scallion cooked over steady steam.",
+    name: "Steamed Chicken with Shiitake",
+    description: "A Cantonese home-style plate of chicken, fresh shiitake, ginger, and scallion cooked over steady steam.",
     steps: [
-      { instruction: "Cut the chicken thighs into similar pieces and slice the mushrooms thickly. Toss the chicken with ginger, soy sauce, and salt, then rest for 10 minutes.", why: "Even pieces cook together. The short rest seasons the surface and is already included in the preparation time." },
-      { instruction: "Arrange the chicken in one layer on a heatproof plate, placing the mushrooms between the pieces instead of building a tall pile.", why: "A single layer exposes the food evenly to steam. A thick pile leaves the pieces in the center heating too slowly." },
+      { instruction: "Cut the chicken thighs into similar pieces and slice the fresh shiitake thickly. Toss the chicken with ginger, soy sauce, and salt, then rest for 10 minutes.", why: "Even pieces cook together. The short rest seasons the surface and is already included in the preparation time." },
+      { instruction: "Arrange the chicken in one layer on a heatproof plate, placing the shiitake between the pieces instead of building a tall pile.", why: "A single layer exposes the food evenly to steam. A thick pile leaves the pieces in the center heating too slowly." },
       { instruction: "Set the plate over a fully steaming pot and cook over medium heat until the center of the thickest chicken piece reaches 74°C / 165°F.", why: "A probe temperature is more reliable than meat color or clear juices. Stable steam avoids temperature swings." },
       { instruction: "Turn off the heat and rest for 2 minutes. Add the scallion and turn the chicken gently through the juices on the plate.", why: "The short rest evens out the internal temperature. Adding scallion last preserves its fresh aroma." },
     ],

@@ -464,7 +464,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "woks-of-life-steamed-chicken-mushrooms",
     sourceBUses: ["preparation", "safety"],
-    editorialDecision: "Publish as a Cantonese-style household preparation; do not imply dried lily flowers are present.",
+    editorialDecision: "Publish as a Cantonese-style household preparation using fresh shiitake; do not imply dried lily flowers are present.",
   },
   {
     slug: "hunan-chili-pork",
@@ -552,7 +552,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "rasa-malaysia-turmeric-chicken",
     sourceBUses: ["identity", "preparation"],
-    editorialDecision: "Clearly label the low-oil stir-fry as a household adaptation, not traditional ayam goreng kunyit frying.",
+    editorialDecision: "Clearly label the vegetable-rich, lower-oil stir-fry as a household adaptation inspired by ayam goreng kunyit, not an official or canonical formula.",
   },
   {
     slug: "singapore-chicken-rice-home",
@@ -632,7 +632,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "mexico-health-bean-recipe-book",
     sourceBUses: ["preparation", "safety"],
-    editorialDecision: "Publish as a modern household black-bean taco combination; make no canonical-origin claim.",
+    editorialDecision: "Publish as a modern household black-bean, mushroom, cabbage, and avocado taco combination; make no canonical-origin claim.",
   },
   {
     slug: "huevos-rancheros-home",

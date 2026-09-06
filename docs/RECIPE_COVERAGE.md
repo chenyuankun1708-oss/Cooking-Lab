@@ -36,7 +36,7 @@ Soup 继续是 dish type，不是 technique；rice-cooker 继续是 tool，不�
 
 ## Ingredient Coverage
 
-Recipe 使用的 Ingredient baseline 从 30 扩展到 73。新增 43 项均被至少一道新增 recipe 使用，补足白肉鱼、猪肩、羊肉、熟鹰嘴豆、熟黑豆、熟米饭、金枪鱼、意面、米粉、粉丝、面粉、面包、玉米饼、藜麦、常用蔬果、香草、奶酪与跨菜系常用调味。Issue #40 又为 native CulinaryItem 增加 29 项，M10.1 图片/料理一致性修订补入烤花生，repository 总数为 103；这些增量不改变 100 Recipe 的配方或覆盖统计。
+Recipe 使用的 Ingredient baseline 从 30 扩展到 76。新增项均被至少一道 recipe 使用，补足白肉鱼、猪肩、羊肉、熟鹰嘴豆、熟黑豆、熟米饭、金枪鱼、意面、米粉、粉丝、面粉、面包、玉米饼、藜麦、常用蔬果、香草、奶酪与跨菜系常用调味。Issue #40 又为 native CulinaryItem 增加 29 项，M10.1 图片/料理一致性修订补入烤花生、鲜香菇、白花椰菜和牛油果，repository 总数为 106；公开 Recipe 数量仍为 100。
 
 状态会影响时间与营养时使用明确 ID：`dry-lentil`、`cooked-chickpea`、`cooked-black-bean`、`cooked-rice`。当前日常鹰嘴豆和黑豆 recipe 均从已熟、沥干状态开始；干扁豆 recipe 则在显示时间内完成煮制。
 

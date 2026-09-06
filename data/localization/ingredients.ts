@@ -2,7 +2,8 @@ import type { SupportedLocale } from "@/types/localization";
 
 const englishIngredientLabels: Readonly<Record<string, string>> = Object.freeze({
   apple: "apple", "bell-pepper": "bell pepper", "black-tea-leaf": "black tea leaves",
-  "brewed-espresso": "brewed espresso", butter: "butter", cardamom: "cardamom", carrot: "carrot",
+  avocado: "avocado", "brewed-espresso": "brewed espresso", butter: "butter", cardamom: "cardamom", carrot: "carrot",
+  cauliflower: "cauliflower",
   cilantro: "cilantro", cinnamon: "cinnamon", clove: "clove", "cocoa-powder": "cocoa powder",
   "coconut-milk": "coconut milk", "cooked-chickpea": "cooked chickpeas", cucumber: "cucumber",
   cumin: "cumin", "dried-hibiscus": "dried hibiscus", "drinking-water": "water", egg: "eggs",
@@ -15,6 +16,7 @@ const englishIngredientLabels: Readonly<Record<string, string>> = Object.freeze(
   "lapsang-souchong-tea-leaf": "Lapsang Souchong tea", lemon: "lemon", lemongrass: "lemongrass",
   lime: "lime", "longjing-tea-leaf": "Longjing tea leaves", "makrut-lime-leaf": "makrut lime leaves",
   mango: "mango", mascarpone: "mascarpone", milk: "milk", miso: "miso", mushroom: "mushrooms",
+  "shiitake-mushroom": "shiitake mushrooms",
   oats: "oats", onion: "onion", oregano: "oregano", pasta: "pasta", "pork-belly": "pork belly",
   "pork-tenderloin": "lean pork", rice: "rice", "rice-noodles": "rice noodles", "roasted-peanut": "unsalted roasted peanuts", salt: "salt",
   scallion: "scallions", "sesame-paste": "sesame paste", "shaoxing-wine": "Shaoxing wine",

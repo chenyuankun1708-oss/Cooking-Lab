@@ -20,7 +20,7 @@ Issue #42 不改变这些 domain identities，只在 Web route 外层增加 `/zh
 
 ## Ingredient
 
-当前包含 103 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材；M10.1 图片/料理一致性修订另补入烤花生。
+当前包含 106 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材；M10.1 图片/料理一致性修订补入烤花生、鲜香菇、白花椰菜和牛油果。
 
 - `id` 使用稳定的英文 kebab-case，名称和别名仅用于展示与搜索。
 - `nutritionPer100g` 所有字段均为非负有限数；当前值是用于产品验证的公开常识级估算，不代表特定品牌、产地、烹饪状态或医学建议。
@@ -31,7 +31,7 @@ Issue #42 不改变这些 domain identities，只在 Web route 外层增加 `/zh
 - 使用非重量默认单位的食材必须提供对应近似克重。数据校验同时检查重复 ID/名称、非法营养值、非法价格和无效换算重量。
 - 当前类别是面向 MVP 筛选的粗粒度烹饪分类；例如豆类归入 `protein`、块茎归入 `vegetable` 并使用 `staple` 标签。若后续需要食品学分类或多维筛选，应另行升级 schema，而不是改变现有类别含义。
 - 当 raw / dry / cooked / canned / frozen 状态会显著改变营养、重量、时间或推荐匹配时，状态必须体现在稳定 ID 和显示名称中，不能由 recipe 文案隐含。当前使用 `dry-lentil`、`cooked-chickpea`、`cooked-black-bean`、`cooked-rice`；日常熟豆 recipe 不再引用含义模糊的干豆 ID。
-- 当前 73 种 Recipe 食材覆盖 100 道菜谱的主要类别；新增 29 种 CulinaryItem 食材均被 native item 引用。自动化校验继续阻止两套内容的悬空 Ingredient ID。
+- 当前 76 种 Recipe 食材覆盖 100 道菜谱的主要类别；新增 29 种 CulinaryItem 食材均被 native item 引用。自动化校验继续阻止两套内容的悬空 Ingredient ID。
 
 ## Recipe
 

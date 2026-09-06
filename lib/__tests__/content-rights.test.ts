@@ -14,7 +14,7 @@ import {
 } from "@/data/published-culinary-items";
 import { recipeImages } from "@/data/recipe-images";
 import { m9RecipeResearchRecords } from "@/data/research/m9-recipe-research";
-import type { CulinaryItem, Source } from "@/types/culinary";
+import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
 import type { ContentRightsRegistry, RightsAssessment } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
 import type { ContentRightsContext } from "../content-rights";
@@ -69,7 +69,7 @@ describe("M10 Production content-rights gate", () => {
     const incomplete = cloneRegistry();
     incomplete.assessments[0].reviewDueAt = undefined;
     incomplete.assessments[0].reviewer = "";
-    incomplete.artifacts[0].review.reviewer = "";
+    incomplete.artifacts[0].version = "";
     incomplete.decisions[0].decidedAt = "";
     expect(issueCodes(incomplete)).toContain("review-incomplete");
 
@@ -374,7 +374,36 @@ describe("M10 Production content-rights gate", () => {
     expect(issueCodes(regenerated, { ...context, items: unlinkedItems })).toContain("missing-artifact");
   });
 
-  it("blocks generated artifacts without dated terms, cleared inputs, human review, and similarity review", () => {
+  it("requires every artifact Evidence to close through its Source rights assessment and UsageDecision", () => {
+    const registry = cloneRegistry();
+    const artifact = registry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.kind === "identity")!;
+    const rogueSource: Source = {
+      ...structuredClone(contentRightsSources[0]),
+      id: "evidence-source-with-unknown-rights",
+      locators: [{ kind: "url", url: "https://evidence-only.example.test/reference", accessedAt: "2026-09-06" }],
+      rights: { status: "unknown", notes: "Mutation fixture must remain blocked." },
+    };
+    const rogueEvidence: Evidence = {
+      id: "evidence-with-unclosed-source",
+      sourceId: rogueSource.id,
+      relation: "supports",
+      strength: "strong",
+      locators: [{ kind: "section", value: "Test" }],
+      editorialNote: "Mutation fixture for the Evidence-to-Source rights chain.",
+    };
+    artifact.evidenceIds = [rogueEvidence.id];
+    const changedContext = {
+      ...context,
+      evidence: [...context.evidence, rogueEvidence],
+      sources: [...context.sources, rogueSource],
+    };
+
+    const codes = issueCodes(registry, changedContext);
+    expect(codes).toContain("missing-reference");
+    expect(codes).toContain("source-rights-unknown");
+  });
+
+  it("blocks generated artifacts without dated terms, cleared inputs, review attestations, and similarity review", () => {
     const registry = cloneRegistry();
     const artifact = registry.artifacts[0];
     artifact.derivation = "generated";
@@ -391,10 +420,11 @@ describe("M10 Production content-rights gate", () => {
       promptTemplateVersion: "",
       inputArtifactIds: [],
       inputRightsReviewed: false,
-      humanReview: "required",
+      reviewAttestationIds: [] as unknown as [string, ...string[]],
       similarityReview: "required",
       trademarkReview: "required",
     }];
+    Object.assign(registry.ai[0], { humanReview: "passed" });
     const codes = issueCodes(registry);
     expect(codes).toContain("ai-review-incomplete");
     expect(codes).toContain("ai-input-rights-unknown");
@@ -404,7 +434,7 @@ describe("M10 Production content-rights gate", () => {
     const usedIngredientIds = new Set(items.flatMap((item) => "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []));
     const nutritionIds = new Set(contentRightsRegistry.nutrition.map((entry) => entry.ingredientId));
     const costIds = new Set(contentRightsRegistry.costs.map((entry) => entry.id));
-    expect(usedIngredientIds.size).toBe(89);
+    expect(usedIngredientIds.size).toBe(93);
     for (const ingredientId of usedIngredientIds) {
       const ingredient = ingredients.find((entry) => entry.id === ingredientId)!;
       expect(nutritionIds.has(ingredientId), ingredientId).toBe(true);
@@ -460,6 +490,7 @@ function registryWithValidProductProfile(): ContentRightsRegistry {
   const decisionId = `usage-${artifactId}`;
   registry.artifacts = [...registry.artifacts, {
     id: artifactId,
+    version: "clv1-test-product-profile",
     subject: { type: "product-profile", id: "test-product-profile" },
     kind: "product-profile",
     derivation: "factual-synthesis",
@@ -468,7 +499,6 @@ function registryWithValidProductProfile(): ContentRightsRegistry {
     rightsAssessmentId: assessmentId,
     usageDecisionId: decisionId,
     attributionRequirementIds: [],
-    review: { expression: "passed", culinary: "not-applicable", reviewer: "test reviewer", reviewedAt: "2026-09-06" },
   }];
   registry.assessments = [...registry.assessments, {
     ...structuredClone(registry.assessments[0]),

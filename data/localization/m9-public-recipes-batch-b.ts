@@ -44,13 +44,13 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
   "malaysian-turmeric-chicken": en({
     name: "Home-Style Turmeric Chicken",
     description:
-      "A home-style chicken stir-fry with turmeric, ginger, and garlic, designed around a thin spice coating and complete cooking.",
+      "A lower-oil home stir-fry inspired by ayam goreng kunyit, with turmeric chicken, cauliflower, carrot, onion, and fresh chili.",
     steps: [
       {
         instruction:
-          "Cut the chicken thighs into evenly sized pieces and pat them dry. Toss with the turmeric and salt, then mince the ginger and garlic and slice the onion.",
+          "Cut the chicken thighs into even thin pieces and pat them dry. Toss with turmeric and salt. Cut the cauliflower into small florets, thinly slice the carrot, and prepare the ginger, garlic, onion, and fresh chili.",
         why:
-          "A dry surface and thin spice coating promote browning. Thick clumps of turmeric can scorch and taste bitter.",
+          "Thin, even chicken pieces finish while the vegetables stay crisp-tender. A light turmeric coating is less likely to scorch than thick clumps.",
       },
       {
         instruction:
@@ -60,18 +60,18 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
       },
       {
         instruction:
-          "When most of the chicken has changed color, add the onion and cook until its edges turn translucent. Add the ginger and garlic and toss briefly.",
+          "When most of the chicken has changed color, add the cauliflower, carrot, and onion. Stir-fry until the cauliflower has pale brown spots and the carrot still has bite.",
         why:
-          "The onion needs more time than the ginger and garlic. Adding the aromatics later keeps them from burning before the chicken is done.",
+          "Adding the sturdier vegetables first lets them finish with the chicken. If the crowded pan begins to steam, spread the ingredients out and raise the heat instead of covering it.",
       },
       {
         instruction:
-          "Continue stir-frying over medium heat until the center of the thickest chicken piece is no longer pink and the turmeric smells fragrant without any burnt odor. Remove from the heat immediately.",
+          "Add the ginger, garlic, and fresh chili and toss briefly. Reduce to medium and continue until the thickest chicken piece reaches 74°C / 165°F, then remove from the heat.",
         why:
-          "The thickest piece is the most reliable doneness check. Reduce the heat if the spices darken too quickly.",
+          "Late aromatics avoid scorching. A probe temperature is more reliable than meat color, while the vegetables should remain cooked but still firm.",
       },
     ],
-    principles: ["Use a thin, even spice coating", "Brown the chicken before adding aromatics", "Check the thickest piece for doneness"],
+    principles: ["Use a thin, even spice coating", "Brown the chicken before the vegetables", "Check the thickest piece for doneness"],
   }),
   "singapore-chicken-rice-home": en({
     name: "One-Pot Home-Style Chicken Rice",
@@ -98,9 +98,9 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
       },
       {
         instruction:
-          "Open the lid and check that the center of the thickest chicken piece is no longer pink and its juices run clear. Remove and slice the chicken, fluff the rice, and serve with the cucumber.",
+          "Open the lid and check that the center of the thickest chicken piece reaches 74°C / 165°F. Remove and slice the chicken, fluff the rice, and serve with the cucumber.",
         why:
-          "Confirm the chicken is fully cooked before serving. If the center is still underdone, heat the chicken separately rather than repeatedly steaming the entire pot of rice.",
+          "A probe temperature is more reliable than meat color or clear juices. If the chicken is below the safe temperature, heat it separately rather than repeatedly steaming the entire pot of rice.",
       },
     ],
     principles: ["Use even thickness for one-pot cooking", "Keep the covered rest after the rice cycle", "Check the thickest part of the chicken"],
@@ -295,66 +295,66 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
   "greek-lemon-oregano-chicken": en({
     name: "Greek-Inspired Lemon Oregano Chicken",
     description:
-      "A home-style grill-pan chicken flavored with lemon, oregano, and garlic, inspired by a common Greek flavor combination.",
+      "Home-style grill-pan chicken pieces flavored with lemon, oregano, and garlic, inspired by a common Greek flavor combination.",
     steps: [
       {
         instruction:
-          "Gently flatten the thickest parts of the chicken thighs to an even thickness. Pat dry and coat with oil, salt, garlic, and oregano, keeping the lemon for the end.",
+          "Cut the chicken thighs into even 3 cm pieces. Pat dry and coat with oil, salt, garlic, and oregano, keeping the lemon for the end.",
         why:
-          "Even thickness supports consistent cooking. Adding a large amount of lemon juice now would wet the surface and interfere with browning.",
+          "Even pieces finish cooking together. Adding a large amount of lemon juice now would wet the surface and interfere with browning.",
       },
       {
         instruction:
-          "Preheat the grill pan until a drop of water evaporates immediately. Add the chicken and leave it in place until clear brown grill marks form underneath.",
+          "Preheat the grill pan until a drop of water evaporates immediately. Arrange the chicken in one layer with space between the pieces.",
         why:
-          "Steady contact with a hot surface builds browned flavor. Frequent movement reduces the effective contact time.",
+          "A single uncrowded layer preserves pan heat and lets each piece touch the hot surface instead of steaming.",
       },
       {
         instruction:
-          "Turn the chicken, reduce to medium-low heat, and continue cooking until the thickest part is no longer pink and the juices run clear.",
+          "Leave the chicken in place until the contact side has clear brown marks. Turn once, then reduce to medium-low until the thickest piece reaches 74°C / 165°F.",
         why:
-          "Lower heat finishes the center without burning an already browned surface. Cover briefly if the outside colors faster than the center cooks.",
+          "Stable contact builds browned flavor; a probe temperature confirms the safety endpoint. Lower heat finishes the center without burning the surface.",
       },
       {
         instruction:
-          "Rest the chicken off the heat for 3 minutes, then slice and squeeze over the lemon juice. Turn the cut surfaces through the juices on the plate.",
+          "Rest the chicken off the heat for 3 minutes, squeeze over the lemon juice, and turn the pieces lightly through the juices on the plate.",
         why:
           "Resting balances heat and juices through the meat. Adding lemon at the end preserves its bright aroma.",
       },
     ],
-    principles: ["Even the thickness before cooking", "Brown over high heat before lowering it", "Add lemon after cooking"],
+    principles: ["Cut the pieces evenly", "Brown in one layer before lowering the heat", "Add lemon after cooking"],
   }),
   "mexican-black-bean-tacos": en({
     name: "Home-Style Black Bean Tacos",
     description:
-      "A modern home-style combination of black beans, tomatoes, and crisp vegetables in corn tortillas, without claiming a single traditional regional recipe.",
+      "A modern home-style combination of black beans, tomatoes, mushrooms, cabbage, and avocado in corn tortillas, without claiming a single traditional regional recipe.",
     steps: [
       {
         instruction:
-          "Drain the cooked black beans thoroughly. Dice the tomatoes and onion, finely shred the cabbage, chop the cilantro, and cut the lime into wedges.",
+          "Drain the cooked black beans thoroughly. Slice the mushrooms, dice the tomatoes and onion, finely shred the cabbage, slice the avocado, and cut the lime into wedges.",
         why:
-          "Clearly cooked beans keep the recipe within its stated time. Thorough draining prevents a wet filling from softening the tortillas too quickly.",
+          "Clearly cooked beans keep the recipe within its stated time. Separate prep lets the high-moisture mushrooms cook first and the cabbage cook last.",
       },
       {
         instruction:
-          "Add the beans, tomatoes, onion, and cumin to a pot. Cook over medium-low heat until the tomatoes collapse and no liquid pools at the bottom.",
+          "Heat the oil over medium and spread the mushrooms in the pan. Cook until their moisture has largely evaporated and the edges turn pale brown, then add the onion and cook until translucent.",
         why:
-          "A moist filling that does not run keeps the tortillas intact. Add only a small splash of hot water if the mixture dries before the tomatoes soften.",
+          "Removing mushroom moisture first concentrates their flavor and prevents a watery bean filling.",
       },
       {
         instruction:
-          "Lightly crush about one quarter of the beans with a spatula, add the salt, and stir until the filling is cohesive enough to mound.",
+          "Add the tomatoes, beans, and cumin and cook over medium-low until the tomatoes soften. Lightly crush about one quarter of the beans, then add the cabbage and salt and cook just until the shreds soften.",
         why:
-          "Crushing a small portion thickens the filling naturally while preserving most of the beans' texture.",
+          "Crushing a small portion binds the filling naturally. Adding cabbage at the end preserves its color and light crunch.",
       },
       {
         instruction:
-          "Warm the corn tortillas one at a time until flexible and lightly fragrant. Fill immediately with the beans, cabbage, and cilantro, then squeeze over lime just before eating.",
+          "Warm the corn tortillas one at a time until flexible and lightly fragrant. Fill immediately with the warm bean mixture, top with avocado, and squeeze over lime just before eating.",
         why:
-          "Warm tortillas bend without cracking. Adding the crisp vegetables and acid at the end preserves their texture and bright flavor.",
+          "Warm tortillas bend without cracking. Adding avocado and acid at serving time preserves their creamy texture and bright flavor.",
       },
     ],
-    principles: ["Start with clearly cooked black beans", "Reduce the filling until it does not run", "Assemble the warm and crisp components at serving time"],
+    principles: ["Cook off mushroom moisture first", "Start with clearly cooked black beans", "Add avocado and lime at serving time"],
   }),
   "huevos-rancheros-home": en({
     name: "Home-Style Huevos Rancheros",

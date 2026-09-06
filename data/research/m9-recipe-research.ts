@@ -464,7 +464,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "woks-of-life-steamed-chicken-mushrooms",
     sourceBUses: ["preparation", "safety"],
-    editorialDecision: "Publish as a Cantonese-style household preparation; do not imply dried lily flowers are present.",
+    editorialDecision: "Publish as a Cantonese-style household preparation using fresh shiitake; do not imply dried lily flowers are present.",
   },
   {
     slug: "hunan-chili-pork",
@@ -488,7 +488,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "preparation", "culture"],
     sourceB: "usda-safe-temperature-chart",
     sourceBUses: ["safety"],
-    editorialDecision: "Use Northwest-style wording and tested household steps; do not claim a single Xinjiang canonical recipe.",
+    editorialDecision: "Use Northwest-style wording and source-cross-checked household steps; do not claim a single Xinjiang canonical recipe or a culinary field test.",
   },
   {
     slug: "chaoshan-fish-congee",
@@ -528,7 +528,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "preparation", "culture"],
     sourceB: "maangchi-japchae",
     sourceBUses: ["identity", "preparation"],
-    editorialDecision: "Publish as japchae with independently tested noodle and component timing.",
+    editorialDecision: "Publish as japchae with independently written, source-cross-checked noodle and component timing; no culinary field test is claimed.",
   },
   {
     slug: "filipino-chicken-adobo-home",
@@ -552,7 +552,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "rasa-malaysia-turmeric-chicken",
     sourceBUses: ["identity", "preparation"],
-    editorialDecision: "Clearly label the low-oil stir-fry as a household adaptation, not traditional ayam goreng kunyit frying.",
+    editorialDecision: "Clearly label the vegetable-rich, lower-oil stir-fry as a household adaptation inspired by ayam goreng kunyit, not an official or canonical formula.",
   },
   {
     slug: "singapore-chicken-rice-home",
@@ -568,7 +568,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "hot-thai-kitchen-papaya-salad",
     sourceBUses: ["identity", "preparation", "safety"],
-    editorialDecision: "Publish as a vegan household som-tam adaptation and disclose omitted fish sauce and dried shrimp.",
+    editorialDecision: "Publish as a household som-tam adaptation using fish sauce and roasted peanuts; omit dried shrimp and do not label it vegan.",
   },
   {
     slug: "indian-masoor-dal",
@@ -576,7 +576,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "preparation"],
     sourceB: "dassana-masoor-dal",
     sourceBUses: ["identity", "preparation"],
-    editorialDecision: "Publish as a household masoor dal with independently tested tempering and consistency cues.",
+    editorialDecision: "Publish as a household masoor dal with independently written, source-cross-checked tempering and consistency cues; no culinary field test is claimed.",
   },
   {
     slug: "indian-chana-masala-home",
@@ -592,7 +592,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "preparation", "culture"],
     sourceB: "mediterranean-dish-mujadara",
     sourceBUses: ["identity", "preparation"],
-    editorialDecision: "Publish as Lebanese-style mujadara with tested lentil-rice timing and deeply browned onions.",
+    editorialDecision: "Publish as Lebanese-style mujadara with source-cross-checked lentil-rice timing and deeply browned onions; no culinary field test is claimed.",
   },
   {
     slug: "spanish-potato-omelet",
@@ -632,7 +632,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "culture"],
     sourceB: "mexico-health-bean-recipe-book",
     sourceBUses: ["preparation", "safety"],
-    editorialDecision: "Publish as a modern household black-bean taco combination; make no canonical-origin claim.",
+    editorialDecision: "Publish as a modern household black-bean, mushroom, cabbage, and avocado taco combination; make no canonical-origin claim.",
   },
   {
     slug: "huevos-rancheros-home",
@@ -640,7 +640,7 @@ const recipeResearchPlans = [
     sourceAUses: ["identity", "preparation", "culture"],
     sourceB: "mely-martinez-huevos-rancheros",
     sourceBUses: ["identity", "preparation", "safety"],
-    editorialDecision: "Publish as a household huevos-rancheros preparation with tested egg doneness and salsa handling.",
+    editorialDecision: "Publish as a household huevos-rancheros preparation with source-cross-checked egg doneness and salsa handling; no culinary field test is claimed.",
   },
 ] satisfies readonly RecipeResearchPlan[];
 

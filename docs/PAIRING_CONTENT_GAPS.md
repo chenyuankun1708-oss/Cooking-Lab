@@ -29,7 +29,7 @@ Pairing readiness audit 覆盖全部 26 个 locale-complete published CulinaryIt
 2. 增加有 crisp/light 信号、准备负担低的 starter 与真正独立的 side。
 3. 在现有主要 cuisine 中补至少一条可连贯组合的 role 链，而不是继续增加孤立 drink。
 4. 增加 preparation 较轻、texture 不重复的 dessert，再评估四道式模板。
-5. 继续人工审核 Flavor、serving context 与 portion semantics；不要让算法反向制造文化归属或感官事实。
+5. 按 `docs/PUBLISHING_GOVERNANCE.md` 的风险路由继续审查 Flavor、serving context 与 portion semantics；LOW 可由独立 agent reviewer 完成，HIGH 保留适用的人类或专家 checkpoint。不要让算法反向制造文化归属或感官事实。
 
 ## Deferred Templates
 

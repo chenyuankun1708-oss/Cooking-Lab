@@ -46,12 +46,19 @@ describe("M9 Recipe publication readiness", () => {
     })).toContain("japanese-oyakodon: accepted sources must represent two independent publishers or institutions");
   });
 
-  it("records the two identity corrections in the public candidates", () => {
+  it("records corrected identities and preparation tools in the public candidates", () => {
     const bySlug = new Map(candidates.map((recipe) => [recipe.slug, recipe]));
     expect(bySlug.get("yunnan-mushroom-chicken-stew")?.name).toBe("菌菇炖鸡");
     expect(bySlug.get("yunnan-mushroom-chicken-stew")?.taxonomy.cuisine.cuisineId).toBe("chinese");
     expect(bySlug.get("chaoshan-fish-congee")?.name).toBe("鱼片粥家庭版");
     expect(bySlug.get("chaoshan-fish-congee")?.taxonomy.cuisine.cuisineId).toBe("chinese");
+    expect(bySlug.get("greek-lemon-oregano-chicken")?.name).toBe("希腊风味柠檬牛至鸡");
+    expect(bySlug.get("greek-lemon-oregano-chicken")?.tools).toEqual([
+      "knife",
+      "cutting-board",
+      "grill-pan",
+      "tongs",
+    ]);
   });
 
   it("exposes localized principles and accepted research sources in the unified detail model", () => {

@@ -48,6 +48,11 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality" | "nutritionProvenanc
     defaultUnit: "g", estimatedPricePer100g: 0.7, tags: ["vegan"],
   },
   {
+    id: "roasted-peanut", name: "无盐烤花生", aliases: ["烤花生", "花生"], category: "protein",
+    nutritionPer100g: nutrition(585, 23.7, 49.7, 6.9, 21.5, 4.2, 8, 6),
+    defaultUnit: "g", estimatedPricePer100g: 2.2, tags: ["vegan", "high-protein"],
+  },
+  {
     id: "dry-lentil", name: "干扁豆", aliases: ["扁豆"], category: "protein",
     nutritionPer100g: nutrition(352, 24.6, 1.1, 0.2, 63.4, 2, 10.7, 6),
     defaultUnit: "g", estimatedPricePer100g: 1.8, tags: ["vegan", "high-fiber"],
@@ -89,6 +94,11 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality" | "nutritionProvenanc
     defaultUnit: "g", estimatedPricePer100g: 1.8, tags: ["vegan"],
   },
   {
+    id: "shiitake-mushroom", name: "鲜香菇", aliases: ["香菇", "冬菇"], category: "vegetable",
+    nutritionPer100g: nutrition(34, 2.2, 0.5, 0.1, 6.8, 2.4, 2.5, 9),
+    defaultUnit: "g", estimatedPricePer100g: 2.4, tags: ["vegan"],
+  },
+  {
     id: "potato", name: "土豆", aliases: ["马铃薯"], category: "vegetable",
     nutritionPer100g: nutrition(77, 2, 0.1, 0, 17.5, 0.8, 2.1, 6),
     defaultUnit: "g", approximateUnitWeight: { piece: 180 }, estimatedPricePer100g: 0.5,
@@ -105,6 +115,17 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality" | "nutritionProvenanc
     nutritionPer100g: nutrition(41, 0.9, 0.2, 0, 9.6, 4.7, 2.8, 69),
     defaultUnit: "g", approximateUnitWeight: { piece: 120 }, estimatedPricePer100g: 0.6,
     tags: ["vegan"],
+  },
+  {
+    id: "cauliflower", name: "白花椰菜", aliases: ["菜花"], category: "vegetable",
+    nutritionPer100g: nutrition(25, 1.9, 0.3, 0.1, 5, 1.9, 2, 30),
+    defaultUnit: "g", estimatedPricePer100g: 1.1, tags: ["vegan", "high-fiber"],
+  },
+  {
+    id: "avocado", name: "牛油果", aliases: ["鳄梨"], category: "vegetable",
+    nutritionPer100g: nutrition(160, 2, 14.7, 2.1, 8.5, 0.7, 6.7, 7),
+    defaultUnit: "g", approximateUnitWeight: { piece: 150 }, estimatedPricePer100g: 4,
+    tags: ["vegan", "fruit"],
   },
   {
     id: "cucumber", name: "黄瓜", aliases: ["青瓜"], category: "vegetable",

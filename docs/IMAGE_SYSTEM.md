@@ -174,7 +174,7 @@ Recipe hero 默认是有内容的图片，alt 必须具体描述画面，例如�
 - AI provenance 完整
 - Recipe heroImageId 存在、role 正确且路径 slug 对齐
 
-测试不访问互联网。来源真实性与授权文本仍需要人工审核，validator 只保证记录完整和明显不安全状态不会进入 dataset。
+测试不访问互联网。来源真实性、授权文本与图片 fidelity 仍需按 `docs/PUBLISHING_GOVERNANCE.md` 完成独立审查；LOW 可使用独立 agent reviewer，权利不明或其他 HIGH 风险继续 BLOCK 或进入适用的人类/法律 checkpoint。validator 负责保证记录完整和明显不安全状态不会进入 dataset。
 
 ## Add One Image Workflow
 

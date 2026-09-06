@@ -14,7 +14,9 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - Taste Redesign - Overhaul 已覆盖首页、目录、详情、Pairing 和 Plan；主题选择跟随系统并在可用时本地保存。
 - 最新 412 px local Production 实测：英文 LCP 244 ms / CLS 0 / INP 152 ms，中文 LCP 216 ms / CLS 0 / INP 160 ms；Lighthouse accessibility 为 1.00。该结果是可复现 lab evidence，不代替 merge 后的 Production field observation。
 - 当前 50 项各自通过 content package module 进入 repository，独立提交的 deterministic manifest、`content:audit` 与 M10 gate 共同阻止过期 identity/Story/Hero/usage decisions。
-- 完整 120 项验收仍缺 70 个经独立人工内容审校的内容包。M10 要求 AI 辅助表达记录 provenance 并通过 human review；实现 agent 不能自证该门禁，因此不会伪造 120 项已完成。
+- PR #95 已独立 merge 并交付 M11 工程、计划体验、内容包容量边界与 Taste 视觉升级；新增 70 项仍未发布。
+- Product Director 已批准 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。Issue #96 负责先让 schema、validator、CI 与文档 fail closed，生效前不得发布新增内容。
+- Issue #96 的 reviewer hardening 已在 PR #97 完成实现与本地验证：artifact fingerprint 覆盖 Source、Evidence、rights、attribution、AI/data/translation 路径及本地图片 SHA-256；sampling 使用真实 item 的风险等价类覆盖，major finding 自动冻结并要求连续两个 clean 100% re-review 批次。五批历史完整保留，当前 artifact 已完成两轮连续 clean recovery，registry 为 `ready=true`；合并和 CI 上线前新增 70 项仍保持未发布。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -61,7 +63,7 @@ Production URL：
 
 - 已新增统一 `ContentArtifact / RightsAssessment / AttributionRequirement / UsageDecision` 及 dataset、nutrition、cost、AI、external media、restaurant 与 product-profile contract
 - Recipe 公开边界和完整 CulinaryItem 公开边界均接入确定性 content-rights gate；任一 unknown、NC/ND、rights-changed、署名缺失、复审过期、AI/数据库/媒体规则失败会阻止测试和 production build
-- 当前 50 项无 grandfathering：34 个 adapted Recipe、16 个 native CulinaryItem、50 张 Hero、6 个 Story 和实际使用的 89 种食材均进入 audit coverage
+- 当前 50 项无 grandfathering：34 个 adapted Recipe、16 个 native CulinaryItem、50 张 Hero、6 个 Story 和实际使用的 93 种食材均进入 audit coverage
 - 当前营养继续明确为 Cooking Lab 演示性编辑估算；USDA FoodData Central 只登记为未来 CC0 versioned-download dataset，未伪称为现有数值来源
 - 料理详情已增加稳定 `#sources`、内容身份、消费级来源、图片许可与改编声明；新增双语 `/content-rights` 与 legacy 永久重定向
 - 独立图片权利复核发现旧 Fino、Junmai 与 Espresso Hero 的品牌包装/商业小包装风险，已替换为无品牌酒桶与酒花、无标识清酒器具和公有领域白色咖啡杯，并登记逐图构图、商标与隐私判断
@@ -87,7 +89,7 @@ Production URL：
 
 - Next.js / TypeScript / Tailwind Web 应用骨架
 - Ingredient、Recipe、Nutrition、Recommendation 类型系统
-- 102 种 `demo-estimated` 食材、100 道结构化 Recipe 与 16 个 native CulinaryItem
+- 106 种 `demo-estimated` 食材、100 道结构化 Recipe 与 16 个 native CulinaryItem
 - Unit Conversion、Nutrition Engine、Cost Engine 与 Dataset Validation
 - 硬限制 + 软偏好的确定性 Recommendation Engine
 - 首页即时料理决策、已发布目录、稳定 slug 详情页
@@ -410,4 +412,4 @@ PR #36 已合并 Living Editorial Hero：
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
 - M10 已完成并继续作为 M11 的强制发布门禁。
 - M11 工程、内容包基础和视觉升级进入 PR 交付；Epic #87 与内容 Issues #91/#92 保持开放。
-- 完整 120 项发布仍等待独立人工 editorial review 产能。没有该证据时，70 个新增内容包不得进入公开 manifest。
+- 完整 120 项发布现在等待 Issue #96 的 M10.1 fail-closed governance 先落地，再按 LOW/MEDIUM/HIGH 路由完成 70 项独立 agent review、sampling QA 或适用的人类/专家/法律 checkpoint。新门禁生效前不得把新增内容放入公开 manifest。

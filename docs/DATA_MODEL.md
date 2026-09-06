@@ -20,7 +20,7 @@ Issue #42 不改变这些 domain identities，只在 Web route 外层增加 `/zh
 
 ## Ingredient
 
-当前包含 102 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量只补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材。
+当前包含 106 种 Ingredient，使用稳定 `id`、名称/别名、类别、每 100g 营养、默认单位、非重量单位近似克重、每 100g 静态参考价和标签。价格是 demo 估算，不代表城市或实时市场价格。其中原有 73 项继续覆盖 Recipe 数据集，Issue #40 的 29 项增量补足新料理所需的茶叶、咖啡、香料、饮品与甜品食材；M10.1 图片/料理一致性修订补入烤花生、鲜香菇、白花椰菜和牛油果。
 
 - `id` 使用稳定的英文 kebab-case，名称和别名仅用于展示与搜索。
 - `nutritionPer100g` 所有字段均为非负有限数；当前值是用于产品验证的公开常识级估算，不代表特定品牌、产地、烹饪状态或医学建议。
@@ -31,7 +31,7 @@ Issue #42 不改变这些 domain identities，只在 Web route 外层增加 `/zh
 - 使用非重量默认单位的食材必须提供对应近似克重。数据校验同时检查重复 ID/名称、非法营养值、非法价格和无效换算重量。
 - 当前类别是面向 MVP 筛选的粗粒度烹饪分类；例如豆类归入 `protein`、块茎归入 `vegetable` 并使用 `staple` 标签。若后续需要食品学分类或多维筛选，应另行升级 schema，而不是改变现有类别含义。
 - 当 raw / dry / cooked / canned / frozen 状态会显著改变营养、重量、时间或推荐匹配时，状态必须体现在稳定 ID 和显示名称中，不能由 recipe 文案隐含。当前使用 `dry-lentil`、`cooked-chickpea`、`cooked-black-bean`、`cooked-rice`；日常熟豆 recipe 不再引用含义模糊的干豆 ID。
-- 当前 73 种 Recipe 食材覆盖 100 道菜谱的主要类别；新增 29 种 CulinaryItem 食材均被 native item 引用。自动化校验继续阻止两套内容的悬空 Ingredient ID。
+- 当前 76 种 Recipe 食材覆盖 100 道菜谱的主要类别；新增 29 种 CulinaryItem 食材均被 native item 引用。自动化校验继续阻止两套内容的悬空 Ingredient ID。
 
 ## Recipe
 
@@ -83,6 +83,8 @@ Nutrition Engine 对缺失食材、非法营养数据或单位转换失败返回
 `validateIngredients`、`validateRecipes` 与 `validateImageAssets` 分别负责静态实体规则；`validateDataset` 组合三者并检查完整 Ingredient/Recipe/Image 集合。当前只在自动化测试或显式 build-time 检查中运行，不在 production 页面每次 render 时重复执行。TypeScript 负责结构约束，validator 负责重复值、引用、数值范围、单位可换算性、图片授权 metadata 及跨字段规则。已知需要长时间浸泡与煮制的 `dry-chickpea` / `dry-black-bean` 若总时间短于 120 分钟，会被直接拒绝。
 
 `evaluateRecipePublishingEligibility` 是更窄的发布 gate：在 Recipe validation 之外验证 nutrition/cost completeness、hero/license/local asset/alt、公开步骤信息量和事实性 culture provenance。M9 额外要求新增 published Recipe 具备 closed ResearchRecord、至少两个独立 accepted Source、完整英文审校与 4–6 个可执行步骤。更深的 sensory cue、doneness、失败预防与 food accuracy 仍由人工 editorial review 决定，不使用脆弱 NLP 规则自动盖章。当前 public adapter 暴露 34 道 published Recipe。
+
+M10.1 将 review identity 从 `reviewed` 状态和自由文本 reviewer 中拆出为 `ReviewAttestation`。Attestation 分别记录六个 review dimension、author/reviewer actor-run-context、reviewed commit、artifact-set version、rubric/policy、verdict 与 findings。LOW 可以由真正独立的 agent review；MEDIUM 需要分离 context；HIGH 保留人类、领域专家或法律 checkpoint。`ContentArtifact.version` 与 committed attestation 不匹配时 public repository fail closed；agent review 不能表示为 human approval、culinary field test 或 legal opinion。
 
 `evaluateCulinaryItemPublishingEligibility` 按 item type 执行统一门禁：所有公开条目需要已审核默认语言、可解析 taxonomy/pairing、合法 primary image 和可达 Story provenance；procedural item 还需完整 ingredient 引用、类型对应的最少步骤和料理 rationale。dish/dessert 必须具备 nutrition 与 cost model；plain tea 和成品酒可以诚实使用 `not-modeled`，成品酒以 serving guidance 或无需消费者制作发布，不编造 cooking steps。`getPublishedCulinaryItems()` 是 50 项统一读取边界，只有推荐引擎继续使用 Recipe-only public source。
 

@@ -5,6 +5,7 @@ import { formatImageAttribution } from "./recipe-images";
 
 export interface ConsumerAttribution {
   id: string;
+  disclosureKind: "license-required" | "provenance-only";
   notice: string;
   sourceUrl: string;
   licenseId: string;
@@ -46,17 +47,11 @@ export function buildConsumerRightsDisclosure(
   const imageArtifact = imageId
     ? registry.artifacts.find((artifact) => artifact.subject.type === "image" && artifact.subject.id === imageId)
     : undefined;
-  const imageAssessment = imageArtifact
-    ? registry.assessments.find((assessment) => assessment.id === imageArtifact.rightsAssessmentId)
-    : undefined;
-  const attributionIds = new Set([
-    ...(imageArtifact?.attributionRequirementIds ?? []),
-    ...(imageAssessment?.attributionRequirementIds ?? []),
-  ]);
   const attributions = registry.attributions
-    .filter((attribution) => attributionIds.has(attribution.id))
+    .filter((attribution) => attribution.artifactId === imageArtifact?.id)
     .map((attribution) => ({
       id: attribution.id,
+      disclosureKind: attribution.disclosureKind,
       notice: formatImageAttribution(attribution.notice, locale),
       sourceUrl: attribution.sourceUrl,
       licenseId: attribution.licenseId,

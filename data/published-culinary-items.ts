@@ -23,10 +23,20 @@ import { m9RecipeResearchRecords, m9RecipeResearchSources } from "./research/m9-
 import { assertContentBundleManifestReady } from "@/lib/content-bundle";
 import { publishedContentBundleManifest } from "./content-bundle-manifest";
 import { publishedLocalContentPackages } from "./content-packages";
+import { createPublishingGovernanceRegistry } from "./publishing-governance";
+import {
+  assertPublishingGovernanceReady,
+  createPublishingGovernanceReport,
+  evaluatePublishingGovernance,
+} from "@/lib/publishing-governance";
+import { createImageAssetVersions } from "@/lib/image-asset-version";
+import { createPublishingLocalizationVersions } from "./publishing-localization-versions";
 
 export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
 const allImages = [...recipeImages, ...culinaryImages];
+export const contentImageAssetVersions = Object.freeze(createImageAssetVersions(allImages));
+export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients));
 const candidates: CulinaryItem[] = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
 const publishingContext: CulinaryPublishingContext = {
   ingredients,
@@ -65,6 +75,43 @@ const contentRightsContext = {
 assertContentRightsReady(contentRightsRegistry, contentRightsContext);
 export const contentRightsAuditReport = createContentRightsAuditReport(
   evaluateContentRightsRegistry(contentRightsRegistry, contentRightsContext),
+);
+export const publishingGovernanceRegistry = createPublishingGovernanceRegistry({
+  items: candidates,
+  rightsRegistry: contentRightsRegistry,
+  images: allImages,
+  sources: allSources,
+  evidence: allEvidence,
+  stories: culinaryStories,
+  researchRecords: m9RecipeResearchRecords,
+  ingredients,
+  contentPackages: publishedLocalContentPackages,
+  localizationVersions: contentLocalizationVersions,
+  imageAssetVersions: contentImageAssetVersions,
+});
+const publishingGovernanceContext = {
+  items: candidates,
+  rightsRegistry: contentRightsRegistry,
+  images: allImages,
+  sources: allSources,
+  evidence: allEvidence,
+  stories: culinaryStories,
+  researchRecords: m9RecipeResearchRecords,
+  ingredients,
+  contentPaths: publishedLocalContentPackages.map((contentPackage) => ({
+    itemId: contentPackage.itemId,
+    kind: contentPackage.sourceKind === "legacy-recipe"
+      ? "adapted-recipe" as const
+      : contentPackage.sourceKind === "legacy-native"
+        ? "native-culinary" as const
+        : "standalone-package" as const,
+  })),
+  localizationVersions: contentLocalizationVersions,
+  imageAssetVersions: contentImageAssetVersions,
+} as const;
+assertPublishingGovernanceReady(publishingGovernanceRegistry, publishingGovernanceContext);
+export const publishingGovernanceAuditReport = createPublishingGovernanceReport(
+  evaluatePublishingGovernance(publishingGovernanceRegistry, publishingGovernanceContext),
 );
 
 const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));

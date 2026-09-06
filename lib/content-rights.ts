@@ -102,12 +102,7 @@ export function evaluateContentRightsRegistry(
       report("missing-reference", artifact.id, "rightsAssessmentId", "Artifact assessment must identify the same artifact");
     }
     if (!decision) report("missing-reference", artifact.id, "usageDecisionId", `Missing decision ${artifact.usageDecisionId}`);
-    if (artifact.review.expression === "required" || artifact.review.culinary === "required") {
-      report("review-incomplete", artifact.id, "review", "Expression and culinary reviews must be resolved before Production");
-    }
-    if (!artifact.review.reviewer.trim() || !isIsoDate(artifact.review.reviewedAt)) {
-      report("review-incomplete", artifact.id, "review", "Artifact review requires a reviewer and ISO review date");
-    }
+    if (!artifact.version.trim()) report("review-incomplete", artifact.id, "version", "Artifact requires a deterministic content version");
     for (const attributionId of artifact.attributionRequirementIds) {
       const attribution = attributions.get(attributionId);
       if (!attribution) report("missing-reference", artifact.id, "attributionRequirementIds", `Missing attribution ${attributionId}`);
@@ -124,7 +119,7 @@ export function evaluateContentRightsRegistry(
   validateExternalMedia(registry, assessments, context.sources, report);
   validateRestaurants(registry, context, assessments, report);
   validateProductProfiles(registry, context, assessments, artifacts, report);
-  validateSources(context.sources, registry, report);
+  validateSources(context.sources, context.evidence, registry, report);
   validatePublishedCoverage(registry, context, report);
 
   return {
@@ -281,6 +276,9 @@ function validateAttributions(
     if (attribution.shareAlikeRequired && !attribution.isolationBoundary) {
       report("share-alike-not-isolated", attribution.id, "isolationBoundary", "ShareAlike material must use an isolated asset or dataset boundary");
     }
+    if (attribution.disclosureKind === "provenance-only" && (attribution.shareAlikeRequired || attribution.isolationBoundary)) {
+      report("attribution-invalid", attribution.id, "disclosureKind", "A provenance-only disclosure cannot claim ShareAlike obligations");
+    }
   }
 }
 
@@ -299,8 +297,8 @@ function validateAi(
     if (!record.provider.trim() || !record.model.trim() || !record.modelVersion.trim() || !record.promptTemplateVersion.trim() || !isHttps(record.termsUrl) || !isIsoDate(record.termsEffectiveDate) || !isIsoDate(record.generatedAt)) {
       report("ai-review-incomplete", artifact.id, "ai.terms", "AI provider, model version, and dated terms are required");
     }
-    if (record.humanReview !== "passed" || record.similarityReview !== "passed" || record.trademarkReview === "required") {
-      report("ai-review-incomplete", artifact.id, "ai.review", "Human, similarity, and trademark reviews must pass");
+    if (!record.reviewAttestationIds.length || record.similarityReview !== "passed" || record.trademarkReview === "required") {
+      report("ai-review-incomplete", artifact.id, "ai.review", "Risk-based review attestations, similarity review, and trademark review must be present before Production");
     }
     if (!record.inputRightsReviewed) report("ai-input-rights-unknown", artifact.id, "ai.inputRightsReviewed", "AI inputs must have cleared rights");
     for (const inputId of record.inputArtifactIds) {
@@ -448,11 +446,17 @@ function validateProductProfiles(
 
 function validateSources(
   sources: readonly Source[],
+  evidenceRecords: readonly Evidence[],
   registry: ContentRightsRegistry,
   report: (code: ContentRightsIssueCode, subjectId: string, field: string, message: string) => void,
 ) {
+  const evidenceById = new Map(evidenceRecords.map((evidence) => [evidence.id, evidence]));
   const usedSourceIds = new Set([
     ...registry.artifacts.flatMap((artifact) => artifact.sourceIds),
+    ...registry.artifacts.flatMap((artifact) => artifact.evidenceIds.flatMap((evidenceId) => {
+      const evidence = evidenceById.get(evidenceId);
+      return evidence ? [evidence.sourceId] : [];
+    })),
     ...registry.externalMedia.map((media) => media.sourceId),
     ...registry.restaurants.flatMap((identity) => "sourceIds" in identity ? identity.sourceIds : []),
     ...registry.productProfiles.flatMap((profile) => profile.sourceIds),
@@ -480,6 +484,7 @@ function validatePublishedCoverage(
   const datasetById = new Map(registry.datasets.map((dataset) => [dataset.id, dataset]));
   const storyIds = new Set(context.stories.map((story) => story.id));
   const evidenceIds = new Set(context.evidence.map((evidence) => evidence.id));
+  const evidenceById = new Map(context.evidence.map((entry) => [entry.id, entry]));
   const sourceIds = new Set(context.sources.map((source) => source.id));
   const closedResearch = context.researchRecords.filter((record) => record.status === "closed");
 
@@ -497,13 +502,25 @@ function validatePublishedCoverage(
         const assessment = assessmentById.get(artifact.rightsAssessmentId);
         const decision = decisionById.get(artifact.usageDecisionId);
         const needsAttribution = ["cc-by", "cc-by-sa", "unsplash-license", "pexels-license", "pixabay-content-license", "other-permitted"].includes(image.license);
+        const needsProvenanceDisclosure = image.source !== "self-created" && Boolean(image.sourceUrl);
         const requirementIds = new Set([...(artifact.attributionRequirementIds ?? []), ...(assessment?.attributionRequirementIds ?? [])]);
         const validRequirement = [...requirementIds].some((id) => {
           const attribution = attributionById.get(id);
-          return attribution?.artifactId === artifact.id && attribution.creator === image.author && attribution.notice === image.attribution && attribution.sourceUrl === image.sourceUrl && attribution.licenseId === image.license && attribution.licenseUrl === image.licenseUrl;
+          return attribution?.disclosureKind === "license-required" && attribution.artifactId === artifact.id && attribution.creator === image.author && attribution.notice === image.attribution && attribution.sourceUrl === image.sourceUrl && attribution.licenseId === image.license && attribution.licenseUrl === image.licenseUrl;
         });
+        const validProvenanceDisclosure = registry.attributions.some((attribution) =>
+          attribution.artifactId === artifact.id
+          && attribution.creator === image.author
+          && attribution.notice === image.attribution
+          && attribution.sourceUrl === image.sourceUrl
+          && attribution.licenseId === image.license
+          && attribution.licenseUrl === image.licenseUrl
+          && (needsAttribution ? attribution.disclosureKind === "license-required" : attribution.disclosureKind === "provenance-only"));
         if (needsAttribution && (!assessment || assessment.basis.kind !== "open-license" || assessment.basis.licenseId !== image.license || !validRequirement || decision?.decision !== "allow-with-obligations")) {
           report("obligation-missing", imageId, "attribution", "Image license metadata must produce aligned assessment, attribution, and allowed-with-obligations decision records");
+        }
+        if (needsProvenanceDisclosure && !validProvenanceDisclosure) {
+          report("missing-reference", imageId, "imageProvenance", "Externally sourced images require an aligned consumer provenance disclosure even when the license does not require attribution");
         }
       }
     }
@@ -545,12 +562,18 @@ function validatePublishedCoverage(
   }
 
   for (const artifact of registry.artifacts) {
-    for (const evidenceId of artifact.evidenceIds) if (!evidenceIds.has(evidenceId)) report("missing-reference", artifact.id, "evidenceIds", `Missing Evidence ${evidenceId}`);
+    for (const evidenceId of artifact.evidenceIds) {
+      const evidence = evidenceById.get(evidenceId);
+      if (!evidenceIds.has(evidenceId) || !evidence) {
+        report("missing-reference", artifact.id, "evidenceIds", `Missing Evidence ${evidenceId}`);
+      } else if (!artifact.sourceIds.includes(evidence.sourceId)) {
+        report("missing-reference", artifact.id, "sourceIds", `Evidence ${evidenceId} requires Source ${evidence.sourceId} in the artifact provenance and UsageDecision chain`);
+      }
+    }
     for (const sourceId of artifact.sourceIds) if (!sourceIds.has(sourceId)) report("missing-reference", artifact.id, "sourceIds", `Missing Source ${sourceId}`);
   }
 
   const storyArtifacts = new Map(registry.artifacts.filter((artifact) => artifact.subject.type === "story").map((artifact) => [artifact.subject.id, artifact]));
-  const evidenceById = new Map(context.evidence.map((entry) => [entry.id, entry]));
   for (const story of context.stories.filter((entry) => entry.publication.status === "published")) {
     const artifact = storyArtifacts.get(story.id);
     if (!artifact) {

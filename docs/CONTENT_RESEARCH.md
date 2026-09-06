@@ -151,7 +151,7 @@ M10 后的发布链实际为：
 - Culinary plausibility：食材状态、时间、步骤、器具和服务方式是否成立
 - Cultural context：不把现代版本伪装成传统，不把一个机构说法写成普遍事实
 - Translation readiness：canonical ID 与显示语言分离，译文不会扩大原 claim
-- Publication eligibility：人工审校与 deterministic gate 都通过
+- Publication eligibility：risk-based independent review 与 deterministic gate 都通过；仅 HIGH 或明确专业 checkpoint 要求人类审查
 
 Validator 只证明 contract 与引用完整，不证明历史判断、版权结论或料理解释正确。
 

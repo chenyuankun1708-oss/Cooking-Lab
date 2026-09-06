@@ -29,7 +29,7 @@ GitHub tracking：Epic `#87`，Issues `#88-#94`。
 - 已建立 `MealPlanV1`、确定性购物合并、最早可用设备时间线、追加/替换分离的安全 URL codec、V0 migration 与版本化 localStorage。
 - 已增加双语 `/{locale}/plan`、推荐/详情/Pairing 入口、首页继续计划、详情章节导航、相似料理和双主题视觉基础。
 - 当前 50 项已通过逐项 package module 进入 repository，并建立独立提交的 deterministic manifest 与 `content:audit`。
-- 120 项公开验收仍缺 70 个经过独立人工内容审校且完全通过 M10 的本地内容包。实现 agent 不伪造这一审校结论。
+- 120 项公开验收仍缺 70 个完全通过 M10 rights gate、M10.1 风险分级独立审查与 sampling QA 的本地内容包。agent review 必须保留真实 actor/run/context 身份，不能表示为 human approval、料理实测或法律意见；HIGH 风险继续进入适用的人类、领域专家或法律 checkpoint。
 
 完整边界与当前停止条件见 `docs/M11_DECISION_TO_TABLE.md`。
 
@@ -72,7 +72,7 @@ GitHub tracking:
 
 在 taxonomy 稳定后，扩展内容覆盖面，形成一个更像“小型世界料理地图”的结构化数据集。
 
-当前已完成 100 道 recipe、73 种 Recipe ingredient、16 种 technique 与 20 个 country 状态的覆盖；Issue #40 另增加 29 种只服务 native CulinaryItem 的食材，repository 合计 102 种。Recipe 基线见 `docs/RECIPE_COVERAGE.md`。
+当前已完成 100 道 recipe、76 种 Recipe ingredient、16 种 technique 与 20 个 country 状态的覆盖；Issue #40 另增加 29 种只服务 native CulinaryItem 的食材，M10.1 图片/料理一致性修订补入烤花生、鲜香菇、白花椰菜和牛油果，repository 合计 106 种。Recipe 基线见 `docs/RECIPE_COVERAGE.md`。
 
 ### D. Recipe image system and visual asset pipeline
 

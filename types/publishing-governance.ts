@@ -128,6 +128,7 @@ export interface SamplingQaBatch {
     provenanceLicenseNoveltyClassKeys: string[];
   };
   auditedAt: string;
+  evidenceDigest: string;
 }
 
 export interface PublishingGovernanceRegistry {

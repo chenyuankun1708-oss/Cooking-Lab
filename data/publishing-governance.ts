@@ -36,6 +36,7 @@ const currentReviewedCommit = "849a313a6fb2e67a4595b9878ab3f325bca1438c";
 const currentReviewBatchId = "issue-96-risk-split-primary-review-849a313-run-1";
 const priorRecoveryArtifactSetVersion = "clv1-cb1aa4def15f2c08";
 const priorRecoveryReviewedCommit = "9c018f6be00be66ea89d59e37d0feab2da0a2995";
+const mediumReviewedCommit = "9c018f6be00be66ea89d59e37d0feab2da0a2995";
 const weakImageFidelityItemIds = new Set([
   "cantonese-mushroom-steamed-chicken",
   "malaysian-turmeric-chicken",
@@ -174,6 +175,7 @@ function createHistoricalSamplingBatch(
       provenanceLicenseNoveltyClassKeys: noveltyClassKeys,
     },
     auditedAt: "2026-09-06",
+    evidenceDigest: "clv1-ca0394e7b678dc93",
   };
 }
 
@@ -289,6 +291,7 @@ function createRecoverySamplingBatch2(
       provenanceLicenseNoveltyClassKeys: [],
     },
     auditedAt: "2026-09-06",
+    evidenceDigest: "clv1-49532a39a4b936b0",
   };
 }
 
@@ -342,6 +345,7 @@ function createRecoverySamplingBatch3(
       provenanceLicenseNoveltyClassKeys: [],
     },
     auditedAt: "2026-09-06",
+    evidenceDigest: "clv1-cd5381a719cb956e",
   };
 }
 
@@ -394,6 +398,7 @@ function createRecoverySamplingBatch4(
       provenanceLicenseNoveltyClassKeys: [],
     },
     auditedAt: "2026-09-06",
+    evidenceDigest: "clv1-cf835c57e697047c",
   };
 }
 
@@ -433,6 +438,7 @@ function createRecoverySamplingBatch5(
       provenanceLicenseNoveltyClassKeys: [],
     },
     auditedAt: "2026-09-06",
+    evidenceDigest: "clv1-fa945f15f6f14fa5",
   };
 }
 
@@ -557,7 +563,7 @@ export function createPublishingGovernanceRegistry(
       artifactSetVersion: currentMediumRiskArtifactSetVersion,
       author,
       reviewer: mediumContentVisualReviewer,
-      reviewedCommit: currentReviewedCommit,
+      reviewedCommit: mediumReviewedCommit,
       evidenceReference: mediumEvidenceReference,
       rubricVersion: "m10.1-medium-content-visual-review-v1",
       policyVersion: publishingGovernancePolicyVersion,

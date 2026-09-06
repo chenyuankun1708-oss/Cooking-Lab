@@ -17,6 +17,7 @@ import { evaluateContentRightsRegistry } from "../content-rights";
 import type { PublishingGovernanceRegistry, ReviewAttestation } from "@/types/publishing-governance";
 import {
   createArtifactSetVersion,
+  createSamplingBatchEvidenceDigest,
   deriveProvenanceLicenseNoveltyClassKeys,
   createSamplingEquivalenceClasses,
   deriveEquivalenceClassKeys,
@@ -145,7 +146,9 @@ function readyRegistry(): PublishingGovernanceRegistry {
       provenanceLicenseNoveltyClassKeys: deriveProvenanceLicenseNoveltyClassKeys(equivalenceClasses),
     },
     auditedAt: "2026-09-06",
+    evidenceDigest: "clv1-placeholder00000000",
   }];
+  sealSamplingBatch(registry.samplingBatches[0]);
   return registry;
 }
 
@@ -214,6 +217,10 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
     expect(issueCodes(registry)).not.toContain("sampling-metrics-invalid");
     expect(evaluatePublishingGovernance(registry, context).ready).toBe(true);
+    expect(registry.attestations.filter((entry) => entry.batchId === "issue-96-medium-content-visual-9c018f6-run-0276f44d"))
+      .toEqual(expect.arrayContaining([
+        expect.objectContaining({ reviewedCommit: "9c018f6be00be66ea89d59e37d0feab2da0a2995" }),
+      ]));
   });
 
   it("accepts a complete low-risk agent-review fixture without claiming human review", () => {
@@ -736,22 +743,18 @@ describe("risk-based publishing governance", () => {
     const recovered = readyRegistry();
     recovered.samplingBatches[0].findings = structuredClone(frozen.samplingBatches[0].findings);
     recovered.samplingBatches[0].metrics.escapeCount = 1;
-    const second = structuredClone(recovered.samplingBatches[0]);
-    second.id = "sampling-recovery-2";
-    second.batchId = "sampling-recovery-2";
-    second.sequence = 2;
-    second.previousBatchId = recovered.samplingBatches[0].id;
+    const second = makeNextSamplingBatch(recovered, "sampling-recovery-2");
     second.findings = [];
     second.metrics.escapeCount = 0;
     second.metrics.provenanceLicenseNoveltyCount = 0;
     second.metrics.provenanceLicenseNoveltyClassKeys = [];
     setFullReview(second, frozenKey);
-    const third = structuredClone(second);
-    third.id = "sampling-recovery-3";
-    third.batchId = "sampling-recovery-3";
-    third.sequence = 3;
-    third.previousBatchId = second.id;
-    recovered.samplingBatches = [...recovered.samplingBatches, second, third];
+    sealSamplingBatch(second);
+    recovered.samplingBatches = [...recovered.samplingBatches, second];
+    const third = makeNextSamplingBatch(recovered, "sampling-recovery-3");
+    setFullReview(third, frozenKey);
+    sealSamplingBatch(third);
+    recovered.samplingBatches = [...recovered.samplingBatches, third];
     expect(issueCodes(recovered)).not.toContain("sampling-class-frozen");
   });
 
@@ -770,11 +773,13 @@ describe("risk-based publishing governance", () => {
 
     const oneClean = makeNextSamplingBatch(registry, "sampling-clean-2");
     setFullReview(oneClean, frozenKey);
+    sealSamplingBatch(oneClean);
     registry.samplingBatches = [...registry.samplingBatches, oneClean];
     expect(issueCodes(registry)).toContain("sampling-class-frozen");
 
     const twoClean = makeNextSamplingBatch(registry, "sampling-clean-3");
     setFullReview(twoClean, frozenKey);
+    sealSamplingBatch(twoClean);
     registry.samplingBatches = [...registry.samplingBatches, twoClean];
     expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
   });
@@ -800,12 +805,14 @@ describe("risk-based publishing governance", () => {
     const oneClean = makeNextSamplingBatch(registry, "sample-major-clean-2");
     oneClean.samples.forEach((entry) => { entry.findings = []; });
     setFullReview(oneClean, frozenKey);
+    sealSamplingBatch(oneClean);
     registry.samplingBatches = [...registry.samplingBatches, oneClean];
     expect(issueCodes(registry)).toContain("sampling-class-frozen");
 
     const twoClean = makeNextSamplingBatch(registry, "sample-major-clean-3");
     twoClean.samples.forEach((entry) => { entry.findings = []; });
     setFullReview(twoClean, frozenKey);
+    sealSamplingBatch(twoClean);
     registry.samplingBatches = [...registry.samplingBatches, twoClean];
     expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
   });
@@ -865,6 +872,24 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(registry)).toContain("sampling-metrics-invalid");
   });
 
+  it("fail closes when a committed sampling checkpoint is reconstructed differently", () => {
+    const registry = readyRegistry();
+    registry.samplingBatches[0].samples[0].equivalenceClassKeys.push("future-rule:retroactive-class");
+    expect(issueCodes(registry)).toContain("sampling-evidence-mutated");
+  });
+
+  it("requires distinct auditor runs, contexts, and evidence for recovery batches", () => {
+    const registry = readyRegistry();
+    const previous = registry.samplingBatches[0];
+    const duplicate = makeNextSamplingBatch(registry, "sampling-duplicate-audit");
+    duplicate.auditor.runId = previous.auditor.runId;
+    duplicate.auditor.contextId = previous.auditor.contextId;
+    duplicate.evidenceReference = previous.evidenceReference;
+    sealSamplingBatch(duplicate);
+    registry.samplingBatches = [...registry.samplingBatches, duplicate];
+    expect(issueCodes(registry)).toContain("sampling-metrics-invalid");
+  });
+
   it("keeps stale sampling as history but never uses it for current publication coverage", () => {
     const registry = readyRegistry();
     const historical = structuredClone(registry.samplingBatches[0]);
@@ -881,6 +906,7 @@ describe("risk-based publishing governance", () => {
       disposition: "unresolved",
       equivalenceClassKeys: [historical.samples[0].equivalenceClassKeys[0]],
     }];
+    sealSamplingBatch(historical);
     const current = structuredClone(registry.samplingBatches[0]);
     current.id = "sampling-current-pass";
     current.batchId = "current-pass";
@@ -888,6 +914,10 @@ describe("risk-based publishing governance", () => {
     current.previousBatchId = historical.id;
     current.metrics.provenanceLicenseNoveltyCount = 0;
     current.metrics.provenanceLicenseNoveltyClassKeys = [];
+    current.auditor.runId = "test-fixture-current-pass-run";
+    current.auditor.contextId = "test-fixture-current-pass-context";
+    current.evidenceReference = "test-fixture://current-pass-evidence";
+    sealSamplingBatch(current);
     registry.samplingBatches = [historical, current];
     expect(issueCodes(registry)).not.toEqual(expect.arrayContaining(["unresolved-review-finding", "missing-sampling-coverage"]));
 
@@ -922,12 +952,18 @@ describe("risk-based publishing governance", () => {
 
 function makeNextSamplingBatch(registry: PublishingGovernanceRegistry, id: string) {
   const previous = registry.samplingBatches.at(-1)!;
-  return {
+  const next = {
     ...structuredClone(previous),
     id,
     batchId: id,
     sequence: previous.sequence + 1,
     previousBatchId: previous.id,
+    auditor: {
+      ...structuredClone(previous.auditor),
+      runId: `${id}-run`,
+      contextId: `${id}-context`,
+    },
+    evidenceReference: `test-fixture://${id}`,
     findings: [],
     metrics: {
       ...previous.metrics,
@@ -936,6 +972,12 @@ function makeNextSamplingBatch(registry: PublishingGovernanceRegistry, id: strin
       provenanceLicenseNoveltyClassKeys: [],
     },
   };
+  sealSamplingBatch(next);
+  return next;
+}
+
+function sealSamplingBatch(batch: PublishingGovernanceRegistry["samplingBatches"][number]) {
+  batch.evidenceDigest = createSamplingBatchEvidenceDigest(batch);
 }
 
 function setFullReview(batch: PublishingGovernanceRegistry["samplingBatches"][number], classKey: string) {

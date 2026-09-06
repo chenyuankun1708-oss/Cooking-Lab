@@ -11,6 +11,7 @@ import type {
   PublishingRiskReasonCode,
   ReviewAttestation,
   ReviewDimension,
+  SamplingQaBatch,
   SamplingEquivalenceClass,
 } from "@/types/publishing-governance";
 import { createContentVersion } from "./content-version";
@@ -32,6 +33,7 @@ export const publishingGovernanceIssueCodes = [
   "missing-sampling-coverage",
   "sampling-class-frozen",
   "sampling-metrics-invalid",
+  "sampling-evidence-mutated",
   "ai-attestation-missing",
 ] as const;
 export type PublishingGovernanceIssueCode = (typeof publishingGovernanceIssueCodes)[number];
@@ -361,6 +363,13 @@ export function deriveProvenanceLicenseNoveltyClassKeys(
     .sort();
 }
 
+export function createSamplingBatchEvidenceDigest(batch: SamplingQaBatch): string {
+  const evidence = Object.fromEntries(
+    Object.entries(batch).filter(([key]) => key !== "evidenceDigest"),
+  );
+  return createContentVersion(evidence);
+}
+
 export function evaluatePublishingGovernance(
   governance: PublishingGovernanceRegistry,
   context: PublishingGovernanceContext,
@@ -635,8 +644,11 @@ function validateSamplingBatch(
   const currentArtifactSet = batch.artifactSetVersion === versionOf(batch.itemIds);
   const currentPublicationRecord = currentArtifactSet && batch.policyVersion === policyVersion;
   const completeIdentity = [batch.author, batch.auditor].every((identity) => identity.actorId.trim() && identity.runId.trim() && identity.contextId.trim());
-  if (!completeIdentity || !isGitCommit(batch.reviewedCommit) || !isArtifactSetVersion(batch.artifactSetVersion) || !batch.evidenceReference.trim() || !batch.rubricVersion.trim() || !isIsoDate(batch.auditedAt)) {
+  if (!completeIdentity || !isGitCommit(batch.reviewedCommit) || !isArtifactSetVersion(batch.artifactSetVersion) || !isArtifactSetVersion(batch.evidenceDigest) || !batch.evidenceReference.trim() || !batch.rubricVersion.trim() || !isIsoDate(batch.auditedAt)) {
     report("missing-sampling-coverage", batch.id, "Sampling QA requires author/auditor identity, commit, evidence, rubric, and audit date");
+  }
+  if (batch.evidenceDigest !== createSamplingBatchEvidenceDigest(batch)) {
+    report("sampling-evidence-mutated", batch.id, "Sampling checkpoint content no longer matches its committed evidence digest");
   }
   if (
     batch.author.actorId === batch.auditor.actorId
@@ -798,11 +810,24 @@ function validateSamplingHistory(
   }
   const states = new Map<string, { frozen: boolean; consecutiveCleanFullReviews: number; lastBatchId: string }>();
   const previouslyObservedNoveltyKeys = new Set<string>();
+  const auditorRunIds = new Set<string>();
+  const auditorContextIds = new Set<string>();
+  const evidenceReferences = new Set<string>();
 
   ordered.forEach((batch, index) => {
     if (batch.sequence !== index + 1 || (index === 0 ? batch.previousBatchId !== undefined : batch.previousBatchId !== ordered[index - 1].id)) {
       report("sampling-metrics-invalid", batch.id, "Sampling batches require a contiguous sequence and explicit previous-batch chain");
     }
+    if (
+      auditorRunIds.has(batch.auditor.runId)
+      || auditorContextIds.has(batch.auditor.contextId)
+      || evidenceReferences.has(batch.evidenceReference)
+    ) {
+      report("sampling-metrics-invalid", batch.id, "Each sampling batch requires a distinct auditor run, context, and durable evidence reference");
+    }
+    auditorRunIds.add(batch.auditor.runId);
+    auditorContextIds.add(batch.auditor.contextId);
+    evidenceReferences.add(batch.evidenceReference);
     const expectedNoveltyKeys = deriveProvenanceLicenseNoveltyClassKeys(batch.equivalenceClasses, previouslyObservedNoveltyKeys);
     const recordedNoveltyKeys = [...(batch.metrics.provenanceLicenseNoveltyClassKeys ?? [])].sort();
     if (expectedNoveltyKeys.join("\0") !== recordedNoveltyKeys.join("\0")) {

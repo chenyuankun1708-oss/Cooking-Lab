@@ -10,12 +10,14 @@ import { createPublishingGovernanceRegistry } from "@/data/publishing-governance
 import { createPublishingLocalizationVersions } from "@/data/publishing-localization-versions";
 import { recipeImages } from "@/data/recipe-images";
 import { m9RecipeResearchRecords, m9RecipeResearchSources } from "@/data/research/m9-recipe-research";
+import type { Evidence, Source } from "@/types/culinary";
 import { createImageAssetVersions } from "../image-asset-version";
 import { buildConsumerRightsDisclosure } from "../content-rights-consumer";
 import { evaluateContentRightsRegistry } from "../content-rights";
 import type { PublishingGovernanceRegistry, ReviewAttestation } from "@/types/publishing-governance";
 import {
   createArtifactSetVersion,
+  deriveProvenanceLicenseNoveltyClassKeys,
   createSamplingEquivalenceClasses,
   deriveEquivalenceClassKeys,
   evaluatePublishingGovernance,
@@ -138,7 +140,9 @@ function readyRegistry(): PublishingGovernanceRegistry {
       escapeCount: 0,
       reviewerDisagreementCount: 0,
       reworkItemCount: 0,
-      provenanceLicenseNoveltyCount: 0,
+      provenanceLicenseNoveltyCount: deriveProvenanceLicenseNoveltyClassKeys(equivalenceClasses).length,
+      reworkItemIds: [],
+      provenanceLicenseNoveltyClassKeys: deriveProvenanceLicenseNoveltyClassKeys(equivalenceClasses),
     },
     auditedAt: "2026-09-06",
   }];
@@ -450,6 +454,80 @@ describe("risk-based publishing governance", () => {
     );
   });
 
+  it("covers artifact, risk, restaurant, external-media, product-profile, and Evidence-derived Source paths", () => {
+    const item = items.find((entry) => entry.id === "japanese-oyakodon")!;
+    const changedContext = structuredClone(context);
+    const artifact = changedContext.rightsRegistry.artifacts.find((entry) =>
+      entry.subject.type === "culinary-item" && entry.subject.id === item.id && entry.kind === "identity")!;
+    const evidenceSource: Source = {
+      ...structuredClone(changedContext.sources[0]),
+      id: "evidence-only-source",
+      locators: [{ kind: "url", url: "https://evidence-only.example.test/reference", accessedAt: "2026-09-06" }],
+    };
+    const evidence: Evidence = {
+      id: "evidence-only-record",
+      sourceId: evidenceSource.id,
+      relation: "supports" as const,
+      strength: "strong" as const,
+      locators: [{ kind: "section" as const, value: "Test" }],
+      editorialNote: "Mutation fixture for the Evidence-to-Source sampling path.",
+    };
+    artifact.evidenceIds = [evidence.id];
+    changedContext.sources = [...changedContext.sources, evidenceSource];
+    changedContext.evidence = [...changedContext.evidence, evidence];
+    changedContext.rightsRegistry.restaurants = [{
+      culinaryItemId: item.id,
+      kind: "cooking-lab-reconstruction",
+      restaurantName: "Test restaurant",
+      sourceIds: artifact.sourceIds as [string, string, ...string[]],
+      independentlyWritten: true,
+      culinaryReview: "passed",
+      nonEndorsementDisclosure: true,
+    }];
+    changedContext.rightsRegistry.externalMedia = [{
+      id: "test-video-reference",
+      sourceId: evidenceSource.id,
+      platform: "youtube",
+      url: "https://www.youtube.com/watch?v=test",
+      use: "reference-only",
+      timestamp: "01:20",
+      downloaded: false,
+      transcriptStored: false,
+      screenshotStored: false,
+      automatedCollection: false,
+      privacyReview: "not-required",
+      rightsAssessmentId: changedContext.rightsRegistry.datasets[0].rightsAssessmentId,
+    }];
+    const profile = {
+      id: "test-profile",
+      culinaryItemId: item.id,
+      brandName: "Test",
+      producerName: "Test",
+      vintageBatchOrModel: "v1",
+      verifiedAt: "2026-09-06",
+      sourceIds: artifact.sourceIds as [string, ...string[]],
+      independentEditorialCopy: true as const,
+      usesUnlicensedBrandArtwork: false as const,
+      impliesEndorsement: false as const,
+      affiliateSales: false as const,
+      rightsAssessmentId: artifact.rightsAssessmentId,
+    };
+    changedContext.rightsRegistry.productProfiles = [profile];
+    const route = { level: "medium" as const, reasonCodes: ["restaurant-reconstruction" as const, "product-profile" as const] };
+    const keys = deriveEquivalenceClassKeys(item, changedContext, route);
+
+    expect(keys).toEqual(expect.arrayContaining([
+      "artifact-kind:identity",
+      "risk-level:medium",
+      "risk-reason:restaurant-reconstruction",
+      "risk-reason:product-profile",
+      "restaurant:cooking-lab-reconstruction",
+      "external-media:youtube:reference-only:not-required",
+      "product-profile:versioned-independent-editorial",
+      "source-domain:evidence-only.example.test",
+    ]));
+  });
+
   it("publishes CC0 and public-domain image provenance without inventing a license obligation", () => {
     const item = items.find((entry) => entry.id === "thai-green-papaya-salad")!;
     const imageId = item.images.availability === "available" ? item.images.references.primaryImageId : undefined;
@@ -607,6 +685,8 @@ describe("risk-based publishing governance", () => {
     second.previousBatchId = recovered.samplingBatches[0].id;
     second.findings = [];
     second.metrics.escapeCount = 0;
+    second.metrics.provenanceLicenseNoveltyCount = 0;
+    second.metrics.provenanceLicenseNoveltyClassKeys = [];
     setFullReview(second, frozenKey);
     const third = structuredClone(second);
     third.id = "sampling-recovery-3";
@@ -652,6 +732,8 @@ describe("risk-based publishing governance", () => {
       disposition: "resolved",
     }];
     registry.samplingBatches[0].metrics.escapeCount = 1;
+    registry.samplingBatches[0].metrics.reworkItemCount = 1;
+    registry.samplingBatches[0].metrics.reworkItemIds = [sample.itemId];
 
     expect(issueCodes(registry)).toContain("sampling-class-frozen");
 
@@ -684,6 +766,29 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(unexplained)).toContain("sampling-metrics-invalid");
   });
 
+  it("requires disagreement, rework, and provenance/license novelty metrics to match durable evidence", () => {
+    const disagreement = readyRegistry();
+    const sample = disagreement.samplingBatches[0].samples[0];
+    sample.findings = [{
+      code: "resolved-reviewer-disagreement",
+      kind: "reviewer-disagreement",
+      severity: "minor",
+      summary: "A resolved disagreement required rework.",
+      disposition: "resolved",
+    }];
+    expect(issueCodes(disagreement)).toContain("sampling-metrics-invalid");
+
+    disagreement.samplingBatches[0].metrics.reviewerDisagreementCount = 1;
+    disagreement.samplingBatches[0].metrics.reworkItemCount = 1;
+    disagreement.samplingBatches[0].metrics.reworkItemIds = [sample.itemId];
+    expect(issueCodes(disagreement)).not.toContain("sampling-metrics-invalid");
+
+    const novelty = readyRegistry();
+    novelty.samplingBatches[0].metrics.provenanceLicenseNoveltyCount = 0;
+    novelty.samplingBatches[0].metrics.provenanceLicenseNoveltyClassKeys = [];
+    expect(issueCodes(novelty)).toContain("sampling-metrics-invalid");
+  });
+
   it("rejects forged sampling sequence and previous-batch chains", () => {
     const registry = readyRegistry();
     const second = makeNextSamplingBatch(registry, "sampling-chain-2");
@@ -707,6 +812,8 @@ describe("risk-based publishing governance", () => {
     current.batchId = "current-pass";
     current.sequence = 2;
     current.previousBatchId = historical.id;
+    current.metrics.provenanceLicenseNoveltyCount = 0;
+    current.metrics.provenanceLicenseNoveltyClassKeys = [];
     registry.samplingBatches = [historical, current];
     expect(issueCodes(registry)).not.toEqual(expect.arrayContaining(["unresolved-review-finding", "missing-sampling-coverage"]));
 
@@ -748,7 +855,12 @@ function makeNextSamplingBatch(registry: PublishingGovernanceRegistry, id: strin
     sequence: previous.sequence + 1,
     previousBatchId: previous.id,
     findings: [],
-    metrics: { ...previous.metrics, escapeCount: 0 },
+    metrics: {
+      ...previous.metrics,
+      escapeCount: 0,
+      provenanceLicenseNoveltyCount: 0,
+      provenanceLicenseNoveltyClassKeys: [],
+    },
   };
 }
 

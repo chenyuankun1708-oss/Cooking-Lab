@@ -119,7 +119,7 @@ export function evaluateContentRightsRegistry(
   validateExternalMedia(registry, assessments, context.sources, report);
   validateRestaurants(registry, context, assessments, report);
   validateProductProfiles(registry, context, assessments, artifacts, report);
-  validateSources(context.sources, registry, report);
+  validateSources(context.sources, context.evidence, registry, report);
   validatePublishedCoverage(registry, context, report);
 
   return {
@@ -446,11 +446,17 @@ function validateProductProfiles(
 
 function validateSources(
   sources: readonly Source[],
+  evidenceRecords: readonly Evidence[],
   registry: ContentRightsRegistry,
   report: (code: ContentRightsIssueCode, subjectId: string, field: string, message: string) => void,
 ) {
+  const evidenceById = new Map(evidenceRecords.map((evidence) => [evidence.id, evidence]));
   const usedSourceIds = new Set([
     ...registry.artifacts.flatMap((artifact) => artifact.sourceIds),
+    ...registry.artifacts.flatMap((artifact) => artifact.evidenceIds.flatMap((evidenceId) => {
+      const evidence = evidenceById.get(evidenceId);
+      return evidence ? [evidence.sourceId] : [];
+    })),
     ...registry.externalMedia.map((media) => media.sourceId),
     ...registry.restaurants.flatMap((identity) => "sourceIds" in identity ? identity.sourceIds : []),
     ...registry.productProfiles.flatMap((profile) => profile.sourceIds),
@@ -478,6 +484,7 @@ function validatePublishedCoverage(
   const datasetById = new Map(registry.datasets.map((dataset) => [dataset.id, dataset]));
   const storyIds = new Set(context.stories.map((story) => story.id));
   const evidenceIds = new Set(context.evidence.map((evidence) => evidence.id));
+  const evidenceById = new Map(context.evidence.map((entry) => [entry.id, entry]));
   const sourceIds = new Set(context.sources.map((source) => source.id));
   const closedResearch = context.researchRecords.filter((record) => record.status === "closed");
 
@@ -555,12 +562,18 @@ function validatePublishedCoverage(
   }
 
   for (const artifact of registry.artifacts) {
-    for (const evidenceId of artifact.evidenceIds) if (!evidenceIds.has(evidenceId)) report("missing-reference", artifact.id, "evidenceIds", `Missing Evidence ${evidenceId}`);
+    for (const evidenceId of artifact.evidenceIds) {
+      const evidence = evidenceById.get(evidenceId);
+      if (!evidenceIds.has(evidenceId) || !evidence) {
+        report("missing-reference", artifact.id, "evidenceIds", `Missing Evidence ${evidenceId}`);
+      } else if (!artifact.sourceIds.includes(evidence.sourceId)) {
+        report("missing-reference", artifact.id, "sourceIds", `Evidence ${evidenceId} requires Source ${evidence.sourceId} in the artifact provenance and UsageDecision chain`);
+      }
+    }
     for (const sourceId of artifact.sourceIds) if (!sourceIds.has(sourceId)) report("missing-reference", artifact.id, "sourceIds", `Missing Source ${sourceId}`);
   }
 
   const storyArtifacts = new Map(registry.artifacts.filter((artifact) => artifact.subject.type === "story").map((artifact) => [artifact.subject.id, artifact]));
-  const evidenceById = new Map(context.evidence.map((entry) => [entry.id, entry]));
   for (const story of context.stories.filter((entry) => entry.publication.status === "published")) {
     const artifact = storyArtifacts.get(story.id);
     if (!artifact) {

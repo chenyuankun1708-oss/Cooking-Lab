@@ -188,13 +188,25 @@ export function createArtifactSetVersion(
   });
 }
 
-export function deriveEquivalenceClassKeys(item: CulinaryItem, context: PublishingGovernanceContext): string[] {
+export function deriveEquivalenceClassKeys(
+  item: CulinaryItem,
+  context: PublishingGovernanceContext,
+  riskRoute: { level: PublishingRiskLevel; reasonCodes: readonly PublishingRiskReasonCode[] } = deriveMinimumPublishingRisk(item, context.rightsRegistry),
+): string[] {
   const artifacts = getItemArtifacts(item, context.rightsRegistry);
   const imageId = item.images.availability === "available" ? item.images.references.primaryImageId : undefined;
   const image = context.images.find((entry) => entry.id === imageId);
   const sourceById = new Map(context.sources.map((source) => [source.id, source]));
+  const evidenceById = new Map(context.evidence.map((evidence) => [evidence.id, evidence]));
+  const provenanceSourceIds = new Set([
+    ...artifacts.flatMap((artifact) => artifact.sourceIds),
+    ...artifacts.flatMap((artifact) => artifact.evidenceIds.flatMap((evidenceId) => {
+      const evidence = evidenceById.get(evidenceId);
+      return evidence ? [evidence.sourceId] : [];
+    })),
+  ]);
   const domains = new Set(
-    artifacts.flatMap((artifact) => artifact.sourceIds)
+    [...provenanceSourceIds]
       .flatMap((sourceId) => sourceById.get(sourceId)?.locators ?? [])
       .flatMap((locator) => locator.kind === "url" ? [safeSourceDomain(locator.url)] : []),
   );
@@ -207,8 +219,8 @@ export function deriveEquivalenceClassKeys(item: CulinaryItem, context: Publishi
     .map((ingredientId) => context.ingredients.find((ingredient) => ingredient.id === ingredientId)?.costProvenanceId)
     .filter((id): id is string => Boolean(id)));
   const costs = context.rightsRegistry.costs.filter((entry) => costIds.has(entry.id));
-  const externalMedia = context.rightsRegistry.externalMedia.filter((entry) =>
-    artifacts.some((artifact) => artifact.sourceIds.includes(entry.sourceId)));
+  const externalMedia = context.rightsRegistry.externalMedia.filter((entry) => provenanceSourceIds.has(entry.sourceId));
+  const restaurant = context.rightsRegistry.restaurants.find((entry) => entry.culinaryItemId === item.id);
   const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => entry.culinaryItemId === item.id);
   const assessmentIds = new Set([
     ...artifacts.flatMap((artifact) => {
@@ -241,6 +253,9 @@ export function deriveEquivalenceClassKeys(item: CulinaryItem, context: Publishi
   const contentPath = localization?.path ?? context.contentPaths.find((entry) => entry.itemId === item.id)?.kind ?? "unknown";
   const keys = [
     `content-type:${item.itemType}`,
+    `risk-level:${riskRoute.level}`,
+    ...riskRoute.reasonCodes.map((reason) => `risk-reason:${reason}`),
+    ...[...new Set(artifacts.map((artifact) => artifact.kind))].sort().map((kind) => `artifact-kind:${kind}`),
     `image-license:${image?.license ?? "none"}`,
     ...(image?.licenseUrl ? [`image-license-authority:${image.license}:${image.licenseUrl}`] : []),
     `image-source:${image?.source ?? "none"}`,
@@ -255,6 +270,9 @@ export function deriveEquivalenceClassKeys(item: CulinaryItem, context: Publishi
     ...nutritionTransforms.sort().map((transform) => `data-transform:${transform}`),
     ...costTransforms.sort().map((transform) => `cost-transform:${transform}`),
     ...aiRecords.map((record) => `model-prompt:${record.provider}/${record.model}/${record.modelVersion}/${record.promptTemplateVersion}`),
+    ...(restaurant ? [`restaurant:${restaurant.kind}`] : []),
+    ...externalMedia.map((media) => `external-media:${media.platform}:${media.use}:${media.privacyReview}`),
+    ...(productProfiles.length ? ["product-profile:versioned-independent-editorial"] : []),
   ];
   return [...new Set(keys)].sort();
 }
@@ -296,6 +314,32 @@ export function createSamplingEquivalenceClasses(
       return { key, itemIds: sorted, sampledItemIds: [representative] };
     });
   return result as unknown as [SamplingEquivalenceClass, ...SamplingEquivalenceClass[]];
+}
+
+export function deriveProvenanceLicenseNoveltyClassKeys(
+  equivalenceClasses: readonly SamplingEquivalenceClass[],
+  previouslyObservedKeys: ReadonlySet<string> = new Set<string>(),
+): string[] {
+  const trackedPrefixes = [
+    "source-domain:",
+    "rights-basis:",
+    "rights-authority:",
+    "image-license:",
+    "image-license-authority:",
+    "image-source:",
+    "image-source-domain:",
+    "derivation:",
+    "model-prompt:",
+    "data-transform:",
+    "cost-transform:",
+    "translation-path:",
+    "external-media:",
+    "restaurant:",
+    "product-profile:",
+  ];
+  return [...new Set(equivalenceClasses.map((entry) => entry.key))]
+    .filter((key) => trackedPrefixes.some((prefix) => key.startsWith(prefix)) && !previouslyObservedKeys.has(key))
+    .sort();
 }
 
 export function evaluatePublishingGovernance(
@@ -467,7 +511,7 @@ function validateRiskClassification(
   if (!classification.equivalenceClassKeys.length || classification.equivalenceClassKeys.some((key) => !key.trim())) {
     report("missing-sampling-coverage", item.id, "Risk classification requires non-empty sampling equivalence classes");
   }
-  const expectedClassKeys = deriveEquivalenceClassKeys(item, context);
+  const expectedClassKeys = deriveEquivalenceClassKeys(item, context, classification);
   if (classification.equivalenceClassKeys.join(",") !== expectedClassKeys.join(",")) {
     report("stale-risk-classification", item.id, "Risk equivalence classes do not match current sources, licenses, content, images, AI, data transformations, and translations");
   }
@@ -614,17 +658,37 @@ function validateSamplingBatch(
   if (currentArtifactSet && batch.itemIds.some((itemId) => !publishedItemIds.has(itemId))) {
     report("missing-sampling-coverage", batch.id, "Sampling batch contains an item outside the published boundary");
   }
-  const metricValues = Object.values(batch.metrics);
-  if (metricValues.some((value) => !Number.isInteger(value) || value < 0) || batch.metrics.reworkItemCount > batch.itemIds.length) {
+  const metricValues = [
+    batch.metrics.escapeCount,
+    batch.metrics.reviewerDisagreementCount,
+    batch.metrics.reworkItemCount,
+    batch.metrics.provenanceLicenseNoveltyCount,
+  ];
+  const recordedReworkItemIds = batch.metrics.reworkItemIds ?? [];
+  const recordedNoveltyClassKeys = batch.metrics.provenanceLicenseNoveltyClassKeys ?? [];
+  const reworkItemIds = new Set(recordedReworkItemIds);
+  const noveltyClassKeys = new Set(recordedNoveltyClassKeys);
+  if (
+    metricValues.some((value) => !Number.isInteger(value) || value < 0)
+    || batch.metrics.reworkItemCount > batch.itemIds.length
+    || reworkItemIds.size !== recordedReworkItemIds.length
+    || noveltyClassKeys.size !== recordedNoveltyClassKeys.length
+    || batch.metrics.reworkItemCount !== reworkItemIds.size
+    || batch.metrics.provenanceLicenseNoveltyCount !== noveltyClassKeys.size
+    || [...reworkItemIds].some((itemId) => !batch.itemIds.includes(itemId))
+  ) {
     report("sampling-metrics-invalid", batch.id, "Sampling metrics must be non-negative integers within the batch size");
   }
-  const hasBatchMajorFinding = batch.findings.some((finding) => finding.severity === "major");
-  const hasSampleMajorFinding = batch.samples.some((sample) => sample.findings.some((finding) => finding.severity === "major"));
-  if (batch.metrics.escapeCount > 0 && !hasBatchMajorFinding && !hasSampleMajorFinding) {
-    report("sampling-metrics-invalid", batch.id, "A recorded escape requires a major batch or sample finding");
+  const allFindings = [...batch.findings, ...batch.samples.flatMap((sample) => sample.findings)];
+  const expectedEscapeCount = allFindings.filter((finding) => finding.severity === "major").length;
+  const expectedDisagreementCount = allFindings.filter((finding) => finding.kind === "reviewer-disagreement").length;
+  if (batch.metrics.escapeCount !== expectedEscapeCount || batch.metrics.reviewerDisagreementCount !== expectedDisagreementCount) {
+    report("sampling-metrics-invalid", batch.id, "Escape and reviewer-disagreement metrics must exactly match durable findings");
   }
-  if (batch.metrics.escapeCount === 0 && (hasBatchMajorFinding || hasSampleMajorFinding)) {
-    report("sampling-metrics-invalid", batch.id, "A major batch or sample finding must be counted as an escape");
+  for (const sample of batch.samples) {
+    if (sample.findings.some((finding) => finding.disposition === "resolved") && !reworkItemIds.has(sample.itemId)) {
+      report("sampling-metrics-invalid", `${batch.id}:${sample.itemId}`, "A resolved sampled-item finding must identify the reworked item");
+    }
   }
   const seenClassKeys = new Set<string>();
   if (new Set(batch.itemIds).size !== batch.itemIds.length) {
@@ -713,11 +777,18 @@ function validateSamplingHistory(
     }
   }
   const states = new Map<string, { frozen: boolean; consecutiveCleanFullReviews: number; lastBatchId: string }>();
+  const previouslyObservedNoveltyKeys = new Set<string>();
 
   ordered.forEach((batch, index) => {
     if (batch.sequence !== index + 1 || (index === 0 ? batch.previousBatchId !== undefined : batch.previousBatchId !== ordered[index - 1].id)) {
       report("sampling-metrics-invalid", batch.id, "Sampling batches require a contiguous sequence and explicit previous-batch chain");
     }
+    const expectedNoveltyKeys = deriveProvenanceLicenseNoveltyClassKeys(batch.equivalenceClasses, previouslyObservedNoveltyKeys);
+    const recordedNoveltyKeys = [...(batch.metrics.provenanceLicenseNoveltyClassKeys ?? [])].sort();
+    if (expectedNoveltyKeys.join("\0") !== recordedNoveltyKeys.join("\0")) {
+      report("sampling-metrics-invalid", batch.id, "Provenance/license novelty metrics must exactly identify newly observed source, license, model, transform, media, restaurant, product, and translation classes");
+    }
+    batch.equivalenceClasses.forEach((entry) => previouslyObservedNoveltyKeys.add(entry.key));
     const majorClassKeys = new Set([
       ...batch.findings
         .filter((finding) => finding.severity === "major")

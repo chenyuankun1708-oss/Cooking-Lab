@@ -86,16 +86,18 @@ export function createPublishingGovernanceRegistry(
     .map((item): PublishingRiskClassification => {
       const minimum = deriveMinimumPublishingRisk(item, input.rightsRegistry);
       const weakImageFidelity = weakImageFidelityItemIds.has(item.id);
+      const level = weakImageFidelity && minimum.level === "low" ? "medium" : minimum.level;
+      const reasonCodes = [...new Set([
+        ...minimum.reasonCodes,
+        ...(weakImageFidelity ? ["weak-image-fidelity" as const] : []),
+      ])] as PublishingRiskClassification["reasonCodes"];
       return {
         id: `risk-${item.id}-${publishingGovernancePolicyVersion}`,
         itemId: item.id,
         artifactSetVersion: createArtifactSetVersion([item.id], context),
-        level: weakImageFidelity && minimum.level === "low" ? "medium" : minimum.level,
-        reasonCodes: [...new Set([
-          ...minimum.reasonCodes,
-          ...(weakImageFidelity ? ["weak-image-fidelity" as const] : []),
-        ])] as PublishingRiskClassification["reasonCodes"],
-        equivalenceClassKeys: deriveEquivalenceClassKeys(item, context) as [string, ...string[]],
+        level,
+        reasonCodes,
+        equivalenceClassKeys: deriveEquivalenceClassKeys(item, context, { level, reasonCodes }) as [string, ...string[]],
         policyVersion: publishingGovernancePolicyVersion,
         classifiedAt: "2026-09-06",
       };

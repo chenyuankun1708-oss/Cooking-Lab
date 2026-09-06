@@ -14,7 +14,7 @@ import {
 } from "@/data/published-culinary-items";
 import { recipeImages } from "@/data/recipe-images";
 import { m9RecipeResearchRecords } from "@/data/research/m9-recipe-research";
-import type { CulinaryItem, Source } from "@/types/culinary";
+import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
 import type { ContentRightsRegistry, RightsAssessment } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
 import type { ContentRightsContext } from "../content-rights";
@@ -372,6 +372,35 @@ describe("M10 Production content-rights gate", () => {
     expect(regenerated.artifacts.some((artifact) => artifact.subject.type === "story" && artifact.subject.id === storyId)).toBe(true);
     regenerated.artifacts = regenerated.artifacts.filter((artifact) => artifact.subject.type !== "story" || artifact.subject.id !== storyId);
     expect(issueCodes(regenerated, { ...context, items: unlinkedItems })).toContain("missing-artifact");
+  });
+
+  it("requires every artifact Evidence to close through its Source rights assessment and UsageDecision", () => {
+    const registry = cloneRegistry();
+    const artifact = registry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.kind === "identity")!;
+    const rogueSource: Source = {
+      ...structuredClone(contentRightsSources[0]),
+      id: "evidence-source-with-unknown-rights",
+      locators: [{ kind: "url", url: "https://evidence-only.example.test/reference", accessedAt: "2026-09-06" }],
+      rights: { status: "unknown", notes: "Mutation fixture must remain blocked." },
+    };
+    const rogueEvidence: Evidence = {
+      id: "evidence-with-unclosed-source",
+      sourceId: rogueSource.id,
+      relation: "supports",
+      strength: "strong",
+      locators: [{ kind: "section", value: "Test" }],
+      editorialNote: "Mutation fixture for the Evidence-to-Source rights chain.",
+    };
+    artifact.evidenceIds = [rogueEvidence.id];
+    const changedContext = {
+      ...context,
+      evidence: [...context.evidence, rogueEvidence],
+      sources: [...context.sources, rogueSource],
+    };
+
+    const codes = issueCodes(registry, changedContext);
+    expect(codes).toContain("missing-reference");
+    expect(codes).toContain("source-rights-unknown");
   });
 
   it("blocks generated artifacts without dated terms, cleared inputs, review attestations, and similarity review", () => {

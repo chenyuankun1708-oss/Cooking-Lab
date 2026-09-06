@@ -124,6 +124,8 @@ export interface SamplingQaBatch {
     reviewerDisagreementCount: number;
     reworkItemCount: number;
     provenanceLicenseNoveltyCount: number;
+    reworkItemIds: string[];
+    provenanceLicenseNoveltyClassKeys: string[];
   };
   auditedAt: string;
 }

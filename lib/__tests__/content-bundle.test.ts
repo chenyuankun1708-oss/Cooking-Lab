@@ -46,6 +46,20 @@ describe("M11 published content bundle manifest", () => {
       "missing-reviewed-locale",
       "missing-primary-image",
       "missing-usage-decision",
+      "usage-decision-mismatch",
     ]));
+  });
+
+  it("rejects a committed manifest when a live content decision changes", () => {
+    const items = getPublishedCulinaryItems();
+    const [first, ...rest] = publishedContentBundleManifest.entries;
+    const stale = {
+      ...publishedContentBundleManifest,
+      entries: [{ ...first, usageDecisionIds: first.usageDecisionIds.slice(1) }, ...rest],
+    };
+
+    expect(validateContentBundleManifest(stale, items, contentRightsRegistry)).toEqual(
+      expect.arrayContaining([expect.objectContaining({ code: "usage-decision-mismatch", itemId: first.itemId })]),
+    );
   });
 });

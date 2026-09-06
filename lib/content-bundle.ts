@@ -90,6 +90,9 @@ export function validateContentBundleManifest(
       .filter((artifact) => isArtifactInItemBundle(artifact.subject, entry.itemId, entry.storyIds, entry.primaryImageId))
       .map((artifact) => artifact.usageDecisionId)
       .sort();
+    if (entry.usageDecisionIds.join(",") !== expectedDecisionIds.join(",")) {
+      report("usage-decision-mismatch", "Manifest usage decisions are stale");
+    }
     for (const decisionId of expectedDecisionIds) {
       if (!entry.usageDecisionIds.includes(decisionId)) report("missing-usage-decision", `Bundle omits usage decision ${decisionId}`);
     }

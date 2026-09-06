@@ -154,7 +154,7 @@ function issueCodes(registry: PublishingGovernanceRegistry, customContext = cont
 }
 
 describe("risk-based publishing governance", () => {
-  it("keeps the real M10 migration fail closed after preserving a failed sampling audit", () => {
+  it("keeps the real M10 migration fail closed while preserving recovery audit history", () => {
     const registry = createPublishingGovernanceRegistry({
       items,
       rightsRegistry: contentRightsRegistry,
@@ -168,7 +168,7 @@ describe("risk-based publishing governance", () => {
       localizationVersions: contentLocalizationVersions,
       imageAssetVersions: contentImageAssetVersions,
     });
-    expect(registry.samplingBatches).toHaveLength(1);
+    expect(registry.samplingBatches).toHaveLength(3);
     expect(registry.samplingBatches[0]).toMatchObject({
       artifactSetVersion: "clv1-f30d9a1f9213c90c",
       reviewedCommit: "81afe4c16abd66e93dab9a4afb75f4e6624bfab6",
@@ -179,6 +179,24 @@ describe("risk-based publishing governance", () => {
       .toEqual(expect.arrayContaining([expect.objectContaining({
         code: "visual-ingredient-mismatch-cashew-peanut",
         equivalenceClassKeys: ["visual-fidelity:dish"],
+      })]));
+    expect(registry.samplingBatches[1]).toMatchObject({
+      id: "sampling-m10-existing-50-9c018f6-recovery-2",
+      previousBatchId: "sampling-m10-existing-50-81afe4c-revise",
+      verdict: "pass",
+      metrics: { escapeCount: 0, reworkItemCount: 4 },
+    });
+    expect(registry.samplingBatches[2]).toMatchObject({
+      id: "sampling-m10-existing-50-9c018f6-recovery-3",
+      previousBatchId: "sampling-m10-existing-50-9c018f6-recovery-2",
+      verdict: "revise",
+      metrics: { escapeCount: 0, reworkItemCount: 0 },
+    });
+    expect(registry.samplingBatches[2].samples.find((entry) => entry.itemId === "hunan-chili-pork")?.findings)
+      .toEqual(expect.arrayContaining([expect.objectContaining({
+        code: "hero-alt-container-and-pepper-color-mismatch",
+        severity: "minor",
+        disposition: "unresolved",
       })]));
     expect(issueCodes(registry)).toContain("missing-sampling-coverage");
     expect(issueCodes(registry)).toContain("sampling-class-frozen");

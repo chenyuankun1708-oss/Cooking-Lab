@@ -20,6 +20,7 @@ import type {
   ReviewAttestation,
   ReviewDimension,
   SamplingQaBatch,
+  SamplingQaFinding,
 } from "@/types/publishing-governance";
 import { m10AuditedCulinaryItemIds } from "./content-rights";
 
@@ -27,9 +28,11 @@ export const publishingGovernancePolicyVersion = "m10.1-risk-based-2026-09-06";
 
 // This value is a committed review checkpoint, not a runtime-derived PASS. Any
 // content artifact change invalidates the attestation and blocks publication.
-const currentReviewedArtifactSetVersion = "clv1-aadce6e32f7b0028";
-const currentReviewedCommit = "47ac94efb6a9ebbb50104498435fed15acfc4a96";
-const currentReviewBatchId = "issue-96-all-50-primary-review-47ac94e-run-1";
+const currentReviewedArtifactSetVersion = "clv1-cb1aa4def15f2c08";
+const currentLowRiskArtifactSetVersion = "clv1-d1b3d06f1c1ad5e7";
+const currentMediumRiskArtifactSetVersion = "clv1-284cf465a54bc99a";
+const currentReviewedCommit = "9c018f6be00be66ea89d59e37d0feab2da0a2995";
+const currentReviewBatchId = "issue-96-risk-split-primary-review-9c018f6-run-1";
 const weakImageFidelityItemIds = new Set([
   "cantonese-mushroom-steamed-chicken",
   "malaysian-turmeric-chicken",
@@ -46,8 +49,15 @@ const author: ReviewActorIdentity = {
 const reviewer: ReviewActorIdentity = {
   actorType: "agent",
   actorId: "/root/m11_primary_readonly_final",
-  runId: "issue-96-all-50-primary-review-47ac94e-run-1",
-  contextId: "/root/m11_primary_readonly_final/47ac94e-primary-context-1",
+  runId: "issue-96-risk-split-primary-review-9c018f6-run-1",
+  contextId: "/root/m11_primary_readonly_final/9c018f6-risk-split-primary-context-1",
+};
+
+const mediumContentVisualReviewer: ReviewActorIdentity = {
+  actorType: "agent",
+  actorId: "/root/m11_medium_clean_reviewer_final",
+  runId: "issue-96-medium-content-visual-9c018f6-run-0276f44d",
+  contextId: "/root/m11_medium_clean_reviewer_final/9c018f6-review-0276f44d-37e7-483b-a095-3cef9502cc26",
 };
 
 const historicalSamplingItemIds = [
@@ -164,6 +174,176 @@ function createHistoricalSamplingBatch(
   };
 }
 
+function createRecoverySamplingBatch2(
+  riskClassifications: readonly PublishingRiskClassification[],
+): SamplingQaBatch {
+  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
+  const equivalenceClasses = createSamplingEquivalenceClasses(riskClassifications);
+  const visualDish = equivalenceClasses.find((entry) => entry.key === "visual-fidelity:dish");
+  if (!visualDish) throw new Error("Recovery sampling requires the visual-fidelity:dish class");
+  visualDish.sampledItemIds = [...visualDish.itemIds];
+
+  const resolvedFindingsByItemId: Record<string, SamplingQaFinding[]> = {
+    "cantonese-mushroom-steamed-chicken": [{
+      code: "medium-review-visual-rework-resolution-verified",
+      kind: "quality",
+      severity: "minor",
+      summary: "Verified that the replacement Hero depicts mushroom chicken served over rice, matches the recipe's fresh shiitake, and discloses the rice serving context in the alt text.",
+      disposition: "resolved",
+      equivalenceClassKeys: ["visual-fidelity:dish"],
+    }],
+    "malaysian-turmeric-chicken": [{
+      code: "medium-review-visual-rework-resolution-verified",
+      kind: "quality",
+      severity: "minor",
+      summary: "Verified that the revised recipe and replacement Hero align on turmeric chicken, cauliflower, carrot, onion, and fresh chili while retaining the explicit lower-oil home-adaptation disclosure.",
+      disposition: "resolved",
+      equivalenceClassKeys: ["visual-fidelity:dish"],
+    }],
+    "mexican-black-bean-tacos": [{
+      code: "medium-review-visual-rework-resolution-verified",
+      kind: "quality",
+      severity: "minor",
+      summary: "Verified that the revised recipe and Hero align on black beans, tomato, mushrooms, leafy cabbage, and avocado, and that the copy identifies the dish as a modern home version rather than a canonical regional recipe.",
+      disposition: "resolved",
+      equivalenceClassKeys: ["visual-fidelity:dish"],
+    }],
+    "thai-green-papaya-salad": [{
+      code: "prior-major-visual-escape-resolution-verified",
+      kind: "quality",
+      severity: "minor",
+      summary: "Verified that the prior cashew-versus-peanut visual escape was resolved: the replacement Hero visibly shows green papaya, tomato, carrot, and peanuts, with no visible cashews.",
+      disposition: "resolved",
+      equivalenceClassKeys: ["visual-fidelity:dish"],
+    }],
+  };
+  const sampledItemIds = [...new Set(equivalenceClasses.flatMap((entry) => entry.sampledItemIds))].sort();
+  const dimensions = [
+    "rights-license",
+    "provenance",
+    "factual-culinary",
+    "editorial",
+    "visual-image",
+  ] as const;
+  const samples = sampledItemIds.map((itemId) => ({
+    itemId,
+    equivalenceClassKeys: equivalenceClasses
+      .filter((entry) => entry.sampledItemIds.includes(itemId))
+      .map((entry) => entry.key) as [string, ...string[]],
+    dimensions: [...dimensions] as [typeof dimensions[number], ...typeof dimensions[number][]],
+    verdict: "pass" as const,
+    findings: resolvedFindingsByItemId[itemId] ?? [],
+  }));
+
+  return {
+    id: "sampling-m10-existing-50-9c018f6-recovery-2",
+    batchId: "m10-existing-50-sampling-recovery-2",
+    sequence: 2,
+    previousBatchId: "sampling-m10-existing-50-81afe4c-revise",
+    policyVersion: publishingGovernancePolicyVersion,
+    itemIds,
+    artifactSetVersion: currentReviewedArtifactSetVersion,
+    equivalenceClasses,
+    author,
+    auditor: {
+      actorType: "agent",
+      actorId: "/root/m11_sampling_reaudit_default",
+      runId: "issue-96-sampling-recovery-batch-2-9c018f6-run-2",
+      contextId: "/root/m11_sampling_reaudit_default/9c018f6-recovery-2",
+    },
+    reviewedCommit: currentReviewedCommit,
+    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559746893",
+    rubricVersion: "m10.1-sampling-content-visual-audit-v1",
+    verdict: "pass",
+    samples,
+    findings: [],
+    auditorModifiedContent: false,
+    metrics: {
+      escapeCount: 0,
+      reviewerDisagreementCount: 0,
+      reworkItemCount: 4,
+      provenanceLicenseNoveltyCount: 0,
+      reworkItemIds: [
+        "cantonese-mushroom-steamed-chicken",
+        "malaysian-turmeric-chicken",
+        "mexican-black-bean-tacos",
+        "thai-green-papaya-salad",
+      ],
+      provenanceLicenseNoveltyClassKeys: [],
+    },
+    auditedAt: "2026-09-06",
+  };
+}
+
+function createRecoverySamplingBatch3(
+  riskClassifications: readonly PublishingRiskClassification[],
+): SamplingQaBatch {
+  const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
+  const equivalenceClasses = createSamplingEquivalenceClasses(riskClassifications);
+  const visualDish = equivalenceClasses.find((entry) => entry.key === "visual-fidelity:dish");
+  if (!visualDish) throw new Error("Recovery sampling requires the visual-fidelity:dish class");
+  visualDish.sampledItemIds = [...visualDish.itemIds];
+  const finding: SamplingQaFinding = {
+    code: "hero-alt-container-and-pepper-color-mismatch",
+    kind: "quality",
+    severity: "minor",
+    summary: "The Chinese Hero alt says the Hunan chili pork is on a white plate with green and red chilies, but the image shows the dish in a black wok with green chilies and no visible red chilies.",
+    disposition: "unresolved",
+    equivalenceClassKeys: ["visual-fidelity:dish"],
+  };
+  const sampledItemIds = [...new Set(equivalenceClasses.flatMap((entry) => entry.sampledItemIds))].sort();
+  const dimensions = [
+    "rights-license",
+    "provenance",
+    "factual-culinary",
+    "editorial",
+    "visual-image",
+  ] as const;
+  const samples = sampledItemIds.map((itemId) => ({
+    itemId,
+    equivalenceClassKeys: equivalenceClasses
+      .filter((entry) => entry.sampledItemIds.includes(itemId))
+      .map((entry) => entry.key) as [string, ...string[]],
+    dimensions: [...dimensions] as [typeof dimensions[number], ...typeof dimensions[number][]],
+    verdict: itemId === "hunan-chili-pork" ? "revise" as const : "pass" as const,
+    findings: itemId === "hunan-chili-pork" ? [finding] : [],
+  }));
+
+  return {
+    id: "sampling-m10-existing-50-9c018f6-recovery-3",
+    batchId: "m10-existing-50-sampling-recovery-3",
+    sequence: 3,
+    previousBatchId: "sampling-m10-existing-50-9c018f6-recovery-2",
+    policyVersion: publishingGovernancePolicyVersion,
+    itemIds,
+    artifactSetVersion: currentReviewedArtifactSetVersion,
+    equivalenceClasses,
+    author,
+    auditor: {
+      actorType: "agent",
+      actorId: "/root/m11_sampling_reaudit_default",
+      runId: "issue-96-sampling-recovery-batch-3-9c018f6-run-3",
+      contextId: "/root/m11_sampling_reaudit_default/9c018f6-recovery-3",
+    },
+    reviewedCommit: currentReviewedCommit,
+    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559813212",
+    rubricVersion: "m10.1-sampling-content-visual-audit-v1",
+    verdict: "revise",
+    samples,
+    findings: [],
+    auditorModifiedContent: false,
+    metrics: {
+      escapeCount: 0,
+      reviewerDisagreementCount: 0,
+      reworkItemCount: 0,
+      provenanceLicenseNoveltyCount: 0,
+      reworkItemIds: [],
+      provenanceLicenseNoveltyClassKeys: [],
+    },
+    auditedAt: "2026-09-06",
+  };
+}
+
 export interface CreatePublishingGovernanceRegistryInput {
   items: readonly CulinaryItem[];
   rightsRegistry: ContentRightsRegistry;
@@ -224,40 +404,87 @@ export function createPublishingGovernanceRegistry(
       };
     });
 
-  const dimensions: ReviewDimension[] = [
-    "rights-license",
-    "provenance",
-    "factual-culinary",
-    "editorial",
-    "visual-image",
+  const lowRiskItemIds = riskClassifications
+    .filter((classification) => classification.level === "low")
+    .map((classification) => classification.itemId) as [string, ...string[]];
+  const mediumRiskItemIds = riskClassifications
+    .filter((classification) => classification.level === "medium")
+    .map((classification) => classification.itemId) as [string, ...string[]];
+  const representations = {
+    humanApproval: false,
+    culinaryFieldTest: false,
+    legalOpinion: false,
+  } as const;
+  const primaryEvidenceReference = "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559696601";
+  const mediumEvidenceReference = "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559696752";
+  const rightsDimensions: ReviewDimension[] = ["rights-license", "provenance"];
+  const contentDimensions: ReviewDimension[] = ["factual-culinary", "editorial", "visual-image"];
+
+  const attestations: ReviewAttestation[] = [
+    ...rightsDimensions.map((dimension): ReviewAttestation => ({
+      id: `attestation-${currentReviewBatchId}-${dimension}`,
+      batchId: currentReviewBatchId,
+      dimension,
+      itemIds,
+      artifactSetVersion: currentReviewedArtifactSetVersion,
+      author,
+      reviewer,
+      reviewedCommit: currentReviewedCommit,
+      evidenceReference: primaryEvidenceReference,
+      rubricVersion: "m10.1-risk-split-primary-review-v1",
+      policyVersion: publishingGovernancePolicyVersion,
+      reviewedAt: "2026-09-06",
+      verdict: "pass",
+      findings: [],
+      reviewerModifiedContent: false,
+      representations,
+    })),
+    ...contentDimensions.map((dimension): ReviewAttestation => ({
+      id: `attestation-${currentReviewBatchId}-${dimension}`,
+      batchId: currentReviewBatchId,
+      dimension,
+      itemIds: lowRiskItemIds,
+      artifactSetVersion: currentLowRiskArtifactSetVersion,
+      author,
+      reviewer,
+      reviewedCommit: currentReviewedCommit,
+      evidenceReference: primaryEvidenceReference,
+      rubricVersion: "m10.1-risk-split-primary-review-v1",
+      policyVersion: publishingGovernancePolicyVersion,
+      reviewedAt: "2026-09-06",
+      verdict: "pass",
+      findings: [],
+      reviewerModifiedContent: false,
+      representations,
+    })),
+    ...contentDimensions.map((dimension): ReviewAttestation => ({
+      id: `attestation-issue-96-medium-content-visual-9c018f6-${dimension}`,
+      batchId: "issue-96-medium-content-visual-9c018f6-run-0276f44d",
+      dimension,
+      itemIds: mediumRiskItemIds,
+      artifactSetVersion: currentMediumRiskArtifactSetVersion,
+      author,
+      reviewer: mediumContentVisualReviewer,
+      reviewedCommit: currentReviewedCommit,
+      evidenceReference: mediumEvidenceReference,
+      rubricVersion: "m10.1-medium-content-visual-review-v1",
+      policyVersion: publishingGovernancePolicyVersion,
+      reviewedAt: "2026-09-06",
+      verdict: "pass",
+      findings: [],
+      reviewerModifiedContent: false,
+      representations,
+    })),
   ];
-  const attestations = dimensions.map((dimension): ReviewAttestation => ({
-    id: `attestation-${currentReviewBatchId}-${dimension}`,
-    batchId: currentReviewBatchId,
-    dimension,
-    itemIds,
-    artifactSetVersion: currentReviewedArtifactSetVersion,
-    author,
-    reviewer,
-    reviewedCommit: currentReviewedCommit,
-    evidenceReference: "https://github.com/chenyuankun1708-oss/Cooking-Lab/issues/96#issuecomment-5559402886",
-    rubricVersion: "m10.1-all-50-five-dimension-primary-review-v1",
-    policyVersion: publishingGovernancePolicyVersion,
-    reviewedAt: "2026-09-06",
-    verdict: "pass",
-    findings: [],
-    reviewerModifiedContent: false,
-    representations: {
-      humanApproval: false,
-      culinaryFieldTest: false,
-      legalOpinion: false,
-    },
-  }));
 
   return {
     policyVersion: publishingGovernancePolicyVersion,
     attestations,
     riskClassifications,
-    samplingBatches: [createHistoricalSamplingBatch(riskClassifications)],
+    samplingBatches: [
+      createHistoricalSamplingBatch(riskClassifications),
+      createRecoverySamplingBatch2(riskClassifications),
+      createRecoverySamplingBatch3(riskClassifications),
+    ],
   };
 }

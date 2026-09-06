@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform` 与 M7 `Decision Continuity & Meal Reliability` 已完成。M8 真人研究计划已取消且没有产生参与者数据。当前执行 M9 Epic #69 `统一料理体验与内容扩充`，目标是以统一料理信息架构、编辑式视觉与 50 项双语内容完成下一版 PR；本阶段不开展用户研究。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6 `Culinary Knowledge Platform`、M7 `Decision Continuity & Meal Reliability` 与 M9 `统一料理体验与内容扩充` 已完成。M8 真人研究计划已取消且没有产生参与者数据。当前没有新的产品 Goal；本阶段不开展用户研究。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -42,7 +42,7 @@ Production URL：
 - Production 已通过 Vercel 部署并可访问
 - 当前 M0-M4 已完成
 - M5 Epic #15 已按实际完成状态关闭
-- M9 Epic #69 与 Issues #70–#75 已建立；PR #76 已提交，工作分支为 `feature/m9-unified-culinary-experience`
+- M9 PR #76 已于 2026-09-06 merge 到 `main`，Issues #70–#75 已自动关闭
 
 ## M9 当前实现状态
 
@@ -55,7 +55,8 @@ Production URL：
 - 首页、目录、详情与 Pairing 已改为米白、墨黑、单一辣椒红的编辑式视觉；首页取消自动轮播，只预加载首个 Hero
 - 推荐引擎仍只处理 published Recipe；全部料理可浏览并参与确定性 Pairing
 - 本地最新验证：typecheck、lint、260 项测试、production build、五档响应式 QA、独立 code review 与独立 visual review 已通过
-- PR #76 的 Vercel 与 Preview Comments checks 已通过，mergeable 状态为 `MERGEABLE`；Preview 受 Vercel SSO 保护，Production 上线烟测需在获得明确 merge 确认并部署后执行
+- PR #76 的 Vercel 与 Preview Comments checks 已通过；Vercel Production 部署成功
+- 合并后 Production 双语烟测通过：首页、料理库、procedural 详情、冲泡详情、成品饮品服务建议、嵌入式 Story 与 Pairing 均返回 200；`zh-CN` 与 `en` 目录各有 50 项，canonical metadata 正确，旧 `/recipes`、`/culinary` 与 `/stories` 路由均返回预期 308
 
 ## 已完成能力
 
@@ -382,4 +383,4 @@ PR #36 已合并 Living Editorial Hero：
 ## 下一步
 
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
-- M9 PR #76 已达到 PR ready：本地质量门禁、独立 review 与 GitHub CI 均通过。按 Codex Autonomy V1 等待明确 merge 确认，不自动 merge；合并后的 Production 双语烟测尚未执行。
+- M9 已完成并上线：PR #76 已合并，Production 双语烟测通过，Epic #69 已收口。按照 Product Director 要求不启动新的产品 Goal。

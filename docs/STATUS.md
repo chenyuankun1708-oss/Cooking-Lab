@@ -17,8 +17,8 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - PR #95 已独立 merge 并交付 M11 工程、计划体验、内容包容量边界与 Taste 视觉升级；新增 70 项仍未发布。
 - Product Director 已批准 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。Issue #96 负责先让 schema、validator、CI 与文档 fail closed，生效前不得发布新增内容。
 - Issue #96 的 reviewer hardening 已在 PR #97 完成实现与本地验证：artifact fingerprint 覆盖 Source、Evidence、rights、attribution、AI/data/translation 路径及本地图片 SHA-256；sampling 使用真实 item 的风险等价类覆盖，major finding 自动冻结并要求连续两个 clean 100% re-review 批次。五批历史完整保留，当前 artifact 已完成两轮连续 clean recovery，registry 为 `ready=true`；合并和 CI 上线前新增 70 项仍保持未发布。
-- Product Director 已移除 M11 的公开视频核对路线。Batch A/B 不观看或总结视频，不创建 timestamp Evidence，也不保存字幕、转录、截图、下载或 `ExternalMediaReference`；每项仍须具备至少两个可靠的非视频来源。M10 的通用外部媒体防滥用规则保持不变。
-- Batch A 的 35 项候选、双语 Story、明确的 step metadata 和原创本地 Hero 已建立，但仍全部保持 draft 且未进入公开 manifest。泛化栏目页与失效跳转已由直接的非视频机构、出版或专业来源替换；发布仍等待最终 artifact fingerprint、独立全维度 attestation 和风险等价类 sampling QA。
+- Product Director 已移除 M11 的公开视频核对路线。Batch A/B 不观看或总结视频，不创建 timestamp Evidence，也不保存字幕、转录、截图、帧、下载或 `ExternalMediaReference`；每项仍须具备至少两个可靠的非视频来源。M10 的通用外部媒体防滥用规则保持不变。
+- Batch A 的 35 项候选、双语 Story、明确的 step metadata 和原创本地 Hero 已建立，但仍全部保持 draft 且未进入公开 manifest。泛化栏目页与失效跳转已由直接的非视频机构、出版或专业来源替换。独立 dish audit 对 8 个餐厅风格重构发现旧 `culinaryReview: passed` 裸断言与 restaurant registry fail-open 风险，并发现 6 项来源仅支持安全温度、不支持料理身份或准备；当前修订已把 review requirement 与 PASS 分离、强制 requirement/identity 一一覆盖，并为受影响条目换成至少两个料理相关的非视频书面来源。发布仍等待新 fingerprint 的独立全维度 attestation 和风险等价类 sampling QA。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)

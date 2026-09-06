@@ -86,6 +86,7 @@ export function evaluateContentRightsRegistry(
   reportDuplicateKey(registry.nutrition, (entry) => entry.ingredientId, "NutritionProvenance ingredient", report);
   reportDuplicateKey(registry.ai, (entry) => entry.artifactId, "AI artifact", report);
   reportDuplicateKey(registry.restaurants, (entry) => entry.culinaryItemId, "Restaurant CulinaryItem", report);
+  reportDuplicateKey(registry.restaurantRequirements, (entry) => entry.culinaryItemId, "Restaurant requirement CulinaryItem", report);
 
   for (const assessment of registry.assessments) {
     validateAssessment(assessment, context.now, report);
@@ -386,8 +387,20 @@ function validateRestaurants(
 ) {
   const itemById = new Map(context.items.map((item) => [item.id, item]));
   const sourceIds = new Set(context.sources.map((source) => source.id));
+  const identitiesByItemId = new Map(registry.restaurants.map((identity) => [identity.culinaryItemId, identity]));
+  const requirementsByItemId = new Map(registry.restaurantRequirements.map((requirement) => [requirement.culinaryItemId, requirement]));
+  for (const requirement of registry.restaurantRequirements) {
+    const identity = identitiesByItemId.get(requirement.culinaryItemId);
+    if (!itemById.has(requirement.culinaryItemId) || !identity || identity.kind !== requirement.kind) {
+      report("restaurant-identity-invalid", requirement.culinaryItemId, "restaurantRequirements", "Every declared restaurant-content requirement needs a matching identity of the same kind");
+    }
+  }
   for (const identity of registry.restaurants) {
     if (!itemById.has(identity.culinaryItemId)) report("restaurant-identity-invalid", identity.culinaryItemId, "culinaryItemId", "Restaurant identity must reference a CulinaryItem");
+    const requirement = requirementsByItemId.get(identity.culinaryItemId);
+    if (!requirement || requirement.kind !== identity.kind) {
+      report("restaurant-identity-invalid", identity.culinaryItemId, "restaurantRequirements", "Restaurant identity is not covered by the declared fail-closed requirement set");
+    }
     if (identity.kind === "official-authorized-recipe") {
       const permission = registry.assessments.find((assessment) => assessment.basis.kind === "permission" && assessment.basis.permissionReferenceId === identity.permissionReferenceId);
       const permissionAllowsAll = permission && rightsActions.every((action) => !["prohibited", "review-required"].includes(permission.permissions[action].status));
@@ -400,8 +413,18 @@ function validateRestaurants(
       const sourceAssessments = identity.sourceIds.map((sourceId) => [...assessments.values()].find((assessment) => assessment.subject.type === "source" && assessment.subject.id === sourceId));
       const relevantArtifacts = registry.artifacts.filter((artifact) => artifact.subject.type === "culinary-item" && artifact.subject.id === identity.culinaryItemId && ["identity", "preparation"].includes(artifact.kind));
       const artifactsAligned = relevantArtifacts.length === 2 && relevantArtifacts.every((artifact) => identity.sourceIds.every((sourceId) => artifact.sourceIds.includes(sourceId)));
-      if (new Set(identity.sourceIds).size < 2 || identity.sourceIds.some((sourceId) => !sourceIds.has(sourceId)) || sourceAssessments.some((assessment) => !assessment) || !artifactsAligned || !identity.independentlyWritten || identity.culinaryReview !== "passed" || !identity.nonEndorsementDisclosure) {
-        report("restaurant-identity-invalid", identity.culinaryItemId, "restaurant", "Reconstruction requires two sources, independent writing, culinary review, and non-endorsement disclosure");
+      const records = context.researchRecords.filter((record) => record.subject.type === "culinary-item" && record.subject.id === identity.culinaryItemId && record.status === "closed");
+      const acceptedUses = new Map(records.flatMap((record) => record.sourceDecisions
+        .filter((decision) => decision.disposition === "accepted")
+        .map((decision) => [decision.sourceId, new Set(decision.uses)] as const)));
+      const sourcesSubstantiateIdentityAndPreparation = identity.sourceIds.every((sourceId) => {
+        const uses = acceptedUses.get(sourceId);
+        return uses?.has("identity") && uses.has("preparation");
+      });
+      const reviewRequirementValid = identity.reviewRequirement.dimension === "factual-culinary"
+        && identity.reviewRequirement.policyVersion.trim().length > 0;
+      if (new Set(identity.sourceIds).size < 2 || identity.sourceIds.some((sourceId) => !sourceIds.has(sourceId)) || sourceAssessments.some((assessment) => !assessment) || !artifactsAligned || !sourcesSubstantiateIdentityAndPreparation || !identity.independentlyWritten || !reviewRequirementValid || !identity.nonEndorsementDisclosure) {
+        report("restaurant-identity-invalid", identity.culinaryItemId, "restaurant", "Reconstruction requires two research-linked identity/preparation sources, independent writing, a factual-culinary governance review requirement, and non-endorsement disclosure");
       }
     } else {
       const item = itemById.get(identity.culinaryItemId);

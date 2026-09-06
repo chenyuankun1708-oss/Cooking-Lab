@@ -59,7 +59,7 @@ export const m11BatchAMealPlanStepMetadata = Object.freeze({
   "cold-shredded-chicken": {
     1: { kind: "active", durationMinutes: 10 },
     2: { kind: "wait", durationMinutes: 12, resourceIds: ["saucepan"] },
-    3: { kind: "prepare-ahead", durationMinutes: 30, resourceIds: ["refrigerator"] },
+    3: { kind: "wait", durationMinutes: 10, resourceIds: [] },
     4: { kind: "active", durationMinutes: 5 },
   },
   "roasted-vegetables": {

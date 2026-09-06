@@ -207,7 +207,10 @@ export type RestaurantContentIdentity =
       restaurantName: string;
       sourceIds: [string, string, ...string[]];
       independentlyWritten: true;
-      culinaryReview: "passed";
+      reviewRequirement: {
+        dimension: "factual-culinary";
+        policyVersion: string;
+      };
       nonEndorsementDisclosure: true;
     }
   | {
@@ -218,6 +221,11 @@ export type RestaurantContentIdentity =
       includesPreparation: false;
       nonEndorsementDisclosure: true;
     };
+
+export interface RestaurantContentRequirement {
+  culinaryItemId: string;
+  kind: RestaurantContentIdentity["kind"];
+}
 
 export interface ProductProfile {
   id: string;
@@ -245,6 +253,7 @@ export interface ContentRightsRegistry {
   costs: readonly CostProvenance[];
   ai: readonly AiGenerationRecord[];
   externalMedia: readonly ExternalMediaReference[];
+  restaurantRequirements: readonly RestaurantContentRequirement[];
   restaurants: readonly RestaurantContentIdentity[];
   productProfiles: readonly ProductProfile[];
 }

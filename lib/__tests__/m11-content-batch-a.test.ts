@@ -16,7 +16,7 @@ import {
   m11BatchAStories,
 } from "@/data/m11/batch-a";
 import { m11BatchAMealPlanStepMetadata } from "@/data/m11/batch-a-meal-plan-metadata";
-import { m11BatchAItemIds, m11PortfolioTarget, m11RequiredItemIds } from "@/data/m11/portfolio";
+import { m11BatchAItemIds, m11PortfolioTarget, m11RequiredItemIds, m11RestaurantReconstructionItemIds } from "@/data/m11/portfolio";
 import { evaluateContentRightsRegistry } from "@/lib/content-rights";
 import { evaluateCulinaryItemPublishingEligibility } from "@/lib/culinary-publishing";
 import { deriveMinimumPublishingRisk } from "@/lib/publishing-governance";
@@ -54,6 +54,10 @@ const rightsRegistry = createContentRightsRegistry({
   evidence: m11BatchAEvidence,
   sources: m11BatchASources,
   researchRecords: m11BatchAResearchRecords,
+  restaurantRequirements: m11RestaurantReconstructionItemIds.map((culinaryItemId) => ({
+    culinaryItemId,
+    kind: "cooking-lab-reconstruction" as const,
+  })),
   restaurants: m11BatchARestaurantIdentities,
   productProfiles: m11BatchAProductProfiles,
 });

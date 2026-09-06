@@ -35,6 +35,7 @@ export const publishingGovernanceIssueCodes = [
   "sampling-metrics-invalid",
   "sampling-evidence-mutated",
   "ai-attestation-missing",
+  "restaurant-review-unlinked",
 ] as const;
 export type PublishingGovernanceIssueCode = (typeof publishingGovernanceIssueCodes)[number];
 
@@ -406,6 +407,17 @@ export function evaluatePublishingGovernance(
     validateRiskClassification(classification, item, governance.policyVersion, context, versionOf, report);
     validateDisagreementEscalation(classification, item, governance.attestations, report);
     validateReviewCoverage(item, classification, governance.attestations, context, report);
+    const restaurant = context.rightsRegistry.restaurants.find((entry) => entry.culinaryItemId === item.id);
+    if (restaurant?.kind === "cooking-lab-reconstruction") {
+      const linkedCulinaryReview = governance.attestations.some((attestation) =>
+        attestation.itemIds.includes(item.id)
+        && attestation.dimension === restaurant.reviewRequirement.dimension
+        && attestation.policyVersion === restaurant.reviewRequirement.policyVersion
+        && attestation.verdict === "pass");
+      if (restaurant.reviewRequirement.policyVersion !== governance.policyVersion || !linkedCulinaryReview) {
+        report("restaurant-review-unlinked", item.id, "Restaurant reconstruction requires a current passing factual-culinary ReviewAttestation; the rights record itself never asserts review PASS");
+      }
+    }
     validateSamplingCoverage(item, classification, governance.samplingBatches, versionOf, report);
   }
 

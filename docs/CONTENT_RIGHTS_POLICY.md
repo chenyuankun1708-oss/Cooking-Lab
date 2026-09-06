@@ -40,10 +40,12 @@ Cooking Lab 将每个公开料理拆成 `identity / preparation / story / nutrit
 餐厅料理只允许三种身份：
 
 1. `official-authorized-recipe`：书面许可必须覆盖商业使用、翻译、改编、署名、期限和撤回条件。
-2. `cooking-lab-reconstruction`：至少两个事实来源、独立写作、料理复核，并明确非官方、无合作背书。
+2. `cooking-lab-reconstruction`：至少两个在 closed ResearchRecord 中同时支持 `identity` 与 `preparation` 的事实来源、独立写作、料理复核，并明确非官方、无合作背书。权利记录只声明当前 policy 的 `factual-culinary` 审查要求；它不能自称已经审查通过，PASS 必须来自与当前 artifact version 对齐的独立 `ReviewAttestation`。需要餐厅身份判断的完整集合与实际身份记录一一覆盖，缺失或多出的记录都会 fail closed。
 3. `dish-profile-only`：证据不足时只介绍料理，不提供推测步骤。
 
 视频只允许人工观看后的 reference-only Evidence，记录 URL、作者/发布者、日期和 timestamp。不下载、不保存字幕/转录/截图、不自动抓取；嵌入播放器需要另行完成平台条款与隐私评估。
+
+M11 采用更窄的项目边界：Batch A/B 不观看或总结视频，不创建 timestamp Evidence 或 `ExternalMediaReference`，也不保存字幕、转录、截图、帧或下载。每个新增料理仍需要至少两个可靠的非视频来源；这项范围收缩不改变上述 M10 通用媒体规则。
 
 具体酒、咖啡和茶 SKU 必须使用版本化 `ProductProfile`，记录品牌、生产者、产区、年份/批次/型号和核验日期。只使用标签窄事实和独立编辑文字，不复制 tasting notes、营销文案或包装图，不暗示背书，也不做联盟销售。
 

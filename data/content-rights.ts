@@ -5,6 +5,7 @@ import type {
   ContentRightsRegistry,
   ProductProfile,
   RestaurantContentIdentity,
+  RestaurantContentRequirement,
   RightsAssessment,
   RightsPermission,
   UsageDecision,
@@ -28,7 +29,8 @@ export interface CreateContentRightsRegistryInput {
   evidence: readonly Evidence[];
   sources: readonly Source[];
   researchRecords: readonly ResearchRecord[];
-  restaurants?: readonly RestaurantContentIdentity[];
+  restaurantRequirements: readonly RestaurantContentRequirement[];
+  restaurants: readonly RestaurantContentIdentity[];
   productProfiles?: readonly ProductProfile[];
 }
 
@@ -164,7 +166,8 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     }],
     ai: [],
     externalMedia: [],
-    restaurants: (input.restaurants ?? []).filter((identity) => itemIds.has(identity.culinaryItemId)),
+    restaurantRequirements: input.restaurantRequirements.filter((requirement) => itemIds.has(requirement.culinaryItemId)),
+    restaurants: input.restaurants.filter((identity) => itemIds.has(identity.culinaryItemId)),
     productProfiles,
   } satisfies ContentRightsRegistry;
 }

@@ -6,7 +6,7 @@ import { culinarySources } from "@/data/culinary/sources";
 import { culinaryStories } from "@/data/culinary/stories";
 import { ingredients } from "@/data/ingredients";
 import { publishedLocalContentPackages } from "@/data/content-packages";
-import { createPublishingGovernanceRegistry } from "@/data/publishing-governance";
+import { createPublishingGovernanceRegistry, publishingGovernancePolicyVersion } from "@/data/publishing-governance";
 import { createPublishingLocalizationVersions } from "@/data/publishing-localization-versions";
 import { recipeImages } from "@/data/recipe-images";
 import { m9RecipeResearchRecords, m9RecipeResearchSources } from "@/data/research/m9-recipe-research";
@@ -37,6 +37,8 @@ const contentRightsRegistry = createContentRightsRegistry({
   evidence: culinaryEvidence,
   sources: contentRightsSources,
   researchRecords: m9RecipeResearchRecords,
+  restaurantRequirements: [],
+  restaurants: [],
 });
 const contentImageAssetVersions = createImageAssetVersions(allImages);
 const contentLocalizationVersions = createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients);
@@ -526,13 +528,17 @@ describe("risk-based publishing governance", () => {
     artifact.evidenceIds = [evidence.id];
     changedContext.sources = [...changedContext.sources, evidenceSource];
     changedContext.evidence = [...changedContext.evidence, evidence];
+    changedContext.rightsRegistry.restaurantRequirements = [{
+      culinaryItemId: item.id,
+      kind: "cooking-lab-reconstruction",
+    }];
     changedContext.rightsRegistry.restaurants = [{
       culinaryItemId: item.id,
       kind: "cooking-lab-reconstruction",
       restaurantName: "Test restaurant",
       sourceIds: artifact.sourceIds as [string, string, ...string[]],
       independentlyWritten: true,
-      culinaryReview: "passed",
+      reviewRequirement: { dimension: "factual-culinary", policyVersion: publishingGovernancePolicyVersion },
       nonEndorsementDisclosure: true,
     }];
     changedContext.rightsRegistry.externalMedia = [{
@@ -577,6 +583,30 @@ describe("risk-based publishing governance", () => {
       "product-profile:versioned-independent-editorial",
       "source-domain:evidence-only.example.test",
     ]));
+  });
+
+  it("requires restaurant reconstruction review claims to resolve through current attestations", () => {
+    const item = items.find((entry) => entry.id === "japanese-oyakodon")!;
+    const changedContext = structuredClone(context);
+    const identityArtifact = changedContext.rightsRegistry.artifacts.find((entry) =>
+      entry.subject.type === "culinary-item" && entry.subject.id === item.id && entry.kind === "identity")!;
+    changedContext.rightsRegistry.restaurantRequirements = [{ culinaryItemId: item.id, kind: "cooking-lab-reconstruction" }];
+    changedContext.rightsRegistry.restaurants = [{
+      culinaryItemId: item.id,
+      kind: "cooking-lab-reconstruction",
+      restaurantName: "Unnamed restaurant-style category",
+      sourceIds: identityArtifact.sourceIds as [string, string, ...string[]],
+      independentlyWritten: true,
+      reviewRequirement: { dimension: "factual-culinary", policyVersion: publishingGovernancePolicyVersion },
+      nonEndorsementDisclosure: true,
+    }];
+
+    const governance = readyRegistry();
+    governance.attestations = governance.attestations.filter((attestation) => !(
+      attestation.itemIds.includes(item.id) && attestation.dimension === "factual-culinary"
+    ));
+    const result = evaluatePublishingGovernance(governance, changedContext);
+    expect(result.issues.some((issue) => issue.code === "restaurant-review-unlinked" && issue.subjectId === item.id)).toBe(true);
   });
 
   it("publishes CC0 and public-domain image provenance without inventing a license obligation", () => {

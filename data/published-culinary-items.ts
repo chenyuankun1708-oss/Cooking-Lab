@@ -63,6 +63,8 @@ export const contentRightsRegistry = createContentRightsRegistry({
   evidence: allEvidence,
   sources: allSources,
   researchRecords: m9RecipeResearchRecords,
+  restaurantRequirements: [],
+  restaurants: [],
 });
 const contentRightsContext = {
   items: candidates,

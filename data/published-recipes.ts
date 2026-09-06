@@ -45,6 +45,8 @@ const recipeRightsRegistry = createContentRightsRegistry({
   evidence: m9RecipeResearchRegistry.evidence,
   sources: m9RecipeResearchRegistry.sources,
   researchRecords: m9RecipeResearchRegistry.records,
+  restaurantRequirements: [],
+  restaurants: [],
 });
 assertContentRightsReady(recipeRightsRegistry, {
   items: recipeRightsItems,

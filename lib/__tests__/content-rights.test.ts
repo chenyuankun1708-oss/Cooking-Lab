@@ -32,6 +32,8 @@ const context = {
   evidence: culinaryEvidence,
   sources: contentRightsSources,
   researchRecords: m9RecipeResearchRecords,
+  restaurantRequirements: [],
+  restaurants: [],
   now: "2026-09-06",
 } as const;
 
@@ -253,6 +255,7 @@ describe("M10 Production content-rights gate", () => {
     const sourceIds = reconstructionArtifact.sourceIds as [string, string];
 
     const official = cloneRegistry();
+    official.restaurantRequirements = [{ culinaryItemId: baseItem.id, kind: "official-authorized-recipe" }];
     official.restaurants = [{ culinaryItemId: baseItem.id, kind: "official-authorized-recipe", restaurantName: "Example", permissionReferenceId: "permission-example", commercialUse: true, translationAllowed: true, adaptationAllowed: true, endorsementLanguageApproved: false }];
     const permission = permissionAssessment("permission-example");
     official.assessments = [...official.assessments, permission];
@@ -263,20 +266,47 @@ describe("M10 Production content-rights gate", () => {
     expect(issueCodes(official)).not.toContain("restaurant-identity-invalid");
 
     const reconstruction = cloneRegistry();
-    reconstruction.restaurants = [{ culinaryItemId: reconstructionItem.id, kind: "cooking-lab-reconstruction", restaurantName: "Example", sourceIds, independentlyWritten: true, culinaryReview: "passed", nonEndorsementDisclosure: true }];
+    reconstruction.restaurantRequirements = [{ culinaryItemId: reconstructionItem.id, kind: "cooking-lab-reconstruction" }];
+    reconstruction.restaurants = [{ culinaryItemId: reconstructionItem.id, kind: "cooking-lab-reconstruction", restaurantName: "Example", sourceIds, independentlyWritten: true, reviewRequirement: { dimension: "factual-culinary", policyVersion: "m10.1-risk-based-2026-09-06" }, nonEndorsementDisclosure: true }];
     expect(issueCodes(reconstruction)).not.toContain("restaurant-identity-invalid");
 
+    const missingIdentity = structuredClone(reconstruction);
+    missingIdentity.restaurants = [];
+    expect(issueCodes(missingIdentity)).toContain("restaurant-identity-invalid");
+
+    const undeclaredIdentity = structuredClone(reconstruction);
+    undeclaredIdentity.restaurantRequirements = [];
+    expect(issueCodes(undeclaredIdentity)).toContain("restaurant-identity-invalid");
+
+    const unrelatedResearch: ContentRightsContext = {
+      ...context,
+      researchRecords: context.researchRecords.map((record) => (
+      record.subject.id === reconstructionItem.id
+        ? {
+            ...record,
+            sourceDecisions: record.sourceDecisions.map((decision) => (
+              decision.disposition === "accepted" ? { ...decision, uses: ["preparation" as const] } : decision
+            )),
+        }
+        : record
+      )),
+    };
+    expect(issueCodes(reconstruction, unrelatedResearch)).toContain("restaurant-identity-invalid");
+
     const profile = cloneRegistry();
+    profile.restaurantRequirements = [{ culinaryItemId: reconstructionItem.id, kind: "dish-profile-only" }];
     profile.restaurants = [{ culinaryItemId: reconstructionItem.id, kind: "dish-profile-only", restaurantName: "Example", sourceIds, includesPreparation: false, nonEndorsementDisclosure: true }];
     const profileItems = items.map((item) => item.id === reconstructionItem.id ? ({ ...item, preparation: { kind: "no-consumer-preparation", reason: "reference-only", content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { servingNote: "Profile only" } }] } } } as CulinaryItem) : item);
     expect(issueCodes(profile, { ...context, items: profileItems })).not.toContain("restaurant-identity-invalid");
 
     const unalignedProfile = cloneRegistry();
+    unalignedProfile.restaurantRequirements = [{ culinaryItemId: baseItem.id, kind: "dish-profile-only" }];
     unalignedProfile.restaurants = [{ culinaryItemId: baseItem.id, kind: "dish-profile-only", restaurantName: "Example", sourceIds: [sourceIds[0]], includesPreparation: false, nonEndorsementDisclosure: true }];
     const unalignedItems = items.map((item) => item.id === baseItem.id ? ({ ...item, preparation: { kind: "no-consumer-preparation", reason: "reference-only", content: { defaultLocale: "zh-CN", entries: [{ locale: "zh-CN", status: "reviewed", value: { servingNote: "Profile only" } }] } } } as CulinaryItem) : item);
     expect(issueCodes(unalignedProfile, { ...context, items: unalignedItems })).toContain("restaurant-identity-invalid");
 
     const falseOfficial = cloneRegistry();
+    falseOfficial.restaurantRequirements = [{ culinaryItemId: baseItem.id, kind: "official-authorized-recipe" }];
     falseOfficial.restaurants = official.restaurants;
     expect(issueCodes(falseOfficial)).toContain("restaurant-identity-invalid");
   });

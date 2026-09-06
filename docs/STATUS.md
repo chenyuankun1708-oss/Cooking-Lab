@@ -4,7 +4,17 @@
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完成。M8 真人研究计划已取消且没有产生参与者数据。当前没有活动中的新产品 Goal；500+ 内容扩充、Taste UI 大升级、M11 与其他新 Goal 均未启动。本阶段不开展用户研究。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完成。M8 真人研究计划已取消且没有产生参与者数据。M11 Epic #87 当前在 `feature/m11-decision-to-table` 执行；不开展用户研究。
+
+## M11 当前状态
+
+- 已实现 `MealPlanV1`、确定性购物清单、最早可用设备时间线、成品服务任务、追加/替换分离的安全 URL、V0 migration 和深层校验的版本化 localStorage；存储被禁用时安全降级为内存状态。
+- 已增加双语 noindex Plan 路由，以及推荐、料理详情、Pairing 的加入入口；首页可继续本地计划。
+- 详情页已有键盘可用的稳定章节导航、跨类型相似料理和保留在末章的 `#sources`。
+- Taste Redesign - Overhaul 已覆盖首页、目录、详情、Pairing 和 Plan；主题选择跟随系统并在可用时本地保存。
+- 最新 412 px local Production 实测：英文 LCP 244 ms / CLS 0 / INP 152 ms，中文 LCP 216 ms / CLS 0 / INP 160 ms；Lighthouse accessibility 为 1.00。该结果是可复现 lab evidence，不代替 merge 后的 Production field observation。
+- 当前 50 项各自通过 content package module 进入 repository，独立提交的 deterministic manifest、`content:audit` 与 M10 gate 共同阻止过期 identity/Story/Hero/usage decisions。
+- 完整 120 项验收仍缺 70 个经独立人工内容审校的内容包。M10 要求 AI 辅助表达记录 provenance 并通过 human review；实现 agent 不能自证该门禁，因此不会伪造 120 项已完成。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)
@@ -58,7 +68,7 @@ Production URL：
 - 最终 M10 audit 为 50 个 published item、256 个 artifact、256 个 UsageDecision、0 个 blocked issue；独立代码/内容权利复审结论为 PASS
 - merge commit `de4ea4164d89c6cf2665b0769ab00b94d89bb808` 的 main CI 与 Vercel Production deployment 均通过；Production 在 390/1440 px 完成双语权利页及 Fino/Junmai/Espresso 详情烟测，无横向溢出或 console error
 - Production 两种语言目录各返回 50 项；100 个双语详情 URL 全部为 200，均有稳定 `#sources`、正确 canonical 和安全来源链接；legacy `/content-rights` 永久导向 `/zh-CN/content-rights`
-- 500+ 扩充、批量 Story、详情章节导航、Taste UI 大升级、M11 与其他新 Goal 未启动；后续方向由 Product Director 决定
+- M10 收口当时未启动 500+ 扩充、批量 Story、详情章节导航、Taste UI 大升级或 M11；此后 Product Director 已明确启动 M11 Epic #87
 
 ## M9 当前实现状态
 
@@ -398,5 +408,6 @@ PR #36 已合并 Living Editorial Hero：
 ## 下一步
 
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
-- M10 已完成并收口；当前不自动启动 500+ 内容扩充、Taste UI 大升级、M11 或其他新 Goal。
-- 下一个 Goal 由 Product Director 决定。
+- M10 已完成并继续作为 M11 的强制发布门禁。
+- M11 工程、内容包基础和视觉升级进入 PR 交付；Epic #87 与内容 Issues #91/#92 保持开放。
+- 完整 120 项发布仍等待独立人工 editorial review 产能。没有该证据时，70 个新增内容包不得进入公开 manifest。

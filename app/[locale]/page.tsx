@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { HomeHero } from "@/components/home-hero";
 import { RecipeCard } from "@/components/recipe-card";
 import { RecipeDiscovery } from "@/components/recipe-discovery";
+import { ResumePlanBanner } from "@/components/resume-plan-banner";
 import { SiteFooter } from "@/components/site-footer";
 import { StoryCard } from "@/components/story-card";
 import { homepageStoryIds } from "@/data/culinary/story-context";
@@ -44,6 +45,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   return (
     <main id="main-content">
       <HomeHero items={heroItems} locale={locale} />
+      <ResumePlanBanner locale={locale} />
 
       <section className="py-14 sm:py-20" aria-labelledby="tonight-title">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">

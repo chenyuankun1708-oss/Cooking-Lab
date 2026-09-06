@@ -5,7 +5,7 @@ export function EmbeddedStories({ stories, locale }: { stories: EmbeddedStoryMod
   if (!stories.length) return null;
   const copy = locale === "zh-CN" ? zhCopy : enCopy;
   return (
-    <section className="border-y border-[var(--line)] bg-[var(--surface-story)] py-14 sm:py-20" aria-labelledby="stories-heading">
+    <section id="stories" className="scroll-mt-24 border-y border-[var(--line)] bg-[var(--surface-story)] py-14 sm:py-20" aria-labelledby="stories-heading">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <h2 id="stories-heading" className="max-w-2xl text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.heading}</h2>
         <div className="mt-10 space-y-16">

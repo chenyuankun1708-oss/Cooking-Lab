@@ -11,15 +11,17 @@ import { supportedLocales, type SupportedLocale } from "@/types/localization";
 const bodyFont = Noto_Sans_SC({
   variable: "--font-body",
   weight: "variable",
-  display: "swap",
-  preload: false,
+  display: "optional",
+  preload: true,
+  subsets: ["latin"],
 });
 
 const displayFont = Noto_Serif_SC({
   variable: "--font-display",
   weight: "variable",
-  display: "swap",
-  preload: false,
+  display: "optional",
+  preload: true,
+  subsets: ["latin"],
 });
 
 export function generateStaticParams() {
@@ -33,7 +35,10 @@ export default async function RootLayout({ children, params }: { children: React
   const locale: SupportedLocale = value;
   const messages = getMessages(locale);
   return (
-    <html className={`${bodyFont.variable} ${displayFont.variable}`} lang={locale}>
+    <html className={`${bodyFont.variable} ${displayFont.variable}`} lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('cooking-lab:theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}})()` }} />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">{messages.skip}</a>
         {children}

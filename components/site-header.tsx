@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SupportedLocale } from "@/types/localization";
 import { getAlternateLocale, getLocalizedPath, replacePathLocale } from "@/lib/localization";
 import { getMessages } from "@/lib/messages";
+import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader({ active, inverse = false, locale, currentPath, query }: { active?: "home" | "recipes" | "stories"; inverse?: boolean; locale: SupportedLocale; currentPath: string; query?: string }) {
   const textClass = inverse ? "text-white" : "text-stone-950";
@@ -23,8 +24,9 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
           <Link aria-current={active === "recipes" ? "page" : undefined} className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center hover:underline" href={getLocalizedPath(locale, "/recipes")}>
             {messages.nav.recipes}
           </Link>
-          <Link className="focus-ring hidden min-h-11 items-center hover:underline md:inline-flex" href={`${getLocalizedPath(locale)}#decide`}>
-            {messages.nav.decide}
+          <Link className="focus-ring inline-flex min-h-11 items-center px-1 hover:underline" href={`${getLocalizedPath(locale)}#decide`}>
+            <span className="md:hidden">{locale === "zh-CN" ? "今晚" : "Decide"}</span>
+            <span className="hidden md:inline">{messages.nav.decide}</span>
           </Link>
           <Link
             aria-label={messages.locale.switchLabel}
@@ -35,6 +37,7 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
           >
             {alternate === "en" ? "EN" : "中"}
           </Link>
+          <ThemeToggle inverse={inverse} locale={locale} />
         </nav>
       </div>
     </header>

@@ -16,6 +16,7 @@ import {
   m9RecipeResearchRecords,
 } from "@/data/research/m9-recipe-research";
 import { buildCulinaryDetailModel } from "@/lib/culinary-detail";
+import { rankSimilarCulinaryItems } from "@/lib/culinary-similarity";
 import { parseCulinaryCatalogFilters } from "@/lib/culinary-exploration";
 import {
   buildDecisionReturnHref,
@@ -53,6 +54,7 @@ export async function generateMetadata({
   const detail = buildCulinaryDetailModel(item, ingredients, getStoryExperienceContext(locale), locale, {
     ...(recipe ? { recipe } : {}),
     rightsRegistry: contentRightsRegistry,
+    similarItems: rankSimilarCulinaryItems(item, getPublishedCulinaryItemsForLocale(locale)).map((result) => result.item),
     researchSources: contentRightsSources,
   });
   const path = `/recipes/${item.slug}`;
@@ -94,6 +96,7 @@ export default async function CulinaryDetailRoute({
     researchRecords: m9RecipeResearchRecords,
     researchSources: contentRightsSources,
     rightsRegistry: contentRightsRegistry,
+    similarItems: rankSimilarCulinaryItems(item, getPublishedCulinaryItemsForLocale(locale)).map((result) => result.item),
   });
   const hasContext = hasDecisionContext(decisionState.context);
   const returnHref = hasContext

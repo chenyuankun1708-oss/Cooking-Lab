@@ -1,8 +1,10 @@
 import Link from "next/link";
 import type { CulinaryDetailModel } from "@/lib/culinary-detail";
 import { getLocalizedPath } from "@/lib/localization";
+import { encodeMealPlanAddPayload } from "@/lib/meal-plan-codec";
 import type { DecisionContext } from "@/types/decision-context";
 import type { SupportedLocale } from "@/types/localization";
+import { mealPlanSchemaVersion } from "@/types/meal-plan";
 import { DecisionContextSummary } from "./decision-context-summary";
 import { EmbeddedStories } from "./embedded-stories";
 import { RecipeImage } from "./recipe-image";
@@ -28,6 +30,16 @@ export function NativeCulinaryDetailPage({
 }) {
   const copy = detailCopy[locale];
   const identity = [detail.itemTypeLabel, detail.placeLabel, detail.flavorLabel].filter(Boolean);
+  const planHref = getLocalizedPath(locale, "/plan", encodeMealPlanAddPayload({ version: mealPlanSchemaVersion, items: [{ slug: detail.slug, servings: detail.defaultServings }] }));
+  const sections = [
+    { id: "preparation", label: copy.sectionPreparation, visible: true },
+    { id: "principles", label: copy.sectionPrinciples, visible: detail.principles.length > 0 },
+    { id: "stories", label: copy.sectionStories, visible: detail.embeddedStories.length > 0 },
+    { id: "nutrition", label: copy.sectionNutrition, visible: true },
+    { id: "pairing", label: copy.sectionPairing, visible: true },
+    { id: "similar", label: copy.sectionSimilar, visible: detail.similarItems.length > 0 },
+    { id: "sources", label: copy.sectionSources, visible: true },
+  ].filter((section) => section.visible);
   return (
     <main id="main-content">
       <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes/${detail.slug}`} query={query.toString()} />
@@ -50,13 +62,20 @@ export function NativeCulinaryDetailPage({
             ) : null}
             {decisionContext ? <DecisionContextSummary context={decisionContext} locale={locale} anchorIsRecipe={anchorIsRecipe} /> : null}
             {returnHref && returnLabel ? <Link className="focus-ring mt-5 inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={returnHref}>{returnLabel}</Link> : null}
+            <div className="mt-6"><Link className="focus-ring inline-flex min-h-11 items-center justify-center rounded-[4px] bg-stone-950 px-5 font-bold text-white transition hover:bg-[var(--tomato)] active:translate-y-px" href={planHref}>{copy.addToPlan}</Link></div>
           </div>
           <div className="overflow-hidden rounded-[4px] bg-stone-200">
-            <RecipeImage image={detail.image} fallbackInitial={detail.fallbackInitial} fallbackLabel={detail.name} alt={detail.image?.alt ?? detail.name} locale={locale} sourceLabel={copy.imageSource} variant="hero" preload />
+            <RecipeImage image={detail.image} fallbackInitial={detail.fallbackInitial} fallbackLabel={detail.name} alt={detail.image?.alt ?? detail.name} locale={locale} sourceLabel={copy.imageSource} variant="hero" lcp />
           </div>
         </header>
 
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="preparation-title">
+        <nav aria-label={copy.sectionNavigation} className="sticky top-0 z-10 border-y border-[var(--line)] bg-[var(--surface-paper)]/95 backdrop-blur">
+          <div className="horizontal-rail mx-auto flex max-w-6xl gap-1 overflow-x-auto px-4 py-2 sm:px-6">
+            {sections.map((section) => <a className="focus-ring inline-flex min-h-11 shrink-0 items-center px-3 text-sm font-bold text-stone-700 hover:text-[var(--tomato)]" href={`#${section.id}`} key={section.id}>{section.label}</a>)}
+          </div>
+        </nav>
+
+        <section id="preparation" className="scroll-mt-24 mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20" aria-labelledby="preparation-title">
           <p className="editorial-kicker">{copy.preparationEyebrow}</p>
           <h2 id="preparation-title" className="mt-3 max-w-2xl text-4xl leading-[1.06] text-stone-950 sm:text-6xl">{detail.preparation.label}</h2>
           {detail.preparation.kind === "procedural" ? (
@@ -108,14 +127,13 @@ export function NativeCulinaryDetailPage({
         </section>
 
         {detail.principles.length ? (
-          <section className="border-y border-[var(--line)] py-12 sm:py-16" aria-labelledby="principles-title">
+          <section id="principles" className="scroll-mt-24 border-y border-[var(--line)] py-12 sm:py-16" aria-labelledby="principles-title">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
               <h2 id="principles-title" className="max-w-2xl text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.principles}</h2>
               <ol className="mt-8 grid gap-px bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
-                {detail.principles.map((principle, index) => (
+                {detail.principles.map((principle) => (
                   <li className="bg-[var(--background)] p-5" key={principle}>
-                    <span className="font-display text-2xl text-[var(--tomato)]" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                    <p className="mt-5 font-bold leading-7 text-stone-950">{principle}</p>
+                    <p className="border-l-2 border-[var(--tomato)] pl-4 font-bold leading-7 text-stone-950">{principle}</p>
                   </li>
                 ))}
               </ol>
@@ -125,7 +143,7 @@ export function NativeCulinaryDetailPage({
 
         <EmbeddedStories stories={detail.embeddedStories} locale={locale} />
 
-        <section className="border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="estimates-title">
+        <section id="nutrition" className="scroll-mt-24 border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="estimates-title">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <p className="editorial-kicker">{copy.reference}</p>
             <h2 id="estimates-title" className="mt-3 text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.estimates}</h2>
@@ -136,49 +154,7 @@ export function NativeCulinaryDetailPage({
           </div>
         </section>
 
-          <section id="sources" className="scroll-mt-24 border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="sources-title">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6">
-              <h2 id="sources-title" className="text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.sources}</h2>
-              <p className="mt-4 max-w-2xl leading-7 text-stone-600">{copy.sourcesIntro}</p>
-              {detail.rights ? (
-                <div className="mt-8 border-y border-[var(--line)] py-5">
-                  <p className="font-bold text-stone-950">{detail.rights.identityLabel}</p>
-                  <p className="mt-2 max-w-3xl text-sm leading-6 text-stone-600">{detail.rights.identityDescription}</p>
-                </div>
-              ) : null}
-              {detail.sources.length ? (
-                <ol className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
-                  {detail.sources.map((source) => (
-                    <li className="border-t border-[var(--line)] pt-4 text-sm leading-6" key={source.id}>
-                      {source.href ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={source.href} rel="noreferrer" target="_blank">{source.title}</a> : <p className="font-bold text-stone-950">{source.title}</p>}
-                      <p className="mt-1 text-stone-600">{source.byline}</p>
-                      <p className="mt-2 text-xs text-stone-500">{source.uses.join(locale === "zh-CN" ? "、" : ", ")}</p>
-                    </li>
-                  ))}
-                </ol>
-              ) : <p className="mt-7 text-sm leading-6 text-stone-600">{copy.noExternalSources}</p>}
-              {detail.rights?.attributions.length ? (
-                <div className="mt-10">
-                  <h3 className="text-xl font-bold text-stone-950">{copy.attributions}</h3>
-                  <ul className="mt-4 space-y-4 border-t border-[var(--line)] pt-4">
-                    {detail.rights.attributions.map((attribution) => (
-                      <li className="text-sm leading-6 text-stone-600" key={attribution.id}>
-                        <p>{attribution.notice}</p>
-                        {attribution.modificationNotice ? <p className="mt-1 text-xs text-stone-500">{attribution.modificationNotice}</p> : null}
-                        <p className="mt-2 flex flex-wrap gap-4">
-                          <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={attribution.sourceUrl} rel="noreferrer" target="_blank">{copy.originalFile}</a>
-                          {attribution.licenseUrl ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={attribution.licenseUrl} rel="noreferrer" target="_blank">{attribution.licenseId}</a> : null}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-              <Link className="focus-ring mt-8 inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={getLocalizedPath(locale, "/content-rights")}>{copy.policy}</Link>
-            </div>
-          </section>
-
-        <section className="border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="pairing-title">
+        <section id="pairing" className="scroll-mt-24 border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="pairing-title">
           <div className="mx-auto grid max-w-6xl gap-7 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
             <div>
               <p className="editorial-kicker">{copy.next}</p>
@@ -186,6 +162,60 @@ export function NativeCulinaryDetailPage({
               <p className="mt-4 max-w-2xl leading-7 text-stone-600">{copy.pairingDescription}</p>
             </div>
             <Link className="focus-ring inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-[4px] bg-stone-950 px-5 py-2.5 font-bold text-white transition hover:bg-[var(--tomato)] active:translate-y-px" href={getLocalizedPath(locale, `/pairing/${detail.slug}`, query)}>{copy.pairing}</Link>
+          </div>
+        </section>
+
+        {detail.similarItems.length ? (
+          <section id="similar" className="scroll-mt-24 border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="similar-title">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6">
+              <h2 id="similar-title" className="max-w-3xl text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.similar}</h2>
+              <p className="mt-4 max-w-2xl leading-7 text-stone-600">{copy.similarIntro}</p>
+              <div className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+                {detail.similarItems.map((item) => <article className="border-t border-[var(--line)] pt-4" key={item.id}><Link className="focus-ring group block" href={item.href}><RecipeImage image={item.image} fallbackInitial={item.fallbackInitial} fallbackLabel={item.name} alt={item.name} locale={locale} variant="card" showAttribution={false} /><h3 className="mt-4 text-xl leading-tight text-stone-950 group-hover:text-[var(--tomato)]">{item.name}</h3><p className="mt-2 text-sm leading-6 text-stone-600">{[item.itemTypeLabel, item.placeLabel].filter(Boolean).join(" / ")}</p></Link></article>)}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        <section id="sources" className="scroll-mt-24 border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="sources-title">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <h2 id="sources-title" className="text-3xl leading-tight text-stone-950 sm:text-5xl">{copy.sources}</h2>
+            <p className="mt-4 max-w-2xl leading-7 text-stone-600">{copy.sourcesIntro}</p>
+            {detail.rights ? (
+              <div className="mt-8 border-y border-[var(--line)] py-5">
+                <p className="font-bold text-stone-950">{detail.rights.identityLabel}</p>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-stone-600">{detail.rights.identityDescription}</p>
+              </div>
+            ) : null}
+            {detail.sources.length ? (
+              <ol className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2">
+                {detail.sources.map((source) => (
+                  <li className="border-t border-[var(--line)] pt-4 text-sm leading-6" key={source.id}>
+                    {source.href ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={source.href} rel="noreferrer" target="_blank">{source.title}</a> : <p className="font-bold text-stone-950">{source.title}</p>}
+                    <p className="mt-1 text-stone-600">{source.byline}</p>
+                    <p className="mt-2 text-xs text-stone-500">{source.uses.join(locale === "zh-CN" ? "、" : ", ")}</p>
+                  </li>
+                ))}
+              </ol>
+            ) : <p className="mt-7 text-sm leading-6 text-stone-600">{copy.noExternalSources}</p>}
+            {detail.rights?.attributions.length ? (
+              <div className="mt-10">
+                <h3 className="text-xl font-bold text-stone-950">{copy.attributions}</h3>
+                <ul className="mt-4 space-y-4 border-t border-[var(--line)] pt-4">
+                  {detail.rights.attributions.map((attribution) => (
+                    <li className="text-sm leading-6 text-stone-600" key={attribution.id}>
+                      <p>{attribution.notice}</p>
+                      {attribution.modificationNotice ? <p className="mt-1 text-xs text-stone-500">{attribution.modificationNotice}</p> : null}
+                      <p className="mt-2 flex flex-wrap gap-4">
+                        <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={attribution.sourceUrl} rel="noreferrer" target="_blank">{copy.originalFile}</a>
+                        {attribution.licenseUrl ? <a className="focus-ring inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={attribution.licenseUrl} rel="noreferrer" target="_blank">{attribution.licenseId}</a> : null}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            <Link className="focus-ring mt-8 inline-flex min-h-11 items-center font-bold text-[var(--tomato)] hover:underline" href={getLocalizedPath(locale, "/content-rights")}>{copy.policy}</Link>
           </div>
         </section>
       </article>
@@ -217,6 +247,14 @@ function costText(detail: CulinaryDetailModel, locale: SupportedLocale): string 
 }
 
 const detailCopy = {
-  "zh-CN": { breadcrumb: "面包屑导航", home: "首页", library: "料理库", flavor: "风味", preparationEyebrow: "从成品到餐桌", principles: "把这道料理做好的关键", pairing: "搭配这一餐", pairingTitle: (name: string) => `围绕${name}完成一餐`, pairingDescription: "保留这道料理作为起点，再平衡餐桌角色、风味和真实的准备节奏。", next: "下一步", imageSource: "图片来源", totalTime: "总时间", yield: "产出", ingredients: "食材", optional: "可选", tools: "工具", method: "准备方法", cue: "状态提示", guidanceLabel: "服务方式", readyLabel: "无需制作", reference: "估算信息", estimates: "营养与成本", nutrition: "营养估算", cost: "成本估算", estimateNote: "营养值为估算，不构成医疗建议。", costNote: "成本按静态参考价格估算。", sources: "来源与权利", sourcesIntro: "以下资料用于核对料理身份、做法、安全边界或文化语境；页面文字为独立编辑，图片按逐文件许可展示。", noExternalSources: "该料理当前不依赖外部表达性内容；编辑估算的方法与限制仍受全站权利政策约束。", attributions: "图片与开放内容署名", originalFile: "查看原始文件", policy: "阅读全站内容来源与权利政策" },
-  en: { breadcrumb: "Breadcrumb", home: "Home", library: "Culinary library", flavor: "Flavor", preparationEyebrow: "From item to table", principles: "What makes this item work", pairing: "Build a pairing", pairingTitle: (name: string) => `Complete a meal around ${name}`, pairingDescription: "Keep this item as the anchor, then balance table roles, flavor, and a preparation rhythm that works in a real kitchen.", next: "Next", imageSource: "Image source", totalTime: "Total time", yield: "Yield", ingredients: "Ingredients", optional: "optional", tools: "Tools", method: "Preparation", cue: "Look for", guidanceLabel: "How to serve", readyLabel: "No preparation needed", reference: "Estimated information", estimates: "Nutrition and cost", nutrition: "Nutrition estimate", cost: "Cost estimate", estimateNote: "Nutrition is estimated and is not medical advice.", costNote: "Cost uses static reference prices.", sources: "Sources and rights", sourcesIntro: "These references support identity, preparation, safety boundaries, or cultural context. Page copy is independently edited, and images are shown under file-specific licenses.", noExternalSources: "This item does not currently depend on third-party expressive content; editorial estimate methods and limits still follow the site-wide rights policy.", attributions: "Image and open-content attribution", originalFile: "View original file", policy: "Read the site-wide content sources and rights policy" },
+  "zh-CN": {
+    similar: "继续探索相近料理", similarIntro: "按料理类型、菜系、技法与风味结构确定性排序，不用浏览热度填充。",
+    sectionNavigation: "料理页章节", sectionPreparation: "准备", sectionPrinciples: "原理", sectionStories: "故事", sectionNutrition: "营养", sectionPairing: "搭配", sectionSimilar: "相似料理", sectionSources: "来源", addToPlan: "加入今晚计划",
+    breadcrumb: "面包屑导航", home: "首页", library: "料理库", flavor: "风味", preparationEyebrow: "从成品到餐桌", principles: "把这道料理做好的关键", pairing: "搭配这一餐", pairingTitle: (name: string) => `围绕${name}完成一餐`, pairingDescription: "保留这道料理作为起点，再平衡餐桌角色、风味和真实的准备节奏。", next: "下一步", imageSource: "图片来源", totalTime: "总时间", yield: "产出", ingredients: "食材", optional: "可选", tools: "工具", method: "准备方法", cue: "状态提示", guidanceLabel: "服务方式", readyLabel: "无需制作", reference: "估算信息", estimates: "营养与成本", nutrition: "营养估算", cost: "成本估算", estimateNote: "营养值为估算，不构成医疗建议。", costNote: "成本按静态参考价格估算。", sources: "来源与权利", sourcesIntro: "以下资料用于核对料理身份、做法、安全边界或文化语境；页面文字为独立编辑，图片按逐文件许可展示。", noExternalSources: "该料理当前不依赖外部表达性内容；编辑估算的方法与限制仍受全站权利政策约束。", attributions: "图片与开放内容署名", originalFile: "查看原始文件", policy: "阅读全站内容来源与权利政策",
+  },
+  en: {
+    similar: "Explore related culinary items", similarIntro: "Ranked deterministically by culinary type, cuisine, technique, and flavor structure, never by browsing popularity.",
+    sectionNavigation: "Culinary page sections", sectionPreparation: "Preparation", sectionPrinciples: "Principles", sectionStories: "Stories", sectionNutrition: "Nutrition", sectionPairing: "Pairing", sectionSimilar: "Similar items", sectionSources: "Sources", addToPlan: "Add to tonight's plan",
+    breadcrumb: "Breadcrumb", home: "Home", library: "Culinary library", flavor: "Flavor", preparationEyebrow: "From item to table", principles: "What makes this item work", pairing: "Build a pairing", pairingTitle: (name: string) => `Complete a meal around ${name}`, pairingDescription: "Keep this item as the anchor, then balance table roles, flavor, and a preparation rhythm that works in a real kitchen.", next: "Next", imageSource: "Image source", totalTime: "Total time", yield: "Yield", ingredients: "Ingredients", optional: "optional", tools: "Tools", method: "Preparation", cue: "Look for", guidanceLabel: "How to serve", readyLabel: "No preparation needed", reference: "Estimated information", estimates: "Nutrition and cost", nutrition: "Nutrition estimate", cost: "Cost estimate", estimateNote: "Nutrition is estimated and is not medical advice.", costNote: "Cost uses static reference prices.", sources: "Sources and rights", sourcesIntro: "These references support identity, preparation, safety boundaries, or cultural context. Page copy is independently edited, and images are shown under file-specific licenses.", noExternalSources: "This item does not currently depend on third-party expressive content; editorial estimate methods and limits still follow the site-wide rights policy.", attributions: "Image and open-content attribution", originalFile: "View original file", policy: "Read the site-wide content sources and rights policy",
+  },
 } as const;

@@ -1,6 +1,5 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { adaptRecipeToCulinaryItem } from "@/lib/culinary-item-adapter";
 import {
   assertPublishedCulinaryItemsEligible,
   getPubliclyVisibleCulinaryItems,
@@ -21,12 +20,14 @@ import type { SupportedLocale } from "@/types/localization";
 import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
 import { assertContentRightsReady, createContentRightsAuditReport, evaluateContentRightsRegistry, getContentRightsEvaluationDate } from "@/lib/content-rights";
 import { m9RecipeResearchRecords, m9RecipeResearchSources } from "./research/m9-recipe-research";
+import { assertContentBundleManifestReady } from "@/lib/content-bundle";
+import { publishedContentBundleManifest } from "./content-bundle-manifest";
+import { publishedLocalContentPackages } from "./content-packages";
+
+export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
 const allImages = [...recipeImages, ...culinaryImages];
-const candidates: CulinaryItem[] = [
-  ...getPublishedRecipes().map(adaptRecipeToCulinaryItem),
-  ...nativeCulinaryItems,
-];
+const candidates: CulinaryItem[] = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
 const publishingContext: CulinaryPublishingContext = {
   ingredients,
   images: allImages,
@@ -66,10 +67,16 @@ export const contentRightsAuditReport = createContentRightsAuditReport(
   evaluateContentRightsRegistry(contentRightsRegistry, contentRightsContext),
 );
 
+const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));
 const publishedItems = Object.freeze(getPubliclyVisibleCulinaryItems(candidates, publishingContext));
+assertContentBundleManifestReady(
+  publishedContentBundleManifest,
+  publishedItems,
+  contentRightsRegistry,
+  isPublishedCulinaryItemLocaleComplete,
+);
 const publishedItemBySlug = new Map(publishedItems.map((item) => [item.slug, item]));
 const nativeItemIds = new Set(nativeCulinaryItems.map((item) => item.id));
-const publishedRecipeById = new Map(getPublishedRecipes().map((recipe) => [recipe.id, recipe]));
 const publishedNativeItems = Object.freeze(publishedItems.filter((item) => nativeItemIds.has(item.id)));
 const publishedNativeItemBySlug = new Map(publishedNativeItems.map((item) => [item.slug, item]));
 

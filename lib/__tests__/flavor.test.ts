@@ -41,5 +41,7 @@ describe("Flavor Profile", () => {
     const result = scoreFlavorPreferences(recipeFlavorProfiles["greek-salad"], ["tangy-refreshing"]);
     expect(() => JSON.stringify({ profile: recipeFlavorProfiles["greek-salad"], result })).not.toThrow();
     expect(describeFlavorProfile(recipeFlavorProfiles["greek-salad"])).toContain("酸香");
+    expect(describeFlavorProfile(recipeFlavorProfiles["greek-salad"])).not.toContain("·");
+    expect(describeFlavorProfile(recipeFlavorProfiles["greek-salad"], "en")).not.toContain("·");
   });
 });

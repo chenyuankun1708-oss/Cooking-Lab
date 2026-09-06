@@ -52,15 +52,17 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
   return (
     <main id="main-content">
       <SiteHeader active="recipes" locale={locale} currentPath={`/${locale}/recipes`} query={normalizedQuery.toString()} />
-      <header className="border-b border-[var(--line)] py-10 sm:py-14">
+      <header className="hero-surface border-b border-[var(--line)] py-8 sm:py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div>
           <p className="editorial-kicker">{copy.eyebrow}</p>
-          <h1 className="mt-3 max-w-[22ch] text-4xl leading-[1.05] text-stone-950 sm:text-6xl">{copy.heading}</h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-stone-600 sm:text-lg">{copy.intro}</p>
+          <h1 className="mt-3 max-w-[18ch] text-4xl leading-[1.05] text-stone-950 sm:text-6xl">{copy.heading}</h1>
+          </div>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-stone-600">{copy.intro}</p>
         </div>
       </header>
 
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12" aria-labelledby="catalog-title">
+      <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8" aria-labelledby="catalog-title">
         {hasCarriedContext ? (
           <div className="mb-8 max-w-3xl border-l-2 border-[var(--tomato)] pl-4 text-sm leading-6 text-stone-700">
             <p className="font-bold text-stone-950">{copy.contextTitle}</p>
@@ -68,7 +70,7 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
           </div>
         ) : null}
 
-        <nav aria-label={copy.quickFilters} className="grid gap-5 border-b border-[var(--line)] pb-7 lg:grid-cols-[1.1fr_1.4fr_1fr]">
+        <nav aria-label={copy.quickFilters} className="hidden gap-4 border-b border-[var(--line)] pb-5 md:grid lg:grid-cols-[1.1fr_1.4fr_1fr]">
           <BrowseChoices
             label={copy.type}
             options={typeOptions}
@@ -132,14 +134,14 @@ export default async function RecipeCatalogPage({ searchParams, params }: { sear
           </details>
         </form>
 
-        <div className="mt-10 max-w-2xl">
+        <div className="mt-7 max-w-2xl">
           <h2 id="catalog-title" className="text-3xl leading-tight text-stone-950 sm:text-4xl">{activeCount ? copy.selectedTitle : copy.browseTitle}</h2>
           <p className="mt-3 text-sm text-stone-600">{copy.count(catalog.length)}</p>
         </div>
 
         {catalog.length ? (
-          <div className="mt-8 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {catalog.map((entry) => <CulinaryCard key={entry.id} entry={entry} locale={locale} query={itemQuery} />)}
+          <div className="culinary-index-grid mt-6 grid grid-flow-row-dense gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {catalog.map((entry, index) => <CulinaryCard featured={index === 0 || index === 7} key={entry.id} entry={entry} locale={locale} query={itemQuery} />)}
           </div>
         ) : (
           <div className="mt-8 border-t border-dashed border-stone-500 py-14">
@@ -176,7 +178,7 @@ function BrowseChoices({ label, options, selected, hrefFor }: { label: string; o
   return (
     <div>
       <p className="text-sm font-semibold text-stone-700">{label}</p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="horizontal-rail -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:px-0">
         {options.map((option) => (
           <Link aria-current={selected === option.id ? "page" : undefined} className={`focus-ring inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold transition active:translate-y-px ${selected === option.id ? "border-[var(--foreground)] bg-[var(--foreground)] text-white" : "border-stone-400 text-stone-800 hover:border-[var(--tomato)] hover:text-[var(--tomato)]"}`} href={hrefFor(option.id)} key={option.id}>
             {option.label}

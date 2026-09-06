@@ -119,7 +119,7 @@ export default async function PairingPage({
                 locale={locale}
                 sourceLabel={messages.common.imageSource}
                 variant="hero"
-                preload
+                lcp
               />
             </div>
           </div>
@@ -161,8 +161,8 @@ export default async function PairingPage({
         {experience.alternatives.length ? (
           <section className="border-t border-[var(--line)] py-12 sm:py-16" aria-labelledby="alternative-meals-title">
             <div className="mx-auto max-w-6xl px-4 sm:px-6">
-              <p className="editorial-kicker">{c.alternatives}</p>
-              <h2 id="alternative-meals-title" className="mt-3 text-3xl leading-tight text-stone-950 sm:text-5xl">{c.alternativeTitle}</h2>
+              <p className="text-sm font-semibold text-[var(--tomato)]">{c.alternatives}</p>
+              <h2 id="alternative-meals-title" className="mt-2 text-3xl leading-tight text-stone-950 sm:text-5xl">{c.alternativeTitle}</h2>
               <div className="mt-8 grid gap-5 lg:grid-cols-2">
                 {experience.alternatives.map((meal) => (
                   <MealCompositionAlternative key={`${meal.templateId}:${meal.items.map(({ id }) => id).join(":")}`} meal={meal} locale={locale} query={routeQuery} />

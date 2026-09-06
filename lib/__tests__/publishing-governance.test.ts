@@ -12,6 +12,7 @@ import { recipeImages } from "@/data/recipe-images";
 import { m9RecipeResearchRecords, m9RecipeResearchSources } from "@/data/research/m9-recipe-research";
 import { createImageAssetVersions } from "../image-asset-version";
 import { buildConsumerRightsDisclosure } from "../content-rights-consumer";
+import { evaluateContentRightsRegistry } from "../content-rights";
 import type { PublishingGovernanceRegistry, ReviewAttestation } from "@/types/publishing-governance";
 import {
   createArtifactSetVersion,
@@ -284,6 +285,20 @@ describe("risk-based publishing governance", () => {
     const assessment = contentRightsRegistry.assessments.find((entry) => entry.id === artifact.rightsAssessmentId)!;
     expect(assessment.attributionRequirementIds).toEqual([]);
     expect(assessment.permissions.publish.status).toBe("allowed");
+
+    const missingDisclosure = structuredClone(contentRightsRegistry);
+    missingDisclosure.attributions = missingDisclosure.attributions.filter((entry) => entry.id !== provenance?.id);
+    const rightsResult = evaluateContentRightsRegistry(missingDisclosure, {
+      items,
+      images: allImages,
+      ingredients,
+      stories: culinaryStories,
+      evidence: culinaryEvidence,
+      sources: contentRightsSources,
+      researchRecords: m9RecipeResearchRecords,
+      now: "2026-09-06",
+    });
+    expect(rightsResult.issues.map((issue) => issue.code)).toContain("missing-reference");
   });
 
   it("requires separate reviewer contexts for medium risk", () => {

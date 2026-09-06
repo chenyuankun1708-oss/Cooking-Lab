@@ -495,13 +495,25 @@ function validatePublishedCoverage(
         const assessment = assessmentById.get(artifact.rightsAssessmentId);
         const decision = decisionById.get(artifact.usageDecisionId);
         const needsAttribution = ["cc-by", "cc-by-sa", "unsplash-license", "pexels-license", "pixabay-content-license", "other-permitted"].includes(image.license);
+        const needsProvenanceDisclosure = image.source !== "self-created" && Boolean(image.sourceUrl);
         const requirementIds = new Set([...(artifact.attributionRequirementIds ?? []), ...(assessment?.attributionRequirementIds ?? [])]);
         const validRequirement = [...requirementIds].some((id) => {
           const attribution = attributionById.get(id);
-          return attribution?.artifactId === artifact.id && attribution.creator === image.author && attribution.notice === image.attribution && attribution.sourceUrl === image.sourceUrl && attribution.licenseId === image.license && attribution.licenseUrl === image.licenseUrl;
+          return attribution?.disclosureKind === "license-required" && attribution.artifactId === artifact.id && attribution.creator === image.author && attribution.notice === image.attribution && attribution.sourceUrl === image.sourceUrl && attribution.licenseId === image.license && attribution.licenseUrl === image.licenseUrl;
         });
+        const validProvenanceDisclosure = registry.attributions.some((attribution) =>
+          attribution.artifactId === artifact.id
+          && attribution.creator === image.author
+          && attribution.notice === image.attribution
+          && attribution.sourceUrl === image.sourceUrl
+          && attribution.licenseId === image.license
+          && attribution.licenseUrl === image.licenseUrl
+          && (needsAttribution ? attribution.disclosureKind === "license-required" : attribution.disclosureKind === "provenance-only"));
         if (needsAttribution && (!assessment || assessment.basis.kind !== "open-license" || assessment.basis.licenseId !== image.license || !validRequirement || decision?.decision !== "allow-with-obligations")) {
           report("obligation-missing", imageId, "attribution", "Image license metadata must produce aligned assessment, attribution, and allowed-with-obligations decision records");
+        }
+        if (needsProvenanceDisclosure && !validProvenanceDisclosure) {
+          report("missing-reference", imageId, "imageProvenance", "Externally sourced images require an aligned consumer provenance disclosure even when the license does not require attribution");
         }
       }
     }

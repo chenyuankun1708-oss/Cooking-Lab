@@ -27,6 +27,8 @@ export const countries = createRegistry([
   { id: "united-kingdom", label: { "zh-CN": "英国", en: "United Kingdom" } },
   { id: "morocco", label: { "zh-CN": "摩洛哥", en: "Morocco" } },
   { id: "vietnam", label: { "zh-CN": "越南", en: "Vietnam" } },
+  { id: "ethiopia", label: { "zh-CN": "埃塞俄比亚", en: "Ethiopia" } },
+  { id: "australia", label: { "zh-CN": "澳大利亚", en: "Australia" } },
 ] as const);
 
 export const regions = createRegistry([
@@ -76,6 +78,8 @@ export const cuisines = createRegistry([
   { id: "british", label: { "zh-CN": "英国料理", en: "British" } },
   { id: "moroccan", label: { "zh-CN": "摩洛哥料理", en: "Moroccan" } },
   { id: "zhejiang", label: { "zh-CN": "浙菜", en: "Zhejiang" } },
+  { id: "ethiopian", label: { "zh-CN": "埃塞俄比亚风味", en: "Ethiopian" } },
+  { id: "australian", label: { "zh-CN": "澳大利亚风味", en: "Australian" } },
 ] as const);
 
 export const subCuisines = createRegistry([

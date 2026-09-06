@@ -14,8 +14,9 @@ import { culinaryStories } from "./culinary/stories";
 import { ingredients } from "./ingredients";
 import { getPublishedRecipes } from "./published-recipes";
 import { recipeImages } from "./recipe-images";
-import { hasCompleteNativeCulinaryTranslation } from "./localization/public-culinary";
+import { hasCompleteNativeCulinaryTranslation, hasCompleteStandaloneCulinaryTranslation } from "./localization/public-culinary";
 import { hasCompleteRecipeTranslation } from "./localization/public-recipes";
+import { hasReviewedEnglishIngredientLabel } from "./localization/ingredients";
 import type { SupportedLocale } from "@/types/localization";
 import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
 import { assertContentRightsReady, createContentRightsAuditReport, evaluateContentRightsRegistry, getContentRightsEvaluationDate } from "@/lib/content-rights";
@@ -36,8 +37,9 @@ export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
 const allImages = [...recipeImages, ...culinaryImages];
 export const contentImageAssetVersions = Object.freeze(createImageAssetVersions(allImages));
-export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients));
+export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients, culinaryStories));
 const candidates: CulinaryItem[] = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
+const contentPackageByItemId = new Map(publishedLocalContentPackages.map((contentPackage) => [contentPackage.itemId, contentPackage]));
 const publishingContext: CulinaryPublishingContext = {
   ingredients,
   images: allImages,
@@ -154,6 +156,11 @@ export function getPublishedNativeCulinaryItemStaticParams(): Array<{ slug: stri
 export function isPublishedCulinaryItemLocaleComplete(item: CulinaryItem, locale: SupportedLocale): boolean {
   const recipe = publishedRecipeById.get(item.id);
   if (recipe) return hasCompleteRecipeTranslation(recipe, locale);
+  if (contentPackageByItemId.get(item.id)?.sourceKind === "standalone") {
+    const ingredientLabelsReady = locale !== "en" || !("inputs" in item.preparation)
+      || item.preparation.inputs.every((input) => hasReviewedEnglishIngredientLabel(input.ingredientId));
+    return ingredientLabelsReady && hasCompleteStandaloneCulinaryTranslation(item, locale, culinaryStories);
+  }
   const preparation = item.preparation;
   const hasSteps = "steps" in preparation;
   return hasCompleteNativeCulinaryTranslation(

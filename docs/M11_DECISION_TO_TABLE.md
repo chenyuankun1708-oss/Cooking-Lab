@@ -31,7 +31,11 @@ The package/manifest foundation routes the current 50 public items through one m
 
 The Product Director approved the M10.1 risk-based governance migration in Issue #96. LOW AI-assisted content may publish only after deterministic gates, a genuinely independent all-dimension agent review and risk-equivalence-class sampling QA; MEDIUM requires separated reviewer contexts; HIGH remains blocked or enters the applicable human, expert or legal checkpoint. The implementation context cannot review its own output, and agent review is never labeled human review.
 
-The additional 70 items remain outside the public manifest until Issue #96 is merged and active in CI. This is a fail-closed sequencing rule, not a licensing bypass. Current 50-item Production content is unchanged.
+Issue #96 and PR #97 are merged, active in CI, and verified in Production. The additional 70 items still remain outside the public manifest until each batch has its own current artifact fingerprints, allowed usage decisions, independent ReviewAttestations, and risk-equivalence sampling checkpoint. Historical M10/M10.1 IDs, attestations, findings, commits, and evidence digests are append-only checkpoints and are never expanded retroactively.
+
+The canonical final portfolio is `dish 57 / dessert 15 / tea 16 / coffee 12 / non-alcoholic drink 14 / alcoholic drink 6`, for 120 items in each locale. `data/m11/portfolio.ts` owns the exact Batch A/B IDs and the required product-profile and restaurant-reconstruction coverage. Batch A adds 35 items across all six types; Batch B adds the remaining 35 without changing the public repository interface. Product Director removed the proposed public-video timestamp cross-check from M11; no video viewing, timestamp evidence, transcript, download, frame capture, or external-media record is required or produced.
+
+M11 standalone packages carry reviewed bilingual item, preparation, and Story copy directly. Package-aware locale validation checks those embedded translations and reviewed English ingredient labels rather than treating a missing legacy translation-map entry as complete. M11 Hero assets are deterministic Cooking Lab original editorial illustrations created locally from repository code; no external candidate image, AI image generation, packaging artwork, logo, person, or protected venue is used.
 
 ## Design contract
 

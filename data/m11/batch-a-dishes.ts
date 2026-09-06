@@ -1,0 +1,1046 @@
+import type { DishItem, Evidence, Source, SourceType, Story, StoryType } from "@/types/culinary";
+import type { LocalContentPackageV1 } from "@/types/content-bundle";
+import type { RecipeImage } from "@/types/image";
+import type { ResearchRecord } from "@/types/research";
+import {
+  bilingual,
+  bilingualStep,
+  defineStandaloneContentPackage,
+  m11Evidence,
+  m11OriginalHero,
+  m11ReferenceSource,
+  m11ResearchRecord,
+  m11Story,
+} from "@/data/m11/content-factories";
+
+type StepSpec = {
+  zh: { instruction: string; rationale: string; stateCue: string };
+  en: { instruction: string; rationale: string; stateCue: string };
+  durationMinutes?: number;
+};
+
+type ReferenceSpec = {
+  title: string;
+  publisherOrInstitution: string;
+  url: string;
+  type?: SourceType;
+  editorialNotes: string;
+};
+
+type ReferenceKey = keyof typeof referenceCatalog;
+
+type StorySpec = {
+  type?: StoryType;
+  zhTitle: string;
+  enTitle: string;
+  zhClaim: string;
+  enClaim: string;
+  zhPractice: string;
+  enPractice: string;
+  zhBoundary: string;
+  enBoundary: string;
+  evidenceLocators: [string, string];
+  evidenceNotes: [string, string];
+};
+
+type DishSpec = {
+  slug: string;
+  zhName: string;
+  enName: string;
+  zhDescription: string;
+  enDescription: string;
+  heroAlt: string;
+  taxonomy: DishItem["taxonomy"];
+  flavor: DishItem["flavor"];
+  pairing: DishItem["pairing"];
+  preparation: {
+    kind: DishItem["preparation"]["kind"];
+    time: DishItem["preparation"]["time"];
+    yield: DishItem["preparation"]["yield"];
+    inputs: DishItem["preparation"]["inputs"];
+    toolIds: string[];
+    steps: [StepSpec, StepSpec, StepSpec, StepSpec, ...StepSpec[]];
+  };
+  references: [ReferenceKey, ReferenceKey];
+  story: StorySpec;
+};
+
+const referenceCatalog = {
+  usdaChicken: {
+    title: "Safe Minimum Internal Temperature Chart",
+    publisherOrInstitution: "USDA Food Safety and Inspection Service",
+    url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+    type: "government",
+    editorialNotes: "Used only for the poultry temperature boundary and thermometer placement cue.",
+  },
+  healthCanadaTemperatures: {
+    title: "Safe Internal Cooking Temperatures",
+    publisherOrInstitution: "Health Canada",
+    url: "https://www.canada.ca/en/health-canada/services/general-food-safety-tips/safe-internal-cooking-temperatures.html",
+    type: "government",
+    editorialNotes: "Independent government cross-check for cooked poultry temperature guidance.",
+  },
+  usdaSeafood: {
+    title: "Safe Minimum Internal Temperature Chart",
+    publisherOrInstitution: "USDA Food Safety and Inspection Service",
+    url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+    type: "government",
+    editorialNotes: "Used only for the seafood temperature and observable doneness boundary.",
+  },
+  fdaSeafood: {
+    title: "Selecting and Serving Fresh and Frozen Seafood Safely",
+    publisherOrInstitution: "U.S. Food and Drug Administration",
+    url: "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely",
+    type: "government",
+    editorialNotes: "Independent cross-check for opaque, separating flesh and safe seafood handling cues.",
+  },
+  fdaEggs: {
+    title: "What You Need to Know About Egg Safety",
+    publisherOrInstitution: "U.S. Food and Drug Administration",
+    url: "https://www.fda.gov/food/buy-store-serve-safe-food/what-you-need-know-about-egg-safety",
+    type: "government",
+    editorialNotes: "Used only for the egg cooking and prompt-serving boundary.",
+  },
+  usdaEggs: {
+    title: "Shell Eggs from Farm to Table",
+    publisherOrInstitution: "USDA Food Safety and Inspection Service",
+    url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/eggs/shell-eggs-farm-table",
+    type: "government",
+    editorialNotes: "Independent cross-check for cooked egg texture and holding guidance.",
+  },
+  woksBroccoliChicken: {
+    title: "Chicken and Broccoli with Brown Sauce",
+    publisherOrInstitution: "The Woks of Life",
+    url: "https://thewoksoflife.com/chinese-chicken-broccoli-brown-sauce/",
+    editorialNotes: "Used to cross-check the staged blanching and stir-fry sequence, not wording or quantities.",
+  },
+  omnivoreBroccoliChicken: {
+    title: "Chicken and Broccoli",
+    publisherOrInstitution: "Omnivore's Cookbook",
+    url: "https://omnivorescookbook.com/chicken-and-broccoli/",
+    editorialNotes: "Independent preparation reference for cooking broccoli and chicken in controlled stages.",
+  },
+  justOneCookbookTofu: {
+    title: "Teriyaki Tofu",
+    publisherOrInstitution: "Just One Cookbook",
+    url: "https://www.justonecookbook.com/teriyaki-tofu/",
+    editorialNotes: "Used only to cross-check surface drying, browning, and late sauce application.",
+  },
+  omnivorePanFriedTofu: {
+    title: "Pan Fried Tofu",
+    publisherOrInstitution: "Omnivore's Cookbook",
+    url: "https://omnivorescookbook.com/pan-fried-tofu/",
+    editorialNotes: "Independent preparation reference for moisture management and pan browning.",
+  },
+  woksBlackPepperBeef: {
+    title: "Beef with Oyster Sauce",
+    publisherOrInstitution: "The Woks of Life",
+    url: "https://thewoksoflife.com/beef-oyster-sauce/",
+    editorialNotes: "Used only to cross-check quick beef searing and staged vegetable cooking.",
+  },
+  omnivoreBlackPepperBeef: {
+    title: "Black Pepper Steak",
+    publisherOrInstitution: "Omnivore's Cookbook",
+    url: "https://omnivorescookbook.com/black-pepper-steak/",
+    editorialNotes: "Independent reference for high-heat, small-batch stir-fry sequencing.",
+  },
+  woksTomatoBeef: {
+    title: "Beef Tomato Stir-fry",
+    publisherOrInstitution: "The Woks of Life",
+    url: "https://thewoksoflife.com/beef-tomato-stir-fry/",
+    editorialNotes: "Used only for the bounded observation that tomato is cooked until juicy before final seasoning.",
+  },
+  omnivoreTomatoBeef: {
+    title: "Chinese Beef Stew with Potatoes",
+    publisherOrInstitution: "Omnivore's Cookbook",
+    url: "https://omnivorescookbook.com/chinese-beef-stew/",
+    editorialNotes: "Independent reference for gentle simmering and vegetable timing in a household beef stew.",
+  },
+  seriousEatsBeefStew: {
+    title: "All-American Beef Stew",
+    publisherOrInstitution: "Serious Eats",
+    url: "https://www.seriouseats.com/all-american-beef-stew-recipe",
+    editorialNotes: "Used only for staged browning and low simmer technique, not recipe expression.",
+  },
+  bbcBeefStew: {
+    title: "Beef Stew",
+    publisherOrInstitution: "BBC Good Food",
+    url: "https://www.bbcgoodfood.com/recipes/beef-vegetable-casserole",
+    editorialNotes: "Independent cross-check for a gentle stew and tender-meat finish cue.",
+  },
+  seriousEatsRoastedBroccoli: {
+    title: "The Best Crispy Roasted Broccoli",
+    publisherOrInstitution: "Serious Eats",
+    url: "https://www.seriouseats.com/easy-roasted-broccoli-recipe",
+    editorialNotes: "Used only for spacing, dry surfaces, and browned-edge cues in roasting.",
+  },
+  bbcRoastedVegetables: {
+    title: "Roasted Vegetables",
+    publisherOrInstitution: "BBC Good Food",
+    url: "https://www.bbcgoodfood.com/recipes/roasted-vegetables",
+    editorialNotes: "Independent cross-check for an uncrowded tray and tender, browned finish.",
+  },
+  madeWithLauSteamedEgg: {
+    title: "Steamed Egg",
+    publisherOrInstitution: "Made With Lau",
+    url: "https://www.madewithlau.com/recipes/steamed-egg",
+    editorialNotes: "Used only to cross-check straining, gentle steam, and set-center cues.",
+  },
+  chinaSichuanSteamedEgg: {
+    title: "Chinese Steamed Egg",
+    publisherOrInstitution: "China Sichuan Food",
+    url: "https://www.chinasichuanfood.com/chinese-steamed-egg/",
+    editorialNotes: "Independent preparation reference for a smooth, gently set egg custard.",
+  },
+  woksTomatoEggSoup: {
+    title: "Tomato Egg Drop Soup",
+    publisherOrInstitution: "The Woks of Life",
+    url: "https://thewoksoflife.com/tomato-egg-drop-soup/",
+    editorialNotes: "Used only to cross-check tomato softening and controlled egg-ribbon formation.",
+  },
+  redHouseTomatoEggSoup: {
+    title: "Tomato Egg Drop Soup",
+    publisherOrInstitution: "Red House Spice",
+    url: "https://redhousespice.com/egg-drop-soup/",
+    editorialNotes: "Independent preparation reference for adding egg to a moving hot broth.",
+  },
+  justOneCookbookNikujaga: {
+    title: "Nikujaga (Japanese Meat and Potato Stew)",
+    publisherOrInstitution: "Just One Cookbook",
+    url: "https://www.justonecookbook.com/nikujaga/",
+    editorialNotes: "Used only to cross-check the meat-potato simmer sequence and tender finish cues.",
+  },
+  chopstickNikujaga: {
+    title: "Nikujaga Japanese Beef and Potato Stew",
+    publisherOrInstitution: "Chopstick Chronicles",
+    url: "https://www.chopstickchronicles.com/nikujaga/",
+    editorialNotes: "Independent household preparation reference for staged simmering.",
+  },
+  koreanBapsangKimchiRice: {
+    title: "Kimchi Fried Rice",
+    publisherOrInstitution: "Korean Bapsang",
+    url: "https://www.koreanbapsang.com/kimchi-fried-rice/",
+    editorialNotes: "Used only to cross-check frying kimchi before adding cooked rice.",
+  },
+  maangchiKimchiRice: {
+    title: "Kimchi-bokkeumbap",
+    publisherOrInstitution: "Maangchi",
+    url: "https://www.maangchi.com/recipe/kimchi-bokkeumbap",
+    editorialNotes: "Independent preparation reference for staged kimchi and rice cooking.",
+  },
+} as const satisfies Record<string, ReferenceSpec>;
+
+const input = (
+  ingredientId: string,
+  amount: number,
+  unit: DishItem["preparation"]["inputs"][number]["unit"] = "g",
+  optional = false,
+): DishItem["preparation"]["inputs"][number] => ({ ingredientId, amount, unit, optional });
+
+const chickenDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
+  zhTitle,
+  enTitle,
+  zhClaim: "在鸡肉最厚处测量至 74°C，比只看表面颜色更能给家庭厨师一个可重复的完成节点。",
+  enClaim: "Measuring 74°C at the thickest part of chicken gives home cooks a more repeatable finish point than surface color alone.",
+  zhPractice: "把探针插入最厚处并避开锅面或骨头，确认后停止高温加热，可减少为了追求更深颜色而继续久煮。",
+  enPractice: "Insert the probe into the thickest part without touching the pan or bone, then stop intense heat after confirmation instead of cooking longer for deeper color.",
+  zhBoundary: "这条 Story 只讨论可观察的家庭烹饪完成节点，不表示任何来源为本配方背书。",
+  enBoundary: "This Story concerns only an observable home-cooking finish point and does not imply endorsement by either source.",
+  evidenceLocators: ["Poultry temperature row", "Poultry cooking-temperature table"],
+  evidenceNotes: [
+    "Supports the 74°C/165°F minimum temperature for poultry.",
+    "Independently supports measuring cooked poultry at its thickest part.",
+  ],
+});
+
+const seafoodDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
+  zhTitle,
+  enTitle,
+  zhClaim: "63°C读数可与鱼肉不透明并易分层、虾肉珠白不透明等状态一起，构成可重复的完成提示。",
+  enClaim: "A 63°C reading can be paired with opaque, separating fish or pearly, opaque shrimp as repeatable finish cues.",
+  zhPractice: "在最厚处接近完成时就检查状态，避免为了追求更深颜色而延长加热。",
+  enPractice: "Check the thickest part as cooking nears completion instead of extending heat merely to chase deeper color.",
+  zhBoundary: "这条 Story 只记录烹饪完成状态，不作健康效果或医疗判断。",
+  enBoundary: "This Story records cooking finish states only and makes no health-effect or medical judgment.",
+  evidenceLocators: ["Fish and shellfish temperature row", "Cooking seafood safely section"],
+  evidenceNotes: [
+    "Supports the 63°C/145°F seafood boundary and opaque-flesh cues.",
+    "Independently supports opaque, separating fish and pearly opaque shrimp cues.",
+  ],
+});
+
+const dishSpecs = [
+  {
+    slug: "lemon-chicken-breast",
+    zhName: "柠檬煎鸡胸",
+    enName: "Lemon Chicken Breast",
+    zhDescription: "鸡胸先煎出浅金色表面，再以柠檬、蒜和少量锅汁收尾，酸香清楚而不过度加热。",
+    enDescription: "Chicken breast is seared to a light golden crust, then finished with lemon, garlic, and a small pan sauce for bright flavor without prolonged cooking.",
+    heroAlt: "Lemon chicken breast sliced beside a glossy pan sauce",
+    taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "western" }, techniqueIds: ["pan-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, sour: 3, umami: 2 }, aromaIds: ["citrusy", "garlicky"], textureIds: ["juicy", "tender"], characterIds: ["light", "appetizing"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 10, processMinutes: 15, totalMinutes: 25, activeMinutes: 22 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("chicken-breast", 360), input("lemon", 1, "piece"), input("garlic", 8), input("cooking-oil", 12), input("salt", 3), input("black-pepper", 1)],
+      toolIds: ["frying-pan", "instant-read-thermometer", "knife"],
+      steps: [
+        { zh: { instruction: "将鸡胸较厚处横向片开或轻拍至约 2 厘米厚，擦干后均匀撒盐和黑胡椒。", rationale: "厚度接近才能让中心熟透时边缘仍保持多汁，干燥表面也更容易上色。", stateCue: "鸡胸厚薄大致一致，表面没有可见水珠。" }, en: { instruction: "Butterfly or gently pound the thickest part of each breast to about 2 cm, pat dry, then season evenly with salt and black pepper.", rationale: "Even thickness lets the center finish before the edges dry out, while a dry surface browns more readily.", stateCue: "The chicken is evenly thick with no visible surface moisture." }, durationMinutes: 5 },
+        { zh: { instruction: "平底锅中火烧热，放油和鸡胸；不移动煎 4 分钟，底面呈浅金色后翻面。", rationale: "先让一面完整接触锅面形成颜色，频繁移动会降低锅面温度。", stateCue: "鸡胸能轻松离锅，底面均匀浅金黄。" }, en: { instruction: "Heat the oil in a skillet over medium heat. Add the chicken and leave it undisturbed for 4 minutes, then turn when the underside is lightly golden.", rationale: "Steady pan contact builds color; frequent movement cools the cooking surface.", stateCue: "The chicken releases easily and the underside is evenly light golden." }, durationMinutes: 5 },
+        { zh: { instruction: "翻面后转中小火，加入拍裂的蒜；煎至最厚处达到 74°C，随即盛出静置。", rationale: "降低火力能让中心平稳升温，温度确认比只看颜色更可靠。", stateCue: "最厚处达到 74°C，按压有弹性，切面不再半透明。" }, en: { instruction: "Turn the chicken, reduce to medium-low, and add crushed garlic. Cook until the thickest part reaches 74°C, then remove and rest.", rationale: "Lower heat lets the center rise steadily, and a temperature check is more reliable than color alone.", stateCue: "The thickest part reaches 74°C, feels springy, and is no longer translucent." }, durationMinutes: 6 },
+        { zh: { instruction: "锅离火后加入柠檬汁和 30 毫升水，刮起锅底焦香物并煮至略能挂勺，淋在切片鸡胸上。", rationale: "短暂收汁保留明亮酸香，也利用锅底风味而不继续久煮鸡肉。", stateCue: "锅汁清亮、略有稠度，入口酸咸平衡且没有焦苦味。" }, en: { instruction: "Off the heat, add the lemon juice and 30 ml water, scrape up the browned bits, and simmer just until the sauce lightly coats a spoon; pour over sliced chicken.", rationale: "A brief reduction keeps the citrus bright and captures the fond without overcooking the chicken.", stateCue: "The sauce is glossy and lightly thickened, with balanced acidity and no burnt bitterness." }, durationMinutes: 4 },
+      ],
+    },
+    references: ["usdaChicken", "healthCanadaTemperatures"],
+    story: chickenDonenessStory("鸡胸熟度要看最厚处", "Doneness Lives at the Thickest Point"),
+  },
+  {
+    slug: "broccoli-chicken",
+    zhName: "西兰花炒鸡片",
+    enName: "Chicken and Broccoli Stir-fry",
+    zhDescription: "鸡片和西兰花分段成熟，最后以蒜香酱汁快速合炒，保持肉嫩、菜脆和汁薄。",
+    enDescription: "Chicken and broccoli are cooked in stages, then quickly combined in a garlicky sauce so the meat stays tender, the florets crisp, and the coating light.",
+    heroAlt: "Chicken and broccoli stir-fry in a shallow serving bowl",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["blanch", "stir-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick", "vegetable-rich"] },
+    flavor: { tastes: { salty: 2, umami: 3, sweet: 1 }, aromaIds: ["garlicky", "gingery"], textureIds: ["tender", "crisp", "saucy"], characterIds: ["rice-friendly", "appetizing"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "crisp" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 10, totalMinutes: 25, activeMinutes: 25 },
+      yield: { amount: 3, unit: "serving" },
+      inputs: [input("chicken-breast", 350), input("broccoli", 350), input("soy-sauce", 24), input("garlic", 10), input("ginger", 8), input("cooking-oil", 18), input("drinking-water", 80, "ml"), input("salt", 2)],
+      toolIds: ["wok", "saucepan", "knife", "instant-read-thermometer"],
+      steps: [
+        { zh: { instruction: "鸡胸逆纹切薄片并擦干；西兰花切成大小接近的小朵，粗梗削皮切片。", rationale: "统一尺寸能缩小成熟时间差，逆纹切片也让鸡肉更容易咀嚼。", stateCue: "鸡片厚度约 4 毫米，西兰花小朵可一口食用。" }, en: { instruction: "Slice the chicken thinly across the grain and pat dry. Cut broccoli into even bite-size florets and peel and slice the thick stem.", rationale: "Consistent size narrows the cooking-time gap, while cutting across the grain shortens the meat fibers.", stateCue: "Chicken slices are about 4 mm thick and broccoli pieces are bite-size." }, durationMinutes: 10 },
+        { zh: { instruction: "沸水加少量盐，西兰花焯 60 至 90 秒后立即沥干。", rationale: "先焯至半熟，最后合炒时就不需要让鸡肉等待蔬菜变软。", stateCue: "西兰花颜色鲜亮，梗部能弯但仍明显脆。" }, en: { instruction: "Salt boiling water lightly, blanch the broccoli for 60 to 90 seconds, and drain immediately.", rationale: "Par-cooking means the chicken will not have to wait for the vegetables to soften during the final toss.", stateCue: "The broccoli is vivid green; stems bend slightly but remain distinctly crisp." }, durationMinutes: 2 },
+        { zh: { instruction: "炒锅大火烧热后放油，鸡片摊成一层，煎炒至两面变白且最厚处达到 74°C，盛出。", rationale: "鸡肉单独完成能避免锅中水汽过多，并明确核验熟度。", stateCue: "鸡片边缘微金黄、中心不透明，最厚处达到 74°C。" }, en: { instruction: "Heat a wok over high heat, add oil, spread the chicken in one layer, and stir-fry until opaque and 74°C at the thickest slice; remove it.", rationale: "Finishing the chicken separately limits steam and gives a clear doneness checkpoint.", stateCue: "Edges are lightly golden, centers opaque, and the thickest slice reaches 74°C." }, durationMinutes: 4 },
+        { zh: { instruction: "原锅炒香姜蒜，加入酱油和水；汁液沸起后放回鸡肉与西兰花，大火翻至均匀薄挂汁。", rationale: "最后短时间合炒只负责融合味道，不重复久煮任何一方。", stateCue: "锅底几乎没有游离水，酱汁只薄薄裹住食材，西兰花仍脆。" }, en: { instruction: "Bloom ginger and garlic in the same wok, add soy sauce and water, then return the chicken and broccoli once bubbling; toss over high heat until lightly coated.", rationale: "The short final toss combines flavors without recooking either component for long.", stateCue: "Little free liquid remains, the sauce forms a thin coat, and the broccoli stays crisp." }, durationMinutes: 4 },
+      ],
+    },
+    references: ["woksBroccoliChicken", "omnivoreBroccoliChicken"],
+    story: {
+      zhTitle: "分段成熟，让肉嫩菜脆",
+      enTitle: "Staged Cooking for Tender Meat and Crisp Greens",
+      zhClaim: "两份独立参考做法都把西兰花与鸡肉的成熟节奏分开，再在最后短时间合炒。",
+      enClaim: "Both independent preparation references separate the cooking pace of broccoli and chicken, then combine them only for a short final stir-fry.",
+      zhPractice: "家庭厨房火力有限，先让西兰花半熟、鸡肉单独到达安全温度，比把生食材一起久炒更容易控制状态。",
+      enPractice: "With limited home-burner power, par-cooking broccoli and finishing chicken separately gives more control than cooking both raw ingredients together for an extended time.",
+      zhBoundary: "本配方的数量、文案和状态提示为 Cooking Lab 独立组织，并未复制参考页面的表达。",
+      enBoundary: "Cooking Lab independently structured the quantities, wording, and state cues; source expression was not copied.",
+      evidenceLocators: ["Broccoli blanching and final stir-fry method", "Staged chicken-and-broccoli cooking method"],
+      evidenceNotes: ["Supports blanching broccoli separately before a short final sauce stage.", "Independently supports controlling chicken and broccoli as separate cooking stages."],
+    },
+  },
+  {
+    slug: "mushroom-tofu-rice",
+    zhName: "蘑菇豆腐盖饭",
+    enName: "Mushroom Tofu Rice Bowl",
+    zhDescription: "豆腐煎至表面金黄，与蘑菇蒜香酱汁同盖热米饭，口感柔软又有清晰焦香。",
+    enDescription: "Golden pan-seared tofu and mushrooms in a garlicky sauce are spooned over hot rice for a soft bowl with defined browned notes.",
+    heroAlt: "Mushroom and golden tofu served over rice",
+    taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "fusion" }, techniqueIds: ["pan-fry", "stir-fry"], formIds: ["staple"], dietaryTagIds: ["vegan"], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["garlicky", "roasted"], textureIds: ["tender", "saucy", "soft"], characterIds: ["comforting", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["fusion"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "saucy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 10, processMinutes: 18, totalMinutes: 28, activeMinutes: 25 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("tofu", 350), input("mushroom", 220), input("cooked-rice", 400), input("soy-sauce", 22), input("garlic", 8), input("scallion", 15), input("cooking-oil", 20), input("drinking-water", 80, "ml")],
+      toolIds: ["frying-pan", "spatula", "knife"],
+      steps: [
+        { zh: { instruction: "豆腐切 2 厘米块，用干净布或厨房纸轻压表面；蘑菇切厚片。", rationale: "去掉表面水分可以减少溅油，并让豆腐更早形成金黄外层。", stateCue: "豆腐表面干爽但没有被压碎，蘑菇片厚薄一致。" }, en: { instruction: "Cut tofu into 2 cm cubes and gently press the surfaces dry with a clean cloth or paper towel; slice the mushrooms thickly.", rationale: "Removing surface moisture reduces spatter and helps the tofu develop a golden exterior sooner.", stateCue: "The tofu surfaces feel dry without crumbling, and mushroom slices are even." }, durationMinutes: 6 },
+        { zh: { instruction: "平底锅中火烧热放油，豆腐留出间距，煎 6 至 8 分钟并逐面翻动，金黄后盛出。", rationale: "留空隙让水汽散出，表面定型后再翻可以减少破损。", stateCue: "至少两面金黄，豆腐能完整铲起且不粘锅。" }, en: { instruction: "Heat oil in a skillet over medium heat, space the tofu apart, and cook for 6 to 8 minutes, turning as each side sets; remove when golden.", rationale: "Open space lets steam escape, and waiting for a crust before turning reduces breakage.", stateCue: "At least two sides are golden and each piece lifts cleanly without sticking." }, durationMinutes: 8 },
+        { zh: { instruction: "原锅转中高火炒蘑菇，先摊开至水汽明显减少，再加入蒜末炒香。", rationale: "先让蘑菇释放并蒸发水分，可避免蒜末在等待中焦黑。", stateCue: "蘑菇边缘微褐，锅底从湿润变为只有薄油膜。" }, en: { instruction: "Raise the pan to medium-high and spread out the mushrooms. Cook until their moisture subsides, then add the garlic.", rationale: "Letting mushroom moisture evaporate first keeps the garlic from burning while it waits.", stateCue: "Mushroom edges are lightly browned and the pan changes from wet to a thin oil sheen." }, durationMinutes: 5 },
+        { zh: { instruction: "加入酱油和水煮沸，放回豆腐轻推 2 分钟；热米饭分碗，浇上蘑菇豆腐并撒葱。", rationale: "酱汁最后加入能保留豆腐外层，同时让味道均匀包裹。", stateCue: "汁液能薄挂豆腐，豆腐块完整，米饭热而松散。" }, en: { instruction: "Add soy sauce and water and bring to a bubble. Return the tofu and nudge gently for 2 minutes; divide hot rice into bowls, top with tofu and mushrooms, and add scallion.", rationale: "Adding sauce last preserves more of the tofu crust while coating everything evenly.", stateCue: "Sauce lightly clings to intact tofu, and the rice is hot and loose-grained." }, durationMinutes: 4 },
+      ],
+    },
+    references: ["justOneCookbookTofu", "omnivorePanFriedTofu"],
+    story: {
+      zhTitle: "豆腐上色从表面水分开始",
+      enTitle: "Tofu Browning Starts with Surface Moisture",
+      zhClaim: "两份独立参考都在煎豆腐前处理表面水分，并把酱汁放在上色之后。",
+      enClaim: "Both independent references manage tofu surface moisture before pan-frying and add sauce only after browning.",
+      zhPractice: "擦干、留间距并等表面定型后再翻面，是比频繁拨动更可靠的家庭锅具策略。",
+      enPractice: "Drying, leaving space, and waiting for the crust to set before turning are more reliable in a home skillet than constant movement.",
+      zhBoundary: "这条结论只覆盖可观察的煎制顺序，不宣称唯一或正宗做法。",
+      enBoundary: "This claim covers only an observable pan-frying sequence and does not present it as the sole or authentic method.",
+      evidenceLocators: ["Tofu preparation and pan-frying method", "Drying and browning method"],
+      evidenceNotes: ["Supports drying tofu and saucing it after browning.", "Independently supports moisture management before pan-frying tofu."],
+    },
+  },
+  {
+    slug: "pan-seared-chicken-thigh",
+    zhName: "香煎鸡腿排",
+    enName: "Pan-seared Chicken Thigh",
+    zhDescription: "去皮鸡腿肉先平整入锅，煎出焦香边缘后以蒜和黑胡椒收味，内部保持多汁。",
+    enDescription: "Boneless chicken thigh is flattened against the pan for browned edges, then finished with garlic and black pepper while the center stays juicy.",
+    heroAlt: "Pan-seared chicken thigh with browned edges",
+    taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "western" }, techniqueIds: ["sear", "pan-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["garlicky", "peppery", "roasted"], textureIds: ["juicy", "tender"], characterIds: ["hearty", "appetizing"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 14, totalMinutes: 22, activeMinutes: 18 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("chicken-thigh", 420), input("garlic", 8), input("cooking-oil", 10), input("salt", 3), input("black-pepper", 2), input("lemon", 0.5, "piece", true)],
+      toolIds: ["frying-pan", "spatula", "instant-read-thermometer"],
+      steps: [
+        { zh: { instruction: "鸡腿肉展开，较厚处轻划一刀但不切断；擦干后两面撒盐和黑胡椒。", rationale: "平整厚度让整片肉同时接触锅面并更均匀成熟。", stateCue: "肉片能自然铺平，表面干爽，厚处没有明显隆起。" }, en: { instruction: "Open out the thighs and score the thickest bulge without cutting through. Pat dry and season both sides with salt and black pepper.", rationale: "An even shape gives broad pan contact and more uniform cooking.", stateCue: "Each thigh lies naturally flat, feels dry, and has no pronounced thick mound." }, durationMinutes: 4 },
+        { zh: { instruction: "锅中火烧热放油，鸡腿较平整的一面向下，用铲轻压 30 秒后保持不动煎 5 分钟。", rationale: "短暂按压建立完整接触，之后不移动才能形成均匀焦香表面。", stateCue: "边缘变白，底面深金黄并能轻松离锅。" }, en: { instruction: "Heat oil over medium heat, place the flatter side down, press lightly for 30 seconds, then leave undisturbed for 5 minutes.", rationale: "Brief pressure establishes contact; leaving it still then builds an even browned surface.", stateCue: "Edges turn opaque and the deep-golden underside releases readily." }, durationMinutes: 6 },
+        { zh: { instruction: "翻面转中小火，加入拍裂蒜瓣，继续煎至最厚处达到 74°C。", rationale: "第二面以较温和火力完成中心，避免第一面继续过深焦化。", stateCue: "温度计读数达到 74°C，肉有弹性且流出的汁液清亮。" }, en: { instruction: "Turn, reduce to medium-low, add crushed garlic, and continue until the thickest point reaches 74°C.", rationale: "Gentler heat on the second side finishes the center without darkening the first crust too far.", stateCue: "The thermometer reads 74°C, the meat feels springy, and its juices run clear." }, durationMinutes: 6 },
+        { zh: { instruction: "离锅静置 4 分钟后逆纹切片；需要时挤少量柠檬汁再上桌。", rationale: "静置让内部汁液稳定，最后加柠檬可保留清新香气。", stateCue: "切片表面湿润但盘中没有大量汁水，中心完全不透明。" }, en: { instruction: "Rest off the heat for 4 minutes, slice across the grain, and add a small squeeze of lemon if desired.", rationale: "Resting stabilizes the juices, while last-minute lemon keeps its aroma bright.", stateCue: "Slices look moist without flooding the plate, and the center is fully opaque." }, durationMinutes: 4 },
+      ],
+    },
+    references: ["usdaChicken", "healthCanadaTemperatures"],
+    story: chickenDonenessStory("焦香之外，温度才是完成线", "Beyond Browning, Temperature Marks the Finish"),
+  },
+  {
+    slug: "pepper-beef-stir-fry",
+    zhName: "黑椒彩椒炒牛肉",
+    enName: "Black Pepper Beef Stir-fry",
+    zhDescription: "薄切牛肉先快速煎香，再与脆甜彩椒和现磨黑胡椒合炒，酱汁浓而不积水。",
+    enDescription: "Thin beef is quickly seared, then tossed with crisp bell pepper and freshly ground black pepper in a concentrated sauce without excess liquid.",
+    heroAlt: "Black pepper beef stir-fry with colorful bell peppers",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["sear", "stir-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick", "vegetable-rich"] },
+    flavor: { tastes: { salty: 3, umami: 3, sweet: 1, spicy: 1 }, aromaIds: ["peppery", "roasted"], textureIds: ["tender", "crisp", "saucy"], characterIds: ["appetizing", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "crisp" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 8, totalMinutes: 23, activeMinutes: 23 },
+      yield: { amount: 3, unit: "serving" },
+      inputs: [input("beef-lean", 360), input("bell-pepper", 300), input("onion", 120), input("soy-sauce", 24), input("black-pepper", 3), input("garlic", 8), input("cooking-oil", 18), input("drinking-water", 40, "ml")],
+      toolIds: ["wok", "knife", "spatula"],
+      steps: [
+        { zh: { instruction: "牛肉逆纹切约 3 毫米薄片并擦干；彩椒和洋葱切成与牛肉长度接近的条。", rationale: "薄而均匀的逆纹切片缩短高温时间，也让蔬菜与牛肉便于同时夹取。", stateCue: "牛肉片可摊平、没有水膜，蔬菜条大小接近。" }, en: { instruction: "Slice beef about 3 mm thick across the grain and pat dry. Cut bell pepper and onion into strips similar in length to the beef.", rationale: "Thin, even cross-grain slices shorten high-heat cooking and make the components easy to pick up together.", stateCue: "Beef slices lie flat with no moisture film, and vegetable strips are similarly sized." }, durationMinutes: 8 },
+        { zh: { instruction: "炒锅大火烧到明显热，放一半油，将牛肉分散成一层；边缘变褐后快速翻炒，七八成熟即盛出。", rationale: "小批量先煎牛肉能避免肉汁把锅面变成焖煮环境。", stateCue: "牛肉边缘褐色、中心刚不见生红，锅底没有大量水。" }, en: { instruction: "Heat a wok until distinctly hot, add half the oil, and spread the beef in one layer. When the edges brown, toss briefly and remove while just shy of done.", rationale: "Searing the beef in a controlled layer keeps released juices from turning the pan into a steamer.", stateCue: "Edges are browned, raw-red centers have nearly disappeared, and little liquid pools in the wok." }, durationMinutes: 3 },
+        { zh: { instruction: "补入余油，先炒洋葱 1 分钟，再放彩椒和蒜，大火炒至边缘微焦但仍脆。", rationale: "依次入锅照顾不同硬度，避免彩椒为等待洋葱而变软。", stateCue: "洋葱略透明，彩椒颜色鲜亮、边缘有少量焦点。" }, en: { instruction: "Add the remaining oil, cook onion for 1 minute, then add bell pepper and garlic; stir-fry until lightly charred at the edges but still crisp.", rationale: "Staggered additions account for different firmness so the peppers do not soften while waiting for the onion.", stateCue: "Onion is slightly translucent; peppers stay vivid with a few charred spots." }, durationMinutes: 3 },
+        { zh: { instruction: "加入酱油、水和黑胡椒，汁液沸起后放回牛肉，快速翻匀约 30 秒立即出锅。", rationale: "最后短促合炒让酱汁挂住牛肉，同时避免把已经上色的肉继续煮老。", stateCue: "酱汁浓亮而无积水，牛肉中心完全变色、仍有弹性。" }, en: { instruction: "Add soy sauce, water, and black pepper. Once bubbling, return the beef, toss for about 30 seconds, and serve immediately.", rationale: "A short final toss coats the browned beef without continuing to cook it into toughness.", stateCue: "The sauce is glossy with no puddle; beef is fully colored through yet springy." }, durationMinutes: 2 },
+      ],
+    },
+    references: ["woksBlackPepperBeef", "omnivoreBlackPepperBeef"],
+    story: {
+      zhTitle: "先煎牛肉，再合炒",
+      enTitle: "Sear the Beef, Then Bring the Wok Together",
+      zhClaim: "两份独立参考都采用高温快速处理牛肉、再与蔬菜和酱汁短暂合炒的分段顺序。",
+      enClaim: "Both independent references use a staged sequence: cook beef quickly over high heat, then combine it briefly with vegetables and sauce.",
+      zhPractice: "对家庭炉具而言，避免锅中积水比盲目延长高温更重要；肉片应能接触锅面并在完成后及时盛出。",
+      enPractice: "On a home burner, preventing pooled liquid matters more than blindly extending high heat; slices need pan contact and prompt removal when done.",
+      zhBoundary: "该 Story 只记录可交叉核对的操作顺序，不声称代表所有黑椒牛肉版本。",
+      enBoundary: "This Story records only a cross-checkable cooking sequence and does not claim to represent every black-pepper beef variation.",
+      evidenceLocators: ["Beef searing and final sauce method", "High-heat beef and vegetable sequence"],
+      evidenceNotes: ["Supports cooking beef quickly before the final combined stir-fry.", "Independently supports staged high-heat beef and vegetable cooking."],
+    },
+  },
+  {
+    slug: "tomato-beef-stew",
+    zhName: "番茄炖牛肉",
+    enName: "Tomato Beef Stew",
+    zhDescription: "牛肉先煎出褐色表面，再与番茄和洋葱小火慢炖，形成酸甜平衡、可拌饭的浓汁。",
+    enDescription: "Beef is browned before a gentle simmer with tomato and onion, producing a balanced tangy-sweet gravy suited to rice.",
+    heroAlt: "Tomato beef stew with tender chunks in a red sauce",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["sear", "stew"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["one-pot"] },
+    flavor: { tastes: { salty: 2, sour: 2, sweet: 2, umami: 3 }, aromaIds: ["tomato-rich", "roasted"], textureIds: ["tender", "saucy"], characterIds: ["comforting", "warming", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "rich" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "saucy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 85, totalMinutes: 100, activeMinutes: 30 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("beef-lean", 650), input("tomato", 700), input("onion", 200), input("carrot", 180), input("garlic", 10), input("soy-sauce", 25), input("cooking-oil", 18), input("drinking-water", 500, "ml"), input("salt", 3)],
+      toolIds: ["heavy-pot", "knife", "wooden-spoon"],
+      steps: [
+        { zh: { instruction: "牛肉切 3 厘米块并彻底擦干；番茄切块，洋葱切粗丝，胡萝卜切滚刀块。", rationale: "干燥且大小一致的牛肉更易均匀上色，蔬菜大块可承受较长炖煮。", stateCue: "牛肉表面无水膜，肉块和胡萝卜块大小接近。" }, en: { instruction: "Cut beef into 3 cm cubes and dry thoroughly. Chunk the tomatoes, slice the onion thickly, and cut carrot into similar pieces.", rationale: "Dry, even beef browns consistently, while large vegetables tolerate the long simmer.", stateCue: "No moisture film remains on the beef, and beef and carrot pieces are similarly sized." }, durationMinutes: 12 },
+        { zh: { instruction: "厚底锅中高火放油，牛肉分两批煎至至少两面深褐，逐批盛出。", rationale: "分批煎避免肉汁迅速降低锅温，褐色表面为炖汁增加深度。", stateCue: "锅底留下褐色焦香物而非灰色积水，牛肉表面明显上色。" }, en: { instruction: "Heat oil in a heavy pot over medium-high and brown the beef in two batches on at least two sides; remove each batch.", rationale: "Batches keep released juices from collapsing the pan temperature, and browned surfaces deepen the stew.", stateCue: "Brown fond, not gray pooled liquid, covers the pot bottom and the beef is visibly seared." }, durationMinutes: 12 },
+        { zh: { instruction: "转中火炒软洋葱，加入蒜和一半番茄，煮至番茄塌软出汁并刮起锅底焦香物。", rationale: "先让部分番茄形成液体基础，能温和带起锅底风味而不加过多水。", stateCue: "番茄大半失去形状，锅底焦香物已融入红色汁液。" }, en: { instruction: "Reduce to medium, soften the onion, then add garlic and half the tomatoes. Cook until collapsed and juicy while scraping up the fond.", rationale: "Letting part of the tomato create the liquid base lifts the fond without excess added water.", stateCue: "Most tomato pieces have lost their shape and the fond has dissolved into red juices." }, durationMinutes: 10 },
+        { zh: { instruction: "放回牛肉，加入酱油和水，微沸后盖锅小火炖 55 分钟；加入胡萝卜和剩余番茄再炖 20 分钟，按需加盐。", rationale: "持续小泡能逐步软化肉，后放部分蔬菜则保留可辨认形状和清亮番茄味。", stateCue: "牛肉可用叉子轻松插入但不散碎，胡萝卜软而完整，汁液能挂勺。" }, en: { instruction: "Return beef, add soy sauce and water, bring to a bare simmer, cover, and cook 55 minutes. Add carrot and remaining tomato for 20 minutes more, then adjust salt.", rationale: "A steady low bubble tenderizes the meat, while later vegetables retain recognizable shape and brighter tomato flavor.", stateCue: "A fork enters the beef easily without shredding it; carrot is tender and intact, and gravy coats a spoon." }, durationMinutes: 75 },
+      ],
+    },
+    references: ["omnivoreTomatoBeef", "seriousEatsBeefStew"],
+    story: {
+      zhTitle: "褐变与慢炖是两个阶段",
+      enTitle: "Browning and Simmering Do Different Jobs",
+      zhClaim: "两份独立参考都先让牛肉形成褐色表面，再转入有液体的温和炖煮阶段。",
+      enClaim: "Both independent references brown the beef first, then move it into a gentler liquid simmer.",
+      zhPractice: "煎制阶段观察锅底是否积水，炖煮阶段观察是否只有稳定小泡；两个状态比固定炉档更可迁移。",
+      enPractice: "Watch for pooled liquid during searing and a steady low bubble during simmering; these states transfer between kitchens better than fixed burner labels.",
+      zhBoundary: "番茄比例和调味为本配方独立设计，参考来源只支持分段技法。",
+      enBoundary: "The tomato ratio and seasoning are original to this recipe; the references support only the staged technique.",
+      evidenceLocators: ["Beef browning and simmer method", "Browning followed by stew method"],
+      evidenceNotes: ["Supports browning beef before a controlled simmer.", "Independently supports separate searing and liquid-stew stages."],
+    },
+  },
+  {
+    slug: "potato-beef-stew",
+    zhName: "土豆炖牛肉",
+    enName: "Potato Beef Stew",
+    zhDescription: "牛肉小火炖至开始变软后再加入土豆，让肉与薯块同时到达柔嫩而不散碎的状态。",
+    enDescription: "Beef is gently simmered before potatoes are added, allowing both meat and potato chunks to finish tender without falling apart.",
+    heroAlt: "Potato beef stew with intact tender potato chunks",
+    taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "fusion" }, techniqueIds: ["sear", "stew"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["one-pot"] },
+    flavor: { tastes: { salty: 2, umami: 3, sweet: 1 }, aromaIds: ["roasted", "peppery"], textureIds: ["tender", "soft", "saucy"], characterIds: ["hearty", "warming", "comforting"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["fusion"], facets: [{ dimension: "weight", value: "rich" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "soft" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 90, totalMinutes: 105, activeMinutes: 28 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("beef-lean", 650), input("potato", 600), input("onion", 200), input("carrot", 180), input("garlic", 10), input("soy-sauce", 22), input("cooking-oil", 18), input("drinking-water", 650, "ml"), input("black-pepper", 2), input("salt", 3)],
+      toolIds: ["heavy-pot", "knife", "wooden-spoon"],
+      steps: [
+        { zh: { instruction: "牛肉切 3 厘米块后擦干；土豆和胡萝卜切稍大的滚刀块，土豆暂泡清水防止变色。", rationale: "统一肉块便于判断柔软度，较大的薯块更能承受后段炖煮。", stateCue: "牛肉干爽，土豆块边角完整且大小略大于胡萝卜。" }, en: { instruction: "Cut beef into 3 cm cubes and pat dry. Cut potato and carrot into slightly larger chunks, holding the potato in water to prevent discoloration.", rationale: "Even beef pieces make tenderness easier to judge, while larger potato pieces withstand the later simmer.", stateCue: "The beef is dry and potato chunks have intact edges and are slightly larger than the carrot." }, durationMinutes: 12 },
+        { zh: { instruction: "厚底锅中高火放油，牛肉分批煎至褐色后盛出；转中火炒洋葱至边缘金黄，再放蒜。", rationale: "肉和洋葱分别上色，能在不烧焦蒜末的情况下建立炖汁底味。", stateCue: "牛肉至少两面褐色，洋葱柔软且边缘金黄，蒜香清楚不焦。" }, en: { instruction: "Heat oil in a heavy pot over medium-high and brown the beef in batches; remove. Lower to medium, cook onion until golden at the edges, then add garlic.", rationale: "Browning meat and onion separately builds the stew base without burning the garlic.", stateCue: "Beef is brown on at least two sides, onion is soft with golden edges, and garlic smells fragrant, not burnt." }, durationMinutes: 15 },
+        { zh: { instruction: "放回牛肉，加入酱油、水和黑胡椒，微沸后盖锅小火炖 55 分钟。", rationale: "先给牛肉充足时间软化，避免土豆与肉同时入锅后已经化碎。", stateCue: "液面只有稳定小泡，55 分钟后叉子可插入牛肉但仍有阻力。" }, en: { instruction: "Return the beef, add soy sauce, water, and black pepper, bring to a bare simmer, cover, and cook for 55 minutes.", rationale: "Giving beef a head start prevents potatoes from disintegrating while the meat is still firm.", stateCue: "Only steady small bubbles break the surface; after 55 minutes a fork enters the beef with some resistance." }, durationMinutes: 55 },
+        { zh: { instruction: "土豆沥干，与胡萝卜一同入锅再炖 25 分钟；开盖稍收汁并加盐，静置 5 分钟上桌。", rationale: "后放根茎让肉和菜在相近时间完成，短暂静置也让汤汁略为稳定。", stateCue: "叉子可轻松穿过土豆中心但边角不脱落，牛肉柔嫩，汤汁薄挂勺。" }, en: { instruction: "Drain the potatoes and add with the carrot. Simmer 25 minutes more, uncover briefly to reduce, adjust salt, and rest 5 minutes before serving.", rationale: "Later root vegetables let meat and vegetables finish together, while a short rest settles the gravy.", stateCue: "A fork slides through potato centers without breaking the edges; beef is tender and gravy lightly coats a spoon." }, durationMinutes: 30 },
+      ],
+    },
+    references: ["seriousEatsBeefStew", "bbcBeefStew"],
+    story: {
+      zhTitle: "土豆后放，完成时间才对齐",
+      enTitle: "Add Potatoes Later to Align the Finish",
+      zhClaim: "两份独立炖牛肉参考都将褐变与慢炖分开，并依据食材软化速度安排蔬菜进入炖锅的时间。",
+      enClaim: "Both independent beef-stew references separate browning from slow simmering and time the vegetables according to how quickly they soften.",
+      zhPractice: "牛肉先炖到叉子能插入但仍有阻力，再加入大块土豆，是家庭厨房容易重复的状态节点。",
+      enPractice: "Letting beef simmer until a fork enters with resistance before adding large potato chunks creates a repeatable home-kitchen checkpoint.",
+      zhBoundary: "不同部位与薯类需要的分钟数会变化，因此状态提示优先于死守时钟。",
+      enBoundary: "Different beef cuts and potatoes vary in timing, so the state cues take priority over a rigid clock.",
+      evidenceLocators: ["Browning, simmering, and vegetable timing", "Stew method and tender finish"],
+      evidenceNotes: ["Supports separate browning and simmer stages with timed vegetables.", "Independently supports adding vegetables within a gentle beef-stew process."],
+    },
+  },
+  {
+    slug: "shrimp-scrambled-eggs",
+    zhName: "虾仁滑蛋",
+    enName: "Shrimp Scrambled Eggs",
+    zhDescription: "虾仁先单独煎至珠白，再与刚凝固的鸡蛋短暂合拢，保留虾的弹性和蛋的柔嫩。",
+    enDescription: "Shrimp are cooked separately until pearly, then folded into just-set eggs to preserve springy seafood and tender curds.",
+    heroAlt: "Tender scrambled eggs folded with pearly shrimp",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["stir-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, umami: 3, sweet: 1 }, aromaIds: ["gingery"], textureIds: ["tender", "juicy", "silky"], characterIds: ["light", "comforting"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["breakfast", "lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "silky" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 7, totalMinutes: 15, activeMinutes: 15 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("shrimp", 180), input("egg", 4, "piece"), input("scallion", 15), input("ginger", 5), input("cooking-oil", 18), input("salt", 2), input("drinking-water", 15, "ml")],
+      toolIds: ["frying-pan", "mixing-bowl", "spatula", "instant-read-thermometer"],
+      steps: [
+        { zh: { instruction: "虾仁擦干，去除残余虾线；鸡蛋加盐和水打散至蛋白蛋黄完全融合。", rationale: "干燥虾仁更易煎熟而不出水，少量水让蛋液受热时更有缓冲。", stateCue: "虾仁表面无水珠，蛋液颜色均匀且有细泡。" }, en: { instruction: "Pat the shrimp dry and remove any remaining vein. Beat eggs with salt and water until whites and yolks fully combine.", rationale: "Dry shrimp sear without flooding the pan, while a little water buffers the eggs during cooking.", stateCue: "Shrimp show no surface droplets and the egg mixture is uniform with fine bubbles." }, durationMinutes: 4 },
+        { zh: { instruction: "锅中火烧热放少量油，加入姜和虾仁，翻煎至虾肉珠白不透明且中心达到 63°C，立即盛出。", rationale: "虾先独立达到熟度，之后只需与蛋短暂融合，减少过熟风险。", stateCue: "虾弯成松散 C 形、肉质珠白不透明，最厚处达到 63°C。" }, en: { instruction: "Heat a little oil over medium, add ginger and shrimp, and turn until pearly, opaque, and 63°C at the center; remove immediately.", rationale: "Finishing shrimp separately means they only need a brief fold with the eggs, reducing overcooking risk.", stateCue: "Shrimp form loose C shapes, look pearly and opaque, and reach 63°C at the thickest point." }, durationMinutes: 3 },
+        { zh: { instruction: "原锅转中小火补入余油，倒入蛋液；边缘开始凝固时用铲从外向内缓慢推拢。", rationale: "低一些的火力和大块推拢可形成柔软蛋块，而不是细碎干硬颗粒。", stateCue: "锅底出现大片软凝块，表面仍湿润但没有分离水。" }, en: { instruction: "Reduce to medium-low, add the remaining oil, and pour in the eggs. As the edge sets, slowly push from the outside toward the center.", rationale: "Gentler heat and broad folds form tender curds instead of small dry crumbs.", stateCue: "Large soft curds form on the pan while the surface remains moist without weeping." }, durationMinutes: 2 },
+        { zh: { instruction: "蛋液只剩少量光泽时放回虾仁和葱，折叠数次后立即离火装盘。", rationale: "余温会完成最后凝固，提前离火可避免蛋和虾重复加热变老。", stateCue: "没有流动蛋液，蛋块柔嫩有光泽，虾仁完整有弹性。" }, en: { instruction: "When only a slight sheen remains, return the shrimp with scallion, fold a few times, and plate immediately off the heat.", rationale: "Carryover heat completes the final set; early removal keeps both egg and shrimp from toughening.", stateCue: "No liquid egg remains, curds are tender and glossy, and shrimp stay intact and springy." }, durationMinutes: 2 },
+      ],
+    },
+    references: ["usdaSeafood", "fdaSeafood"],
+    story: seafoodDonenessStory("虾仁的完成线是珠白不透明", "Pearly and Opaque Marks the Shrimp Finish"),
+  },
+  {
+    slug: "steamed-salmon",
+    zhName: "姜葱清蒸三文鱼",
+    enName: "Ginger-Scallion Steamed Salmon",
+    zhDescription: "三文鱼以姜葱和少量酱油蒸至刚好分层，火候清晰，鱼肉湿润而不积水。",
+    enDescription: "Salmon is steamed with ginger and scallion until it just separates into moist flakes, with a clear doneness point and no watery sauce.",
+    heroAlt: "Steamed salmon with ginger and scallion",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["steam"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["gingery", "herbal"], textureIds: ["juicy", "tender"], characterIds: ["light", "clean-tasting"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "tender" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 10, totalMinutes: 18, activeMinutes: 10 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("salmon", 400), input("ginger", 12), input("scallion", 25), input("soy-sauce", 18), input("cooking-oil", 8), input("salt", 1)],
+      toolIds: ["steamer", "heatproof-plate", "instant-read-thermometer", "knife"],
+      steps: [
+        { zh: { instruction: "三文鱼擦干并检查细刺，较厚部分朝盘外摆放；表面薄撒盐，铺一半姜丝。", rationale: "厚处靠近蒸汽较强的位置有助于同步成熟，擦干也避免盘中积出过多水。", stateCue: "鱼肉表面干爽，厚薄方向已调整，细刺清理完成。" }, en: { instruction: "Pat salmon dry and check for pin bones. Place thicker portions toward the plate edge, season lightly with salt, and top with half the ginger.", rationale: "Putting thicker sections nearer stronger steam helps even cooking, while drying limits pooled liquid.", stateCue: "The surface is dry, thickness is oriented deliberately, and pin bones are removed." }, durationMinutes: 4 },
+        { zh: { instruction: "蒸锅水完全沸腾后放入鱼盘，盖严并保持稳定蒸汽 6 分钟。", rationale: "从稳定蒸汽开始计时，比随冷水升温更容易判断鱼肉状态。", stateCue: "锅盖边缘持续冒出少量蒸汽，水保持沸腾但不干锅。" }, en: { instruction: "Once the steamer water is fully boiling, add the plate, cover tightly, and maintain steady steam for 6 minutes.", rationale: "Timing from stable steam gives a clearer doneness reference than warming from cold water.", stateCue: "A small steady stream of steam escapes the lid and the water continues boiling safely." }, durationMinutes: 6 },
+        { zh: { instruction: "打开锅盖，在最厚处测温；达到 63°C且鱼肉不透明、用叉轻推即可分层时取出。", rationale: "温度与组织状态共同确认完成，避免仅凭表面颜色延长蒸制。", stateCue: "最厚处 63°C，鱼肉不透明并能沿纹理分开，中心仍湿润。" }, en: { instruction: "Open the steamer and check the thickest part. Remove at 63°C when opaque flesh separates under gentle fork pressure.", rationale: "Temperature and texture together confirm doneness without extending steam based on surface color alone.", stateCue: "The thickest point is 63°C; flesh is opaque, separates along the grain, and remains moist." }, durationMinutes: 2 },
+        { zh: { instruction: "倒掉盘中多余水分，撒剩余姜葱，淋酱油；将油加热至流动明显后浇在葱姜上。", rationale: "先去水再调味可避免酱汁被稀释，热油只用于释放葱姜香气。", stateCue: "盘底只有薄层酱汁，葱姜香气清楚，鱼肉表面仍湿润。" }, en: { instruction: "Pour off excess steaming liquid, add the remaining ginger and scallion, and drizzle with soy sauce. Heat the oil until fluid and pour it over the aromatics.", rationale: "Removing water first prevents dilution; the hot oil is only to release ginger-scallion aroma.", stateCue: "Only a thin sauce remains on the plate, aromatics smell vivid, and the fish stays moist." }, durationMinutes: 2 },
+      ],
+    },
+    references: ["usdaSeafood", "fdaSeafood"],
+    story: seafoodDonenessStory("蒸鱼的熟度可以同时看温度与分层", "Steam Doneness Can Be Read by Temperature and Flaking"),
+  },
+  {
+    slug: "roasted-salmon",
+    zhName: "烤三文鱼",
+    enName: "Roasted Salmon",
+    zhDescription: "三文鱼以柠檬和黑胡椒高温短烤，边缘微焦，中心刚好不透明并保持湿润。",
+    enDescription: "Salmon is briefly roasted with lemon and black pepper until the edges color and the center turns just opaque while remaining moist.",
+    heroAlt: "Roasted salmon with lemon and browned edges",
+    taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "western" }, techniqueIds: ["roast"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, sour: 2, umami: 3 }, aromaIds: ["citrusy", "roasted", "peppery"], textureIds: ["juicy", "tender"], characterIds: ["light", "appetizing"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
+    preparation: {
+      kind: "baking",
+      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 10 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("salmon", 400), input("lemon", 1, "piece"), input("extra-virgin-olive-oil", 12), input("salt", 2), input("black-pepper", 2), input("garlic", 6)],
+      toolIds: ["oven", "baking-tray", "instant-read-thermometer"],
+      steps: [
+        { zh: { instruction: "烤箱预热至 220°C；三文鱼擦干，厚端若明显隆起则分成厚度接近的两块。", rationale: "充分预热和接近的厚度让鱼肉迅速受热，并减少薄端等待厚端熟透。", stateCue: "烤箱达到设定温度，鱼肉表面无水珠且份量厚薄接近。" }, en: { instruction: "Preheat the oven to 220°C. Pat salmon dry and divide it if one end is much thicker so portions cook at a similar rate.", rationale: "A fully heated oven and similar thickness provide fast heat while keeping thin ends from waiting on thick centers.", stateCue: "The oven reaches temperature, fish surfaces are dry, and portions are similarly thick." }, durationMinutes: 6 },
+        { zh: { instruction: "鱼肉放烤盘，抹橄榄油、盐、黑胡椒和蒜末，柠檬只刨少量皮屑撒在表面。", rationale: "柠檬汁暂不加入，避免酸液在烤前长时间停留并增加表面水分。", stateCue: "调味形成均匀薄层，烤盘没有积液。" }, en: { instruction: "Place the fish on a tray and coat with olive oil, salt, black pepper, garlic, and a little lemon zest only.", rationale: "Holding the juice until later avoids a wet surface and prolonged acid contact before roasting.", stateCue: "Seasoning forms a thin even film and no liquid pools on the tray." }, durationMinutes: 2 },
+        { zh: { instruction: "送入烤箱烤 8 分钟后检查，每次追加 1 至 2 分钟，直到最厚处达到 63°C。", rationale: "厚度比固定分钟更决定完成时间，短间隔复查可减少过熟。", stateCue: "边缘有浅褐色，中心不透明，最厚处达到 63°C。" }, en: { instruction: "Roast for 8 minutes, then check in 1- to 2-minute increments until the thickest point reaches 63°C.", rationale: "Thickness matters more than a fixed minute count, and short rechecks reduce overcooking.", stateCue: "Edges are lightly browned, the center is opaque, and the thickest point reaches 63°C." }, durationMinutes: 10 },
+        { zh: { instruction: "出炉静置 2 分钟，再挤少量柠檬汁；沿纹理轻推确认鱼肉能分层后上桌。", rationale: "最后加入柠檬保留清亮酸香，短暂静置让余温均匀分布。", stateCue: "鱼肉可轻松分层但不干散，表面有光泽，柠檬香清楚。" }, en: { instruction: "Rest for 2 minutes, add a small squeeze of lemon, and gently check that the flesh separates along its flakes before serving.", rationale: "Last-minute lemon stays bright, while a short rest distributes carryover heat.", stateCue: "The fish separates easily without looking dry, remains glossy, and smells distinctly lemony." }, durationMinutes: 2 },
+      ],
+    },
+    references: ["usdaSeafood", "fdaSeafood"],
+    story: seafoodDonenessStory("烤鱼不靠更深颜色判断熟度", "Roasted Fish Does Not Need Deeper Color to Be Done"),
+  },
+  {
+    slug: "steamed-egg",
+    zhName: "家常蒸水蛋",
+    enName: "Home-style Steamed Egg",
+    zhDescription: "蛋液与温水混合并过滤，以温和蒸汽凝成平滑柔嫩的蒸水蛋，表面完整、中心不流动。",
+    enDescription: "Eggs are mixed with warm water, strained, and gently steamed into a smooth tender custard with an intact surface and fully set center.",
+    heroAlt: "Smooth home-style steamed egg custard",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["steam"], formIds: ["side-dish"], dietaryTagIds: ["vegetarian"], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 1, umami: 2 }, aromaIds: ["herbal"], textureIds: ["silky", "soft"], characterIds: ["light", "comforting"] },
+    pairing: { mealRoleIds: ["side"], servingContextIds: ["breakfast", "lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "warm" }, { dimension: "texture", value: "silky" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 10 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("egg", 3, "piece"), input("drinking-water", 225, "ml"), input("soy-sauce", 8), input("scallion", 8), input("cooking-oil", 3)],
+      toolIds: ["steamer", "heatproof-bowl", "fine-strainer", "whisk"],
+      steps: [
+        { zh: { instruction: "鸡蛋充分打散，加入约 40°C 温水缓慢搅匀，撇去表面大泡。", rationale: "温水使蛋液更快接近蒸制温度，缓慢搅拌减少难消散的大气泡。", stateCue: "蛋液颜色均匀，表面只剩少量细泡。" }, en: { instruction: "Beat the eggs thoroughly, slowly mix in water around 40°C, and skim large bubbles from the surface.", rationale: "Warm water brings the mixture closer to steaming temperature, while gentle mixing limits persistent large bubbles.", stateCue: "The mixture is evenly colored with only a few fine bubbles." }, durationMinutes: 4 },
+        { zh: { instruction: "蛋液通过细筛倒入耐热碗，盖上耐热盘或留缝的盖子。", rationale: "过滤去除未打散蛋筋，遮盖可减少锅盖冷凝水滴落破坏表面。", stateCue: "碗中蛋液平整无明显蛋筋，盖子不会接触液面。" }, en: { instruction: "Strain the mixture into a heatproof bowl and cover with a heatproof plate or a lid left slightly vented.", rationale: "Straining removes unmixed chalazae, while covering limits condensation drops that mark the surface.", stateCue: "The mixture is smooth with no visible strands and the cover does not touch it." }, durationMinutes: 2 },
+        { zh: { instruction: "蒸锅水沸后放入碗，调至中小火保持温和蒸汽，蒸 9 分钟后检查中心。", rationale: "猛烈蒸汽会让蛋液内部快速膨胀并形成孔洞，温和蒸汽更易均匀凝固。", stateCue: "表面完整不鼓泡，轻晃时整体颤动但中心没有液体波纹。" }, en: { instruction: "Once the steamer boils, add the bowl, reduce to gentle steam, and cook for 9 minutes before checking the center.", rationale: "Aggressive steam expands the custard unevenly and creates holes; gentle steam sets it more uniformly.", stateCue: "The surface is intact without bubbling; the custard jiggles as one piece with no liquid ripple at the center." }, durationMinutes: 10 },
+        { zh: { instruction: "中心完全凝固后取出，静置 2 分钟，淋酱油和油并撒葱，温热食用。", rationale: "静置利用余温完成结构，最后调味避免在蒸制中形成表面深色斑块。", stateCue: "勺子划开后内部细滑、无流动蛋液，表面只有清亮调味汁。" }, en: { instruction: "When the center is fully set, remove, rest 2 minutes, then add soy sauce, oil, and scallion; serve warm.", rationale: "Resting lets carryover heat finish the structure, and late seasoning avoids dark patches during steaming.", stateCue: "A spoon reveals a fine smooth interior with no liquid egg and only a clear seasoning layer on top." }, durationMinutes: 2 },
+      ],
+    },
+    references: ["madeWithLauSteamedEgg", "chinaSichuanSteamedEgg"],
+    story: {
+      zhTitle: "温和蒸汽形成平滑蛋羹",
+      enTitle: "Gentle Steam Builds a Smooth Egg Custard",
+      zhClaim: "两份独立参考都通过均匀蛋液与受控蒸汽，让蒸蛋形成平滑、柔嫩且完整凝固的结构。",
+      enClaim: "Both independent references use an even egg mixture and controlled steam to produce a smooth, tender custard that is fully set.",
+      zhPractice: "过滤蛋液、遮挡冷凝水并保持温和蒸汽，比单纯延长高火时间更容易控制表面与中心状态。",
+      enPractice: "Straining, shielding the surface from condensation, and maintaining gentle steam control the surface and center better than simply extending aggressive heat.",
+      zhBoundary: "水量、碗的深度和蒸锅火力会改变分钟数，因此以整体颤动且中心无液体波纹为准。",
+      enBoundary: "Water ratio, bowl depth, and steamer strength change the timing, so use a unified jiggle with no liquid ripple at the center as the finish cue.",
+      evidenceLocators: ["Straining, covering, and gentle steaming method", "Water ratio and gentle steaming method"],
+      evidenceNotes: ["Supports straining and gentle covered steam for a smooth fully set custard.", "Independently supports a controlled steam and a non-liquid set center."],
+    },
+  },
+  {
+    slug: "pan-fried-tofu",
+    zhName: "家常香煎豆腐",
+    enName: "Home-style Pan-fried Tofu",
+    zhDescription: "北豆腐擦干后煎至两面金黄，再用蒜、葱和少量酱油薄薄收汁，外层完整、中心柔软。",
+    enDescription: "Firm tofu is dried and browned on both sides, then lightly glazed with garlic, scallion, and soy sauce for an intact crust and soft center.",
+    heroAlt: "Golden pan-fried tofu with scallion and a light glaze",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["pan-fry"], formIds: ["main-dish", "side-dish"], dietaryTagIds: ["vegan"], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["garlicky", "roasted"], textureIds: ["tender", "soft", "saucy"], characterIds: ["rice-friendly", "comforting"] },
+    pairing: { mealRoleIds: ["main", "side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "tender" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 14, totalMinutes: 22, activeMinutes: 20 },
+      yield: { amount: 3, unit: "serving" },
+      inputs: [input("tofu", 450), input("garlic", 8), input("scallion", 15), input("soy-sauce", 20), input("cooking-oil", 22), input("drinking-water", 50, "ml")],
+      toolIds: ["frying-pan", "spatula", "knife"],
+      steps: [
+        { zh: { instruction: "豆腐切约 1.5 厘米厚片，平铺在干净布或厨房纸上，轻压两面至表面干爽。", rationale: "处理表面水分可以减少溅油，并缩短形成金黄外层的时间。", stateCue: "豆腐片边缘完整，手指轻触没有明显水膜。" }, en: { instruction: "Cut tofu into slices about 1.5 cm thick, lay on a clean cloth or paper towel, and gently press both sides dry.", rationale: "Managing surface moisture reduces spatter and shortens the time needed for a golden crust.", stateCue: "Edges remain intact and no obvious water film transfers to a fingertip." }, durationMinutes: 5 },
+        { zh: { instruction: "平底锅中火烧热放油，豆腐留出间距平铺，先不移动煎 4 至 5 分钟。", rationale: "留空隙让蒸汽散出，等待表面定型后豆腐更容易完整翻面。", stateCue: "底面金黄，轻晃锅时豆腐能移动，铲子可顺利滑入。" }, en: { instruction: "Heat oil in a skillet over medium, space the tofu in one layer, and leave it undisturbed for 4 to 5 minutes.", rationale: "Spacing lets steam escape, and waiting for the crust to set makes clean turning easier.", stateCue: "The underside is golden, pieces move with a pan shake, and a spatula slides underneath cleanly." }, durationMinutes: 5 },
+        { zh: { instruction: "逐片翻面再煎 4 分钟，第二面金黄后把豆腐推到锅边，中央炒香蒜末和葱白。", rationale: "先完成两面上色，再加入含水调味料，能保留更多外层口感。", stateCue: "两面都有连续金黄色，蒜香出现但蒜末没有变黑。" }, en: { instruction: "Turn each slice and cook 4 minutes more. Once golden, push tofu to the side and bloom garlic and scallion whites in the center.", rationale: "Completing both browned sides before wet seasoning preserves more surface texture.", stateCue: "Both faces show continuous golden color and the garlic smells fragrant without blackening." }, durationMinutes: 5 },
+        { zh: { instruction: "加入酱油和水，轻推豆腐让汁液均匀接触，煮 2 分钟至只剩薄层汁，撒葱绿。", rationale: "短时间薄收汁让豆腐入味而不把已形成的表面完全泡软。", stateCue: "豆腐片保持完整，汁液薄挂表面，锅底没有明显积水。" }, en: { instruction: "Add soy sauce and water, gently nudge the tofu through the liquid, and cook 2 minutes until only a thin glaze remains; add scallion greens.", rationale: "A brief light reduction seasons the tofu without soaking away the crust.", stateCue: "Slices remain intact, glaze clings lightly, and no obvious liquid pools in the pan." }, durationMinutes: 3 },
+      ],
+    },
+    references: ["justOneCookbookTofu", "omnivorePanFriedTofu"],
+    story: {
+      zhTitle: "先让表面定型，再翻面",
+      enTitle: "Let the Surface Set Before Turning",
+      zhClaim: "两份独立参考都先减少豆腐表面水分、完成煎制上色，再进入酱汁阶段。",
+      enClaim: "Both independent references reduce surface moisture and brown the tofu before moving into a sauce stage.",
+      zhPractice: "豆腐能自然离锅是比固定分钟更有用的翻面提示；如果仍牢固粘住，通常需要再等一会儿。",
+      enPractice: "Clean release is a more useful turning cue than a fixed minute count; if tofu still clings firmly, it usually needs more time.",
+      zhBoundary: "这是一种家庭平底锅技法，并非对豆腐料理传统的完整描述。",
+      enBoundary: "This is a home-skillet technique, not a complete description of tofu traditions.",
+      evidenceLocators: ["Tofu drying, browning, and sauce method", "Pan-fried tofu preparation method"],
+      evidenceNotes: ["Supports drying and browning tofu before sauce is added.", "Independently supports moisture management and waiting for browned release."],
+    },
+  },
+  {
+    slug: "cold-shredded-chicken",
+    zhName: "凉拌手撕鸡",
+    enName: "Cold Shredded Chicken",
+    zhDescription: "鸡胸温和煮熟并彻底降温后手撕，与黄瓜、葱和清爽酸咸汁拌匀，适合冷食。",
+    enDescription: "Chicken breast is gently cooked, fully chilled, hand-shredded, and tossed with cucumber, scallion, and a bright savory dressing for cold service.",
+    heroAlt: "Cold shredded chicken with cucumber and scallion",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["poach", "cold-mix"], formIds: ["cold-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 2, sour: 3, umami: 2, spicy: 1 }, aromaIds: ["garlicky", "herbal"], textureIds: ["tender", "crisp", "juicy"], characterIds: ["refreshing", "appetizing"] },
+    pairing: { mealRoleIds: ["starter", "main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "cold" }, { dimension: "texture", value: "crisp" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 10, processMinutes: 35, totalMinutes: 45, activeMinutes: 20 },
+      yield: { amount: 3, unit: "serving" },
+      inputs: [input("chicken-breast", 420), input("cucumber", 250), input("scallion", 25), input("garlic", 8), input("ginger", 10), input("soy-sauce", 18), input("vinegar", 22), input("cooking-oil", 8), input("fresh-chili", 8, "g", true), input("drinking-water", 900, "ml")],
+      toolIds: ["saucepan", "instant-read-thermometer", "mixing-bowl", "knife"],
+      steps: [
+        { zh: { instruction: "鸡胸厚处片开至厚度接近；与姜和水一同入锅，水应刚好没过鸡肉。", rationale: "厚度接近有利于同步达到安全温度，足量水则让受热更均匀。", stateCue: "鸡胸完全浸没且没有折叠，肉片厚度基本一致。" }, en: { instruction: "Butterfly the thickest part of the chicken to even the thickness. Place with ginger in enough water to cover completely.", rationale: "Similar thickness helps all portions reach a safe temperature together, while full submersion heats evenly.", stateCue: "Chicken is fully submerged without folding and is roughly even in thickness." }, durationMinutes: 5 },
+        { zh: { instruction: "中火加热至锅边出现小泡，转小火保持轻微颤动，不让水猛烈翻滚；煮至最厚处 74°C。", rationale: "温和汆煮降低外层先变柴的风险，温度计明确完成边界。", stateCue: "水面只有零星小泡，鸡肉最厚处达到 74°C且完全不透明。" }, en: { instruction: "Heat until small bubbles appear at the edge, then hold at a bare poach without a hard boil until the thickest part reaches 74°C.", rationale: "Gentle poaching reduces the chance of a dry outer layer, while the thermometer defines completion.", stateCue: "Only occasional bubbles appear; the thickest point is 74°C and fully opaque." }, durationMinutes: 12 },
+        { zh: { instruction: "鸡肉取出放在干净盘中，降至不冒热气后加盖冷藏 15 分钟；黄瓜拍裂切段。", rationale: "先降温再手撕可避免持续散失汁液，也让冷食保持清爽状态。", stateCue: "鸡肉中心已冷却、表面不再冒热气，黄瓜切口脆而多汁。" }, en: { instruction: "Move chicken to a clean plate, let visible steam subside, cover, and chill for 15 minutes. Smash and cut the cucumber.", rationale: "Cooling before shredding limits juice loss and gives the cold dish a refreshing service state.", stateCue: "The chicken center has cooled with no visible steam, and cucumber cuts look crisp and juicy." }, durationMinutes: 18 },
+        { zh: { instruction: "鸡肉顺纹撕成细条，与黄瓜、葱、蒜、酱油、醋、油及可选辣椒轻拌，立即食用。", rationale: "顺纹手撕保留完整纤维，临上桌拌汁则减少黄瓜提前出水。", stateCue: "鸡丝完整湿润，黄瓜仍脆，碗底只有少量清亮调味汁。" }, en: { instruction: "Shred chicken along the grain and gently toss with cucumber, scallion, garlic, soy sauce, vinegar, oil, and optional chili; serve immediately.", rationale: "Shredding with the grain keeps distinct fibers, while last-minute dressing limits cucumber weeping.", stateCue: "Chicken strands are intact and moist, cucumber stays crisp, and only a little clear dressing sits below." }, durationMinutes: 5 },
+      ],
+    },
+    references: ["usdaChicken", "healthCanadaTemperatures"],
+    story: chickenDonenessStory("冷食鸡肉先完成温度核验", "Cold Chicken Still Starts with a Temperature Check"),
+  },
+  {
+    slug: "roasted-vegetables",
+    zhName: "焦香烤时蔬",
+    enName: "Roasted Vegetables",
+    zhDescription: "西兰花、胡萝卜和彩椒分切成合适大小，在宽松烤盘中烤至边缘焦香、中心柔嫩。",
+    enDescription: "Broccoli, carrot, and bell pepper are cut to suit their density and roasted on a roomy tray until browned at the edges and tender within.",
+    heroAlt: "Colorful roasted vegetables with browned edges",
+    taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "western" }, techniqueIds: ["roast"], formIds: ["side-dish"], dietaryTagIds: ["vegan"], browseTagIds: ["vegetable-rich"] },
+    flavor: { tastes: { salty: 1, sweet: 2, umami: 2 }, aromaIds: ["roasted", "herbal"], textureIds: ["crisp", "tender", "juicy"], characterIds: ["light", "appetizing"] },
+    pairing: { mealRoleIds: ["side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "crisp" }] },
+    preparation: {
+      kind: "baking",
+      time: { prepMinutes: 12, processMinutes: 28, totalMinutes: 40, activeMinutes: 15 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("broccoli", 300), input("carrot", 250), input("bell-pepper", 250), input("zucchini", 250), input("extra-virgin-olive-oil", 28), input("salt", 4), input("black-pepper", 2), input("oregano", 2)],
+      toolIds: ["oven", "two-baking-trays", "knife", "mixing-bowl"],
+      steps: [
+        { zh: { instruction: "烤箱预热至 220°C；蔬菜洗后彻底擦干，胡萝卜切细滚刀块，西兰花切小朵，彩椒和西葫芦切较大块。", rationale: "按密度调整大小可以让硬根茎与含水蔬菜在相近时间完成，干燥表面更利于褐变。", stateCue: "蔬菜表面无水珠，胡萝卜块明显小于彩椒和西葫芦。" }, en: { instruction: "Preheat the oven to 220°C. Dry washed vegetables thoroughly; cut carrot into small chunks, broccoli into florets, and pepper and zucchini into larger pieces.", rationale: "Sizing by density lets firm roots and watery vegetables finish together, while dry surfaces brown more readily.", stateCue: "No droplets remain; carrot pieces are visibly smaller than pepper and zucchini." }, durationMinutes: 10 },
+        { zh: { instruction: "蔬菜与油、盐、黑胡椒和牛至拌匀，分在两个烤盘上单层铺开，块与块之间留缝。", rationale: "均匀薄油膜传递热量，宽松铺放让蒸汽离开而不是困在食材之间。", stateCue: "每块蔬菜有薄油光但盘底不积油，绝大多数块不重叠。" }, en: { instruction: "Toss vegetables with oil, salt, black pepper, and oregano. Spread in a single layer across two trays with gaps between pieces.", rationale: "A thin oil film transfers heat, while open spacing lets steam escape instead of collecting between pieces.", stateCue: "Each piece has a light sheen with no oil puddle, and almost no pieces overlap." }, durationMinutes: 4 },
+        { zh: { instruction: "烤 15 分钟后交换烤盘上下位置并翻动蔬菜，继续烤 8 至 12 分钟。", rationale: "中途换位和翻面修正家用烤箱热点，让更多切面接触烤盘。", stateCue: "翻面时底部已有褐色斑点，胡萝卜开始变软但仍有阻力。" }, en: { instruction: "Roast 15 minutes, swap the tray positions, turn the vegetables, and continue for 8 to 12 minutes.", rationale: "Rotating and turning corrects home-oven hot spots and exposes more cut surfaces to the tray.", stateCue: "Brown spots show underneath; carrot has begun to soften but still resists a fork." }, durationMinutes: 25 },
+        { zh: { instruction: "边缘明显焦香、胡萝卜中心可被叉子穿透时出炉，摊开静置 2 分钟再装盘。", rationale: "短暂摊开放散水汽，避免刚出炉的脆边在深碗里迅速回软。", stateCue: "西兰花边缘深褐，彩椒柔软仍成形，胡萝卜熟透，盘面无大量水。" }, en: { instruction: "Remove when edges are well browned and a fork passes through the carrot centers. Leave spread out for 2 minutes before plating.", rationale: "Brief open resting releases steam so crisp edges do not immediately soften in a deep bowl.", stateCue: "Broccoli edges are deep brown, pepper is tender but shaped, carrot is cooked through, and trays show little water." }, durationMinutes: 2 },
+      ],
+    },
+    references: ["seriousEatsRoastedBroccoli", "bbcRoastedVegetables"],
+    story: {
+      zhTitle: "烤蔬菜需要给蒸汽留出口",
+      enTitle: "Roasted Vegetables Need Room for Steam to Leave",
+      zhClaim: "两份独立参考都强调单层铺放与烤至边缘褐变，而不是把蔬菜堆在拥挤烤盘中。",
+      enClaim: "Both independent references emphasize a single layer and browned edges rather than piling vegetables onto a crowded tray.",
+      zhPractice: "如果一个烤盘无法留出空隙，分成两盘比延长时间更能维持烤制而非蒸煮的环境。",
+      enPractice: "If one tray cannot provide gaps, using two trays preserves a roasting environment better than simply extending the time.",
+      zhBoundary: "不同烤箱热点和蔬菜含水量会改变分钟数，因此以褐边和叉子阻力为准。",
+      enBoundary: "Oven hot spots and vegetable moisture change the timing, so browned edges and fork resistance are the deciding cues.",
+      evidenceLocators: ["Tray spacing and browned-edge guidance", "Single-layer roasting method"],
+      evidenceNotes: ["Supports dry, spaced vegetables and browned edges as roasting cues.", "Independently supports uncrowded single-layer roasting to a tender browned finish."],
+    },
+  },
+  {
+    slug: "tomato-egg-soup",
+    zhName: "番茄蛋花汤",
+    enName: "Tomato Egg Drop Soup",
+    zhDescription: "番茄先煮出酸甜汤底，再以细流蛋液形成柔软蛋花，汤清亮、番茄块仍可辨认。",
+    enDescription: "Tomatoes first build a tangy-sweet broth, then a thin stream of egg forms tender ribbons in a clear soup with recognizable tomato pieces.",
+    heroAlt: "Tomato egg drop soup with delicate egg ribbons",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["simmer"], formIds: ["soup"], dietaryTagIds: ["vegetarian"], browseTagIds: ["quick", "one-pot"] },
+    flavor: { tastes: { salty: 2, sour: 2, sweet: 1, umami: 2 }, aromaIds: ["tomato-rich", "herbal"], textureIds: ["brothy", "silky", "soft"], characterIds: ["light", "comforting", "warming"] },
+    pairing: { mealRoleIds: ["soup"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "brothy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 18 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("tomato", 450), input("egg", 3, "piece"), input("scallion", 15), input("cooking-oil", 8), input("salt", 3), input("soy-sauce", 8), input("drinking-water", 900, "ml")],
+      toolIds: ["soup-pot", "mixing-bowl", "ladle", "chopsticks"],
+      steps: [
+        { zh: { instruction: "番茄切小块；鸡蛋打散至颜色均匀但不过度打入大泡，葱白葱绿分开。", rationale: "小块番茄较快出汁，均匀蛋液则更容易形成连续而非斑驳的蛋花。", stateCue: "番茄块大小接近，蛋液无明显蛋白条，表面只有细泡。" }, en: { instruction: "Cut tomatoes into small even pieces. Beat eggs until uniform without whipping in large bubbles, and separate scallion whites from greens.", rationale: "Small tomatoes release juice quickly, while uniform eggs form continuous rather than patchy ribbons.", stateCue: "Tomato pieces are similar in size and the egg has no white streaks or large bubbles." }, durationMinutes: 5 },
+        { zh: { instruction: "汤锅中火放油炒香葱白，加入番茄和一半盐，煮至边缘塌软、锅底出现红色汁液。", rationale: "先用盐帮助番茄出汁，可在加水前建立清晰汤底风味。", stateCue: "约一半番茄失去锐利边角，锅底有连续红色汁液。" }, en: { instruction: "Heat oil in a soup pot over medium, soften scallion whites, then add tomatoes and half the salt. Cook until edges collapse and red juices collect.", rationale: "Early salt helps tomatoes release juice, building a clear flavor base before water is added.", stateCue: "About half the tomato edges have softened and a continuous layer of red juice covers the pot." }, durationMinutes: 4 },
+        { zh: { instruction: "加入水和酱油煮沸，转中火保持轻滚 4 分钟；用勺沿同一方向搅动汤形成缓慢旋流。", rationale: "稳定而非猛烈的流动能托起蛋液形成条带，不把蛋打成细碎泡沫。", stateCue: "汤面持续小滚，番茄软而未全碎，旋流清楚但不飞溅。" }, en: { instruction: "Add water and soy sauce, bring to a boil, then hold a gentle bubble for 4 minutes. Stir in one direction to create a slow current.", rationale: "Steady rather than violent movement carries the egg into ribbons instead of breaking it into foam-like bits.", stateCue: "The soup bubbles gently, tomatoes are soft but recognizable, and the current is visible without splashing." }, durationMinutes: 5 },
+        { zh: { instruction: "蛋液以细流沿锅面绕圈倒入，等待 15 秒再轻推两次；蛋花完全凝固后加余盐和葱绿，立即离火。", rationale: "短暂等待让蛋液先成形，少量推动保留较大的柔软蛋花。", stateCue: "没有流动蛋液，蛋花成薄软条带，汤仍清亮而非浑浊。" }, en: { instruction: "Pour egg in a thin stream around the pot, wait 15 seconds, then nudge only twice. Once fully set, add remaining salt and scallion greens and remove from heat.", rationale: "A short pause lets the egg establish ribbons, while minimal movement preserves tender larger strands.", stateCue: "No liquid egg remains, ribbons are thin and soft, and the broth stays clear rather than cloudy." }, durationMinutes: 3 },
+      ],
+    },
+    references: ["woksTomatoEggSoup", "redHouseTomatoEggSoup"],
+    story: {
+      zhTitle: "蛋花先成形，再轻推",
+      enTitle: "Let Egg Ribbons Form Before Stirring",
+      zhClaim: "两份独立参考都先把番茄煮入汤底，再让蛋液以受控方式进入热汤形成蛋花。",
+      enClaim: "Both independent references cook tomato into the broth first, then introduce egg in a controlled way to form ribbons.",
+      zhPractice: "蛋液入锅后先等待再轻推，比持续快速搅拌更容易留下清楚、柔软的蛋花。",
+      enPractice: "Pausing after the egg enters and then nudging gently preserves clearer, softer ribbons than constant fast stirring.",
+      zhBoundary: "蛋花粗细存在家庭偏好，本配方只说明一种可重复的操作路径。",
+      enBoundary: "Egg-ribbon size is a household preference; this recipe documents one repeatable path only.",
+      evidenceLocators: ["Tomato broth and egg-stream method", "Tomato cooking and egg-ribbon method"],
+      evidenceNotes: ["Supports cooking tomatoes before controlled egg addition.", "Independently supports adding beaten egg to hot tomato broth to form ribbons."],
+    },
+  },
+  {
+    slug: "rice-cooker-chicken-rice",
+    zhName: "电饭煲鸡肉焖饭",
+    enName: "Rice-cooker Chicken Rice",
+    zhDescription: "大米、香菇和鸡腿在电饭煲中同锅焖熟，鸡肉放在米面便于核验，米粒吸收咸鲜锅汁。",
+    enDescription: "Rice, shiitake, and chicken thigh cook together in a rice cooker, with chicken arranged on top for verification and savory juices absorbed by the grains.",
+    heroAlt: "Rice-cooker chicken rice with shiitake and scallion",
+    taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["rice-cook", "braise"], formIds: ["staple"], dietaryTagIds: [], browseTagIds: ["one-pot"] },
+    flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["gingery", "toasty"], textureIds: ["juicy", "soft", "chewy"], characterIds: ["comforting", "hearty", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "rich" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "soft" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 35, totalMinutes: 50, activeMinutes: 18 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("rice", 300), input("chicken-thigh", 450), input("shiitake-mushroom", 180), input("carrot", 120), input("ginger", 10), input("scallion", 20), input("soy-sauce", 28), input("cooking-oil", 10), input("drinking-water", 390, "ml")],
+      toolIds: ["rice-cooker", "instant-read-thermometer", "knife", "mixing-bowl"],
+      steps: [
+        { zh: { instruction: "大米淘洗后沥 5 分钟；鸡腿切 3 厘米块，与一半酱油和姜拌匀，香菇和胡萝卜切丁。", rationale: "沥干后水量更可控，鸡块统一便于同一时间成熟。", stateCue: "米不再滴水，鸡块大小接近，蔬菜丁略小于鸡块。" }, en: { instruction: "Rinse rice and drain for 5 minutes. Cut chicken thigh into 3 cm pieces and mix with half the soy sauce and ginger; dice shiitake and carrot.", rationale: "Draining makes the added water predictable, while even chicken pieces finish together.", stateCue: "Rice no longer drips, chicken pieces are even, and vegetable dice are slightly smaller." }, durationMinutes: 10 },
+        { zh: { instruction: "内胆放米、水、余下酱油和油，搅匀后铺上香菇、胡萝卜，鸡块单层放在最上面。", rationale: "鸡肉不埋入米中，完成后更容易从最厚块核验温度，也减少米粒被反复翻动。", stateCue: "米面平整，配料分布均匀，鸡块不重叠并清楚可见。" }, en: { instruction: "Combine rice, water, remaining soy sauce, and oil in the cooker. Level the surface, add shiitake and carrot, and arrange chicken in one visible layer on top.", rationale: "Keeping chicken above the rice makes the thickest piece accessible for a finish check and avoids repeatedly disturbing the grains.", stateCue: "The rice surface is level, vegetables are even, and chicken pieces remain visible without overlap." }, durationMinutes: 4 },
+        { zh: { instruction: "启动标准煮饭程序；程序结束后立即测最厚鸡块，达到 74°C则盖盖焖 8 分钟。", rationale: "不同电饭煲程序差异大，温度读数比只依赖结束提示音更可重复。", stateCue: "最厚鸡块达到 74°C，米面无游离水，锅盖内有稳定蒸汽。" }, en: { instruction: "Run the standard rice cycle. At completion, immediately check the thickest chicken piece; when it reaches 74°C, close the lid and rest 8 minutes.", rationale: "Rice-cooker programs vary, so a temperature reading transfers better than relying only on the completion chime.", stateCue: "The thickest chicken piece reaches 74°C, no free water sits on the rice, and steady steam remains under the lid." }, durationMinutes: 33 },
+        { zh: { instruction: "打开锅盖先取出两块鸡肉确认中心不透明，再由底向上轻翻米饭，撒葱后趁热分碗。", rationale: "焖后再翻松让水分均匀分布，轻翻避免把米粒压成团。", stateCue: "鸡肉中心不透明，米粒熟透无硬芯、彼此松散，锅底没有生水。" }, en: { instruction: "Open the lid, check two chicken pieces for opaque centers, then gently fold the rice from bottom to top, add scallion, and portion while hot.", rationale: "Fluffing after the rest distributes moisture, while gentle folding keeps the grains from compacting.", stateCue: "Chicken centers are opaque; rice has no hard core, separates into grains, and no raw water remains below." }, durationMinutes: 3 },
+      ],
+    },
+    references: ["usdaChicken", "healthCanadaTemperatures"],
+    story: chickenDonenessStory("电饭煲提示音之后还要看鸡肉状态", "After the Chime, Check the Chicken State"),
+  },
+  {
+    slug: "japanese-beef-potato-simmer",
+    zhName: "日式牛肉土豆煮",
+    enName: "Japanese Beef and Potato Simmer",
+    zhDescription: "薄切牛肉、土豆和洋葱在咸甜汁中温和煮熟，土豆完整柔软，汤汁轻薄而不黏重。",
+    enDescription: "Thin beef, potato, and onion gently simmer in a savory-sweet broth until the potatoes are tender yet intact and the liquid remains light.",
+    heroAlt: "Japanese beef and potato simmer with onion and carrot",
+    taxonomy: { origin: { countryId: "japan" }, cuisine: { cuisineId: "japanese" }, techniqueIds: ["simmer"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["one-pot"] },
+    flavor: { tastes: { salty: 2, sweet: 2, umami: 3 }, aromaIds: ["toasty"], textureIds: ["tender", "soft", "brothy"], characterIds: ["comforting", "warming", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main", "side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["japanese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "soft" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 30, totalMinutes: 45, activeMinutes: 22 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("beef-lean", 320), input("potato", 550), input("onion", 220), input("carrot", 150), input("soy-sauce", 35), input("granulated-sugar", 12), input("cooking-oil", 10), input("drinking-water", 500, "ml")],
+      toolIds: ["heavy-pot", "drop-lid", "knife"],
+      steps: [
+        { zh: { instruction: "牛肉逆纹切薄片；土豆切 4 厘米块并冲去表面淀粉，洋葱切宽条，胡萝卜切小滚刀块。", rationale: "牛肉薄片适合短时间熟成，较大的土豆块则在煮软后仍能保持形状。", stateCue: "牛肉片可轻松展开，土豆冲洗水基本清澈且边角完整。" }, en: { instruction: "Slice beef thinly across the grain. Cut potato into 4 cm chunks and rinse surface starch; slice onion broadly and carrot into smaller chunks.", rationale: "Thin beef cooks briefly, while larger potatoes retain shape after becoming tender.", stateCue: "Beef slices unfold easily and the potato rinse runs mostly clear with intact edges." }, durationMinutes: 10 },
+        { zh: { instruction: "锅中火放油炒洋葱至略透明，加入牛肉拨散，肉片大半变色后立刻进入下一步。", rationale: "牛肉只需先分散并去除生红，之后还会在汤汁中继续成熟。", stateCue: "洋葱柔软，牛肉片彼此分开且只剩少量粉红。" }, en: { instruction: "Heat oil over medium, soften onion until translucent, then separate the beef slices and move on once most raw color disappears.", rationale: "The beef only needs separation and an initial color change because it continues cooking in broth.", stateCue: "Onion is soft and beef slices are separate with only a little pink remaining." }, durationMinutes: 5 },
+        { zh: { instruction: "加入土豆、胡萝卜、水、糖和一半酱油，煮沸后撇去浮沫，盖落盖保持小滚 15 分钟。", rationale: "落盖让较少汤汁持续接触食材，温和小滚则减少土豆边角碰碎。", stateCue: "汤面稳定冒小泡，落盖轻微颤动，土豆边角仍清楚。" }, en: { instruction: "Add potato, carrot, water, sugar, and half the soy sauce. Bring to a boil, skim, cover with a drop lid, and maintain a gentle bubble for 15 minutes.", rationale: "A drop lid circulates a modest amount of broth, while a gentle bubble limits damage to potato edges.", stateCue: "Small bubbles remain steady, the drop lid trembles lightly, and potato edges stay defined." }, durationMinutes: 18 },
+        { zh: { instruction: "加入余下酱油，再煮 5 至 8 分钟；竹签能穿透土豆中心但薯块不散时关火，静置 5 分钟。", rationale: "后段补酱油可保留更清楚的咸香，离火静置让汤汁继续均匀接触食材。", stateCue: "土豆中心无硬芯且保持块状，汤汁清亮，只薄薄覆盖锅底。" }, en: { instruction: "Add remaining soy sauce and simmer 5 to 8 minutes more. Turn off heat when a skewer passes through potato centers without breaking the chunks; rest 5 minutes.", rationale: "Later soy sauce keeps its aroma clearer, and off-heat resting continues to distribute the light broth.", stateCue: "Potatoes have no hard core yet stay intact, and clear broth only lightly covers the pot bottom." }, durationMinutes: 12 },
+      ],
+    },
+    references: ["justOneCookbookNikujaga", "chopstickNikujaga"],
+    story: {
+      type: "place-food-culture",
+      zhTitle: "日式肉土豆煮的完成状态",
+      enTitle: "The Finish State of Japanese Meat-and-Potato Simmer",
+      zhClaim: "两份独立的 nikujaga 参考都以肉、土豆和洋葱在咸甜汤汁中煮熟为核心，并以土豆柔软完整为关键完成状态。",
+      enClaim: "Both independent nikujaga references center on meat, potato, and onion simmered in a savory-sweet broth, with tender intact potato as a key finish state.",
+      zhPractice: "大块土豆、温和小滚和最后静置共同减少边角散碎，也让少量汤汁均匀接触食材。",
+      enPractice: "Large potato pieces, a gentle bubble, and a final rest together limit broken edges and distribute a modest broth.",
+      zhBoundary: "本配方是家常版本，不声称代表唯一配料组合、地区版本或权威标准。",
+      enBoundary: "This is a household version and does not claim a sole ingredient set, regional form, or authoritative standard.",
+      evidenceLocators: ["Nikujaga ingredient identity and simmer method", "Beef-potato simmer method"],
+      evidenceNotes: ["Supports the bounded dish identity and tender-potato simmer state.", "Independently supports the meat, potato, onion, and light-broth preparation pattern."],
+    },
+  },
+  {
+    slug: "korean-kimchi-fried-rice",
+    zhName: "韩式泡菜炒饭",
+    enName: "Korean Kimchi Fried Rice",
+    zhDescription: "泡菜先炒至水分收紧、香气集中，再加入冷米饭和辣椒酱炒散，成品粒粒分明而酸辣。",
+    enDescription: "Kimchi is cooked until its moisture tightens and aroma concentrates before cold rice and gochujang are added for distinct, tangy-spicy grains.",
+    heroAlt: "Korean kimchi fried rice with distinct red grains",
+    taxonomy: { origin: { countryId: "south-korea" }, cuisine: { cuisineId: "korean" }, techniqueIds: ["stir-fry"], formIds: ["staple"], dietaryTagIds: [], browseTagIds: ["quick", "one-pot"] },
+    flavor: { tastes: { salty: 3, sour: 3, spicy: 3, umami: 3 }, aromaIds: ["fermented", "toasty", "garlicky"], textureIds: ["chewy", "crisp"], characterIds: ["appetizing", "comforting", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["korean"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "chewy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 8, processMinutes: 10, totalMinutes: 18, activeMinutes: 18 },
+      yield: { amount: 2, unit: "serving" },
+      inputs: [input("cooked-rice", 450), input("kimchi", 220), input("gochujang", 18), input("scallion", 20), input("cooking-oil", 16), input("egg", 2, "piece", true)],
+      toolIds: ["wok", "spatula", "frying-pan"],
+      steps: [
+        { zh: { instruction: "冷米饭用手或饭勺拨散大块；泡菜剪成小块并保留 30 毫升泡菜汁，葱白葱绿分开。", rationale: "先拨散米饭可减少入锅后为拆团而过度翻炒，分开泡菜汁便于控制湿度。", stateCue: "米饭没有大于核桃的结块，泡菜块大小均匀且汁液单独量好。" }, en: { instruction: "Break large clumps in cold rice. Cut kimchi into small pieces, reserve 30 ml juice, and separate scallion whites and greens.", rationale: "Pre-loosening rice prevents excessive stirring in the pan, while reserved juice gives deliberate moisture control.", stateCue: "No rice clump is larger than a walnut; kimchi pieces are even and the juice is measured separately." }, durationMinutes: 5 },
+        { zh: { instruction: "炒锅中高火放油，先炒葱白和泡菜 3 分钟，直到锅底水汽明显减少、泡菜边缘略焦。", rationale: "泡菜先收紧水分并产生焦香，米饭加入后才不会被大量汁液焖软。", stateCue: "蒸汽从浓变薄，泡菜颜色加深，锅底没有明显积汁。" }, en: { instruction: "Heat oil in a wok over medium-high and cook scallion whites with kimchi for 3 minutes until steam subsides and edges lightly char.", rationale: "Concentrating kimchi first prevents its liquid from steaming the rice once added.", stateCue: "Steam thins out, kimchi deepens in color, and no obvious juice pools below." }, durationMinutes: 3 },
+        { zh: { instruction: "加入米饭，铲压结块并不断翻散；米粒热透后加入辣椒酱和少量泡菜汁，炒至颜色均匀。", rationale: "先让米饭松散升温，再少量补入调味液，可以控制黏度和咸辣浓度。", stateCue: "米粒彼此分开、均匀变红，锅底只有薄油膜而无湿汁。" }, en: { instruction: "Add rice, press apart clumps, and toss until hot. Add gochujang and a little reserved kimchi juice, then stir-fry until evenly colored.", rationale: "Heating and loosening rice before measured liquid controls both stickiness and seasoning intensity.", stateCue: "Grains separate and turn evenly red, with only a thin oil film and no wet sauce in the wok." }, durationMinutes: 5 },
+        { zh: { instruction: "尝味后只按需补泡菜汁，撒葱绿出锅；若加鸡蛋，另锅煎至蛋白完全凝固后盖在饭上。", rationale: "最后按状态调整避免一次加入过多咸酸汁，鸡蛋分锅也不干扰米饭的干爽度。", stateCue: "炒饭松散无积水，酸辣平衡；可选鸡蛋蛋白无流动部分。" }, en: { instruction: "Taste and add reserved juice only if needed, then finish with scallion greens. If using eggs, fry separately until whites are fully set and place on top.", rationale: "Late adjustment avoids excess salty-acid liquid, and a separate egg pan preserves the rice texture.", stateCue: "Rice remains loose without pooling liquid and tastes balanced; optional egg whites have no liquid areas." }, durationMinutes: 5 },
+      ],
+    },
+    references: ["koreanBapsangKimchiRice", "maangchiKimchiRice"],
+    story: {
+      type: "place-food-culture",
+      zhTitle: "泡菜先炒，米饭后入",
+      enTitle: "Kimchi First, Rice Second",
+      zhClaim: "两份独立的 kimchi-bokkeumbap 参考都先在锅中处理泡菜，再加入熟米饭完成炒制。",
+      enClaim: "Both independent kimchi-bokkeumbap references cook the kimchi in the pan before adding cooked rice to finish the stir-fry.",
+      zhPractice: "先观察泡菜水汽从浓转薄，再加入拨散冷饭，能减少米饭被汁液焖成团。",
+      enPractice: "Waiting for kimchi steam to thin before adding loosened cold rice reduces the chance of wet, clumped grains.",
+      zhBoundary: "泡菜成熟度、辣度和配料会变化；本配方不把单一组合称为唯一正宗版本。",
+      enBoundary: "Kimchi age, heat, and additions vary; this recipe does not call one combination the sole authentic version.",
+      evidenceLocators: ["Kimchi-first stir-fry sequence", "Kimchi-bokkeumbap cooking method"],
+      evidenceNotes: ["Supports frying kimchi before cooked rice is added.", "Independently supports the kimchi-first, rice-second sequence."],
+    },
+  },
+  {
+    slug: "vietnamese-lemongrass-chicken",
+    zhName: "越式香茅鸡",
+    enName: "Vietnamese Lemongrass Chicken",
+    zhDescription: "鸡腿肉以香茅、蒜、鱼露和青柠调味后快速煎炒，焦香边缘衬出明亮草本气息。",
+    enDescription: "Chicken thigh is seasoned with lemongrass, garlic, fish sauce, and lime, then quickly seared for browned edges against bright herbal aroma.",
+    heroAlt: "Vietnamese lemongrass chicken with browned edges and herbs",
+    taxonomy: { origin: { countryId: "vietnam" }, cuisine: { cuisineId: "vietnamese" }, techniqueIds: ["sear", "stir-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
+    flavor: { tastes: { salty: 3, sweet: 1, sour: 2, umami: 3 }, aromaIds: ["herbal", "citrusy", "garlicky"], textureIds: ["juicy", "tender"], characterIds: ["appetizing", "rice-friendly"] },
+    pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["vietnamese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 27, totalMinutes: 42, activeMinutes: 25 },
+      yield: { amount: 3, unit: "serving" },
+      inputs: [input("chicken-thigh", 500), input("lemongrass", 30), input("garlic", 10), input("fish-sauce", 24), input("lime", 1, "piece"), input("granulated-sugar", 10), input("cooking-oil", 15), input("fresh-chili", 8, "g", true), input("cilantro", 15, "g", true)],
+      toolIds: ["frying-pan", "mixing-bowl", "instant-read-thermometer", "knife"],
+      steps: [
+        { zh: { instruction: "香茅去硬外层，只取柔嫩下段切细；鸡腿切 3 厘米块并擦干。", rationale: "细切嫩香茅减少纤维感，干燥且均匀的鸡块更易形成焦香边缘。", stateCue: "香茅碎细小柔软，鸡块大小接近且表面无水膜。" }, en: { instruction: "Remove tough lemongrass layers and finely chop the tender lower stalk. Cut chicken thigh into 3 cm pieces and pat dry.", rationale: "Finely cut tender lemongrass limits fibrous bites, while dry even chicken browns more readily.", stateCue: "Lemongrass is fine and tender; chicken pieces are even with no moisture film." }, durationMinutes: 8 },
+        { zh: { instruction: "鸡肉与香茅、蒜、鱼露、糖和一半青柠汁拌匀，室温腌 15 分钟。", rationale: "短时间让表面调味均匀，又避免湿腌料长时间阻碍煎制上色。", stateCue: "调味薄薄覆盖每块鸡肉，碗底没有大量游离液体。" }, en: { instruction: "Mix chicken with lemongrass, garlic, fish sauce, sugar, and half the lime juice; marinate at room temperature for 15 minutes.", rationale: "A short rest distributes surface seasoning without leaving a wet marinade to obstruct browning for too long.", stateCue: "Seasoning lightly coats every piece with little free liquid at the bottom." }, durationMinutes: 15 },
+        { zh: { instruction: "平底锅中高火放油，鸡块抖去多余腌汁后单层入锅，先不移动煎 3 分钟，再翻炒。", rationale: "去掉滴落腌汁并留出锅面空间，可减少蒸汽并形成褐色边缘。", stateCue: "接触锅面的一侧呈深金黄，鸡块能自然离锅，锅底无大量水。" }, en: { instruction: "Heat oil over medium-high. Shake excess marinade from the chicken, arrange in one layer, leave for 3 minutes, then turn and toss.", rationale: "Removing dripping marinade and leaving pan space limits steam and builds browned edges.", stateCue: "The pan side is deep golden, pieces release naturally, and no large pool of water forms." }, durationMinutes: 5 },
+        { zh: { instruction: "转中火继续炒至最厚处 74°C；离火加入余下青柠汁和可选辣椒、香菜，翻匀上桌。", rationale: "温度确认后停止加热，最后加入酸和香草可以保留明亮香气。", stateCue: "最厚鸡块达到 74°C、中心不透明，青柠与香茅气味清晰不焦苦。" }, en: { instruction: "Reduce to medium and continue until the thickest piece reaches 74°C. Off heat, add remaining lime and optional chili and cilantro, then toss and serve.", rationale: "Stopping after the temperature check and adding acid and herbs last preserves their bright aroma.", stateCue: "The thickest piece reaches 74°C with an opaque center; lime and lemongrass smell vivid, not burnt." }, durationMinutes: 7 },
+      ],
+    },
+    references: ["usdaChicken", "healthCanadaTemperatures"],
+    story: chickenDonenessStory("香茅焦香之后，用最厚块判断完成", "After Browning, Judge the Thickest Piece"),
+  },
+  {
+    slug: "mexican-chicken-fajitas",
+    zhName: "墨西哥风味鸡肉法希塔",
+    enName: "Mexican Chicken Fajitas",
+    zhDescription: "鸡胸、彩椒和洋葱分段煎炒，以青柠、孜然和红椒粉调味，装入温热玉米饼即食。",
+    enDescription: "Chicken breast, bell pepper, and onion are seared in stages with lime, cumin, and paprika, then served in warm corn tortillas.",
+    heroAlt: "Chicken fajitas with peppers, onion, lime, and corn tortillas",
+    taxonomy: { origin: { countryId: "mexico" }, cuisine: { cuisineId: "mexican" }, techniqueIds: ["sear", "stir-fry"], formIds: ["main-dish", "staple"], dietaryTagIds: [], browseTagIds: ["quick", "vegetable-rich"] },
+    flavor: { tastes: { salty: 2, sour: 2, umami: 2, spicy: 1 }, aromaIds: ["spiced", "citrusy", "roasted"], textureIds: ["juicy", "crisp", "chewy"], characterIds: ["appetizing", "hearty"] },
+    pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["mexican"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "crisp" }] },
+    preparation: {
+      kind: "cooking",
+      time: { prepMinutes: 15, processMinutes: 12, totalMinutes: 27, activeMinutes: 27 },
+      yield: { amount: 4, unit: "serving" },
+      inputs: [input("chicken-breast", 450), input("bell-pepper", 350), input("onion", 200), input("corn-tortilla", 8, "piece"), input("lime", 2, "piece"), input("cumin", 3), input("paprika", 3), input("garlic", 8), input("cooking-oil", 18), input("salt", 4), input("fresh-chili", 10, "g", true)],
+      toolIds: ["frying-pan", "instant-read-thermometer", "knife", "tongs"],
+      steps: [
+        { zh: { instruction: "鸡胸逆纹切 1 厘米条并擦干，与孜然、红椒粉、蒜、盐和一半青柠汁拌匀；彩椒洋葱切宽条。", rationale: "统一鸡条缩短成熟时间差，蔬菜宽条在高温下更能保留脆度。", stateCue: "鸡条大小接近、表面只有薄调味层，蔬菜条宽度均匀。" }, en: { instruction: "Cut chicken across the grain into 1 cm strips and pat dry. Toss with cumin, paprika, garlic, salt, and half the lime; cut peppers and onion into broad strips.", rationale: "Even chicken strips narrow the doneness gap, while broad vegetables retain more crispness over high heat.", stateCue: "Chicken pieces are similar with only a thin seasoning coat, and vegetable strips are even." }, durationMinutes: 10 },
+        { zh: { instruction: "大平底锅中高火放一半油，鸡条单层煎炒，边缘上色且最厚条达到 74°C后盛出。", rationale: "鸡肉独立完成并测最厚条，可避免为等待蔬菜或拼色而继续加热。", stateCue: "鸡条有褐色边缘、中心不透明，最厚处达到 74°C。" }, en: { instruction: "Heat half the oil in a large skillet over medium-high. Cook chicken in one layer until browned at the edges and 74°C at the thickest strip; remove.", rationale: "Finishing and checking chicken separately avoids continued heating while waiting for vegetables or color.", stateCue: "Strips have browned edges and opaque centers, and the thickest reaches 74°C." }, durationMinutes: 5 },
+        { zh: { instruction: "原锅补余油，洋葱先炒 2 分钟，再加入彩椒和可选辣椒，大火炒至边缘焦香、中心仍脆。", rationale: "洋葱先入锅补偿其较长软化时间，让彩椒保留更清楚口感。", stateCue: "洋葱半透明带焦边，彩椒颜色鲜亮、弯曲时仍有阻力。" }, en: { instruction: "Add remaining oil, cook onion for 2 minutes, then add bell pepper and optional chili; cook until edges char while centers stay crisp.", rationale: "Giving onion a head start offsets its longer softening time and preserves the peppers' distinct bite.", stateCue: "Onion is translucent with charred edges; peppers stay vivid and resist bending." }, durationMinutes: 5 },
+        { zh: { instruction: "放回鸡肉翻匀 30 秒，离火挤余下青柠汁；玉米饼另锅逐张加热至柔软，包入鸡肉蔬菜。", rationale: "短促合炒避免重复煮鸡，玉米饼单独温热后更柔软、不易折裂。", stateCue: "鸡肉热透仍湿润，蔬菜有脆感，玉米饼可折叠而不开裂。" }, en: { instruction: "Return chicken for a 30-second toss, remove from heat, and add remaining lime. Warm tortillas separately until pliable, then fill with chicken and vegetables.", rationale: "A brief reunion avoids recooking the chicken, while separately warmed tortillas fold without cracking.", stateCue: "Chicken is hot and moist, vegetables retain bite, and tortillas fold cleanly without splitting." }, durationMinutes: 4 },
+      ],
+    },
+    references: ["usdaChicken", "healthCanadaTemperatures"],
+    story: chickenDonenessStory("分段煎炒，最厚鸡条给出完成节点", "Staged Searing, with the Thickest Strip as the Finish Cue"),
+  },
+] as const satisfies readonly DishSpec[];
+
+type BuiltDishContent = {
+  item: DishItem;
+  image: RecipeImage;
+  sources: [Source, Source];
+  evidence: [Evidence, Evidence];
+  story: Story;
+  researchRecord: ResearchRecord;
+  contentPackage: LocalContentPackageV1;
+};
+
+const buildDishContent = (spec: DishSpec): BuiltDishContent => {
+  const storyId = `${spec.slug}-technique-story`;
+  const sourceIds: [string, string] = [`${spec.slug}-source-a`, `${spec.slug}-source-b`];
+  const evidenceIds: [string, string] = [`${spec.slug}-evidence-a`, `${spec.slug}-evidence-b`];
+  const sourceSpecs = spec.references.map((key) => referenceCatalog[key]) as [ReferenceSpec, ReferenceSpec];
+  const sources = sourceSpecs.map((sourceSpec, index) => m11ReferenceSource({
+    id: sourceIds[index],
+    title: sourceSpec.title,
+    publisherOrInstitution: sourceSpec.publisherOrInstitution,
+    url: sourceSpec.url,
+    ...(sourceSpec.type ? { type: sourceSpec.type } : {}),
+    editorialNotes: sourceSpec.editorialNotes,
+  })) as [Source, Source];
+  const evidence = sources.map((source, index) => m11Evidence({
+    id: evidenceIds[index],
+    sourceId: source.id,
+    locator: spec.story.evidenceLocators[index],
+    editorialNote: spec.story.evidenceNotes[index],
+  })) as [Evidence, Evidence];
+  const [firstStep, ...remainingSteps] = spec.preparation.steps;
+  const steps: DishItem["preparation"]["steps"] = [
+    bilingualStep(1, firstStep.zh, firstStep.en, firstStep.durationMinutes),
+    ...remainingSteps.map((step, index) => bilingualStep(index + 2, step.zh, step.en, step.durationMinutes)),
+  ];
+  const image = m11OriginalHero(spec.slug, spec.heroAlt);
+  const item: DishItem = {
+    id: spec.slug,
+    slug: spec.slug,
+    itemType: "dish",
+    content: bilingual(
+      { name: spec.zhName, description: spec.zhDescription },
+      { name: spec.enName, description: spec.enDescription },
+    ),
+    taxonomy: {
+      ...(spec.taxonomy.origin ? { origin: { ...spec.taxonomy.origin } } : {}),
+      ...(spec.taxonomy.cuisine ? { cuisine: { ...spec.taxonomy.cuisine } } : {}),
+      techniqueIds: [...spec.taxonomy.techniqueIds],
+      formIds: [...spec.taxonomy.formIds],
+      dietaryTagIds: [...spec.taxonomy.dietaryTagIds],
+      browseTagIds: [...spec.taxonomy.browseTagIds],
+    },
+    flavor: {
+      tastes: { ...spec.flavor.tastes },
+      ...(spec.flavor.aromaIds ? { aromaIds: [...spec.flavor.aromaIds] } : {}),
+      ...(spec.flavor.textureIds ? { textureIds: [...spec.flavor.textureIds] } : {}),
+      ...(spec.flavor.characterIds ? { characterIds: [...spec.flavor.characterIds] } : {}),
+    },
+    images: { availability: "available", references: { primaryImageId: image.id, imageIds: [image.id] } },
+    storyIds: [storyId],
+    pairing: {
+      mealRoleIds: [...spec.pairing.mealRoleIds],
+      servingContextIds: [...spec.pairing.servingContextIds],
+      cuisineIds: [...spec.pairing.cuisineIds],
+      facets: [...spec.pairing.facets],
+    },
+    publication: { status: "published" },
+    nutrition: { applicability: "applicable", source: "ingredient-derived" },
+    cost: { source: "ingredient-derived", currency: "CNY" },
+    preparation: {
+      kind: spec.preparation.kind,
+      time: { ...spec.preparation.time },
+      yield: { ...spec.preparation.yield },
+      inputs: spec.preparation.inputs.map((ingredient) => ({ ...ingredient })),
+      toolIds: [...spec.preparation.toolIds],
+      steps,
+    },
+  };
+  const story = m11Story({
+    id: storyId,
+    itemId: item.id,
+    type: spec.story.type ?? "technique",
+    kind: "documented-fact",
+    evidenceIds,
+    zh: {
+      title: spec.story.zhTitle,
+      dek: "一条可核验的技法说明，把固定分钟转换为家庭厨房可观察的完成状态。",
+      firstHeading: "来源支持的操作节点",
+      firstParagraphs: [spec.story.zhClaim, spec.story.zhPractice],
+      secondHeading: "适用边界",
+      secondParagraphs: [spec.story.zhBoundary],
+      claim: spec.story.zhClaim,
+    },
+    en: {
+      title: spec.story.enTitle,
+      dek: "A verifiable technique note that translates fixed timing into an observable home-kitchen finish state.",
+      firstHeading: "Source-supported checkpoint",
+      firstParagraphs: [spec.story.enClaim, spec.story.enPractice],
+      secondHeading: "Scope and boundary",
+      secondParagraphs: [spec.story.enBoundary],
+      claim: spec.story.enClaim,
+    },
+  });
+  const researchRecord = m11ResearchRecord({
+    itemId: item.id,
+    templateId: "dish-dessert",
+    sourceIds,
+    claim: spec.story.enClaim,
+    evidenceIds,
+  });
+  return {
+    item,
+    image,
+    sources,
+    evidence,
+    story,
+    researchRecord,
+    contentPackage: defineStandaloneContentPackage(item),
+  };
+};
+
+const builtDishContent = dishSpecs.map(buildDishContent);
+
+export const batchADishItems = builtDishContent.map(({ item }) => item);
+export const batchADishImages = builtDishContent.map(({ image }) => image);
+export const batchADishSources = builtDishContent.flatMap(({ sources }) => sources);
+export const batchADishEvidence = builtDishContent.flatMap(({ evidence }) => evidence);
+export const batchADishStories = builtDishContent.map(({ story }) => story);
+export const batchADishResearchRecords = builtDishContent.map(({ researchRecord }) => researchRecord);
+export const batchADishContentPackages = builtDishContent.map(({ contentPackage }) => contentPackage);

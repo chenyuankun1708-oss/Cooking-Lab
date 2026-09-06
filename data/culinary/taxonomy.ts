@@ -20,6 +20,21 @@ export const culinaryForms = createRegistry([
   { id: "yogurt-drink", label: { "zh-CN": "酸奶饮品", en: "Yogurt drink" } },
   { id: "fortified-wine", label: { "zh-CN": "加强葡萄酒", en: "Fortified wine" } },
   { id: "sake", label: { "zh-CN": "清酒", en: "Sake" } },
+  { id: "custard-dessert", label: { "zh-CN": "奶蛋甜品", en: "Custard dessert" } },
+  { id: "sago-dessert", label: { "zh-CN": "西米甜品", en: "Sago dessert" } },
+  { id: "pastry", label: { "zh-CN": "酥点", en: "Pastry" } },
+  { id: "sweet-soup", label: { "zh-CN": "糖水", en: "Sweet soup" } },
+  { id: "powdered-green-tea", label: { "zh-CN": "粉末绿茶", en: "Powdered green tea" } },
+  { id: "oolong-tea", label: { "zh-CN": "乌龙茶", en: "Oolong tea" } },
+  { id: "black-tea-profile", label: { "zh-CN": "红茶产品档案", en: "Black tea profile" } },
+  { id: "pour-over-coffee", label: { "zh-CN": "手冲咖啡", en: "Pour-over coffee" } },
+  { id: "milk-espresso", label: { "zh-CN": "奶咖", en: "Milk espresso" } },
+  { id: "coffee-profile", label: { "zh-CN": "咖啡产品档案", en: "Coffee profile" } },
+  { id: "carbonated-tea-drink", label: { "zh-CN": "茶味碳酸饮品", en: "Carbonated tea drink" } },
+  { id: "citrus-tea", label: { "zh-CN": "柑橘茶饮", en: "Citrus tea" } },
+  { id: "iced-black-tea", label: { "zh-CN": "冰红茶饮", en: "Iced black tea" } },
+  { id: "tea-coffee-blend", label: { "zh-CN": "茶咖混合饮", en: "Tea-coffee blend" } },
+  { id: "wine-profile", label: { "zh-CN": "葡萄酒产品档案", en: "Wine profile" } },
 ] as const);
 
 export const servingContexts = createRegistry([

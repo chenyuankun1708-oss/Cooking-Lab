@@ -6,12 +6,15 @@ import { createContentVersion } from "@/lib/content-version";
 import type { PublishingLocalizationVersion } from "@/lib/publishing-governance";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
 import type { Ingredient } from "@/types/ingredient";
+import type { Story } from "@/types/culinary";
 
 export function createPublishingLocalizationVersions(
   contentPackages: readonly LocalContentPackageV1[],
   ingredients: readonly Ingredient[],
+  standaloneStories: readonly Story[] = [],
 ): PublishingLocalizationVersion[] {
   const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
+  const standaloneStoryById = new Map(standaloneStories.map((story) => [story.id, story]));
   return contentPackages.map((contentPackage): PublishingLocalizationVersion => {
     const path = contentPackage.sourceKind === "legacy-recipe"
       ? "adapted-recipe" as const
@@ -26,7 +29,15 @@ export function createPublishingLocalizationVersions(
     const chineseItemCopy = contentPackage.item.content.entries.find((entry) => entry.locale === "zh-CN");
     const englishStories = contentPackage.item.storyIds.map((storyId) => ({
       storyId,
-      translation: storyTranslations[storyId],
+      translation: contentPackage.sourceKind === "standalone"
+        ? (() => {
+            const story = standaloneStoryById.get(storyId);
+            return story && {
+              story: story.content.entries.find((entry) => entry.locale === "en"),
+              claims: story.claims.map((claim) => claim.content.entries.find((entry) => entry.locale === "en")),
+            };
+          })()
+        : storyTranslations[storyId],
     }));
     const ingredientIds = "inputs" in contentPackage.item.preparation
       ? contentPackage.item.preparation.inputs.map((input) => input.ingredientId)

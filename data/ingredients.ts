@@ -262,6 +262,15 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality" | "nutritionProvenanc
   { id: "sweetened-condensed-milk", name: "甜炼乳", aliases: ["炼乳"], category: "dairy", nutritionPer100g: nutrition(321, 7.9, 8.7, 5.5, 54.4, 54.4, 0, 127, 44), defaultUnit: "g", approximateUnitWeight: { tbsp: 20, tsp: 7, ml: 1.3 }, estimatedPricePer100g: 2.8, tags: ["vegetarian"] },
   { id: "ice", name: "食用冰块", aliases: ["冰块"], category: "seasoning", nutritionPer100g: nutrition(0, 0, 0, 0, 0, 0, 0, 0), defaultUnit: "g", estimatedPricePer100g: 0.05, tags: ["vegan"] },
   { id: "dried-hibiscus", name: "干洛神花", aliases: ["干玫瑰茄"], category: "seasoning", nutritionPer100g: nutrition(49, 1, 0.6, 0.2, 12, 0, 0, 8), defaultUnit: "g", estimatedPricePer100g: 10, tags: ["vegan"] },
+  { id: "egg-white", name: "蛋清", aliases: ["鸡蛋清"], category: "protein", nutritionPer100g: nutrition(52, 10.9, 0.2, 0, 0.7, 0.7, 0, 166), defaultUnit: "g", approximateUnitWeight: { piece: 33 }, estimatedPricePer100g: 1.6, tags: ["vegetarian", "high-protein"] },
+  { id: "pomelo", name: "柚子果肉", aliases: ["柚子"], category: "vegetable", nutritionPer100g: nutrition(38, 0.8, 0, 0, 9.6, 7.5, 1, 1), defaultUnit: "g", estimatedPricePer100g: 1.8, tags: ["vegan", "fruit"] },
+  { id: "tapioca-pearl", name: "干西米", aliases: ["西米"], category: "grain", nutritionPer100g: nutrition(358, 0.2, 0, 0, 88.7, 3.4, 0.9, 1), defaultUnit: "g", estimatedPricePer100g: 1.8, tags: ["vegan", "staple"] },
+  { id: "black-sesame", name: "黑芝麻", aliases: [], category: "protein", nutritionPer100g: nutrition(573, 17.7, 49.7, 7, 23.4, 0.3, 11.8, 11), defaultUnit: "g", estimatedPricePer100g: 3.2, tags: ["vegan"] },
+  { id: "rice-flour", name: "粘米粉", aliases: ["大米粉"], category: "grain", nutritionPer100g: nutrition(366, 6, 1.4, 0.4, 80.1, 0.1, 2.4, 0), defaultUnit: "g", estimatedPricePer100g: 1.2, tags: ["vegan", "staple"] },
+  { id: "matcha-powder", name: "抹茶粉", aliases: ["碾茶粉"], category: "seasoning", nutritionPer100g: nutrition(324, 30.6, 5.3, 0.7, 38.5, 0, 34, 6), defaultUnit: "g", estimatedPricePer100g: 35, tags: ["vegan"] },
+  { id: "tieguanyin-tea-leaf", name: "铁观音茶叶", aliases: [], category: "seasoning", nutritionPer100g: nutrition(300, 20, 5, 1, 50, 0, 20, 5), defaultUnit: "g", estimatedPricePer100g: 18, tags: ["vegan"] },
+  { id: "cola", name: "原味可乐", aliases: ["可乐"], category: "seasoning", nutritionPer100g: nutrition(42, 0, 0, 0, 10.6, 10.6, 0, 4, 10.6), defaultUnit: "ml", approximateUnitWeight: { ml: 1 }, estimatedPricePer100g: 0.8, tags: ["vegan"] },
+  { id: "kumquat", name: "金桔", aliases: [], category: "vegetable", nutritionPer100g: nutrition(71, 1.9, 0.9, 0.1, 15.9, 9.4, 6.5, 10), defaultUnit: "g", approximateUnitWeight: { piece: 18 }, estimatedPricePer100g: 2.5, tags: ["vegan", "fruit"] },
 ];
 
 export const ingredients: Ingredient[] = estimatedIngredients.map((ingredient) => ({

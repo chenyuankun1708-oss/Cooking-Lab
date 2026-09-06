@@ -25,6 +25,10 @@ const englishIngredientLabels: Readonly<Record<string, string>> = Object.freeze(
   vinegar: "vinegar", "wheat-flour": "wheat flour", yogurt: "plain yogurt", zucchini: "zucchini",
   "beef-lean": "lean beef", "chicken-thigh": "chicken thighs", "chili-bean-paste": "chili bean paste",
   "cooking-oil": "cooking oil",
+  "egg-white": "egg whites", pomelo: "pomelo",
+  "tapioca-pearl": "tapioca pearls", "black-sesame": "black sesame", "rice-flour": "rice flour",
+  "matcha-powder": "matcha powder", "tieguanyin-tea-leaf": "Tieguanyin tea leaves",
+  cola: "cola", kumquat: "kumquats",
 });
 
 export function getIngredientLabel(id: string, zhLabel: string | undefined, locale: SupportedLocale): string {

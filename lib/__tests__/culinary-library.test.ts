@@ -15,6 +15,7 @@ import { nativeCulinaryItems } from "@/data/culinary/items";
 import { culinarySources } from "@/data/culinary/sources";
 import { culinaryStories } from "@/data/culinary/stories";
 import { ingredients } from "@/data/ingredients";
+import { m11BatchAItems } from "@/data/m11/batch-a";
 import {
   getPublishedCulinaryItemBySlug,
   getPublishedCulinaryItems,
@@ -149,9 +150,18 @@ describe("published culinary library", () => {
         ? (item.preparation as Extract<CulinaryItem["preparation"], { inputs: unknown }>).inputs.map((input) => input.ingredientId)
         : [],
     ));
+    const candidateIngredientIds = new Set(m11BatchAItems.flatMap((item) =>
+      proceduralKinds.has(item.preparation.kind)
+        ? (item.preparation as Extract<CulinaryItem["preparation"], { inputs: unknown }>).inputs.map((input) => input.ingredientId)
+        : [],
+    ));
 
     expect([...nativeIngredientIds].every((id) => ingredientIds.has(id))).toBe(true);
-    expect(ingredients.filter((ingredient) => !recipeIngredientIds.has(ingredient.id)).every((ingredient) => nativeIngredientIds.has(ingredient.id))).toBe(true);
+    expect(ingredients.filter((ingredient) => (
+      !recipeIngredientIds.has(ingredient.id)
+      && !nativeIngredientIds.has(ingredient.id)
+      && !candidateIngredientIds.has(ingredient.id)
+    )).map((ingredient) => ingredient.id)).toEqual([]);
     expect(recipes).toHaveLength(100);
     expect(getPublishedRecipes()).toHaveLength(34);
   });

@@ -1,4 +1,4 @@
-import type { CulinaryItemCopy, PreparationStepCopy } from "@/types/culinary";
+import type { CulinaryItem, CulinaryItemCopy, PreparationStepCopy, Story } from "@/types/culinary";
 import type { SupportedLocale, TranslationSet } from "@/types/localization";
 import { resolveReviewedTranslation } from "@/lib/localization";
 
@@ -181,4 +181,40 @@ export function hasCompleteNativeCulinaryTranslation(
   if (!copy) return false;
   const hasInputNotes = inputNoteIds.every((ingredientId) => Boolean(copy.inputNotes?.[ingredientId]));
   return hasInputNotes && (usesGuidance ? Boolean(copy.guidance) : copy.steps?.length === expectedSteps);
+}
+
+export function hasCompleteStandaloneCulinaryTranslation(
+  item: CulinaryItem,
+  locale: SupportedLocale,
+  stories: readonly Story[],
+): boolean {
+  const itemCopy = item.content.entries.find((entry) => entry.locale === locale && entry.status === "reviewed")?.value;
+  if (!itemCopy?.name.trim() || !itemCopy.description.trim()) return false;
+
+  const preparation = item.preparation;
+  if ("steps" in preparation) {
+    if (!preparation.steps.length || preparation.steps.some((step) => {
+      const copy = step.content.entries.find((entry) => entry.locale === locale && entry.status === "reviewed")?.value;
+      return !copy?.instruction.trim() || !copy.rationale?.trim() || !copy.stateCue?.trim();
+    })) return false;
+  } else {
+    const copy = preparation.content.entries.find((entry) => entry.locale === locale && entry.status === "reviewed")?.value;
+    if (!copy || !("guidance" in copy ? copy.guidance.trim() : copy.servingNote.trim())) return false;
+  }
+
+  const storyById = new Map(stories.map((story) => [story.id, story]));
+  return item.storyIds.every((storyId) => {
+    const story = storyById.get(storyId);
+    const content = story?.content.entries.find((entry) => entry.locale === locale && entry.status === "reviewed")?.value;
+    return Boolean(
+      story
+      && content?.title.trim()
+      && content.dek.trim()
+      && content.sections.length >= 2
+      && content.sections.every((section) => section.heading.trim() && section.paragraphs.every((paragraph) => paragraph.trim()))
+      && story.claims.every((claim) => claim.content.entries.some((entry) => (
+        entry.locale === locale && entry.status === "reviewed" && entry.value.statement.trim()
+      ))),
+    );
+  });
 }

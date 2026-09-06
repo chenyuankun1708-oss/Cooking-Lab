@@ -3,6 +3,7 @@ import {
   batchADishEvidence,
   batchADishImages,
   batchADishItems,
+  batchADishRestaurantIdentities,
   batchADishResearchRecords,
   batchADishSources,
   batchADishStories,
@@ -12,6 +13,7 @@ import {
   batchANonDishImages,
   batchANonDishItems,
   batchANonDishPackages,
+  batchANonDishProductProfiles,
   batchANonDishResearchRecords,
   batchANonDishSources,
   batchANonDishStories,
@@ -25,6 +27,8 @@ export const m11BatchAEvidence = Object.freeze([...batchADishEvidence, ...batchA
 export const m11BatchAStories = Object.freeze([...batchADishStories, ...batchANonDishStories]);
 export const m11BatchAResearchRecords = Object.freeze([...batchADishResearchRecords, ...batchANonDishResearchRecords]);
 export const m11BatchAContentPackages = Object.freeze([...batchADishContentPackages, ...batchANonDishPackages]);
+export const m11BatchARestaurantIdentities = Object.freeze([...batchADishRestaurantIdentities]);
+export const m11BatchAProductProfiles = Object.freeze([...batchANonDishProductProfiles]);
 
 const actualIds = m11BatchAItems.map((item) => item.id).sort();
 const expectedIds = [...m11BatchAItemIds].sort();

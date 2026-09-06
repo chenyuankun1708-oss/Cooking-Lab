@@ -3,6 +3,8 @@ import type {
   AttributionRequirement,
   ContentArtifact,
   ContentRightsRegistry,
+  ProductProfile,
+  RestaurantContentIdentity,
   RightsAssessment,
   RightsPermission,
   UsageDecision,
@@ -26,6 +28,8 @@ export interface CreateContentRightsRegistryInput {
   evidence: readonly Evidence[];
   sources: readonly Source[];
   researchRecords: readonly ResearchRecord[];
+  restaurants?: readonly RestaurantContentIdentity[];
+  productProfiles?: readonly ProductProfile[];
 }
 
 export function createContentRightsRegistry(input: CreateContentRightsRegistryInput): ContentRightsRegistry {
@@ -93,6 +97,19 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     addImageArtifact(image, artifacts, assessments, decisions, attributions);
   }
 
+  const productProfiles = (input.productProfiles ?? []).filter((profile) => itemIds.has(profile.culinaryItemId));
+  for (const profile of productProfiles) {
+    addFirstPartyArtifact({
+      id: `${profile.id}-product-profile`,
+      version: createContentVersion({ kind: "product-profile", profile }),
+      subject: { type: "product-profile", id: profile.id },
+      kind: "product-profile",
+      derivation: "factual-synthesis",
+      sourceIds: [...profile.sourceIds],
+      evidenceIds: [],
+    }, artifacts, assessments, decisions);
+  }
+
   const usedSourceIds = new Set(artifacts.flatMap((artifact) => artifact.sourceIds));
   for (const source of input.sources.filter((entry) => usedSourceIds.has(entry.id))) {
     assessments.push(buildSourceAssessment(source));
@@ -147,8 +164,8 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     }],
     ai: [],
     externalMedia: [],
-    restaurants: [],
-    productProfiles: [],
+    restaurants: (input.restaurants ?? []).filter((identity) => itemIds.has(identity.culinaryItemId)),
+    productProfiles,
   } satisfies ContentRightsRegistry;
 }
 

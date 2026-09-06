@@ -1,4 +1,4 @@
-import { countries, cuisines, regions } from "@/data/taxonomy";
+import { countries, cuisines, originAreas, regions } from "@/data/taxonomy";
 import { getLocalizedCulinaryCopy } from "@/data/localization/public-culinary";
 import { getRecipeEditorialCopy } from "@/data/localization/public-recipes";
 import { getLocalizedStoryTranslation } from "@/data/localization/public-stories";
@@ -252,6 +252,7 @@ function rankRelatedStories(story: Story, anchors: readonly CulinaryItem[], cont
 function scoreItemRelation(left: CulinaryItem, right: CulinaryItem): number {
   if (left.id === right.id) return 100;
   let score = 0;
+  if (left.taxonomy.origin?.areaId && left.taxonomy.origin.areaId === right.taxonomy.origin?.areaId) score += 2;
   if (left.taxonomy.origin?.regionId && left.taxonomy.origin.regionId === right.taxonomy.origin?.regionId) score += 5;
   if (left.taxonomy.origin?.countryId && left.taxonomy.origin.countryId === right.taxonomy.origin?.countryId) score += 2;
   if (left.taxonomy.cuisine?.cuisineId && left.taxonomy.cuisine.cuisineId === right.taxonomy.cuisine?.cuisineId) score += 3;
@@ -275,10 +276,12 @@ function getItemHeroImage(item: CulinaryItem, images: readonly RecipeImage[]): R
 }
 
 function getItemPlaceLabel(item: CulinaryItem, locale: SupportedLocale): string | undefined {
+  const areaId = item.taxonomy.origin?.areaId;
   const countryId = item.taxonomy.origin?.countryId;
   const regionId = item.taxonomy.origin?.regionId;
   const cuisineId = item.taxonomy.cuisine?.cuisineId;
   const labels = [
+    areaId ? originAreas[areaId]?.label[locale] : undefined,
     regionId ? regions[regionId]?.label[locale] : undefined,
     countryId ? countries[countryId]?.label[locale] : undefined,
     cuisineId ? cuisines[cuisineId]?.label[locale] : undefined,

@@ -1,5 +1,6 @@
 import type { DishItem, Evidence, Source, SourceType, Story, StoryType } from "@/types/culinary";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
+import type { RestaurantContentIdentity } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
 import type { ResearchRecord, ResearchSourceUse } from "@/types/research";
 import {
@@ -13,6 +14,7 @@ import {
   m11ReviewedAt,
   m11Story,
 } from "@/data/m11/content-factories";
+import { m11RestaurantReconstructionItemIds } from "@/data/m11/portfolio";
 
 type StepSpec = {
   zh: { instruction: string; rationale: string; stateCue: string };
@@ -1059,3 +1061,15 @@ export const batchADishEvidence = builtDishContent.flatMap(({ evidence }) => evi
 export const batchADishStories = builtDishContent.map(({ story }) => story);
 export const batchADishResearchRecords = builtDishContent.map(({ researchRecord }) => researchRecord);
 export const batchADishContentPackages = builtDishContent.map(({ contentPackage }) => contentPackage);
+
+export const batchADishRestaurantIdentities: readonly RestaurantContentIdentity[] = Object.freeze(
+  m11RestaurantReconstructionItemIds.map((culinaryItemId) => ({
+    culinaryItemId,
+    kind: "cooking-lab-reconstruction" as const,
+    restaurantName: "Unnamed restaurant-style category — no named restaurant represented",
+    sourceIds: [`${culinaryItemId}-source-a`, `${culinaryItemId}-source-b`] as [string, string],
+    independentlyWritten: true as const,
+    culinaryReview: "passed" as const,
+    nonEndorsementDisclosure: true as const,
+  })),
+);

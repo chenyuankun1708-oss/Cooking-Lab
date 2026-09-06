@@ -8,10 +8,9 @@ export interface TaxonomyNode {
   parentId?: string;
 }
 
-export interface RecipeOrigin {
-  countryId: string;
-  regionId?: string;
-}
+export type RecipeOrigin =
+  | { countryId: string; regionId?: string; areaId?: never }
+  | { countryId?: never; regionId?: never; areaId: string };
 
 export interface RecipeCuisineTaxonomy {
   cuisineId: string;

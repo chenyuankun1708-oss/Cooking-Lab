@@ -221,8 +221,11 @@ function calculateTemperatureRelationship(left: CulinaryItem, right: CulinaryIte
 function calculateCuisineCoherence(left: CulinaryItem, right: CulinaryItem) {
   const ids = intersection(left.pairing.cuisineIds, right.pairing.cuisineIds);
   if (ids.length) return { score: 1, ids };
-  const sameCountry = left.taxonomy.origin?.countryId && left.taxonomy.origin.countryId === right.taxonomy.origin?.countryId;
-  return { score: sameCountry ? 0.75 : 0.5, ids: sameCountry ? [left.taxonomy.origin!.countryId] : [] };
+  const leftAreaId = left.taxonomy.origin?.areaId;
+  if (leftAreaId && leftAreaId === right.taxonomy.origin?.areaId) return { score: 0.75, ids: [leftAreaId] };
+  const leftCountryId = left.taxonomy.origin?.countryId;
+  const sameCountry = Boolean(leftCountryId && leftCountryId === right.taxonomy.origin?.countryId);
+  return { score: sameCountry ? 0.75 : 0.5, ids: sameCountry && leftCountryId ? [leftCountryId] : [] };
 }
 
 function calculateServingContext(left: CulinaryItem, right: CulinaryItem, requested?: string) {

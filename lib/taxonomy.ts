@@ -1,4 +1,4 @@
-import { browseTags, countries, cuisines, dietaryTags, dishTypes, getTaxonomyLabel, mealOccasions, regions, subCuisines, techniques } from "@/data/taxonomy";
+import { browseTags, countries, cuisines, dietaryTags, dishTypes, getTaxonomyLabel, mealOccasions, originAreas, regions, subCuisines, techniques } from "@/data/taxonomy";
 import type { Recipe } from "@/types/recipe";
 import type { SupportedLocale } from "@/types/taxonomy";
 import { localIngredientRepository } from "./ingredient-repository";
@@ -54,9 +54,10 @@ export function getRecipeLegacyCategoryLabel(recipe: Recipe, locale: SupportedLo
 }
 
 export function getRecipeOriginLabel(recipe: Recipe, locale: SupportedLocale = "zh-CN"): string | undefined {
+  const area = getTaxonomyLabel("originAreas", recipe.taxonomy.origin?.areaId, locale);
   const country = getTaxonomyLabel("countries", recipe.taxonomy.origin?.countryId, locale);
   const region = getTaxonomyLabel("regions", recipe.taxonomy.origin?.regionId, locale);
-  return [country, region].filter((value): value is string => Boolean(value)).join(" / ") || undefined;
+  return area ?? ([country, region].filter((value): value is string => Boolean(value)).join(" / ") || undefined);
 }
 
 export function getRecipeTagIds(recipe: Recipe): string[] {
@@ -119,7 +120,11 @@ export function getCuisineHierarchyLabels(recipe: Recipe, locale: SupportedLocal
     subCuisine: recipe.taxonomy.cuisine.subCuisineId
       ? subCuisines[recipe.taxonomy.cuisine.subCuisineId]?.label[locale] ?? recipe.taxonomy.cuisine.subCuisineId
       : undefined,
-    region: recipe.taxonomy.origin?.regionId ? regions[recipe.taxonomy.origin.regionId]?.label[locale] ?? recipe.taxonomy.origin.regionId : undefined,
+    region: recipe.taxonomy.origin?.areaId
+      ? originAreas[recipe.taxonomy.origin.areaId]?.label[locale] ?? recipe.taxonomy.origin.areaId
+      : recipe.taxonomy.origin?.regionId
+        ? regions[recipe.taxonomy.origin.regionId]?.label[locale] ?? recipe.taxonomy.origin.regionId
+        : undefined,
   };
 }
 

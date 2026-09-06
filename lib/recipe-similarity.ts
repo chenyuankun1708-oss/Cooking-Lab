@@ -245,6 +245,9 @@ function calculateCuisineSimilarity(target: Recipe, candidate: Recipe): { score:
   if (targetCuisine.cuisineId === candidateCuisine.cuisineId) {
     return { score: 0.8, ids: [targetCuisine.cuisineId] };
   }
+  if (target.taxonomy.origin?.areaId && target.taxonomy.origin.areaId === candidate.taxonomy.origin?.areaId) {
+    return { score: 0.45, ids: [target.taxonomy.origin.areaId] };
+  }
   if (target.taxonomy.origin?.regionId && target.taxonomy.origin.regionId === candidate.taxonomy.origin?.regionId) {
     return { score: 0.65, ids: [target.taxonomy.origin.regionId] };
   }

@@ -8,6 +8,7 @@ import {
   cuisines,
   dietaryTags,
   dishTypes as recipeDishTypes,
+  originAreas,
   regions,
   subCuisines,
   techniques,
@@ -135,8 +136,18 @@ function validateCulinaryTaxonomy(
 ) {
   const { taxonomy } = item;
   if (taxonomy.origin) {
-    if (!(taxonomy.origin.countryId in countries)) report("taxonomy.origin.countryId", "国家 ID 不在 taxonomy registry 中");
-    if (taxonomy.origin.regionId) {
+    if (Boolean(taxonomy.origin.areaId) === Boolean(taxonomy.origin.countryId)) {
+      report("taxonomy.origin", "来源必须且只能声明 countryId 或 areaId");
+    }
+    if (taxonomy.origin.areaId && taxonomy.origin.regionId) {
+      report("taxonomy.origin.regionId", "跨地域来源不能同时声明单一国家下的 regionId");
+    }
+    if (taxonomy.origin.areaId) {
+      if (!(taxonomy.origin.areaId in originAreas)) report("taxonomy.origin.areaId", "跨地域来源 ID 不在 taxonomy registry 中");
+    } else if (!taxonomy.origin.countryId || !(taxonomy.origin.countryId in countries)) {
+      report("taxonomy.origin.countryId", "国家 ID 不在 taxonomy registry 中");
+    }
+    if (!taxonomy.origin.areaId && taxonomy.origin.regionId) {
       const region = regions[taxonomy.origin.regionId];
       if (!region) report("taxonomy.origin.regionId", "地域 ID 不在 taxonomy registry 中");
       else if (region.parentId !== taxonomy.origin.countryId) report("taxonomy.origin.regionId", "地域与所属国家不匹配");

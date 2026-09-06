@@ -1,6 +1,6 @@
 # Taxonomy
 
-最近更新：2026-09-05
+最近更新：2026-09-07
 
 ## Goal
 
@@ -29,10 +29,9 @@ Recipe Taxonomy v2 的目标不是建立一部料理百科，而是为当前 100
 同一国家可以有多个 cuisine tradition；同一 cuisine 也可能跨多个地方传播。为了避免把不同概念塞进一个字段，当前模型拆成：
 
 ```ts
-origin?: {
-  countryId: string;
-  regionId?: string;
-}
+origin?:
+  | { countryId: string; regionId?: string }
+  | { areaId: string }
 
 cuisine: {
   cuisineId: string;
@@ -45,6 +44,7 @@ cuisine: {
 - 只知道国家时只填 `countryId`
 - 只知道 cuisine tradition 时只填 `cuisineId`
 - 可靠时再补 `regionId` 或 `subCuisineId`
+- 料理身份确实跨国且不应裁决单一国家时，使用受控的 `areaId`；不能把跨国组合伪装成 country
 
 ### Illustrative examples
 
@@ -55,6 +55,9 @@ cuisine: {
 | 广东家常菜 | `countryId: "china"` + `regionId: "guangdong"` | `cuisineId: "cantonese"` + `subCuisineId: "guangfu"` |
 | 西班牙瓦伦西亚风味 | `countryId: "spain"` + `regionId: "valencia"` | `cuisineId: "spanish"` + `subCuisineId: "valencian"` |
 | 泰北风味 | `countryId: "thailand"` + `regionId: "northern-thailand"` | `cuisineId: "thai"` + `subCuisineId: "northern-thai"` |
+| Flat white 争议归属 | `areaId: "trans-tasman"` | `cuisineId: "fusion"` |
+
+`areaId` 只用于有来源支持的跨国或争议归属；它不与 `countryId` / `regionId` 同时出现，也不参与伪精确的国家筛选。具体争议仍由 claim-level Story 与 Evidence 表达。
 
 ## Techniques
 

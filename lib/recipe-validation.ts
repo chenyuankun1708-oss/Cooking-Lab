@@ -1,6 +1,6 @@
 import type { Ingredient, Unit } from "@/types/ingredient";
 import { recipePublicationStatuses, type Recipe } from "@/types/recipe";
-import { browseTags, countries, cuisines, dietaryTags, dishTypes, mealOccasions, regions, subCuisines, techniques } from "@/data/taxonomy";
+import { browseTags, countries, cuisines, dietaryTags, dishTypes, mealOccasions, originAreas, regions, subCuisines, techniques } from "@/data/taxonomy";
 import { validateFlavorProfile } from "./flavor-validation";
 import { toGrams } from "./unit-conversion";
 import { isNonNegativeFinite, isPositiveFinite, isSlug } from "./validation-utils";
@@ -172,9 +172,18 @@ function validateTaxonomy(recipe: Recipe, report: (recipeId: string, field: stri
   }
 
   if (taxonomy.origin) {
-    const country = countries[taxonomy.origin.countryId];
-    if (!country) report(recipeId, "taxonomy.origin.countryId", "国家 ID 不在 taxonomy registry 中");
-    if (taxonomy.origin.regionId) {
+    if (Boolean(taxonomy.origin.areaId) === Boolean(taxonomy.origin.countryId)) {
+      report(recipeId, "taxonomy.origin", "来源必须且只能声明 countryId 或 areaId");
+    }
+    if (taxonomy.origin.areaId && taxonomy.origin.regionId) {
+      report(recipeId, "taxonomy.origin.regionId", "跨地域来源不能同时声明单一国家下的 regionId");
+    }
+    if (taxonomy.origin.areaId) {
+      if (!originAreas[taxonomy.origin.areaId]) report(recipeId, "taxonomy.origin.areaId", "跨地域来源 ID 不在 taxonomy registry 中");
+    } else if (!taxonomy.origin.countryId || !countries[taxonomy.origin.countryId]) {
+      report(recipeId, "taxonomy.origin.countryId", "国家 ID 不在 taxonomy registry 中");
+    }
+    if (!taxonomy.origin.areaId && taxonomy.origin.regionId) {
       const region = regions[taxonomy.origin.regionId];
       if (!region) report(recipeId, "taxonomy.origin.regionId", "地域 ID 不在 taxonomy registry 中");
       else if (region.parentId !== taxonomy.origin.countryId) {

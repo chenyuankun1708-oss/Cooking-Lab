@@ -9,7 +9,9 @@ import {
   m11BatchAEvidence,
   m11BatchAImages,
   m11BatchAItems,
+  m11BatchAProductProfiles,
   m11BatchAResearchRecords,
+  m11BatchARestaurantIdentities,
   m11BatchASources,
   m11BatchAStories,
 } from "@/data/m11/batch-a";
@@ -17,7 +19,9 @@ import { m11BatchAMealPlanStepMetadata } from "@/data/m11/batch-a-meal-plan-meta
 import { m11BatchAItemIds, m11PortfolioTarget, m11RequiredItemIds } from "@/data/m11/portfolio";
 import { evaluateContentRightsRegistry } from "@/lib/content-rights";
 import { evaluateCulinaryItemPublishingEligibility } from "@/lib/culinary-publishing";
+import { deriveMinimumPublishingRisk } from "@/lib/publishing-governance";
 import { validateResearchRegistry } from "@/lib/research-validation";
+import { getToolLabel } from "@/lib/tool-labels";
 import type { CulinaryItemType } from "@/types/culinary";
 
 const publishingContext = {
@@ -50,6 +54,8 @@ const rightsRegistry = createContentRightsRegistry({
   evidence: m11BatchAEvidence,
   sources: m11BatchASources,
   researchRecords: m11BatchAResearchRecords,
+  restaurants: m11BatchARestaurantIdentities,
+  productProfiles: m11BatchAProductProfiles,
 });
 
 describe("M11 content Batch A candidate boundary", () => {
@@ -102,6 +108,13 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(result.ready, result.issues.map((issue) => `${issue.code}:${issue.subjectId}`).join("\n")).toBe(true);
     expect(result.auditedItemIds).toHaveLength(35);
     expect(rightsRegistry.decisions.every((decision) => decision.decision !== "block")).toBe(true);
+    expect(rightsRegistry.restaurants).toHaveLength(8);
+    expect(rightsRegistry.productProfiles).toHaveLength(3);
+
+    for (const itemId of [...m11BatchARestaurantIdentities, ...m11BatchAProductProfiles].map((entry) => entry.culinaryItemId)) {
+      const item = rightsPreflightItems.find((entry) => entry.id === itemId)!;
+      expect(deriveMinimumPublishingRisk(item, rightsRegistry).level, itemId).toBe("medium");
+    }
   });
 
   it("uses only non-video research evidence", () => {
@@ -147,7 +160,7 @@ describe("M11 content Batch A candidate boundary", () => {
     for (const itemId of ["mango-pomelo-sago", "hong-kong-egg-tart", "cha-chaan-teng-lemon-coke", "hong-kong-iced-lemon-tea", "yuenyeung"]) {
       expect(byId.get(itemId)?.taxonomy.origin?.regionId, itemId).not.toBe("guangdong");
     }
-    expect(byId.get("flat-white")?.taxonomy.origin?.countryId).toBe("trans-tasman");
+    expect(byId.get("flat-white")?.taxonomy.origin).toEqual({ areaId: "trans-tasman" });
     expect(byId.get("cha-chaan-teng-lemon-coke")?.taxonomy.formIds).toContain("lemon-cola");
 
     for (const itemId of ["darjeeling-first-flush-profile", "ethiopia-yirgacheffe-washed-profile", "rioja-reserva-profile"]) {
@@ -162,6 +175,13 @@ describe("M11 content Batch A candidate boundary", () => {
     const openCantoneseSources = m11BatchASources.filter((source) => source.publisherOrInstitution === "Open Cantonese");
     expect(openCantoneseSources.length).toBeGreaterThan(0);
     expect(openCantoneseSources.every((source) => source.type === "open-educational-resource" && source.reliability === "general-secondary")).toBe(true);
+  });
+
+  it("localizes the specialized tools introduced by Batch A", () => {
+    const toolIds = ["v60-dripper", "paper-filter", "milk-pitcher", "pour-over-dripper", "coffee-filter", "bottle-opener"];
+    for (const toolId of toolIds) {
+      expect(getToolLabel(toolId, "zh-CN"), toolId).not.toBe(toolId.replaceAll("-", " "));
+    }
   });
 
   it("authors every procedural plan duration without inferring task kind from prose", () => {

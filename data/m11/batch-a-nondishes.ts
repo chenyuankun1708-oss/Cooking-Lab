@@ -13,6 +13,7 @@ import type {
   TeaItem,
 } from "@/types/culinary";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
+import type { ProductProfile } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
 import type { ResearchRecord, ResearchSourceUse, ResearchTemplateId } from "@/types/research";
 import {
@@ -51,6 +52,7 @@ interface CommonSeed {
   enDescription: string;
   countryId?: string;
   regionId?: string;
+  originAreaId?: string;
   cuisineId: string;
   techniqueIds: string[];
   formIds: string[];
@@ -283,7 +285,7 @@ const seeds: readonly Seed[] = [
       { title: "How Climate Change Is Threatening the Flavour — and Future — of India's Prized Darjeeling Tea", publisher: "CBC News", url: "https://www.cbc.ca/news/world/darjeeling-tea-india-drought-rain-climate-change-9.7152129", locator: "Late-February and early-March first-flush harvest and Darjeeling growing context", note: "Authored reporting independently supports first flush as the early harvest; tasting adjectives and marketing language are not reused.", type: "reputable-media", reliability: "general-secondary", uses: ["identity", "culture"] },
     ],
     nutrition: { applicability: "not-modeled", reason: "out-of-scope" }, cost: { source: "not-modeled" },
-    alt: "无品牌白色茶杯中的浅金色大吉岭茶汤，旁边是展开的春摘茶叶",
+    alt: "无品牌白色茶壶中的浅金色大吉岭茶汤，壶身旁点缀展开的春摘茶叶",
     preparation: { kind: "serving-guidance", estimatedMinutes: 5, toolIds: ["kettle", "teapot", "timer"], content: bilingual(
       { guidance: "档案基线：每 250 毫升水用 3 克散茶，约 90°C 浸泡 3 分钟后完全出汤；先按具体茶叶标签调整。本页不展示品牌包装、营销 tasting notes 或购买建议。" },
       { guidance: "Profile baseline: use 3 g loose leaf per 250 ml water, steep near 90°C for 3 minutes, and decant fully; defer to the specific tea label. This page shows no brand packaging, marketing tasting notes, or buying advice." },
@@ -317,7 +319,7 @@ const seeds: readonly Seed[] = [
     id: "flat-white", itemType: "coffee", zhName: "Flat White 澳白", enName: "Flat White",
     zhDescription: "双份浓缩与细腻薄层微泡牛奶组成的小杯奶咖，强调咖啡存在感和均匀口感。",
     enDescription: "A compact milk coffee combining a double espresso with a thin layer of fine microfoam, keeping coffee character present.",
-    countryId: "trans-tasman", cuisineId: "fusion", techniqueIds: [], formIds: ["milk-espresso"], dietaryTagIds: ["vegetarian"],
+    originAreaId: "trans-tasman", cuisineId: "fusion", techniqueIds: [], formIds: ["milk-espresso"], dietaryTagIds: ["vegetarian"],
     tastes: { bitter: 2, sweet: 2 }, aromaIds: ["roasted"], textureIds: ["creamy", "silky"], characterIds: ["comforting"],
     servingContextIds: ["breakfast", "afternoon-tea"], weight: "medium", temperature: "hot", storyType: "historical-development",
     claimZh: "Flat white 通常与澳大利亚和新西兰咖啡文化共同关联；本条目不主张单一发明者或唯一比例。",
@@ -448,7 +450,7 @@ const seeds: readonly Seed[] = [
     claimEn: "This entry records yuenyeung as a Hong Kong cha chaan teng tea-and-coffee drink without claiming a sole originating shop or proprietary ratio.",
     sources: [
       { title: "Vocabulary: Drinks in Cha Chaan Teng", publisher: "Open Cantonese", url: "https://opencantonese.org/books/cantonese-life-1/unit-6/lesson-29/29-8-vocabulary-drinks-in-cha-chaan-teng", locator: "Drink list: 鴛鴦 as a milk-tea and coffee mixture", note: "Direct educational source for yuenyeung identity in cha chaan teng ordering language; linked audio and video are not used.", type: "open-educational-resource", reliability: "general-secondary", uses: ["identity", "culture"] },
-      { title: "Coffee or Tea? Order Yuen Yeung, a Half-and-half Hybrid", publisher: "South China Morning Post", url: "https://www.scmp.com/magazines/style/leisure/article/3052122/coffee-or-tea-order-yuen-yeung-menu-half-half-hybrid-served", locator: "Hong Kong tea-and-coffee identity and competing origin accounts", note: "Authored feature supports the bounded drink identity and disputed attribution; no prose, shop ratio, or branded expression is reused.", type: "reputable-media", reliability: "general-secondary", uses: ["identity", "culture"] },
+      { title: "Coffee or Tea? Order a Yuen Yeung – the Off-menu, Half-half Hybrid Served at Cafes across Hong Kong", publisher: "South China Morning Post", url: "https://www.scmp.com/magazines/style/leisure/article/3052122/coffee-or-tea-order-yuen-yeung-menu-half-half-hybrid-served", locator: "Hong Kong tea-and-coffee identity and competing origin accounts", note: "Authored feature supports the bounded drink identity and disputed attribution; no prose, shop ratio, or branded expression is reused.", type: "reputable-media", reliability: "general-secondary", uses: ["identity", "culture"] },
       { title: "Yuenyeung", publisher: "Wikipedia contributors", url: "https://en.wikipedia.org/wiki/Yuenyeung", locator: "Tea-coffee composition and Hong Kong context", note: "Independent general cross-check for composition and context; no source wording or ratios are reused.", type: "open-educational-resource", reliability: "general-secondary", uses: ["identity", "culture"] },
       { title: "Pour-over Coffee", publisher: "National Coffee Association USA", url: "https://www.aboutcoffee.org/brewing/pour-over-coffee/", locator: "Water, grind, freshness, and filter-brewing variables", note: "Independent professional coffee-preparation cross-check; no source wording or fixed ratio is reused.", type: "professional-organization", uses: ["preparation"] },
     ],
@@ -756,7 +758,7 @@ const storyCopyByItemId = {
       firstHeading: "A Hong Kong tea café blend",
       firstParagraph: "Yuenyeung combines black tea, coffee, and milk within Hong Kong cha chaan teng beverage culture. Originator accounts vary, so this entry names no sole shop.",
       secondHeading: "Brew separately, then choose the balance",
-      secondParagraph: "Cooking Lab brews tea and coffee separately before combining them on an adjustable ratio so tea structure and roasted aroma both remain distinct, without copying a shop formula.",
+      secondParagraph: "Cooking Lab brews tea and coffee separately before combining them at an adjustable ratio so tea structure and roasted aroma both remain distinct, without copying a shop formula.",
     },
   },
   "rioja-reserva-profile": {
@@ -774,7 +776,7 @@ const storyCopyByItemId = {
       firstHeading: "Region name and aging category",
       firstParagraph: "Rioja Reserva sits within a regulated regional identity, where Reserva denotes specified aging conditions. That fact does not mean every bottle shares the same flavor or quality.",
       secondHeading: "Keeping service guidance restrained",
-      secondParagraph: "Cooking Lab offers legal-age adults only general temperature and small-glass pacing guidance, with no brand tasting notes, scores, packaging, purchasing, or health advice.",
+      secondParagraph: "Cooking Lab offers legal-age adults only general serving guidance in a small glass, with no brand tasting notes, scores, packaging, purchasing, or health advice.",
     },
   },
 } satisfies Record<(typeof seeds)[number]["id"], StoryCopy>;
@@ -796,7 +798,11 @@ function buildItem(seed: Seed): BatchItem {
       { name: seed.enName, description: seed.enDescription },
     ),
     taxonomy: {
-      ...(seed.countryId ? { origin: { countryId: seed.countryId, ...(seed.regionId ? { regionId: seed.regionId } : {}) } } : {}),
+      ...(seed.originAreaId
+        ? { origin: { areaId: seed.originAreaId } }
+        : seed.countryId
+          ? { origin: { countryId: seed.countryId, ...(seed.regionId ? { regionId: seed.regionId } : {}) } }
+          : {}),
       cuisine: { cuisineId: seed.cuisineId },
       techniqueIds: seed.techniqueIds,
       formIds: seed.formIds,
@@ -942,3 +948,51 @@ export const batchANonDishProfileBoundaries = Object.freeze({
     scope: "Non-brand Rioja Reserva regulatory-category profile; no winery, vintage, score, packaging, tasting-note, endorsement, affiliate, or purchase claim.",
   },
 });
+
+export const batchANonDishProductProfiles: readonly ProductProfile[] = Object.freeze([
+  {
+    id: "darjeeling-first-flush-regional-profile-2026-09-v1",
+    culinaryItemId: "darjeeling-first-flush-profile",
+    brandName: "None — non-brand regional profile",
+    producerName: "Multiple producers; no producer represented",
+    region: "Darjeeling, India",
+    vintageBatchOrModel: batchANonDishProfileBoundaries["darjeeling-first-flush-profile"].version,
+    verifiedAt: batchANonDishProfileBoundaries["darjeeling-first-flush-profile"].verifiedAt,
+    sourceIds: ["m11-darjeeling-first-flush-profile-source-1", "m11-darjeeling-first-flush-profile-source-2"],
+    independentEditorialCopy: true,
+    usesUnlicensedBrandArtwork: false,
+    impliesEndorsement: false,
+    affiliateSales: false,
+    rightsAssessmentId: "rights-darjeeling-first-flush-regional-profile-2026-09-v1-product-profile",
+  },
+  {
+    id: "ethiopia-yirgacheffe-washed-regional-profile-2026-09-v1",
+    culinaryItemId: "ethiopia-yirgacheffe-washed-profile",
+    brandName: "None — non-brand regional profile",
+    producerName: "Multiple producers; no producer represented",
+    region: "Yirgacheffe, southern Ethiopia",
+    vintageBatchOrModel: batchANonDishProfileBoundaries["ethiopia-yirgacheffe-washed-profile"].version,
+    verifiedAt: batchANonDishProfileBoundaries["ethiopia-yirgacheffe-washed-profile"].verifiedAt,
+    sourceIds: ["m11-ethiopia-yirgacheffe-washed-profile-source-1", "m11-ethiopia-yirgacheffe-washed-profile-source-2", "m11-ethiopia-yirgacheffe-washed-profile-source-3"],
+    independentEditorialCopy: true,
+    usesUnlicensedBrandArtwork: false,
+    impliesEndorsement: false,
+    affiliateSales: false,
+    rightsAssessmentId: "rights-ethiopia-yirgacheffe-washed-regional-profile-2026-09-v1-product-profile",
+  },
+  {
+    id: "rioja-reserva-regional-profile-2026-09-v1",
+    culinaryItemId: "rioja-reserva-profile",
+    brandName: "None — non-brand regional profile",
+    producerName: "Multiple producers; no producer represented",
+    region: "DOCa Rioja, Spain",
+    vintageBatchOrModel: batchANonDishProfileBoundaries["rioja-reserva-profile"].version,
+    verifiedAt: batchANonDishProfileBoundaries["rioja-reserva-profile"].verifiedAt,
+    sourceIds: ["m11-rioja-reserva-profile-source-1", "m11-rioja-reserva-profile-source-2"],
+    independentEditorialCopy: true,
+    usesUnlicensedBrandArtwork: false,
+    impliesEndorsement: false,
+    affiliateSales: false,
+    rightsAssessmentId: "rights-rioja-reserva-regional-profile-2026-09-v1-product-profile",
+  },
+]);

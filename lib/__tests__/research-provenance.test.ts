@@ -27,10 +27,50 @@ describe("content research and provenance", () => {
     expect(validateSourceCatalog(evaluatedSourceCatalog)).toEqual(validateSourceCatalog(evaluatedSourceCatalog));
   });
 
-  it("validates three completed research exercises and their source graph", () => {
+  it("validates three migrated research exercises and their source graph", () => {
     expect(researchExercises).toHaveLength(3);
     expect(validateResearchRegistry(registry)).toEqual([]);
   });
+
+  it("requires a valid subject and explicit uses on every accepted source", () => {
+    const espresso = researchExercises[2];
+    const invalidRecord = {
+      ...espresso,
+      id: "invalid-contract-record",
+      subject: { type: "person", id: "" },
+      sourceDecisions: espresso.sourceDecisions.map((decision, index) => (
+        decision.disposition === "accepted" && index === 0
+          ? { ...decision, uses: [] }
+          : decision
+      )),
+    } as unknown as ResearchRecord;
+
+    expect(validateResearchRegistry({ ...registry, records: [invalidRecord] })).toEqual(expect.arrayContaining([
+      expect.objectContaining({ entityId: "invalid-contract-record", field: "subject.type" }),
+      expect.objectContaining({ entityId: "invalid-contract-record", field: "subject.id" }),
+      expect.objectContaining({ entityId: "invalid-contract-record", field: "sourceDecisions.0.uses" }),
+    ]));
+  });
+
+  it.each(["publication-candidate", "closed"] as const)(
+    "requires two independent accepted sources for %s records",
+    (status) => {
+      const dongpo = researchExercises[0];
+      const invalidRecord = {
+        ...dongpo,
+        id: `${status}-single-source-record`,
+        status,
+      } satisfies ResearchRecord;
+
+      expect(validateResearchRegistry({ ...registry, records: [invalidRecord] })).toContainEqual(
+        expect.objectContaining({
+          entityId: `${status}-single-source-record`,
+          field: "sourceDecisions",
+          message: "Publication candidate 或 closed ResearchRecord 必须接受至少两个独立 Source",
+        }),
+      );
+    },
+  );
 
   it("collects only accepted sources and referenced evidence in registry order", () => {
     const espresso = researchExercises.find(({ id }) => id === "espresso-development-exercise")!;

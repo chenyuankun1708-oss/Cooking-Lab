@@ -24,7 +24,7 @@ const heroImage: RecipeImage = {
 
 describe("recipe image system", () => {
   it("keeps the seed registry valid and returns real or fallback presentation data", () => {
-    expect(recipeImages).toHaveLength(10);
+    expect(recipeImages).toHaveLength(34);
     expect(validateImageAssets(recipeImages)).toEqual([]);
     expect(validateRecipeImageReferences(recipes, recipeImages)).toEqual([]);
     expect(getRecipeHeroImage(recipes[0], recipeImages)?.id).toBe("tomato-scrambled-eggs-hero");
@@ -39,7 +39,7 @@ describe("recipe image system", () => {
 
   it("keeps source, author and license provenance for every seed image", () => {
     for (const image of recipeImages) {
-      expect(image.sourceUrl, image.id).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      expect(image.sourceUrl, image.id).toMatch(/^https:\/\/(commons\.wikimedia\.org\/wiki\/File:|www\.flickr\.com\/photos\/)/);
       expect(image.author?.trim(), image.id).toBeTruthy();
       expect(image.licenseUrl, image.id).toMatch(/^https:\/\/creativecommons\.org\//);
       expect(image.attribution?.trim(), image.id).toBeTruthy();

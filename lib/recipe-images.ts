@@ -25,3 +25,15 @@ export function formatImageAttribution(attribution: string, locale: SupportedLoc
   if (locale === "zh-CN") return attribution;
   return attribution.replaceAll("，", ", ").replaceAll("裁切处理", "cropped");
 }
+
+export function formatImageAttributionParts(
+  attribution: string,
+  locale: SupportedLocale,
+): { credit: string; license?: string } {
+  const formatted = formatImageAttribution(attribution, locale);
+  const separator = locale === "zh-CN" ? "，" : ", ";
+  const parts = formatted.split(separator);
+  const license = parts.at(-1);
+  if (!license?.startsWith("CC")) return { credit: formatted };
+  return { credit: parts.slice(0, -1).join(separator), license };
+}

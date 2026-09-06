@@ -101,10 +101,10 @@ describe("recipe publishing contract", () => {
 });
 
 describe("canonical public recipe source", () => {
-  it("publishes only the ten reviewed recipes while preserving all structured data", () => {
+  it("publishes the 34 reviewed recipes while preserving all structured data", () => {
     const published = getPublishedRecipes();
     expect(recipes).toHaveLength(100);
-    expect(published).toHaveLength(10);
+    expect(published).toHaveLength(34);
     expect(published.every((recipe) => recipe.publication.status === "published")).toBe(true);
     expect(published.every((recipe) => evaluateRecipePublishingEligibility(recipe, context).eligible)).toBe(true);
   });

@@ -22,7 +22,7 @@ import { buildRecommendationExplanation } from "../recommendation-display";
 import { recommendationEngine } from "../recommendation";
 import { describeRecipeSimilarity } from "../recipe-similarity-display";
 import { rankSimilarRecipes } from "../recipe-similarity";
-import { formatImageAttribution } from "../recipe-images";
+import { formatImageAttribution, formatImageAttributionParts } from "../recipe-images";
 import { getRecipeCuisineLabel, getRecipePrimaryTechniqueLabel } from "../taxonomy";
 import type { TranslationSet } from "@/types/localization";
 
@@ -94,12 +94,12 @@ describe("reviewed public translation policy", () => {
     expect(resolveReviewedTranslation(set, "en")).toBeUndefined();
   });
 
-  it("covers all 10 published Recipes without rewriting the 100-item draft dataset", () => {
+  it("covers all 34 published Recipes without rewriting the 100-item structured dataset", () => {
     const recipes = getPublishedRecipes();
-    expect(recipes).toHaveLength(10);
+    expect(recipes).toHaveLength(34);
     expect(recipes.every((recipe) => hasCompleteRecipeTranslation(recipe, "en"))).toBe(true);
     const english = getLocalizedRecipes(recipes, "en");
-    expect(english).toHaveLength(10);
+    expect(english).toHaveLength(34);
     expect(english.every((recipe) => !cjk.test([recipe.name, recipe.description, ...recipe.steps.flatMap((step) => [step.instruction, step.why])].join(" ")))).toBe(true);
   });
 
@@ -116,7 +116,12 @@ describe("reviewed public translation policy", () => {
         "inputs" in preparation ? preparation.inputs.filter((input) => input.note).map((input) => input.ingredientId) : [],
       ), item.id).toBe(true);
       const detail = buildCulinaryDetailModel(item, ingredients, getStoryExperienceContext("en"), "en");
-      expect(cjk.test(JSON.stringify({ name: detail.name, description: detail.description, preparation: detail.preparation })), item.id).toBe(false);
+      expect(cjk.test(JSON.stringify({
+        name: detail.name,
+        description: detail.description,
+        imageAlt: detail.image?.alt,
+        preparation: detail.preparation,
+      })), item.id).toBe(false);
     }
   });
 
@@ -150,6 +155,8 @@ describe("localized domain presentation", () => {
     expect(getHeatLabel("high", "en")).toBe("High heat");
     expect(formatImageAttribution("Author / Wikimedia Commons，裁切处理，CC BY 4.0", "en"))
       .toBe("Author / Wikimedia Commons, cropped, CC BY 4.0");
+    expect(formatImageAttributionParts("Author / Wikimedia Commons，裁切处理，CC BY 4.0", "en"))
+      .toEqual({ credit: "Author / Wikimedia Commons, cropped", license: "CC BY 4.0" });
     const heroes = buildHomeHeroItems(homeHeroEditorialItems, englishRecipes, recipeImages, "en");
     expect(heroes).toHaveLength(5);
     expect(heroes.every((hero) => !cjk.test(`${hero.name} ${hero.editorialLine}`))).toBe(true);

@@ -5,6 +5,7 @@ import {
   getPublishedCulinaryItemsForLocale,
 } from "./published-culinary-items";
 import { getStoryExperienceContext } from "./published-stories";
+import { getPublishedRecipes } from "./published-recipes";
 import { buildMealCompositionPageModel } from "@/lib/meal-composition-display";
 import { buildCulinaryItemSummary } from "@/lib/story-experience";
 import {
@@ -23,6 +24,7 @@ const ingredientRepository: IngredientRepository = {
   getById: (id) => ingredientById.get(id),
   list: () => ingredients,
 };
+const publishedRecipeIds = new Set(getPublishedRecipes().map((recipe) => recipe.id));
 
 export function getPublishedMealComposition(
   slug: string,
@@ -68,6 +70,7 @@ export function getPublishedPairingExperience(
     ...defaultModel,
     alcoholicAlternative,
     nonAlcoholicAlternative: nonAlcoholicItem ? buildCulinaryItemSummary(nonAlcoholicItem, storyContext) : undefined,
+    anchorIsRecipe: publishedRecipeIds.has(result.anchor.id),
     anchorIsAlcoholic: result.anchor.itemType === "alcoholic-drink",
     appliedRelaxationIds,
   };

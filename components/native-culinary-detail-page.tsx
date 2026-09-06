@@ -65,7 +65,7 @@ export function NativeCulinaryDetailPage({
             <div className="mt-6"><Link className="focus-ring inline-flex min-h-11 items-center justify-center rounded-[4px] bg-stone-950 px-5 font-bold text-white transition hover:bg-[var(--tomato)] active:translate-y-px" href={planHref}>{copy.addToPlan}</Link></div>
           </div>
           <div className="overflow-hidden rounded-[4px] bg-stone-200">
-            <RecipeImage image={detail.image} fallbackInitial={detail.fallbackInitial} fallbackLabel={detail.name} alt={detail.image?.alt ?? detail.name} locale={locale} sourceLabel={copy.imageSource} variant="hero" preload />
+            <RecipeImage image={detail.image} fallbackInitial={detail.fallbackInitial} fallbackLabel={detail.name} alt={detail.image?.alt ?? detail.name} locale={locale} sourceLabel={copy.imageSource} variant="hero" lcp />
           </div>
         </header>
 

@@ -119,7 +119,7 @@ export default async function PairingPage({
                 locale={locale}
                 sourceLabel={messages.common.imageSource}
                 variant="hero"
-                preload
+                lcp
               />
             </div>
           </div>

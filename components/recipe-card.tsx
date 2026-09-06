@@ -37,11 +37,10 @@ export function RecipeCard({
   return (
     <article className="editorial-card group h-full min-w-0 pt-4">
       <Link
-        aria-label={locale === "zh-CN" ? `查看 ${recipe.name}，${flavor}，${formatHumanCookingTime(recipe.cooking.totalTime, locale)}` : `View ${recipe.name}, ${flavor}, ${formatHumanCookingTime(recipe.cooking.totalTime, locale)}`}
         className="focus-ring block focus:outline-none"
         href={detailHref}
       >
-        <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={recipe.name} alt={recipe.name} variant="card" />
+        <RecipeImage image={image} fallbackInitial={fallback.initial} fallbackLabel={recipe.name} alt="" variant="card" />
         <div className="pt-4">
           <p className="text-xs font-semibold text-[var(--tomato)]">{cuisineAndTechnique}</p>
           <h3 className="mt-2 text-xl font-bold leading-snug text-stone-950 group-hover:underline">{recipe.name}</h3>

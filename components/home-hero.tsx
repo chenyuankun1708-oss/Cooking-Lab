@@ -37,8 +37,9 @@ export function HomeHero({ items, locale }: { items: readonly HomeHeroItem[]; lo
               <Image
                 alt={locale === "en" ? `${item.name}, ready to serve` : item.image.alt}
                 className="object-cover"
+                fetchPriority="high"
                 fill
-                preload
+                loading="eager"
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 src={item.image.src}
                 style={{ objectPosition: `${(item.image.focalPoint?.x ?? 0.5) * 100}% ${(item.image.focalPoint?.y ?? 0.5) * 100}%` }}

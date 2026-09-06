@@ -11,15 +11,17 @@ import { supportedLocales, type SupportedLocale } from "@/types/localization";
 const bodyFont = Noto_Sans_SC({
   variable: "--font-body",
   weight: "variable",
-  display: "swap",
-  preload: false,
+  display: "optional",
+  preload: true,
+  subsets: ["latin"],
 });
 
 const displayFont = Noto_Serif_SC({
   variable: "--font-display",
   weight: "variable",
-  display: "swap",
-  preload: false,
+  display: "optional",
+  preload: true,
+  subsets: ["latin"],
 });
 
 export function generateStaticParams() {

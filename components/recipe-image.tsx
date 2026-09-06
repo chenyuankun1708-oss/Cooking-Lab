@@ -16,7 +16,7 @@ interface RecipeImageProps {
   fallbackInitial: string;
   fallbackLabel: string;
   variant: keyof typeof imageSizes;
-  preload?: boolean;
+  lcp?: boolean;
   showAttribution?: boolean;
   alt?: string;
   sourceLabel?: string;
@@ -28,7 +28,7 @@ export function RecipeImage({
   fallbackInitial,
   fallbackLabel,
   variant,
-  preload = false,
+  lcp = false,
   showAttribution = true,
   alt,
   sourceLabel = "来源",
@@ -59,10 +59,10 @@ export function RecipeImage({
       <div className={`${frameClass} relative w-full overflow-hidden rounded-[4px] bg-stone-100`}>
         <Image
           alt={alt ?? image.alt}
+          fetchPriority={lcp ? "high" : undefined}
           fill
-          loading={preload ? undefined : "lazy"}
+          loading={lcp ? "eager" : "lazy"}
           onError={() => setFailed(true)}
-          preload={preload}
           sizes={imageSizes[variant]}
           src={image.src}
           style={{ objectFit: "cover", objectPosition: `${focalPoint.x * 100}% ${focalPoint.y * 100}%` }}

@@ -48,3 +48,5 @@ Design read: a bilingual culinary decision product for home cooks, using Fresh E
 ## Definition of done
 
 The engineering/design portion is complete when lint, typecheck, tests, production build, local bilingual smoke tests, responsive screenshots, independent code review, and independent visual review pass. The full 120-item M11 acceptance criterion additionally requires the independent human content review described above.
+
+Latest local Production lab evidence at a 412 px viewport records English LCP 244 ms, CLS 0, and INP 152 ms; Chinese records LCP 216 ms, CLS 0, and INP 160 ms. Lighthouse accessibility is 1.00 after contrast and accessible-name fixes. These measurements are pre-merge lab evidence, not Production field data.

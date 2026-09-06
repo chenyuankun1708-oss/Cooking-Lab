@@ -198,7 +198,7 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - existing footer, disclaimers, and metadata patterns
 - New/changed components:
   - `SiteHeader` and `HomeHero`
-  - static editorial Hero with one preloaded LCP image and no automatic carousel
+  - static editorial Hero with one high-priority LCP image and no automatic carousel
   - `CulinaryCard` and `NativeCulinaryDetailPage` as cross-type consumer surfaces
   - `EmbeddedStories` for evidence-backed cultural and recognition chapters
   - visual-first catalog and recommendation card variants
@@ -290,8 +290,8 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - keep tokens modest and practical
   - prefer a small semantic role system over large theme matrices
 - Performance constraints:
-  - only the homepage LCP image and current detail hero preload
-  - the homepage Hero mounts and preloads one LCP image only
+  - only the current page's LCP Hero image receives high fetch priority
+  - the homepage Hero mounts and eagerly loads one LCP image only
   - recipe cards lazy-load images with responsive `sizes`
   - catalog filtering remains server-rendered; no second 100-recipe client payload is introduced
   - locale dictionaries and editorial content resolve server-side; do not ship both public languages to client components

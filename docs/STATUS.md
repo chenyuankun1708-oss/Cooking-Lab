@@ -12,6 +12,7 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - 已增加双语 noindex Plan 路由，以及推荐、料理详情、Pairing 的加入入口；首页可继续本地计划。
 - 详情页已有键盘可用的稳定章节导航、跨类型相似料理和保留在末章的 `#sources`。
 - Taste Redesign - Overhaul 已覆盖首页、目录、详情、Pairing 和 Plan；主题选择跟随系统并在可用时本地保存。
+- 最新 412 px local Production 实测：英文 LCP 244 ms / CLS 0 / INP 152 ms，中文 LCP 216 ms / CLS 0 / INP 160 ms；Lighthouse accessibility 为 1.00。该结果是可复现 lab evidence，不代替 merge 后的 Production field observation。
 - 当前 50 项各自通过 content package module 进入 repository，独立提交的 deterministic manifest、`content:audit` 与 M10 gate 共同阻止过期 identity/Story/Hero/usage decisions。
 - 完整 120 项验收仍缺 70 个经独立人工内容审校的内容包。M10 要求 AI 辅助表达记录 provenance 并通过 human review；实现 agent 不能自证该门禁，因此不会伪造 120 项已完成。
 

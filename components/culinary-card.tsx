@@ -20,7 +20,6 @@ export function CulinaryCard({
   return (
     <article className={`editorial-card group min-w-0 pt-4 ${featured ? "sm:col-span-2" : ""}`}>
       <Link
-        aria-label={locale === "zh-CN" ? `查看${entry.name}` : `View ${entry.name}`}
         className="focus-ring block"
         href={href}
       >
@@ -29,7 +28,7 @@ export function CulinaryCard({
             image={entry.image}
             fallbackInitial={entry.fallbackInitial}
             fallbackLabel={entry.name}
-            alt={entry.name}
+            alt=""
             variant="card"
           />
         </div>

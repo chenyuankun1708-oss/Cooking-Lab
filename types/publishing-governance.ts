@@ -20,6 +20,7 @@ export interface ReviewActorIdentity {
 
 export interface ReviewFinding {
   code: string;
+  kind: "quality" | "reviewer-disagreement";
   severity: "minor" | "major";
   summary: string;
   disposition: "resolved" | "unresolved";
@@ -66,6 +67,7 @@ export const publishingRiskReasonCodes = [
   "food-safety-critical-process",
   "unresolved-material-factual-conflict",
   "complex-trademark-publicity-or-privacy",
+  "unresolved-reviewer-disagreement",
   "professional-legal-checkpoint",
 ] as const;
 export type PublishingRiskReasonCode = (typeof publishingRiskReasonCodes)[number];
@@ -87,9 +89,23 @@ export interface SamplingEquivalenceClass {
   sampledItemIds: [string, ...string[]];
 }
 
+export interface SamplingQaFinding extends ReviewFinding {
+  equivalenceClassKeys: [string, ...string[]];
+}
+
+export interface SamplingQaSample {
+  itemId: string;
+  equivalenceClassKeys: [string, ...string[]];
+  dimensions: [Exclude<ReviewDimension, "human-approval">, ...Exclude<ReviewDimension, "human-approval">[]];
+  verdict: "pass" | "revise" | "block";
+  findings: ReviewFinding[];
+}
+
 export interface SamplingQaBatch {
   id: string;
   batchId: string;
+  sequence: number;
+  previousBatchId?: string;
   policyVersion: string;
   itemIds: [string, ...string[]];
   artifactSetVersion: string;
@@ -99,7 +115,9 @@ export interface SamplingQaBatch {
   reviewedCommit: string;
   evidenceReference: string;
   rubricVersion: string;
-  findings: ReviewFinding[];
+  verdict: "pass" | "revise" | "block";
+  samples: SamplingQaSample[];
+  findings: SamplingQaFinding[];
   auditorModifiedContent: false;
   metrics: {
     escapeCount: number;
@@ -107,9 +125,6 @@ export interface SamplingQaBatch {
     reworkItemCount: number;
     provenanceLicenseNoveltyCount: number;
   };
-  frozenClassKeys: string[];
-  fullReReviewClassKeys: string[];
-  consecutiveCleanBatchesByClass: Record<string, number>;
   auditedAt: string;
 }
 

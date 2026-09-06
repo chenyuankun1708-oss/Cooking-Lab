@@ -103,4 +103,4 @@ AI-generated prose, search snippets and unattributed summaries are never Evidenc
 
 ## M10 Commercial-use Boundary
 
-`Source.rights` 不再单独决定 Production。M10 将 Source 作为 ContentArtifact 的 reference input，并另建 RightsAssessment：reference-only 来源允许保存引用元数据与抽取窄事实，但禁止发布或商业化来源表达；只有经过独立结构、独立文字和人工复核的 factual synthesis artifact 才能得到 allow decision。来源 rights unknown、health rights-changed、过期 assessment 或缺少可执行署名时，统一门禁立即阻止公开。
+`Source.rights` 不再单独决定 Production。M10 将 Source 作为 ContentArtifact 的 reference input，并另建 RightsAssessment：reference-only 来源允许保存引用元数据与抽取窄事实，但禁止发布或商业化来源表达；只有经过独立结构、独立文字和适用的 risk-based review 的 factual synthesis artifact 才能得到 allow decision。LOW 可由真正独立的 agent context 审查，HIGH 保留人类、专家或法律 checkpoint。来源 rights unknown、health rights-changed、过期 assessment 或缺少可执行署名时，统一门禁立即阻止公开。

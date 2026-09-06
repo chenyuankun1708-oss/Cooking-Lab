@@ -16,7 +16,7 @@ const englishIngredientLabels: Readonly<Record<string, string>> = Object.freeze(
   lime: "lime", "longjing-tea-leaf": "Longjing tea leaves", "makrut-lime-leaf": "makrut lime leaves",
   mango: "mango", mascarpone: "mascarpone", milk: "milk", miso: "miso", mushroom: "mushrooms",
   oats: "oats", onion: "onion", oregano: "oregano", pasta: "pasta", "pork-belly": "pork belly",
-  "pork-tenderloin": "lean pork", rice: "rice", "rice-noodles": "rice noodles", salt: "salt",
+  "pork-tenderloin": "lean pork", rice: "rice", "rice-noodles": "rice noodles", "roasted-peanut": "unsalted roasted peanuts", salt: "salt",
   scallion: "scallions", "sesame-paste": "sesame paste", "shaoxing-wine": "Shaoxing wine",
   shrimp: "shrimp", "soy-sauce": "soy sauce", spinach: "spinach",
   "sweetened-condensed-milk": "sweetened condensed milk", tomato: "tomatoes", tofu: "tofu",

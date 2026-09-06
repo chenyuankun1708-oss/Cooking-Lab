@@ -48,6 +48,11 @@ const estimatedIngredients: Omit<Ingredient, "dataQuality" | "nutritionProvenanc
     defaultUnit: "g", estimatedPricePer100g: 0.7, tags: ["vegan"],
   },
   {
+    id: "roasted-peanut", name: "无盐烤花生", aliases: ["烤花生", "花生"], category: "protein",
+    nutritionPer100g: nutrition(585, 23.7, 49.7, 6.9, 21.5, 4.2, 8, 6),
+    defaultUnit: "g", estimatedPricePer100g: 2.2, tags: ["vegan", "high-protein"],
+  },
+  {
     id: "dry-lentil", name: "干扁豆", aliases: ["扁豆"], category: "protein",
     nutritionPer100g: nutrition(352, 24.6, 1.1, 0.2, 63.4, 2, 10.7, 6),
     defaultUnit: "g", estimatedPricePer100g: 1.8, tags: ["vegan", "high-fiber"],

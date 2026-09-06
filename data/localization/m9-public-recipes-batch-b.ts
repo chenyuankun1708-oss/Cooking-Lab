@@ -293,36 +293,36 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
     principles: ["Soften the vegetables before simmering", "Maintain gentle bubbling", "Judge doneness by lentil texture"],
   }),
   "greek-lemon-oregano-chicken": en({
-    name: "Greek-Inspired Lemon Oregano Chicken",
+    name: "Greek-Inspired Lemon Oregano Chicken Skewers",
     description:
-      "A home-style grill-pan chicken flavored with lemon, oregano, and garlic, inspired by a common Greek flavor combination.",
+      "Home-style grill-pan chicken skewers flavored with lemon, oregano, and garlic, inspired by a common Greek flavor combination.",
     steps: [
       {
         instruction:
-          "Gently flatten the thickest parts of the chicken thighs to an even thickness. Pat dry and coat with oil, salt, garlic, and oregano, keeping the lemon for the end.",
+          "Cut the chicken thighs into even 3 cm pieces. Pat dry and coat with oil, salt, garlic, and oregano, keeping the lemon for the end.",
         why:
-          "Even thickness supports consistent cooking. Adding a large amount of lemon juice now would wet the surface and interfere with browning.",
+          "Even pieces finish cooking together. Adding a large amount of lemon juice now would wet the surface and interfere with browning.",
       },
       {
         instruction:
-          "Preheat the grill pan until a drop of water evaporates immediately. Add the chicken and leave it in place until clear brown grill marks form underneath.",
+          "Thread the chicken snugly but without compressing it, leaving a small gap between pieces. Preheat the grill pan until a drop of water evaporates immediately.",
         why:
-          "Steady contact with a hot surface builds browned flavor. Frequent movement reduces the effective contact time.",
+          "Small gaps let heat reach the sides and keep the pieces from squeezing moisture onto each other.",
       },
       {
         instruction:
-          "Turn the chicken, reduce to medium-low heat, and continue cooking until the thickest part is no longer pink and the juices run clear.",
+          "Add the skewers and leave them in place until the contact side has clear brown marks. Turn to brown each side, then reduce to medium-low until the thickest piece is no longer pink.",
         why:
-          "Lower heat finishes the center without burning an already browned surface. Cover briefly if the outside colors faster than the center cooks.",
+          "Stable contact builds browned flavor on each side. Lower heat then finishes the center without burning the surface.",
       },
       {
         instruction:
-          "Rest the chicken off the heat for 3 minutes, then slice and squeeze over the lemon juice. Turn the cut surfaces through the juices on the plate.",
+          "Rest the skewers off the heat for 3 minutes, squeeze over the lemon juice, and turn them lightly through the juices on the plate.",
         why:
           "Resting balances heat and juices through the meat. Adding lemon at the end preserves its bright aroma.",
       },
     ],
-    principles: ["Even the thickness before cooking", "Brown over high heat before lowering it", "Add lemon after cooking"],
+    principles: ["Cut the pieces evenly", "Brown each side before lowering the heat", "Add lemon after cooking"],
   }),
   "mexican-black-bean-tacos": en({
     name: "Home-Style Black Bean Tacos",

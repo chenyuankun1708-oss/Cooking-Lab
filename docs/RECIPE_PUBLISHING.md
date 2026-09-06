@@ -10,7 +10,7 @@ Cooking Lab 明确区分“已经存在的结构化 Recipe 数据”和“适合
 
 `recipe.publication.status` 是明确的编辑状态：
 
-- `draft`：仍需内容、图片或人工复核
+- `draft`：仍需内容、图片或适用的 risk-based review
 - `reviewed`：已经过一轮人工审阅，但尚未决定公开
 - `published`：编辑已明确决定公开
 
@@ -67,7 +67,7 @@ Issue #30 对 100 道 Recipe 的基线审计结论：
 
 ## Editorial Review
 
-人工审校逐道检查 servings、ingredient state、tools、时间、步骤顺序、调味时机、图片内容、授权以及营养/成本计算。步骤数量由实际流程决定，每一步尽量包含：
+发布审查按 `docs/PUBLISHING_GOVERNANCE.md` 的风险分级执行。LOW 可由确定性门禁与独立 agent review 完成；MEDIUM 使用分离的审查上下文；只有 HIGH 或明确专业 checkpoint 才要求真人、领域专家或律师。各批次仍需逐项覆盖 servings、ingredient state、tools、时间、步骤顺序、调味时机、图片 fidelity、授权以及营养/成本计算。步骤数量由实际流程决定，每一步尽量包含：
 
 1. 可执行动作
 2. 可观察的颜色、气味、质地、声音、汁水或锅内变化

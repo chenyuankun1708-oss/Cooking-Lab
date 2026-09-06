@@ -1,14 +1,17 @@
-import { createArtifactSetVersion, getItemArtifacts } from "@/lib/publishing-governance";
-import type { CulinaryItem, Source } from "@/types/culinary";
+import { createArtifactSetVersion, deriveEquivalenceClassKeys } from "@/lib/publishing-governance";
+import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
 import type { ContentRightsRegistry } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
+import type { Ingredient } from "@/types/ingredient";
+import type { LocalContentPackageV1 } from "@/types/content-bundle";
+import type { ImageAssetVersion } from "@/lib/image-asset-version";
+import type { PublishingLocalizationVersion } from "@/lib/publishing-governance";
 import type {
   PublishingGovernanceRegistry,
   PublishingRiskClassification,
   ReviewActorIdentity,
   ReviewAttestation,
   ReviewDimension,
-  SamplingEquivalenceClass,
 } from "@/types/publishing-governance";
 import { m10AuditedCulinaryItemIds } from "./content-rights";
 
@@ -39,13 +42,35 @@ export interface CreatePublishingGovernanceRegistryInput {
   rightsRegistry: ContentRightsRegistry;
   images: readonly RecipeImage[];
   sources: readonly Source[];
+  evidence: readonly Evidence[];
+  ingredients: readonly Ingredient[];
+  contentPackages: readonly LocalContentPackageV1[];
+  localizationVersions: readonly PublishingLocalizationVersion[];
+  imageAssetVersions: readonly ImageAssetVersion[];
 }
 
 export function createPublishingGovernanceRegistry(
   input: CreatePublishingGovernanceRegistryInput,
 ): PublishingGovernanceRegistry {
   const itemIds = [...m10AuditedCulinaryItemIds] as [string, ...string[]];
-  const context = { items: input.items, rightsRegistry: input.rightsRegistry };
+  const context = {
+    items: input.items,
+    rightsRegistry: input.rightsRegistry,
+    images: input.images,
+    sources: input.sources,
+    evidence: input.evidence,
+    ingredients: input.ingredients,
+    contentPaths: input.contentPackages.map((contentPackage) => ({
+      itemId: contentPackage.itemId,
+      kind: contentPackage.sourceKind === "legacy-recipe"
+        ? "adapted-recipe" as const
+        : contentPackage.sourceKind === "legacy-native"
+          ? "native-culinary" as const
+          : "standalone-package" as const,
+    })),
+    localizationVersions: input.localizationVersions,
+    imageAssetVersions: input.imageAssetVersions,
+  };
   const riskClassifications = input.items
     .filter((item) => itemIds.includes(item.id))
     .map((item): PublishingRiskClassification => ({
@@ -54,7 +79,7 @@ export function createPublishingGovernanceRegistry(
       artifactSetVersion: createArtifactSetVersion([item.id], context),
       level: "low",
       reasonCodes: ["clear-first-party-or-reference-only-rights"],
-      equivalenceClassKeys: equivalenceClassKeys(item, input) as [string, ...string[]],
+      equivalenceClassKeys: deriveEquivalenceClassKeys(item, context) as [string, ...string[]],
       policyVersion: publishingGovernancePolicyVersion,
       classifiedAt: "2026-09-06",
     }));
@@ -89,88 +114,12 @@ export function createPublishingGovernanceRegistry(
     },
   }));
 
-  const classes = buildSamplingClasses(riskClassifications);
   return {
     policyVersion: publishingGovernancePolicyVersion,
     attestations,
     riskClassifications,
-    samplingBatches: [{
-      id: `sampling-${m10BaselineBatchId}`,
-      batchId: m10BaselineBatchId,
-      policyVersion: publishingGovernancePolicyVersion,
-      itemIds,
-      artifactSetVersion: m10BaselineReviewedArtifactSetVersion,
-      equivalenceClasses: classes,
-      author,
-      auditor: {
-        actorType: "agent",
-        actorId: "codex-agent:m10-independent-sampling-auditor",
-        runId: "m10-pr84-sampling-audit-final",
-        contextId: "m10-independent-sampling-context",
-      },
-      reviewedCommit: m10BaselineReviewedCommit,
-      evidenceReference: "docs/M10_CONTENT_RIGHTS_AUDIT.md",
-      rubricVersion: "m10-risk-equivalence-sampling-v1",
-      findings: [],
-      auditorModifiedContent: false,
-      metrics: {
-        escapeCount: 0,
-        reviewerDisagreementCount: 0,
-        reworkItemCount: 0,
-        provenanceLicenseNoveltyCount: 0,
-      },
-      frozenClassKeys: [],
-      fullReReviewClassKeys: [],
-      consecutiveCleanBatchesByClass: {},
-      auditedAt: "2026-09-06",
-    }],
+    // M10 did not perform risk-equivalence sampling. Keep this empty until a
+    // real M10.1 auditor reviews a frozen commit and leaves item-level evidence.
+    samplingBatches: [],
   };
-}
-
-function equivalenceClassKeys(
-  item: CulinaryItem,
-  input: CreatePublishingGovernanceRegistryInput,
-): string[] {
-  const artifacts = getItemArtifacts(item, input.rightsRegistry);
-  const imageId = item.images.availability === "available" ? item.images.references.primaryImageId : undefined;
-  const image = input.images.find((entry) => entry.id === imageId);
-  const sourceById = new Map(input.sources.map((source) => [source.id, source]));
-  const domains = new Set(
-    artifacts.flatMap((artifact) => artifact.sourceIds)
-      .flatMap((sourceId) => sourceById.get(sourceId)?.locators ?? [])
-      .flatMap((locator) => locator.kind === "url" ? [new URL(locator.url).hostname] : []),
-  );
-  const derivations = new Set(artifacts.map((artifact) => artifact.derivation));
-  const aiRecords = artifacts.flatMap((artifact) => input.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
-  const keys = [
-    `content-type:${item.itemType}`,
-    `image-license:${image?.license ?? "none"}`,
-    `image-source:${image?.source ?? "none"}`,
-    `nutrition:${item.nutrition.applicability === "applicable" ? item.nutrition.source : item.nutrition.applicability}`,
-    `cost:${item.cost.source}`,
-    "translation-path:zh-CN+en-reviewed",
-    ...[...domains].sort().map((domain) => `source-domain:${domain}`),
-    ...[...derivations].sort().map((derivation) => `derivation:${derivation}`),
-    ...aiRecords.map((record) => `model-prompt:${record.provider}/${record.model}/${record.modelVersion}/${record.promptTemplateVersion}`),
-  ];
-  return [...new Set(keys)].sort();
-}
-
-function buildSamplingClasses(
-  classifications: readonly PublishingRiskClassification[],
-): [SamplingEquivalenceClass, ...SamplingEquivalenceClass[]] {
-  const members = new Map<string, string[]>();
-  for (const classification of classifications) {
-    for (const key of classification.equivalenceClassKeys) {
-      members.set(key, [...(members.get(key) ?? []), classification.itemId]);
-    }
-  }
-  const classes = [...members.entries()]
-    .sort(([left], [right]) => left.localeCompare(right))
-    .map(([key, itemIds]): SamplingEquivalenceClass => {
-      const sorted = [...itemIds].sort() as [string, ...string[]];
-      return { key, itemIds: sorted, sampledItemIds: [sorted[0]] };
-    });
-  if (!classes.length) throw new Error("Publishing governance requires at least one sampling equivalence class");
-  return classes as [SamplingEquivalenceClass, ...SamplingEquivalenceClass[]];
 }

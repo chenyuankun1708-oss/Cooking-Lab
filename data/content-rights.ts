@@ -244,6 +244,7 @@ function addImageArtifact(
   const usageDecisionId = `usage-${artifactId}`;
   const attributionId = `attribution-${image.id}`;
   const needsAttribution = ["cc-by", "cc-by-sa", "unsplash-license", "pexels-license", "pixabay-content-license", "other-permitted"].includes(image.license);
+  const needsProvenanceDisclosure = image.source !== "self-created" && Boolean(image.sourceUrl);
   const shareAlike = image.license === "cc-by-sa";
   const prohibited = ["cc-by-nc", "cc-by-nd", "cc-by-nc-sa", "cc-by-nc-nd", "unknown", "prohibited"].includes(image.license);
   const attributionRequirementIds = needsAttribution ? [attributionId] : [];
@@ -288,10 +289,11 @@ function addImageArtifact(
     decidedAt: assessedAt,
     reviewer,
   });
-  if (needsAttribution) {
+  if (needsAttribution || needsProvenanceDisclosure) {
     attributions.push({
       id: attributionId,
       artifactId,
+      disclosureKind: needsAttribution ? "license-required" : "provenance-only",
       creator: image.author ?? "Unknown creator",
       workTitle: image.alt,
       sourceUrl: image.sourceUrl ?? "",

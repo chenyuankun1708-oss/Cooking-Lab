@@ -121,14 +121,14 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
   }),
   "thai-green-papaya-salad": en({
     name: "Home-Style Green Papaya Salad",
-    description: "A vegan household adaptation built around crisp green papaya, lime, fresh chili, and soy sauce.",
+    description: "A home-style salad of crisp green papaya, tomatoes, lime, fish sauce, chili, and roasted peanuts.",
     steps: [
-      { instruction: "Peel and seed the green papaya, cut it and the carrot into even fine shreds, and blot away surface water.", why: "Even shreds absorb seasoning together. Excess water dilutes the acidity and saltiness." },
-      { instruction: "Finely chop the garlic and chili and mix them thoroughly with lime juice, soy sauce, and salt. The dressing should taste clearly tart and hot without being overly salty.", why: "Mixing first prevents concentrated hot spots. Wash your hands after handling chili and avoid touching your eyes." },
-      { instruction: "Just before serving, place the papaya and carrot in a large bowl. Add the dressing and turn from the bottom with tongs until the shreds look evenly glossy.", why: "Last-minute dressing limits released water. Avoid crushing the shreds so they remain crisp." },
-      { instruction: "Rest for 2 minutes, toss again, and taste. If a large pool of liquid has formed, drain a little before serving.", why: "A short rest lets the dressing reach the cut surfaces. Controlling free liquid keeps the salad bright and crisp." },
+      { instruction: "Peel and seed the green papaya, cut it and the carrot into even fine shreds, cut the tomatoes into small chunks, and roughly crush the peanuts.", why: "Even shreds absorb seasoning together. Keeping the tomatoes in chunks limits premature juice loss." },
+      { instruction: "Finely chop the garlic and chili and mix them thoroughly with lime juice, fish sauce, and salt. The dressing should taste clearly tart and hot without being overly salty.", why: "Mixing first prevents concentrated hot spots. Fish sauce is already salty, so use salt only for a small final correction." },
+      { instruction: "Just before serving, place the papaya, carrot, and tomatoes in a large bowl. Add the dressing and turn from the bottom with tongs until the shreds look evenly glossy.", why: "Last-minute dressing limits released water. Avoid crushing the shreds so they remain crisp." },
+      { instruction: "Rest for 2 minutes, toss again, and taste. Drain a little liquid if a large pool has formed, then plate and scatter over the peanuts.", why: "A short rest lets the dressing reach the cut surfaces. Adding the peanuts last preserves their toasted aroma and crunch." },
     ],
-    principles: ["Cut evenly for consistent seasoning", "Mix the dressing before adding it", "Dress close to serving"],
+    principles: ["Cut evenly for consistent seasoning", "Balance fish sauce before adding salt", "Add peanuts last for crunch"],
   }),
   "filipino-chicken-adobo-home": en({
     name: "Home-Style Filipino Chicken Adobo",

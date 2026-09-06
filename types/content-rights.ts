@@ -61,6 +61,7 @@ export interface RightsAssessment {
 export interface AttributionRequirement {
   id: string;
   artifactId: string;
+  disclosureKind: "license-required" | "provenance-only";
   creator: string;
   workTitle: string;
   sourceUrl: string;

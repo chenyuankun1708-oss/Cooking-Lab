@@ -29,10 +29,14 @@ import {
   createPublishingGovernanceReport,
   evaluatePublishingGovernance,
 } from "@/lib/publishing-governance";
+import { createImageAssetVersions } from "@/lib/image-asset-version";
+import { createPublishingLocalizationVersions } from "./publishing-localization-versions";
 
 export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
 const allImages = [...recipeImages, ...culinaryImages];
+export const contentImageAssetVersions = Object.freeze(createImageAssetVersions(allImages));
+export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages));
 const candidates: CulinaryItem[] = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
 const publishingContext: CulinaryPublishingContext = {
   ingredients,
@@ -77,8 +81,30 @@ export const publishingGovernanceRegistry = createPublishingGovernanceRegistry({
   rightsRegistry: contentRightsRegistry,
   images: allImages,
   sources: allSources,
+  evidence: allEvidence,
+  ingredients,
+  contentPackages: publishedLocalContentPackages,
+  localizationVersions: contentLocalizationVersions,
+  imageAssetVersions: contentImageAssetVersions,
 });
-const publishingGovernanceContext = { items: candidates, rightsRegistry: contentRightsRegistry } as const;
+const publishingGovernanceContext = {
+  items: candidates,
+  rightsRegistry: contentRightsRegistry,
+  images: allImages,
+  sources: allSources,
+  evidence: allEvidence,
+  ingredients,
+  contentPaths: publishedLocalContentPackages.map((contentPackage) => ({
+    itemId: contentPackage.itemId,
+    kind: contentPackage.sourceKind === "legacy-recipe"
+      ? "adapted-recipe" as const
+      : contentPackage.sourceKind === "legacy-native"
+        ? "native-culinary" as const
+        : "standalone-package" as const,
+  })),
+  localizationVersions: contentLocalizationVersions,
+  imageAssetVersions: contentImageAssetVersions,
+} as const;
 assertPublishingGovernanceReady(publishingGovernanceRegistry, publishingGovernanceContext);
 export const publishingGovernanceAuditReport = createPublishingGovernanceReport(
   evaluatePublishingGovernance(publishingGovernanceRegistry, publishingGovernanceContext),

@@ -12,7 +12,7 @@ M5 的内容目标不是“随便再加 70 道菜”，而是把数据集扩展�
 
 ## Publishing Strategy
 
-结构完整不等于内容已经适合公开。Recipe 使用 `draft / reviewed / published` 表达人工编辑状态，确定性 eligibility 另行检查 schema、计算、时间、hero、授权、alt、步骤完整性与 culture provenance。只有 `published` 且 eligibility 通过的 Recipe 才进入公开首页、目录、推荐和详情。
+结构完整不等于内容已经适合公开。Recipe 使用 `draft / reviewed / published` 表达编辑工作流状态，不暗示审查者为人类；审查身份只由 `ReviewAttestation` 表达。确定性 eligibility 另行检查 schema、计算、时间、hero、授权、alt、步骤完整性与 culture provenance。只有 `published` 且 eligibility 通过的 Recipe 才进入公开首页、目录、推荐和详情。
 
 当前公开集包含 34 道具备合法 Hero 且完成逐道内容深化的 Recipe。M9 新增的 24 道还必须具备 closed ResearchRecord 和至少两个独立 accepted Source；其余 66 道继续保留 draft，不为了公开数量降低图片、步骤或来源质量。
 
@@ -261,7 +261,7 @@ M5 必须引入真实料理视觉系统，但本轮只定义 schema 和原则，
 - story / origin 只有在可靠时出现
 - no fake historical claims
 - publication status 必须显式设置，不能由“字段看起来齐全”或“存在图片”自动推断
-- 公开 Recipe 必须通过人工步骤、状态判断、图片准确性和来源复核
+- 公开 Recipe 必须按风险分级通过步骤、状态判断、图片准确性和来源复核；LOW 可由确定性门禁与真正独立的 agent reviewer 完成，HIGH 保留适用的人类或专业 checkpoint
 
 ## 推荐的执行顺序
 

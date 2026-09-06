@@ -42,16 +42,18 @@ Translation 的 `reviewed` 与 publication 的 `published` 只表示工作流状
 
 ### HIGH
 
-包括权利或商业使用不明、可能大量复现受保护表达、官方授权或品牌关系、医疗健康主张、高风险食品工艺、重要事实冲突、复杂 trademark/publicity/privacy 或 M10 专业法律 checkpoint。默认 BLOCK；只有对应类型的真人、领域专家或律师 checkpoint 可以解除可解除的风险。`unknown rights` 等 M10 硬阻断不能仅靠 human approval 解除。
+包括权利或商业使用不明、可能大量复现受保护表达、官方授权或品牌关系、医疗健康主张、高风险食品工艺、重要事实冲突、未解决 reviewer disagreement、复杂 trademark/publicity/privacy 或 M10 专业法律 checkpoint。默认 BLOCK；只有对应类型的真人、领域专家或律师 checkpoint 可以解除可解除的风险。`unknown rights` 等 M10 硬阻断不能仅靠 human approval 解除。
 
 ## Sampling QA
 
-Sampling 不使用固定百分比。每批必须覆盖新增或改变的风险等价类：来源域、许可证、内容类型、图片来源、derivation、模型/prompt、营养或成本数据转换和翻译路径。每个等价类至少有一个真实 sampled item；sampling auditor 必须与 author 及 primary reviewer 使用不同 actor/run/context。MEDIUM 的逐项双上下文审查不被 sampling 替代。
+Sampling 不使用固定百分比。每批必须覆盖新增或改变的风险等价类：来源域、许可证、内容类型、图片来源、derivation、模型/prompt、营养或成本数据转换和翻译路径。翻译路径至少区分 adapted Recipe、native CulinaryItem 与 standalone package。系统从真实 classified item 中使用确定性的 greedy set cover 选择能覆盖全部等价类的最小候选集合；这不是统计代表性声明，而是风险路径覆盖。新增 license、来源域、模型/prompt、转换或翻译路径会自然增加样本，持续出现 escape、disagreement 或 rework 则通过冻结规则将对应类提升到 100% review。
+
+每个等价类至少有一个真实 sampled item；每个 sampled item 必须留下逐项、全维度、带 verdict 与 findings 的 durable evidence，不能只用批次级 PASS 或虚假 item ID 满足覆盖。sampling auditor 必须与 author 及 primary reviewer 使用不同 actor/run/context。MEDIUM 的逐项双上下文审查不被 sampling 替代。
 
 出现 major finding 时冻结对应风险类，并把该类扩展为 100% re-review。只有完整复审且连续两个批次没有 major finding 后才可解除冻结。每批持续记录 escape count、reviewer disagreement、rework item count 和 provenance/license novelty，用于调高或调低后续覆盖强度。
 
 ## Fail-closed enforcement
 
-`ContentArtifact.version` 由实际料理、Story 或图片内容确定。Committed attestation 保存对应 artifact-set version；内容修改、scope 改变、policy 变化、缺少 risk classification、缺少适用 dimension、MEDIUM 独立性不足、HIGH 缺少 checkpoint 或 sampling coverage 不完整都会使 Production import、测试与 build 失败。
+Artifact-set version 覆盖实际料理、Story、Source、Evidence、RightsAssessment、UsageDecision、Attribution、AI metadata、营养/成本 dataset 与转换、内容路径、图片 metadata 及本地图片文件 SHA-256。Committed attestation 保存对应 version；任一内容或依赖证据修改、scope 改变、policy 变化、缺少 risk classification、缺少适用 dimension、MEDIUM 独立性不足、HIGH 缺少 checkpoint 或 sampling coverage 不完整都会使 Production import、测试与 build 失败。历史 sampling record 可以保留其原始 artifact version，但不能为已经改变的当前 item 提供 publication coverage。
 
-当前 M10 50 项的 migration 记录明确标为独立 agent review，不标为 human review、field test 或 legal opinion。未来批次使用新的 batch attestation，不修改旧 checkpoint 来“继承”PASS。
+当前 M10 50 项的 migration 记录明确标为独立 agent review，不标为 human review、field test 或 legal opinion。旧 M10 review 不能被追溯包装成 sampling PASS，因此 registry 在新审计完成前不包含 sampling batch，Production import 会按设计 fail closed。M10.1 必须使用本次真实、逐项留痕的独立 sampling audit。未来批次使用新的 batch attestation，不修改旧 checkpoint 来“继承”PASS。

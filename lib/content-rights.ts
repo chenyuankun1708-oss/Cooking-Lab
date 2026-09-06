@@ -276,6 +276,9 @@ function validateAttributions(
     if (attribution.shareAlikeRequired && !attribution.isolationBoundary) {
       report("share-alike-not-isolated", attribution.id, "isolationBoundary", "ShareAlike material must use an isolated asset or dataset boundary");
     }
+    if (attribution.disclosureKind === "provenance-only" && (attribution.shareAlikeRequired || attribution.isolationBoundary)) {
+      report("attribution-invalid", attribution.id, "disclosureKind", "A provenance-only disclosure cannot claim ShareAlike obligations");
+    }
   }
 }
 

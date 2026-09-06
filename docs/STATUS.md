@@ -16,6 +16,7 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - 当前 50 项各自通过 content package module 进入 repository，独立提交的 deterministic manifest、`content:audit` 与 M10 gate 共同阻止过期 identity/Story/Hero/usage decisions。
 - PR #95 已独立 merge 并交付 M11 工程、计划体验、内容包容量边界与 Taste 视觉升级；新增 70 项仍未发布。
 - Product Director 已批准 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。Issue #96 负责先让 schema、validator、CI 与文档 fail closed，生效前不得发布新增内容。
+- Issue #96 的 reviewer hardening 正在进行：artifact fingerprint 已覆盖 Source、Evidence、rights、attribution、AI/data/translation 路径及本地图片 SHA-256；sampling 使用真实 item 的风险等价类覆盖，major finding 自动冻结并要求连续两个 clean 100% re-review 批次。旧 M10 review 没有被追溯伪装成 sampling PASS，因此当前分支在真实独立 sampling audit 完成前会主动阻止 Production build。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)

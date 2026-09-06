@@ -340,3 +340,19 @@ M10 将内容权利建立为 framework-independent shared core：
 - `data/published-recipes.ts` 在 Recipe 进入推荐消费者前运行 recipe-scope gate；`data/published-culinary-items.ts` 对统一 50 项运行完整 gate。
 - Web 只消费 `ConsumerRightsDisclosure`，不暴露内部风险备注、合同或个人信息。
 - CC BY-SA 隔离发生在具体 asset-file / isolated-dataset 边界，不污染专有核心内容库。
+
+## M11 Local plan and content-bundle boundary
+
+M11 保持既有依赖方向：
+
+`Plan UI -> published plan adapter -> deterministic MealPlan engine -> CulinaryItem preparation data`
+
+`per-item local package -> published repository -> committed ContentBundleManifestV1 -> culinary publishing gate + M10 rights gate`
+
+- `types/meal-plan.ts` 和 `lib/meal-plan.ts` 不依赖 React、Next、DOM、filesystem 或 locale 文案。
+- `data/published-meal-plans.ts` 是服务器端 adapter，负责把 reviewed 本地文案与 public item identity 组合为按已选料理裁剪的 Plan catalog；浏览器不会接收完整料理库的 preparation 数据。
+- `lib/meal-plan-codec.ts` 区分精确替换的 share payload 与追加式 entry payload，只接受 bounded public URL、深层校验的 V1 state 和明确的 V0 selection migration。
+- `components/plan-workspace.tsx` 独占 localStorage、clipboard 和 timer 等浏览器能力。
+- `data/content-packages/` 为每个公开料理提供一个 package module；当前 50 项通过显式 legacy adapter 保持内容与顺序不变，后续可逐项替换为 standalone package。
+- `ContentBundleManifestV1` 不替代 repository；它是独立提交的 deterministic release index，并在 import/build/test 时验证 public identity、Story、locale、Hero 与精确 usage decisions。
+- 500+ 扩展不改变 `getPublishedCulinaryItems()` 等公共读取接口。数据库迁移仍需真实运行规模或第二客户端证据。

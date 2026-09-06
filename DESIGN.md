@@ -2,7 +2,7 @@
 
 ## Source of truth
 
-- Status: Active through M9 Epic #69
+- Status: Active through M11 Epic #87
 - Last refreshed: 2026-09-06
 - Primary product surfaces:
   - consumer homepage
@@ -11,6 +11,7 @@
   - embedded story and recognition chapters
   - recommendation entry and result presentation
   - deterministic pairing
+  - local-first tonight plan, shopping list, timeline, and cooking mode
 - Evidence reviewed:
   - `docs/PRODUCT.md`
   - `docs/BRAND_BRIEF.md`
@@ -29,7 +30,7 @@
 
 ## Brand
 
-### M9 design read
+### M11 design read
 
 Reading this as a bilingual culinary decision and knowledge product for everyday home cooks and curious food explorers, with a food-first editorial language and a restrained laboratory sense of order.
 
@@ -38,7 +39,9 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
 - `MOTION_INTENSITY: 3`
 - `VISUAL_DENSITY: 5`
 - Taste is a critique rubric, not the product source of truth. Accessibility, performance, factual integrity and this document override generic skill defaults.
-- M9 removes the separate consumer idea of Recipes versus Stories. A culinary item is the destination; method, serving guidance, nutrition, cultural context, recognition and sources are chapters of that item when applicable.
+- M11 uses Redesign - Overhaul for browsing and editorial surfaces while preserving the established brand, routes, canonical metadata, navigation, legal copy, and stable anchors.
+- The Plan surface is task-oriented and uses the same tokens without marketing-page choreography.
+- Multi-value metadata uses commas or Chinese enumeration punctuation. A visible line may use at most one middle-dot separator.
 
 - Personality:
   - warm
@@ -74,10 +77,11 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - Help users decide what to cook under real-life constraints.
   - Make cooking inspiration feel appetizing and approachable.
   - Grow from a recommendation tool into a cooking knowledge and household companion.
+  - Carry a decision through shopping, preparation, and serving on the same device.
   - Create a visual system that can stretch across Web and future mobile surfaces.
 - Non-goals:
   - Final brand naming in this phase
-  - New account, household, planning, persistence, AI, or mobile features
+  - Accounts, household profiles, cloud persistence, notifications, AI cooking, or mobile features
   - Paid design-service level brand identity execution
 - Success signals:
   - Homepage feels food-first instead of filter-first.
@@ -117,6 +121,7 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - `/{locale}/recipes`
   - `/{locale}/recipes/[slug]`
   - `/{locale}/pairing/[slug]`
+  - `/{locale}/plan` (`noindex`)
   - `/{locale}/stories` redirects to `/{locale}/recipes?story=available`
   - `/{locale}/stories/[slug]` redirects to the corresponding story anchor within the culinary detail
   - `/{locale}/culinary/[slug]` redirects permanently to the canonical recipe route
@@ -133,6 +138,7 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
 - `/{locale}/recipes/[slug]` follows: identity and tags -> type-correct preparation or serving guidance -> principles and state cues -> embedded story or recognition -> nutrition and cost -> sources -> pairing.
 - Stories are not a parallel content type in navigation. They remain structured domain objects and appear as chapters of the culinary item they explain.
 - Every public culinary item uses `/{locale}/recipes/[slug]` as its canonical consumer URL. Legacy culinary and story routes only preserve inbound links through permanent redirects.
+- Recommendation results, culinary details, and Pairing can create a versioned local plan. The plan share URL contains only public slugs, servings, and a template ID.
 - Navigation remains limited to Home, Culinary library, Tonight's choice, and Language. Beta feedback stays in the Footer.
 
 ## Design principles
@@ -174,6 +180,10 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - CSS-only tactile hover and active states
   - no autoplay hero in M9
   - reduced motion support by default
+- Themes:
+  - light and dark share the same semantic hierarchy
+  - system preference is the default; an explicit selection is stored locally
+  - no section-level theme inversion
 - Imagery/iconography:
   - editorial food-first photography as the primary visual language
   - modern culinary studio details as a secondary layer on recipe detail and knowledge surfaces
@@ -196,6 +206,8 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - homepage inspiration, cuisine, and technique sections
   - progressive recommendation disclosure for secondary and advanced criteria
   - detail page editorial reading flow without a sticky metric sidebar
+  - responsive sticky chapter navigation with stable anchors
+  - `PlanWorkspace`, `ResumePlanBanner`, and `ThemeToggle`
 - Variants and states:
   - catalog card
   - recommendation card
@@ -244,12 +256,14 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - explain how to broaden conditions and suggest nearby exploration paths
 - Error:
   - calm tone, direct recovery action
+  - invalid share URLs and corrupt local plans fail closed with an inline explanation
 - Success:
   - recommendation confirmation should feel encouraging, not transactional
 - Disabled:
   - distinct but still legible
 - Offline/slow network, if applicable:
   - static content sections should remain useful even if recommendation interactions are delayed
+  - an existing plan remains usable from local browser state after the page bundle loads
 
 ## Content voice
 
@@ -277,7 +291,7 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
   - prefer a small semantic role system over large theme matrices
 - Performance constraints:
   - only the homepage LCP image and current detail hero preload
-  - the homepage Hero initially mounts the LCP image and its next editorial image, then prepares later images as the sequence advances
+  - the homepage Hero mounts and preloads one LCP image only
   - recipe cards lazy-load images with responsive `sizes`
   - catalog filtering remains server-rendered; no second 100-recipe client payload is introduced
   - locale dictionaries and editorial content resolve server-side; do not ship both public languages to client components
@@ -289,6 +303,6 @@ Reading this as a bilingual culinary decision and knowledge product for everyday
 
 ## Resolved and deferred decisions
 
-- Typography uses the system UI stack for Chinese and Latin text in M5; no font dependency was added.
+- Typography uses Noto Sans SC for body/UI and Noto Serif SC for editorial display through `next/font`; no external runtime font request or UI dependency was added.
 - The "lab" identity appears through explainability, structured facts, and cooking principles rather than interface jargon.
 - Character or mascot exploration remains deferred beyond M5 and is not represented in the current product UI.

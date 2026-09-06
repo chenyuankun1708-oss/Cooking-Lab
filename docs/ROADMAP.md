@@ -19,6 +19,19 @@
 - M5.1 Product Naturalization & Content Quality: completed
 - M6 Culinary Knowledge Platform: completed
 - M7 Decision Continuity & Meal Reliability: completed
+- M9 Unified Culinary Experience & Content Expansion: completed
+- M10 Commercial-ready Content Rights / Provenance / Attribution Gate: completed
+
+## 进行中：M11 从决定到上桌
+
+GitHub tracking：Epic `#87`，Issues `#88-#94`。
+
+- 已建立 `MealPlanV1`、确定性购物合并、最早可用设备时间线、追加/替换分离的安全 URL codec、V0 migration 与版本化 localStorage。
+- 已增加双语 `/{locale}/plan`、推荐/详情/Pairing 入口、首页继续计划、详情章节导航、相似料理和双主题视觉基础。
+- 当前 50 项已通过逐项 package module 进入 repository，并建立独立提交的 deterministic manifest 与 `content:audit`。
+- 120 项公开验收仍缺 70 个经过独立人工内容审校且完全通过 M10 的本地内容包。实现 agent 不伪造这一审校结论。
+
+完整边界与当前停止条件见 `docs/M11_DECISION_TO_TABLE.md`。
 
 M4 已结束于“可公开访问的 Public Beta 成功上线”，不再停留在 deployment-ready 状态。
 

@@ -11,9 +11,9 @@ import type { LocalContentPackageV1 } from "@/types/content-bundle";
 import { localContentPackageVersion } from "@/types/content-bundle";
 import type { RecipeImage } from "@/types/image";
 import type { SupportedLocale, TranslationSet } from "@/types/localization";
-import type { ResearchRecord, ResearchTemplateId } from "@/types/research";
+import type { ResearchRecord, ResearchSourceUse, ResearchTemplateId } from "@/types/research";
 
-export const m11ReviewedAt = "2026-09-06";
+export const m11ReviewedAt = "2026-09-07";
 
 export function bilingual<T>(zh: T, en: T): TranslationSet<T> {
   return {
@@ -47,20 +47,22 @@ export function m11ReferenceSource(input: {
   reliability?: Source["reliability"];
   authorNames?: string[];
   editorialNotes: string;
+  health: Source["health"];
 }): Source {
+  const type = input.type ?? "publisher";
   return {
     id: input.id,
-    type: input.type ?? "publisher",
+    type,
     title: input.title,
     publisherOrInstitution: input.publisherOrInstitution,
     authorNames: input.authorNames ?? [],
     locators: [{ kind: "url", url: input.url, accessedAt: m11ReviewedAt }],
     rights: {
       status: "reference-only",
-      notes: "Only narrow facts and preparation checks are used. Source wording, structure, imagery, video, subtitles, and transcripts are not copied or stored.",
+      notes: "Only narrow facts and preparation checks are used. Source wording, structure, imagery, and other expressive material are not copied or stored.",
     },
-    health: { status: "active", checkedAt: m11ReviewedAt },
-    reliability: input.reliability ?? "authoritative-secondary",
+    health: input.health,
+    reliability: input.reliability ?? defaultReliability(type),
     editorialNotes: input.editorialNotes,
   };
 }
@@ -77,7 +79,7 @@ export function m11Evidence(input: {
     id: input.id,
     sourceId: input.sourceId,
     relation: input.relation ?? "supports",
-    strength: input.strength ?? "strong",
+    strength: input.strength ?? "limited",
     locators: [{ kind: "section", value: input.locator }],
     editorialNote: input.editorialNote,
   };
@@ -137,7 +139,10 @@ export function m11Story(input: {
       evidenceIds: input.evidenceIds,
     }],
     relatedEntities: [{ type: "culinary-item", id: input.itemId }],
-    publication: { status: "published" },
+    // Batch content remains editorially staged until its reviewed artifact fingerprint,
+    // attestations, and sampling checkpoint are committed. Public index integration flips
+    // this state only after that evidence exists.
+    publication: { status: "draft" },
   };
 }
 
@@ -145,25 +150,27 @@ export function m11ResearchRecord(input: {
   itemId: string;
   templateId: ResearchTemplateId;
   sourceIds: [string, string, ...string[]];
+  sourceUses?: readonly [ResearchSourceUse, ...ResearchSourceUse[]][];
   claim: string;
+  claimKind?: ClaimKind;
   evidenceIds: [string, ...string[]];
 }): ResearchRecord {
   return {
     id: `m11-research-${input.itemId}`,
     subject: { type: "culinary-item", id: input.itemId },
     templateId: input.templateId,
-    question: `Which independently verifiable facts support the identity, preparation, and bounded cultural context of ${input.itemId}?`,
+    question: `Which independently verifiable facts support the cited claim and declared source uses for ${input.itemId}?`,
     sourceDecisions: input.sourceIds.map((sourceId, index) => ({
       id: `m11-${input.itemId}-source-${index + 1}`,
       disposition: "accepted" as const,
       sourceId,
-      uses: ["identity", "preparation", "culture"] as ["identity", "preparation", "culture"],
-      rationale: "Reference-only cross-check; Cooking Lab uses an independently structured bilingual synthesis and does not copy source expression.",
+      uses: input.sourceUses?.[index] ?? ["preparation"],
+      rationale: "Reference-only cross-check for the declared use only; Cooking Lab uses an independently structured bilingual synthesis and does not copy source expression.",
     })),
     claims: [{
       id: `m11-${input.itemId}-claim-assessment`,
       statement: input.claim,
-      kind: "documented-fact",
+      kind: input.claimKind ?? "documented-fact",
       disposition: "include",
       evidenceIds: input.evidenceIds,
       rationale: "The public Story keeps this claim narrow and traceable to the cited evidence.",
@@ -174,6 +181,14 @@ export function m11ResearchRecord(input: {
     reviewedAt: m11ReviewedAt,
     status: "closed",
   };
+}
+
+function defaultReliability(type: Source["type"]): Source["reliability"] {
+  if (new Set<Source["type"]>(["government", "patent", "producer-documentation"]).has(type)) return "primary";
+  if (new Set<Source["type"]>(["professional-organization", "educational-institution", "official-cultural-institution", "journal", "book", "museum", "library", "archive"]).has(type)) {
+    return "authoritative-secondary";
+  }
+  return "general-secondary";
 }
 
 export function m11OriginalHero(itemId: string, alt: string): RecipeImage {

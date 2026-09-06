@@ -1,7 +1,7 @@
 import type { DishItem, Evidence, Source, SourceType, Story, StoryType } from "@/types/culinary";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
 import type { RecipeImage } from "@/types/image";
-import type { ResearchRecord } from "@/types/research";
+import type { ResearchRecord, ResearchSourceUse } from "@/types/research";
 import {
   bilingual,
   bilingualStep,
@@ -10,6 +10,7 @@ import {
   m11OriginalHero,
   m11ReferenceSource,
   m11ResearchRecord,
+  m11ReviewedAt,
   m11Story,
 } from "@/data/m11/content-factories";
 
@@ -24,6 +25,7 @@ type ReferenceSpec = {
   publisherOrInstitution: string;
   url: string;
   type?: SourceType;
+  uses?: [ResearchSourceUse, ...ResearchSourceUse[]];
   editorialNotes: string;
 };
 
@@ -41,6 +43,7 @@ type StorySpec = {
   enBoundary: string;
   evidenceLocators: [string, string];
   evidenceNotes: [string, string];
+  evidenceStrengths?: [Evidence["strength"], Evidence["strength"]];
 };
 
 type DishSpec = {
@@ -71,6 +74,7 @@ const referenceCatalog = {
     publisherOrInstitution: "USDA Food Safety and Inspection Service",
     url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
     type: "government",
+    uses: ["safety", "preparation"],
     editorialNotes: "Used only for the poultry temperature boundary and thermometer placement cue.",
   },
   healthCanadaTemperatures: {
@@ -78,6 +82,7 @@ const referenceCatalog = {
     publisherOrInstitution: "Health Canada",
     url: "https://www.canada.ca/en/health-canada/services/general-food-safety-tips/safe-internal-cooking-temperatures.html",
     type: "government",
+    uses: ["safety", "preparation"],
     editorialNotes: "Independent government cross-check for cooked poultry temperature guidance.",
   },
   usdaSeafood: {
@@ -85,6 +90,7 @@ const referenceCatalog = {
     publisherOrInstitution: "USDA Food Safety and Inspection Service",
     url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
     type: "government",
+    uses: ["safety", "preparation"],
     editorialNotes: "Used only for the seafood temperature and observable doneness boundary.",
   },
   fdaSeafood: {
@@ -92,6 +98,7 @@ const referenceCatalog = {
     publisherOrInstitution: "U.S. Food and Drug Administration",
     url: "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely",
     type: "government",
+    uses: ["safety", "preparation"],
     editorialNotes: "Independent cross-check for opaque, separating flesh and safe seafood handling cues.",
   },
   fdaEggs: {
@@ -99,6 +106,7 @@ const referenceCatalog = {
     publisherOrInstitution: "U.S. Food and Drug Administration",
     url: "https://www.fda.gov/food/buy-store-serve-safe-food/what-you-need-know-about-egg-safety",
     type: "government",
+    uses: ["safety", "preparation"],
     editorialNotes: "Used only for the egg cooking and prompt-serving boundary.",
   },
   usdaEggs: {
@@ -106,6 +114,7 @@ const referenceCatalog = {
     publisherOrInstitution: "USDA Food Safety and Inspection Service",
     url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/eggs/shell-eggs-farm-table",
     type: "government",
+    uses: ["safety", "preparation"],
     editorialNotes: "Independent cross-check for cooked egg texture and holding guidance.",
   },
   woksBroccoliChicken: {
@@ -251,6 +260,7 @@ const chickenDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
     "Supports the 74°C/165°F minimum temperature for poultry.",
     "Independently supports measuring cooked poultry at its thickest part.",
   ],
+  evidenceStrengths: ["strong", "strong"],
 });
 
 const seafoodDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
@@ -267,6 +277,7 @@ const seafoodDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
     "Supports the 63°C/145°F seafood boundary and opaque-flesh cues.",
     "Independently supports opaque, separating fish and pearly opaque shrimp cues.",
   ],
+  evidenceStrengths: ["strong", "strong"],
 });
 
 const dishSpecs = [
@@ -282,9 +293,9 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 10, processMinutes: 15, totalMinutes: 25, activeMinutes: 22 },
+      time: { prepMinutes: 10, processMinutes: 15, totalMinutes: 25, activeMinutes: 25 },
       yield: { amount: 2, unit: "serving" },
-      inputs: [input("chicken-breast", 360), input("lemon", 1, "piece"), input("garlic", 8), input("cooking-oil", 12), input("salt", 3), input("black-pepper", 1)],
+      inputs: [input("chicken-breast", 360), input("lemon", 1, "piece"), input("garlic", 8), input("cooking-oil", 12), input("drinking-water", 30, "ml"), input("salt", 3), input("black-pepper", 1)],
       toolIds: ["frying-pan", "instant-read-thermometer", "knife"],
       steps: [
         { zh: { instruction: "将鸡胸较厚处横向片开或轻拍至约 2 厘米厚，擦干后均匀撒盐和黑胡椒。", rationale: "厚度接近才能让中心熟透时边缘仍保持多汁，干燥表面也更容易上色。", stateCue: "鸡胸厚薄大致一致，表面没有可见水珠。" }, en: { instruction: "Butterfly or gently pound the thickest part of each breast to about 2 cm, pat dry, then season evenly with salt and black pepper.", rationale: "Even thickness lets the center finish before the edges dry out, while a dry surface browns more readily.", stateCue: "The chicken is evenly thick with no visible surface moisture." }, durationMinutes: 5 },
@@ -345,7 +356,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["fusion"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "saucy" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 10, processMinutes: 18, totalMinutes: 28, activeMinutes: 25 },
+      time: { prepMinutes: 10, processMinutes: 18, totalMinutes: 28, activeMinutes: 28 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("tofu", 350), input("mushroom", 220), input("cooked-rice", 400), input("soy-sauce", 22), input("garlic", 8), input("scallion", 15), input("cooking-oil", 20), input("drinking-water", 80, "ml")],
       toolIds: ["frying-pan", "spatula", "knife"],
@@ -382,7 +393,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 8, processMinutes: 14, totalMinutes: 22, activeMinutes: 18 },
+      time: { prepMinutes: 8, processMinutes: 14, totalMinutes: 22, activeMinutes: 22 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("chicken-thigh", 420), input("garlic", 8), input("cooking-oil", 10), input("salt", 3), input("black-pepper", 2), input("lemon", 0.5, "piece", true)],
       toolIds: ["frying-pan", "spatula", "instant-read-thermometer"],
@@ -445,7 +456,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "rich" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "saucy" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 85, totalMinutes: 100, activeMinutes: 30 },
+      time: { prepMinutes: 15, processMinutes: 94, totalMinutes: 109, activeMinutes: 34 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("beef-lean", 650), input("tomato", 700), input("onion", 200), input("carrot", 180), input("garlic", 10), input("soy-sauce", 25), input("cooking-oil", 18), input("drinking-water", 500, "ml"), input("salt", 3)],
       toolIds: ["heavy-pot", "knife", "wooden-spoon"],
@@ -482,7 +493,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["fusion"], facets: [{ dimension: "weight", value: "rich" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "soft" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 90, totalMinutes: 105, activeMinutes: 28 },
+      time: { prepMinutes: 15, processMinutes: 97, totalMinutes: 112, activeMinutes: 27 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("beef-lean", 650), input("potato", 600), input("onion", 200), input("carrot", 180), input("garlic", 10), input("soy-sauce", 22), input("cooking-oil", 18), input("drinking-water", 650, "ml"), input("black-pepper", 2), input("salt", 3)],
       toolIds: ["heavy-pot", "knife", "wooden-spoon"],
@@ -545,10 +556,10 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "tender" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 8, processMinutes: 10, totalMinutes: 18, activeMinutes: 10 },
+      time: { prepMinutes: 8, processMinutes: 10, totalMinutes: 18, activeMinutes: 8 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("salmon", 400), input("ginger", 12), input("scallion", 25), input("soy-sauce", 18), input("cooking-oil", 8), input("salt", 1)],
-      toolIds: ["steamer", "heatproof-plate", "instant-read-thermometer", "knife"],
+      toolIds: ["steamer", "heatproof-plate", "saucepan", "instant-read-thermometer", "knife"],
       steps: [
         { zh: { instruction: "三文鱼擦干并检查细刺，较厚部分朝盘外摆放；表面薄撒盐，铺一半姜丝。", rationale: "厚处靠近蒸汽较强的位置有助于同步成熟，擦干也避免盘中积出过多水。", stateCue: "鱼肉表面干爽，厚薄方向已调整，细刺清理完成。" }, en: { instruction: "Pat salmon dry and check for pin bones. Place thicker portions toward the plate edge, season lightly with salt, and top with half the ginger.", rationale: "Putting thicker sections nearer stronger steam helps even cooking, while drying limits pooled liquid.", stateCue: "The surface is dry, thickness is oriented deliberately, and pin bones are removed." }, durationMinutes: 4 },
         { zh: { instruction: "蒸锅水完全沸腾后放入鱼盘，盖严并保持稳定蒸汽 6 分钟。", rationale: "从稳定蒸汽开始计时，比随冷水升温更容易判断鱼肉状态。", stateCue: "锅盖边缘持续冒出少量蒸汽，水保持沸腾但不干锅。" }, en: { instruction: "Once the steamer water is fully boiling, add the plate, cover tightly, and maintain steady steam for 6 minutes.", rationale: "Timing from stable steam gives a clearer doneness reference than warming from cold water.", stateCue: "A small steady stream of steam escapes the lid and the water continues boiling safely." }, durationMinutes: 6 },
@@ -571,7 +582,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
     preparation: {
       kind: "baking",
-      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 10 },
+      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 8 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("salmon", 400), input("lemon", 1, "piece"), input("extra-virgin-olive-oil", 12), input("salt", 2), input("black-pepper", 2), input("garlic", 6)],
       toolIds: ["oven", "baking-tray", "instant-read-thermometer"],
@@ -597,29 +608,30 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["side"], servingContextIds: ["breakfast", "lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "warm" }, { dimension: "texture", value: "silky" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 10 },
+      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 8 },
       yield: { amount: 2, unit: "serving" },
       inputs: [input("egg", 3, "piece"), input("drinking-water", 225, "ml"), input("soy-sauce", 8), input("scallion", 8), input("cooking-oil", 3)],
-      toolIds: ["steamer", "heatproof-bowl", "fine-strainer", "whisk"],
+      toolIds: ["steamer", "heatproof-bowl", "fine-strainer", "whisk", "instant-read-thermometer"],
       steps: [
         { zh: { instruction: "鸡蛋充分打散，加入约 40°C 温水缓慢搅匀，撇去表面大泡。", rationale: "温水使蛋液更快接近蒸制温度，缓慢搅拌减少难消散的大气泡。", stateCue: "蛋液颜色均匀，表面只剩少量细泡。" }, en: { instruction: "Beat the eggs thoroughly, slowly mix in water around 40°C, and skim large bubbles from the surface.", rationale: "Warm water brings the mixture closer to steaming temperature, while gentle mixing limits persistent large bubbles.", stateCue: "The mixture is evenly colored with only a few fine bubbles." }, durationMinutes: 4 },
         { zh: { instruction: "蛋液通过细筛倒入耐热碗，盖上耐热盘或留缝的盖子。", rationale: "过滤去除未打散蛋筋，遮盖可减少锅盖冷凝水滴落破坏表面。", stateCue: "碗中蛋液平整无明显蛋筋，盖子不会接触液面。" }, en: { instruction: "Strain the mixture into a heatproof bowl and cover with a heatproof plate or a lid left slightly vented.", rationale: "Straining removes unmixed chalazae, while covering limits condensation drops that mark the surface.", stateCue: "The mixture is smooth with no visible strands and the cover does not touch it." }, durationMinutes: 2 },
-        { zh: { instruction: "蒸锅水沸后放入碗，调至中小火保持温和蒸汽，蒸 9 分钟后检查中心。", rationale: "猛烈蒸汽会让蛋液内部快速膨胀并形成孔洞，温和蒸汽更易均匀凝固。", stateCue: "表面完整不鼓泡，轻晃时整体颤动但中心没有液体波纹。" }, en: { instruction: "Once the steamer boils, add the bowl, reduce to gentle steam, and cook for 9 minutes before checking the center.", rationale: "Aggressive steam expands the custard unevenly and creates holes; gentle steam sets it more uniformly.", stateCue: "The surface is intact without bubbling; the custard jiggles as one piece with no liquid ripple at the center." }, durationMinutes: 10 },
-        { zh: { instruction: "中心完全凝固后取出，静置 2 分钟，淋酱油和油并撒葱，温热食用。", rationale: "静置利用余温完成结构，最后调味避免在蒸制中形成表面深色斑块。", stateCue: "勺子划开后内部细滑、无流动蛋液，表面只有清亮调味汁。" }, en: { instruction: "When the center is fully set, remove, rest 2 minutes, then add soy sauce, oil, and scallion; serve warm.", rationale: "Resting lets carryover heat finish the structure, and late seasoning avoids dark patches during steaming.", stateCue: "A spoon reveals a fine smooth interior with no liquid egg and only a clear seasoning layer on top." }, durationMinutes: 2 },
+        { zh: { instruction: "蒸锅水沸后放入碗，调至中小火保持温和蒸汽，蒸 9 分钟后从中心测温。", rationale: "猛烈蒸汽会让蛋液内部快速膨胀并形成孔洞；中心温度则避免只凭晃动判断。", stateCue: "表面完整不鼓泡，中心达到 71°C、没有液体波纹。" }, en: { instruction: "Once the steamer boils, add the bowl, reduce to gentle steam, and cook for 9 minutes before checking the center temperature.", rationale: "Aggressive steam expands the custard unevenly and creates holes; center temperature avoids relying on wobble alone.", stateCue: "The surface is intact without bubbling, and the center reaches 71°C with no liquid ripple." }, durationMinutes: 10 },
+        { zh: { instruction: "中心达到 71°C 且完全凝固后取出，静置 2 分钟，淋酱油和油并撒葱，温热食用。", rationale: "静置让结构稳定，最后调味避免在蒸制中形成表面深色斑块。", stateCue: "勺子划开后内部细滑、无流动蛋液，表面只有清亮调味汁。" }, en: { instruction: "Once the center reaches 71°C and is fully set, remove, rest 2 minutes, then add soy sauce, oil, and scallion; serve warm.", rationale: "Resting stabilizes the structure, and late seasoning avoids dark patches during steaming.", stateCue: "A spoon reveals a fine smooth interior with no liquid egg and only a clear seasoning layer on top." }, durationMinutes: 2 },
       ],
     },
-    references: ["madeWithLauSteamedEgg", "chinaSichuanSteamedEgg"],
+    references: ["fdaEggs", "usdaEggs"],
     story: {
-      zhTitle: "温和蒸汽形成平滑蛋羹",
-      enTitle: "Gentle Steam Builds a Smooth Egg Custard",
-      zhClaim: "两份独立参考都通过均匀蛋液与受控蒸汽，让蒸蛋形成平滑、柔嫩且完整凝固的结构。",
-      enClaim: "Both independent references use an even egg mixture and controlled steam to produce a smooth, tender custard that is fully set.",
-      zhPractice: "过滤蛋液、遮挡冷凝水并保持温和蒸汽，比单纯延长高火时间更容易控制表面与中心状态。",
-      enPractice: "Straining, shielding the surface from condensation, and maintaining gentle steam control the surface and center better than simply extending aggressive heat.",
-      zhBoundary: "水量、碗的深度和蒸锅火力会改变分钟数，因此以整体颤动且中心无液体波纹为准。",
-      enBoundary: "Water ratio, bowl depth, and steamer strength change the timing, so use a unified jiggle with no liquid ripple at the center as the finish cue.",
-      evidenceLocators: ["Straining, covering, and gentle steaming method", "Water ratio and gentle steaming method"],
-      evidenceNotes: ["Supports straining and gentle covered steam for a smooth fully set custard.", "Independently supports a controlled steam and a non-liquid set center."],
+      zhTitle: "柔嫩蒸蛋也需要明确完成线",
+      enTitle: "Tender Steamed Egg Still Needs a Clear Finish Line",
+      zhClaim: "两份政府食品安全资料都要求蛋类料理彻底凝固；美国农业部另以 71°C（160°F）作为含蛋料理的完成温度。",
+      enClaim: "Both government food-safety references require egg dishes to be thoroughly cooked, and USDA additionally gives 71°C (160°F) as the finish temperature for egg dishes.",
+      zhPractice: "温和蒸汽负责口感，中心温度与无流动蛋液负责完成判断；这两件事不应互相替代。",
+      enPractice: "Gentle steam manages texture, while center temperature and the absence of liquid egg define completion; one does not replace the other.",
+      zhBoundary: "水量、碗深和蒸锅火力会改变分钟数，因此先看中心状态，再用温度复核。",
+      enBoundary: "Water ratio, bowl depth, and steamer strength change timing, so inspect the center and confirm it with temperature.",
+      evidenceLocators: ["Cooking eggs thoroughly section", "Egg dishes temperature guidance"],
+      evidenceNotes: ["Supports cooking eggs until no liquid egg remains.", "Supports the 71°C/160°F minimum for egg dishes."],
+      evidenceStrengths: ["strong", "strong"],
     },
   },
   {
@@ -634,7 +646,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main", "side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "tender" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 8, processMinutes: 14, totalMinutes: 22, activeMinutes: 20 },
+      time: { prepMinutes: 8, processMinutes: 14, totalMinutes: 22, activeMinutes: 22 },
       yield: { amount: 3, unit: "serving" },
       inputs: [input("tofu", 450), input("garlic", 8), input("scallion", 15), input("soy-sauce", 20), input("cooking-oil", 22), input("drinking-water", 50, "ml")],
       toolIds: ["frying-pan", "spatula", "knife"],
@@ -671,14 +683,14 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["starter", "main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "cold" }, { dimension: "texture", value: "crisp" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 10, processMinutes: 35, totalMinutes: 45, activeMinutes: 20 },
+      time: { prepMinutes: 10, processMinutes: 47, totalMinutes: 57, activeMinutes: 15 },
       yield: { amount: 3, unit: "serving" },
       inputs: [input("chicken-breast", 420), input("cucumber", 250), input("scallion", 25), input("garlic", 8), input("ginger", 10), input("soy-sauce", 18), input("vinegar", 22), input("cooking-oil", 8), input("fresh-chili", 8, "g", true), input("drinking-water", 900, "ml")],
       toolIds: ["saucepan", "instant-read-thermometer", "mixing-bowl", "knife"],
       steps: [
         { zh: { instruction: "鸡胸厚处片开至厚度接近；与姜和水一同入锅，水应刚好没过鸡肉。", rationale: "厚度接近有利于同步达到安全温度，足量水则让受热更均匀。", stateCue: "鸡胸完全浸没且没有折叠，肉片厚度基本一致。" }, en: { instruction: "Butterfly the thickest part of the chicken to even the thickness. Place with ginger in enough water to cover completely.", rationale: "Similar thickness helps all portions reach a safe temperature together, while full submersion heats evenly.", stateCue: "Chicken is fully submerged without folding and is roughly even in thickness." }, durationMinutes: 5 },
         { zh: { instruction: "中火加热至锅边出现小泡，转小火保持轻微颤动，不让水猛烈翻滚；煮至最厚处 74°C。", rationale: "温和汆煮降低外层先变柴的风险，温度计明确完成边界。", stateCue: "水面只有零星小泡，鸡肉最厚处达到 74°C且完全不透明。" }, en: { instruction: "Heat until small bubbles appear at the edge, then hold at a bare poach without a hard boil until the thickest part reaches 74°C.", rationale: "Gentle poaching reduces the chance of a dry outer layer, while the thermometer defines completion.", stateCue: "Only occasional bubbles appear; the thickest point is 74°C and fully opaque." }, durationMinutes: 12 },
-        { zh: { instruction: "鸡肉取出放在干净盘中，降至不冒热气后加盖冷藏 15 分钟；黄瓜拍裂切段。", rationale: "先降温再手撕可避免持续散失汁液，也让冷食保持清爽状态。", stateCue: "鸡肉中心已冷却、表面不再冒热气，黄瓜切口脆而多汁。" }, en: { instruction: "Move chicken to a clean plate, let visible steam subside, cover, and chill for 15 minutes. Smash and cut the cucumber.", rationale: "Cooling before shredding limits juice loss and gives the cold dish a refreshing service state.", stateCue: "The chicken center has cooled with no visible steam, and cucumber cuts look crisp and juicy." }, durationMinutes: 18 },
+        { zh: { instruction: "鸡肉移到干净浅盘，静置不超过 10 分钟后加盖冷藏；冷却至中心不高于 4°C再取出，黄瓜拍裂切段。", rationale: "浅盘和及时冷藏能让熟鸡肉更快穿过温热区；用中心温度确认冷食状态比固定 15 分钟可靠。", stateCue: "鸡肉中心不高于 4°C、表面无冷凝积水，黄瓜切口脆而多汁。" }, en: { instruction: "Move the chicken to a clean shallow plate, rest no longer than 10 minutes, cover, and refrigerate until the center is 4°C or colder; smash and cut the cucumber meanwhile.", rationale: "A shallow plate and prompt refrigeration move cooked chicken through the warm range faster; center temperature is more reliable than a fixed 15-minute chill.", stateCue: "The chicken center is 4°C or colder with no pooled condensation, and cucumber cuts look crisp and juicy." }, durationMinutes: 30 },
         { zh: { instruction: "鸡肉顺纹撕成细条，与黄瓜、葱、蒜、酱油、醋、油及可选辣椒轻拌，立即食用。", rationale: "顺纹手撕保留完整纤维，临上桌拌汁则减少黄瓜提前出水。", stateCue: "鸡丝完整湿润，黄瓜仍脆，碗底只有少量清亮调味汁。" }, en: { instruction: "Shred chicken along the grain and gently toss with cucumber, scallion, garlic, soy sauce, vinegar, oil, and optional chili; serve immediately.", rationale: "Shredding with the grain keeps distinct fibers, while last-minute dressing limits cucumber weeping.", stateCue: "Chicken strands are intact and moist, cucumber stays crisp, and only a little clear dressing sits below." }, durationMinutes: 5 },
       ],
     },
@@ -697,7 +709,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "crisp" }] },
     preparation: {
       kind: "baking",
-      time: { prepMinutes: 12, processMinutes: 28, totalMinutes: 40, activeMinutes: 15 },
+      time: { prepMinutes: 12, processMinutes: 29, totalMinutes: 41, activeMinutes: 14 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("broccoli", 300), input("carrot", 250), input("bell-pepper", 250), input("zucchini", 250), input("extra-virgin-olive-oil", 28), input("salt", 4), input("black-pepper", 2), input("oregano", 2)],
       toolIds: ["oven", "two-baking-trays", "knife", "mixing-bowl"],
@@ -734,7 +746,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["soup"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "brothy" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 18 },
+      time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 20 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("tomato", 450), input("egg", 3, "piece"), input("scallion", 15), input("cooking-oil", 8), input("salt", 3), input("soy-sauce", 8), input("drinking-water", 900, "ml")],
       toolIds: ["soup-pot", "mixing-bowl", "ladle", "chopsticks"],
@@ -771,14 +783,14 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "rich" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "soft" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 35, totalMinutes: 50, activeMinutes: 18 },
+      time: { prepMinutes: 15, processMinutes: 35, totalMinutes: 50, activeMinutes: 17 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("rice", 300), input("chicken-thigh", 450), input("shiitake-mushroom", 180), input("carrot", 120), input("ginger", 10), input("scallion", 20), input("soy-sauce", 28), input("cooking-oil", 10), input("drinking-water", 390, "ml")],
-      toolIds: ["rice-cooker", "instant-read-thermometer", "knife", "mixing-bowl"],
+      toolIds: ["rice-cooker", "frying-pan", "instant-read-thermometer", "knife", "mixing-bowl"],
       steps: [
         { zh: { instruction: "大米淘洗后沥 5 分钟；鸡腿切 3 厘米块，与一半酱油和姜拌匀，香菇和胡萝卜切丁。", rationale: "沥干后水量更可控，鸡块统一便于同一时间成熟。", stateCue: "米不再滴水，鸡块大小接近，蔬菜丁略小于鸡块。" }, en: { instruction: "Rinse rice and drain for 5 minutes. Cut chicken thigh into 3 cm pieces and mix with half the soy sauce and ginger; dice shiitake and carrot.", rationale: "Draining makes the added water predictable, while even chicken pieces finish together.", stateCue: "Rice no longer drips, chicken pieces are even, and vegetable dice are slightly smaller." }, durationMinutes: 10 },
         { zh: { instruction: "内胆放米、水、余下酱油和油，搅匀后铺上香菇、胡萝卜，鸡块单层放在最上面。", rationale: "鸡肉不埋入米中，完成后更容易从最厚块核验温度，也减少米粒被反复翻动。", stateCue: "米面平整，配料分布均匀，鸡块不重叠并清楚可见。" }, en: { instruction: "Combine rice, water, remaining soy sauce, and oil in the cooker. Level the surface, add shiitake and carrot, and arrange chicken in one visible layer on top.", rationale: "Keeping chicken above the rice makes the thickest piece accessible for a finish check and avoids repeatedly disturbing the grains.", stateCue: "The rice surface is level, vegetables are even, and chicken pieces remain visible without overlap." }, durationMinutes: 4 },
-        { zh: { instruction: "启动标准煮饭程序；程序结束后立即测最厚鸡块，达到 74°C则盖盖焖 8 分钟。", rationale: "不同电饭煲程序差异大，温度读数比只依赖结束提示音更可重复。", stateCue: "最厚鸡块达到 74°C，米面无游离水，锅盖内有稳定蒸汽。" }, en: { instruction: "Run the standard rice cycle. At completion, immediately check the thickest chicken piece; when it reaches 74°C, close the lid and rest 8 minutes.", rationale: "Rice-cooker programs vary, so a temperature reading transfers better than relying only on the completion chime.", stateCue: "The thickest chicken piece reaches 74°C, no free water sits on the rice, and steady steam remains under the lid." }, durationMinutes: 33 },
+        { zh: { instruction: "启动标准煮饭程序；结束后立即测最厚鸡块。达到 74°C则盖盖焖 8 分钟；若未达到，把鸡肉移入平底锅，加一大勺水加盖中火继续加热，每 2 分钟复测至 74°C。", rationale: "电饭煲程序差异大，温度读数比提示音可靠；独立补热鸡肉可避免为了追温度把米饭反复煮烂。", stateCue: "最厚鸡块达到 74°C，米面无游离水，补热后的鸡肉中心完全不透明。" }, en: { instruction: "Run the standard rice cycle and immediately check the thickest chicken piece. At 74°C, close the lid and rest 8 minutes. If it is cooler, move the chicken to a skillet with 1 tablespoon water, cover, cook over medium heat, and recheck every 2 minutes until 74°C.", rationale: "Rice-cooker programs vary, so temperature is more reliable than the chime. Finishing the chicken separately avoids repeatedly cooking the rice into mush.", stateCue: "The thickest piece reaches 74°C, no free water sits on the rice, and any separately finished chicken is opaque at the center." }, durationMinutes: 33 },
         { zh: { instruction: "打开锅盖先取出两块鸡肉确认中心不透明，再由底向上轻翻米饭，撒葱后趁热分碗。", rationale: "焖后再翻松让水分均匀分布，轻翻避免把米粒压成团。", stateCue: "鸡肉中心不透明，米粒熟透无硬芯、彼此松散，锅底没有生水。" }, en: { instruction: "Open the lid, check two chicken pieces for opaque centers, then gently fold the rice from bottom to top, add scallion, and portion while hot.", rationale: "Fluffing after the rest distributes moisture, while gentle folding keeps the grains from compacting.", stateCue: "Chicken centers are opaque; rice has no hard core, separates into grains, and no raw water remains below." }, durationMinutes: 3 },
       ],
     },
@@ -797,7 +809,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main", "side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["japanese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "soft" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 30, totalMinutes: 45, activeMinutes: 22 },
+      time: { prepMinutes: 15, processMinutes: 30, totalMinutes: 45, activeMinutes: 15 },
       yield: { amount: 4, unit: "serving" },
       inputs: [input("beef-lean", 320), input("potato", 550), input("onion", 220), input("carrot", 150), input("soy-sauce", 35), input("granulated-sugar", 12), input("cooking-oil", 10), input("drinking-water", 500, "ml")],
       toolIds: ["heavy-pot", "drop-lid", "knife"],
@@ -837,13 +849,13 @@ const dishSpecs = [
       kind: "cooking",
       time: { prepMinutes: 8, processMinutes: 10, totalMinutes: 18, activeMinutes: 18 },
       yield: { amount: 2, unit: "serving" },
-      inputs: [input("cooked-rice", 450), input("kimchi", 220), input("gochujang", 18), input("scallion", 20), input("cooking-oil", 16), input("egg", 2, "piece", true)],
-      toolIds: ["wok", "spatula", "frying-pan"],
+      inputs: [input("cooked-rice", 450), input("kimchi", 220), input("gochujang", 18), input("scallion", 20), input("cooking-oil", 16)],
+      toolIds: ["wok", "spatula"],
       steps: [
         { zh: { instruction: "冷米饭用手或饭勺拨散大块；泡菜剪成小块并保留 30 毫升泡菜汁，葱白葱绿分开。", rationale: "先拨散米饭可减少入锅后为拆团而过度翻炒，分开泡菜汁便于控制湿度。", stateCue: "米饭没有大于核桃的结块，泡菜块大小均匀且汁液单独量好。" }, en: { instruction: "Break large clumps in cold rice. Cut kimchi into small pieces, reserve 30 ml juice, and separate scallion whites and greens.", rationale: "Pre-loosening rice prevents excessive stirring in the pan, while reserved juice gives deliberate moisture control.", stateCue: "No rice clump is larger than a walnut; kimchi pieces are even and the juice is measured separately." }, durationMinutes: 5 },
         { zh: { instruction: "炒锅中高火放油，先炒葱白和泡菜 3 分钟，直到锅底水汽明显减少、泡菜边缘略焦。", rationale: "泡菜先收紧水分并产生焦香，米饭加入后才不会被大量汁液焖软。", stateCue: "蒸汽从浓变薄，泡菜颜色加深，锅底没有明显积汁。" }, en: { instruction: "Heat oil in a wok over medium-high and cook scallion whites with kimchi for 3 minutes until steam subsides and edges lightly char.", rationale: "Concentrating kimchi first prevents its liquid from steaming the rice once added.", stateCue: "Steam thins out, kimchi deepens in color, and no obvious juice pools below." }, durationMinutes: 3 },
         { zh: { instruction: "加入米饭，铲压结块并不断翻散；米粒热透后加入辣椒酱和少量泡菜汁，炒至颜色均匀。", rationale: "先让米饭松散升温，再少量补入调味液，可以控制黏度和咸辣浓度。", stateCue: "米粒彼此分开、均匀变红，锅底只有薄油膜而无湿汁。" }, en: { instruction: "Add rice, press apart clumps, and toss until hot. Add gochujang and a little reserved kimchi juice, then stir-fry until evenly colored.", rationale: "Heating and loosening rice before measured liquid controls both stickiness and seasoning intensity.", stateCue: "Grains separate and turn evenly red, with only a thin oil film and no wet sauce in the wok." }, durationMinutes: 5 },
-        { zh: { instruction: "尝味后只按需补泡菜汁，撒葱绿出锅；若加鸡蛋，另锅煎至蛋白完全凝固后盖在饭上。", rationale: "最后按状态调整避免一次加入过多咸酸汁，鸡蛋分锅也不干扰米饭的干爽度。", stateCue: "炒饭松散无积水，酸辣平衡；可选鸡蛋蛋白无流动部分。" }, en: { instruction: "Taste and add reserved juice only if needed, then finish with scallion greens. If using eggs, fry separately until whites are fully set and place on top.", rationale: "Late adjustment avoids excess salty-acid liquid, and a separate egg pan preserves the rice texture.", stateCue: "Rice remains loose without pooling liquid and tastes balanced; optional egg whites have no liquid areas." }, durationMinutes: 5 },
+        { zh: { instruction: "尝味后只按需补泡菜汁，撒葱绿翻匀后立即出锅。", rationale: "最后按状态调整，避免一次加入过多咸酸汁而让米饭回潮。", stateCue: "炒饭松散无积水，酸辣平衡，葱绿仍保持清香。" }, en: { instruction: "Taste, add reserved kimchi juice only if needed, fold in the scallion greens, and serve immediately.", rationale: "Late adjustment prevents excess salty-acid liquid from making the rice wet again.", stateCue: "The rice remains loose with no pooled liquid, tastes balanced, and retains fresh scallion aroma." }, durationMinutes: 2 },
       ],
     },
     references: ["koreanBapsangKimchiRice", "maangchiKimchiRice"],
@@ -873,7 +885,7 @@ const dishSpecs = [
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["vietnamese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
     preparation: {
       kind: "cooking",
-      time: { prepMinutes: 15, processMinutes: 27, totalMinutes: 42, activeMinutes: 25 },
+      time: { prepMinutes: 15, processMinutes: 27, totalMinutes: 42, activeMinutes: 27 },
       yield: { amount: 3, unit: "serving" },
       inputs: [input("chicken-thigh", 500), input("lemongrass", 30), input("garlic", 10), input("fish-sauce", 24), input("lime", 1, "piece"), input("granulated-sugar", 10), input("cooking-oil", 15), input("fresh-chili", 8, "g", true), input("cilantro", 15, "g", true)],
       toolIds: ["frying-pan", "mixing-bowl", "instant-read-thermometer", "knife"],
@@ -937,12 +949,14 @@ const buildDishContent = (spec: DishSpec): BuiltDishContent => {
     url: sourceSpec.url,
     ...(sourceSpec.type ? { type: sourceSpec.type } : {}),
     editorialNotes: sourceSpec.editorialNotes,
+    health: { status: "active", checkedAt: m11ReviewedAt },
   })) as [Source, Source];
   const evidence = sources.map((source, index) => m11Evidence({
     id: evidenceIds[index],
     sourceId: source.id,
     locator: spec.story.evidenceLocators[index],
     editorialNote: spec.story.evidenceNotes[index],
+    strength: spec.story.evidenceStrengths?.[index],
   })) as [Evidence, Evidence];
   const [firstStep, ...remainingSteps] = spec.preparation.steps;
   const steps: DishItem["preparation"]["steps"] = [
@@ -980,7 +994,7 @@ const buildDishContent = (spec: DishSpec): BuiltDishContent => {
       cuisineIds: [...spec.pairing.cuisineIds],
       facets: [...spec.pairing.facets],
     },
-    publication: { status: "published" },
+    publication: { status: "draft" },
     nutrition: { applicability: "applicable", source: "ingredient-derived" },
     cost: { source: "ingredient-derived", currency: "CNY" },
     preparation: {
@@ -1021,6 +1035,7 @@ const buildDishContent = (spec: DishSpec): BuiltDishContent => {
     itemId: item.id,
     templateId: "dish-dessert",
     sourceIds,
+    sourceUses: sourceSpecs.map((sourceSpec) => sourceSpec.uses ?? ["preparation"]),
     claim: spec.story.enClaim,
     evidenceIds,
   });

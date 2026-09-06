@@ -13,6 +13,7 @@ import {
   m11BatchASources,
   m11BatchAStories,
 } from "@/data/m11/batch-a";
+import { m11BatchAMealPlanStepMetadata } from "@/data/m11/batch-a-meal-plan-metadata";
 import { m11BatchAItemIds, m11PortfolioTarget, m11RequiredItemIds } from "@/data/m11/portfolio";
 import { evaluateContentRightsRegistry } from "@/lib/content-rights";
 import { evaluateCulinaryItemPublishingEligibility } from "@/lib/culinary-publishing";
@@ -28,12 +29,24 @@ const publishingContext = {
   evidence: m11BatchAEvidence,
 };
 
+// M10 derives audit scope from publication status. Candidate packages intentionally remain
+// draft until independent attestations and sampling exist, so this preflight uses an isolated
+// publication projection without changing the staged source data or public package index.
+const rightsPreflightItems = m11BatchAItems.map((item) => ({
+  ...item,
+  publication: { status: "published" as const },
+}));
+const rightsPreflightStories = m11BatchAStories.map((story) => ({
+  ...story,
+  publication: { status: "published" as const },
+}));
+
 const rightsRegistry = createContentRightsRegistry({
-  items: m11BatchAItems,
+  items: rightsPreflightItems,
   auditedItemIds: m11BatchAItemIds,
   images: m11BatchAImages,
   ingredients,
-  stories: m11BatchAStories,
+  stories: rightsPreflightStories,
   evidence: m11BatchAEvidence,
   sources: m11BatchASources,
   researchRecords: m11BatchAResearchRecords,
@@ -45,6 +58,8 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(m11BatchAContentPackages).toHaveLength(35);
     expect(m11BatchAItems.map((item) => item.id).sort()).toEqual([...m11BatchAItemIds].sort());
     expect(m11RequiredItemIds.every((id) => m11BatchAItemIds.includes(id))).toBe(true);
+    expect(m11BatchAItems.every((item) => item.publication.status === "draft")).toBe(true);
+    expect(m11BatchAStories.every((story) => story.publication.status === "draft")).toBe(true);
     expect(publishedLocalContentPackages.some((contentPackage) => (
       (m11BatchAItemIds as readonly string[]).includes(contentPackage.itemId)
     ))).toBe(false);
@@ -75,10 +90,10 @@ describe("M11 content Batch A candidate boundary", () => {
       records: m11BatchAResearchRecords,
     })).toEqual([]);
     const result = evaluateContentRightsRegistry(rightsRegistry, {
-      items: m11BatchAItems,
+      items: rightsPreflightItems,
       images: m11BatchAImages,
       ingredients,
-      stories: m11BatchAStories,
+      stories: rightsPreflightStories,
       evidence: m11BatchAEvidence,
       sources: m11BatchASources,
       researchRecords: m11BatchAResearchRecords,
@@ -87,5 +102,56 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(result.ready, result.issues.map((issue) => `${issue.code}:${issue.subjectId}`).join("\n")).toBe(true);
     expect(result.auditedItemIds).toHaveLength(35);
     expect(rightsRegistry.decisions.every((decision) => decision.decision !== "block")).toBe(true);
+  });
+
+  it("uses only non-video research evidence", () => {
+    expect(rightsRegistry.externalMedia).toEqual([]);
+    expect(m11BatchASources.every((source) => source.health.status === "active" && source.health.checkedAt === "2026-09-07")).toBe(true);
+    expect(m11BatchASources.every((source) => source.locators.every((locator) => (
+      locator.kind !== "url" || !/(?:youtube\.com|youtu\.be|bilibili\.com)/i.test(locator.url)
+    )))).toBe(true);
+    expect(m11BatchASources.every((source) => source.locators.every((locator) => (
+      locator.kind !== "url" || !/(?:discoverhongkong\.com\/eng\/explore\/dining\.html|ncausa\.org\/About-Coffee\/How-to-Brew-Coffee|riojawine\.com\/en\/$)/i.test(locator.url)
+    )))).toBe(true);
+    expect(m11BatchAEvidence.every((record) => record.locators.every((locator) => locator.kind !== "timestamp"))).toBe(true);
+  });
+
+  it("publishes item-specific culinary stories rather than governance boilerplate", () => {
+    const bannedBoilerplate = [
+      "可核验的内容边界",
+      "来源支持的范围",
+      "verifiable editorial boundary",
+      "What the sources support",
+    ];
+
+    for (const story of m11BatchAStories) {
+      const text = JSON.stringify(story.content);
+      for (const phrase of bannedBoilerplate) expect(text, story.id).not.toContain(phrase);
+      expect(story.content.entries.find((entry) => entry.locale === "zh-CN")?.value.sections).toHaveLength(2);
+      expect(story.content.entries.find((entry) => entry.locale === "en")?.value.sections).toHaveLength(2);
+    }
+
+    for (const itemId of ["flat-white", "yuenyeung"]) {
+      expect(m11BatchAStories.find((story) => story.relatedEntities.some((entity) => entity.id === itemId))?.claims[0].kind).toBe("disputed-attribution");
+      expect(m11BatchAResearchRecords.find((record) => record.subject.id === itemId)?.claims[0].kind).toBe("disputed-attribution");
+    }
+  });
+
+  it("authors every procedural plan duration without inferring task kind from prose", () => {
+    const proceduralItems = m11BatchAItems.filter((item) => "steps" in item.preparation);
+    expect(Object.keys(m11BatchAMealPlanStepMetadata).sort()).toEqual(proceduralItems.map((item) => item.id).sort());
+
+    for (const item of proceduralItems) {
+      if (!("steps" in item.preparation)) continue;
+      const metadata = m11BatchAMealPlanStepMetadata[item.id as keyof typeof m11BatchAMealPlanStepMetadata];
+      const orders = item.preparation.steps.map((step) => step.order);
+      expect(Object.keys(metadata).map(Number).sort((a, b) => a - b), item.id).toEqual(orders);
+      const entries = Object.values(metadata);
+      expect(entries.reduce((total, entry) => total + entry.durationMinutes, 0), `${item.id} total`).toBe(item.preparation.time.totalMinutes);
+      expect(entries.filter((entry) => entry.kind === "active").reduce((total, entry) => total + entry.durationMinutes, 0), `${item.id} active`).toBe(item.preparation.time.activeMinutes);
+      if (item.preparation.time.totalMinutes > item.preparation.time.activeMinutes) {
+        expect(entries.some((entry) => entry.kind === "wait" || entry.kind === "prepare-ahead"), item.id).toBe(true);
+      }
+    }
   });
 });

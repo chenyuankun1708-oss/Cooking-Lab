@@ -40,7 +40,7 @@ The manifest is a release index, not an alternative content database. Existing r
 - LOW content may use one genuinely independent agent context across all applicable dimensions. MEDIUM requires separate rights/provenance and content/visual reviewer contexts. HIGH remains blocked without the applicable human, expert, or legal checkpoint.
 - The implementation context cannot mark its own copy reviewed. Agent review is recorded as `actorType: agent` and never represented as human review, culinary field testing, legal opinion, or human approval.
 - Unreviewed packages stay draft and do not enter `getPublishedCulinaryItems()` or the public manifest.
-- Reference-only video may support manual fact checking by URL and timestamp; no video, subtitle, transcript, or frame is stored.
+- The generic M10 media model remains available for other goals. M11 content batches do not use it: no video viewing, timestamp Evidence, subtitle, transcript, download, frame capture, or `ExternalMediaReference` is produced.
 
 ## Scale limits
 

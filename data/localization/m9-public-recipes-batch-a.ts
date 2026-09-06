@@ -26,7 +26,7 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
     steps: [
       { instruction: "Cut the chicken thighs into similar pieces and slice the mushrooms thickly. Toss the chicken with ginger, soy sauce, and salt, then rest for 10 minutes.", why: "Even pieces cook together. The short rest seasons the surface and is already included in the preparation time." },
       { instruction: "Arrange the chicken in one layer on a heatproof plate, placing the mushrooms between the pieces instead of building a tall pile.", why: "A single layer exposes the food evenly to steam. A thick pile leaves the pieces in the center heating too slowly." },
-      { instruction: "Set the plate over a fully steaming pot and cook over medium heat until the thickest chicken piece has no pink center and its juices run clear.", why: "Checking the thickest piece is more reliable than looking only at the surface. Stable steam avoids temperature swings." },
+      { instruction: "Set the plate over a fully steaming pot and cook over medium heat until the center of the thickest chicken piece reaches 74°C / 165°F.", why: "A probe temperature is more reliable than meat color or clear juices. Stable steam avoids temperature swings." },
       { instruction: "Turn off the heat and rest for 2 minutes. Add the scallion and turn the chicken gently through the juices on the plate.", why: "The short rest evens out the internal temperature. Adding scallion last preserves its fresh aroma." },
     ],
     principles: ["Steam in one even layer", "Check the thickest chicken piece", "Finish with the cooking juices"],
@@ -48,7 +48,7 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
     steps: [
       { instruction: "Cut the chicken thighs into similar pieces. Use only clearly identified edible cultivated mushrooms, brush them clean, and slice them thickly. Discard anything spoiled or uncertain.", why: "Even chicken pieces cook together. Misidentified wild mushrooms can be dangerous, so this recipe is not for foraged or uncertain mushrooms." },
       { instruction: "Cover the chicken with cold water in a pot and heat gradually. Skim the foam as it gathers, then add the ginger.", why: "Gradual heating helps impurities gather for a clearer broth. Add hot water if needed so the temperature does not fall sharply." },
-      { instruction: "Add the mushrooms, bring back to the boil, then maintain a continuous gentle simmer until the thickest chicken piece is fully cooked.", why: "A gentle simmer transfers heat without breaking up the food. No pink should remain at the center of the chicken." },
+      { instruction: "Add the mushrooms, bring back to the boil, then maintain a continuous gentle simmer until the thickest chicken piece reaches 74°C / 165°F.", why: "A gentle simmer transfers heat without breaking up the food. A probe temperature is more reliable than meat color." },
       { instruction: "Continue until the mushrooms are completely tender with no raw firmness. Season for the final broth volume, add scallion, and remove from the heat.", why: "Mushrooms need complete cooking and cannot be judged by color alone. Seasoning at the final concentration reduces oversalting." },
     ],
     principles: ["Use clearly identified edible mushrooms", "Cook both chicken and mushrooms completely", "Season for the final broth volume"],
@@ -81,7 +81,7 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
     steps: [
       { instruction: "Cook the rice and keep it warm. Cut the chicken into 2 cm pieces, thinly slice the onion, and beat the eggs only enough to leave visible streaks of white.", why: "Having the rice ready lets the topping be served at once. Lightly mixed eggs keep more texture after setting." },
       { instruction: "Add the onion, soy sauce, and about 100 ml water to a small pan. Simmer over medium heat until the onion turns translucent.", why: "Cooking the onion first builds sweetness. Add a little hot water if the liquid reduces before the onion softens." },
-      { instruction: "Add the chicken, lower the heat, and cover until the thickest piece has no pink center and a shallow layer of sauce remains.", why: "Gentle moist heat limits moisture loss. The chicken must be done before adding egg so the egg does not overcook while waiting." },
+      { instruction: "Add the chicken, lower the heat, and cover until the center of the thickest piece reaches 74°C / 165°F and a shallow layer of sauce remains.", why: "Gentle moist heat limits moisture loss. Confirm the chicken with a probe before adding egg so the egg does not overcook while the meat remains unsafe." },
       { instruction: "Pour in the egg in two additions, adding the second when the first has begun to set. Turn off the heat as the top stops flowing and slide everything over the rice.", why: "Two additions create varied texture. Residual heat continues cooking the egg, so an early stop keeps it tender." },
     ],
     principles: ["Confirm the chicken before adding egg", "Set the egg in two additions", "Keep a little sauce for the rice"],
@@ -99,14 +99,14 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
   }),
   "korean-tofu-stew-home": en({
     name: "Home-Style Korean Tofu Stew",
-    description: "A simplified gochujang broth with tofu, mushrooms, napa cabbage, garlic, and scallion.",
+    description: "A simplified gochujang broth with tofu, mushrooms, napa cabbage, egg, garlic, and scallion.",
     steps: [
-      { instruction: "Cut the tofu into large pieces, slice the mushrooms, separate the cabbage stems from the leaves, and mince the garlic.", why: "Large tofu pieces withstand simmering. Separating the cabbage prevents the leaves from becoming soft before the stems are ready." },
+      { instruction: "Cut the tofu into large pieces, slice the mushrooms, separate the cabbage stems from the leaves, and mince the garlic. Crack the egg into a small bowl.", why: "Large tofu pieces withstand simmering. Separating the cabbage controls texture, while cracking the egg separately makes shell fragments easier to catch." },
       { instruction: "Combine the gochujang, garlic, and about 650 ml water in a pot. Stir smooth before bringing it to the boil over medium heat.", why: "Dispersing the paste first prevents salty clumps. Check the bottom for any concentrated paste before heating." },
       { instruction: "Add the cabbage stems, mushrooms, and tofu. Lower to a gentle simmer and cook until the mushrooms are completely tender.", why: "Gentle bubbling transfers heat without breaking the tofu. Mushrooms need more than a surface color change to be done." },
-      { instruction: "Add the cabbage leaves and scallion and cook just until wilted. Taste at the final volume and add salt only if needed.", why: "Late-added leaves keep more color and texture. Gochujang is already salty, so early seasoning can become excessive after reduction." },
+      { instruction: "Add the cabbage leaves and scallion and cook just until wilted. Add the egg and keep the stew at a gentle simmer until the white is fully set, then taste and add salt only if needed.", why: "Late-added leaves keep more color and texture. A fully set white is a clear endpoint, and the salty gochujang means seasoning should wait until the final volume." },
     ],
-    principles: ["Disperse the gochujang completely", "Add ingredients by cooking time", "Season only at the final volume"],
+    principles: ["Disperse the gochujang completely", "Add ingredients by cooking time", "Set the egg white fully", "Season only at the final volume"],
   }),
   "korean-glass-noodle-stir-fry": en({
     name: "Home-Style Japchae",
@@ -136,7 +136,7 @@ export const m9PublicRecipeTranslationsBatchA: Readonly<
     steps: [
       { instruction: "Pat the chicken dry and cut it into similar pieces. Crush the garlic and measure the vinegar, soy sauce, and about 120 ml water.", why: "Dry, even pieces brown and finish together. Measured liquid is ready to cool the pan immediately after searing." },
       { instruction: "Heat the oil and brown the chicken in one uncrowded layer over medium heat, working in batches if needed.", why: "Browning builds flavor. An overcrowded pot makes the chicken release water instead of searing." },
-      { instruction: "Add the garlic, black pepper, vinegar, soy sauce, and water. Bring to the boil, then cover and simmer until the thickest piece has no pink center.", why: "Gentle moist heat cooks and seasons the chicken. Avoid prolonged hard boiling after adding vinegar, which drives off acidity quickly." },
+      { instruction: "Add the garlic, black pepper, vinegar, soy sauce, and water. Bring to the boil, then cover and simmer until the center of the thickest piece reaches 74°C / 165°F.", why: "Gentle moist heat cooks and seasons the chicken. Confirm the safety endpoint with a probe and avoid prolonged hard boiling after adding vinegar." },
       { instruction: "Uncover and reduce over medium heat, turning gently, until the sauce lightly coats the chicken. Taste and add salt only if necessary.", why: "Open reduction concentrates the sauce. Soy sauce is already salty, so the final concentration must be tasted first." },
     ],
     principles: ["Brown before braising", "Check the thickest chicken piece", "Adjust salt only after reduction"],

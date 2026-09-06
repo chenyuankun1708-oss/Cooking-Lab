@@ -73,12 +73,35 @@ function readyRegistry(): PublishingGovernanceRegistry {
     imageAssetVersions: contentImageAssetVersions,
   }));
   const itemIds = registry.riskClassifications.map((entry) => entry.itemId) as [string, ...string[]];
-  const artifactSetVersion = createArtifactSetVersion(itemIds, context);
   registry.attestations.forEach((attestation) => {
-    attestation.artifactSetVersion = artifactSetVersion;
+    attestation.artifactSetVersion = createArtifactSetVersion(attestation.itemIds, context);
     attestation.reviewedCommit = "1111111111111111111111111111111111111111";
     attestation.evidenceReference = "test-fixture://independent-review";
   });
+  const mediumItemIds = registry.riskClassifications
+    .filter((entry) => entry.level === "medium")
+    .map((entry) => entry.itemId) as [string, ...string[]];
+  if (mediumItemIds.length) {
+    const secondReviewer = {
+      actorType: "agent" as const,
+      actorId: "test-fixture:medium-content-reviewer",
+      runId: "test-fixture-medium-content-run",
+      contextId: "test-fixture-medium-content-context",
+    };
+    registry.attestations = [
+      ...registry.attestations,
+      ...(["factual-culinary", "editorial", "visual-image"] as const).map((dimension): ReviewAttestation => ({
+        ...structuredClone(registry.attestations[0]),
+        id: `attestation-test-medium-${dimension}`,
+        batchId: "test-medium-review",
+        dimension,
+        itemIds: mediumItemIds,
+        artifactSetVersion: createArtifactSetVersion(mediumItemIds, context),
+        reviewer: secondReviewer,
+      })),
+    ];
+  }
+  const artifactSetVersion = createArtifactSetVersion(itemIds, context);
   const equivalenceClasses = createSamplingEquivalenceClasses(registry.riskClassifications);
   const sampledItemIds = [...new Set(equivalenceClasses.flatMap((entry) => entry.sampledItemIds))].sort();
   registry.samplingBatches = [{
@@ -321,7 +344,14 @@ describe("risk-based publishing governance", () => {
 
     const aiContext = structuredClone(context);
     const outputArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.subject.id === item.id)!;
-    const inputArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.subject.id !== item.id)!;
+    const inputItem = aiContext.items.find((entry) =>
+      entry.id !== item.id
+      && aiContext.researchRecords.some((record) => record.subject.id === entry.id))!;
+    const inputArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.subject.id === inputItem.id)!;
+    const inputStory = aiContext.stories[0];
+    const inputStoryArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "story" && entry.subject.id === inputStory.id)!;
+    const outputImageId = item.images.availability === "available" ? item.images.references.primaryImageId : "";
+    const inputImageArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.kind === "image" && entry.subject.id !== outputImageId)!;
     Object.assign(aiContext.rightsRegistry, {
       ai: [{
         id: "test-transitive-ai-record",
@@ -333,7 +363,7 @@ describe("risk-based publishing governance", () => {
         termsUrl: "https://example.test/terms",
         termsEffectiveDate: "2026-09-01",
         promptTemplateVersion: "test-prompt-v1",
-        inputArtifactIds: [inputArtifact.id],
+        inputArtifactIds: [inputArtifact.id, inputStoryArtifact.id, inputImageArtifact.id],
         inputRightsReviewed: true,
         reviewAttestationIds: ["test-attestation"],
         similarityReview: "passed",
@@ -343,6 +373,28 @@ describe("risk-based publishing governance", () => {
     const aiVersion = createArtifactSetVersion(itemIds, aiContext);
     inputArtifact.version += "-changed";
     expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
+    inputArtifact.version = inputArtifact.version.replace(/-changed$/, "");
+
+    const inputResearchRecord = aiContext.researchRecords.find((record) => record.subject.id === inputItem.id)!;
+    inputResearchRecord.editorialDecision += " changed";
+    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
+    inputResearchRecord.editorialDecision = inputResearchRecord.editorialDecision.replace(/ changed$/, "");
+
+    const inputLocalization = aiContext.localizationVersions.find((entry) => entry.itemId === inputItem.id)!;
+    const originalLocalizationVersion = inputLocalization.localeVersions[1].version;
+    inputLocalization.localeVersions[1].version = "clv1-0000000000000000";
+    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
+    inputLocalization.localeVersions[1].version = originalLocalizationVersion;
+
+    inputStory.content.entries[0].value.dek += " changed";
+    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
+    inputStory.content.entries[0].value.dek = inputStory.content.entries[0].value.dek.replace(/ changed$/, "");
+
+    const inputImageVersion = aiContext.imageAssetVersions.find((entry) => entry.imageId === inputImageArtifact.subject.id)!;
+    const originalImageSha = inputImageVersion.sha256;
+    inputImageVersion.sha256 = "0".repeat(64);
+    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
+    inputImageVersion.sha256 = originalImageSha;
 
     const mediaContext = structuredClone(context);
     const sourcedArtifact = mediaContext.rightsRegistry.artifacts.find((entry) =>
@@ -451,6 +503,32 @@ describe("risk-based publishing governance", () => {
         })),
     ];
     expect(issueCodes(registry)).not.toContain("insufficient-medium-independence");
+  });
+
+  it("routes a single-source non-image adaptation to MEDIUM without treating an image crop as deep adaptation", () => {
+    const registry = readyRegistry();
+    const itemId = registry.riskClassifications[0].itemId;
+    const changedContext = structuredClone(context);
+    const contentArtifact = changedContext.rightsRegistry.artifacts.find((entry) =>
+      entry.subject.type === "culinary-item"
+      && entry.subject.id === itemId
+      && entry.kind === "preparation")!;
+    contentArtifact.derivation = "adaptation";
+    contentArtifact.sourceIds = [changedContext.sources[0].id];
+    expect(issueCodes(registry, changedContext)).toContain("under-classified-risk");
+
+    const imageOnlyContext = structuredClone(context);
+    const imageArtifact = imageOnlyContext.rightsRegistry.artifacts.find((entry) => entry.kind === "image")!;
+    imageArtifact.derivation = "adaptation";
+    imageArtifact.sourceIds = [imageOnlyContext.sources[0].id];
+    const imageItemId = imageOnlyContext.items.find((entry) =>
+      entry.images.availability === "available"
+      && entry.images.references.primaryImageId === imageArtifact.subject.id)!.id;
+    const imageRegistry = readyRegistry();
+    imageRegistry.riskClassifications.find((entry) => entry.itemId === imageItemId)!.artifactSetVersion = createArtifactSetVersion([imageItemId], imageOnlyContext);
+    imageRegistry.attestations.forEach((entry) => { entry.artifactSetVersion = createArtifactSetVersion(entry.itemIds, imageOnlyContext); });
+    imageRegistry.samplingBatches[0].artifactSetVersion = createArtifactSetVersion(imageRegistry.samplingBatches[0].itemIds, imageOnlyContext);
+    expect(issueCodes(imageRegistry, imageOnlyContext)).not.toContain("under-classified-risk");
   });
 
   it("escalates unresolved reviewer disagreement beyond LOW or MEDIUM", () => {

@@ -66,9 +66,9 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
       },
       {
         instruction:
-          "Continue stir-frying over medium heat until the center of the thickest chicken piece is no longer pink and the turmeric smells fragrant without any burnt odor. Remove from the heat immediately.",
+          "Continue stir-frying over medium heat until the center of the thickest chicken piece reaches 74°C / 165°F and the turmeric smells fragrant without any burnt odor. Remove from the heat immediately.",
         why:
-          "The thickest piece is the most reliable doneness check. Reduce the heat if the spices darken too quickly.",
+          "A probe temperature is more reliable than meat color. Reduce the heat if the spices darken too quickly.",
       },
     ],
     principles: ["Use a thin, even spice coating", "Brown the chicken before adding aromatics", "Check the thickest piece for doneness"],
@@ -98,9 +98,9 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
       },
       {
         instruction:
-          "Open the lid and check that the center of the thickest chicken piece is no longer pink and its juices run clear. Remove and slice the chicken, fluff the rice, and serve with the cucumber.",
+          "Open the lid and check that the center of the thickest chicken piece reaches 74°C / 165°F. Remove and slice the chicken, fluff the rice, and serve with the cucumber.",
         why:
-          "Confirm the chicken is fully cooked before serving. If the center is still underdone, heat the chicken separately rather than repeatedly steaming the entire pot of rice.",
+          "A probe temperature is more reliable than meat color or clear juices. If the chicken is below the safe temperature, heat it separately rather than repeatedly steaming the entire pot of rice.",
       },
     ],
     principles: ["Use even thickness for one-pot cooking", "Keep the covered rest after the rice cycle", "Check the thickest part of the chicken"],
@@ -293,9 +293,9 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
     principles: ["Soften the vegetables before simmering", "Maintain gentle bubbling", "Judge doneness by lentil texture"],
   }),
   "greek-lemon-oregano-chicken": en({
-    name: "Greek-Inspired Lemon Oregano Chicken Skewers",
+    name: "Greek-Inspired Lemon Oregano Chicken",
     description:
-      "Home-style grill-pan chicken skewers flavored with lemon, oregano, and garlic, inspired by a common Greek flavor combination.",
+      "Home-style grill-pan chicken pieces flavored with lemon, oregano, and garlic, inspired by a common Greek flavor combination.",
     steps: [
       {
         instruction:
@@ -305,24 +305,24 @@ export const m9PublicRecipeTranslationsBatchB: Readonly<
       },
       {
         instruction:
-          "Thread the chicken snugly but without compressing it, leaving a small gap between pieces. Preheat the grill pan until a drop of water evaporates immediately.",
+          "Preheat the grill pan until a drop of water evaporates immediately. Arrange the chicken in one layer with space between the pieces.",
         why:
-          "Small gaps let heat reach the sides and keep the pieces from squeezing moisture onto each other.",
+          "A single uncrowded layer preserves pan heat and lets each piece touch the hot surface instead of steaming.",
       },
       {
         instruction:
-          "Add the skewers and leave them in place until the contact side has clear brown marks. Turn to brown each side, then reduce to medium-low until the thickest piece is no longer pink.",
+          "Leave the chicken in place until the contact side has clear brown marks. Turn once, then reduce to medium-low until the thickest piece reaches 74°C / 165°F.",
         why:
-          "Stable contact builds browned flavor on each side. Lower heat then finishes the center without burning the surface.",
+          "Stable contact builds browned flavor; a probe temperature confirms the safety endpoint. Lower heat finishes the center without burning the surface.",
       },
       {
         instruction:
-          "Rest the skewers off the heat for 3 minutes, squeeze over the lemon juice, and turn them lightly through the juices on the plate.",
+          "Rest the chicken off the heat for 3 minutes, squeeze over the lemon juice, and turn the pieces lightly through the juices on the plate.",
         why:
           "Resting balances heat and juices through the meat. Adding lemon at the end preserves its bright aroma.",
       },
     ],
-    principles: ["Cut the pieces evenly", "Brown each side before lowering the heat", "Add lemon after cooking"],
+    principles: ["Cut the pieces evenly", "Brown in one layer before lowering the heat", "Add lemon after cooking"],
   }),
   "mexican-black-bean-tacos": en({
     name: "Home-Style Black Bean Tacos",

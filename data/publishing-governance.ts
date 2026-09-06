@@ -1,4 +1,4 @@
-import { createArtifactSetVersion, deriveEquivalenceClassKeys } from "@/lib/publishing-governance";
+import { createArtifactSetVersion, deriveEquivalenceClassKeys, deriveMinimumPublishingRisk } from "@/lib/publishing-governance";
 import type { CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
 import type { ContentRightsRegistry } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
@@ -23,6 +23,11 @@ export const publishingGovernancePolicyVersion = "m10.1-risk-based-2026-09-06";
 const m10BaselineReviewedArtifactSetVersion = "clv1-f5c87a7ef999023e";
 const m10BaselineReviewedCommit = "de4ea4164d89c6cf2665b0769ab00b94d89bb808";
 const m10BaselineBatchId = "m10-existing-50-independent-review";
+const weakImageFidelityItemIds = new Set([
+  "cantonese-mushroom-steamed-chicken",
+  "malaysian-turmeric-chicken",
+  "mexican-black-bean-tacos",
+]);
 
 const author: ReviewActorIdentity = {
   actorType: "agent",
@@ -78,16 +83,23 @@ export function createPublishingGovernanceRegistry(
   };
   const riskClassifications = input.items
     .filter((item) => itemIds.includes(item.id))
-    .map((item): PublishingRiskClassification => ({
-      id: `risk-${item.id}-${publishingGovernancePolicyVersion}`,
-      itemId: item.id,
-      artifactSetVersion: createArtifactSetVersion([item.id], context),
-      level: "low",
-      reasonCodes: ["clear-first-party-or-reference-only-rights"],
-      equivalenceClassKeys: deriveEquivalenceClassKeys(item, context) as [string, ...string[]],
-      policyVersion: publishingGovernancePolicyVersion,
-      classifiedAt: "2026-09-06",
-    }));
+    .map((item): PublishingRiskClassification => {
+      const minimum = deriveMinimumPublishingRisk(item, input.rightsRegistry);
+      const weakImageFidelity = weakImageFidelityItemIds.has(item.id);
+      return {
+        id: `risk-${item.id}-${publishingGovernancePolicyVersion}`,
+        itemId: item.id,
+        artifactSetVersion: createArtifactSetVersion([item.id], context),
+        level: weakImageFidelity && minimum.level === "low" ? "medium" : minimum.level,
+        reasonCodes: [...new Set([
+          ...minimum.reasonCodes,
+          ...(weakImageFidelity ? ["weak-image-fidelity" as const] : []),
+        ])] as PublishingRiskClassification["reasonCodes"],
+        equivalenceClassKeys: deriveEquivalenceClassKeys(item, context) as [string, ...string[]],
+        policyVersion: publishingGovernancePolicyVersion,
+        classifiedAt: "2026-09-06",
+      };
+    });
 
   const dimensions: ReviewDimension[] = [
     "rights-license",

@@ -23,7 +23,7 @@ export const m9RecipeImages: readonly RecipeImage[] = [
   {
     id: "cantonese-mushroom-steamed-chicken-hero",
     src: "/images/recipes/cantonese-mushroom-steamed-chicken/hero.webp",
-    alt: "白盘中的鸡肉块和香菇，表面带有浓郁棕色汁水",
+    alt: "白色深盘中的鸡肉、菌菇与棕色汤汁，为同类食材组合的视觉示意",
     role: "hero",
     delivery: "local",
     width: 1500,
@@ -135,7 +135,7 @@ export const m9RecipeImages: readonly RecipeImage[] = [
   {
     id: "korean-tofu-stew-home-hero",
     src: "/images/recipes/korean-tofu-stew-home/hero.webp",
-    alt: "黑色陶锅中的韩式嫩豆腐锅，红汤中可见豆腐和蔬菜",
+    alt: "黑色陶锅中的韩式嫩豆腐锅，红汤中可见豆腐、菌菇、蔬菜和鸡蛋",
     role: "hero",
     delivery: "local",
     width: 1500,
@@ -343,7 +343,7 @@ export const m9RecipeImages: readonly RecipeImage[] = [
   {
     id: "greek-lemon-oregano-chicken-hero",
     src: "/images/recipes/greek-lemon-oregano-chicken/hero.webp",
-    alt: "白盘中的希腊烤鸡肉串，带有清晰烤纹和柠檬",
+    alt: "白盘中的希腊风味烤鸡肉块，搭配烤饼、洋葱和浅色酱汁",
     role: "hero",
     delivery: "local",
     width: 1500,
@@ -359,7 +359,7 @@ export const m9RecipeImages: readonly RecipeImage[] = [
   {
     id: "mexican-black-bean-tacos-hero",
     src: "/images/recipes/mexican-black-bean-tacos/hero.webp",
-    alt: "盘中的黑豆玉米饼，铺有玉米、番茄和新鲜蔬菜",
+    alt: "盘中的黑豆玉米饼，铺有生菜、紫甘蓝、豌豆、种子和酱料，为同类料理的视觉示意",
     role: "hero",
     delivery: "local",
     width: 1500,
@@ -381,7 +381,7 @@ export const m9RecipeImages: readonly RecipeImage[] = [
     width: 1500,
     height: 1000,
     aspectRatio: "3:2",
-    source: "public-domain",
+    source: "open-license",
     sourceUrl: commons("Huevos rancheros.jpg"),
     author: "1000b",
     license: "cc-by-sa",

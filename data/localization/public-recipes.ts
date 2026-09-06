@@ -107,7 +107,7 @@ export const publishedRecipeTranslations: Readonly<Record<string, TranslationSet
     steps: [
       { instruction: "Cut the chicken thighs into 1.5 cm pieces and pat dry. Mince the garlic, slice the chilies, pick the basil leaves, and mix the soy sauce and salt with 1 tablespoon water.", why: "Even pieces cook quickly; a dry surface browns better, and a premixed sauce avoids pauses over high heat." },
       { instruction: "Heat the pan thoroughly, add the oil, and spread the chicken in one layer. Leave it until the underside is lightly browned and the edges turn opaque, then stir-fry.", why: "Steady contact with the hot pan builds browned aroma and avoids releasing moisture through constant movement." },
-      { instruction: "When most of the chicken has changed color, add the garlic and chilies. Stir until fragrant and check that the center of the thickest piece is no longer pink.", why: "Adding aromatics later keeps them from burning before the chicken is done; the thickest piece is the best doneness check." },
+      { instruction: "When most of the chicken has changed color, add the garlic and chilies. Stir until fragrant and let the center of the thickest piece reach 74°C / 165°F.", why: "Adding aromatics later keeps them from burning before the chicken is done; a probe temperature is more reliable than meat color." },
       { instruction: "Pour the sauce around the edge of the pan and toss until almost no liquid remains. Add the basil and turn off the heat as soon as the leaves wilt and smell fragrant.", why: "A quick reduction coats the chicken; residual heat is enough for basil, whose fresh aroma fades with prolonged cooking." },
     ],
     principles: ["Stir-fry over high heat", "Add fresh herbs last"],

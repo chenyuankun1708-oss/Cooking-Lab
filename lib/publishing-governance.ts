@@ -84,8 +84,8 @@ export function createArtifactSetVersion(
   context: PublishingGovernanceContext,
 ): string {
   const itemIdSet = new Set(itemIds);
-  const items = context.items.filter((item) => itemIdSet.has(item.id)).sort((left, right) => left.id.localeCompare(right.id));
-  const artifactIds = new Set(items.flatMap((item) => getItemArtifacts(item, context.rightsRegistry).map((artifact) => artifact.id)));
+  const requestedItems = context.items.filter((item) => itemIdSet.has(item.id)).sort((left, right) => left.id.localeCompare(right.id));
+  const artifactIds = new Set(requestedItems.flatMap((item) => getItemArtifacts(item, context.rightsRegistry).map((artifact) => artifact.id)));
   let discoveredAiInput = true;
   while (discoveredAiInput) {
     discoveredAiInput = false;
@@ -99,6 +99,16 @@ export function createArtifactSetVersion(
     }
   }
   const artifacts = context.rightsRegistry.artifacts.filter((artifact) => artifactIds.has(artifact.id)).sort(byId);
+  const relatedItemIds = new Set([
+    ...itemIds,
+    ...artifacts.flatMap((artifact) => artifact.subject.type === "culinary-item" ? [artifact.subject.id] : []),
+    ...artifacts.flatMap((artifact) => artifact.subject.type === "product-profile"
+      ? context.rightsRegistry.productProfiles
+        .filter((profile) => profile.id === artifact.subject.id)
+        .map((profile) => profile.culinaryItemId)
+      : []),
+  ]);
+  const items = context.items.filter((item) => relatedItemIds.has(item.id)).sort((left, right) => left.id.localeCompare(right.id));
   const decisions = uniqueById(artifacts.flatMap((artifact) => context.rightsRegistry.decisions.filter((decision) => decision.id === artifact.usageDecisionId)));
   const attributions = context.rightsRegistry.attributions.filter((entry) => artifactIds.has(entry.artifactId)).sort(byId);
   const evidenceIds = new Set(artifacts.flatMap((artifact) => artifact.evidenceIds));
@@ -108,15 +118,29 @@ export function createArtifactSetVersion(
     ...evidence.map((entry) => entry.sourceId),
   ]);
   const sources = context.sources.filter((source) => sourceIds.has(source.id)).sort(byId);
-  const storyIds = new Set(items.flatMap((item) => item.storyIds));
+  const storyIds = new Set([
+    ...items.flatMap((item) => item.storyIds),
+    ...artifacts.flatMap((artifact) => artifact.subject.type === "story" ? [artifact.subject.id] : []),
+  ]);
   const stories = context.stories.filter((story) => storyIds.has(story.id)).sort(byId);
+  const researchSubjectIds = new Set([
+    ...relatedItemIds,
+    ...storyIds,
+    ...artifacts.map((artifact) => artifact.subject.id),
+  ]);
   const researchRecords = context.researchRecords
-    .filter((record) => itemIdSet.has(record.subject.id) || storyIds.has(record.subject.id))
+    .filter((record) => researchSubjectIds.has(record.subject.id))
     .sort(byId);
-  const imageIds = new Set(items.flatMap((item) => item.images.availability === "available" ? item.images.references.imageIds : []));
+  const imageIds = new Set([
+    ...items.flatMap((item) => item.images.availability === "available" ? item.images.references.imageIds : []),
+    ...artifacts.flatMap((artifact) => artifact.subject.type === "image" ? [artifact.subject.id] : []),
+  ]);
   const images = context.images.filter((image) => imageIds.has(image.id)).sort(byId);
   const imageAssetVersions = context.imageAssetVersions.filter((entry) => imageIds.has(entry.imageId)).sort((left, right) => left.imageId.localeCompare(right.imageId));
-  const ingredientIds = new Set(items.flatMap((item) => "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []));
+  const ingredientIds = new Set([
+    ...items.flatMap((item) => "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []),
+    ...artifacts.flatMap((artifact) => artifact.subject.type === "ingredient-data" ? [artifact.subject.id] : []),
+  ]);
   const ingredients = context.ingredients.filter((ingredient) => ingredientIds.has(ingredient.id)).sort(byId);
   const nutrition = context.rightsRegistry.nutrition.filter((entry) => ingredientIds.has(entry.ingredientId)).sort((left, right) => left.ingredientId.localeCompare(right.ingredientId));
   const costIds = new Set(ingredients.map((ingredient) => ingredient.costProvenanceId));
@@ -125,8 +149,8 @@ export function createArtifactSetVersion(
   const datasets = context.rightsRegistry.datasets.filter((entry) => datasetIds.has(entry.id)).sort(byId);
   const ai = context.rightsRegistry.ai.filter((entry) => artifacts.some((artifact) => artifact.id === entry.artifactId)).sort(byId);
   const externalMedia = context.rightsRegistry.externalMedia.filter((entry) => sourceIds.has(entry.sourceId)).sort(byId);
-  const restaurants = context.rightsRegistry.restaurants.filter((entry) => itemIdSet.has(entry.culinaryItemId)).sort((left, right) => left.culinaryItemId.localeCompare(right.culinaryItemId));
-  const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => itemIdSet.has(entry.culinaryItemId)).sort(byId);
+  const restaurants = context.rightsRegistry.restaurants.filter((entry) => relatedItemIds.has(entry.culinaryItemId)).sort((left, right) => left.culinaryItemId.localeCompare(right.culinaryItemId));
+  const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => relatedItemIds.has(entry.culinaryItemId)).sort(byId);
   const assessmentIds = new Set([
     ...artifacts.map((artifact) => artifact.rightsAssessmentId),
     ...decisions.flatMap((decision) => decision.assessmentIds),
@@ -136,8 +160,8 @@ export function createArtifactSetVersion(
     ...productProfiles.map((profile) => profile.rightsAssessmentId),
   ]);
   const assessments = context.rightsRegistry.assessments.filter((assessment) => assessmentIds.has(assessment.id)).sort(byId);
-  const contentPaths = context.contentPaths.filter((entry) => itemIdSet.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
-  const localizationVersions = context.localizationVersions.filter((entry) => itemIdSet.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
+  const contentPaths = context.contentPaths.filter((entry) => relatedItemIds.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
+  const localizationVersions = context.localizationVersions.filter((entry) => relatedItemIds.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
   return createContentVersion({
     itemIds: [...itemIds].sort(),
     items,
@@ -433,7 +457,7 @@ function validateRiskClassification(
   if (classification.policyVersion !== policyVersion || classification.artifactSetVersion !== currentVersion) {
     report("stale-risk-classification", item.id, "Risk classification does not match the active policy and current artifact version");
   }
-  const minimum = deriveMinimumRisk(item, context.rightsRegistry);
+  const minimum = deriveMinimumPublishingRisk(item, context.rightsRegistry);
   if (riskRank[classification.level] < riskRank[minimum.level]) {
     report("under-classified-risk", item.id, `Declared ${classification.level} is below deterministic minimum ${minimum.level}`);
   }
@@ -779,7 +803,7 @@ function requiredDimensions(item: CulinaryItem, registry: ContentRightsRegistry)
   return dimensions;
 }
 
-function deriveMinimumRisk(item: CulinaryItem, registry: ContentRightsRegistry): { level: PublishingRiskLevel; reasonCodes: PublishingRiskReasonCode[] } {
+export function deriveMinimumPublishingRisk(item: CulinaryItem, registry: ContentRightsRegistry): { level: PublishingRiskLevel; reasonCodes: PublishingRiskReasonCode[] } {
   const artifacts = getItemArtifacts(item, registry);
   const assessments = artifacts.flatMap((artifact) => registry.assessments.filter((assessment) => assessment.id === artifact.rightsAssessmentId));
   const highRights = assessments.some((assessment) =>
@@ -789,7 +813,11 @@ function deriveMinimumRisk(item: CulinaryItem, registry: ContentRightsRegistry):
   const restaurant = registry.restaurants.find((entry) => entry.culinaryItemId === item.id);
   const hasProductProfile = registry.productProfiles.some((entry) => entry.culinaryItemId === item.id);
   const hasGeneratedImage = artifacts.some((artifact) => artifact.kind === "image" && artifact.derivation === "generated");
-  const hasLicensedCopy = artifacts.some((artifact) => artifact.derivation === "licensed-copy");
+  const hasLicensedCopy = artifacts.some((artifact) => artifact.kind !== "image" && artifact.derivation === "licensed-copy");
+  const hasSingleSourceDeepAdaptation = artifacts.some((artifact) =>
+    artifact.kind !== "image"
+    && artifact.derivation === "adaptation"
+    && artifact.sourceIds.length === 1);
   const hasAi = artifacts.some((artifact) => registry.ai.some((record) => record.artifactId === artifact.id));
 
   if (highRights || restaurant?.kind === "official-authorized-recipe") {
@@ -802,7 +830,7 @@ function deriveMinimumRisk(item: CulinaryItem, registry: ContentRightsRegistry):
   if (restaurant?.kind === "cooking-lab-reconstruction") mediumReasons.push("restaurant-reconstruction");
   if (hasProductProfile) mediumReasons.push("product-profile");
   if (hasGeneratedImage) mediumReasons.push("ai-generated-image");
-  if (hasLicensedCopy) mediumReasons.push("single-source-deep-adaptation");
+  if (hasLicensedCopy || hasSingleSourceDeepAdaptation) mediumReasons.push("single-source-deep-adaptation");
   if (mediumReasons.length) return { level: "medium", reasonCodes: mediumReasons };
   return {
     level: "low",

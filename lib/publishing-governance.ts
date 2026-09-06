@@ -547,8 +547,13 @@ function validateSamplingBatch(
   if (metricValues.some((value) => !Number.isInteger(value) || value < 0) || batch.metrics.reworkItemCount > batch.itemIds.length) {
     report("sampling-metrics-invalid", batch.id, "Sampling metrics must be non-negative integers within the batch size");
   }
-  if (batch.metrics.escapeCount > 0 && !batch.findings.some((finding) => finding.severity === "major")) {
-    report("sampling-metrics-invalid", batch.id, "A recorded escape requires a class-linked major finding");
+  const hasBatchMajorFinding = batch.findings.some((finding) => finding.severity === "major");
+  const hasSampleMajorFinding = batch.samples.some((sample) => sample.findings.some((finding) => finding.severity === "major"));
+  if (batch.metrics.escapeCount > 0 && !hasBatchMajorFinding && !hasSampleMajorFinding) {
+    report("sampling-metrics-invalid", batch.id, "A recorded escape requires a major batch or sample finding");
+  }
+  if (batch.metrics.escapeCount === 0 && (hasBatchMajorFinding || hasSampleMajorFinding)) {
+    report("sampling-metrics-invalid", batch.id, "A major batch or sample finding must be counted as an escape");
   }
   const seenClassKeys = new Set<string>();
   if (new Set(batch.itemIds).size !== batch.itemIds.length) {
@@ -642,7 +647,14 @@ function validateSamplingHistory(
     if (batch.sequence !== index + 1 || (index === 0 ? batch.previousBatchId !== undefined : batch.previousBatchId !== ordered[index - 1].id)) {
       report("sampling-metrics-invalid", batch.id, "Sampling batches require a contiguous sequence and explicit previous-batch chain");
     }
-    const majorClassKeys = new Set(batch.findings.filter((finding) => finding.severity === "major").flatMap((finding) => finding.equivalenceClassKeys));
+    const majorClassKeys = new Set([
+      ...batch.findings
+        .filter((finding) => finding.severity === "major")
+        .flatMap((finding) => finding.equivalenceClassKeys),
+      ...batch.samples
+        .filter((sample) => sample.findings.some((finding) => finding.severity === "major"))
+        .flatMap((sample) => sample.equivalenceClassKeys),
+    ]);
 
     for (const [key, state] of states) {
       if (!state.frozen) continue;
@@ -651,7 +663,8 @@ function validateSamplingHistory(
       const cleanCurrentRecord = batch.policyVersion === policyVersion
         && batch.artifactSetVersion === versionOf(batch.itemIds)
         && batch.verdict === "pass"
-        && !batch.findings.some((finding) => finding.severity === "major" || finding.disposition === "unresolved");
+        && !batch.findings.some((finding) => finding.severity === "major" || finding.disposition === "unresolved")
+        && !batch.samples.some((sample) => sample.findings.some((finding) => finding.severity === "major" || finding.disposition === "unresolved"));
       const fullReview = Boolean(
         cleanCurrentRecord
         && equivalence

@@ -438,6 +438,49 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
   });
 
+  it("freezes every sampled risk class after a resolved sample-level major finding until two clean full reviews", () => {
+    const registry = readyRegistry();
+    const sample = registry.samplingBatches[0].samples.find((entry) => entry.equivalenceClassKeys.length > 1)!;
+    sample.findings = [{
+      code: "sample-major-escape",
+      kind: "quality",
+      severity: "major",
+      summary: "A resolved major issue was discovered in this sampled item.",
+      disposition: "resolved",
+    }];
+    registry.samplingBatches[0].metrics.escapeCount = 1;
+
+    expect(issueCodes(registry)).toContain("sampling-class-frozen");
+
+    const oneClean = makeNextSamplingBatch(registry, "sample-major-clean-2");
+    oneClean.samples.forEach((entry) => { entry.findings = []; });
+    for (const classKey of sample.equivalenceClassKeys) setFullReview(oneClean, classKey);
+    registry.samplingBatches = [...registry.samplingBatches, oneClean];
+    expect(issueCodes(registry)).toContain("sampling-class-frozen");
+
+    const twoClean = makeNextSamplingBatch(registry, "sample-major-clean-3");
+    twoClean.samples.forEach((entry) => { entry.findings = []; });
+    for (const classKey of sample.equivalenceClassKeys) setFullReview(twoClean, classKey);
+    registry.samplingBatches = [...registry.samplingBatches, twoClean];
+    expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
+  });
+
+  it("requires sampling escape metrics to agree with batch-level and sample-level major findings", () => {
+    const uncounted = readyRegistry();
+    uncounted.samplingBatches[0].samples[0].findings = [{
+      code: "uncounted-major",
+      kind: "quality",
+      severity: "major",
+      summary: "This major finding must be represented by the escape metric.",
+      disposition: "resolved",
+    }];
+    expect(issueCodes(uncounted)).toContain("sampling-metrics-invalid");
+
+    const unexplained = readyRegistry();
+    unexplained.samplingBatches[0].metrics.escapeCount = 1;
+    expect(issueCodes(unexplained)).toContain("sampling-metrics-invalid");
+  });
+
   it("rejects forged sampling sequence and previous-batch chains", () => {
     const registry = readyRegistry();
     const second = makeNextSamplingBatch(registry, "sampling-chain-2");

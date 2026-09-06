@@ -149,10 +149,11 @@ GitHub tracking：Epic `#60`，研究协议 `#61`，双语参与入口 `#62`，�
 Product Director 在任何参与者联系、session 或数据产生之前取消并取代了 M8。Cooking Lab 当前阶段不招募参与者、不执行真人研究，也不继续建设研究流程。已上线但只服务该研究的 validation 页面、Footer 入口与专用反馈表单由 Issue #67 撤下。
 
 M7 的 `ready for bounded external validation` 只保留为 readiness 结论，不代表下一阶段必须执行用户研究。M8 没有产生外部用户证据或产品方向结论；清理完成后不自动启动新的产品 Goal。
-## 当前优先级：M10 Commercial-ready Content Rights / Provenance / Attribution Gate
+
+## 已完成：M10 Commercial-ready Content Rights / Provenance / Attribution Gate
 
 GitHub tracking：Epic `#78`，current-library migration `#79`，unified Production gate `#80`，public bilingual disclosure `#81`，final QA / independent rights review `#82`，model and policy baseline `#83`。
 
-M10 暂停 500+ 内容扩充和 Taste UI 大升级，先让当前 50 项的 identity、preparation、Story、nutrition、cost、image 与 product-profile 进入同一权利门禁。完成标准是：全量无 grandfathering 审计、稳定 blocked reason code、build/CI gate、双语来源与署名 UI、全站政策页、独立 code review 和独立 content-rights review。PR ready 后等待 Product Director 明确 merge；不自动开始后续 Epic。
+M10 已通过 PR #84 完成并于 2026-09-06 merge。当前 50 项的 identity、preparation、Story、nutrition、cost、image 与 product-profile 已进入同一权利门禁；全量无 grandfathering 审计、稳定 blocked reason code、build/CI gate、双语来源与署名 UI、全站政策页、独立 code review 和独立 content-rights review 均已完成。merge 后 main CI、Vercel Production deployment、双语 Production smoke 与 100 个详情页 regression verification 均通过。
 
-M10 之后才重新评估 500+ 内容批量生产、多个 Story、详情章节导航和 Taste UI 大升级；届时任何餐厅授权、酒类推广或大规模数据库导入仍需专业律师 checkpoint。
+500+ 内容批量生产、多个 Story、详情章节导航、Taste UI 大升级、M11 与其他新 Goal 均未启动，是否进入后续阶段由 Product Director 决定。任何未来餐厅授权、酒类推广或大规模数据库导入仍需专业律师 checkpoint。

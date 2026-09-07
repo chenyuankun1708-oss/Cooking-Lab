@@ -449,6 +449,7 @@ describe("M10 Production content-rights gate", () => {
       model: "",
       modelVersion: "",
       generatedAt: "2026-09-06",
+      serviceRoute: "direct",
       serviceChain: [{ serviceId: "", provider: "", role: "model-provider", termsAssessmentId: "missing-terms-assessment" }],
       termsAssessmentIds: ["missing-terms-assessment"],
       promptTemplateId: "",
@@ -501,6 +502,20 @@ describe("M10 Production content-rights gate", () => {
     prohibitedTerms.permissions.store.status = "prohibited";
     expect(issueCodes(prohibitedStorage)).toContain("ai-input-rights-unknown");
 
+    const prohibitedTransform = registryWithValidAiArtifact();
+    const prohibitedTransformTerms = prohibitedTransform.assessments.find((assessment) => assessment.subject.type === "ai-service")!;
+    prohibitedTransformTerms.permissions.transform.status = "prohibited";
+    expect(issueCodes(prohibitedTransform)).toContain("ai-input-rights-unknown");
+
+    const prohibitedPublish = registryWithValidAiArtifact();
+    const prohibitedPublishTerms = prohibitedPublish.assessments.find((assessment) => assessment.subject.type === "ai-service")!;
+    prohibitedPublishTerms.permissions.publish.status = "review-required";
+    expect(issueCodes(prohibitedPublish)).toContain("ai-input-rights-unknown");
+
+    const omittedGateway = registryWithValidAiArtifact();
+    omittedGateway.ai[0].serviceRoute = "gateway";
+    expect(issueCodes(omittedGateway)).toContain("ai-input-rights-unknown");
+
     const wrongProvider = registryWithValidAiArtifact();
     wrongProvider.ai[0].serviceChain[0].provider = "Another Provider";
     expect(issueCodes(wrongProvider)).toContain("ai-input-rights-unknown");
@@ -510,6 +525,39 @@ describe("M10 Production content-rights gate", () => {
     const generatedDecision = missingDecisionClosure.decisions.find((entry) => entry.id === generatedArtifact.usageDecisionId)!;
     generatedDecision.assessmentIds = generatedDecision.assessmentIds.filter((id) => id !== missingDecisionClosure.ai[0].termsAssessmentIds[0]) as [string, ...string[]];
     expect(issueCodes(missingDecisionClosure)).toContain("ai-input-rights-unknown");
+
+    const ghostSource = registryWithValidAiArtifact();
+    const ghostSourceId = "source-not-registered";
+    const ghostAssessmentId = "source-rights-not-registered";
+    const baseSourceAssessment = ghostSource.assessments.find((assessment) => assessment.subject.type === "source")!;
+    ghostSource.assessments = [...ghostSource.assessments, {
+      ...structuredClone(baseSourceAssessment),
+      id: ghostAssessmentId,
+      subject: { type: "source", id: ghostSourceId },
+    }];
+    ghostSource.aiInputs[0].sourceIds.push(ghostSourceId);
+    ghostSource.aiInputs[0].rightsAssessmentIds.push(ghostAssessmentId);
+    const ghostResearchRecord = context.researchRecords.find((record) => record.id === ghostSource.aiInputs[0].researchRecordIds[0])!;
+    const ghostContext = structuredClone(context);
+    const mutableGhostRecord = ghostContext.researchRecords.find((record) => record.id === ghostResearchRecord.id)!;
+    mutableGhostRecord.sourceDecisions.push({
+      id: "decision-ghost-source",
+      sourceId: ghostSourceId,
+      disposition: "accepted",
+      uses: ["identity"],
+      rationale: "Mutation fixture",
+    });
+    ghostSource.aiInputs[0].contentHash = createContentVersion({
+      kind: ghostSource.aiInputs[0].kind,
+      sourceIds: [...ghostSource.aiInputs[0].sourceIds].sort(),
+      evidenceIds: [...ghostSource.aiInputs[0].evidenceIds].sort(),
+      researchRecordIds: [...ghostSource.aiInputs[0].researchRecordIds].sort(),
+      rightsAssessmentIds: [...ghostSource.aiInputs[0].rightsAssessmentIds].sort(),
+      containsThirdPartyExpression: false,
+    });
+    const ghostArtifact = ghostSource.artifacts.find((entry) => entry.id === ghostSource.ai[0].artifactId)!;
+    ghostSource.decisions.find((entry) => entry.id === ghostArtifact.usageDecisionId)!.assessmentIds.push(ghostAssessmentId);
+    expect(issueCodes(ghostSource, ghostContext)).toContain("ai-input-rights-unknown");
 
     const unclosedInput = registryWithValidAiArtifact();
     (unclosedInput.aiInputs[0] as { containsThirdPartyExpression: boolean }).containsThirdPartyExpression = true;
@@ -722,6 +770,7 @@ function registryWithValidAiArtifact(): ContentRightsRegistry {
     model: "test-model",
     modelVersion: "test-model-2026-09-01",
     generatedAt: "2026-09-06",
+    serviceRoute: "direct",
     serviceChain: [{
       serviceId: "test-provider",
       provider: "Test Provider",

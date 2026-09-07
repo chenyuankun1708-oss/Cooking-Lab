@@ -188,6 +188,7 @@ export interface AiGenerationRecord {
   model: string;
   modelVersion: string;
   generatedAt: string;
+  serviceRoute: "direct" | "gateway";
   serviceChain: [AiServiceChainEntry, ...AiServiceChainEntry[]];
   termsAssessmentIds: [string, ...string[]];
   promptTemplateId: string;

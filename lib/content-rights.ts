@@ -294,6 +294,7 @@ function validateAi(
   report: (code: ContentRightsIssueCode, subjectId: string, field: string, message: string) => void,
 ) {
   const inputsById = new Map(registry.aiInputs.map((input) => [input.id, input]));
+  const sourcesById = new Map(context.sources.map((source) => [source.id, source]));
   const recordsByArtifact = new Map<string, (typeof registry.ai)[number][]>();
   for (const record of registry.ai) {
     recordsByArtifact.set(record.artifactId, [...(recordsByArtifact.get(record.artifactId) ?? []), record]);
@@ -348,13 +349,18 @@ function validateAi(
     }
 
     const linkedAssessments = input.rightsAssessmentIds.map((id) => assessments.get(id));
-    const inputAssessment = linkedAssessments.find((assessment) => assessment?.subject.type === "ai-input" && assessment.subject.id === input.id);
-    const sourceAssessmentsComplete = input.sourceIds.every((sourceId) => linkedAssessments.some((assessment) =>
-      assessment?.subject.type === "source" && assessment.subject.id === sourceId));
+    const inputAssessments = linkedAssessments.filter((assessment) => assessment?.subject.type === "ai-input" && assessment.subject.id === input.id);
+    const sourcesResolve = input.sourceIds.every((sourceId) => sourcesById.has(sourceId));
+    const sourceAssessmentsComplete = input.sourceIds.every((sourceId) => linkedAssessments.filter((assessment) =>
+      assessment?.subject.type === "source" && assessment.subject.id === sourceId).length === 1);
+    const assessmentSubjectsExact = linkedAssessments.every((assessment) => assessment && (
+      (assessment.subject.type === "ai-input" && assessment.subject.id === input.id)
+      || (assessment.subject.type === "source" && sourceIds.has(assessment.subject.id))
+    ));
     const transformAllowed = linkedAssessments.every((assessment) => assessment
       && !["prohibited", "review-required"].includes(assessment.permissions.store.status)
       && !["prohibited", "review-required"].includes(assessment.permissions.transform.status));
-    if (!inputAssessment || !sourceAssessmentsComplete || !transformAllowed) {
+    if (inputAssessments.length !== 1 || !sourcesResolve || !sourceAssessmentsComplete || !assessmentSubjectsExact || !transformAllowed) {
       report("ai-input-rights-unknown", input.id, "rightsAssessmentIds", "AI input requires its own assessment plus every Source assessment, all allowing storage and transformation");
     }
   }
@@ -392,22 +398,33 @@ function validateAi(
     const assessmentIdsUnique = new Set(chainAssessmentIds).size === chainAssessmentIds.length;
     const exactTermsSet = sameStringSet(record.termsAssessmentIds, chainAssessmentIds);
     const modelProviders = record.serviceChain.filter((entry) => entry.role === "model-provider");
+    const gateways = record.serviceChain.filter((entry) => entry.role === "gateway");
+    const routeShapeValid = record.serviceRoute === "direct"
+      ? record.serviceChain.length === 1 && gateways.length === 0 && modelProviders.length === 1
+      : record.serviceRoute === "gateway"
+        && gateways.length >= 1
+        && modelProviders.length === 1
+        && record.serviceChain.at(-1)?.role === "model-provider";
     const serviceChainAllowed = record.serviceChain.length > 0
       && chainIdsUnique
       && assessmentIdsUnique
       && exactTermsSet
+      && routeShapeValid
       && modelProviders.length === 1
       && modelProviders[0].provider === record.provider
       && record.serviceChain.every((entry) => {
         const assessment = assessments.get(entry.termsAssessmentId);
-        return assessment?.subject.type === "ai-service"
+        return entry.serviceId.trim()
+          && entry.provider.trim()
+          && entry.termsAssessmentId.trim()
+          && assessment?.subject.type === "ai-service"
           && assessment.subject.id === entry.serviceId
           && assessment.basis.kind === "terms"
           && assessment.basis.provider === entry.provider
           && rightsActions.every((action) => !["prohibited", "review-required"].includes(assessment.permissions[action].status));
       });
     if (!serviceChainAllowed) {
-      report("ai-input-rights-unknown", artifact.id, "ai.serviceChain", "The explicit gateway/model-provider chain must map one-to-one to dated assessments allowing storage, transformation, publication, and commercial use");
+      report("ai-input-rights-unknown", artifact.id, "ai.serviceChain", "The declared direct-provider or gateway route must map one-to-one to dated assessments allowing storage, transformation, publication, and commercial use");
     }
     const inputs = record.inputArtifactIds.map((inputId) => inputsById.get(inputId));
     if (inputs.some((input) => !input)) {

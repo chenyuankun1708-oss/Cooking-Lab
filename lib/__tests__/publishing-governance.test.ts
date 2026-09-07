@@ -314,6 +314,7 @@ describe("risk-based publishing governance", () => {
         model: "test-model",
         modelVersion: "test-model-v1",
         generatedAt: "2026-09-06",
+        serviceRoute: "direct",
         serviceChain: [{ serviceId: "test-provider", provider: "test-provider", role: "model-provider", termsAssessmentId: "test-ai-terms" }],
         termsAssessmentIds: ["test-ai-terms"],
         promptTemplateId: "test-prompt",
@@ -446,6 +447,7 @@ describe("risk-based publishing governance", () => {
       model: "test-model",
       modelVersion: "test-model-v2",
       generatedAt: "2026-09-06",
+      serviceRoute: "direct",
       serviceChain: [{ serviceId: "test-provider", provider: "test-provider", role: "model-provider", termsAssessmentId: "test-ai-terms" }],
       termsAssessmentIds: ["test-ai-terms"],
       promptTemplateId: "test-prompt",
@@ -555,6 +557,7 @@ describe("risk-based publishing governance", () => {
         model: "test-model",
         modelVersion: "test-model-v1",
         generatedAt: "2026-09-06",
+        serviceRoute: "direct",
         serviceChain: [{
           serviceId: "test-ai-service",
           provider: "test-provider",

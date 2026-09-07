@@ -1,12 +1,12 @@
 # Status
 
-最近更新：2026-09-06
+最近更新：2026-09-07
 
 ## 当前阶段
 
-Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完成。M8 真人研究计划已取消且没有产生参与者数据。M11 Epic #87 当前在 `feature/m11-decision-to-table` 执行；不开展用户研究。
+Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9、M10 与修订范围后的 M11 已完成。M8 真人研究计划已取消且没有产生参与者数据。M11 以已上线的“从决定到上桌”闭环、Taste 视觉升级、本地内容供应链容量和 M10.1 治理收口；公开内容保持 50 项，不开展用户研究，也不启动新的产品 Goal。
 
-## M11 当前状态
+## M11 收口状态
 
 - 已实现 `MealPlanV1`、确定性购物清单、最早可用设备时间线、成品服务任务、追加/替换分离的安全 URL、V0 migration 和深层校验的版本化 localStorage；存储被禁用时安全降级为内存状态。
 - 已增加双语 noindex Plan 路由，以及推荐、料理详情、Pairing 的加入入口；首页可继续本地计划。
@@ -15,8 +15,11 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - 最新 412 px local Production 实测：英文 LCP 244 ms / CLS 0 / INP 152 ms，中文 LCP 216 ms / CLS 0 / INP 160 ms；Lighthouse accessibility 为 1.00。该结果是可复现 lab evidence，不代替 merge 后的 Production field observation。
 - 当前 50 项各自通过 content package module 进入 repository，独立提交的 deterministic manifest、`content:audit` 与 M10 gate 共同阻止过期 identity/Story/Hero/usage decisions。
 - PR #95 已独立 merge 并交付 M11 工程、计划体验、内容包容量边界与 Taste 视觉升级；新增 70 项仍未发布。
-- Product Director 已批准 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。Issue #96 负责先让 schema、validator、CI 与文档 fail closed，生效前不得发布新增内容。
-- Issue #96 的 reviewer hardening 已在 PR #97 完成实现与本地验证：artifact fingerprint 覆盖 Source、Evidence、rights、attribution、AI/data/translation 路径及本地图片 SHA-256；sampling 使用真实 item 的风险等价类覆盖，major finding 自动冻结并要求连续两个 clean 100% re-review 批次。五批历史完整保留，当前 artifact 已完成两轮连续 clean recovery，registry 为 `ready=true`；合并和 CI 上线前新增 70 项仍保持未发布。
+- Product Director 已批准并上线 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。PR #97 已完成 schema、validator、fingerprint、sampling 与 fail-closed CI。
+- M11 收口进一步强制逐项显式 `textArtifactDerivations`；AI input 使用 canonical hash；`AiGenerationRecord` 显式区分 direct/gateway 并要求服务链每层四项权限与 UsageDecision 闭合；AI-only Source 的 unknown/rights-changed 继续硬阻断。无法恢复真实上游、输入和条款链的历史生成式文字不能发布或事后补造 provenance。
+- Product Director 已将 50 → 120、Batch A/B、12 个产品档案与剩余餐厅重构延期。PR #98 的 35 个候选保持未合并且不视为已审查内容；远端分支和 commit `b0832d629e48cf5be3a34fe6f3d9f43e308ee77c` 作为可恢复审计记录保留。
+- M11 已完全取消视频路线：没有观看或总结视频，没有 timestamp、字幕、转录、截图、下载或 `ExternalMediaReference` 进入数据。
+- 最终 QA 以当前双语各 50 项、候选 slug 不可公开、关键路由/`#sources`/canonical/重定向、双主题/键盘/响应式，以及 lint、typecheck、全量测试、`content:audit`、build、独立 review 和 Production smoke 为收口门禁。
 
 Production URL：
 [https://cooking-lab-pied.vercel.app](https://cooking-lab-pied.vercel.app)

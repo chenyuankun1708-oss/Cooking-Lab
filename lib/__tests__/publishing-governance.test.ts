@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "@/data/content-rights";
+import { createContentRightsRegistry, createM10TextArtifactDerivations, m10AuditedCulinaryItemIds } from "@/data/content-rights";
 import { culinaryImages } from "@/data/culinary/images";
 import { culinaryEvidence } from "@/data/culinary/evidence";
 import { culinarySources } from "@/data/culinary/sources";
@@ -37,6 +37,7 @@ const contentRightsRegistry = createContentRightsRegistry({
   evidence: culinaryEvidence,
   sources: contentRightsSources,
   researchRecords: m9RecipeResearchRecords,
+  textArtifactDerivations: createM10TextArtifactDerivations(items, culinaryStories, m9RecipeResearchRecords),
 });
 const contentImageAssetVersions = createImageAssetVersions(allImages);
 const contentLocalizationVersions = createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients);
@@ -243,6 +244,70 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(sameContext)).toContain("reviewer-not-independent");
   });
 
+  it("requires current AI attestations whose author matches the generation record and whose reviewer is independent", () => {
+    const fixture = () => {
+      const aiContext = structuredClone(context);
+      const item = items.find((entry) => aiContext.rightsRegistry.artifacts.some((artifact) => (
+        artifact.subject.type === "culinary-item"
+        && artifact.subject.id === entry.id
+        && artifact.kind === "identity"
+      )))!;
+      const artifact = aiContext.rightsRegistry.artifacts.find((entry) => (
+        entry.subject.type === "culinary-item"
+        && entry.subject.id === item.id
+        && entry.kind === "identity"
+      ))!;
+      artifact.derivation = "generated";
+      const governance = readyRegistry();
+      const linked = (["rights-license", "provenance", "editorial"] as const).map((dimension) => (
+        governance.attestations.find((attestation) => attestation.dimension === dimension && attestation.itemIds.includes(item.id))!
+      ));
+      aiContext.rightsRegistry.ai = [{
+        id: "test-ai-attestation-record",
+        artifactId: artifact.id,
+        outputArtifactVersion: artifact.version,
+        author: structuredClone(linked[0].author) as typeof linked[0]["author"] & { actorType: "agent" },
+        provider: "test-provider",
+        model: "test-model",
+        modelVersion: "test-model-v1",
+        generatedAt: "2026-09-06",
+        serviceRoute: "direct",
+        serviceChain: [{ serviceId: "test-provider", provider: "test-provider", role: "model-provider", termsAssessmentId: "test-ai-terms" }],
+        termsAssessmentIds: ["test-ai-terms"],
+        promptTemplateId: "test-prompt",
+        promptTemplateVersion: "test-prompt-v1",
+        promptTemplateHash: "clv1-1111111111111111",
+        inputArtifactIds: ["test-ai-input"],
+        reviewAttestationIds: linked.map((attestation) => attestation.id) as [string, ...string[]],
+        similarityReview: "passed",
+        trademarkReview: "not-applicable",
+      }];
+      for (const attestation of linked) {
+        attestation.artifactSetVersion = createArtifactSetVersion(attestation.itemIds, aiContext);
+      }
+      return { aiContext, artifact, governance, linked };
+    };
+
+    const valid = fixture();
+    expect(issueCodes(valid.governance, valid.aiContext)).not.toContain("ai-attestation-missing");
+
+    const mismatchedAuthor = fixture();
+    mismatchedAuthor.aiContext.rightsRegistry.ai[0].author.actorId = "different-ai-author";
+    expect(issueCodes(mismatchedAuthor.governance, mismatchedAuthor.aiContext)).toContain("ai-attestation-missing");
+
+    const missingDimension = fixture();
+    missingDimension.aiContext.rightsRegistry.ai[0].reviewAttestationIds = missingDimension.aiContext.rightsRegistry.ai[0].reviewAttestationIds
+      .filter((id) => id !== missingDimension.linked[2].id) as [string, ...string[]];
+    expect(issueCodes(missingDimension.governance, missingDimension.aiContext)).toContain("ai-attestation-missing");
+
+    const nonIndependent = fixture();
+    nonIndependent.linked[0].reviewer.runId = nonIndependent.aiContext.rightsRegistry.ai[0].author.runId;
+    expect(issueCodes(nonIndependent.governance, nonIndependent.aiContext)).toEqual(expect.arrayContaining([
+      "reviewer-not-independent",
+      "ai-attestation-missing",
+    ]));
+  });
+
   it("fails closed when a published item has no risk or review record", () => {
     const unreviewedItem = {
       ...structuredClone(items[0]),
@@ -324,15 +389,19 @@ describe("risk-based publishing governance", () => {
     aiContext.rightsRegistry.ai = [{
       id: "test-ai-record",
       artifactId: aiArtifact.id,
-      provider: "test-provider",
+      outputArtifactVersion: aiArtifact.version,
+      author: { actorType: "agent", actorId: "test-author", runId: "test-author-run", contextId: "test-author-context" },
+      provider: "Test Provider",
       model: "test-model",
       modelVersion: "test-model-v2",
       generatedAt: "2026-09-06",
-      termsUrl: "https://example.test/terms",
-      termsEffectiveDate: "2026-09-01",
+      serviceRoute: "direct",
+      serviceChain: [{ serviceId: "test-provider", provider: "Test Provider", role: "model-provider", termsAssessmentId: "test-ai-terms" }],
+      termsAssessmentIds: ["test-ai-terms"],
+      promptTemplateId: "test-prompt",
       promptTemplateVersion: "test-prompt-v2",
-      inputArtifactIds: [],
-      inputRightsReviewed: true,
+      promptTemplateHash: "clv1-1111111111111111",
+      inputArtifactIds: ["test-ai-input"],
       reviewAttestationIds: ["test-attestation"],
       similarityReview: "passed",
       trademarkReview: "not-applicable",
@@ -359,7 +428,7 @@ describe("risk-based publishing governance", () => {
     expect(issueCodes(readyRegistry(), imageBytesContext)).toContain("stale-review-attestation");
   });
 
-  it("fingerprints used dataset and cost assessments plus transitive AI input artifacts", () => {
+  it("fingerprints used dataset and cost assessments plus structured AI input provenance", () => {
     const item = items.find((entry) =>
       "inputs" in entry.preparation
       && entry.preparation.inputs.length > 0
@@ -403,53 +472,49 @@ describe("risk-based publishing governance", () => {
       entry.id !== item.id
       && aiContext.researchRecords.some((record) => record.subject.id === entry.id))!;
     const inputArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "culinary-item" && entry.subject.id === inputItem.id)!;
-    const inputStory = aiContext.stories[0];
-    const inputStoryArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.subject.type === "story" && entry.subject.id === inputStory.id)!;
-    const outputImageId = item.images.availability === "available" ? item.images.references.primaryImageId : "";
-    const inputImageArtifact = aiContext.rightsRegistry.artifacts.find((entry) => entry.kind === "image" && entry.subject.id !== outputImageId)!;
+    const inputResearchRecord = aiContext.researchRecords.find((record) => record.subject.id === inputItem.id)!;
+    const sourceAssessmentIds = inputArtifact.sourceIds.map((sourceId) => `source-rights-${sourceId}`);
     Object.assign(aiContext.rightsRegistry, {
+      aiInputs: [{
+        id: "test-ai-input",
+        version: "test-ai-input-v1",
+        contentHash: "clv1-1111111111111111",
+        kind: "structured-research-bundle" as const,
+        sourceIds: [...inputArtifact.sourceIds],
+        evidenceIds: [],
+        researchRecordIds: [inputResearchRecord.id],
+        rightsAssessmentIds: sourceAssessmentIds as [string, ...string[]],
+        containsThirdPartyExpression: false as const,
+      }],
       ai: [{
         id: "test-transitive-ai-record",
         artifactId: outputArtifact.id,
-        provider: "test-provider",
+        outputArtifactVersion: outputArtifact.version,
+        author: { actorType: "agent" as const, actorId: "test-author", runId: "test-run", contextId: "test-context" },
+        provider: "Test Provider",
         model: "test-model",
         modelVersion: "test-model-v1",
         generatedAt: "2026-09-06",
-        termsUrl: "https://example.test/terms",
-        termsEffectiveDate: "2026-09-01",
+        serviceRoute: "direct" as const,
+        serviceChain: [{ serviceId: "test-provider", provider: "Test Provider", role: "model-provider" as const, termsAssessmentId: aiContext.rightsRegistry.datasets[0].rightsAssessmentId }],
+        termsAssessmentIds: [aiContext.rightsRegistry.datasets[0].rightsAssessmentId] as [string],
+        promptTemplateId: "test-prompt",
         promptTemplateVersion: "test-prompt-v1",
-        inputArtifactIds: [inputArtifact.id, inputStoryArtifact.id, inputImageArtifact.id],
-        inputRightsReviewed: true,
+        promptTemplateHash: "clv1-2222222222222222",
+        inputArtifactIds: ["test-ai-input"] as [string],
         reviewAttestationIds: ["test-attestation"],
         similarityReview: "passed",
         trademarkReview: "not-applicable",
       }],
     });
     const aiVersion = createArtifactSetVersion(itemIds, aiContext);
-    inputArtifact.version += "-changed";
+    aiContext.rightsRegistry.aiInputs[0].contentHash = "clv1-3333333333333333";
     expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
-    inputArtifact.version = inputArtifact.version.replace(/-changed$/, "");
+    aiContext.rightsRegistry.aiInputs[0].contentHash = "clv1-1111111111111111";
 
-    const inputResearchRecord = aiContext.researchRecords.find((record) => record.subject.id === inputItem.id)!;
     inputResearchRecord.editorialDecision += " changed";
     expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
     inputResearchRecord.editorialDecision = inputResearchRecord.editorialDecision.replace(/ changed$/, "");
-
-    const inputLocalization = aiContext.localizationVersions.find((entry) => entry.itemId === inputItem.id)!;
-    const originalLocalizationVersion = inputLocalization.localeVersions[1].version;
-    inputLocalization.localeVersions[1].version = "clv1-0000000000000000";
-    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
-    inputLocalization.localeVersions[1].version = originalLocalizationVersion;
-
-    inputStory.content.entries[0].value.dek += " changed";
-    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
-    inputStory.content.entries[0].value.dek = inputStory.content.entries[0].value.dek.replace(/ changed$/, "");
-
-    const inputImageVersion = aiContext.imageAssetVersions.find((entry) => entry.imageId === inputImageArtifact.subject.id)!;
-    const originalImageSha = inputImageVersion.sha256;
-    inputImageVersion.sha256 = "0".repeat(64);
-    expect(createArtifactSetVersion(itemIds, aiContext)).not.toBe(aiVersion);
-    inputImageVersion.sha256 = originalImageSha;
 
     const mediaContext = structuredClone(context);
     const sourcedArtifact = mediaContext.rightsRegistry.artifacts.find((entry) =>

@@ -1,7 +1,10 @@
 import type { CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
 import type {
   AttributionRequirement,
+  AiGenerationRecord,
+  AiInputArtifact,
   ContentArtifact,
+  ContentDerivation,
   ContentRightsRegistry,
   RightsAssessment,
   RightsPermission,
@@ -26,18 +29,45 @@ export interface CreateContentRightsRegistryInput {
   evidence: readonly Evidence[];
   sources: readonly Source[];
   researchRecords: readonly ResearchRecord[];
+  aiInputs?: readonly AiInputArtifact[];
+  ai?: readonly AiGenerationRecord[];
+  aiAssessments?: readonly RightsAssessment[];
+  textArtifactDerivations: readonly {
+    artifactId: string;
+    derivation: ContentDerivation;
+  }[];
 }
 
 export function createContentRightsRegistry(input: CreateContentRightsRegistryInput): ContentRightsRegistry {
+  if (!Array.isArray(input.textArtifactDerivations)) {
+    throw new Error("textArtifactDerivations is required; content origin cannot be inferred safely");
+  }
   const auditedItemIds = new Set(input.auditedItemIds);
   const publishedItems = input.items.filter((item) => item.publication.status === "published" && auditedItemIds.has(item.id));
   const itemIds = new Set(publishedItems.map((item) => item.id));
+  const storyIds = new Set(publishedItems.flatMap((item) => item.storyIds));
   const imageIds = new Set(publishedItems.flatMap((item) => item.images.availability === "available" ? [item.images.references.primaryImageId] : []));
   const researchBySubject = new Map<string, ResearchRecord[]>();
   for (const record of input.researchRecords.filter((entry) => entry.status === "closed" && itemIds.has(entry.subject.id))) {
     researchBySubject.set(record.subject.id, [...(researchBySubject.get(record.subject.id) ?? []), record]);
   }
   const evidenceById = new Map(input.evidence.map((entry) => [entry.id, entry]));
+  const textDerivationByArtifactId = new Map<string, ContentDerivation>();
+  for (const declaration of input.textArtifactDerivations) {
+    if (textDerivationByArtifactId.has(declaration.artifactId)) {
+      throw new Error(`Duplicate text artifact derivation declaration: ${declaration.artifactId}`);
+    }
+    textDerivationByArtifactId.set(declaration.artifactId, declaration.derivation);
+  }
+  const consumedTextDerivationIds = new Set<string>();
+  const declaredTextDerivation = (artifactId: string): ContentDerivation => {
+    const derivation = textDerivationByArtifactId.get(artifactId);
+    if (!derivation) throw new Error(`Missing text artifact derivation declaration: ${artifactId}`);
+    consumedTextDerivationIds.add(artifactId);
+    return derivation;
+  };
+  const aiRecordByArtifactId = new Map((input.ai ?? []).map((record) => [record.artifactId, record]));
+  const aiInputById = new Map((input.aiInputs ?? []).map((artifact) => [artifact.id, artifact]));
 
   const artifacts: ContentArtifact[] = [];
   const assessments: RightsAssessment[] = [];
@@ -47,14 +77,13 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
   for (const item of publishedItems) {
     const records = researchBySubject.get(item.id) ?? [];
     const sourceIds = unique(records.flatMap((record) => record.sourceDecisions.flatMap((decision) => decision.disposition === "accepted" ? [decision.sourceId] : [])));
-    const derivation = sourceIds.length ? "factual-synthesis" as const : "original" as const;
     for (const kind of ["identity", "preparation"] as const) {
       addFirstPartyArtifact({
         id: `${item.id}-${kind}`,
         version: createContentVersion({ kind, item, sourceIds }),
         subject: { type: "culinary-item", id: item.id },
         kind,
-        derivation,
+        derivation: declaredTextDerivation(`${item.id}-${kind}`),
         sourceIds,
         evidenceIds: [],
       }, artifacts, assessments, decisions);
@@ -72,7 +101,7 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     }
   }
 
-  for (const story of input.stories.filter((entry) => entry.publication.status === "published")) {
+  for (const story of input.stories.filter((entry) => entry.publication.status === "published" && storyIds.has(entry.id))) {
     const evidenceIds = unique(story.claims.flatMap((claim) => claim.evidenceIds));
     const sourceIds = unique(evidenceIds.flatMap((evidenceId) => {
       const evidence = evidenceById.get(evidenceId);
@@ -83,7 +112,7 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
       version: createContentVersion({ kind: "story", story, sourceIds, evidenceIds }),
       subject: { type: "story", id: story.id },
       kind: "story",
-      derivation: "factual-synthesis",
+      derivation: declaredTextDerivation(`${story.id}-story`),
       sourceIds,
       evidenceIds,
     }, artifacts, assessments, decisions);
@@ -91,6 +120,11 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
 
   for (const image of input.images.filter((entry) => imageIds.has(entry.id))) {
     addImageArtifact(image, artifacts, assessments, decisions, attributions);
+  }
+
+  const unusedTextDerivationIds = [...textDerivationByArtifactId.keys()].filter((artifactId) => !consumedTextDerivationIds.has(artifactId));
+  if (unusedTextDerivationIds.length) {
+    throw new Error(`Text artifact derivation declarations do not resolve: ${unusedTextDerivationIds.join(", ")}`);
   }
 
   const usedSourceIds = new Set(artifacts.flatMap((artifact) => artifact.sourceIds));
@@ -101,12 +135,27 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     const artifact = artifacts.find((entry) => entry.id === decision.artifactId);
     if (!artifact) continue;
     const sourceAssessments = artifact.sourceIds.map((sourceId) => `source-rights-${sourceId}`);
-    decision.assessmentIds = [artifact.rightsAssessmentId, ...sourceAssessments];
+    const aiRecord = aiRecordByArtifactId.get(artifact.id);
+    const aiAssessmentIds = aiRecord
+      ? unique([
+          ...aiRecord.termsAssessmentIds,
+          ...aiRecord.inputArtifactIds.flatMap((inputId) => aiInputById.get(inputId)?.rightsAssessmentIds ?? []),
+        ])
+      : [];
+    decision.assessmentIds = [artifact.rightsAssessmentId, ...sourceAssessments, ...aiAssessmentIds];
+    if (artifact.derivation === "generated" && !aiRecord) {
+      decision.decision = "block";
+      decision.conditions = [
+        ...decision.conditions,
+        "Generated expression has no complete, current AI provenance and service-terms chain.",
+      ];
+    }
   }
 
   const costAssessmentId = "rights-cooking-lab-cn-price-estimate-2026-09";
   assessments.push(firstPartyAssessment(costAssessmentId, { type: "dataset", id: "cooking-lab-cn-price-estimate-2026-09" }));
   assessments.push(approvedFutureDatasets.usdaFoodDataCentral.rightsAssessment);
+  assessments.push(...(input.aiAssessments ?? []));
 
   const nutrition = input.ingredients.map((ingredient) => ({
     ingredientId: ingredient.id,
@@ -145,7 +194,8 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
       methodology: "Static Cooking Lab editorial estimates per 100 g; no retailer database or systematic extraction is used.",
       rightsAssessmentId: costAssessmentId,
     }],
-    ai: [],
+    aiInputs: input.aiInputs ?? [],
+    ai: input.ai ?? [],
     externalMedia: [],
     restaurants: [],
     productProfiles: [],
@@ -204,6 +254,32 @@ export const m10AuditedCulinaryItemIds = Object.freeze([
   "fino-sherry",
   "junmai-sake",
 ] as const);
+
+export function createM10TextArtifactDerivations(
+  items: readonly CulinaryItem[],
+  stories: readonly Story[],
+  researchRecords: readonly ResearchRecord[],
+): CreateContentRightsRegistryInput["textArtifactDerivations"] {
+  const m10ItemIds = new Set<string>(m10AuditedCulinaryItemIds);
+  const publishedItems = items.filter((item) => item.publication.status === "published");
+  const unsupportedItemIds = publishedItems.map((item) => item.id).filter((itemId) => !m10ItemIds.has(itemId));
+  if (unsupportedItemIds.length) {
+    throw new Error(`M10 non-AI authoring baseline cannot declare later content: ${unsupportedItemIds.join(", ")}`);
+  }
+  const linkedStoryIds = new Set(publishedItems.flatMap((item) => item.storyIds));
+  const sourcedItemIds = new Set(researchRecords
+    .filter((record) => record.status === "closed" && record.sourceDecisions.some((decision) => decision.disposition === "accepted"))
+    .map((record) => record.subject.id));
+  return [
+    ...publishedItems.flatMap((item) => ([
+      { artifactId: `${item.id}-identity`, derivation: sourcedItemIds.has(item.id) ? "factual-synthesis" as const : "original" as const },
+      { artifactId: `${item.id}-preparation`, derivation: sourcedItemIds.has(item.id) ? "factual-synthesis" as const : "original" as const },
+    ])),
+    ...stories
+      .filter((story) => story.publication.status === "published" && linkedStoryIds.has(story.id))
+      .map((story) => ({ artifactId: `${story.id}-story`, derivation: "factual-synthesis" as const })),
+  ];
+}
 
 function addFirstPartyArtifact(
   input: Pick<ContentArtifact, "id" | "version" | "subject" | "kind" | "derivation" | "sourceIds" | "evidenceIds">,

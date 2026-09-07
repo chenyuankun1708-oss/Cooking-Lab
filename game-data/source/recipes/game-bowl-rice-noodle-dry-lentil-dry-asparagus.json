@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-468be3b4084b69cb",
+  "artifactVersion": "clv1-153e5da3e14c1fb2",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,33 @@
       "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 900,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02",
+      "volumeMl": 900
+    },
+    {
       "ingredientId": "usda-lentil-dry",
       "initialState": "dry",
       "massG": 180,
-      "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02"
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 540,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "primary-cooking-water",
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04",
+      "volumeMl": 540
     },
     {
       "ingredientId": "usda-asparagus",
@@ -37,7 +57,7 @@
       "nutritionProvenanceId": "usda-fdc:2710823:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03"
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +66,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04"
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05"
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06",
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-08",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +94,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07"
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-08",
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-10",
       "volumeMl": 12
     },
     {
@@ -93,7 +113,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09"
+      "portionId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-11"
     }
   ],
   "itemType": "dish",
@@ -102,14 +122,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 464.06,
-      "carbs": 83.4362,
-      "fat": 6.4252,
-      "fiber": 3.06,
-      "protein": 16.1551,
-      "saturatedFat": 0.46345,
-      "sodium": 676.978,
-      "sugar": 1.5482
+      "calories": 460.64,
+      "carbs": 84.1232,
+      "fat": 6.0418,
+      "fiber": 7.857,
+      "protein": 16.5973,
+      "saturatedFat": 0.53542,
+      "sodium": 694.588,
+      "sugar": 2.4917
     },
     "provenance": [
       {
@@ -129,13 +149,26 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-lentil-dry",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2644283",
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-lentil-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172420",
         "yieldFactor": 1
       },
       {
@@ -168,13 +201,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +266,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1856.24,
-      "carbs": 333.7448,
-      "fat": 25.7008,
-      "fiber": 12.24,
-      "protein": 64.6204,
-      "saturatedFat": 1.8538,
-      "sodium": 2707.912,
-      "sugar": 6.1928
+      "calories": 1842.56,
+      "carbs": 336.4928,
+      "fat": 24.1672,
+      "fiber": 31.428,
+      "protein": 66.3892,
+      "saturatedFat": 2.14168,
+      "sodium": 2778.352,
+      "sugar": 9.9668
     }
   },
   "operationGraph": {
@@ -251,8 +284,8 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-001-dice",
         "operationType": "dice",
@@ -279,7 +312,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-002-mince",
         "operationType": "mince",
@@ -306,7 +339,8 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-01"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-01",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-003-boil",
         "operationType": "boil",
@@ -325,7 +359,33 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 360000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-003-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-01",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-004-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
       },
       {
         "activeDurationMs": 60000,
@@ -333,12 +393,13 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04"
         ],
-        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-004-boil",
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-005-boil",
         "operationType": "boil",
         "outputStateIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-004"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-005"
         ],
         "parameters": {
           "heatLevel": 0.65,
@@ -355,25 +416,51 @@
         "waitDurationMs": 1200000
       },
       {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-005-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-006-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-006"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-001-dice",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-002-mince",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-004-boil"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-006-drain"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-08"
         ],
-        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-005-pan-fry",
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-007-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-005"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-007"
         ],
         "parameters": {
           "capacityG": 900,
@@ -398,18 +485,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-005-pan-fry"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-007-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-08",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-10",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-11"
         ],
-        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-006-season",
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-008-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-006"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-008"
         ],
         "parameters": {
           "quantityG": 35
@@ -427,25 +514,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-003-boil",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-006-season"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-004-drain",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-008-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-01",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-08",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-10",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-11"
         ],
-        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-007-assemble",
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-009-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-007"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-009"
         ],
         "parameters": {},
         "targetStates": [],
@@ -455,24 +542,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-007-assemble"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-009-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-01",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-02",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-03",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-04",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-05",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-06",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-07",
           "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-08",
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-09",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-10",
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-portion-11"
         ],
-        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-008-serve",
+        "nodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-008"
+          "game-bowl-rice-noodle-dry-lentil-dry-asparagus-state-010"
         ],
         "parameters": {},
         "targetStates": [],
@@ -507,7 +594,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -532,7 +619,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -557,7 +644,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -587,7 +674,31 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-004-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-004-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -608,16 +719,40 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-004-boil",
+        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-005-boil",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-004-boil"
+      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-005-boil"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-006-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-006-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -638,16 +773,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-005-pan-fry",
+        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-007-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-007-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -655,23 +790,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-006-season",
+        "targetNodeId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-op-008-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-006-season"
+      "scenarioId": "game-bowl-rice-noodle-dry-lentil-dry-asparagus-scenario-008-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-468be3b4084b69cb",
+      "baselineArtifactVersion": "clv1-153e5da3e14c1fb2",
       "causeCodes": [
         "supplemental:duplicate"
       ],

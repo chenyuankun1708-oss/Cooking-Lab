@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-b09f56c3a917e8ce",
+  "artifactVersion": "clv1-0552e85ee1c8068c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -99,10 +99,10 @@
           "game-coffee-espresso-sugar-cold-portion-01",
           "game-coffee-espresso-sugar-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-sugar-cold-op-002-chill",
+        "nodeId": "game-coffee-espresso-sugar-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-coffee-espresso-sugar-cold-state-002"
+          "game-coffee-espresso-sugar-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -120,17 +120,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-coffee-espresso-sugar-cold-op-002-chill"
+          "game-coffee-espresso-sugar-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-coffee-espresso-sugar-cold-portion-01",
           "game-coffee-espresso-sugar-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-sugar-cold-op-003-serve",
+        "nodeId": "game-coffee-espresso-sugar-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-coffee-espresso-sugar-cold-state-003"
+          "game-coffee-espresso-sugar-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -165,39 +165,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b09f56c3a917e8ce",
+      "baselineArtifactVersion": "clv1-0552e85ee1c8068c",
       "causeCodes": [
         "duration-too-short:chill"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-duration-too-short"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "game-coffee-espresso-sugar-cold-op-002-chill",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-coffee-espresso-sugar-cold-scenario-002-chill"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b09f56c3a917e8ce",
-      "causeCodes": [
-        "supplemental:quantity-too-high"
       ],
       "expectedDeltas": [
         {
@@ -207,15 +177,38 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-quantity-too-high"
+        "fault-duration-too-short"
       ],
       "mutation": {
-        "scalar": 1.5,
-        "targetNodeId": "game-coffee-espresso-sugar-cold-op-002-chill",
-        "targetPortionId": "game-coffee-espresso-sugar-cold-portion-01",
-        "type": "quantity-too-high"
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-espresso-sugar-cold-op-003-chill",
+        "type": "duration-too-short"
       },
-      "nutritionEffect": "recalculate-from-quantities",
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-sugar-cold-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-0552e85ee1c8068c",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-sugar-cold-op-003-chill",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-coffee-espresso-sugar-cold-scenario-supplemental"
     }
@@ -225,7 +218,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-coffee-espresso-sugar-cold",
   "yield": {
-    "amount": 160,
-    "unit": "ml"
+    "amount": 144,
+    "unit": "g"
   }
 }

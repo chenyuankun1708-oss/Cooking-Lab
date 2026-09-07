@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-230549a29e71d819",
+  "artifactVersion": "clv1-9e79fdf478435b71",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,14 +16,14 @@
       "ingredientId": "usda-blueberry",
       "initialState": "raw",
       "massG": 360,
-      "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-dessert-blueberry-walnut-yogurt-cup-portion-01"
     },
     {
       "ingredientId": "usda-yogurt",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 360,
       "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
       "optional": false,
@@ -55,27 +55,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 6.1575,
-      "calories": 223.51,
-      "carbs": 25.423,
-      "fat": 11.2774,
-      "fiber": 0.536,
-      "protein": 5.5532,
-      "saturatedFat": 2.693,
-      "sodium": 37.92,
-      "sugar": 18.2625
+      "calories": 217.3,
+      "carbs": 25.333,
+      "fat": 11.299,
+      "fiber": 2.696,
+      "protein": 5.5865,
+      "saturatedFat": 2.7182,
+      "sodium": 38.82,
+      "sugar": 18.8025
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-blueberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346411",
+        "upstreamRecordId": "171711",
         "yieldFactor": 1
       },
       {
@@ -84,7 +84,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "foundation-2026-04-30",
         "ingredientId": "usda-yogurt",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -121,14 +121,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 24.63,
-      "calories": 894.04,
-      "carbs": 101.692,
-      "fat": 45.1096,
-      "fiber": 2.144,
-      "protein": 22.2128,
-      "saturatedFat": 10.772,
-      "sodium": 151.68,
-      "sugar": 73.05
+      "calories": 869.2,
+      "carbs": 101.332,
+      "fat": 45.196,
+      "fiber": 10.784,
+      "protein": 22.346,
+      "saturatedFat": 10.8728,
+      "sodium": 155.28,
+      "sugar": 75.21
     }
   },
   "operationGraph": {
@@ -272,7 +272,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-230549a29e71d819",
+      "baselineArtifactVersion": "clv1-9e79fdf478435b71",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -297,14 +297,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-230549a29e71d819",
+      "baselineArtifactVersion": "clv1-9e79fdf478435b71",
       "causeCodes": [
         "omit:fold"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -321,20 +321,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-230549a29e71d819",
+      "baselineArtifactVersion": "clv1-9e79fdf478435b71",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -351,7 +346,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-230549a29e71d819",
+      "baselineArtifactVersion": "clv1-9e79fdf478435b71",
       "causeCodes": [
         "supplemental:missing-state-transition"
       ],

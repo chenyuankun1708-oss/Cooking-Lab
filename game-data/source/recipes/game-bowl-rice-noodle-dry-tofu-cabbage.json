@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c7ceca1fb645e47d",
+  "artifactVersion": "clv1-3902682db4932412",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,22 +22,32 @@
       "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 900,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02",
+      "volumeMl": 900
+    },
+    {
       "ingredientId": "usda-tofu",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 300,
       "nutritionProvenanceId": "usda-fdc:172476:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-03"
     },
     {
       "ingredientId": "usda-cabbage",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346407:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169975:sr-legacy-2018-04",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-03"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +56,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +74,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06",
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-07",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-07"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-08"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +93,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-08",
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09",
       "volumeMl": 12
     },
     {
@@ -93,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-cabbage-portion-10"
     }
   ],
   "itemType": "dish",
@@ -102,14 +112,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 361.7,
-      "carbs": 57.8727,
-      "fat": 9.1558,
-      "fiber": 1.781,
-      "protein": 11.2119,
-      "saturatedFat": 0.9817,
-      "sodium": 693.14,
-      "sugar": 2.0132
+      "calories": 356.76,
+      "carbs": 57.5557,
+      "fat": 9.057,
+      "fiber": 3.763,
+      "protein": 11.4593,
+      "saturatedFat": 1.01157,
+      "sodium": 704.17,
+      "sugar": 4.6032
     },
     "provenance": [
       {
@@ -130,8 +140,21 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-tofu",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:172476:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -142,13 +165,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-cabbage",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346407:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169975:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346407",
+        "upstreamRecordId": "169975",
         "yieldFactor": 1
       },
       {
@@ -168,13 +191,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +256,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1446.8,
-      "carbs": 231.4908,
-      "fat": 36.6232,
-      "fiber": 7.124,
-      "protein": 44.8476,
-      "saturatedFat": 3.9268,
-      "sodium": 2772.56,
-      "sugar": 8.0528
+      "calories": 1427.04,
+      "carbs": 230.2228,
+      "fat": 36.228,
+      "fiber": 15.052,
+      "protein": 45.8372,
+      "saturatedFat": 4.04628,
+      "sodium": 2816.68,
+      "sugar": 18.4128
     }
   },
   "operationGraph": {
@@ -251,16 +274,16 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-03",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05"
         ],
-        "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-dice",
-        "operationType": "dice",
+        "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-slice",
+        "operationType": "slice",
         "outputStateIds": [
           "game-bowl-rice-noodle-dry-tofu-cabbage-state-001"
         ],
         "parameters": {
-          "cutSizeMm": 12,
+          "cutSizeMm": 18,
           "uniformity": 0.85
         },
         "targetStates": [
@@ -279,7 +302,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-002-mince",
         "operationType": "mince",
@@ -306,7 +329,8 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-01"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-01",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-003-boil",
         "operationType": "boil",
@@ -325,22 +349,48 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 360000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-tofu-cabbage-op-003-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-01",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-004-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-tofu-cabbage-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
       },
       {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-dice",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-slice",
           "game-bowl-rice-noodle-dry-tofu-cabbage-op-002-mince"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-03",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-07"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-005-pan-fry",
         "operationType": "pan-fry",
@@ -374,9 +424,9 @@
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-07",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-08",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-10"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-006-season",
         "operationType": "season",
@@ -399,20 +449,20 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-rice-noodle-dry-tofu-cabbage-op-003-boil",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-op-004-drain",
           "game-bowl-rice-noodle-dry-tofu-cabbage-op-006-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-01",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-03",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-07",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-08",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-10"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-007-assemble",
         "operationType": "assemble",
@@ -432,14 +482,14 @@
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-01",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-02",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-03",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-04",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-05",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-06",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-07",
           "game-bowl-rice-noodle-dry-tofu-cabbage-portion-08",
-          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09"
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-09",
+          "game-bowl-rice-noodle-dry-tofu-cabbage-portion-10"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-008-serve",
         "operationType": "serve",
@@ -479,9 +529,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c7ceca1fb645e47d",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
       "causeCodes": [
-        "cut-size-too-large:dice"
+        "cut-size-too-large:slice"
       ],
       "expectedDeltas": [
         {
@@ -495,16 +545,16 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-dice",
+        "targetNodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-slice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-rice-noodle-dry-tofu-cabbage-scenario-001-dice"
+      "scenarioId": "game-bowl-rice-noodle-dry-tofu-cabbage-scenario-001-slice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c7ceca1fb645e47d",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -529,7 +579,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c7ceca1fb645e47d",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -559,7 +609,31 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c7ceca1fb645e47d",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-004-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-tofu-cabbage-scenario-004-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -589,7 +663,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c7ceca1fb645e47d",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -597,7 +671,12 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
@@ -613,7 +692,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c7ceca1fb645e47d",
+      "baselineArtifactVersion": "clv1-3902682db4932412",
       "causeCodes": [
         "supplemental:duplicate"
       ],
@@ -628,7 +707,7 @@
         "fault-duplicate"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-dice",
+        "targetNodeId": "game-bowl-rice-noodle-dry-tofu-cabbage-op-001-slice",
         "type": "duplicate"
       },
       "nutritionEffect": "unchanged",

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-af055b4ad0300a2c",
+  "artifactVersion": "clv1-190fa13dec602160",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -26,7 +26,7 @@
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
       "portionId": "game-coffee-coffee-coconut-milk-cold-portion-02",
@@ -39,14 +39,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 120.6,
-      "carbs": 1.686,
-      "fat": 12.828,
-      "fiber": 0,
-      "protein": 1.5,
-      "saturatedFat": 11.3448,
-      "sodium": 12.6,
-      "sugar": 0
+      "calories": 140.4,
+      "carbs": 3.324,
+      "fat": 14.328,
+      "fiber": 1.32,
+      "protein": 1.662,
+      "saturatedFat": 12.6648,
+      "sodium": 13.8,
+      "sugar": 2.004
     },
     "provenance": [
       {
@@ -69,24 +69,24 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       }
     ],
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 241.2,
-      "carbs": 3.372,
-      "fat": 25.656,
-      "fiber": 0,
-      "protein": 3,
-      "saturatedFat": 22.6896,
-      "sodium": 25.2,
-      "sugar": 0
+      "calories": 280.8,
+      "carbs": 6.648,
+      "fat": 28.656,
+      "fiber": 2.64,
+      "protein": 3.324,
+      "saturatedFat": 25.3296,
+      "sodium": 27.6,
+      "sugar": 4.008
     }
   },
   "operationGraph": {
@@ -100,10 +100,10 @@
           "game-coffee-coffee-coconut-milk-cold-portion-01",
           "game-coffee-coffee-coconut-milk-cold-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-coconut-milk-cold-op-002-chill",
+        "nodeId": "game-coffee-coffee-coconut-milk-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-coffee-coffee-coconut-milk-cold-state-002"
+          "game-coffee-coffee-coconut-milk-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -121,17 +121,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-coffee-coffee-coconut-milk-cold-op-002-chill"
+          "game-coffee-coffee-coconut-milk-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-coffee-coffee-coconut-milk-cold-portion-01",
           "game-coffee-coffee-coconut-milk-cold-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-coconut-milk-cold-op-003-serve",
+        "nodeId": "game-coffee-coffee-coconut-milk-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-coffee-coffee-coconut-milk-cold-state-003"
+          "game-coffee-coffee-coconut-milk-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -166,39 +166,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af055b4ad0300a2c",
+      "baselineArtifactVersion": "clv1-190fa13dec602160",
       "causeCodes": [
         "duration-too-short:chill"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-duration-too-short"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "game-coffee-coffee-coconut-milk-cold-op-002-chill",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-coffee-coffee-coconut-milk-cold-scenario-002-chill"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af055b4ad0300a2c",
-      "causeCodes": [
-        "supplemental:quantity-too-high"
       ],
       "expectedDeltas": [
         {
@@ -208,15 +178,38 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-quantity-too-high"
+        "fault-duration-too-short"
       ],
       "mutation": {
-        "scalar": 1.5,
-        "targetNodeId": "game-coffee-coffee-coconut-milk-cold-op-002-chill",
-        "targetPortionId": "game-coffee-coffee-coconut-milk-cold-portion-01",
-        "type": "quantity-too-high"
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-coffee-coconut-milk-cold-op-003-chill",
+        "type": "duration-too-short"
       },
-      "nutritionEffect": "recalculate-from-quantities",
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-coffee-coconut-milk-cold-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-190fa13dec602160",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-coffee-coconut-milk-cold-op-003-chill",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-coffee-coffee-coconut-milk-cold-scenario-supplemental"
     }
@@ -226,7 +219,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-coffee-coffee-coconut-milk-cold",
   "yield": {
-    "amount": 480,
-    "unit": "ml"
+    "amount": 600,
+    "unit": "g"
   }
 }

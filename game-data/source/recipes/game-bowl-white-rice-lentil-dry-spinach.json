@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+  "artifactVersion": "clv1-fed37314117e1e1f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,33 @@
       "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-02",
+      "volumeMl": 360
+    },
+    {
       "ingredientId": "usda-lentil-dry",
       "initialState": "dry",
       "massG": 180,
-      "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-02"
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-03"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 540,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "primary-cooking-water",
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-04",
+      "volumeMl": 540
     },
     {
       "ingredientId": "usda-spinach",
@@ -37,7 +57,7 @@
       "nutritionProvenanceId": "usda-fdc:1999632:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-03"
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-05"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +66,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-04"
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-06"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-05"
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-07"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-06",
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-08",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +94,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-07"
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-09"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-08",
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-10",
       "volumeMl": 12
     },
     {
@@ -93,7 +113,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-09"
+      "portionId": "game-bowl-white-rice-lentil-dry-spinach-portion-11"
     }
   ],
   "itemType": "dish",
@@ -102,14 +122,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 459.86,
-      "carbs": 81.3442,
-      "fat": 7.0296,
-      "fiber": 1.9334,
-      "protein": 17.9371,
-      "saturatedFat": 0.37165,
-      "sodium": 654.8872,
-      "sugar": 1.4762
+      "calories": 456.44,
+      "carbs": 82.0312,
+      "fat": 6.6462,
+      "fiber": 6.7304,
+      "protein": 18.3793,
+      "saturatedFat": 0.44362,
+      "sodium": 667.0972,
+      "sugar": 2.4197
     },
     "provenance": [
       {
@@ -129,13 +149,26 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-lentil-dry",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2644283",
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-lentil-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172420",
         "yieldFactor": 1
       },
       {
@@ -168,13 +201,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +266,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1839.44,
-      "carbs": 325.3768,
-      "fat": 28.1184,
-      "fiber": 7.7336,
-      "protein": 71.7484,
-      "saturatedFat": 1.4866,
-      "sodium": 2619.5488,
-      "sugar": 5.9048
+      "calories": 1825.76,
+      "carbs": 328.1248,
+      "fat": 26.5848,
+      "fiber": 26.9216,
+      "protein": 73.5172,
+      "saturatedFat": 1.77448,
+      "sodium": 2668.3888,
+      "sugar": 9.6788
     }
   },
   "operationGraph": {
@@ -251,16 +284,16 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-portion-03",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-04"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-05",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-06"
         ],
-        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-001-dice",
-        "operationType": "dice",
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-001-slice",
+        "operationType": "slice",
         "outputStateIds": [
           "game-bowl-white-rice-lentil-dry-spinach-state-001"
         ],
         "parameters": {
-          "cutSizeMm": 12,
+          "cutSizeMm": 18,
           "uniformity": 0.85
         },
         "targetStates": [
@@ -279,7 +312,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-portion-05"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-07"
         ],
         "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-002-mince",
         "operationType": "mince",
@@ -306,10 +339,11 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-portion-01"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-01",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-02"
         ],
-        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-003-boil",
-        "operationType": "boil",
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-003-simmer",
+        "operationType": "simmer",
         "outputStateIds": [
           "game-bowl-white-rice-lentil-dry-spinach-state-003"
         ],
@@ -325,7 +359,7 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 1080000
       },
       {
         "activeDurationMs": 60000,
@@ -333,7 +367,8 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-portion-02"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-03",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-04"
         ],
         "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-004-boil",
         "operationType": "boil",
@@ -355,25 +390,51 @@
         "waitDurationMs": 1200000
       },
       {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-white-rice-lentil-dry-spinach-op-004-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-white-rice-lentil-dry-spinach-portion-03",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-04"
+        ],
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-005-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-white-rice-lentil-dry-spinach-state-005"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-white-rice-lentil-dry-spinach-op-001-dice",
+          "game-bowl-white-rice-lentil-dry-spinach-op-001-slice",
           "game-bowl-white-rice-lentil-dry-spinach-op-002-mince",
-          "game-bowl-white-rice-lentil-dry-spinach-op-004-boil"
+          "game-bowl-white-rice-lentil-dry-spinach-op-005-drain"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-portion-02",
           "game-bowl-white-rice-lentil-dry-spinach-portion-03",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-04",
           "game-bowl-white-rice-lentil-dry-spinach-portion-05",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-06"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-06",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-07",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-08"
         ],
-        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-005-pan-fry",
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-006-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-state-005"
+          "game-bowl-white-rice-lentil-dry-spinach-state-006"
         ],
         "parameters": {
           "capacityG": 900,
@@ -398,18 +459,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-white-rice-lentil-dry-spinach-op-005-pan-fry"
+          "game-bowl-white-rice-lentil-dry-spinach-op-006-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-portion-07",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-08",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-09"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-09",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-10",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-11"
         ],
-        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-006-season",
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-007-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-state-006"
+          "game-bowl-white-rice-lentil-dry-spinach-state-007"
         ],
         "parameters": {
           "quantityG": 35
@@ -427,25 +488,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-white-rice-lentil-dry-spinach-op-003-boil",
-          "game-bowl-white-rice-lentil-dry-spinach-op-006-season"
+          "game-bowl-white-rice-lentil-dry-spinach-op-003-simmer",
+          "game-bowl-white-rice-lentil-dry-spinach-op-007-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-white-rice-lentil-dry-spinach-portion-01",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-02",
           "game-bowl-white-rice-lentil-dry-spinach-portion-03",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-04",
           "game-bowl-white-rice-lentil-dry-spinach-portion-05",
           "game-bowl-white-rice-lentil-dry-spinach-portion-06",
           "game-bowl-white-rice-lentil-dry-spinach-portion-07",
           "game-bowl-white-rice-lentil-dry-spinach-portion-08",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-09"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-09",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-10",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-11"
         ],
-        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-007-assemble",
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-008-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-state-007"
+          "game-bowl-white-rice-lentil-dry-spinach-state-008"
         ],
         "parameters": {},
         "targetStates": [],
@@ -455,24 +516,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-white-rice-lentil-dry-spinach-op-007-assemble"
+          "game-bowl-white-rice-lentil-dry-spinach-op-008-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-white-rice-lentil-dry-spinach-portion-01",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-02",
           "game-bowl-white-rice-lentil-dry-spinach-portion-03",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-04",
           "game-bowl-white-rice-lentil-dry-spinach-portion-05",
           "game-bowl-white-rice-lentil-dry-spinach-portion-06",
           "game-bowl-white-rice-lentil-dry-spinach-portion-07",
           "game-bowl-white-rice-lentil-dry-spinach-portion-08",
-          "game-bowl-white-rice-lentil-dry-spinach-portion-09"
+          "game-bowl-white-rice-lentil-dry-spinach-portion-09",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-10",
+          "game-bowl-white-rice-lentil-dry-spinach-portion-11"
         ],
-        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-008-serve",
+        "nodeId": "game-bowl-white-rice-lentil-dry-spinach-op-009-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-white-rice-lentil-dry-spinach-state-008"
+          "game-bowl-white-rice-lentil-dry-spinach-state-009"
         ],
         "parameters": {},
         "targetStates": [],
@@ -507,9 +568,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
-        "cut-size-too-large:dice"
+        "cut-size-too-large:slice"
       ],
       "expectedDeltas": [
         {
@@ -523,16 +584,16 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-001-dice",
+        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-001-slice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-001-dice"
+      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-001-slice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -557,9 +618,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
-        "duration-too-short:boil"
+        "duration-too-short:simmer"
       ],
       "expectedDeltas": [
         {
@@ -578,16 +639,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-003-boil",
+        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-003-simmer",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-003-boil"
+      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-003-simmer"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -617,7 +678,31 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-005-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-005-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -638,16 +723,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-005-pan-fry",
+        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-006-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-006-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -655,23 +740,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-006-season",
+        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-007-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-006-season"
+      "scenarioId": "game-bowl-white-rice-lentil-dry-spinach-scenario-007-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca6fb4a4e5c3d9d1",
+      "baselineArtifactVersion": "clv1-fed37314117e1e1f",
       "causeCodes": [
         "supplemental:wrong-equipment"
       ],
@@ -686,7 +776,8 @@
         "fault-wrong-equipment"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-001-dice",
+        "replacementEquipmentId": "incompatible-tool",
+        "targetNodeId": "game-bowl-white-rice-lentil-dry-spinach-op-001-slice",
         "type": "wrong-equipment"
       },
       "nutritionEffect": "unchanged",

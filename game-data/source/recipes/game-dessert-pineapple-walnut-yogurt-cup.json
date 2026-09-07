@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-de4a94f20a19a05d",
+  "artifactVersion": "clv1-6fafc3b791c08883",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -23,7 +23,7 @@
     },
     {
       "ingredientId": "usda-yogurt",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 360,
       "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
       "optional": false,
@@ -84,7 +84,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "foundation-2026-04-30",
         "ingredientId": "usda-yogurt",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -272,7 +272,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-de4a94f20a19a05d",
+      "baselineArtifactVersion": "clv1-6fafc3b791c08883",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -297,14 +297,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-de4a94f20a19a05d",
+      "baselineArtifactVersion": "clv1-6fafc3b791c08883",
       "causeCodes": [
         "omit:fold"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -321,20 +321,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-de4a94f20a19a05d",
+      "baselineArtifactVersion": "clv1-6fafc3b791c08883",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -351,7 +346,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-de4a94f20a19a05d",
+      "baselineArtifactVersion": "clv1-6fafc3b791c08883",
       "causeCodes": [
         "supplemental:missing-state-transition"
       ],

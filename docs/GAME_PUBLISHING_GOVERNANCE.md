@@ -29,7 +29,7 @@ Agent review is never represented as human approval, culinary field testing or l
 
 ## Sampling QA
 
-Sampling covers risk-equivalence classes rather than a fixed percentage. Classes include content type, formula family, source institution, license route, nutrition dataset and transform, image applicability and authoring path. A major finding freezes the affected class and moves it to 100% re-review; two consecutive clean batches are required before returning to ordinary sampling.
+Sampling covers risk-equivalence classes rather than a fixed percentage. Classes include content type, source recipe/formula variant, operation signature, mutation family, ingredient state, source institution/domain/rights route, nutrition dataset and transform, image applicability and authoring path. A major finding freezes the affected class and moves it to 100% re-review; two consecutive clean batches are required before returning to ordinary sampling.
 
 Metrics retained per batch are escape count, reviewer disagreement, rework count and provenance/license novelty. These metrics determine future sampling strength.
 
@@ -38,3 +38,9 @@ Metrics retained per batch are escape count, reviewer disagreement, rework count
 The M13 corpus uses only the committed 81-record subset of USDA FoodData Central Foundation Foods 2026-04 and SR Legacy 2018-04. FoodData Central is recorded as CC0. Each ingredient retains fdcId, source description, data type, dataset version, access date and per-100g values. Recipe totals are deterministic ingredient sums and remain estimates because brand, edible yield, retention and preparation can change real values.
 
 The full USDA database is not committed or redistributed and the build makes no network request.
+
+## M13 source decision
+
+The deterministic formula corpus is a draft-only stress fixture. It cannot be promoted by attaching generic safety and nutrition sources because those sources do not establish a particular recipe identity, ratio, time, temperature or mutation outcome.
+
+The M13 release corpus must instead be reconstructed recipe by recipe from Library of Congress items whose own rights statements explicitly identify the scanned book as public domain and free to use/reuse. Structured facts retain the item URL, OCR locator and source hash; the full OCR is not committed. A second independently rights-cleared recipe source must cross-check the title, core ingredients and material method facts. USDA nutrition is not that second recipe source. Historical recipes with ambiguous quantities, unsafe preservation/fermentation, medical claims, brand dependence or non-deterministic heat/time are excluded rather than relaxed.

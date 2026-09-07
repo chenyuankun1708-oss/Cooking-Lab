@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-1b8f9d946a1b98c6",
+  "artifactVersion": "clv1-bef9db817f002af3",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -128,10 +128,10 @@
           "game-tea-green-tea-mango-cold-portion-01",
           "game-tea-green-tea-mango-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-mango-cold-op-002-chill",
+        "nodeId": "game-tea-green-tea-mango-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-tea-green-tea-mango-cold-state-002"
+          "game-tea-green-tea-mango-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -149,17 +149,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-mango-cold-op-002-chill"
+          "game-tea-green-tea-mango-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-tea-green-tea-mango-cold-portion-01",
           "game-tea-green-tea-mango-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-mango-cold-op-003-serve",
+        "nodeId": "game-tea-green-tea-mango-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-mango-cold-state-003"
+          "game-tea-green-tea-mango-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -194,7 +194,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1b8f9d946a1b98c6",
+      "baselineArtifactVersion": "clv1-bef9db817f002af3",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -219,20 +219,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1b8f9d946a1b98c6",
+      "baselineArtifactVersion": "clv1-bef9db817f002af3",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -240,35 +235,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-tea-green-tea-mango-cold-op-002-chill",
+        "targetNodeId": "game-tea-green-tea-mango-cold-op-003-chill",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-mango-cold-scenario-002-chill"
+      "scenarioId": "game-tea-green-tea-mango-cold-scenario-003-chill"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1b8f9d946a1b98c6",
+      "baselineArtifactVersion": "clv1-bef9db817f002af3",
       "causeCodes": [
-        "supplemental:allowed-substitution"
+        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "unchanged"
+          "direction": "decrease"
         }
       ],
-      "expectedFaultCodes": [],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
       "mutation": {
-        "replacementIngredientId": "usda-mango",
         "targetNodeId": "game-tea-green-tea-mango-cold-op-001-dice",
-        "targetPortionId": "game-tea-green-tea-mango-cold-portion-02",
-        "type": "allowed-substitution"
+        "type": "missing-state-transition"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
+      "recoverability": "partially-recoverable",
       "scenarioId": "game-tea-green-tea-mango-cold-scenario-supplemental"
     }
   ],
@@ -277,7 +272,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-green-tea-mango-cold",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 600,
+    "unit": "g"
   }
 }

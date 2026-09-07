@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c942d2628cb259e8",
+  "artifactVersion": "clv1-1a2f75b3d2d04b95",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-blueberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-blueberry-ginger-blended-portion-01"
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-blueberry-ginger-blended-portion-04"
     }
@@ -56,27 +56,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 71.36,
-      "carbs": 17.069,
-      "fat": 0.26355,
-      "fiber": 0.062,
-      "protein": 0.6259,
-      "saturatedFat": 0.005075,
-      "sodium": 7.565,
-      "sugar": 12.4565
+      "calories": 65.84,
+      "carbs": 16.989,
+      "fat": 0.28275,
+      "fiber": 1.982,
+      "protein": 0.6555,
+      "saturatedFat": 0.027475,
+      "sodium": 8.365,
+      "sugar": 12.9365
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-blueberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346411",
+        "upstreamRecordId": "171711",
         "yieldFactor": 1
       },
       {
@@ -122,14 +122,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 285.44,
-      "carbs": 68.276,
-      "fat": 1.0542,
-      "fiber": 0.248,
-      "protein": 2.5036,
-      "saturatedFat": 0.0203,
-      "sodium": 30.26,
-      "sugar": 49.826
+      "calories": 263.36,
+      "carbs": 67.956,
+      "fat": 1.131,
+      "fiber": 7.928,
+      "protein": 2.622,
+      "saturatedFat": 0.1099,
+      "sodium": 33.46,
+      "sugar": 51.746
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-blueberry-ginger-blended-portion-03",
           "game-drink-blueberry-ginger-blended-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-ginger-blended-op-002-blend",
+        "nodeId": "game-drink-blueberry-ginger-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-blueberry-ginger-blended-state-002"
+          "game-drink-blueberry-ginger-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-blueberry-ginger-blended-op-002-blend"
+          "game-drink-blueberry-ginger-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-blueberry-ginger-blended-portion-03",
           "game-drink-blueberry-ginger-blended-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-ginger-blended-op-003-serve",
+        "nodeId": "game-drink-blueberry-ginger-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-blueberry-ginger-blended-state-003"
+          "game-drink-blueberry-ginger-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c942d2628cb259e8",
+      "baselineArtifactVersion": "clv1-1a2f75b3d2d04b95",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c942d2628cb259e8",
+      "baselineArtifactVersion": "clv1-1a2f75b3d2d04b95",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-blueberry-ginger-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-blueberry-ginger-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c942d2628cb259e8",
-      "causeCodes": [
-        "supplemental:quantity-too-high"
       ],
       "expectedDeltas": [
         {
@@ -305,15 +281,37 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-quantity-too-high"
+        "fault-omit"
       ],
       "mutation": {
-        "scalar": 1.5,
-        "targetNodeId": "game-drink-blueberry-ginger-blended-op-001-dice",
-        "targetPortionId": "game-drink-blueberry-ginger-blended-portion-03",
-        "type": "quantity-too-high"
+        "targetNodeId": "game-drink-blueberry-ginger-blended-op-003-blend",
+        "type": "omit"
       },
-      "nutritionEffect": "recalculate-from-quantities",
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-blueberry-ginger-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1a2f75b3d2d04b95",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-drink-blueberry-ginger-blended-op-001-dice",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-blueberry-ginger-blended-scenario-supplemental"
     }
@@ -323,7 +321,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-blueberry-ginger-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

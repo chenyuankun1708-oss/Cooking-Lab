@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-d07d67adcb7be554",
+  "artifactVersion": "clv1-ffa687c0fac44e8c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -26,7 +26,7 @@
       "ingredientId": "usda-strawberry",
       "initialState": "raw",
       "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
       "portionId": "game-tea-black-tea-strawberry-cold-portion-02"
@@ -38,14 +38,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 24.24,
-      "carbs": 5.496,
-      "fat": 0.132,
-      "fiber": 0,
-      "protein": 0.3846,
-      "saturatedFat": 0.0048,
-      "sodium": 7.2,
-      "sugar": 2.916
+      "calories": 21.6,
+      "carbs": 5.328,
+      "fat": 0.18,
+      "fiber": 1.2,
+      "protein": 0.402,
+      "saturatedFat": 0.0138,
+      "sodium": 7.8,
+      "sugar": 2.934
     },
     "provenance": [
       {
@@ -65,27 +65,27 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-strawberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346409",
+        "upstreamRecordId": "167762",
         "yieldFactor": 1
       }
     ],
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 48.48,
-      "carbs": 10.992,
-      "fat": 0.264,
-      "fiber": 0,
-      "protein": 0.7692,
-      "saturatedFat": 0.0096,
-      "sodium": 14.4,
-      "sugar": 5.832
+      "calories": 43.2,
+      "carbs": 10.656,
+      "fat": 0.36,
+      "fiber": 2.4,
+      "protein": 0.804,
+      "saturatedFat": 0.0276,
+      "sodium": 15.6,
+      "sugar": 5.868
     }
   },
   "operationGraph": {
@@ -128,10 +128,10 @@
           "game-tea-black-tea-strawberry-cold-portion-01",
           "game-tea-black-tea-strawberry-cold-portion-02"
         ],
-        "nodeId": "game-tea-black-tea-strawberry-cold-op-002-chill",
+        "nodeId": "game-tea-black-tea-strawberry-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-tea-black-tea-strawberry-cold-state-002"
+          "game-tea-black-tea-strawberry-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -149,17 +149,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-black-tea-strawberry-cold-op-002-chill"
+          "game-tea-black-tea-strawberry-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-tea-black-tea-strawberry-cold-portion-01",
           "game-tea-black-tea-strawberry-cold-portion-02"
         ],
-        "nodeId": "game-tea-black-tea-strawberry-cold-op-003-serve",
+        "nodeId": "game-tea-black-tea-strawberry-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-black-tea-strawberry-cold-state-003"
+          "game-tea-black-tea-strawberry-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -194,7 +194,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d07d67adcb7be554",
+      "baselineArtifactVersion": "clv1-ffa687c0fac44e8c",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -219,20 +219,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d07d67adcb7be554",
+      "baselineArtifactVersion": "clv1-ffa687c0fac44e8c",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -240,35 +235,36 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-tea-black-tea-strawberry-cold-op-002-chill",
+        "targetNodeId": "game-tea-black-tea-strawberry-cold-op-003-chill",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-black-tea-strawberry-cold-scenario-002-chill"
+      "scenarioId": "game-tea-black-tea-strawberry-cold-scenario-003-chill"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d07d67adcb7be554",
+      "baselineArtifactVersion": "clv1-ffa687c0fac44e8c",
       "causeCodes": [
-        "supplemental:allowed-substitution"
+        "supplemental:reorder"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "unchanged"
+          "direction": "decrease"
         }
       ],
-      "expectedFaultCodes": [],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
       "mutation": {
-        "replacementIngredientId": "usda-strawberry",
+        "destinationBeforeNodeId": "game-tea-black-tea-strawberry-cold-op-003-chill",
         "targetNodeId": "game-tea-black-tea-strawberry-cold-op-001-dice",
-        "targetPortionId": "game-tea-black-tea-strawberry-cold-portion-02",
-        "type": "allowed-substitution"
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
+      "recoverability": "partially-recoverable",
       "scenarioId": "game-tea-black-tea-strawberry-cold-scenario-supplemental"
     }
   ],
@@ -277,7 +273,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-black-tea-strawberry-cold",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 600,
+    "unit": "g"
   }
 }

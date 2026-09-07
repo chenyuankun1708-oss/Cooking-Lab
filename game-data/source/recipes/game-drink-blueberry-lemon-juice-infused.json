@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-67048364b001c99a",
+  "artifactVersion": "clv1-6be75d9056f24233",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-blueberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-blueberry-lemon-juice-infused-portion-01"
@@ -46,7 +46,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-blueberry-lemon-juice-infused-portion-04"
     }
@@ -57,27 +57,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 71.835,
-      "carbs": 17.40025,
-      "fat": 0.2718,
-      "fiber": 0.04575,
-      "protein": 0.619775,
-      "saturatedFat": 0.0045,
-      "sodium": 7.3525,
-      "sugar": 12.6975
+      "calories": 66.315,
+      "carbs": 17.32025,
+      "fat": 0.291,
+      "fiber": 1.96575,
+      "protein": 0.649375,
+      "saturatedFat": 0.0269,
+      "sodium": 8.1525,
+      "sugar": 13.1775
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-blueberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346411",
+        "upstreamRecordId": "171711",
         "yieldFactor": 1
       },
       {
@@ -123,14 +123,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 287.34,
-      "carbs": 69.601,
-      "fat": 1.0872,
-      "fiber": 0.183,
-      "protein": 2.4791,
-      "saturatedFat": 0.018,
-      "sodium": 29.41,
-      "sugar": 50.79
+      "calories": 265.26,
+      "carbs": 69.281,
+      "fat": 1.164,
+      "fiber": 7.863,
+      "protein": 2.5975,
+      "saturatedFat": 0.1076,
+      "sodium": 32.61,
+      "sugar": 52.71
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-blueberry-lemon-juice-infused-portion-03",
           "game-drink-blueberry-lemon-juice-infused-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-lemon-juice-infused-op-002-rest",
+        "nodeId": "game-drink-blueberry-lemon-juice-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-blueberry-lemon-juice-infused-state-002"
+          "game-drink-blueberry-lemon-juice-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -188,13 +188,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-blueberry-lemon-juice-infused-op-002-rest"
+          "game-drink-blueberry-lemon-juice-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -203,10 +203,10 @@
           "game-drink-blueberry-lemon-juice-infused-portion-03",
           "game-drink-blueberry-lemon-juice-infused-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-lemon-juice-infused-op-003-serve",
+        "nodeId": "game-drink-blueberry-lemon-juice-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-blueberry-lemon-juice-infused-state-003"
+          "game-drink-blueberry-lemon-juice-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -241,7 +241,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-67048364b001c99a",
+      "baselineArtifactVersion": "clv1-6be75d9056f24233",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -266,20 +266,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-67048364b001c99a",
+      "baselineArtifactVersion": "clv1-6be75d9056f24233",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -287,35 +282,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-blueberry-lemon-juice-infused-op-002-rest",
+        "targetNodeId": "game-drink-blueberry-lemon-juice-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-blueberry-lemon-juice-infused-scenario-002-rest"
+      "scenarioId": "game-drink-blueberry-lemon-juice-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-67048364b001c99a",
+      "baselineArtifactVersion": "clv1-6be75d9056f24233",
       "causeCodes": [
-        "supplemental:allowed-substitution"
+        "supplemental:duplicate"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "unchanged"
+          "direction": "decrease"
         }
       ],
-      "expectedFaultCodes": [],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
       "mutation": {
-        "replacementIngredientId": "usda-honey",
         "targetNodeId": "game-drink-blueberry-lemon-juice-infused-op-001-dice",
-        "targetPortionId": "game-drink-blueberry-lemon-juice-infused-portion-04",
-        "type": "allowed-substitution"
+        "type": "duplicate"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
+      "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-blueberry-lemon-juice-infused-scenario-supplemental"
     }
   ],
@@ -324,7 +319,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-blueberry-lemon-juice-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1089,
+    "unit": "g"
   }
 }

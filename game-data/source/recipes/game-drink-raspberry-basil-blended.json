@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-87cc0c5b348b716a",
+  "artifactVersion": "clv1-1c94caec6072cafb",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-raspberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346410:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:167755:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-raspberry-basil-blended-portion-01"
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-raspberry-basil-blended-portion-04"
     }
@@ -56,27 +56,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 64.655,
-      "carbs": 15.33025,
-      "fat": 0.1664,
-      "fiber": 0.052,
-      "protein": 0.90475,
-      "saturatedFat": 0.001025,
-      "sodium": 7.34,
-      "sugar": 7.0775
+      "calories": 60.415,
+      "carbs": 14.53025,
+      "fat": 0.536,
+      "fiber": 5.252,
+      "protein": 1.05675,
+      "saturatedFat": 0.016225,
+      "sodium": 8.14,
+      "sugar": 8.4695
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-raspberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346410:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167755:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346410",
+        "upstreamRecordId": "167755",
         "yieldFactor": 1
       },
       {
@@ -122,14 +122,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 258.62,
-      "carbs": 61.321,
-      "fat": 0.6656,
-      "fiber": 0.208,
-      "protein": 3.619,
-      "saturatedFat": 0.0041,
-      "sodium": 29.36,
-      "sugar": 28.31
+      "calories": 241.66,
+      "carbs": 58.121,
+      "fat": 2.144,
+      "fiber": 21.008,
+      "protein": 4.227,
+      "saturatedFat": 0.0649,
+      "sodium": 32.56,
+      "sugar": 33.878
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-raspberry-basil-blended-portion-03",
           "game-drink-raspberry-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-raspberry-basil-blended-op-002-blend",
+        "nodeId": "game-drink-raspberry-basil-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-raspberry-basil-blended-state-002"
+          "game-drink-raspberry-basil-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-raspberry-basil-blended-op-002-blend"
+          "game-drink-raspberry-basil-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-raspberry-basil-blended-portion-03",
           "game-drink-raspberry-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-raspberry-basil-blended-op-003-serve",
+        "nodeId": "game-drink-raspberry-basil-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-raspberry-basil-blended-state-003"
+          "game-drink-raspberry-basil-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-87cc0c5b348b716a",
+      "baselineArtifactVersion": "clv1-1c94caec6072cafb",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-87cc0c5b348b716a",
+      "baselineArtifactVersion": "clv1-1c94caec6072cafb",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-raspberry-basil-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-raspberry-basil-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-87cc0c5b348b716a",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -305,11 +281,36 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-omit"
       ],
       "mutation": {
+        "targetNodeId": "game-drink-raspberry-basil-blended-op-003-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-raspberry-basil-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1c94caec6072cafb",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "destinationBeforeNodeId": "game-drink-raspberry-basil-blended-op-003-blend",
         "targetNodeId": "game-drink-raspberry-basil-blended-op-001-dice",
-        "type": "missing-state-transition"
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -321,7 +322,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-raspberry-basil-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

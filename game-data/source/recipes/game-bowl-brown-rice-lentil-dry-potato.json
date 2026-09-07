@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-20f3371e4165ba80",
+  "artifactVersion": "clv1-b88d61ae092ed7be",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,33 @@
       "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-02",
+      "volumeMl": 480
+    },
+    {
       "ingredientId": "usda-lentil-dry",
       "initialState": "dry",
       "massG": 180,
-      "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-02"
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-03"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 540,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "primary-cooking-water",
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-04",
+      "volumeMl": 540
     },
     {
       "ingredientId": "usda-potato",
@@ -37,7 +57,17 @@
       "nutritionProvenanceId": "usda-fdc:2346401:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-03"
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-05"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 640,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "vegetable-cooking-water",
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-06",
+      "volumeMl": 640
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +76,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-04"
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-07"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-05"
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-08"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +94,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-06",
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-09",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +104,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-07"
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-10"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +113,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-08",
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-11",
       "volumeMl": 12
     },
     {
@@ -93,7 +123,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-09"
+      "portionId": "game-bowl-brown-rice-lentil-dry-potato-portion-12"
     }
   ],
   "itemType": "dish",
@@ -102,14 +132,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 509.5,
-      "carbs": 91.4962,
-      "fat": 8.1904,
-      "fiber": 2.408,
-      "protein": 17.5991,
-      "saturatedFat": 0.37165,
-      "sodium": 568.002,
-      "sugar": 1.897
+      "calories": 506.08,
+      "carbs": 92.1832,
+      "fat": 7.807,
+      "fiber": 19.125,
+      "protein": 18.0413,
+      "saturatedFat": 0.44362,
+      "sodium": 587.812,
+      "sugar": 2.8405
     },
     "provenance": [
       {
@@ -129,13 +159,26 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-lentil-dry",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2644283",
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-lentil-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172420",
         "yieldFactor": 1
       },
       {
@@ -168,13 +211,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +276,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 2038,
-      "carbs": 365.9848,
-      "fat": 32.7616,
-      "fiber": 9.632,
-      "protein": 70.3964,
-      "saturatedFat": 1.4866,
-      "sodium": 2272.008,
-      "sugar": 7.588
+      "calories": 2024.32,
+      "carbs": 368.7328,
+      "fat": 31.228,
+      "fiber": 76.5,
+      "protein": 72.1652,
+      "saturatedFat": 1.77448,
+      "sodium": 2351.248,
+      "sugar": 11.362
     }
   },
   "operationGraph": {
@@ -251,8 +294,8 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-portion-03",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-04"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-05",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-07"
         ],
         "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-001-dice",
         "operationType": "dice",
@@ -279,7 +322,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-portion-05"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-08"
         ],
         "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-002-mince",
         "operationType": "mince",
@@ -306,10 +349,11 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-portion-01"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-01",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-02"
         ],
-        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-003-boil",
-        "operationType": "boil",
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-003-simmer",
+        "operationType": "simmer",
         "outputStateIds": [
           "game-bowl-brown-rice-lentil-dry-potato-state-003"
         ],
@@ -325,7 +369,7 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 2100000
       },
       {
         "activeDurationMs": 60000,
@@ -333,7 +377,8 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-portion-02"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-03",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-04"
         ],
         "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-004-boil",
         "operationType": "boil",
@@ -355,25 +400,108 @@
         "waitDurationMs": 1200000
       },
       {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-brown-rice-lentil-dry-potato-op-004-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-brown-rice-lentil-dry-potato-portion-03",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-04"
+        ],
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-005-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-brown-rice-lentil-dry-potato-state-005"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-brown-rice-lentil-dry-potato-op-001-dice"
+        ],
+        "equipmentId": "pot",
+        "inputPortionIds": [
+          "game-bowl-brown-rice-lentil-dry-potato-portion-05",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-06"
+        ],
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-006-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "game-bowl-brown-rice-lentil-dry-potato-state-006"
+        ],
+        "parameters": {
+          "heatLevel": 0.65,
+          "temperatureC": 96
+        },
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-brown-rice-lentil-dry-potato-op-006-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-brown-rice-lentil-dry-potato-portion-05",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-06"
+        ],
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-007-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-brown-rice-lentil-dry-potato-state-007"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
           "game-bowl-brown-rice-lentil-dry-potato-op-001-dice",
           "game-bowl-brown-rice-lentil-dry-potato-op-002-mince",
-          "game-bowl-brown-rice-lentil-dry-potato-op-004-boil"
+          "game-bowl-brown-rice-lentil-dry-potato-op-005-drain",
+          "game-bowl-brown-rice-lentil-dry-potato-op-007-drain"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-portion-02",
           "game-bowl-brown-rice-lentil-dry-potato-portion-03",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-04",
           "game-bowl-brown-rice-lentil-dry-potato-portion-05",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-06"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-07",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-08",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-09"
         ],
-        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-005-pan-fry",
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-008-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-state-005"
+          "game-bowl-brown-rice-lentil-dry-potato-state-008"
         ],
         "parameters": {
           "capacityG": 900,
@@ -398,18 +526,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-brown-rice-lentil-dry-potato-op-005-pan-fry"
+          "game-bowl-brown-rice-lentil-dry-potato-op-008-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-portion-07",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-08",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-09"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-10",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-11",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-12"
         ],
-        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-006-season",
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-009-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-state-006"
+          "game-bowl-brown-rice-lentil-dry-potato-state-009"
         ],
         "parameters": {
           "quantityG": 35
@@ -427,25 +555,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-brown-rice-lentil-dry-potato-op-003-boil",
-          "game-bowl-brown-rice-lentil-dry-potato-op-006-season"
+          "game-bowl-brown-rice-lentil-dry-potato-op-003-simmer",
+          "game-bowl-brown-rice-lentil-dry-potato-op-009-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-brown-rice-lentil-dry-potato-portion-01",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-02",
           "game-bowl-brown-rice-lentil-dry-potato-portion-03",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-04",
           "game-bowl-brown-rice-lentil-dry-potato-portion-05",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-06",
           "game-bowl-brown-rice-lentil-dry-potato-portion-07",
           "game-bowl-brown-rice-lentil-dry-potato-portion-08",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-09"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-09",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-10",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-11",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-12"
         ],
-        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-007-assemble",
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-010-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-state-007"
+          "game-bowl-brown-rice-lentil-dry-potato-state-010"
         ],
         "parameters": {},
         "targetStates": [],
@@ -455,24 +583,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-brown-rice-lentil-dry-potato-op-007-assemble"
+          "game-bowl-brown-rice-lentil-dry-potato-op-010-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-brown-rice-lentil-dry-potato-portion-01",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-02",
           "game-bowl-brown-rice-lentil-dry-potato-portion-03",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-04",
           "game-bowl-brown-rice-lentil-dry-potato-portion-05",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-06",
           "game-bowl-brown-rice-lentil-dry-potato-portion-07",
           "game-bowl-brown-rice-lentil-dry-potato-portion-08",
-          "game-bowl-brown-rice-lentil-dry-potato-portion-09"
+          "game-bowl-brown-rice-lentil-dry-potato-portion-09",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-10",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-11",
+          "game-bowl-brown-rice-lentil-dry-potato-portion-12"
         ],
-        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-008-serve",
+        "nodeId": "game-bowl-brown-rice-lentil-dry-potato-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-brown-rice-lentil-dry-potato-state-008"
+          "game-bowl-brown-rice-lentil-dry-potato-state-011"
         ],
         "parameters": {},
         "targetStates": [],
@@ -507,7 +635,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -532,7 +660,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -557,9 +685,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
-        "duration-too-short:boil"
+        "duration-too-short:simmer"
       ],
       "expectedDeltas": [
         {
@@ -578,16 +706,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-003-boil",
+        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-003-simmer",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-003-boil"
+      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-003-simmer"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -617,7 +745,85 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-005-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-005-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
+      "causeCodes": [
+        "duration-too-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-006-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-006-boil"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-007-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-007-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -638,16 +844,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-005-pan-fry",
+        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-008-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-008-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -655,23 +861,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-006-season",
+        "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-009-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-006-season"
+      "scenarioId": "game-bowl-brown-rice-lentil-dry-potato-scenario-009-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-20f3371e4165ba80",
+      "baselineArtifactVersion": "clv1-b88d61ae092ed7be",
       "causeCodes": [
         "supplemental:wrong-equipment"
       ],
@@ -686,6 +897,7 @@
         "fault-wrong-equipment"
       ],
       "mutation": {
+        "replacementEquipmentId": "incompatible-tool",
         "targetNodeId": "game-bowl-brown-rice-lentil-dry-potato-op-001-dice",
         "type": "wrong-equipment"
       },

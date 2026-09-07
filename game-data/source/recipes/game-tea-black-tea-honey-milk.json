@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ab49889e4793613d",
+  "artifactVersion": "clv1-a3af82ada80bb481",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -123,10 +123,10 @@
           "game-tea-black-tea-honey-milk-portion-02",
           "game-tea-black-tea-honey-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-honey-milk-op-002-mix",
+        "nodeId": "game-tea-black-tea-honey-milk-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-black-tea-honey-milk-state-002"
+          "game-tea-black-tea-honey-milk-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -145,7 +145,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-black-tea-honey-milk-op-002-mix"
+          "game-tea-black-tea-honey-milk-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -153,10 +153,10 @@
           "game-tea-black-tea-honey-milk-portion-02",
           "game-tea-black-tea-honey-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-honey-milk-op-003-serve",
+        "nodeId": "game-tea-black-tea-honey-milk-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-black-tea-honey-milk-state-003"
+          "game-tea-black-tea-honey-milk-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -191,33 +191,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab49889e4793613d",
+      "baselineArtifactVersion": "clv1-a3af82ada80bb481",
       "causeCodes": [
         "omit:mix"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-tea-black-tea-honey-milk-op-002-mix",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-tea-black-tea-honey-milk-scenario-002-mix"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab49889e4793613d",
-      "causeCodes": [
-        "supplemental:wrong-equipment"
       ],
       "expectedDeltas": [
         {
@@ -227,11 +203,35 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-wrong-equipment"
+        "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-black-tea-honey-milk-op-002-mix",
-        "type": "wrong-equipment"
+        "targetNodeId": "game-tea-black-tea-honey-milk-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-black-tea-honey-milk-scenario-003-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a3af82ada80bb481",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-black-tea-honey-milk-op-003-mix",
+        "type": "duplicate"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -243,7 +243,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-black-tea-honey-milk",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 624,
+    "unit": "g"
   }
 }

@@ -69,6 +69,30 @@ describe("game-commercial-ready fail-closed gate", () => {
     expect(issues.some((issue) => issue.field.includes("attributionRequirementIds"))).toBe(true);
     expect(issues.some((issue) => issue.field.includes("review"))).toBe(true);
   });
+
+  it("blocks malformed allowed substitutions", () => {
+    const recipe = clone(sourceRecipe);
+    const scenario = recipe.scenarios.find((entry) => entry.mutation.type === "allowed-substitution")
+      ?? recipe.scenarios[0];
+    const targetPortion = recipe.ingredientPortions[0];
+    scenario.mutation = {
+      type: "allowed-substitution",
+      targetNodeId: scenario.mutation.targetNodeId,
+      targetPortionId: targetPortion.portionId,
+      replacementIngredientId: targetPortion.ingredientId,
+    };
+    scenario.nutritionEffect = "unchanged";
+
+    const issues = evaluate([recipe], data.rightsRegistry);
+    expect(issues.some((issue) => issue.code === "invalid-scenario" && issue.field.endsWith("replacementIngredientId"))).toBe(true);
+    expect(issues.some((issue) => issue.code === "invalid-scenario" && issue.field.endsWith("nutritionEffect"))).toBe(true);
+
+    delete scenario.mutation.targetPortionId;
+    scenario.mutation.replacementIngredientId = "missing-ingredient";
+    const missingReferenceIssues = evaluate([recipe], data.rightsRegistry);
+    expect(missingReferenceIssues.some((issue) => issue.code === "invalid-scenario" && issue.field.endsWith("targetPortionId"))).toBe(true);
+    expect(missingReferenceIssues.some((issue) => issue.code === "missing-reference" && issue.field.endsWith("replacementIngredientId"))).toBe(true);
+  });
 });
 
 function evaluate(recipes: GameRecipeV1[], registry: GameRightsRegistryV1) {

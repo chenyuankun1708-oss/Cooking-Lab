@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-7dbc149a0ccf03ad",
+  "artifactVersion": "clv1-baf59853d6f0d0be",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-mango-ginger-blended-portion-04"
     }
@@ -175,10 +175,10 @@
           "game-drink-mango-ginger-blended-portion-03",
           "game-drink-mango-ginger-blended-portion-04"
         ],
-        "nodeId": "game-drink-mango-ginger-blended-op-002-blend",
+        "nodeId": "game-drink-mango-ginger-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-mango-ginger-blended-state-002"
+          "game-drink-mango-ginger-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-mango-ginger-blended-op-002-blend"
+          "game-drink-mango-ginger-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-mango-ginger-blended-portion-03",
           "game-drink-mango-ginger-blended-portion-04"
         ],
-        "nodeId": "game-drink-mango-ginger-blended-op-003-serve",
+        "nodeId": "game-drink-mango-ginger-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-mango-ginger-blended-state-003"
+          "game-drink-mango-ginger-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7dbc149a0ccf03ad",
+      "baselineArtifactVersion": "clv1-baf59853d6f0d0be",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7dbc149a0ccf03ad",
+      "baselineArtifactVersion": "clv1-baf59853d6f0d0be",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-mango-ginger-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-mango-ginger-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7dbc149a0ccf03ad",
-      "causeCodes": [
-        "supplemental:quantity-too-high"
       ],
       "expectedDeltas": [
         {
@@ -305,15 +281,37 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-quantity-too-high"
+        "fault-omit"
       ],
       "mutation": {
-        "scalar": 1.5,
-        "targetNodeId": "game-drink-mango-ginger-blended-op-001-dice",
-        "targetPortionId": "game-drink-mango-ginger-blended-portion-01",
-        "type": "quantity-too-high"
+        "targetNodeId": "game-drink-mango-ginger-blended-op-003-blend",
+        "type": "omit"
       },
-      "nutritionEffect": "recalculate-from-quantities",
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-mango-ginger-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-baf59853d6f0d0be",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-drink-mango-ginger-blended-op-001-dice",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-mango-ginger-blended-scenario-supplemental"
     }
@@ -323,7 +321,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-mango-ginger-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

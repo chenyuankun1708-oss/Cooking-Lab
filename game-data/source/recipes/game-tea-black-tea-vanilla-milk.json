@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-e86964c6a370e494",
+  "artifactVersion": "clv1-e0c66aabc173175d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -8,7 +8,7 @@
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-game-tea-black-tea-lemon-juice-milk",
+    "riskClassificationId": "game-risk-game-tea-black-tea-vanilla-milk",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -19,18 +19,17 @@
       "nutritionProvenanceId": "usda-fdc:173227:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
-      "portionId": "game-tea-black-tea-lemon-juice-milk-portion-01",
+      "portionId": "game-tea-black-tea-vanilla-milk-portion-01",
       "volumeMl": 480
     },
     {
-      "ingredientId": "usda-lemon-juice",
-      "initialState": "liquid",
-      "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:167747:sr-legacy-2018-04",
+      "ingredientId": "usda-vanilla",
+      "initialState": "raw",
+      "massG": 3,
+      "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
-      "portionId": "game-tea-black-tea-lemon-juice-milk-portion-02",
-      "volumeMl": 120
+      "portionId": "game-tea-black-tea-vanilla-milk-portion-02"
     },
     {
       "ingredientId": "usda-whole-milk",
@@ -39,7 +38,7 @@
       "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
       "optional": false,
       "phase": "finish",
-      "portionId": "game-tea-black-tea-lemon-juice-milk-portion-03",
+      "portionId": "game-tea-black-tea-vanilla-milk-portion-03",
       "volumeMl": 120
     }
   ],
@@ -49,14 +48,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 51.6,
-      "carbs": 7.638,
-      "fat": 2.064,
-      "fiber": 0.18,
-      "protein": 2.172,
-      "saturatedFat": 1.1448,
-      "sodium": 30.6,
-      "sugar": 4.398
+      "calories": 42.72,
+      "carbs": 3.687,
+      "fat": 1.9209,
+      "fiber": 0,
+      "protein": 1.9629,
+      "saturatedFat": 1.12095,
+      "sodium": 30.135,
+      "sugar": 3.075
     },
     "provenance": [
       {
@@ -77,12 +76,12 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
-        "ingredientId": "usda-lemon-juice",
-        "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:167747:sr-legacy-2018-04",
+        "ingredientId": "usda-vanilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "167747",
+        "upstreamRecordId": "173471",
         "yieldFactor": 1
       },
       {
@@ -102,14 +101,14 @@
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 103.2,
-      "carbs": 15.276,
-      "fat": 4.128,
-      "fiber": 0.36,
-      "protein": 4.344,
-      "saturatedFat": 2.2896,
-      "sodium": 61.2,
-      "sugar": 8.796
+      "calories": 85.44,
+      "carbs": 7.374,
+      "fat": 3.8418,
+      "fiber": 0,
+      "protein": 3.9258,
+      "saturatedFat": 2.2419,
+      "sodium": 60.27,
+      "sugar": 6.15
     }
   },
   "operationGraph": {
@@ -120,14 +119,14 @@
         "dependsOn": [],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-tea-black-tea-lemon-juice-milk-portion-01",
-          "game-tea-black-tea-lemon-juice-milk-portion-02",
-          "game-tea-black-tea-lemon-juice-milk-portion-03"
+          "game-tea-black-tea-vanilla-milk-portion-01",
+          "game-tea-black-tea-vanilla-milk-portion-02",
+          "game-tea-black-tea-vanilla-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-lemon-juice-milk-op-002-mix",
+        "nodeId": "game-tea-black-tea-vanilla-milk-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-black-tea-lemon-juice-milk-state-002"
+          "game-tea-black-tea-vanilla-milk-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -146,18 +145,18 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-black-tea-lemon-juice-milk-op-002-mix"
+          "game-tea-black-tea-vanilla-milk-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-tea-black-tea-lemon-juice-milk-portion-01",
-          "game-tea-black-tea-lemon-juice-milk-portion-02",
-          "game-tea-black-tea-lemon-juice-milk-portion-03"
+          "game-tea-black-tea-vanilla-milk-portion-01",
+          "game-tea-black-tea-vanilla-milk-portion-02",
+          "game-tea-black-tea-vanilla-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-lemon-juice-milk-op-003-serve",
+        "nodeId": "game-tea-black-tea-vanilla-milk-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-black-tea-lemon-juice-milk-state-003"
+          "game-tea-black-tea-vanilla-milk-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -165,13 +164,13 @@
       }
     ]
   },
-  "recipeId": "game-tea-black-tea-lemon-juice-milk",
+  "recipeId": "game-tea-black-tea-vanilla-milk",
   "rights": {
     "artifactIds": [
-      "game-artifact-game-tea-black-tea-lemon-juice-milk-identity",
-      "game-artifact-game-tea-black-tea-lemon-juice-milk-preparation",
-      "game-artifact-game-tea-black-tea-lemon-juice-milk-nutrition",
-      "game-artifact-game-tea-black-tea-lemon-juice-milk-simulation"
+      "game-artifact-game-tea-black-tea-vanilla-milk-identity",
+      "game-artifact-game-tea-black-tea-vanilla-milk-preparation",
+      "game-artifact-game-tea-black-tea-vanilla-milk-nutrition",
+      "game-artifact-game-tea-black-tea-vanilla-milk-simulation"
     ],
     "evidenceIds": [
       "evidence-usda-fdc-subset",
@@ -183,23 +182,23 @@
       "fda-caffeine-guidance"
     ],
     "usageDecisionIds": [
-      "game-usage-game-tea-black-tea-lemon-juice-milk-identity",
-      "game-usage-game-tea-black-tea-lemon-juice-milk-preparation",
-      "game-usage-game-tea-black-tea-lemon-juice-milk-nutrition",
-      "game-usage-game-tea-black-tea-lemon-juice-milk-simulation"
+      "game-usage-game-tea-black-tea-vanilla-milk-identity",
+      "game-usage-game-tea-black-tea-vanilla-milk-preparation",
+      "game-usage-game-tea-black-tea-vanilla-milk-nutrition",
+      "game-usage-game-tea-black-tea-vanilla-milk-simulation"
     ]
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e86964c6a370e494",
+      "baselineArtifactVersion": "clv1-e0c66aabc173175d",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -207,16 +206,16 @@
         "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-black-tea-lemon-juice-milk-op-002-mix",
+        "targetNodeId": "game-tea-black-tea-vanilla-milk-op-003-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-black-tea-lemon-juice-milk-scenario-002-mix"
+      "scenarioId": "game-tea-black-tea-vanilla-milk-scenario-003-mix"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e86964c6a370e494",
+      "baselineArtifactVersion": "clv1-e0c66aabc173175d",
       "causeCodes": [
         "supplemental:wrong-equipment"
       ],
@@ -231,20 +230,21 @@
         "fault-wrong-equipment"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-black-tea-lemon-juice-milk-op-002-mix",
+        "replacementEquipmentId": "incompatible-tool",
+        "targetNodeId": "game-tea-black-tea-vanilla-milk-op-003-mix",
         "type": "wrong-equipment"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-tea-black-tea-lemon-juice-milk-scenario-supplemental"
+      "scenarioId": "game-tea-black-tea-vanilla-milk-scenario-supplemental"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",
   "servings": 2,
   "simulationProfile": "requires-cat-kitchen-v2",
-  "slug": "game-tea-black-tea-lemon-juice-milk",
+  "slug": "game-tea-black-tea-vanilla-milk",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 603,
+    "unit": "g"
   }
 }

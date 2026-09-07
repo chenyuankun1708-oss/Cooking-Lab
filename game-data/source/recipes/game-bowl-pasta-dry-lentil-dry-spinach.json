@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-446c17267843fda6",
+  "artifactVersion": "clv1-d8595147c65d81e2",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,33 @@
       "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 1200,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-02",
+      "volumeMl": 1200
+    },
+    {
       "ingredientId": "usda-lentil-dry",
       "initialState": "dry",
       "massG": 180,
-      "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-02"
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-03"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 540,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "primary-cooking-water",
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-04",
+      "volumeMl": 540
     },
     {
       "ingredientId": "usda-spinach",
@@ -37,7 +57,7 @@
       "nutritionProvenanceId": "usda-fdc:1999632:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-03"
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-05"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +66,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-04"
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-06"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-05"
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-07"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-06",
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-08",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +94,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-07"
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-09"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-08",
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-10",
       "volumeMl": 12
     },
     {
@@ -93,7 +113,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-09"
+      "portionId": "game-bowl-pasta-dry-lentil-dry-spinach-portion-11"
     }
   ],
   "itemType": "dish",
@@ -102,14 +122,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 467.06,
-      "carbs": 77.9842,
-      "fat": 7.3176,
-      "fiber": 3.764,
-      "protein": 21.5131,
-      "saturatedFat": 0.53785,
-      "sodium": 658.21,
-      "sugar": 3.0782
+      "calories": 463.64,
+      "carbs": 78.6712,
+      "fat": 6.9342,
+      "fiber": 8.561,
+      "protein": 21.9553,
+      "saturatedFat": 0.60982,
+      "sodium": 678.82,
+      "sugar": 4.0217
     },
     "provenance": [
       {
@@ -129,13 +149,26 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-lentil-dry",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:2644283:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2644283",
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-lentil-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172420:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172420",
         "yieldFactor": 1
       },
       {
@@ -168,13 +201,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +266,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1868.24,
-      "carbs": 311.9368,
-      "fat": 29.2704,
-      "fiber": 15.056,
-      "protein": 86.0524,
-      "saturatedFat": 2.1514,
-      "sodium": 2632.84,
-      "sugar": 12.3128
+      "calories": 1854.56,
+      "carbs": 314.6848,
+      "fat": 27.7368,
+      "fiber": 34.244,
+      "protein": 87.8212,
+      "saturatedFat": 2.43928,
+      "sodium": 2715.28,
+      "sugar": 16.0868
     }
   },
   "operationGraph": {
@@ -251,16 +284,16 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-03",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-04"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-05",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-06"
         ],
-        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-001-dice",
-        "operationType": "dice",
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-001-slice",
+        "operationType": "slice",
         "outputStateIds": [
           "game-bowl-pasta-dry-lentil-dry-spinach-state-001"
         ],
         "parameters": {
-          "cutSizeMm": 12,
+          "cutSizeMm": 18,
           "uniformity": 0.85
         },
         "targetStates": [
@@ -279,7 +312,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-05"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-07"
         ],
         "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-002-mince",
         "operationType": "mince",
@@ -306,7 +339,8 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-01"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-01",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-02"
         ],
         "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-003-boil",
         "operationType": "boil",
@@ -325,7 +359,33 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-003-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-01",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-02"
+        ],
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-004-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
       },
       {
         "activeDurationMs": 60000,
@@ -333,12 +393,13 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-02"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-03",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-04"
         ],
-        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-004-boil",
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-005-boil",
         "operationType": "boil",
         "outputStateIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-state-004"
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-005"
         ],
         "parameters": {
           "heatLevel": 0.65,
@@ -355,25 +416,51 @@
         "waitDurationMs": 1200000
       },
       {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-005-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-03",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-04"
+        ],
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-006-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-006"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-op-001-dice",
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-001-slice",
           "game-bowl-pasta-dry-lentil-dry-spinach-op-002-mince",
-          "game-bowl-pasta-dry-lentil-dry-spinach-op-004-boil"
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-006-drain"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-02",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-03",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-04",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-05",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-06"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-06",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-07",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-08"
         ],
-        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-005-pan-fry",
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-007-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-state-005"
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-007"
         ],
         "parameters": {
           "capacityG": 900,
@@ -398,18 +485,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-op-005-pan-fry"
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-007-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-07",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-08",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-09"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-09",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-10",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-11"
         ],
-        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-006-season",
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-008-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-state-006"
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-008"
         ],
         "parameters": {
           "quantityG": 35
@@ -427,25 +514,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-op-003-boil",
-          "game-bowl-pasta-dry-lentil-dry-spinach-op-006-season"
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-004-drain",
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-008-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-01",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-02",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-03",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-04",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-05",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-06",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-07",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-08",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-09"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-09",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-10",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-11"
         ],
-        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-007-assemble",
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-009-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-state-007"
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-009"
         ],
         "parameters": {},
         "targetStates": [],
@@ -455,24 +542,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-op-007-assemble"
+          "game-bowl-pasta-dry-lentil-dry-spinach-op-009-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-01",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-02",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-03",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-04",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-05",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-06",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-07",
           "game-bowl-pasta-dry-lentil-dry-spinach-portion-08",
-          "game-bowl-pasta-dry-lentil-dry-spinach-portion-09"
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-09",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-10",
+          "game-bowl-pasta-dry-lentil-dry-spinach-portion-11"
         ],
-        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-008-serve",
+        "nodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-pasta-dry-lentil-dry-spinach-state-008"
+          "game-bowl-pasta-dry-lentil-dry-spinach-state-010"
         ],
         "parameters": {},
         "targetStates": [],
@@ -507,9 +594,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
-        "cut-size-too-large:dice"
+        "cut-size-too-large:slice"
       ],
       "expectedDeltas": [
         {
@@ -523,16 +610,16 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-001-dice",
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-001-slice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-001-dice"
+      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-001-slice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -557,7 +644,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -587,7 +674,31 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-004-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-004-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -608,16 +719,40 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-004-boil",
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-005-boil",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-004-boil"
+      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-005-boil"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-006-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-006-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -638,16 +773,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-005-pan-fry",
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-007-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-007-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -655,23 +790,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-006-season",
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-008-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-006-season"
+      "scenarioId": "game-bowl-pasta-dry-lentil-dry-spinach-scenario-008-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-446c17267843fda6",
+      "baselineArtifactVersion": "clv1-d8595147c65d81e2",
       "causeCodes": [
         "supplemental:duplicate"
       ],
@@ -686,7 +826,7 @@
         "fault-duplicate"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-001-dice",
+        "targetNodeId": "game-bowl-pasta-dry-lentil-dry-spinach-op-001-slice",
         "type": "duplicate"
       },
       "nutritionEffect": "unchanged",

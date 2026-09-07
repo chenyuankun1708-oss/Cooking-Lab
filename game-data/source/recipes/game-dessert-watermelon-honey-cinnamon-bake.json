@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-5be4ca5c301df8cd",
+  "artifactVersion": "clv1-873255efd29ef26d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,67 +14,57 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
-      "massG": 400,
+      "initialState": "raw",
+      "massG": 440,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-01",
-      "volumeMl": 400
+      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-01"
     },
     {
       "ingredientId": "usda-oats",
       "initialState": "dry",
-      "massG": 120,
+      "massG": 150,
       "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-02"
     },
     {
-      "ingredientId": "usda-wheat-flour",
-      "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 35,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-03"
     },
     {
-      "ingredientId": "usda-almond",
-      "initialState": "raw",
-      "massG": 45,
-      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
-      "optional": false,
-      "phase": "dry",
-      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-04"
-    },
-    {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
-      "massG": 45,
+      "initialState": "prepared",
+      "massG": 35,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "fat",
-      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-05"
+      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-04"
     },
     {
       "ingredientId": "usda-honey",
       "initialState": "raw",
-      "massG": 40,
+      "massG": 52,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
       "optional": false,
       "phase": "sweetener",
-      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-06"
+      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-05"
     },
     {
       "ingredientId": "usda-cinnamon",
       "initialState": "dry",
-      "massG": 2,
+      "massG": 3,
       "nutritionProvenanceId": "usda-fdc:171320:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-07"
+      "portionId": "game-dessert-watermelon-honey-cinnamon-bake-portion-06"
     }
   ],
   "itemType": "dessert",
@@ -82,15 +72,15 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 8.21,
-      "calories": 398.9225,
-      "carbs": 53.69975,
-      "fat": 17.0917,
-      "fiber": 1.9005,
-      "protein": 9.844325,
-      "saturatedFat": 6.124225,
-      "sodium": 3.6879,
-      "sugar": 14.4276
+      "addedSugar": 10.673,
+      "calories": 335.135,
+      "carbs": 47.13925,
+      "fat": 13.95055,
+      "fiber": 5.70925,
+      "protein": 7.75805,
+      "saturatedFat": 4.769688,
+      "sodium": 2.908,
+      "sugar": 17.514525
     },
     "provenance": [
       {
@@ -99,7 +89,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -124,19 +114,6 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-wheat-flour",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
-        "provider": "USDA FoodData Central",
-        "retentionFactor": 1,
-        "upstreamRecordId": "789951",
-        "yieldFactor": 1
-      },
-      {
-        "accessedAt": "2026-09-08",
-        "basis": "per-100g",
-        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
         "ingredientId": "usda-almond",
         "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
@@ -151,7 +128,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -187,15 +164,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 32.84,
-      "calories": 1595.69,
-      "carbs": 214.799,
-      "fat": 68.3668,
-      "fiber": 7.602,
-      "protein": 39.3773,
-      "saturatedFat": 24.4969,
-      "sodium": 14.7516,
-      "sugar": 57.7104
+      "addedSugar": 42.692,
+      "calories": 1340.54,
+      "carbs": 188.557,
+      "fat": 55.8022,
+      "fiber": 22.837,
+      "protein": 31.0322,
+      "saturatedFat": 19.07875,
+      "sodium": 11.632,
+      "sugar": 70.0581
     }
   },
   "operationGraph": {
@@ -240,8 +217,7 @@
           "game-dessert-watermelon-honey-cinnamon-bake-portion-03",
           "game-dessert-watermelon-honey-cinnamon-bake-portion-04",
           "game-dessert-watermelon-honey-cinnamon-bake-portion-05",
-          "game-dessert-watermelon-honey-cinnamon-bake-portion-06",
-          "game-dessert-watermelon-honey-cinnamon-bake-portion-07"
+          "game-dessert-watermelon-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-watermelon-honey-cinnamon-bake-op-002-mix",
         "operationType": "mix",
@@ -274,8 +250,7 @@
           "game-dessert-watermelon-honey-cinnamon-bake-portion-03",
           "game-dessert-watermelon-honey-cinnamon-bake-portion-04",
           "game-dessert-watermelon-honey-cinnamon-bake-portion-05",
-          "game-dessert-watermelon-honey-cinnamon-bake-portion-06",
-          "game-dessert-watermelon-honey-cinnamon-bake-portion-07"
+          "game-dessert-watermelon-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-watermelon-honey-cinnamon-bake-op-003-bake",
         "operationType": "bake",
@@ -313,8 +288,7 @@
           "game-dessert-watermelon-honey-cinnamon-bake-portion-03",
           "game-dessert-watermelon-honey-cinnamon-bake-portion-04",
           "game-dessert-watermelon-honey-cinnamon-bake-portion-05",
-          "game-dessert-watermelon-honey-cinnamon-bake-portion-06",
-          "game-dessert-watermelon-honey-cinnamon-bake-portion-07"
+          "game-dessert-watermelon-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-watermelon-honey-cinnamon-bake-op-004-serve",
         "operationType": "serve",
@@ -354,7 +328,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5be4ca5c301df8cd",
+      "baselineArtifactVersion": "clv1-873255efd29ef26d",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -379,14 +353,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5be4ca5c301df8cd",
+      "baselineArtifactVersion": "clv1-873255efd29ef26d",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -403,7 +377,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5be4ca5c301df8cd",
+      "baselineArtifactVersion": "clv1-873255efd29ef26d",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -438,7 +412,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5be4ca5c301df8cd",
+      "baselineArtifactVersion": "clv1-873255efd29ef26d",
       "causeCodes": [
         "supplemental:duplicate"
       ],

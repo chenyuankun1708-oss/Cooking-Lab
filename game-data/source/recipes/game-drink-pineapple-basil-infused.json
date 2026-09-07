@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6e62d9e3dcb4d0a2",
+  "artifactVersion": "clv1-1d2761736a19b370",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-pineapple-basil-infused-portion-04"
     }
@@ -175,10 +175,10 @@
           "game-drink-pineapple-basil-infused-portion-03",
           "game-drink-pineapple-basil-infused-portion-04"
         ],
-        "nodeId": "game-drink-pineapple-basil-infused-op-002-rest",
+        "nodeId": "game-drink-pineapple-basil-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-pineapple-basil-infused-state-002"
+          "game-drink-pineapple-basil-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -188,13 +188,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-pineapple-basil-infused-op-002-rest"
+          "game-drink-pineapple-basil-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -203,10 +203,10 @@
           "game-drink-pineapple-basil-infused-portion-03",
           "game-drink-pineapple-basil-infused-portion-04"
         ],
-        "nodeId": "game-drink-pineapple-basil-infused-op-003-serve",
+        "nodeId": "game-drink-pineapple-basil-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-pineapple-basil-infused-state-003"
+          "game-drink-pineapple-basil-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -241,7 +241,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e62d9e3dcb4d0a2",
+      "baselineArtifactVersion": "clv1-1d2761736a19b370",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -266,20 +266,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e62d9e3dcb4d0a2",
+      "baselineArtifactVersion": "clv1-1d2761736a19b370",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -287,35 +282,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-pineapple-basil-infused-op-002-rest",
+        "targetNodeId": "game-drink-pineapple-basil-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-pineapple-basil-infused-scenario-002-rest"
+      "scenarioId": "game-drink-pineapple-basil-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e62d9e3dcb4d0a2",
+      "baselineArtifactVersion": "clv1-1d2761736a19b370",
       "causeCodes": [
-        "supplemental:wrong-equipment"
+        "supplemental:allowed-substitution"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "decrease"
+          "direction": "unchanged"
         }
       ],
-      "expectedFaultCodes": [
-        "fault-wrong-equipment"
-      ],
+      "expectedFaultCodes": [],
       "mutation": {
+        "replacementIngredientId": "usda-mango",
         "targetNodeId": "game-drink-pineapple-basil-infused-op-001-dice",
-        "type": "wrong-equipment"
+        "targetPortionId": "game-drink-pineapple-basil-infused-portion-01",
+        "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-drink-pineapple-basil-infused-scenario-supplemental"
     }
   ],
@@ -324,7 +319,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-pineapple-basil-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

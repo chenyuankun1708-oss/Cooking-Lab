@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-3a63fff745afc384",
+  "artifactVersion": "clv1-2162bc87515a312d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -123,10 +123,10 @@
           "game-tea-black-tea-cinnamon-milk-portion-02",
           "game-tea-black-tea-cinnamon-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-cinnamon-milk-op-002-mix",
+        "nodeId": "game-tea-black-tea-cinnamon-milk-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-black-tea-cinnamon-milk-state-002"
+          "game-tea-black-tea-cinnamon-milk-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -145,7 +145,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-black-tea-cinnamon-milk-op-002-mix"
+          "game-tea-black-tea-cinnamon-milk-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -153,10 +153,10 @@
           "game-tea-black-tea-cinnamon-milk-portion-02",
           "game-tea-black-tea-cinnamon-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-cinnamon-milk-op-003-serve",
+        "nodeId": "game-tea-black-tea-cinnamon-milk-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-black-tea-cinnamon-milk-state-003"
+          "game-tea-black-tea-cinnamon-milk-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -191,14 +191,14 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3a63fff745afc384",
+      "baselineArtifactVersion": "clv1-2162bc87515a312d",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -206,16 +206,16 @@
         "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-black-tea-cinnamon-milk-op-002-mix",
+        "targetNodeId": "game-tea-black-tea-cinnamon-milk-op-003-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-black-tea-cinnamon-milk-scenario-002-mix"
+      "scenarioId": "game-tea-black-tea-cinnamon-milk-scenario-003-mix"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3a63fff745afc384",
+      "baselineArtifactVersion": "clv1-2162bc87515a312d",
       "causeCodes": [
         "supplemental:reorder"
       ],
@@ -230,7 +230,8 @@
         "fault-reorder"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-black-tea-cinnamon-milk-op-002-mix",
+        "destinationBeforeNodeId": "game-tea-black-tea-cinnamon-milk-op-004-serve",
+        "targetNodeId": "game-tea-black-tea-cinnamon-milk-op-003-mix",
         "type": "reorder"
       },
       "nutritionEffect": "unchanged",
@@ -243,7 +244,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-black-tea-cinnamon-milk",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 603,
+    "unit": "g"
   }
 }

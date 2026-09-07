@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-bd2ea7f75787782f",
+  "artifactVersion": "clv1-6f24918dea64b03a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -33,8 +33,8 @@
     {
       "ingredientId": "usda-wheat-flour",
       "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "massG": 60,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-banana-almond-oat-bake-portion-03"
@@ -50,7 +50,7 @@
     },
     {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 45,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
@@ -82,14 +82,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 474.0225,
-      "carbs": 70.86975,
-      "fat": 17.2637,
-      "fiber": 3.1805,
-      "protein": 9.944325,
-      "saturatedFat": 6.108225,
-      "sodium": 2.3879,
-      "sugar": 25.7976
+      "calories": 457.0225,
+      "carbs": 67.67475,
+      "fat": 17.1147,
+      "fiber": 6.7055,
+      "protein": 8.869325,
+      "saturatedFat": 6.131475,
+      "sodium": 1.8879,
+      "sugar": 25.8381
     },
     "provenance": [
       {
@@ -122,13 +122,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-wheat-flour",
         "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "789951",
+        "upstreamRecordId": "168936",
         "yieldFactor": 1
       },
       {
@@ -150,7 +150,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -187,14 +187,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1896.09,
-      "carbs": 283.479,
-      "fat": 69.0548,
-      "fiber": 12.722,
-      "protein": 39.7773,
-      "saturatedFat": 24.4329,
-      "sodium": 9.5516,
-      "sugar": 103.1904
+      "calories": 1828.09,
+      "carbs": 270.699,
+      "fat": 68.4588,
+      "fiber": 26.822,
+      "protein": 35.4773,
+      "saturatedFat": 24.5259,
+      "sodium": 7.5516,
+      "sugar": 103.3524
     }
   },
   "operationGraph": {
@@ -353,7 +353,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd2ea7f75787782f",
+      "baselineArtifactVersion": "clv1-6f24918dea64b03a",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +378,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd2ea7f75787782f",
+      "baselineArtifactVersion": "clv1-6f24918dea64b03a",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +402,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd2ea7f75787782f",
+      "baselineArtifactVersion": "clv1-6f24918dea64b03a",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +437,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd2ea7f75787782f",
+      "baselineArtifactVersion": "clv1-6f24918dea64b03a",
       "causeCodes": [
         "supplemental:wrong-equipment"
       ],
@@ -452,6 +452,7 @@
         "fault-wrong-equipment"
       ],
       "mutation": {
+        "replacementEquipmentId": "incompatible-tool",
         "targetNodeId": "game-dessert-banana-almond-oat-bake-op-001-dice",
         "type": "wrong-equipment"
       },

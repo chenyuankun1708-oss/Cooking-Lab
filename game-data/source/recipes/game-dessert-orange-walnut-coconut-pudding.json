@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-d147e01268bb47c9",
+  "artifactVersion": "clv1-0ee76e2860607ace",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -25,7 +25,7 @@
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-orange-walnut-coconut-pudding-portion-02",
@@ -65,14 +65,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 368.915,
-      "carbs": 30.79075,
-      "fat": 27.54775,
-      "fiber": 2.036875,
-      "protein": 4.0034,
-      "saturatedFat": 19.430185,
-      "sodium": 20.66,
-      "sugar": 16.4075
+      "calories": 401.915,
+      "carbs": 33.52075,
+      "fat": 30.04775,
+      "fiber": 4.236875,
+      "protein": 4.2734,
+      "saturatedFat": 21.630185,
+      "sodium": 22.66,
+      "sugar": 19.7475
     },
     "provenance": [
       {
@@ -95,10 +95,10 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       },
       {
@@ -144,14 +144,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1475.66,
-      "carbs": 123.163,
-      "fat": 110.191,
-      "fiber": 8.1475,
-      "protein": 16.0136,
-      "saturatedFat": 77.72074,
-      "sodium": 82.64,
-      "sugar": 65.63
+      "calories": 1607.66,
+      "carbs": 134.083,
+      "fat": 120.191,
+      "fiber": 16.9475,
+      "protein": 17.0936,
+      "saturatedFat": 86.52074,
+      "sodium": 90.64,
+      "sugar": 78.99
     }
   },
   "operationGraph": {
@@ -332,7 +332,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d147e01268bb47c9",
+      "baselineArtifactVersion": "clv1-0ee76e2860607ace",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -357,14 +357,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d147e01268bb47c9",
+      "baselineArtifactVersion": "clv1-0ee76e2860607ace",
       "causeCodes": [
         "omit:whisk"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -381,7 +381,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d147e01268bb47c9",
+      "baselineArtifactVersion": "clv1-0ee76e2860607ace",
       "causeCodes": [
         "duration-too-short:simmer"
       ],
@@ -411,20 +411,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d147e01268bb47c9",
+      "baselineArtifactVersion": "clv1-0ee76e2860607ace",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -441,7 +436,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d147e01268bb47c9",
+      "baselineArtifactVersion": "clv1-0ee76e2860607ace",
       "causeCodes": [
         "supplemental:reorder"
       ],
@@ -456,6 +451,7 @@
         "fault-reorder"
       ],
       "mutation": {
+        "destinationBeforeNodeId": "game-dessert-orange-walnut-coconut-pudding-op-002-whisk",
         "targetNodeId": "game-dessert-orange-walnut-coconut-pudding-op-001-dice",
         "type": "reorder"
       },

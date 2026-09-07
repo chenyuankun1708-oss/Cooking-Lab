@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-35bb478e2d52a795",
+  "artifactVersion": "clv1-c913d778b765e88c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -99,10 +99,10 @@
           "game-coffee-espresso-vanilla-cold-portion-01",
           "game-coffee-espresso-vanilla-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-vanilla-cold-op-002-chill",
+        "nodeId": "game-coffee-espresso-vanilla-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-coffee-espresso-vanilla-cold-state-002"
+          "game-coffee-espresso-vanilla-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -120,17 +120,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-coffee-espresso-vanilla-cold-op-002-chill"
+          "game-coffee-espresso-vanilla-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-coffee-espresso-vanilla-cold-portion-01",
           "game-coffee-espresso-vanilla-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-vanilla-cold-op-003-serve",
+        "nodeId": "game-coffee-espresso-vanilla-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-coffee-espresso-vanilla-cold-state-003"
+          "game-coffee-espresso-vanilla-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -165,39 +165,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-35bb478e2d52a795",
+      "baselineArtifactVersion": "clv1-c913d778b765e88c",
       "causeCodes": [
         "duration-too-short:chill"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-duration-too-short"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "game-coffee-espresso-vanilla-cold-op-002-chill",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-coffee-espresso-vanilla-cold-scenario-002-chill"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-35bb478e2d52a795",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -207,11 +177,37 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-duration-too-short"
       ],
       "mutation": {
-        "targetNodeId": "game-coffee-espresso-vanilla-cold-op-002-chill",
-        "type": "missing-state-transition"
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-espresso-vanilla-cold-op-003-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-vanilla-cold-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c913d778b765e88c",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "destinationBeforeNodeId": "game-coffee-espresso-vanilla-cold-op-004-serve",
+        "targetNodeId": "game-coffee-espresso-vanilla-cold-op-003-chill",
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -223,7 +219,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-coffee-espresso-vanilla-cold",
   "yield": {
-    "amount": 160,
-    "unit": "ml"
+    "amount": 123,
+    "unit": "g"
   }
 }

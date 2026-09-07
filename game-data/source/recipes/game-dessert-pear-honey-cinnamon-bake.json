@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ac5cc7371ac4a766",
+  "artifactVersion": "clv1-073b0ebc684a5c3f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -15,7 +15,7 @@
     {
       "ingredientId": "usda-pear",
       "initialState": "raw",
-      "massG": 400,
+      "massG": 440,
       "nutritionProvenanceId": "usda-fdc:2710836:foundation-2026-04-30",
       "optional": false,
       "phase": "fruit",
@@ -24,56 +24,47 @@
     {
       "ingredientId": "usda-oats",
       "initialState": "dry",
-      "massG": 120,
+      "massG": 150,
       "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-02"
     },
     {
-      "ingredientId": "usda-wheat-flour",
-      "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 35,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-03"
     },
     {
-      "ingredientId": "usda-almond",
-      "initialState": "raw",
-      "massG": 45,
-      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
-      "optional": false,
-      "phase": "dry",
-      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-04"
-    },
-    {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
-      "massG": 45,
+      "initialState": "prepared",
+      "massG": 35,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "fat",
-      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-05"
+      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-04"
     },
     {
       "ingredientId": "usda-honey",
       "initialState": "raw",
-      "massG": 40,
+      "massG": 52,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
       "optional": false,
       "phase": "sweetener",
-      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-06"
+      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-05"
     },
     {
       "ingredientId": "usda-cinnamon",
       "initialState": "dry",
-      "massG": 2,
+      "massG": 3,
       "nutritionProvenanceId": "usda-fdc:171320:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-07"
+      "portionId": "game-dessert-pear-honey-cinnamon-bake-portion-06"
     }
   ],
   "itemType": "dessert",
@@ -81,15 +72,15 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 8.21,
-      "calories": 432.6225,
-      "carbs": 60.94975,
-      "fat": 17.3127,
-      "fiber": 4.1405,
-      "protein": 9.546325,
-      "saturatedFat": 6.108225,
-      "sodium": 3.0859,
-      "sugar": 16.0276
+      "addedSugar": 10.673,
+      "calories": 372.205,
+      "carbs": 55.11425,
+      "fat": 14.19365,
+      "fiber": 8.17325,
+      "protein": 7.43025,
+      "saturatedFat": 4.752088,
+      "sodium": 2.2458,
+      "sugar": 19.274525
     },
     "provenance": [
       {
@@ -123,19 +114,6 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-wheat-flour",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
-        "provider": "USDA FoodData Central",
-        "retentionFactor": 1,
-        "upstreamRecordId": "789951",
-        "yieldFactor": 1
-      },
-      {
-        "accessedAt": "2026-09-08",
-        "basis": "per-100g",
-        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
         "ingredientId": "usda-almond",
         "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
@@ -150,7 +128,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -186,15 +164,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 32.84,
-      "calories": 1730.49,
-      "carbs": 243.799,
-      "fat": 69.2508,
-      "fiber": 16.562,
-      "protein": 38.1853,
-      "saturatedFat": 24.4329,
-      "sodium": 12.3436,
-      "sugar": 64.1104
+      "addedSugar": 42.692,
+      "calories": 1488.82,
+      "carbs": 220.457,
+      "fat": 56.7746,
+      "fiber": 32.693,
+      "protein": 29.721,
+      "saturatedFat": 19.00835,
+      "sodium": 8.9832,
+      "sugar": 77.0981
     }
   },
   "operationGraph": {
@@ -239,8 +217,7 @@
           "game-dessert-pear-honey-cinnamon-bake-portion-03",
           "game-dessert-pear-honey-cinnamon-bake-portion-04",
           "game-dessert-pear-honey-cinnamon-bake-portion-05",
-          "game-dessert-pear-honey-cinnamon-bake-portion-06",
-          "game-dessert-pear-honey-cinnamon-bake-portion-07"
+          "game-dessert-pear-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-pear-honey-cinnamon-bake-op-002-mix",
         "operationType": "mix",
@@ -273,8 +250,7 @@
           "game-dessert-pear-honey-cinnamon-bake-portion-03",
           "game-dessert-pear-honey-cinnamon-bake-portion-04",
           "game-dessert-pear-honey-cinnamon-bake-portion-05",
-          "game-dessert-pear-honey-cinnamon-bake-portion-06",
-          "game-dessert-pear-honey-cinnamon-bake-portion-07"
+          "game-dessert-pear-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-pear-honey-cinnamon-bake-op-003-bake",
         "operationType": "bake",
@@ -312,8 +288,7 @@
           "game-dessert-pear-honey-cinnamon-bake-portion-03",
           "game-dessert-pear-honey-cinnamon-bake-portion-04",
           "game-dessert-pear-honey-cinnamon-bake-portion-05",
-          "game-dessert-pear-honey-cinnamon-bake-portion-06",
-          "game-dessert-pear-honey-cinnamon-bake-portion-07"
+          "game-dessert-pear-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-pear-honey-cinnamon-bake-op-004-serve",
         "operationType": "serve",
@@ -353,7 +328,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ac5cc7371ac4a766",
+      "baselineArtifactVersion": "clv1-073b0ebc684a5c3f",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +353,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ac5cc7371ac4a766",
+      "baselineArtifactVersion": "clv1-073b0ebc684a5c3f",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +377,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ac5cc7371ac4a766",
+      "baselineArtifactVersion": "clv1-073b0ebc684a5c3f",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +412,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ac5cc7371ac4a766",
+      "baselineArtifactVersion": "clv1-073b0ebc684a5c3f",
       "causeCodes": [
         "supplemental:duplicate"
       ],

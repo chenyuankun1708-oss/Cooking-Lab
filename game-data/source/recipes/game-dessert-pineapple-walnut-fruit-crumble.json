@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-528ddfbc0a785c77",
+  "artifactVersion": "clv1-850271140e1cbdd0",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -15,7 +15,7 @@
     {
       "ingredientId": "usda-pineapple",
       "initialState": "raw",
-      "massG": 400,
+      "massG": 420,
       "nutritionProvenanceId": "usda-fdc:2346398:foundation-2026-04-30",
       "optional": false,
       "phase": "fruit",
@@ -24,7 +24,7 @@
     {
       "ingredientId": "usda-oats",
       "initialState": "dry",
-      "massG": 120,
+      "massG": 60,
       "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
@@ -33,8 +33,8 @@
     {
       "ingredientId": "usda-wheat-flour",
       "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "massG": 100,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-pineapple-walnut-fruit-crumble-portion-03"
@@ -42,7 +42,7 @@
     {
       "ingredientId": "usda-walnut",
       "initialState": "raw",
-      "massG": 45,
+      "massG": 50,
       "nutritionProvenanceId": "usda-fdc:2346394:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
@@ -50,8 +50,8 @@
     },
     {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
-      "massG": 45,
+      "initialState": "prepared",
+      "massG": 60,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "fat",
@@ -60,7 +60,7 @@
     {
       "ingredientId": "usda-sugar",
       "initialState": "dry",
-      "massG": 40,
+      "massG": 48,
       "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
       "optional": false,
       "phase": "sweetener",
@@ -81,15 +81,15 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 9.98,
-      "calories": 448.8225,
-      "carbs": 60.946,
-      "fat": 19.2772,
-      "fiber": 1.786625,
-      "protein": 8.889075,
-      "saturatedFat": 6.3636,
-      "sodium": 2.3879,
-      "sugar": 21.3976
+      "addedSugar": 11.976,
+      "calories": 457.64,
+      "carbs": 57.9115,
+      "fat": 22.27215,
+      "fiber": 4.1335,
+      "protein": 7.0565,
+      "saturatedFat": 8.371725,
+      "sodium": 2.4202,
+      "sugar": 24.03335
     },
     "provenance": [
       {
@@ -122,13 +122,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-wheat-flour",
         "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "789951",
+        "upstreamRecordId": "168936",
         "yieldFactor": 1
       },
       {
@@ -150,7 +150,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -186,15 +186,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 39.92,
-      "calories": 1795.29,
-      "carbs": 243.784,
-      "fat": 77.1088,
-      "fiber": 7.1465,
-      "protein": 35.5563,
-      "saturatedFat": 25.4544,
-      "sodium": 9.5516,
-      "sugar": 85.5904
+      "addedSugar": 47.904,
+      "calories": 1830.56,
+      "carbs": 231.646,
+      "fat": 89.0886,
+      "fiber": 16.534,
+      "protein": 28.226,
+      "saturatedFat": 33.4869,
+      "sodium": 9.6808,
+      "sugar": 96.1334
     }
   },
   "operationGraph": {
@@ -353,7 +353,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-528ddfbc0a785c77",
+      "baselineArtifactVersion": "clv1-850271140e1cbdd0",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +378,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-528ddfbc0a785c77",
+      "baselineArtifactVersion": "clv1-850271140e1cbdd0",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +402,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-528ddfbc0a785c77",
+      "baselineArtifactVersion": "clv1-850271140e1cbdd0",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +437,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-528ddfbc0a785c77",
+      "baselineArtifactVersion": "clv1-850271140e1cbdd0",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],

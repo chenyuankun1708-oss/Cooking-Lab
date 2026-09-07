@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-771f81bc44bc813a",
+  "artifactVersion": "clv1-fb288429a1d373fc",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -33,8 +33,8 @@
     {
       "ingredientId": "usda-wheat-flour",
       "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "massG": 60,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-pineapple-walnut-oat-bake-portion-03"
@@ -50,7 +50,7 @@
     },
     {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 45,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
@@ -82,14 +82,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 448.8225,
-      "carbs": 60.946,
-      "fat": 19.2772,
-      "fiber": 1.786625,
-      "protein": 8.889075,
-      "saturatedFat": 6.3636,
-      "sodium": 2.3879,
-      "sugar": 21.3976
+      "calories": 431.8225,
+      "carbs": 57.751,
+      "fat": 19.1282,
+      "fiber": 5.311625,
+      "protein": 7.814075,
+      "saturatedFat": 6.38685,
+      "sodium": 1.8879,
+      "sugar": 21.4381
     },
     "provenance": [
       {
@@ -122,13 +122,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-wheat-flour",
         "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "789951",
+        "upstreamRecordId": "168936",
         "yieldFactor": 1
       },
       {
@@ -150,7 +150,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -187,14 +187,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1795.29,
-      "carbs": 243.784,
-      "fat": 77.1088,
-      "fiber": 7.1465,
-      "protein": 35.5563,
-      "saturatedFat": 25.4544,
-      "sodium": 9.5516,
-      "sugar": 85.5904
+      "calories": 1727.29,
+      "carbs": 231.004,
+      "fat": 76.5128,
+      "fiber": 21.2465,
+      "protein": 31.2563,
+      "saturatedFat": 25.5474,
+      "sodium": 7.5516,
+      "sugar": 85.7524
     }
   },
   "operationGraph": {
@@ -353,7 +353,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-771f81bc44bc813a",
+      "baselineArtifactVersion": "clv1-fb288429a1d373fc",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +378,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-771f81bc44bc813a",
+      "baselineArtifactVersion": "clv1-fb288429a1d373fc",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +402,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-771f81bc44bc813a",
+      "baselineArtifactVersion": "clv1-fb288429a1d373fc",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +437,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-771f81bc44bc813a",
+      "baselineArtifactVersion": "clv1-fb288429a1d373fc",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-74bddff219fce5b4",
+  "artifactVersion": "clv1-4d2b71cc8bcd1e86",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-blueberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-blueberry-basil-blended-portion-01"
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-blueberry-basil-blended-portion-04"
     }
@@ -56,27 +56,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 69.935,
-      "carbs": 16.69025,
-      "fat": 0.2608,
-      "fiber": 0.052,
-      "protein": 0.65915,
-      "saturatedFat": 0.001025,
-      "sodium": 7.34,
-      "sugar": 12.4215
+      "calories": 64.415,
+      "carbs": 16.61025,
+      "fat": 0.28,
+      "fiber": 1.972,
+      "protein": 0.68875,
+      "saturatedFat": 0.023425,
+      "sodium": 8.14,
+      "sugar": 12.9015
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-blueberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346411",
+        "upstreamRecordId": "171711",
         "yieldFactor": 1
       },
       {
@@ -122,14 +122,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 279.74,
-      "carbs": 66.761,
-      "fat": 1.0432,
-      "fiber": 0.208,
-      "protein": 2.6366,
-      "saturatedFat": 0.0041,
-      "sodium": 29.36,
-      "sugar": 49.686
+      "calories": 257.66,
+      "carbs": 66.441,
+      "fat": 1.12,
+      "fiber": 7.888,
+      "protein": 2.755,
+      "saturatedFat": 0.0937,
+      "sodium": 32.56,
+      "sugar": 51.606
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-blueberry-basil-blended-portion-03",
           "game-drink-blueberry-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-basil-blended-op-002-blend",
+        "nodeId": "game-drink-blueberry-basil-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-blueberry-basil-blended-state-002"
+          "game-drink-blueberry-basil-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-blueberry-basil-blended-op-002-blend"
+          "game-drink-blueberry-basil-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-blueberry-basil-blended-portion-03",
           "game-drink-blueberry-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-basil-blended-op-003-serve",
+        "nodeId": "game-drink-blueberry-basil-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-blueberry-basil-blended-state-003"
+          "game-drink-blueberry-basil-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-74bddff219fce5b4",
+      "baselineArtifactVersion": "clv1-4d2b71cc8bcd1e86",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-74bddff219fce5b4",
+      "baselineArtifactVersion": "clv1-4d2b71cc8bcd1e86",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-blueberry-basil-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-blueberry-basil-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-74bddff219fce5b4",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -305,11 +281,36 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-omit"
       ],
       "mutation": {
+        "targetNodeId": "game-drink-blueberry-basil-blended-op-003-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-blueberry-basil-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4d2b71cc8bcd1e86",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "destinationBeforeNodeId": "game-drink-blueberry-basil-blended-op-003-blend",
         "targetNodeId": "game-drink-blueberry-basil-blended-op-001-dice",
-        "type": "missing-state-transition"
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -321,7 +322,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-blueberry-basil-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

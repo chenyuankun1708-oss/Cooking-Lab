@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-24cff1b8178411e8",
+  "artifactVersion": "clv1-a88e6bb2ef5ef8a9",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -25,7 +25,7 @@
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-mango-walnut-coconut-pudding-portion-02",
@@ -65,14 +65,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 385.04,
-      "carbs": 33.41575,
-      "fat": 27.86425,
-      "fiber": 1.849375,
-      "protein": 3.7424,
-      "saturatedFat": 19.430185,
-      "sodium": 13.91,
-      "sugar": 18.005
+      "calories": 418.04,
+      "carbs": 36.14575,
+      "fat": 30.36425,
+      "fiber": 4.049375,
+      "protein": 4.0124,
+      "saturatedFat": 21.630185,
+      "sodium": 15.91,
+      "sugar": 21.345
     },
     "provenance": [
       {
@@ -95,10 +95,10 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       },
       {
@@ -144,14 +144,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1540.16,
-      "carbs": 133.663,
-      "fat": 111.457,
-      "fiber": 7.3975,
-      "protein": 14.9696,
-      "saturatedFat": 77.72074,
-      "sodium": 55.64,
-      "sugar": 72.02
+      "calories": 1672.16,
+      "carbs": 144.583,
+      "fat": 121.457,
+      "fiber": 16.1975,
+      "protein": 16.0496,
+      "saturatedFat": 86.52074,
+      "sodium": 63.64,
+      "sugar": 85.38
     }
   },
   "operationGraph": {
@@ -332,7 +332,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-24cff1b8178411e8",
+      "baselineArtifactVersion": "clv1-a88e6bb2ef5ef8a9",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -357,14 +357,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-24cff1b8178411e8",
+      "baselineArtifactVersion": "clv1-a88e6bb2ef5ef8a9",
       "causeCodes": [
         "omit:whisk"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -381,7 +381,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-24cff1b8178411e8",
+      "baselineArtifactVersion": "clv1-a88e6bb2ef5ef8a9",
       "causeCodes": [
         "duration-too-short:simmer"
       ],
@@ -411,20 +411,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-24cff1b8178411e8",
+      "baselineArtifactVersion": "clv1-a88e6bb2ef5ef8a9",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -441,7 +436,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-24cff1b8178411e8",
+      "baselineArtifactVersion": "clv1-a88e6bb2ef5ef8a9",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],

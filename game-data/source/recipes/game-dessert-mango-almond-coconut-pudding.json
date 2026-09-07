@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-e4fc96616a367abf",
+  "artifactVersion": "clv1-30067973ec50cad3",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -25,7 +25,7 @@
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-mango-almond-coconut-pudding-portion-02",
@@ -65,14 +65,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 375.94,
-      "carbs": 34.212,
-      "fat": 26.23675,
-      "fiber": 2.3385,
-      "protein": 4.34615,
-      "saturatedFat": 19.23156,
-      "sodium": 13.91,
-      "sugar": 18.005
+      "calories": 408.94,
+      "carbs": 36.942,
+      "fat": 28.73675,
+      "fiber": 4.5385,
+      "protein": 4.61615,
+      "saturatedFat": 21.43156,
+      "sodium": 15.91,
+      "sugar": 21.345
     },
     "provenance": [
       {
@@ -95,10 +95,10 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       },
       {
@@ -144,14 +144,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1503.76,
-      "carbs": 136.848,
-      "fat": 104.947,
-      "fiber": 9.354,
-      "protein": 17.3846,
-      "saturatedFat": 76.92624,
-      "sodium": 55.64,
-      "sugar": 72.02
+      "calories": 1635.76,
+      "carbs": 147.768,
+      "fat": 114.947,
+      "fiber": 18.154,
+      "protein": 18.4646,
+      "saturatedFat": 85.72624,
+      "sodium": 63.64,
+      "sugar": 85.38
     }
   },
   "operationGraph": {
@@ -332,7 +332,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e4fc96616a367abf",
+      "baselineArtifactVersion": "clv1-30067973ec50cad3",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -357,14 +357,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e4fc96616a367abf",
+      "baselineArtifactVersion": "clv1-30067973ec50cad3",
       "causeCodes": [
         "omit:whisk"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -381,7 +381,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e4fc96616a367abf",
+      "baselineArtifactVersion": "clv1-30067973ec50cad3",
       "causeCodes": [
         "duration-too-short:simmer"
       ],
@@ -411,20 +411,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e4fc96616a367abf",
+      "baselineArtifactVersion": "clv1-30067973ec50cad3",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -441,7 +436,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e4fc96616a367abf",
+      "baselineArtifactVersion": "clv1-30067973ec50cad3",
       "causeCodes": [
         "supplemental:duplicate"
       ],

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-68f5542c13e5cd4c",
+  "artifactVersion": "clv1-1e5189fc631e0b81",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-blueberry",
       "initialState": "raw",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-dessert-blueberry-walnut-oat-bake-portion-01"
@@ -33,8 +33,8 @@
     {
       "ingredientId": "usda-wheat-flour",
       "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "massG": 60,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-blueberry-walnut-oat-bake-portion-03"
@@ -50,7 +50,7 @@
     },
     {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 45,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
@@ -82,27 +82,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 452.6225,
-      "carbs": 61.446,
-      "fat": 19.3722,
-      "fiber": 0.851625,
-      "protein": 9.131075,
-      "saturatedFat": 6.3636,
-      "sodium": 2.3879,
-      "sugar": 19.3576
+      "calories": 428.7225,
+      "carbs": 58.151,
+      "fat": 19.2472,
+      "fiber": 6.776625,
+      "protein": 8.093075,
+      "saturatedFat": 6.41485,
+      "sodium": 2.8879,
+      "sugar": 19.9981
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-blueberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346411",
+        "upstreamRecordId": "171711",
         "yieldFactor": 1
       },
       {
@@ -122,13 +122,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-wheat-flour",
         "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "789951",
+        "upstreamRecordId": "168936",
         "yieldFactor": 1
       },
       {
@@ -150,7 +150,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -187,14 +187,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1810.49,
-      "carbs": 245.784,
-      "fat": 77.4888,
-      "fiber": 3.4065,
-      "protein": 36.5243,
-      "saturatedFat": 25.4544,
-      "sodium": 9.5516,
-      "sugar": 77.4304
+      "calories": 1714.89,
+      "carbs": 232.604,
+      "fat": 76.9888,
+      "fiber": 27.1065,
+      "protein": 32.3723,
+      "saturatedFat": 25.6594,
+      "sodium": 11.5516,
+      "sugar": 79.9924
     }
   },
   "operationGraph": {
@@ -353,7 +353,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68f5542c13e5cd4c",
+      "baselineArtifactVersion": "clv1-1e5189fc631e0b81",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +378,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68f5542c13e5cd4c",
+      "baselineArtifactVersion": "clv1-1e5189fc631e0b81",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +402,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68f5542c13e5cd4c",
+      "baselineArtifactVersion": "clv1-1e5189fc631e0b81",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +437,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68f5542c13e5cd4c",
+      "baselineArtifactVersion": "clv1-1e5189fc631e0b81",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],

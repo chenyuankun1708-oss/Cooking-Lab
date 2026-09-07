@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-af0308690924a511",
+  "artifactVersion": "clv1-1b6622a422ad27c1",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,14 +16,14 @@
       "ingredientId": "usda-strawberry",
       "initialState": "raw",
       "massG": 360,
-      "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-dessert-strawberry-almond-yogurt-cup-portion-01"
     },
     {
       "ingredientId": "usda-yogurt",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 360,
       "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
       "optional": false,
@@ -55,27 +55,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 6.1575,
-      "calories": 188.36,
-      "carbs": 20.357,
-      "fat": 9.34,
-      "fiber": 1.095,
-      "protein": 6.1874,
-      "saturatedFat": 2.466,
-      "sodium": 37.92,
-      "sugar": 14.2125
+      "calories": 184.4,
+      "carbs": 20.105,
+      "fat": 9.412,
+      "fiber": 2.895,
+      "protein": 6.2135,
+      "saturatedFat": 2.4795,
+      "sodium": 38.82,
+      "sugar": 14.2395
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-strawberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346409",
+        "upstreamRecordId": "167762",
         "yieldFactor": 1
       },
       {
@@ -84,7 +84,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "foundation-2026-04-30",
         "ingredientId": "usda-yogurt",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -121,14 +121,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 24.63,
-      "calories": 753.44,
-      "carbs": 81.428,
-      "fat": 37.36,
-      "fiber": 4.38,
-      "protein": 24.7496,
-      "saturatedFat": 9.864,
-      "sodium": 151.68,
-      "sugar": 56.85
+      "calories": 737.6,
+      "carbs": 80.42,
+      "fat": 37.648,
+      "fiber": 11.58,
+      "protein": 24.854,
+      "saturatedFat": 9.918,
+      "sodium": 155.28,
+      "sugar": 56.958
     }
   },
   "operationGraph": {
@@ -272,7 +272,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af0308690924a511",
+      "baselineArtifactVersion": "clv1-1b6622a422ad27c1",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -297,14 +297,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af0308690924a511",
+      "baselineArtifactVersion": "clv1-1b6622a422ad27c1",
       "causeCodes": [
         "omit:fold"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -321,20 +321,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af0308690924a511",
+      "baselineArtifactVersion": "clv1-1b6622a422ad27c1",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -351,7 +346,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af0308690924a511",
+      "baselineArtifactVersion": "clv1-1b6622a422ad27c1",
       "causeCodes": [
         "supplemental:allowed-substitution"
       ],
@@ -364,12 +359,12 @@
       ],
       "expectedFaultCodes": [],
       "mutation": {
-        "replacementIngredientId": "usda-honey",
+        "replacementIngredientId": "usda-banana",
         "targetNodeId": "game-dessert-strawberry-almond-yogurt-cup-op-001-dice",
-        "targetPortionId": "game-dessert-strawberry-almond-yogurt-cup-portion-04",
+        "targetPortionId": "game-dessert-strawberry-almond-yogurt-cup-portion-01",
         "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "recoverable",
       "scenarioId": "game-dessert-strawberry-almond-yogurt-cup-scenario-supplemental"
     }

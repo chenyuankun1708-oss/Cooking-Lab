@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-e68839aa8fd5386e",
+  "artifactVersion": "clv1-fbcffecdc642b9a6",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,23 @@
       "portionId": "game-bowl-white-rice-mushroom-spinach-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-02",
+      "volumeMl": 360
+    },
+    {
       "ingredientId": "usda-mushroom",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "usda-fdc:1999629:foundation-2026-04-30",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-02"
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-03"
     },
     {
       "ingredientId": "usda-spinach",
@@ -37,7 +47,7 @@
       "nutritionProvenanceId": "usda-fdc:1999632:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-03"
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-04"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +56,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-04"
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-05"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-05"
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-06"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +74,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-06",
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-07",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-07"
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-08"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +93,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-08",
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-09",
       "volumeMl": 12
     },
     {
@@ -93,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-09"
+      "portionId": "game-bowl-white-rice-mushroom-spinach-portion-10"
     }
   ],
   "itemType": "dish",
@@ -102,14 +112,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 321.26,
-      "carbs": 56.4142,
-      "fat": 6.44385,
-      "fiber": 3.2234,
-      "protein": 9.4846,
-      "saturatedFat": 0.37165,
-      "sodium": 659.7172,
-      "sugar": 1.4762
+      "calories": 321.44,
+      "carbs": 56.5612,
+      "fat": 6.44745,
+      "fiber": 3.2054,
+      "protein": 9.4768,
+      "saturatedFat": 0.37432,
+      "sodium": 663.8272,
+      "sugar": 1.5062
     },
     "provenance": [
       {
@@ -123,6 +133,19 @@
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
         "upstreamRecordId": "2512381",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
         "yieldFactor": 1
       },
       {
@@ -168,13 +191,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +256,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1285.04,
-      "carbs": 225.6568,
-      "fat": 25.7754,
-      "fiber": 12.8936,
-      "protein": 37.9384,
-      "saturatedFat": 1.4866,
-      "sodium": 2638.8688,
-      "sugar": 5.9048
+      "calories": 1285.76,
+      "carbs": 226.2448,
+      "fat": 25.7898,
+      "fiber": 12.8216,
+      "protein": 37.9072,
+      "saturatedFat": 1.49728,
+      "sodium": 2655.3088,
+      "sugar": 6.0248
     }
   },
   "operationGraph": {
@@ -251,16 +274,16 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-white-rice-mushroom-spinach-portion-03",
-          "game-bowl-white-rice-mushroom-spinach-portion-04"
+          "game-bowl-white-rice-mushroom-spinach-portion-04",
+          "game-bowl-white-rice-mushroom-spinach-portion-05"
         ],
-        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-001-dice",
-        "operationType": "dice",
+        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-001-slice",
+        "operationType": "slice",
         "outputStateIds": [
           "game-bowl-white-rice-mushroom-spinach-state-001"
         ],
         "parameters": {
-          "cutSizeMm": 12,
+          "cutSizeMm": 18,
           "uniformity": 0.85
         },
         "targetStates": [
@@ -279,7 +302,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-white-rice-mushroom-spinach-portion-05"
+          "game-bowl-white-rice-mushroom-spinach-portion-06"
         ],
         "nodeId": "game-bowl-white-rice-mushroom-spinach-op-002-mince",
         "operationType": "mince",
@@ -306,10 +329,11 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-white-rice-mushroom-spinach-portion-01"
+          "game-bowl-white-rice-mushroom-spinach-portion-01",
+          "game-bowl-white-rice-mushroom-spinach-portion-02"
         ],
-        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-003-boil",
-        "operationType": "boil",
+        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-003-simmer",
+        "operationType": "simmer",
         "outputStateIds": [
           "game-bowl-white-rice-mushroom-spinach-state-003"
         ],
@@ -325,27 +349,27 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 1080000
       },
       {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-white-rice-mushroom-spinach-op-001-dice",
+          "game-bowl-white-rice-mushroom-spinach-op-001-slice",
           "game-bowl-white-rice-mushroom-spinach-op-002-mince"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-white-rice-mushroom-spinach-portion-02",
           "game-bowl-white-rice-mushroom-spinach-portion-03",
           "game-bowl-white-rice-mushroom-spinach-portion-04",
           "game-bowl-white-rice-mushroom-spinach-portion-05",
-          "game-bowl-white-rice-mushroom-spinach-portion-06"
+          "game-bowl-white-rice-mushroom-spinach-portion-06",
+          "game-bowl-white-rice-mushroom-spinach-portion-07"
         ],
-        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-005-pan-fry",
+        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-004-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-white-rice-mushroom-spinach-state-005"
+          "game-bowl-white-rice-mushroom-spinach-state-004"
         ],
         "parameters": {
           "capacityG": 900,
@@ -370,18 +394,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-white-rice-mushroom-spinach-op-005-pan-fry"
+          "game-bowl-white-rice-mushroom-spinach-op-004-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-white-rice-mushroom-spinach-portion-07",
           "game-bowl-white-rice-mushroom-spinach-portion-08",
-          "game-bowl-white-rice-mushroom-spinach-portion-09"
+          "game-bowl-white-rice-mushroom-spinach-portion-09",
+          "game-bowl-white-rice-mushroom-spinach-portion-10"
         ],
-        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-006-season",
+        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-005-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-white-rice-mushroom-spinach-state-006"
+          "game-bowl-white-rice-mushroom-spinach-state-005"
         ],
         "parameters": {
           "quantityG": 35
@@ -399,25 +423,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-white-rice-mushroom-spinach-op-003-boil",
-          "game-bowl-white-rice-mushroom-spinach-op-006-season"
+          "game-bowl-white-rice-mushroom-spinach-op-003-simmer",
+          "game-bowl-white-rice-mushroom-spinach-op-005-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-white-rice-mushroom-spinach-portion-01",
-          "game-bowl-white-rice-mushroom-spinach-portion-02",
           "game-bowl-white-rice-mushroom-spinach-portion-03",
           "game-bowl-white-rice-mushroom-spinach-portion-04",
           "game-bowl-white-rice-mushroom-spinach-portion-05",
           "game-bowl-white-rice-mushroom-spinach-portion-06",
           "game-bowl-white-rice-mushroom-spinach-portion-07",
           "game-bowl-white-rice-mushroom-spinach-portion-08",
-          "game-bowl-white-rice-mushroom-spinach-portion-09"
+          "game-bowl-white-rice-mushroom-spinach-portion-09",
+          "game-bowl-white-rice-mushroom-spinach-portion-10"
         ],
-        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-007-assemble",
+        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-006-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-white-rice-mushroom-spinach-state-007"
+          "game-bowl-white-rice-mushroom-spinach-state-006"
         ],
         "parameters": {},
         "targetStates": [],
@@ -427,24 +451,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-white-rice-mushroom-spinach-op-007-assemble"
+          "game-bowl-white-rice-mushroom-spinach-op-006-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-white-rice-mushroom-spinach-portion-01",
-          "game-bowl-white-rice-mushroom-spinach-portion-02",
           "game-bowl-white-rice-mushroom-spinach-portion-03",
           "game-bowl-white-rice-mushroom-spinach-portion-04",
           "game-bowl-white-rice-mushroom-spinach-portion-05",
           "game-bowl-white-rice-mushroom-spinach-portion-06",
           "game-bowl-white-rice-mushroom-spinach-portion-07",
           "game-bowl-white-rice-mushroom-spinach-portion-08",
-          "game-bowl-white-rice-mushroom-spinach-portion-09"
+          "game-bowl-white-rice-mushroom-spinach-portion-09",
+          "game-bowl-white-rice-mushroom-spinach-portion-10"
         ],
-        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-008-serve",
+        "nodeId": "game-bowl-white-rice-mushroom-spinach-op-007-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-white-rice-mushroom-spinach-state-008"
+          "game-bowl-white-rice-mushroom-spinach-state-007"
         ],
         "parameters": {},
         "targetStates": [],
@@ -479,9 +503,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e68839aa8fd5386e",
+      "baselineArtifactVersion": "clv1-fbcffecdc642b9a6",
       "causeCodes": [
-        "cut-size-too-large:dice"
+        "cut-size-too-large:slice"
       ],
       "expectedDeltas": [
         {
@@ -495,16 +519,16 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-001-dice",
+        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-001-slice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-001-dice"
+      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-001-slice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e68839aa8fd5386e",
+      "baselineArtifactVersion": "clv1-fbcffecdc642b9a6",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -529,9 +553,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e68839aa8fd5386e",
+      "baselineArtifactVersion": "clv1-fbcffecdc642b9a6",
       "causeCodes": [
-        "duration-too-short:boil"
+        "duration-too-short:simmer"
       ],
       "expectedDeltas": [
         {
@@ -550,16 +574,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-003-boil",
+        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-003-simmer",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-003-boil"
+      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-003-simmer"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e68839aa8fd5386e",
+      "baselineArtifactVersion": "clv1-fbcffecdc642b9a6",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -580,16 +604,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-005-pan-fry",
+        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-004-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-004-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e68839aa8fd5386e",
+      "baselineArtifactVersion": "clv1-fbcffecdc642b9a6",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -597,23 +621,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-006-season",
+        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-005-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-006-season"
+      "scenarioId": "game-bowl-white-rice-mushroom-spinach-scenario-005-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e68839aa8fd5386e",
+      "baselineArtifactVersion": "clv1-fbcffecdc642b9a6",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],
@@ -629,8 +658,8 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-001-dice",
-        "targetPortionId": "game-bowl-white-rice-mushroom-spinach-portion-09",
+        "targetNodeId": "game-bowl-white-rice-mushroom-spinach-op-001-slice",
+        "targetPortionId": "game-bowl-white-rice-mushroom-spinach-portion-05",
         "type": "quantity-too-high"
       },
       "nutritionEffect": "recalculate-from-quantities",

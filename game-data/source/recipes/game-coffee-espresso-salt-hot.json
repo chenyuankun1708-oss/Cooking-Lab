@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-050c3c175bdaddca",
+  "artifactVersion": "clv1-b53d40850d9ce7be",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -8,54 +8,44 @@
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-game-tea-green-tea-apple-milk",
+    "riskClassificationId": "game-risk-game-coffee-espresso-salt-hot",
     "riskLevel": "low"
   },
   "ingredientPortions": [
     {
-      "ingredientId": "usda-green-tea-brewed",
+      "ingredientId": "usda-espresso",
       "initialState": "liquid",
-      "massG": 480,
-      "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
-      "portionId": "game-tea-green-tea-apple-milk-portion-01",
-      "volumeMl": 480
+      "portionId": "game-coffee-espresso-salt-hot-portion-01",
+      "volumeMl": 120
     },
     {
-      "ingredientId": "usda-apple",
-      "initialState": "raw",
+      "ingredientId": "usda-salt",
+      "initialState": "dry",
       "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:1750340:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
-      "portionId": "game-tea-green-tea-apple-milk-portion-02"
-    },
-    {
-      "ingredientId": "usda-whole-milk",
-      "initialState": "liquid",
-      "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
-      "optional": false,
-      "phase": "finish",
-      "portionId": "game-tea-green-tea-apple-milk-portion-03",
-      "volumeMl": 120
+      "portionId": "game-coffee-espresso-salt-hot-portion-02"
     }
   ],
-  "itemType": "tea",
+  "itemType": "coffee",
   "nutritionProfile": {
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 77.22,
-      "carbs": 12.198,
-      "fat": 2.0172,
-      "fiber": 1.248,
-      "protein": 2.5788,
-      "saturatedFat": 1.116,
-      "sodium": 25.806,
-      "sugar": 10.866
+      "calories": 5.4,
+      "carbs": 1.002,
+      "fat": 0.108,
+      "fiber": 0,
+      "protein": 0.072,
+      "saturatedFat": 0.0552,
+      "sodium": 23288.4,
+      "sugar": 0
     },
     "provenance": [
       {
@@ -63,52 +53,39 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
-        "ingredientId": "usda-green-tea-brewed",
+        "ingredientId": "usda-espresso",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "171917",
+        "upstreamRecordId": "171891",
         "yieldFactor": 1
       },
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-apple",
-        "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1750340:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1750340",
-        "yieldFactor": 1
-      },
-      {
-        "accessedAt": "2026-09-08",
-        "basis": "per-100g",
-        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-whole-milk",
-        "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
-        "provider": "USDA FoodData Central",
-        "retentionFactor": 1,
-        "upstreamRecordId": "746782",
+        "upstreamRecordId": "173468",
         "yieldFactor": 1
       }
     ],
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 154.44,
-      "carbs": 24.396,
-      "fat": 4.0344,
-      "fiber": 2.496,
-      "protein": 5.1576,
-      "saturatedFat": 2.232,
-      "sodium": 51.612,
-      "sugar": 21.732
+      "calories": 10.8,
+      "carbs": 2.004,
+      "fat": 0.216,
+      "fiber": 0,
+      "protein": 0.144,
+      "saturatedFat": 0.1104,
+      "sodium": 46576.8,
+      "sugar": 0
     }
   },
   "operationGraph": {
@@ -119,12 +96,12 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-tea-green-tea-apple-milk-portion-02"
+          "game-coffee-espresso-salt-hot-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-apple-milk-op-001-dice",
+        "nodeId": "game-coffee-espresso-salt-hot-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
-          "game-tea-green-tea-apple-milk-state-001"
+          "game-coffee-espresso-salt-hot-state-001"
         ],
         "parameters": {
           "cutSizeMm": 10,
@@ -141,21 +118,49 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 120000,
+        "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [
-          "game-tea-green-tea-apple-milk-op-001-dice"
+          "game-coffee-espresso-salt-hot-op-001-dice"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-tea-green-tea-apple-milk-portion-01",
-          "game-tea-green-tea-apple-milk-portion-02",
-          "game-tea-green-tea-apple-milk-portion-03"
+          "game-coffee-espresso-salt-hot-portion-01",
+          "game-coffee-espresso-salt-hot-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-apple-milk-op-002-mix",
+        "nodeId": "game-coffee-espresso-salt-hot-op-002-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "game-coffee-espresso-salt-hot-state-002"
+        ],
+        "parameters": {
+          "heatLevel": 0.35,
+          "temperatureC": 65
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.3,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 180000
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-coffee-espresso-salt-hot-op-002-set-heat"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-salt-hot-portion-01",
+          "game-coffee-espresso-salt-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-salt-hot-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-green-tea-apple-milk-state-002"
+          "game-coffee-espresso-salt-hot-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -174,18 +179,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-apple-milk-op-002-mix"
+          "game-coffee-espresso-salt-hot-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-tea-green-tea-apple-milk-portion-01",
-          "game-tea-green-tea-apple-milk-portion-02",
-          "game-tea-green-tea-apple-milk-portion-03"
+          "game-coffee-espresso-salt-hot-portion-01",
+          "game-coffee-espresso-salt-hot-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-apple-milk-op-003-serve",
+        "nodeId": "game-coffee-espresso-salt-hot-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-apple-milk-state-003"
+          "game-coffee-espresso-salt-hot-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -193,13 +197,13 @@
       }
     ]
   },
-  "recipeId": "game-tea-green-tea-apple-milk",
+  "recipeId": "game-coffee-espresso-salt-hot",
   "rights": {
     "artifactIds": [
-      "game-artifact-game-tea-green-tea-apple-milk-identity",
-      "game-artifact-game-tea-green-tea-apple-milk-preparation",
-      "game-artifact-game-tea-green-tea-apple-milk-nutrition",
-      "game-artifact-game-tea-green-tea-apple-milk-simulation"
+      "game-artifact-game-coffee-espresso-salt-hot-identity",
+      "game-artifact-game-coffee-espresso-salt-hot-preparation",
+      "game-artifact-game-coffee-espresso-salt-hot-nutrition",
+      "game-artifact-game-coffee-espresso-salt-hot-simulation"
     ],
     "evidenceIds": [
       "evidence-usda-fdc-subset",
@@ -211,16 +215,16 @@
       "fda-caffeine-guidance"
     ],
     "usageDecisionIds": [
-      "game-usage-game-tea-green-tea-apple-milk-identity",
-      "game-usage-game-tea-green-tea-apple-milk-preparation",
-      "game-usage-game-tea-green-tea-apple-milk-nutrition",
-      "game-usage-game-tea-green-tea-apple-milk-simulation"
+      "game-usage-game-coffee-espresso-salt-hot-identity",
+      "game-usage-game-coffee-espresso-salt-hot-preparation",
+      "game-usage-game-coffee-espresso-salt-hot-nutrition",
+      "game-usage-game-coffee-espresso-salt-hot-simulation"
     ]
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-050c3c175bdaddca",
+      "baselineArtifactVersion": "clv1-b53d40850d9ce7be",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -236,18 +240,18 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-tea-green-tea-apple-milk-op-001-dice",
+        "targetNodeId": "game-coffee-espresso-salt-hot-op-001-dice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-apple-milk-scenario-001-dice"
+      "scenarioId": "game-coffee-espresso-salt-hot-scenario-001-dice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-050c3c175bdaddca",
+      "baselineArtifactVersion": "clv1-b53d40850d9ce7be",
       "causeCodes": [
-        "omit:mix"
+        "omit:set-heat"
       ],
       "expectedDeltas": [
         {
@@ -260,16 +264,40 @@
         "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-apple-milk-op-002-mix",
+        "targetNodeId": "game-coffee-espresso-salt-hot-op-002-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-apple-milk-scenario-002-mix"
+      "scenarioId": "game-coffee-espresso-salt-hot-scenario-002-set-heat"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-050c3c175bdaddca",
+      "baselineArtifactVersion": "clv1-b53d40850d9ce7be",
+      "causeCodes": [
+        "omit:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-salt-hot-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-salt-hot-scenario-003-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b53d40850d9ce7be",
       "causeCodes": [
         "supplemental:wrong-equipment"
       ],
@@ -284,20 +312,21 @@
         "fault-wrong-equipment"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-apple-milk-op-001-dice",
+        "replacementEquipmentId": "incompatible-tool",
+        "targetNodeId": "game-coffee-espresso-salt-hot-op-001-dice",
         "type": "wrong-equipment"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-tea-green-tea-apple-milk-scenario-supplemental"
+      "scenarioId": "game-coffee-espresso-salt-hot-scenario-supplemental"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",
   "servings": 2,
   "simulationProfile": "requires-cat-kitchen-v2",
-  "slug": "game-tea-green-tea-apple-milk",
+  "slug": "game-coffee-espresso-salt-hot",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 240,
+    "unit": "g"
   }
 }

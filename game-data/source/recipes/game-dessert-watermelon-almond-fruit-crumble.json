@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6e933a63e84dbf26",
+  "artifactVersion": "clv1-7789818334c23ab9",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,18 +14,17 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
-      "massG": 400,
+      "initialState": "raw",
+      "massG": 420,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-dessert-watermelon-almond-fruit-crumble-portion-01",
-      "volumeMl": 400
+      "portionId": "game-dessert-watermelon-almond-fruit-crumble-portion-01"
     },
     {
       "ingredientId": "usda-oats",
       "initialState": "dry",
-      "massG": 120,
+      "massG": 60,
       "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
@@ -34,8 +33,8 @@
     {
       "ingredientId": "usda-wheat-flour",
       "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "massG": 100,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-watermelon-almond-fruit-crumble-portion-03"
@@ -43,7 +42,7 @@
     {
       "ingredientId": "usda-almond",
       "initialState": "raw",
-      "massG": 45,
+      "massG": 50,
       "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
@@ -51,8 +50,8 @@
     },
     {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
-      "massG": 45,
+      "initialState": "prepared",
+      "massG": 60,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "fat",
@@ -61,7 +60,7 @@
     {
       "ingredientId": "usda-sugar",
       "initialState": "dry",
-      "massG": 40,
+      "massG": 48,
       "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
       "optional": false,
       "phase": "sweetener",
@@ -82,15 +81,15 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 9.98,
-      "calories": 407.0225,
-      "carbs": 55.41975,
-      "fat": 17.1237,
-      "fiber": 1.8805,
-      "protein": 9.814325,
-      "saturatedFat": 6.124225,
-      "sodium": 3.3879,
-      "sugar": 16.1976
+      "addedSugar": 11.976,
+      "calories": 413.035,
+      "carbs": 52.1715,
+      "fat": 19.8831,
+      "fiber": 4.2705,
+      "protein": 8.07545,
+      "saturatedFat": 8.104775,
+      "sodium": 3.4702,
+      "sugar": 18.57335
     },
     "provenance": [
       {
@@ -99,7 +98,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -123,13 +122,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-wheat-flour",
         "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "789951",
+        "upstreamRecordId": "168936",
         "yieldFactor": 1
       },
       {
@@ -151,7 +150,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -187,15 +186,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 39.92,
-      "calories": 1628.09,
-      "carbs": 221.679,
-      "fat": 68.4948,
-      "fiber": 7.522,
-      "protein": 39.2573,
-      "saturatedFat": 24.4969,
-      "sodium": 13.5516,
-      "sugar": 64.7904
+      "addedSugar": 47.904,
+      "calories": 1652.14,
+      "carbs": 208.686,
+      "fat": 79.5324,
+      "fiber": 17.082,
+      "protein": 32.3018,
+      "saturatedFat": 32.4191,
+      "sodium": 13.8808,
+      "sugar": 74.2934
     }
   },
   "operationGraph": {
@@ -354,7 +353,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e933a63e84dbf26",
+      "baselineArtifactVersion": "clv1-7789818334c23ab9",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -379,14 +378,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e933a63e84dbf26",
+      "baselineArtifactVersion": "clv1-7789818334c23ab9",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -403,7 +402,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e933a63e84dbf26",
+      "baselineArtifactVersion": "clv1-7789818334c23ab9",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -438,7 +437,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e933a63e84dbf26",
+      "baselineArtifactVersion": "clv1-7789818334c23ab9",
       "causeCodes": [
         "supplemental:allowed-substitution"
       ],
@@ -451,12 +450,12 @@
       ],
       "expectedFaultCodes": [],
       "mutation": {
-        "replacementIngredientId": "usda-wheat-flour",
+        "replacementIngredientId": "usda-orange",
         "targetNodeId": "game-dessert-watermelon-almond-fruit-crumble-op-001-dice",
-        "targetPortionId": "game-dessert-watermelon-almond-fruit-crumble-portion-03",
+        "targetPortionId": "game-dessert-watermelon-almond-fruit-crumble-portion-01",
         "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "recoverable",
       "scenarioId": "game-dessert-watermelon-almond-fruit-crumble-scenario-supplemental"
     }

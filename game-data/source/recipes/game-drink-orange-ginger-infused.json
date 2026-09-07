@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-47a944dbd4919b1f",
+  "artifactVersion": "clv1-3bbe7d6b2157b018",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-orange-ginger-infused-portion-04"
     }
@@ -175,10 +175,10 @@
           "game-drink-orange-ginger-infused-portion-03",
           "game-drink-orange-ginger-infused-portion-04"
         ],
-        "nodeId": "game-drink-orange-ginger-infused-op-002-rest",
+        "nodeId": "game-drink-orange-ginger-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-orange-ginger-infused-state-002"
+          "game-drink-orange-ginger-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -188,13 +188,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-orange-ginger-infused-op-002-rest"
+          "game-drink-orange-ginger-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -203,10 +203,10 @@
           "game-drink-orange-ginger-infused-portion-03",
           "game-drink-orange-ginger-infused-portion-04"
         ],
-        "nodeId": "game-drink-orange-ginger-infused-op-003-serve",
+        "nodeId": "game-drink-orange-ginger-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-orange-ginger-infused-state-003"
+          "game-drink-orange-ginger-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -241,7 +241,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-47a944dbd4919b1f",
+      "baselineArtifactVersion": "clv1-3bbe7d6b2157b018",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -266,20 +266,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-47a944dbd4919b1f",
+      "baselineArtifactVersion": "clv1-3bbe7d6b2157b018",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -287,18 +282,18 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-orange-ginger-infused-op-002-rest",
+        "targetNodeId": "game-drink-orange-ginger-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-orange-ginger-infused-scenario-002-rest"
+      "scenarioId": "game-drink-orange-ginger-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-47a944dbd4919b1f",
+      "baselineArtifactVersion": "clv1-3bbe7d6b2157b018",
       "causeCodes": [
-        "supplemental:duplicate"
+        "supplemental:wrong-equipment"
       ],
       "expectedDeltas": [
         {
@@ -308,11 +303,12 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-duplicate"
+        "fault-wrong-equipment"
       ],
       "mutation": {
+        "replacementEquipmentId": "incompatible-tool",
         "targetNodeId": "game-drink-orange-ginger-infused-op-001-dice",
-        "type": "duplicate"
+        "type": "wrong-equipment"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -324,7 +320,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-orange-ginger-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

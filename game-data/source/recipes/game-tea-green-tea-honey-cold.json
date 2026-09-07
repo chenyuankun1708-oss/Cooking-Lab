@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6da02e4162bab2e4",
+  "artifactVersion": "clv1-8dab351f24d42a36",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -99,10 +99,10 @@
           "game-tea-green-tea-honey-cold-portion-01",
           "game-tea-green-tea-honey-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-honey-cold-op-002-chill",
+        "nodeId": "game-tea-green-tea-honey-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-tea-green-tea-honey-cold-state-002"
+          "game-tea-green-tea-honey-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -120,17 +120,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-honey-cold-op-002-chill"
+          "game-tea-green-tea-honey-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-tea-green-tea-honey-cold-portion-01",
           "game-tea-green-tea-honey-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-honey-cold-op-003-serve",
+        "nodeId": "game-tea-green-tea-honey-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-honey-cold-state-003"
+          "game-tea-green-tea-honey-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -165,20 +165,15 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6da02e4162bab2e4",
+      "baselineArtifactVersion": "clv1-8dab351f24d42a36",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -186,16 +181,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-tea-green-tea-honey-cold-op-002-chill",
+        "targetNodeId": "game-tea-green-tea-honey-cold-op-003-chill",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-honey-cold-scenario-002-chill"
+      "scenarioId": "game-tea-green-tea-honey-cold-scenario-003-chill"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6da02e4162bab2e4",
+      "baselineArtifactVersion": "clv1-8dab351f24d42a36",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],
@@ -211,7 +206,7 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-tea-green-tea-honey-cold-op-002-chill",
+        "targetNodeId": "game-tea-green-tea-honey-cold-op-003-chill",
         "targetPortionId": "game-tea-green-tea-honey-cold-portion-01",
         "type": "quantity-too-high"
       },
@@ -225,7 +220,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-green-tea-honey-cold",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 504,
+    "unit": "g"
   }
 }

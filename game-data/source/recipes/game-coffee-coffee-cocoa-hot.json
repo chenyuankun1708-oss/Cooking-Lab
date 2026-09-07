@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-b002249c650c3d7f",
+  "artifactVersion": "clv1-838e3d669863720c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -91,7 +91,7 @@
   "operationGraph": {
     "nodes": [
       {
-        "activeDurationMs": 120000,
+        "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "bowl",
@@ -99,10 +99,39 @@
           "game-coffee-coffee-cocoa-hot-portion-01",
           "game-coffee-coffee-cocoa-hot-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-cocoa-hot-op-002-mix",
-        "operationType": "mix",
+        "nodeId": "game-coffee-coffee-cocoa-hot-op-002-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
           "game-coffee-coffee-cocoa-hot-state-002"
+        ],
+        "parameters": {
+          "heatLevel": 0.35,
+          "temperatureC": 65
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.3,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 180000
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-coffee-coffee-cocoa-hot-op-002-set-heat"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-coffee-cocoa-hot-portion-01",
+          "game-coffee-coffee-cocoa-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-coffee-cocoa-hot-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "game-coffee-coffee-cocoa-hot-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -121,17 +150,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-coffee-coffee-cocoa-hot-op-002-mix"
+          "game-coffee-coffee-cocoa-hot-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-coffee-coffee-cocoa-hot-portion-01",
           "game-coffee-coffee-cocoa-hot-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-cocoa-hot-op-003-serve",
+        "nodeId": "game-coffee-coffee-cocoa-hot-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-coffee-coffee-cocoa-hot-state-003"
+          "game-coffee-coffee-cocoa-hot-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -166,9 +195,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b002249c650c3d7f",
+      "baselineArtifactVersion": "clv1-838e3d669863720c",
       "causeCodes": [
-        "omit:mix"
+        "omit:set-heat"
       ],
       "expectedDeltas": [
         {
@@ -181,18 +210,18 @@
         "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-coffee-coffee-cocoa-hot-op-002-mix",
+        "targetNodeId": "game-coffee-coffee-cocoa-hot-op-002-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-coffee-coffee-cocoa-hot-scenario-002-mix"
+      "scenarioId": "game-coffee-coffee-cocoa-hot-scenario-002-set-heat"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b002249c650c3d7f",
+      "baselineArtifactVersion": "clv1-838e3d669863720c",
       "causeCodes": [
-        "supplemental:wrong-equipment"
+        "omit:mix"
       ],
       "expectedDeltas": [
         {
@@ -202,14 +231,38 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-wrong-equipment"
+        "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-coffee-coffee-cocoa-hot-op-002-mix",
-        "type": "wrong-equipment"
+        "targetNodeId": "game-coffee-coffee-cocoa-hot-op-003-mix",
+        "type": "omit"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-coffee-cocoa-hot-scenario-003-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-838e3d669863720c",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-espresso",
+        "targetNodeId": "game-coffee-coffee-cocoa-hot-op-002-set-heat",
+        "targetPortionId": "game-coffee-coffee-cocoa-hot-portion-01",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-coffee-coffee-cocoa-hot-scenario-supplemental"
     }
   ],
@@ -218,7 +271,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-coffee-coffee-cocoa-hot",
   "yield": {
-    "amount": 480,
-    "unit": "ml"
+    "amount": 504,
+    "unit": "g"
   }
 }

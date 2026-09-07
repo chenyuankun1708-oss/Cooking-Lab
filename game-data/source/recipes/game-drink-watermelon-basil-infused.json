@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-2efd8ecd873d765f",
+  "artifactVersion": "clv1-81bdca7192e74de2",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,13 +14,12 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
+      "initialState": "raw",
       "massG": 320,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-drink-watermelon-basil-infused-portion-01",
-      "volumeMl": 320
+      "portionId": "game-drink-watermelon-basil-infused-portion-01"
     },
     {
       "ingredientId": "usda-basil",
@@ -46,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-watermelon-basil-infused-portion-04"
     }
@@ -73,7 +72,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -175,10 +174,10 @@
           "game-drink-watermelon-basil-infused-portion-03",
           "game-drink-watermelon-basil-infused-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-basil-infused-op-002-rest",
+        "nodeId": "game-drink-watermelon-basil-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-watermelon-basil-infused-state-002"
+          "game-drink-watermelon-basil-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -188,13 +187,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-watermelon-basil-infused-op-002-rest"
+          "game-drink-watermelon-basil-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -203,10 +202,10 @@
           "game-drink-watermelon-basil-infused-portion-03",
           "game-drink-watermelon-basil-infused-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-basil-infused-op-003-serve",
+        "nodeId": "game-drink-watermelon-basil-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-watermelon-basil-infused-state-003"
+          "game-drink-watermelon-basil-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -241,7 +240,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2efd8ecd873d765f",
+      "baselineArtifactVersion": "clv1-81bdca7192e74de2",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -266,20 +265,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2efd8ecd873d765f",
+      "baselineArtifactVersion": "clv1-81bdca7192e74de2",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -287,35 +281,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-watermelon-basil-infused-op-002-rest",
+        "targetNodeId": "game-drink-watermelon-basil-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-watermelon-basil-infused-scenario-002-rest"
+      "scenarioId": "game-drink-watermelon-basil-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2efd8ecd873d765f",
+      "baselineArtifactVersion": "clv1-81bdca7192e74de2",
       "causeCodes": [
-        "supplemental:wrong-equipment"
+        "supplemental:allowed-substitution"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "decrease"
+          "direction": "unchanged"
         }
       ],
-      "expectedFaultCodes": [
-        "fault-wrong-equipment"
-      ],
+      "expectedFaultCodes": [],
       "mutation": {
+        "replacementIngredientId": "usda-orange",
         "targetNodeId": "game-drink-watermelon-basil-infused-op-001-dice",
-        "type": "wrong-equipment"
+        "targetPortionId": "game-drink-watermelon-basil-infused-portion-01",
+        "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-drink-watermelon-basil-infused-scenario-supplemental"
     }
   ],
@@ -324,7 +318,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-watermelon-basil-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

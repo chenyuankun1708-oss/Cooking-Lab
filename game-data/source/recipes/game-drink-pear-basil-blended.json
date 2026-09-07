@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-481d74ad2ffa2daf",
+  "artifactVersion": "clv1-a2894a753400a941",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-pear-basil-blended-portion-04"
     }
@@ -175,10 +175,10 @@
           "game-drink-pear-basil-blended-portion-03",
           "game-drink-pear-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-pear-basil-blended-op-002-blend",
+        "nodeId": "game-drink-pear-basil-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-pear-basil-blended-state-002"
+          "game-drink-pear-basil-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-pear-basil-blended-op-002-blend"
+          "game-drink-pear-basil-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-pear-basil-blended-portion-03",
           "game-drink-pear-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-pear-basil-blended-op-003-serve",
+        "nodeId": "game-drink-pear-basil-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-pear-basil-blended-state-003"
+          "game-drink-pear-basil-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-481d74ad2ffa2daf",
+      "baselineArtifactVersion": "clv1-a2894a753400a941",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-481d74ad2ffa2daf",
+      "baselineArtifactVersion": "clv1-a2894a753400a941",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-pear-basil-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-pear-basil-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-481d74ad2ffa2daf",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -305,11 +281,36 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-omit"
       ],
       "mutation": {
+        "targetNodeId": "game-drink-pear-basil-blended-op-003-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-pear-basil-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a2894a753400a941",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "destinationBeforeNodeId": "game-drink-pear-basil-blended-op-003-blend",
         "targetNodeId": "game-drink-pear-basil-blended-op-001-dice",
-        "type": "missing-state-transition"
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -321,7 +322,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-pear-basil-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

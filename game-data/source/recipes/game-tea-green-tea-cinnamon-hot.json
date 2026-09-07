@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-9cf2fe339f62e0eb",
+  "artifactVersion": "clv1-8a1a597f89e2bdf4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -91,7 +91,7 @@
   "operationGraph": {
     "nodes": [
       {
-        "activeDurationMs": 120000,
+        "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "bowl",
@@ -99,39 +99,65 @@
           "game-tea-green-tea-cinnamon-hot-portion-01",
           "game-tea-green-tea-cinnamon-hot-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-cinnamon-hot-op-002-mix",
-        "operationType": "mix",
+        "nodeId": "game-tea-green-tea-cinnamon-hot-op-002-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
           "game-tea-green-tea-cinnamon-hot-state-002"
         ],
         "parameters": {
-          "strength": 0.45
+          "heatLevel": 0.35,
+          "temperatureC": 65
         },
         "targetStates": [
           {
-            "dimension": "structural-integrity",
-            "maximum": 0.9,
+            "dimension": "aroma",
+            "minimum": 0.3,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 180000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-tea-green-tea-cinnamon-hot-op-002-set-heat"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-tea-green-tea-cinnamon-hot-portion-01",
+          "game-tea-green-tea-cinnamon-hot-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-cinnamon-hot-op-003-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "game-tea-green-tea-cinnamon-hot-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "aroma",
             "minimum": 0.35,
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 0
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-cinnamon-hot-op-002-mix"
+          "game-tea-green-tea-cinnamon-hot-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-tea-green-tea-cinnamon-hot-portion-01",
           "game-tea-green-tea-cinnamon-hot-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-cinnamon-hot-op-003-serve",
+        "nodeId": "game-tea-green-tea-cinnamon-hot-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-cinnamon-hot-state-003"
+          "game-tea-green-tea-cinnamon-hot-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -166,9 +192,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9cf2fe339f62e0eb",
+      "baselineArtifactVersion": "clv1-8a1a597f89e2bdf4",
       "causeCodes": [
-        "omit:mix"
+        "omit:set-heat"
       ],
       "expectedDeltas": [
         {
@@ -181,35 +207,60 @@
         "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-cinnamon-hot-op-002-mix",
+        "targetNodeId": "game-tea-green-tea-cinnamon-hot-op-002-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-cinnamon-hot-scenario-002-mix"
+      "scenarioId": "game-tea-green-tea-cinnamon-hot-scenario-002-set-heat"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9cf2fe339f62e0eb",
+      "baselineArtifactVersion": "clv1-8a1a597f89e2bdf4",
       "causeCodes": [
-        "supplemental:missing-state-transition"
+        "duration-too-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-tea-green-tea-cinnamon-hot-op-003-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-cinnamon-hot-scenario-003-rest"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8a1a597f89e2bdf4",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "decrease"
+          "direction": "unchanged"
         }
       ],
-      "expectedFaultCodes": [
-        "fault-missing-state-transition"
-      ],
+      "expectedFaultCodes": [],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-cinnamon-hot-op-002-mix",
-        "type": "missing-state-transition"
+        "replacementIngredientId": "usda-black-tea-brewed",
+        "targetNodeId": "game-tea-green-tea-cinnamon-hot-op-002-set-heat",
+        "targetPortionId": "game-tea-green-tea-cinnamon-hot-portion-01",
+        "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-tea-green-tea-cinnamon-hot-scenario-supplemental"
     }
   ],
@@ -218,7 +269,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-green-tea-cinnamon-hot",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 483,
+    "unit": "g"
   }
 }

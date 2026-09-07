@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-3e012b2d7b5b3fcd",
+  "artifactVersion": "clv1-acd18770a0d059a4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-raspberry",
       "initialState": "raw",
       "massG": 300,
-      "nutritionProvenanceId": "usda-fdc:2346410:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:167755:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-dessert-raspberry-walnut-coconut-pudding-portion-01"
@@ -25,7 +25,7 @@
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-raspberry-walnut-coconut-pudding-portion-02",
@@ -65,27 +65,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 376.64,
-      "carbs": 31.61575,
-      "fat": 27.57625,
-      "fiber": 0.536875,
-      "protein": 4.0784,
-      "saturatedFat": 19.430185,
-      "sodium": 13.91,
-      "sugar": 11.99
+      "calories": 405.665,
+      "carbs": 33.59575,
+      "fat": 30.42275,
+      "fiber": 7.611875,
+      "protein": 4.4909,
+      "saturatedFat": 21.644435,
+      "sodium": 16.66,
+      "sugar": 16.635
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-raspberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346410:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167755:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346410",
+        "upstreamRecordId": "167755",
         "yieldFactor": 1
       },
       {
@@ -95,10 +95,10 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       },
       {
@@ -144,14 +144,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1506.56,
-      "carbs": 126.463,
-      "fat": 110.305,
-      "fiber": 2.1475,
-      "protein": 16.3136,
-      "saturatedFat": 77.72074,
-      "sodium": 55.64,
-      "sugar": 47.96
+      "calories": 1622.66,
+      "carbs": 134.383,
+      "fat": 121.691,
+      "fiber": 30.4475,
+      "protein": 17.9636,
+      "saturatedFat": 86.57774,
+      "sodium": 66.64,
+      "sugar": 66.54
     }
   },
   "operationGraph": {
@@ -332,7 +332,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e012b2d7b5b3fcd",
+      "baselineArtifactVersion": "clv1-acd18770a0d059a4",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -357,14 +357,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e012b2d7b5b3fcd",
+      "baselineArtifactVersion": "clv1-acd18770a0d059a4",
       "causeCodes": [
         "omit:whisk"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -381,7 +381,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e012b2d7b5b3fcd",
+      "baselineArtifactVersion": "clv1-acd18770a0d059a4",
       "causeCodes": [
         "duration-too-short:simmer"
       ],
@@ -411,20 +411,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e012b2d7b5b3fcd",
+      "baselineArtifactVersion": "clv1-acd18770a0d059a4",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -441,7 +436,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e012b2d7b5b3fcd",
+      "baselineArtifactVersion": "clv1-acd18770a0d059a4",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],

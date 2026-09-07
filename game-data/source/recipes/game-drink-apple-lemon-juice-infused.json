@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-1327c9f4f92885e9",
+  "artifactVersion": "clv1-6b925b28740d30c8",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -46,7 +46,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-apple-lemon-juice-infused-portion-04"
     }
@@ -175,10 +175,10 @@
           "game-drink-apple-lemon-juice-infused-portion-03",
           "game-drink-apple-lemon-juice-infused-portion-04"
         ],
-        "nodeId": "game-drink-apple-lemon-juice-infused-op-002-rest",
+        "nodeId": "game-drink-apple-lemon-juice-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-apple-lemon-juice-infused-state-002"
+          "game-drink-apple-lemon-juice-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -188,13 +188,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-apple-lemon-juice-infused-op-002-rest"
+          "game-drink-apple-lemon-juice-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -203,10 +203,10 @@
           "game-drink-apple-lemon-juice-infused-portion-03",
           "game-drink-apple-lemon-juice-infused-portion-04"
         ],
-        "nodeId": "game-drink-apple-lemon-juice-infused-op-003-serve",
+        "nodeId": "game-drink-apple-lemon-juice-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-apple-lemon-juice-infused-state-003"
+          "game-drink-apple-lemon-juice-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -241,7 +241,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1327c9f4f92885e9",
+      "baselineArtifactVersion": "clv1-6b925b28740d30c8",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -266,20 +266,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1327c9f4f92885e9",
+      "baselineArtifactVersion": "clv1-6b925b28740d30c8",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -287,35 +282,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-apple-lemon-juice-infused-op-002-rest",
+        "targetNodeId": "game-drink-apple-lemon-juice-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-apple-lemon-juice-infused-scenario-002-rest"
+      "scenarioId": "game-drink-apple-lemon-juice-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1327c9f4f92885e9",
+      "baselineArtifactVersion": "clv1-6b925b28740d30c8",
       "causeCodes": [
-        "supplemental:allowed-substitution"
+        "supplemental:duplicate"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "unchanged"
+          "direction": "decrease"
         }
       ],
-      "expectedFaultCodes": [],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
       "mutation": {
-        "replacementIngredientId": "usda-lemon-juice",
         "targetNodeId": "game-drink-apple-lemon-juice-infused-op-001-dice",
-        "targetPortionId": "game-drink-apple-lemon-juice-infused-portion-02",
-        "type": "allowed-substitution"
+        "type": "duplicate"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
+      "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-apple-lemon-juice-infused-scenario-supplemental"
     }
   ],
@@ -324,7 +319,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-apple-lemon-juice-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1089,
+    "unit": "g"
   }
 }

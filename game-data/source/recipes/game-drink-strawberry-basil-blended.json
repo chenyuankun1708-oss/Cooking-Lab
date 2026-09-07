@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-204cae32b816a452",
+  "artifactVersion": "clv1-19ad6fced3d7cf14",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-strawberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-strawberry-basil-blended-portion-01"
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-strawberry-basil-blended-portion-04"
     }
@@ -56,27 +56,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 47.935,
-      "carbs": 11.37825,
-      "fat": 0.192,
-      "fiber": 0.052,
-      "protein": 0.60955,
-      "saturatedFat": 0.001025,
-      "sodium": 7.34,
-      "sugar": 8.8215
+      "calories": 44.415,
+      "carbs": 11.15425,
+      "fat": 0.256,
+      "fiber": 1.652,
+      "protein": 0.63275,
+      "saturatedFat": 0.013025,
+      "sodium": 8.14,
+      "sugar": 8.8455
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-strawberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346409",
+        "upstreamRecordId": "167762",
         "yieldFactor": 1
       },
       {
@@ -122,14 +122,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 191.74,
-      "carbs": 45.513,
-      "fat": 0.768,
-      "fiber": 0.208,
-      "protein": 2.4382,
-      "saturatedFat": 0.0041,
-      "sodium": 29.36,
-      "sugar": 35.286
+      "calories": 177.66,
+      "carbs": 44.617,
+      "fat": 1.024,
+      "fiber": 6.608,
+      "protein": 2.531,
+      "saturatedFat": 0.0521,
+      "sodium": 32.56,
+      "sugar": 35.382
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-strawberry-basil-blended-portion-03",
           "game-drink-strawberry-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-strawberry-basil-blended-op-002-blend",
+        "nodeId": "game-drink-strawberry-basil-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-strawberry-basil-blended-state-002"
+          "game-drink-strawberry-basil-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-strawberry-basil-blended-op-002-blend"
+          "game-drink-strawberry-basil-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-strawberry-basil-blended-portion-03",
           "game-drink-strawberry-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-strawberry-basil-blended-op-003-serve",
+        "nodeId": "game-drink-strawberry-basil-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-strawberry-basil-blended-state-003"
+          "game-drink-strawberry-basil-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-204cae32b816a452",
+      "baselineArtifactVersion": "clv1-19ad6fced3d7cf14",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-204cae32b816a452",
+      "baselineArtifactVersion": "clv1-19ad6fced3d7cf14",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-strawberry-basil-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-strawberry-basil-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-204cae32b816a452",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -305,11 +281,36 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-omit"
       ],
       "mutation": {
+        "targetNodeId": "game-drink-strawberry-basil-blended-op-003-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-strawberry-basil-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-19ad6fced3d7cf14",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "destinationBeforeNodeId": "game-drink-strawberry-basil-blended-op-003-blend",
         "targetNodeId": "game-drink-strawberry-basil-blended-op-001-dice",
-        "type": "missing-state-transition"
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -321,7 +322,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-strawberry-basil-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

@@ -1,5 +1,11 @@
 import { createContentVersion } from "@/lib/content-version";
-import { createGameArtifactSetVersion, createGameRecipeArtifactVersion } from "@/lib/game-recipe-validation";
+import {
+  createGameArtifactSetVersion,
+  createGameRecipeArtifactVersion,
+  deriveGameEquivalenceClassKeys,
+  deriveMinimumGamePublishingRisk,
+} from "@/lib/game-recipe-validation";
+import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { emptyNutrition, type Nutrition } from "@/types/nutrition";
 import type { CulinaryItemType, Evidence, Source } from "@/types/culinary";
 import type { ContentArtifact, RightsAssessment, UsageDecision } from "@/types/content-rights";
@@ -55,11 +61,11 @@ const teaAdditions = [
   "usda-lemon-juice", "usda-orange", "usda-apple", "usda-mango", "usda-pineapple",
   "usda-strawberry", "usda-ginger", "usda-cinnamon", "usda-honey", "usda-basil",
 ] as const;
-const teaModes = ["hot", "cold", "milk"] as const;
+const milkTeaAdditions = ["usda-ginger", "usda-cinnamon", "usda-honey", "usda-basil", "usda-vanilla"] as const;
 const coffeeBases = ["usda-coffee-brewed", "usda-espresso"] as const;
 const coffeeAdditions = [
   "usda-whole-milk", "usda-cocoa", "usda-cinnamon", "usda-vanilla", "usda-honey",
-  "usda-sugar", "usda-coconut-milk", "usda-almond", "usda-orange", "usda-banana",
+  "usda-sugar", "usda-coconut-milk", "usda-butter", "usda-salt", "usda-lemon-juice",
 ] as const;
 const coffeeModes = ["hot", "cold"] as const;
 const drinkAccents = ["usda-lemon-juice", "usda-ginger", "usda-basil"] as const;
@@ -106,7 +112,7 @@ export function createM13DraftCorpus(
       ingredientById,
     }));
   }
-  for (const tea of teaBases) for (const addition of teaAdditions) for (const mode of teaModes) {
+  for (const tea of teaBases) for (const addition of teaAdditions) for (const mode of ["hot", "cold"] as const) {
     sequence += 1;
     recipes.push(createRecipe({
       sequence,
@@ -114,10 +120,23 @@ export function createM13DraftCorpus(
       itemType: "tea",
       family: "tea",
       servings: 2,
-      yieldUnit: "ml",
-      yieldAmount: 520,
-      portions: beveragePortions(tea, addition, mode === "milk" ? "usda-whole-milk" : undefined),
-      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, mode === "cold" ? "chill" : "mix"),
+      yieldUnit: "g",
+      portions: beveragePortions(tea, addition),
+      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, mode === "cold" ? "chill" : "rest", mode === "hot"),
+      ingredientById,
+    }));
+  }
+  for (const tea of teaBases) for (const addition of milkTeaAdditions) {
+    sequence += 1;
+    recipes.push(createRecipe({
+      sequence,
+      recipeId: `game-tea-${shortId(tea)}-${shortId(addition)}-milk`,
+      itemType: "tea",
+      family: "tea",
+      servings: 2,
+      yieldUnit: "g",
+      portions: beveragePortions(tea, addition, "usda-whole-milk"),
+      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, "mix", false),
       ingredientById,
     }));
   }
@@ -129,10 +148,9 @@ export function createM13DraftCorpus(
       itemType: "coffee",
       family: "coffee",
       servings: 2,
-      yieldUnit: "ml",
-      yieldAmount: coffee === "usda-espresso" ? 160 : 480,
+      yieldUnit: "g",
       portions: beveragePortions(coffee, addition),
-      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, mode === "cold" ? "chill" : "mix"),
+      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, mode === "cold" ? "chill" : "mix", mode === "hot"),
       ingredientById,
     }));
   }
@@ -144,15 +162,14 @@ export function createM13DraftCorpus(
       itemType: "non-alcoholic-drink",
       family: "fruit-drink",
       servings: 4,
-      yieldUnit: "ml",
-      yieldAmount: 1000,
+      yieldUnit: "g",
       portions: fruitDrinkPortions(fruit, accent),
-      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, mode === "blended" ? "blend" : "rest"),
+      nodes: (recipeId, portions) => beverageNodes(recipeId, portions, mode === "blended" ? "blend" : "rest", false),
       ingredientById,
     }));
   }
-  if (recipes.length !== 520) throw new Error(`M13 corpus size drifted: ${recipes.length}`);
-  const rightsRegistry = createRightsRegistry(recipes);
+  if (recipes.length !== 510) throw new Error(`M13 corpus size drifted: ${recipes.length}`);
+  const rightsRegistry = createRightsRegistry(recipes, ingredients, subset);
   return { recipes, ingredients, rightsRegistry };
 }
 
@@ -226,7 +243,10 @@ function createRecipe(input: {
       ? "cat-kitchen-goal1-v1"
       : "requires-cat-kitchen-v2",
     servings: input.servings,
-    yield: { amount: input.yieldAmount ?? input.servings, unit: input.yieldUnit ?? "serving" },
+    yield: {
+      amount: input.yieldAmount ?? (input.yieldUnit === "g" ? round(portions.reduce((sum, portion) => sum + portion.massG, 0)) : input.servings),
+      unit: input.yieldUnit ?? "serving",
+    },
     ingredientPortions: portions,
     operationGraph: { nodes },
     nutritionProfile: createNutritionProfile(portions, input.servings, input.ingredientById),
@@ -260,8 +280,11 @@ const requiredKinds = ["identity", "preparation", "nutrition", "simulation"] as 
 function dishPortions(base: string, primary: string, vegetable: string): PortionSpec[] {
   return [
     { ingredientId: base, massG: 240, phase: "base" },
+    { ingredientId: "usda-water", massG: baseCookingWater(base), phase: "base-cooking-water" },
     { ingredientId: primary, massG: primary === "usda-lentil-dry" ? 180 : 300, phase: "primary" },
+    ...(primary === "usda-lentil-dry" ? [{ ingredientId: "usda-water", massG: 540, phase: "primary-cooking-water" }] : []),
     { ingredientId: vegetable, massG: 320, phase: "vegetable" },
+    ...(["usda-potato", "usda-sweet-potato"].includes(vegetable) ? [{ ingredientId: "usda-water", massG: 640, phase: "vegetable-cooking-water" }] : []),
     { ingredientId: "usda-onion", massG: 100, phase: "aromatic" },
     { ingredientId: "usda-garlic", massG: 12, phase: "aromatic" },
     { ingredientId: "usda-canola-oil", massG: 20, phase: "cooking" },
@@ -271,27 +294,111 @@ function dishPortions(base: string, primary: string, vegetable: string): Portion
   ];
 }
 
+function baseCookingWater(ingredientId: string): number {
+  if (ingredientId === "usda-brown-rice") return 480;
+  if (ingredientId === "usda-white-rice") return 360;
+  if (ingredientId === "usda-pasta-dry") return 1_200;
+  return 900;
+}
+
+function baseCookDuration(ingredientId: string): number {
+  if (ingredientId === "usda-brown-rice") return 35 * 60_000;
+  if (ingredientId === "usda-white-rice") return 18 * 60_000;
+  if (ingredientId === "usda-pasta-dry") return 10 * 60_000;
+  return 6 * 60_000;
+}
+
+function substitutionFor(ingredientId: string): string | undefined {
+  const substitutions: Readonly<Record<string, string>> = {
+    "usda-white-rice": "usda-brown-rice",
+    "usda-brown-rice": "usda-white-rice",
+    "usda-pasta-dry": "usda-rice-noodle-dry",
+    "usda-rice-noodle-dry": "usda-pasta-dry",
+    "usda-canola-oil": "usda-olive-oil",
+    "usda-olive-oil": "usda-canola-oil",
+    "usda-almond": "usda-walnut",
+    "usda-walnut": "usda-almond",
+    "usda-black-bean": "usda-chickpea",
+    "usda-chickpea": "usda-black-bean",
+    "usda-whole-milk": "usda-coconut-milk",
+    "usda-coconut-milk": "usda-whole-milk",
+    "usda-black-tea-brewed": "usda-green-tea-brewed",
+    "usda-green-tea-brewed": "usda-black-tea-brewed",
+    "usda-coffee-brewed": "usda-espresso",
+    "usda-espresso": "usda-coffee-brewed",
+    "usda-mango": "usda-pineapple",
+    "usda-pineapple": "usda-mango",
+    "usda-apple": "usda-pear",
+    "usda-pear": "usda-apple",
+    "usda-banana": "usda-strawberry",
+    "usda-strawberry": "usda-banana",
+    "usda-orange": "usda-watermelon",
+    "usda-watermelon": "usda-orange",
+    "usda-blueberry": "usda-raspberry",
+    "usda-raspberry": "usda-blueberry",
+  };
+  return substitutions[ingredientId];
+}
+
 function dishNodes(recipeId: string, portions: readonly GameIngredientPortionV1[]): GameOperationNodeV1[] {
-  const [base, primary, vegetable, onion, garlic, oil, soy, vinegar, salt] = portions;
-  const prepVegetable = node(recipeId, 1, "dice", [], [vegetable.portionId, onion.portionId], 240_000, 0, { cutSizeMm: 12, uniformity: 0.85 }, cutTarget(), "quality");
-  const prepGarlic = node(recipeId, 2, "mince", [], [garlic.portionId], 60_000, 0, { cutSizeMm: 3, uniformity: 0.75 }, cutTarget(), "quality");
-  const baseCook = node(recipeId, 3, "boil", [], [base.portionId], 60_000, 900_000, { heatLevel: 0.7, temperatureC: 98 }, donenessTarget(), "quality");
-  const primaryPrep = primary.ingredientId === "usda-lentil-dry"
-    ? node(recipeId, 4, "boil", [], [primary.portionId], 60_000, 1_200_000, { heatLevel: 0.65, temperatureC: 96 }, donenessTarget(), "quality")
+  const portion = (phase: string) => {
+    const match = portions.find((entry) => entry.phase === phase);
+    if (!match) throw new Error(`Missing ${phase} portion for ${recipeId}`);
+    return match;
+  };
+  const base = portion("base");
+  const baseWater = portion("base-cooking-water");
+  const primary = portion("primary");
+  const primaryWater = portions.find((entry) => entry.phase === "primary-cooking-water");
+  const vegetable = portion("vegetable");
+  const vegetableWater = portions.find((entry) => entry.phase === "vegetable-cooking-water");
+  const onion = portion("aromatic");
+  const garlic = portions.find((entry) => entry.phase === "aromatic" && entry.ingredientId === "usda-garlic");
+  if (!garlic) throw new Error(`Missing garlic portion for ${recipeId}`);
+  const oil = portion("cooking");
+  const soy = portions.find((entry) => entry.ingredientId === "usda-soy-sauce");
+  const vinegar = portions.find((entry) => entry.ingredientId === "usda-vinegar");
+  const salt = portions.find((entry) => entry.ingredientId === "usda-salt");
+  if (!soy || !vinegar || !salt) throw new Error(`Missing seasoning portion for ${recipeId}`);
+  let order = 0;
+  const vegetableCut: GameOperationId = ["usda-spinach", "usda-bok-choy", "usda-cabbage"].includes(vegetable.ingredientId) ? "slice" : "dice";
+  const prepVegetable = node(recipeId, ++order, vegetableCut, [], [vegetable.portionId, onion.portionId], 240_000, 0, { cutSizeMm: vegetableCut === "slice" ? 18 : 12, uniformity: 0.85 }, cutTarget(), "quality");
+  const prepGarlic = node(recipeId, ++order, "mince", [], [garlic.portionId], 60_000, 0, { cutSizeMm: 3, uniformity: 0.75 }, cutTarget(), "quality");
+  const baseCook = node(recipeId, ++order, ["usda-white-rice", "usda-brown-rice"].includes(base.ingredientId) ? "simmer" : "boil", [], [base.portionId, baseWater.portionId], 60_000, baseCookDuration(base.ingredientId), { heatLevel: 0.7, temperatureC: 98 }, donenessTarget(), "quality");
+  const baseDrain = ["usda-pasta-dry", "usda-rice-noodle-dry"].includes(base.ingredientId)
+    ? node(recipeId, ++order, "drain", [baseCook.nodeId], [base.portionId, baseWater.portionId], 60_000, 0, {}, [{ dimension: "wateriness", maximum: 0.35, unit: "normalized" }], "quality")
+    : undefined;
+  const primaryPrep = primaryWater
+    ? node(recipeId, ++order, "boil", [], [primary.portionId, primaryWater.portionId], 60_000, 1_200_000, { heatLevel: 0.65, temperatureC: 96 }, donenessTarget(), "quality")
+    : undefined;
+  const primaryDrain = primaryPrep && primaryWater
+    ? node(recipeId, ++order, "drain", [primaryPrep.nodeId], [primary.portionId, primaryWater.portionId], 60_000, 0, {}, [{ dimension: "wateriness", maximum: 0.4, unit: "normalized" }], "quality")
+    : undefined;
+  const vegetablePrep = vegetableWater
+    ? node(recipeId, ++order, "boil", [prepVegetable.nodeId], [vegetable.portionId, vegetableWater.portionId], 60_000, 600_000, { heatLevel: 0.65, temperatureC: 96 }, donenessTarget(), "quality")
+    : undefined;
+  const vegetableDrain = vegetablePrep && vegetableWater
+    ? node(recipeId, ++order, "drain", [vegetablePrep.nodeId], [vegetable.portionId, vegetableWater.portionId], 60_000, 0, {}, [{ dimension: "wateriness", maximum: 0.4, unit: "normalized" }], "quality")
     : undefined;
   const pan = node(
-    recipeId, 5, "pan-fry", [prepVegetable.nodeId, prepGarlic.nodeId, ...(primaryPrep ? [primaryPrep.nodeId] : [])],
+    recipeId, ++order, "pan-fry", [prepVegetable.nodeId, prepGarlic.nodeId, ...(primaryDrain ? [primaryDrain.nodeId] : primaryPrep ? [primaryPrep.nodeId] : []), ...(vegetableDrain ? [vegetableDrain.nodeId] : vegetablePrep ? [vegetablePrep.nodeId] : [])],
     [primary.portionId, vegetable.portionId, onion.portionId, garlic.portionId, oil.portionId],
     180_000, 480_000, { heatLevel: 0.65, capacityG: 900 }, browningTarget(), "quality",
   );
-  const season = node(recipeId, 6, "season", [pan.nodeId], [soy.portionId, vinegar.portionId, salt.portionId], 60_000, 0, { quantityG: 35 }, [{ dimension: "salt", maximum: 0.8, unit: "normalized" }], "quality");
-  const assemble = node(recipeId, 7, "assemble", [baseCook.nodeId, season.nodeId], portions.map((portion) => portion.portionId), 90_000, 0, {}, [], "completion");
-  const serve = node(recipeId, 8, "serve", [assemble.nodeId], portions.map((portion) => portion.portionId), 30_000, 0, {}, [], "completion");
-  return [prepVegetable, prepGarlic, baseCook, ...(primaryPrep ? [primaryPrep] : []), pan, season, assemble, serve];
+  const season = node(recipeId, ++order, "season", [pan.nodeId], [soy.portionId, vinegar.portionId, salt.portionId], 60_000, 0, { quantityG: 35 }, [{ dimension: "salt", maximum: 0.8, unit: "normalized" }], "quality");
+  const assemble = node(recipeId, ++order, "assemble", [(baseDrain ?? baseCook).nodeId, season.nodeId], portions.filter((entry) => !entry.phase.endsWith("cooking-water")).map((entry) => entry.portionId), 90_000, 0, {}, [], "completion");
+  const serve = node(recipeId, ++order, "serve", [assemble.nodeId], portions.filter((entry) => !entry.phase.endsWith("cooking-water")).map((entry) => entry.portionId), 30_000, 0, {}, [], "completion");
+  return [prepVegetable, prepGarlic, baseCook, ...(baseDrain ? [baseDrain] : []), ...(primaryPrep ? [primaryPrep] : []), ...(primaryDrain ? [primaryDrain] : []), ...(vegetablePrep ? [vegetablePrep] : []), ...(vegetableDrain ? [vegetableDrain] : []), pan, season, assemble, serve];
 }
 
 function dessertPortions(fruit: string, format: typeof dessertFormats[number]): PortionSpec[] {
   const nut = format.includes("walnut") ? "usda-walnut" : "usda-almond";
+  if (format === "vanilla-yogurt-chill") return [
+    { ingredientId: fruit, massG: 360, phase: "fruit" },
+    { ingredientId: "usda-yogurt", massG: 400, phase: "base" },
+    { ingredientId: "usda-vanilla", massG: 4, phase: "flavor" },
+    { ingredientId: "usda-honey", massG: 24, phase: "sweetener" },
+  ];
   if (format.includes("yogurt")) return [
     { ingredientId: fruit, massG: 360, phase: "fruit" },
     { ingredientId: "usda-yogurt", massG: 360, phase: "base" },
@@ -305,13 +412,30 @@ function dessertPortions(fruit: string, format: typeof dessertFormats[number]): 
     { ingredientId: nut, massG: 35, phase: "finish" },
     { ingredientId: "usda-sugar", massG: 40, phase: "sweetener" },
   ];
+  if (format.includes("fruit-crumble")) return [
+    { ingredientId: fruit, massG: 420, phase: "fruit" },
+    { ingredientId: "usda-oats", massG: 60, phase: "dry" },
+    { ingredientId: "usda-wheat-flour", massG: 100, phase: "dry" },
+    { ingredientId: nut, massG: 50, phase: "dry" },
+    { ingredientId: "usda-butter", massG: 60, phase: "fat" },
+    { ingredientId: "usda-sugar", massG: 48, phase: "sweetener" },
+    { ingredientId: "usda-cinnamon", massG: 2, phase: "seasoning" },
+  ];
+  if (format === "honey-cinnamon-bake") return [
+    { ingredientId: fruit, massG: 440, phase: "fruit" },
+    { ingredientId: "usda-oats", massG: 150, phase: "dry" },
+    { ingredientId: "usda-almond", massG: 35, phase: "dry" },
+    { ingredientId: "usda-butter", massG: 35, phase: "fat" },
+    { ingredientId: "usda-honey", massG: 52, phase: "sweetener" },
+    { ingredientId: "usda-cinnamon", massG: 3, phase: "seasoning" },
+  ];
   return [
     { ingredientId: fruit, massG: 400, phase: "fruit" },
     { ingredientId: "usda-oats", massG: 120, phase: "dry" },
-    { ingredientId: "usda-wheat-flour", massG: 80, phase: "dry" },
+    { ingredientId: "usda-wheat-flour", massG: 60, phase: "dry" },
     { ingredientId: nut, massG: 45, phase: "dry" },
     { ingredientId: "usda-butter", massG: 45, phase: "fat" },
-    { ingredientId: format.includes("honey") ? "usda-honey" : "usda-sugar", massG: 40, phase: "sweetener" },
+    { ingredientId: "usda-sugar", massG: 40, phase: "sweetener" },
     { ingredientId: "usda-cinnamon", massG: 2, phase: "seasoning" },
   ];
 }
@@ -352,25 +476,33 @@ function fruitDrinkPortions(fruit: string, accent: string): PortionSpec[] {
     { ingredientId: fruit, massG: 320, phase: "fruit" },
     { ingredientId: accent, massG: /ginger|basil/.test(accent) ? 10 : 45, phase: "accent" },
     { ingredientId: "usda-water", massG: 700, phase: "base" },
-    { ingredientId: "usda-honey", massG: 24, phase: "sweetener", optional: true },
+    { ingredientId: "usda-honey", massG: 24, phase: "sweetener" },
   ];
 }
 
-function beverageNodes(recipeId: string, portions: readonly GameIngredientPortionV1[], process: "mix" | "chill" | "blend" | "rest"): GameOperationNodeV1[] {
+function beverageNodes(
+  recipeId: string,
+  portions: readonly GameIngredientPortionV1[],
+  process: "mix" | "chill" | "blend" | "rest",
+  serveHot: boolean,
+): GameOperationNodeV1[] {
   const needsCut = portions.some((portion) => !/water|milk|coffee|espresso|tea|juice|honey|sugar|cocoa|cinnamon|vanilla/.test(portion.ingredientId));
   const prep = needsCut
     ? node(recipeId, 1, "dice", [], portions.filter((portion) => !/water|milk|coffee|espresso|tea|juice|honey|sugar|cocoa|cinnamon|vanilla/.test(portion.ingredientId)).map((portion) => portion.portionId), 120_000, 0, { cutSizeMm: 10, uniformity: 0.8 }, cutTarget(), "quality")
     : undefined;
+  const warm = serveHot
+    ? node(recipeId, 2, "set-heat", prep ? [prep.nodeId] : [], portions.map((portion) => portion.portionId), 30_000, 180_000, { heatLevel: 0.35, temperatureC: 65 }, [{ dimension: "aroma", minimum: 0.3, unit: "normalized" }], "quality")
+    : undefined;
   const processNode = node(
-    recipeId, 2, process, prep ? [prep.nodeId] : [], portions.map((portion) => portion.portionId),
+    recipeId, 3, process, warm ? [warm.nodeId] : prep ? [prep.nodeId] : [], portions.map((portion) => portion.portionId),
     process === "rest" || process === "chill" ? 30_000 : 120_000,
-    process === "rest" ? 900_000 : process === "chill" ? 1_800_000 : 0,
+    process === "rest" ? 300_000 : process === "chill" ? 1_800_000 : 0,
     process === "mix" ? { strength: 0.45 } : process === "blend" ? { strength: 0.75 } : process === "chill" ? { temperatureC: 5 } : {},
     process === "blend" || process === "mix" ? structureTarget() : [{ dimension: "aroma", minimum: 0.35, unit: "normalized" }],
     "quality",
   );
-  const serve = node(recipeId, 3, "serve", [processNode.nodeId], portions.map((portion) => portion.portionId), 30_000, 0, {}, [], "completion");
-  return [...(prep ? [prep] : []), processNode, serve];
+  const serve = node(recipeId, 4, "serve", [processNode.nodeId], portions.map((portion) => portion.portionId), 30_000, 0, {}, [], "completion");
+  return [...(prep ? [prep] : []), ...(warm ? [warm] : []), processNode, serve];
 }
 
 function node(
@@ -455,25 +587,30 @@ function createScenarios(recipe: GameRecipeV1, sequence: number): GameRecipeScen
       };
     });
   const qualityNode = recipe.operationGraph.nodes.find((node) => node.criticality === "quality");
-  const portion = recipe.ingredientPortions[sequence % recipe.ingredientPortions.length];
+  const fallbackPortion = recipe.ingredientPortions[sequence % recipe.ingredientPortions.length];
   if (qualityNode) {
     const supplementalTypes = ["reorder", "duplicate", "quantity-too-high", "wrong-equipment", "missing-state-transition", "allowed-substitution"] as const;
     const type = supplementalTypes[sequence % supplementalTypes.length];
+    const substitutionPortion = recipe.ingredientPortions.find((entry) => substitutionFor(entry.ingredientId));
+    const portion = type === "allowed-substitution" ? substitutionPortion ?? fallbackPortion : fallbackPortion;
+    const reorderDestination = recipe.operationGraph.nodes.find((node) => node.nodeId !== qualityNode.nodeId);
     scenarios.push({
       scenarioId: `${recipe.recipeId}-scenario-supplemental`,
       baselineArtifactVersion: "",
       mutation: {
         type,
         targetNodeId: qualityNode.nodeId,
+        ...(type === "reorder" && reorderDestination ? { destinationBeforeNodeId: reorderDestination.nodeId } : {}),
         ...(type === "quantity-too-high" || type === "allowed-substitution" ? { targetPortionId: portion.portionId } : {}),
         ...(type === "quantity-too-high" ? { scalar: 1.5 } : {}),
-        ...(type === "allowed-substitution" ? { replacementIngredientId: portion.ingredientId } : {}),
+        ...(type === "wrong-equipment" ? { replacementEquipmentId: "incompatible-tool" } : {}),
+        ...(type === "allowed-substitution" ? { replacementIngredientId: substitutionFor(portion.ingredientId) ?? portion.ingredientId } : {}),
       },
       expectedDeltas: [{ dimension: "structural-integrity", direction: type === "allowed-substitution" ? "unchanged" : "decrease", confidence: "rule-based" }],
       expectedFaultCodes: type === "allowed-substitution" ? [] : [faultFor(type)],
       causeCodes: [`supplemental:${type}`],
       recoverability: type === "allowed-substitution" ? "recoverable" : "partially-recoverable",
-      nutritionEffect: type === "quantity-too-high" ? "recalculate-from-quantities" : "unchanged",
+      nutritionEffect: type === "quantity-too-high" || type === "allowed-substitution" ? "recalculate-from-quantities" : "unchanged",
       applicableEngine: recipe.simulationProfile,
     });
   }
@@ -495,20 +632,32 @@ function deltasFor(operation: GameOperationId, mutation: GameRecipeScenarioV1["m
     { dimension: "burn", direction: "increase", confidence: "rule-based" },
     { dimension: "wateriness", direction: "decrease", confidence: "rule-based" },
   ];
-  if (mutation === "duration-too-short") return [
+  if (mutation === "duration-too-short" && ["boil", "simmer"].includes(operation)) return [
     { dimension: "doneness", direction: "decrease", confidence: "rule-based" },
     { dimension: "wateriness", direction: "increase", confidence: "rule-based" },
   ];
+  if (mutation === "duration-too-short" && operation === "chill") return [
+    { dimension: "structural-integrity", direction: "decrease", confidence: "rule-based" },
+  ];
+  if (mutation === "duration-too-short") return [{ dimension: "aroma", direction: "decrease", confidence: "rule-based" }];
   if (mutation === "overcrowding") return [
     { dimension: "browning", direction: "decrease", confidence: "rule-based" },
     { dimension: "wateriness", direction: "increase", confidence: "rule-based" },
   ];
-  if (mutation === "season-too-early") return [{ dimension: "salt", direction: "increase", confidence: "rule-based" }];
+  if (mutation === "season-too-early") return [
+    { dimension: "salt", direction: "unchanged", confidence: "rule-based" },
+    { dimension: "aroma", direction: "decrease", confidence: "rule-based" },
+  ];
   if (["slice", "dice", "mince"].includes(operation)) return [{ dimension: "structural-integrity", direction: "decrease", confidence: "rule-based" }];
+  if (["mix", "fold", "whisk", "blend"].includes(operation)) return [{ dimension: "structural-integrity", direction: "decrease", confidence: "rule-based" }];
   return [{ dimension: "aroma", direction: "decrease", confidence: "rule-based" }];
 }
 
-function createRightsRegistry(recipes: readonly GameRecipeV1[]): GameRightsRegistryV1 {
+function createRightsRegistry(
+  recipes: readonly GameRecipeV1[],
+  ingredients: GameIngredientCatalogV1,
+  nutritionDataset: GameNutritionDatasetSubsetV1,
+): GameRightsRegistryV1 {
   const sources = gameSources();
   const evidence = gameEvidence();
   const sourceAssessments = sources.map(sourceAssessment);
@@ -556,17 +705,38 @@ function createRightsRegistry(recipes: readonly GameRecipeV1[]): GameRightsRegis
         id: `game-research-${recipe.recipeId}-${sourceId}`,
         disposition: "accepted",
         sourceId,
-        uses: sourceId === "usda-fdc-downloads" ? ["identity", "nutrition"] : ["preparation", "safety"],
+        uses: sourceId === "usda-fdc-downloads"
+          ? ["identity", "nutrition"]
+          : sourceId === "fda-produce-handling"
+            ? ["safety"]
+            : ["identity"],
         rationale: sourceId === "usda-fdc-downloads"
           ? "Uses record-level CC0 nutrient facts from the committed versioned subset."
           : "Uses narrow factual guidance only; no source wording, image, layout or recipe expression is copied.",
       })),
-      claims: [],
-      unresolvedQuestions: [],
-      editorialDecision: "Eligible only as deterministic structured data after independent review and sampling QA.",
+      claims: [
+        {
+          id: `game-claim-${recipe.recipeId}-nutrition`,
+          statement: "Ingredient identity and per-100g nutrition are derived from the committed USDA FoodData Central subset.",
+          kind: "documented-fact",
+          disposition: "include",
+          evidenceIds: ["evidence-usda-fdc-subset"],
+          rationale: "The recipe stores each FDC record ID, dataset release and deterministic mass-based calculation path.",
+        },
+        {
+          id: `game-claim-${recipe.recipeId}-preparation-pending`,
+          statement: "The exact ingredient ratios, operation graph and mutation outcomes are culinarily plausible.",
+          kind: "documented-fact",
+          disposition: "defer",
+          evidenceIds: [],
+          rationale: "Family-specific preparation evidence and independent culinary review are still required before export.",
+        },
+      ],
+      unresolvedQuestions: ["Which rights-cleared family-specific sources support the exact preparation parameters and mutation causality?"],
+      editorialDecision: "Draft only until family-specific evidence, independent review and sampling QA are complete.",
       reviewer: "Cooking Lab deterministic provenance pipeline",
       reviewedAt: accessedAt,
-      status: "closed",
+      status: "in-progress",
     });
   }
   const registry: GameRightsRegistryV1 = {
@@ -587,24 +757,23 @@ function createRightsRegistry(recipes: readonly GameRecipeV1[]): GameRightsRegis
       samplingBatches: [],
     },
   };
-  registry.governance.riskClassifications = recipes.map((recipe): PublishingRiskClassification => ({
-    id: `game-risk-${recipe.recipeId}`,
-    itemId: recipe.recipeId,
-    artifactSetVersion: createGameArtifactSetVersion([recipe], registry),
-    level: "low",
-    reasonCodes: ["clear-first-party-or-reference-only-rights", "approved-nutrition-or-cost-method"],
-    equivalenceClassKeys: [
-      `content-type:${recipe.itemType}`,
-      `formula:${familyFor(recipe.recipeId)}`,
-      "nutrition:usda-fdc-versioned-subset",
-      "source-route:cc0-plus-reference-only",
-      "image:not-applicable",
-      "authoring:deterministic-source-normalization",
-      "translation:not-applicable",
-    ],
-    policyVersion: m13PolicyVersion,
-    classifiedAt: accessedAt,
-  }));
+  registry.governance.riskClassifications = recipes.map((recipe): PublishingRiskClassification => {
+    const minimumRisk = deriveMinimumGamePublishingRisk(recipe, registry);
+    return {
+      id: `game-risk-${recipe.recipeId}`,
+      itemId: recipe.recipeId,
+      artifactSetVersion: createGameArtifactSetVersion([recipe], registry, {
+        operations: gameOperationCatalog,
+        ingredients,
+        nutritionDataset,
+      }),
+      level: minimumRisk.level,
+      reasonCodes: minimumRisk.reasonCodes as PublishingRiskClassification["reasonCodes"],
+      equivalenceClassKeys: deriveGameEquivalenceClassKeys(recipe, registry) as PublishingRiskClassification["equivalenceClassKeys"],
+      policyVersion: m13PolicyVersion,
+      classifiedAt: accessedAt,
+    };
+  });
   return registry;
 }
 
@@ -666,7 +835,7 @@ function gameEvidence(): Evidence[] {
       relation: "supports",
       strength: "primary",
       locators: [{ kind: "section", value: "Foundation Foods 2026-04 and SR Legacy 2018-04 downloadable JSON records identified by fdcId" }],
-      editorialNote: "Supports ingredient identity and per-100g nutrition values in the committed 79-record subset.",
+      editorialNote: "Supports ingredient identity and per-100g nutrition values in the committed 81-record subset.",
     },
     {
       id: "evidence-fda-produce-handling",
@@ -755,26 +924,33 @@ function evidenceIdsFor(itemType: CulinaryItemType): string[] {
   return ["evidence-usda-fdc-subset", ["tea", "coffee"].includes(itemType) ? "evidence-fda-caffeine-context" : "evidence-fda-produce-handling"];
 }
 
-function familyFor(recipeId: string): RecipeFamily {
-  if (recipeId.startsWith("game-bowl-")) return "grain-bowl";
-  if (recipeId.startsWith("game-dessert-")) return "dessert";
-  if (recipeId.startsWith("game-tea-")) return "tea";
-  if (recipeId.startsWith("game-coffee-")) return "coffee";
-  return "fruit-drink";
-}
-
 function inferIngredientState(ingredientId: string): GameIngredientCatalogV1["ingredients"][number]["defaultState"] {
   if (/black-bean|chickpea/.test(ingredientId)) return "prepared";
-  if (/water|milk|oil|coffee|espresso|tea-brewed|vinegar|lemon-juice|coconut-milk/.test(ingredientId)) return "liquid";
+  if (["usda-butter", "usda-tofu", "usda-yogurt"].includes(ingredientId)) return "prepared";
+  if (liquidIngredientIds.has(ingredientId)) return "liquid";
   if (/rice|oats|flour|lentil|sugar|salt|cocoa|cinnamon|baking-powder|cornstarch|pasta|noodle/.test(ingredientId)) return "dry";
   return "raw";
 }
 
 function inferDensity(ingredientId: string): number | undefined {
   if (/olive-oil|canola-oil/.test(ingredientId)) return 0.91;
-  if (/water|milk|coffee|espresso|tea-brewed|vinegar|lemon-juice|coconut-milk/.test(ingredientId)) return 1;
+  if (liquidIngredientIds.has(ingredientId)) return 1;
   return undefined;
 }
+
+const liquidIngredientIds = new Set([
+  "usda-water",
+  "usda-whole-milk",
+  "usda-coconut-milk",
+  "usda-olive-oil",
+  "usda-canola-oil",
+  "usda-coffee-brewed",
+  "usda-espresso",
+  "usda-black-tea-brewed",
+  "usda-green-tea-brewed",
+  "usda-vinegar",
+  "usda-lemon-juice",
+]);
 
 function equipmentFor(operation: GameOperationId): string {
   if (["boil", "simmer"].includes(operation)) return "pot";

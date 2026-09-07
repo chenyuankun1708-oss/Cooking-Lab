@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-8a45479e0a7ffcd0",
+  "artifactVersion": "clv1-feb7ae2ba2be1d8c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,23 @@
       "portionId": "game-bowl-white-rice-chickpea-potato-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-02",
+      "volumeMl": 360
+    },
+    {
       "ingredientId": "usda-chickpea",
       "initialState": "prepared",
       "massG": 300,
       "nutritionProvenanceId": "usda-fdc:2644288:foundation-2026-04-30",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-02"
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-03"
     },
     {
       "ingredientId": "usda-potato",
@@ -37,7 +47,17 @@
       "nutritionProvenanceId": "usda-fdc:2346401:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-03"
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-04"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 640,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "vegetable-cooking-water",
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-05",
+      "volumeMl": 640
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +66,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-04"
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-06"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-05"
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-07"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-06",
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-08",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +94,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-07"
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-09"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-08",
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-10",
       "volumeMl": 12
     },
     {
@@ -93,7 +113,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-white-rice-chickpea-potato-portion-09"
+      "portionId": "game-bowl-white-rice-chickpea-potato-portion-11"
     }
   ],
   "itemType": "dish",
@@ -102,14 +122,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 446.05,
-      "carbs": 80.8912,
-      "fat": 8.2834,
-      "fiber": 0.6854,
-      "protein": 12.1181,
-      "saturatedFat": 0.37165,
-      "sodium": 719.7792,
-      "sugar": 1.897
+      "calories": 446.23,
+      "carbs": 81.0382,
+      "fat": 8.287,
+      "fiber": 17.0274,
+      "protein": 12.1103,
+      "saturatedFat": 0.37432,
+      "sodium": 730.2892,
+      "sugar": 1.927
     },
     "provenance": [
       {
@@ -123,6 +143,19 @@
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
         "upstreamRecordId": "2512381",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
         "yieldFactor": 1
       },
       {
@@ -168,13 +201,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +266,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1784.2,
-      "carbs": 323.5648,
-      "fat": 33.1336,
-      "fiber": 2.7416,
-      "protein": 48.4724,
-      "saturatedFat": 1.4866,
-      "sodium": 2879.1168,
-      "sugar": 7.588
+      "calories": 1784.92,
+      "carbs": 324.1528,
+      "fat": 33.148,
+      "fiber": 68.1096,
+      "protein": 48.4412,
+      "saturatedFat": 1.49728,
+      "sodium": 2921.1568,
+      "sugar": 7.708
     }
   },
   "operationGraph": {
@@ -251,8 +284,8 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-white-rice-chickpea-potato-portion-03",
-          "game-bowl-white-rice-chickpea-potato-portion-04"
+          "game-bowl-white-rice-chickpea-potato-portion-04",
+          "game-bowl-white-rice-chickpea-potato-portion-06"
         ],
         "nodeId": "game-bowl-white-rice-chickpea-potato-op-001-dice",
         "operationType": "dice",
@@ -279,7 +312,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-white-rice-chickpea-potato-portion-05"
+          "game-bowl-white-rice-chickpea-potato-portion-07"
         ],
         "nodeId": "game-bowl-white-rice-chickpea-potato-op-002-mince",
         "operationType": "mince",
@@ -306,10 +339,11 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-white-rice-chickpea-potato-portion-01"
+          "game-bowl-white-rice-chickpea-potato-portion-01",
+          "game-bowl-white-rice-chickpea-potato-portion-02"
         ],
-        "nodeId": "game-bowl-white-rice-chickpea-potato-op-003-boil",
-        "operationType": "boil",
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-003-simmer",
+        "operationType": "simmer",
         "outputStateIds": [
           "game-bowl-white-rice-chickpea-potato-state-003"
         ],
@@ -325,27 +359,84 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 1080000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-white-rice-chickpea-potato-op-001-dice"
+        ],
+        "equipmentId": "pot",
+        "inputPortionIds": [
+          "game-bowl-white-rice-chickpea-potato-portion-04",
+          "game-bowl-white-rice-chickpea-potato-portion-05"
+        ],
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-004-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "game-bowl-white-rice-chickpea-potato-state-004"
+        ],
+        "parameters": {
+          "heatLevel": 0.65,
+          "temperatureC": 96
+        },
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-white-rice-chickpea-potato-op-004-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-white-rice-chickpea-potato-portion-04",
+          "game-bowl-white-rice-chickpea-potato-portion-05"
+        ],
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-005-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-white-rice-chickpea-potato-state-005"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
       },
       {
         "activeDurationMs": 180000,
         "criticality": "quality",
         "dependsOn": [
           "game-bowl-white-rice-chickpea-potato-op-001-dice",
-          "game-bowl-white-rice-chickpea-potato-op-002-mince"
+          "game-bowl-white-rice-chickpea-potato-op-002-mince",
+          "game-bowl-white-rice-chickpea-potato-op-005-drain"
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-white-rice-chickpea-potato-portion-02",
           "game-bowl-white-rice-chickpea-potato-portion-03",
           "game-bowl-white-rice-chickpea-potato-portion-04",
-          "game-bowl-white-rice-chickpea-potato-portion-05",
-          "game-bowl-white-rice-chickpea-potato-portion-06"
+          "game-bowl-white-rice-chickpea-potato-portion-06",
+          "game-bowl-white-rice-chickpea-potato-portion-07",
+          "game-bowl-white-rice-chickpea-potato-portion-08"
         ],
-        "nodeId": "game-bowl-white-rice-chickpea-potato-op-005-pan-fry",
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-006-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-white-rice-chickpea-potato-state-005"
+          "game-bowl-white-rice-chickpea-potato-state-006"
         ],
         "parameters": {
           "capacityG": 900,
@@ -370,18 +461,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-white-rice-chickpea-potato-op-005-pan-fry"
+          "game-bowl-white-rice-chickpea-potato-op-006-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-white-rice-chickpea-potato-portion-07",
-          "game-bowl-white-rice-chickpea-potato-portion-08",
-          "game-bowl-white-rice-chickpea-potato-portion-09"
+          "game-bowl-white-rice-chickpea-potato-portion-09",
+          "game-bowl-white-rice-chickpea-potato-portion-10",
+          "game-bowl-white-rice-chickpea-potato-portion-11"
         ],
-        "nodeId": "game-bowl-white-rice-chickpea-potato-op-006-season",
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-007-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-white-rice-chickpea-potato-state-006"
+          "game-bowl-white-rice-chickpea-potato-state-007"
         ],
         "parameters": {
           "quantityG": 35
@@ -399,25 +490,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-white-rice-chickpea-potato-op-003-boil",
-          "game-bowl-white-rice-chickpea-potato-op-006-season"
+          "game-bowl-white-rice-chickpea-potato-op-003-simmer",
+          "game-bowl-white-rice-chickpea-potato-op-007-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-white-rice-chickpea-potato-portion-01",
-          "game-bowl-white-rice-chickpea-potato-portion-02",
           "game-bowl-white-rice-chickpea-potato-portion-03",
           "game-bowl-white-rice-chickpea-potato-portion-04",
-          "game-bowl-white-rice-chickpea-potato-portion-05",
           "game-bowl-white-rice-chickpea-potato-portion-06",
           "game-bowl-white-rice-chickpea-potato-portion-07",
           "game-bowl-white-rice-chickpea-potato-portion-08",
-          "game-bowl-white-rice-chickpea-potato-portion-09"
+          "game-bowl-white-rice-chickpea-potato-portion-09",
+          "game-bowl-white-rice-chickpea-potato-portion-10",
+          "game-bowl-white-rice-chickpea-potato-portion-11"
         ],
-        "nodeId": "game-bowl-white-rice-chickpea-potato-op-007-assemble",
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-008-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-white-rice-chickpea-potato-state-007"
+          "game-bowl-white-rice-chickpea-potato-state-008"
         ],
         "parameters": {},
         "targetStates": [],
@@ -427,24 +518,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-white-rice-chickpea-potato-op-007-assemble"
+          "game-bowl-white-rice-chickpea-potato-op-008-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-white-rice-chickpea-potato-portion-01",
-          "game-bowl-white-rice-chickpea-potato-portion-02",
           "game-bowl-white-rice-chickpea-potato-portion-03",
           "game-bowl-white-rice-chickpea-potato-portion-04",
-          "game-bowl-white-rice-chickpea-potato-portion-05",
           "game-bowl-white-rice-chickpea-potato-portion-06",
           "game-bowl-white-rice-chickpea-potato-portion-07",
           "game-bowl-white-rice-chickpea-potato-portion-08",
-          "game-bowl-white-rice-chickpea-potato-portion-09"
+          "game-bowl-white-rice-chickpea-potato-portion-09",
+          "game-bowl-white-rice-chickpea-potato-portion-10",
+          "game-bowl-white-rice-chickpea-potato-portion-11"
         ],
-        "nodeId": "game-bowl-white-rice-chickpea-potato-op-008-serve",
+        "nodeId": "game-bowl-white-rice-chickpea-potato-op-009-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-white-rice-chickpea-potato-state-008"
+          "game-bowl-white-rice-chickpea-potato-state-009"
         ],
         "parameters": {},
         "targetStates": [],
@@ -479,7 +570,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8a45479e0a7ffcd0",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -504,7 +595,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8a45479e0a7ffcd0",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -529,7 +620,37 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8a45479e0a7ffcd0",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
+      "causeCodes": [
+        "duration-too-short:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-003-simmer",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-003-simmer"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -550,16 +671,40 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-003-boil",
+        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-004-boil",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-003-boil"
+      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-004-boil"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8a45479e0a7ffcd0",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-005-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-005-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -580,16 +725,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-005-pan-fry",
+        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-006-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-006-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8a45479e0a7ffcd0",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -597,23 +742,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-006-season",
+        "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-007-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-006-season"
+      "scenarioId": "game-bowl-white-rice-chickpea-potato-scenario-007-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8a45479e0a7ffcd0",
+      "baselineArtifactVersion": "clv1-feb7ae2ba2be1d8c",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],
@@ -630,7 +780,7 @@
       "mutation": {
         "scalar": 1.5,
         "targetNodeId": "game-bowl-white-rice-chickpea-potato-op-001-dice",
-        "targetPortionId": "game-bowl-white-rice-chickpea-potato-portion-06",
+        "targetPortionId": "game-bowl-white-rice-chickpea-potato-portion-11",
         "type": "quantity-too-high"
       },
       "nutritionEffect": "recalculate-from-quantities",

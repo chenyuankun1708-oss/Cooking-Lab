@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ca58ba645d93507e",
+  "artifactVersion": "clv1-40167d1c76c61b05",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-blueberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-blueberry-basil-infused-portion-01"
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-blueberry-basil-infused-portion-04"
     }
@@ -56,27 +56,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 69.935,
-      "carbs": 16.69025,
-      "fat": 0.2608,
-      "fiber": 0.052,
-      "protein": 0.65915,
-      "saturatedFat": 0.001025,
-      "sodium": 7.34,
-      "sugar": 12.4215
+      "calories": 64.415,
+      "carbs": 16.61025,
+      "fat": 0.28,
+      "fiber": 1.972,
+      "protein": 0.68875,
+      "saturatedFat": 0.023425,
+      "sodium": 8.14,
+      "sugar": 12.9015
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-blueberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346411:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:171711:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346411",
+        "upstreamRecordId": "171711",
         "yieldFactor": 1
       },
       {
@@ -122,14 +122,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 279.74,
-      "carbs": 66.761,
-      "fat": 1.0432,
-      "fiber": 0.208,
-      "protein": 2.6366,
-      "saturatedFat": 0.0041,
-      "sodium": 29.36,
-      "sugar": 49.686
+      "calories": 257.66,
+      "carbs": 66.441,
+      "fat": 1.12,
+      "fiber": 7.888,
+      "protein": 2.755,
+      "saturatedFat": 0.0937,
+      "sodium": 32.56,
+      "sugar": 51.606
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-blueberry-basil-infused-portion-03",
           "game-drink-blueberry-basil-infused-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-basil-infused-op-002-rest",
+        "nodeId": "game-drink-blueberry-basil-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-blueberry-basil-infused-state-002"
+          "game-drink-blueberry-basil-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -188,13 +188,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-blueberry-basil-infused-op-002-rest"
+          "game-drink-blueberry-basil-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -203,10 +203,10 @@
           "game-drink-blueberry-basil-infused-portion-03",
           "game-drink-blueberry-basil-infused-portion-04"
         ],
-        "nodeId": "game-drink-blueberry-basil-infused-op-003-serve",
+        "nodeId": "game-drink-blueberry-basil-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-blueberry-basil-infused-state-003"
+          "game-drink-blueberry-basil-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -241,7 +241,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca58ba645d93507e",
+      "baselineArtifactVersion": "clv1-40167d1c76c61b05",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -266,20 +266,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca58ba645d93507e",
+      "baselineArtifactVersion": "clv1-40167d1c76c61b05",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -287,35 +282,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-blueberry-basil-infused-op-002-rest",
+        "targetNodeId": "game-drink-blueberry-basil-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-blueberry-basil-infused-scenario-002-rest"
+      "scenarioId": "game-drink-blueberry-basil-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ca58ba645d93507e",
+      "baselineArtifactVersion": "clv1-40167d1c76c61b05",
       "causeCodes": [
-        "supplemental:wrong-equipment"
+        "supplemental:allowed-substitution"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "decrease"
+          "direction": "unchanged"
         }
       ],
-      "expectedFaultCodes": [
-        "fault-wrong-equipment"
-      ],
+      "expectedFaultCodes": [],
       "mutation": {
+        "replacementIngredientId": "usda-raspberry",
         "targetNodeId": "game-drink-blueberry-basil-infused-op-001-dice",
-        "type": "wrong-equipment"
+        "targetPortionId": "game-drink-blueberry-basil-infused-portion-01",
+        "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-drink-blueberry-basil-infused-scenario-supplemental"
     }
   ],
@@ -324,7 +319,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-blueberry-basil-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c094dc5d29fd38b6",
+  "artifactVersion": "clv1-6ccb2360096a20d0",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -123,10 +123,10 @@
           "game-tea-green-tea-cinnamon-milk-portion-02",
           "game-tea-green-tea-cinnamon-milk-portion-03"
         ],
-        "nodeId": "game-tea-green-tea-cinnamon-milk-op-002-mix",
+        "nodeId": "game-tea-green-tea-cinnamon-milk-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-green-tea-cinnamon-milk-state-002"
+          "game-tea-green-tea-cinnamon-milk-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -145,7 +145,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-cinnamon-milk-op-002-mix"
+          "game-tea-green-tea-cinnamon-milk-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -153,10 +153,10 @@
           "game-tea-green-tea-cinnamon-milk-portion-02",
           "game-tea-green-tea-cinnamon-milk-portion-03"
         ],
-        "nodeId": "game-tea-green-tea-cinnamon-milk-op-003-serve",
+        "nodeId": "game-tea-green-tea-cinnamon-milk-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-cinnamon-milk-state-003"
+          "game-tea-green-tea-cinnamon-milk-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -191,33 +191,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c094dc5d29fd38b6",
+      "baselineArtifactVersion": "clv1-6ccb2360096a20d0",
       "causeCodes": [
         "omit:mix"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-tea-green-tea-cinnamon-milk-op-002-mix",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-cinnamon-milk-scenario-002-mix"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c094dc5d29fd38b6",
-      "causeCodes": [
-        "supplemental:reorder"
       ],
       "expectedDeltas": [
         {
@@ -227,14 +203,38 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-reorder"
+        "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-cinnamon-milk-op-002-mix",
-        "type": "reorder"
+        "targetNodeId": "game-tea-green-tea-cinnamon-milk-op-003-mix",
+        "type": "omit"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-cinnamon-milk-scenario-003-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6ccb2360096a20d0",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-black-tea-brewed",
+        "targetNodeId": "game-tea-green-tea-cinnamon-milk-op-003-mix",
+        "targetPortionId": "game-tea-green-tea-cinnamon-milk-portion-01",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-tea-green-tea-cinnamon-milk-scenario-supplemental"
     }
   ],
@@ -243,7 +243,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-green-tea-cinnamon-milk",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 603,
+    "unit": "g"
   }
 }

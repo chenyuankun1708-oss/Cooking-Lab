@@ -131,9 +131,11 @@ export type GameMutationType =
 export interface GameRecipeMutationV1 {
   type: GameMutationType;
   targetNodeId?: string;
+  destinationBeforeNodeId?: string;
   targetPortionId?: string;
   scalar?: number;
   replacementIngredientId?: string;
+  replacementEquipmentId?: string;
 }
 
 export interface GameSensoryDeltaV1 {
@@ -229,6 +231,12 @@ export interface GameNutritionDatasetSubsetV1 {
   provider: "USDA FoodData Central";
   sourceUrl: string;
   licenseId: "CC0-1.0";
+  upstreamArchives: Array<{
+    dataType: "Foundation" | "SR Legacy";
+    datasetVersion: string;
+    url: string;
+    sha256: string;
+  }>;
   records: GameNutritionDatasetRecordV1[];
 }
 
@@ -304,6 +312,13 @@ export interface GameDataManifestV1 {
   recipeCount: number;
   recipes: GameManifestRecipeEntryV1[];
   ingredientCatalog: { path: string; sha256: string };
+  nutritionDataset: {
+    path: string;
+    sha256: string;
+    schemaVersion: GameNutritionDatasetSubsetV1["schemaVersion"];
+    provider: GameNutritionDatasetSubsetV1["provider"];
+    upstreamArchives: Array<Pick<GameNutritionDatasetSubsetV1["upstreamArchives"][number], "datasetVersion" | "sha256">>;
+  };
   operationCatalog: { path: string; sha256: string; version: typeof gameOperationCatalogVersion };
   rightsRegistry: { path: string; sha256: string; version: typeof gameRightsRegistrySchemaVersion };
   attribution: { path: string; sha256: string };

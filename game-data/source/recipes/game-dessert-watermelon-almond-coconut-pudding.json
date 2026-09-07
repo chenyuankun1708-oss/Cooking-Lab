@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-7d440ea0409f3473",
+  "artifactVersion": "clv1-f8d9f47a8ec5997e",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,19 +14,18 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
+      "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-dessert-watermelon-almond-coconut-pudding-portion-01",
-      "volumeMl": 300
+      "portionId": "game-dessert-watermelon-almond-coconut-pudding-portion-01"
     },
     {
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-watermelon-almond-coconut-pudding-portion-02",
@@ -66,14 +65,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 347.065,
-      "carbs": 28.3995,
-      "fat": 25.92025,
-      "fiber": 1.326,
-      "protein": 4.38215,
-      "saturatedFat": 19.24356,
-      "sodium": 14.66,
-      "sugar": 14.63
+      "calories": 380.065,
+      "carbs": 31.1295,
+      "fat": 28.42025,
+      "fiber": 3.526,
+      "protein": 4.65215,
+      "saturatedFat": 21.44356,
+      "sodium": 16.66,
+      "sugar": 17.97
     },
     "provenance": [
       {
@@ -82,7 +81,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -96,10 +95,10 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       },
       {
@@ -145,14 +144,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1388.26,
-      "carbs": 113.598,
-      "fat": 103.681,
-      "fiber": 5.304,
-      "protein": 17.5286,
-      "saturatedFat": 76.97424,
-      "sodium": 58.64,
-      "sugar": 58.52
+      "calories": 1520.26,
+      "carbs": 124.518,
+      "fat": 113.681,
+      "fiber": 14.104,
+      "protein": 18.6086,
+      "saturatedFat": 85.77424,
+      "sodium": 66.64,
+      "sugar": 71.88
     }
   },
   "operationGraph": {
@@ -333,7 +332,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7d440ea0409f3473",
+      "baselineArtifactVersion": "clv1-f8d9f47a8ec5997e",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -358,14 +357,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7d440ea0409f3473",
+      "baselineArtifactVersion": "clv1-f8d9f47a8ec5997e",
       "causeCodes": [
         "omit:whisk"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -382,7 +381,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7d440ea0409f3473",
+      "baselineArtifactVersion": "clv1-f8d9f47a8ec5997e",
       "causeCodes": [
         "duration-too-short:simmer"
       ],
@@ -412,20 +411,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7d440ea0409f3473",
+      "baselineArtifactVersion": "clv1-f8d9f47a8ec5997e",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -442,7 +436,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-7d440ea0409f3473",
+      "baselineArtifactVersion": "clv1-f8d9f47a8ec5997e",
       "causeCodes": [
         "supplemental:wrong-equipment"
       ],
@@ -457,6 +451,7 @@
         "fault-wrong-equipment"
       ],
       "mutation": {
+        "replacementEquipmentId": "incompatible-tool",
         "targetNodeId": "game-dessert-watermelon-almond-coconut-pudding-op-001-dice",
         "type": "wrong-equipment"
       },

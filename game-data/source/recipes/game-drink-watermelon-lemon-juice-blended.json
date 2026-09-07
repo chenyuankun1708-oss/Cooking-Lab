@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-0aaec84ae93bfdf0",
+  "artifactVersion": "clv1-557019f7cbca61d0",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,13 +14,12 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
+      "initialState": "raw",
       "massG": 320,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-drink-watermelon-lemon-juice-blended-portion-01",
-      "volumeMl": 320
+      "portionId": "game-drink-watermelon-lemon-juice-blended-portion-01"
     },
     {
       "ingredientId": "usda-lemon-juice",
@@ -47,7 +46,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-watermelon-lemon-juice-blended-portion-04"
     }
@@ -74,7 +73,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -147,10 +146,10 @@
           "game-drink-watermelon-lemon-juice-blended-portion-03",
           "game-drink-watermelon-lemon-juice-blended-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-lemon-juice-blended-op-002-blend",
+        "nodeId": "game-drink-watermelon-lemon-juice-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-watermelon-lemon-juice-blended-state-002"
+          "game-drink-watermelon-lemon-juice-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -169,7 +168,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-watermelon-lemon-juice-blended-op-002-blend"
+          "game-drink-watermelon-lemon-juice-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -178,10 +177,10 @@
           "game-drink-watermelon-lemon-juice-blended-portion-03",
           "game-drink-watermelon-lemon-juice-blended-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-lemon-juice-blended-op-003-serve",
+        "nodeId": "game-drink-watermelon-lemon-juice-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-watermelon-lemon-juice-blended-state-003"
+          "game-drink-watermelon-lemon-juice-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -216,33 +215,9 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0aaec84ae93bfdf0",
+      "baselineArtifactVersion": "clv1-557019f7cbca61d0",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-watermelon-lemon-juice-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-watermelon-lemon-juice-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0aaec84ae93bfdf0",
-      "causeCodes": [
-        "supplemental:reorder"
       ],
       "expectedDeltas": [
         {
@@ -252,13 +227,39 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-reorder"
+        "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-drink-watermelon-lemon-juice-blended-op-002-blend",
-        "type": "reorder"
+        "targetNodeId": "game-drink-watermelon-lemon-juice-blended-op-003-blend",
+        "type": "omit"
       },
       "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-watermelon-lemon-juice-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-557019f7cbca61d0",
+      "causeCodes": [
+        "supplemental:quantity-too-high"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-quantity-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-drink-watermelon-lemon-juice-blended-op-003-blend",
+        "targetPortionId": "game-drink-watermelon-lemon-juice-blended-portion-03",
+        "type": "quantity-too-high"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-watermelon-lemon-juice-blended-scenario-supplemental"
     }
@@ -268,7 +269,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-watermelon-lemon-juice-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1089,
+    "unit": "g"
   }
 }

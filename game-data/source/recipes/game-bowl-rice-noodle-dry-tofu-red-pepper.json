@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6c94fb0f391610a2",
+  "artifactVersion": "clv1-dbca6ad70aaa684e",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,23 @@
       "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 900,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02",
+      "volumeMl": 900
+    },
+    {
       "ingredientId": "usda-tofu",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 300,
       "nutritionProvenanceId": "usda-fdc:172476:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-03"
     },
     {
       "ingredientId": "usda-red-pepper",
@@ -37,7 +47,7 @@
       "nutritionProvenanceId": "usda-fdc:2258590:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-03"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +56,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +74,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06",
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-07",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-07"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-08"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +93,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-08",
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09",
       "volumeMl": 12
     },
     {
@@ -93,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09"
+      "portionId": "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-10"
     }
   ],
   "itemType": "dish",
@@ -102,14 +112,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 361.62,
-      "carbs": 58.0887,
-      "fat": 9.0742,
-      "fiber": 2.709,
-      "protein": 11.1599,
-      "saturatedFat": 0.9817,
-      "sodium": 680.26,
-      "sugar": 2.0132
+      "calories": 361.8,
+      "carbs": 58.2357,
+      "fat": 9.0778,
+      "fiber": 2.691,
+      "protein": 11.1521,
+      "saturatedFat": 0.98437,
+      "sodium": 689.77,
+      "sugar": 2.0432
     },
     "provenance": [
       {
@@ -130,8 +140,21 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-tofu",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:172476:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -168,13 +191,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +256,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1446.48,
-      "carbs": 232.3548,
-      "fat": 36.2968,
-      "fiber": 10.836,
-      "protein": 44.6396,
-      "saturatedFat": 3.9268,
-      "sodium": 2721.04,
-      "sugar": 8.0528
+      "calories": 1447.2,
+      "carbs": 232.9428,
+      "fat": 36.3112,
+      "fiber": 10.764,
+      "protein": 44.6084,
+      "saturatedFat": 3.93748,
+      "sodium": 2759.08,
+      "sugar": 8.1728
     }
   },
   "operationGraph": {
@@ -251,8 +274,8 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-03",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-001-dice",
         "operationType": "dice",
@@ -279,7 +302,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-002-mince",
         "operationType": "mince",
@@ -306,7 +329,8 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-01"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-01",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-003-boil",
         "operationType": "boil",
@@ -325,7 +349,33 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 360000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-op-003-boil"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-01",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-004-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "wateriness",
+            "maximum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
       },
       {
         "activeDurationMs": 180000,
@@ -336,11 +386,11 @@
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-03",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-07"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-005-pan-fry",
         "operationType": "pan-fry",
@@ -374,9 +424,9 @@
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-07",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-08",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-10"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-006-season",
         "operationType": "season",
@@ -399,20 +449,20 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-op-003-boil",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-op-004-drain",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-op-006-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-01",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-03",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-07",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-08",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-10"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-007-assemble",
         "operationType": "assemble",
@@ -432,14 +482,14 @@
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-01",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-02",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-03",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-04",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-05",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-06",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-07",
           "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-08",
-          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09"
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-09",
+          "game-bowl-rice-noodle-dry-tofu-red-pepper-portion-10"
         ],
         "nodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-008-serve",
         "operationType": "serve",
@@ -479,7 +529,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6c94fb0f391610a2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -504,7 +554,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6c94fb0f391610a2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -529,7 +579,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6c94fb0f391610a2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
       "causeCodes": [
         "duration-too-short:boil"
       ],
@@ -559,7 +609,31 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6c94fb0f391610a2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
+      "causeCodes": [
+        "omit:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-rice-noodle-dry-tofu-red-pepper-op-004-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-tofu-red-pepper-scenario-004-drain"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -589,7 +663,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6c94fb0f391610a2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -597,7 +671,12 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
@@ -613,7 +692,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6c94fb0f391610a2",
+      "baselineArtifactVersion": "clv1-dbca6ad70aaa684e",
       "causeCodes": [
         "supplemental:duplicate"
       ],

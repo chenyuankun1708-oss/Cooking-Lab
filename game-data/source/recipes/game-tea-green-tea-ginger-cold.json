@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-46644ed6982cb476",
+  "artifactVersion": "clv1-d77ad47ec0129ed6",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -128,10 +128,10 @@
           "game-tea-green-tea-ginger-cold-portion-01",
           "game-tea-green-tea-ginger-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-ginger-cold-op-002-chill",
+        "nodeId": "game-tea-green-tea-ginger-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-tea-green-tea-ginger-cold-state-002"
+          "game-tea-green-tea-ginger-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -149,17 +149,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-ginger-cold-op-002-chill"
+          "game-tea-green-tea-ginger-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-tea-green-tea-ginger-cold-portion-01",
           "game-tea-green-tea-ginger-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-ginger-cold-op-003-serve",
+        "nodeId": "game-tea-green-tea-ginger-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-ginger-cold-state-003"
+          "game-tea-green-tea-ginger-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -194,7 +194,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-46644ed6982cb476",
+      "baselineArtifactVersion": "clv1-d77ad47ec0129ed6",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -219,39 +219,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-46644ed6982cb476",
+      "baselineArtifactVersion": "clv1-d77ad47ec0129ed6",
       "causeCodes": [
         "duration-too-short:chill"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-duration-too-short"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "game-tea-green-tea-ginger-cold-op-002-chill",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-ginger-cold-scenario-002-chill"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-46644ed6982cb476",
-      "causeCodes": [
-        "supplemental:quantity-too-high"
       ],
       "expectedDeltas": [
         {
@@ -261,15 +231,38 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-quantity-too-high"
+        "fault-duration-too-short"
       ],
       "mutation": {
-        "scalar": 1.5,
-        "targetNodeId": "game-tea-green-tea-ginger-cold-op-001-dice",
-        "targetPortionId": "game-tea-green-tea-ginger-cold-portion-01",
-        "type": "quantity-too-high"
+        "scalar": 0.5,
+        "targetNodeId": "game-tea-green-tea-ginger-cold-op-003-chill",
+        "type": "duration-too-short"
       },
-      "nutritionEffect": "recalculate-from-quantities",
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-ginger-cold-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d77ad47ec0129ed6",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-green-tea-ginger-cold-op-001-dice",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-tea-green-tea-ginger-cold-scenario-supplemental"
     }
@@ -279,7 +272,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-green-tea-ginger-cold",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 483,
+    "unit": "g"
   }
 }

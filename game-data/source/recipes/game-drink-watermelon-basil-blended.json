@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-59c69f73fd79ac87",
+  "artifactVersion": "clv1-32b6c37b4022e03a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,13 +14,12 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
+      "initialState": "raw",
       "massG": 320,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-drink-watermelon-basil-blended-portion-01",
-      "volumeMl": 320
+      "portionId": "game-drink-watermelon-basil-blended-portion-01"
     },
     {
       "ingredientId": "usda-basil",
@@ -46,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-watermelon-basil-blended-portion-04"
     }
@@ -73,7 +72,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -175,10 +174,10 @@
           "game-drink-watermelon-basil-blended-portion-03",
           "game-drink-watermelon-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-basil-blended-op-002-blend",
+        "nodeId": "game-drink-watermelon-basil-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-watermelon-basil-blended-state-002"
+          "game-drink-watermelon-basil-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +196,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-watermelon-basil-blended-op-002-blend"
+          "game-drink-watermelon-basil-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +205,10 @@
           "game-drink-watermelon-basil-blended-portion-03",
           "game-drink-watermelon-basil-blended-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-basil-blended-op-003-serve",
+        "nodeId": "game-drink-watermelon-basil-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-watermelon-basil-blended-state-003"
+          "game-drink-watermelon-basil-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +243,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-59c69f73fd79ac87",
+      "baselineArtifactVersion": "clv1-32b6c37b4022e03a",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +268,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-59c69f73fd79ac87",
+      "baselineArtifactVersion": "clv1-32b6c37b4022e03a",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-watermelon-basil-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-watermelon-basil-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-59c69f73fd79ac87",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -305,11 +280,36 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-omit"
       ],
       "mutation": {
+        "targetNodeId": "game-drink-watermelon-basil-blended-op-003-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-watermelon-basil-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-32b6c37b4022e03a",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "destinationBeforeNodeId": "game-drink-watermelon-basil-blended-op-003-blend",
         "targetNodeId": "game-drink-watermelon-basil-blended-op-001-dice",
-        "type": "missing-state-transition"
+        "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -321,7 +321,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-watermelon-basil-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

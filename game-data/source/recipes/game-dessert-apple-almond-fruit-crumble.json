@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-3e06432f75c6e449",
+  "artifactVersion": "clv1-e8b6e369e4429dd8",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -15,7 +15,7 @@
     {
       "ingredientId": "usda-apple",
       "initialState": "raw",
-      "massG": 400,
+      "massG": 420,
       "nutritionProvenanceId": "usda-fdc:1750340:foundation-2026-04-30",
       "optional": false,
       "phase": "fruit",
@@ -24,7 +24,7 @@
     {
       "ingredientId": "usda-oats",
       "initialState": "dry",
-      "massG": 120,
+      "massG": 60,
       "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
@@ -33,8 +33,8 @@
     {
       "ingredientId": "usda-wheat-flour",
       "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "massG": 100,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-apple-almond-fruit-crumble-portion-03"
@@ -42,7 +42,7 @@
     {
       "ingredientId": "usda-almond",
       "initialState": "raw",
-      "massG": 45,
+      "massG": 50,
       "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
@@ -50,8 +50,8 @@
     },
     {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
-      "massG": 45,
+      "initialState": "prepared",
+      "massG": 60,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "fat",
@@ -60,7 +60,7 @@
     {
       "ingredientId": "usda-sugar",
       "initialState": "dry",
-      "massG": 40,
+      "massG": 48,
       "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
       "optional": false,
       "phase": "sweetener",
@@ -81,15 +81,15 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 9.98,
-      "calories": 441.7225,
-      "carbs": 63.56975,
-      "fat": 17.1357,
-      "fiber": 3.5605,
-      "protein": 9.352325,
-      "saturatedFat": 6.108225,
-      "sodium": 3.3979,
-      "sugar": 23.2976
+      "addedSugar": 11.976,
+      "calories": 449.47,
+      "carbs": 60.729,
+      "fat": 19.8957,
+      "fiber": 6.0345,
+      "protein": 7.59035,
+      "saturatedFat": 8.087975,
+      "sodium": 3.4807,
+      "sugar": 26.02835
     },
     "provenance": [
       {
@@ -122,13 +122,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-wheat-flour",
         "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "789951",
+        "upstreamRecordId": "168936",
         "yieldFactor": 1
       },
       {
@@ -150,7 +150,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -186,15 +186,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 39.92,
-      "calories": 1766.89,
-      "carbs": 254.279,
-      "fat": 68.5428,
-      "fiber": 14.242,
-      "protein": 37.4093,
-      "saturatedFat": 24.4329,
-      "sodium": 13.5916,
-      "sugar": 93.1904
+      "addedSugar": 47.904,
+      "calories": 1797.88,
+      "carbs": 242.916,
+      "fat": 79.5828,
+      "fiber": 24.138,
+      "protein": 30.3614,
+      "saturatedFat": 32.3519,
+      "sodium": 13.9228,
+      "sugar": 104.1134
     }
   },
   "operationGraph": {
@@ -353,7 +353,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e06432f75c6e449",
+      "baselineArtifactVersion": "clv1-e8b6e369e4429dd8",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +378,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e06432f75c6e449",
+      "baselineArtifactVersion": "clv1-e8b6e369e4429dd8",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +402,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e06432f75c6e449",
+      "baselineArtifactVersion": "clv1-e8b6e369e4429dd8",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +437,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e06432f75c6e449",
+      "baselineArtifactVersion": "clv1-e8b6e369e4429dd8",
       "causeCodes": [
         "supplemental:allowed-substitution"
       ],
@@ -450,12 +450,12 @@
       ],
       "expectedFaultCodes": [],
       "mutation": {
-        "replacementIngredientId": "usda-apple",
+        "replacementIngredientId": "usda-pear",
         "targetNodeId": "game-dessert-apple-almond-fruit-crumble-op-001-dice",
         "targetPortionId": "game-dessert-apple-almond-fruit-crumble-portion-01",
         "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "recoverable",
       "scenarioId": "game-dessert-apple-almond-fruit-crumble-scenario-supplemental"
     }

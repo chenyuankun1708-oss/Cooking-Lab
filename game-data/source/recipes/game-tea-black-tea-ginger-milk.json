@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-704925cb68fdeedb",
+  "artifactVersion": "clv1-7f54ec91a9da80b4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -152,10 +152,10 @@
           "game-tea-black-tea-ginger-milk-portion-02",
           "game-tea-black-tea-ginger-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-ginger-milk-op-002-mix",
+        "nodeId": "game-tea-black-tea-ginger-milk-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-black-tea-ginger-milk-state-002"
+          "game-tea-black-tea-ginger-milk-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -174,7 +174,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-black-tea-ginger-milk-op-002-mix"
+          "game-tea-black-tea-ginger-milk-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -182,10 +182,10 @@
           "game-tea-black-tea-ginger-milk-portion-02",
           "game-tea-black-tea-ginger-milk-portion-03"
         ],
-        "nodeId": "game-tea-black-tea-ginger-milk-op-003-serve",
+        "nodeId": "game-tea-black-tea-ginger-milk-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-black-tea-ginger-milk-state-003"
+          "game-tea-black-tea-ginger-milk-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -220,7 +220,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-704925cb68fdeedb",
+      "baselineArtifactVersion": "clv1-7f54ec91a9da80b4",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -245,33 +245,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-704925cb68fdeedb",
+      "baselineArtifactVersion": "clv1-7f54ec91a9da80b4",
       "causeCodes": [
         "omit:mix"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-tea-black-tea-ginger-milk-op-002-mix",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-tea-black-tea-ginger-milk-scenario-002-mix"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-704925cb68fdeedb",
-      "causeCodes": [
-        "supplemental:wrong-equipment"
       ],
       "expectedDeltas": [
         {
@@ -281,14 +257,38 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-wrong-equipment"
+        "fault-omit"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-black-tea-ginger-milk-op-001-dice",
-        "type": "wrong-equipment"
+        "targetNodeId": "game-tea-black-tea-ginger-milk-op-003-mix",
+        "type": "omit"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-black-tea-ginger-milk-scenario-003-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7f54ec91a9da80b4",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-green-tea-brewed",
+        "targetNodeId": "game-tea-black-tea-ginger-milk-op-001-dice",
+        "targetPortionId": "game-tea-black-tea-ginger-milk-portion-01",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "recoverable",
       "scenarioId": "game-tea-black-tea-ginger-milk-scenario-supplemental"
     }
   ],
@@ -297,7 +297,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-black-tea-ginger-milk",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 603,
+    "unit": "g"
   }
 }

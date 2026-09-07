@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-0f4ad74e4c3f7584",
+  "artifactVersion": "clv1-8bb7fe378b4d1960",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -16,7 +16,7 @@
       "ingredientId": "usda-raspberry",
       "initialState": "raw",
       "massG": 320,
-      "nutritionProvenanceId": "usda-fdc:2346410:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:167755:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-drink-raspberry-ginger-blended-portion-01"
@@ -45,7 +45,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-raspberry-ginger-blended-portion-04"
     }
@@ -56,27 +56,27 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 4.926,
-      "calories": 66.08,
-      "carbs": 15.709,
-      "fat": 0.16915,
-      "fiber": 0.062,
-      "protein": 0.8715,
-      "saturatedFat": 0.005075,
-      "sodium": 7.565,
-      "sugar": 7.1125
+      "calories": 61.84,
+      "carbs": 14.909,
+      "fat": 0.53875,
+      "fiber": 5.262,
+      "protein": 1.0235,
+      "saturatedFat": 0.020275,
+      "sodium": 8.365,
+      "sugar": 8.5045
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-raspberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346410:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167755:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346410",
+        "upstreamRecordId": "167755",
         "yieldFactor": 1
       },
       {
@@ -122,14 +122,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 19.704,
-      "calories": 264.32,
-      "carbs": 62.836,
-      "fat": 0.6766,
-      "fiber": 0.248,
-      "protein": 3.486,
-      "saturatedFat": 0.0203,
-      "sodium": 30.26,
-      "sugar": 28.45
+      "calories": 247.36,
+      "carbs": 59.636,
+      "fat": 2.155,
+      "fiber": 21.048,
+      "protein": 4.094,
+      "saturatedFat": 0.0811,
+      "sodium": 33.46,
+      "sugar": 34.018
     }
   },
   "operationGraph": {
@@ -175,10 +175,10 @@
           "game-drink-raspberry-ginger-blended-portion-03",
           "game-drink-raspberry-ginger-blended-portion-04"
         ],
-        "nodeId": "game-drink-raspberry-ginger-blended-op-002-blend",
+        "nodeId": "game-drink-raspberry-ginger-blended-op-003-blend",
         "operationType": "blend",
         "outputStateIds": [
-          "game-drink-raspberry-ginger-blended-state-002"
+          "game-drink-raspberry-ginger-blended-state-003"
         ],
         "parameters": {
           "strength": 0.75
@@ -197,7 +197,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-raspberry-ginger-blended-op-002-blend"
+          "game-drink-raspberry-ginger-blended-op-003-blend"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -206,10 +206,10 @@
           "game-drink-raspberry-ginger-blended-portion-03",
           "game-drink-raspberry-ginger-blended-portion-04"
         ],
-        "nodeId": "game-drink-raspberry-ginger-blended-op-003-serve",
+        "nodeId": "game-drink-raspberry-ginger-blended-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-raspberry-ginger-blended-state-003"
+          "game-drink-raspberry-ginger-blended-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -244,7 +244,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0f4ad74e4c3f7584",
+      "baselineArtifactVersion": "clv1-8bb7fe378b4d1960",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -269,33 +269,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0f4ad74e4c3f7584",
+      "baselineArtifactVersion": "clv1-8bb7fe378b4d1960",
       "causeCodes": [
         "omit:blend"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-drink-raspberry-ginger-blended-op-002-blend",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-drink-raspberry-ginger-blended-scenario-002-blend"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0f4ad74e4c3f7584",
-      "causeCodes": [
-        "supplemental:quantity-too-high"
       ],
       "expectedDeltas": [
         {
@@ -305,15 +281,37 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-quantity-too-high"
+        "fault-omit"
       ],
       "mutation": {
-        "scalar": 1.5,
-        "targetNodeId": "game-drink-raspberry-ginger-blended-op-001-dice",
-        "targetPortionId": "game-drink-raspberry-ginger-blended-portion-03",
-        "type": "quantity-too-high"
+        "targetNodeId": "game-drink-raspberry-ginger-blended-op-003-blend",
+        "type": "omit"
       },
-      "nutritionEffect": "recalculate-from-quantities",
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-raspberry-ginger-blended-scenario-003-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8bb7fe378b4d1960",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-drink-raspberry-ginger-blended-op-001-dice",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-raspberry-ginger-blended-scenario-supplemental"
     }
@@ -323,7 +321,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-raspberry-ginger-blended",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1054,
+    "unit": "g"
   }
 }

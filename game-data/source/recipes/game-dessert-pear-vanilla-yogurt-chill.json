@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4ba6c9c24c16707c",
+  "artifactVersion": "clv1-f9a9d101cf2cc4ed",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -23,26 +23,26 @@
     },
     {
       "ingredientId": "usda-yogurt",
-      "initialState": "raw",
-      "massG": 360,
+      "initialState": "prepared",
+      "massG": 400,
       "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-pear-vanilla-yogurt-chill-portion-02"
     },
     {
-      "ingredientId": "usda-almond",
+      "ingredientId": "usda-vanilla",
       "initialState": "raw",
-      "massG": 40,
-      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+      "massG": 4,
+      "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
       "optional": false,
-      "phase": "finish",
+      "phase": "flavor",
       "portionId": "game-dessert-pear-vanilla-yogurt-chill-portion-03"
     },
     {
       "ingredientId": "usda-honey",
       "initialState": "raw",
-      "massG": 30,
+      "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
       "optional": false,
       "phase": "sweetener",
@@ -54,15 +54,15 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 6.1575,
-      "calories": 212.93,
-      "carbs": 26.513,
-      "fat": 9.4759,
-      "fiber": 3.471,
-      "protein": 5.8913,
-      "saturatedFat": 2.466,
-      "sodium": 38.2782,
-      "sugar": 16.8585
+      "addedSugar": 4.926,
+      "calories": 156.45,
+      "carbs": 23.96,
+      "fat": 4.8145,
+      "fiber": 2.388,
+      "protein": 4.1194,
+      "saturatedFat": 2.3201,
+      "sodium": 42.4882,
+      "sugar": 16.162
     },
     "provenance": [
       {
@@ -84,7 +84,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "foundation-2026-04-30",
         "ingredientId": "usda-yogurt",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -95,13 +95,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-almond",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-vanilla",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346393",
+        "upstreamRecordId": "173471",
         "yieldFactor": 1
       },
       {
@@ -120,15 +120,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 24.63,
-      "calories": 851.72,
-      "carbs": 106.052,
-      "fat": 37.9036,
-      "fiber": 13.884,
-      "protein": 23.5652,
-      "saturatedFat": 9.864,
-      "sodium": 153.1128,
-      "sugar": 67.434
+      "addedSugar": 19.704,
+      "calories": 625.8,
+      "carbs": 95.84,
+      "fat": 19.258,
+      "fiber": 9.552,
+      "protein": 16.4776,
+      "saturatedFat": 9.2804,
+      "sodium": 169.9528,
+      "sugar": 64.648
     }
   },
   "operationGraph": {
@@ -272,7 +272,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ba6c9c24c16707c",
+      "baselineArtifactVersion": "clv1-f9a9d101cf2cc4ed",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -297,14 +297,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ba6c9c24c16707c",
+      "baselineArtifactVersion": "clv1-f9a9d101cf2cc4ed",
       "causeCodes": [
         "omit:fold"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -321,20 +321,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ba6c9c24c16707c",
+      "baselineArtifactVersion": "clv1-f9a9d101cf2cc4ed",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -351,7 +346,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ba6c9c24c16707c",
+      "baselineArtifactVersion": "clv1-f9a9d101cf2cc4ed",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],

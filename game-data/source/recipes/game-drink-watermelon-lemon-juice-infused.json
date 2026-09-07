@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-523ceafe494b9b82",
+  "artifactVersion": "clv1-d2f5950637056658",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -14,13 +14,12 @@
   "ingredientPortions": [
     {
       "ingredientId": "usda-watermelon",
-      "initialState": "liquid",
+      "initialState": "raw",
       "massG": 320,
       "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
-      "portionId": "game-drink-watermelon-lemon-juice-infused-portion-01",
-      "volumeMl": 320
+      "portionId": "game-drink-watermelon-lemon-juice-infused-portion-01"
     },
     {
       "ingredientId": "usda-lemon-juice",
@@ -47,7 +46,7 @@
       "initialState": "raw",
       "massG": 24,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
-      "optional": true,
+      "optional": false,
       "phase": "sweetener",
       "portionId": "game-drink-watermelon-lemon-juice-infused-portion-04"
     }
@@ -74,7 +73,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-watermelon",
-        "ingredientState": "liquid",
+        "ingredientState": "raw",
         "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -147,10 +146,10 @@
           "game-drink-watermelon-lemon-juice-infused-portion-03",
           "game-drink-watermelon-lemon-juice-infused-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-lemon-juice-infused-op-002-rest",
+        "nodeId": "game-drink-watermelon-lemon-juice-infused-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
-          "game-drink-watermelon-lemon-juice-infused-state-002"
+          "game-drink-watermelon-lemon-juice-infused-state-003"
         ],
         "parameters": {},
         "targetStates": [
@@ -160,13 +159,13 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 300000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-drink-watermelon-lemon-juice-infused-op-002-rest"
+          "game-drink-watermelon-lemon-juice-infused-op-003-rest"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -175,10 +174,10 @@
           "game-drink-watermelon-lemon-juice-infused-portion-03",
           "game-drink-watermelon-lemon-juice-infused-portion-04"
         ],
-        "nodeId": "game-drink-watermelon-lemon-juice-infused-op-003-serve",
+        "nodeId": "game-drink-watermelon-lemon-juice-infused-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-drink-watermelon-lemon-juice-infused-state-003"
+          "game-drink-watermelon-lemon-juice-infused-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -213,20 +212,15 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-523ceafe494b9b82",
+      "baselineArtifactVersion": "clv1-d2f5950637056658",
       "causeCodes": [
         "duration-too-short:rest"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "aroma",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -234,35 +228,35 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-drink-watermelon-lemon-juice-infused-op-002-rest",
+        "targetNodeId": "game-drink-watermelon-lemon-juice-infused-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-drink-watermelon-lemon-juice-infused-scenario-002-rest"
+      "scenarioId": "game-drink-watermelon-lemon-juice-infused-scenario-003-rest"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-523ceafe494b9b82",
+      "baselineArtifactVersion": "clv1-d2f5950637056658",
       "causeCodes": [
-        "supplemental:allowed-substitution"
+        "supplemental:duplicate"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
           "dimension": "structural-integrity",
-          "direction": "unchanged"
+          "direction": "decrease"
         }
       ],
-      "expectedFaultCodes": [],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
       "mutation": {
-        "replacementIngredientId": "usda-honey",
-        "targetNodeId": "game-drink-watermelon-lemon-juice-infused-op-002-rest",
-        "targetPortionId": "game-drink-watermelon-lemon-juice-infused-portion-04",
-        "type": "allowed-substitution"
+        "targetNodeId": "game-drink-watermelon-lemon-juice-infused-op-003-rest",
+        "type": "duplicate"
       },
       "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
+      "recoverability": "partially-recoverable",
       "scenarioId": "game-drink-watermelon-lemon-juice-infused-scenario-supplemental"
     }
   ],
@@ -271,7 +265,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-drink-watermelon-lemon-juice-infused",
   "yield": {
-    "amount": 1000,
-    "unit": "ml"
+    "amount": 1089,
+    "unit": "g"
   }
 }

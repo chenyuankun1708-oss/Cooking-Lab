@@ -21,7 +21,7 @@ The generated Godot JSON, SQLite, attribution report, rights summary, manifest a
 - `GameRecipeV1` records stable IDs, quantified portions, a dependency graph, USDA-derived nutrition, simulation scenarios and export eligibility.
 - `GameOperationDefinitionV1` distinguishes `supported-now`, `macro-supported`, `requires-engine-v2` and `presentation-only`.
 - `GameRecipeScenarioV1` mutates a baseline without modifying it and records directional sensory changes, fault causes, recoverability and nutrition impact.
-- `GameDataManifestV1` hashes every exported recipe and supporting artifact.
+- `GameDataManifestV1` hashes every exported recipe and every supporting catalog, rights, attribution and nutrition artifact, including upstream USDA archive identifiers and SHA-256 values.
 
 All masses use grams. Liquids may additionally expose milliliters only when the ingredient catalog contains a density conversion. Piece, teaspoon and tablespoon values cannot enter the game export without a recorded conversion.
 
@@ -33,7 +33,7 @@ The existing serialized command IDs `CUT`, `ADD`, `SET_HEAT`, `WAIT`, `STIR`, `S
 - `requires-cat-kitchen-v2`: preparation state or cooking environment support is required.
 - `data-only`: presentation-only content with no physical simulation.
 
-The future adapter must fail closed for unsupported operations and preserve old replay/content versions. Cooking Lab does not modify the active Cat Kitchen Goal 8 worktree.
+The repository includes a minimal, read-only `cat-kitchen-goal1-v1` compiler contract for the seven frozen commands. Export validation must actually compile every recipe that claims this profile; missing mappings, parameters, ingredient calibration or unsupported operations fail closed. This is an exchange-format proof, not a Cat Kitchen integration. Cooking Lab does not modify the active Cat Kitchen Goal 8 worktree.
 
 ## Commands
 
@@ -41,4 +41,4 @@ The future adapter must fail closed for unsupported operations and preserve old 
 - `npm run game-data:build`: require at least one fully eligible recipe, then generate Godot JSON, SQLite, manifest, attribution and audit output.
 - `npx tsx scripts/audit-game-data.ts --minimum-exportable=500`: final M13 release gate.
 
-The build uses `node:sqlite` already provided by the supported Node runtime and adds no runtime database dependency.
+The build uses `node:sqlite` already provided by the supported Node runtime and adds no runtime database dependency. It writes through a validated staging directory and only replaces an output located below the repository `.local/` directory or a dedicated Cooking Lab temporary container. Godot JSON and SQLite are round-tripped against the same canonical records before completion.

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c8ca5a6fa0c1f8f5",
+  "artifactVersion": "clv1-ca2cb86f935c1d43",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -8,54 +8,44 @@
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-game-tea-green-tea-mango-milk",
+    "riskClassificationId": "game-risk-game-coffee-coffee-butter-cold",
     "riskLevel": "low"
   },
   "ingredientPortions": [
     {
-      "ingredientId": "usda-green-tea-brewed",
+      "ingredientId": "usda-coffee-brewed",
       "initialState": "liquid",
       "massG": 480,
-      "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
-      "portionId": "game-tea-green-tea-mango-milk-portion-01",
+      "portionId": "game-coffee-coffee-butter-cold-portion-01",
       "volumeMl": 480
     },
     {
-      "ingredientId": "usda-mango",
-      "initialState": "raw",
+      "ingredientId": "usda-butter",
+      "initialState": "prepared",
       "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:2710833:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
-      "portionId": "game-tea-green-tea-mango-milk-portion-02"
-    },
-    {
-      "ingredientId": "usda-whole-milk",
-      "initialState": "liquid",
-      "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
-      "optional": false,
-      "phase": "finish",
-      "portionId": "game-tea-green-tea-mango-milk-portion-03",
-      "volumeMl": 120
+      "portionId": "game-coffee-coffee-butter-cold-portion-02"
     }
   ],
-  "itemType": "tea",
+  "itemType": "coffee",
   "nutritionProfile": {
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 79.5,
-      "carbs": 11.958,
-      "fat": 2.2632,
-      "fiber": 1.05,
-      "protein": 2.8272,
-      "saturatedFat": 1.116,
-      "sodium": 25.2,
-      "sugar": 9.306
+      "calories": 432.6,
+      "carbs": 0.036,
+      "fat": 48.708,
+      "fiber": 0,
+      "protein": 0.798,
+      "saturatedFat": 30.3048,
+      "sodium": 11.4,
+      "sugar": 0.036
     },
     "provenance": [
       {
@@ -63,52 +53,39 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
-        "ingredientId": "usda-green-tea-brewed",
+        "ingredientId": "usda-coffee-brewed",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "171917",
+        "upstreamRecordId": "171890",
         "yieldFactor": 1
       },
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-mango",
-        "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2710833:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-butter",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2710833",
-        "yieldFactor": 1
-      },
-      {
-        "accessedAt": "2026-09-08",
-        "basis": "per-100g",
-        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-whole-milk",
-        "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
-        "provider": "USDA FoodData Central",
-        "retentionFactor": 1,
-        "upstreamRecordId": "746782",
+        "upstreamRecordId": "173430",
         "yieldFactor": 1
       }
     ],
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 159,
-      "carbs": 23.916,
-      "fat": 4.5264,
-      "fiber": 2.1,
-      "protein": 5.6544,
-      "saturatedFat": 2.232,
-      "sodium": 50.4,
-      "sugar": 18.612
+      "calories": 865.2,
+      "carbs": 0.072,
+      "fat": 97.416,
+      "fiber": 0,
+      "protein": 1.596,
+      "saturatedFat": 60.6096,
+      "sodium": 22.8,
+      "sugar": 0.072
     }
   },
   "operationGraph": {
@@ -119,12 +96,12 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-tea-green-tea-mango-milk-portion-02"
+          "game-coffee-coffee-butter-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-mango-milk-op-001-dice",
+        "nodeId": "game-coffee-coffee-butter-cold-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
-          "game-tea-green-tea-mango-milk-state-001"
+          "game-coffee-coffee-butter-cold-state-001"
         ],
         "parameters": {
           "cutSizeMm": 10,
@@ -141,51 +118,48 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 120000,
+        "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [
-          "game-tea-green-tea-mango-milk-op-001-dice"
+          "game-coffee-coffee-butter-cold-op-001-dice"
         ],
-        "equipmentId": "bowl",
+        "equipmentId": "container",
         "inputPortionIds": [
-          "game-tea-green-tea-mango-milk-portion-01",
-          "game-tea-green-tea-mango-milk-portion-02",
-          "game-tea-green-tea-mango-milk-portion-03"
+          "game-coffee-coffee-butter-cold-portion-01",
+          "game-coffee-coffee-butter-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-mango-milk-op-002-mix",
-        "operationType": "mix",
+        "nodeId": "game-coffee-coffee-butter-cold-op-003-chill",
+        "operationType": "chill",
         "outputStateIds": [
-          "game-tea-green-tea-mango-milk-state-002"
+          "game-coffee-coffee-butter-cold-state-003"
         ],
         "parameters": {
-          "strength": 0.45
+          "temperatureC": 5
         },
         "targetStates": [
           {
-            "dimension": "structural-integrity",
-            "maximum": 0.9,
+            "dimension": "aroma",
             "minimum": 0.35,
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 0
+        "waitDurationMs": 1800000
       },
       {
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-mango-milk-op-002-mix"
+          "game-coffee-coffee-butter-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-tea-green-tea-mango-milk-portion-01",
-          "game-tea-green-tea-mango-milk-portion-02",
-          "game-tea-green-tea-mango-milk-portion-03"
+          "game-coffee-coffee-butter-cold-portion-01",
+          "game-coffee-coffee-butter-cold-portion-02"
         ],
-        "nodeId": "game-tea-green-tea-mango-milk-op-003-serve",
+        "nodeId": "game-coffee-coffee-butter-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-mango-milk-state-003"
+          "game-coffee-coffee-butter-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -193,13 +167,13 @@
       }
     ]
   },
-  "recipeId": "game-tea-green-tea-mango-milk",
+  "recipeId": "game-coffee-coffee-butter-cold",
   "rights": {
     "artifactIds": [
-      "game-artifact-game-tea-green-tea-mango-milk-identity",
-      "game-artifact-game-tea-green-tea-mango-milk-preparation",
-      "game-artifact-game-tea-green-tea-mango-milk-nutrition",
-      "game-artifact-game-tea-green-tea-mango-milk-simulation"
+      "game-artifact-game-coffee-coffee-butter-cold-identity",
+      "game-artifact-game-coffee-coffee-butter-cold-preparation",
+      "game-artifact-game-coffee-coffee-butter-cold-nutrition",
+      "game-artifact-game-coffee-coffee-butter-cold-simulation"
     ],
     "evidenceIds": [
       "evidence-usda-fdc-subset",
@@ -211,16 +185,16 @@
       "fda-caffeine-guidance"
     ],
     "usageDecisionIds": [
-      "game-usage-game-tea-green-tea-mango-milk-identity",
-      "game-usage-game-tea-green-tea-mango-milk-preparation",
-      "game-usage-game-tea-green-tea-mango-milk-nutrition",
-      "game-usage-game-tea-green-tea-mango-milk-simulation"
+      "game-usage-game-coffee-coffee-butter-cold-identity",
+      "game-usage-game-coffee-coffee-butter-cold-preparation",
+      "game-usage-game-coffee-coffee-butter-cold-nutrition",
+      "game-usage-game-coffee-coffee-butter-cold-simulation"
     ]
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c8ca5a6fa0c1f8f5",
+      "baselineArtifactVersion": "clv1-ca2cb86f935c1d43",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -236,40 +210,41 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-tea-green-tea-mango-milk-op-001-dice",
+        "targetNodeId": "game-coffee-coffee-butter-cold-op-001-dice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-mango-milk-scenario-001-dice"
+      "scenarioId": "game-coffee-coffee-butter-cold-scenario-001-dice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c8ca5a6fa0c1f8f5",
+      "baselineArtifactVersion": "clv1-ca2cb86f935c1d43",
       "causeCodes": [
-        "omit:mix"
+        "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
-        "fault-omit"
+        "fault-duration-too-short"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-mango-milk-op-002-mix",
-        "type": "omit"
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-coffee-butter-cold-op-003-chill",
+        "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-mango-milk-scenario-002-mix"
+      "scenarioId": "game-coffee-coffee-butter-cold-scenario-003-chill"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c8ca5a6fa0c1f8f5",
+      "baselineArtifactVersion": "clv1-ca2cb86f935c1d43",
       "causeCodes": [
         "supplemental:reorder"
       ],
@@ -284,20 +259,21 @@
         "fault-reorder"
       ],
       "mutation": {
-        "targetNodeId": "game-tea-green-tea-mango-milk-op-001-dice",
+        "destinationBeforeNodeId": "game-coffee-coffee-butter-cold-op-003-chill",
+        "targetNodeId": "game-coffee-coffee-butter-cold-op-001-dice",
         "type": "reorder"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-tea-green-tea-mango-milk-scenario-supplemental"
+      "scenarioId": "game-coffee-coffee-butter-cold-scenario-supplemental"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",
   "servings": 2,
   "simulationProfile": "requires-cat-kitchen-v2",
-  "slug": "game-tea-green-tea-mango-milk",
+  "slug": "game-coffee-coffee-butter-cold",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 600,
+    "unit": "g"
   }
 }

@@ -1,15 +1,10 @@
 import catalog from "./operations.json";
-import {
-  gameOperationCatalogVersion,
-  type GameOperationDefinitionV1,
-} from "@/types/game-recipe";
+import { parseGameOperationCatalog } from "@/lib/game-data-runtime-schema";
 
-if (catalog.version !== gameOperationCatalogVersion) {
-  throw new Error(`Unsupported game operation catalog version: ${catalog.version}`);
-}
+const parsedCatalog = parseGameOperationCatalog(catalog, "game-data/operations.json");
 
 export const gameOperationCatalog = Object.freeze(
-  catalog.operations as readonly GameOperationDefinitionV1[],
+  parsedCatalog.operations,
 );
 
 export const gameOperationById = new Map(gameOperationCatalog.map((operation) => [operation.id, operation]));

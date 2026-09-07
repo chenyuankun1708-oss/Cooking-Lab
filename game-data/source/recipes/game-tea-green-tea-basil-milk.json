@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-689594bf0cfbeb0b",
+  "artifactVersion": "clv1-8f1f010b642a7d04",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -152,10 +152,10 @@
           "game-tea-green-tea-basil-milk-portion-02",
           "game-tea-green-tea-basil-milk-portion-03"
         ],
-        "nodeId": "game-tea-green-tea-basil-milk-op-002-mix",
+        "nodeId": "game-tea-green-tea-basil-milk-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
-          "game-tea-green-tea-basil-milk-state-002"
+          "game-tea-green-tea-basil-milk-state-003"
         ],
         "parameters": {
           "strength": 0.45
@@ -174,7 +174,7 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-tea-green-tea-basil-milk-op-002-mix"
+          "game-tea-green-tea-basil-milk-op-003-mix"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
@@ -182,10 +182,10 @@
           "game-tea-green-tea-basil-milk-portion-02",
           "game-tea-green-tea-basil-milk-portion-03"
         ],
-        "nodeId": "game-tea-green-tea-basil-milk-op-003-serve",
+        "nodeId": "game-tea-green-tea-basil-milk-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-tea-green-tea-basil-milk-state-003"
+          "game-tea-green-tea-basil-milk-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -220,7 +220,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-689594bf0cfbeb0b",
+      "baselineArtifactVersion": "clv1-8f1f010b642a7d04",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -245,33 +245,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-689594bf0cfbeb0b",
+      "baselineArtifactVersion": "clv1-8f1f010b642a7d04",
       "causeCodes": [
         "omit:mix"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-omit"
-      ],
-      "mutation": {
-        "targetNodeId": "game-tea-green-tea-basil-milk-op-002-mix",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-tea-green-tea-basil-milk-scenario-002-mix"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-689594bf0cfbeb0b",
-      "causeCodes": [
-        "supplemental:reorder"
       ],
       "expectedDeltas": [
         {
@@ -281,11 +257,35 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-reorder"
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-green-tea-basil-milk-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-basil-milk-scenario-003-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f1f010b642a7d04",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
       ],
       "mutation": {
         "targetNodeId": "game-tea-green-tea-basil-milk-op-001-dice",
-        "type": "reorder"
+        "type": "duplicate"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
@@ -297,7 +297,7 @@
   "simulationProfile": "requires-cat-kitchen-v2",
   "slug": "game-tea-green-tea-basil-milk",
   "yield": {
-    "amount": 520,
-    "unit": "ml"
+    "amount": 603,
+    "unit": "g"
   }
 }

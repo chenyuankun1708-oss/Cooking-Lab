@@ -1,13 +1,15 @@
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import { evaluateGameRecipeCorpus } from "@/lib/game-recipe-validation";
+import { getContentRightsEvaluationDate } from "@/lib/content-rights";
 
 const data = loadCanonicalGameData();
 const result = evaluateGameRecipeCorpus(data.recipes, {
   operations: gameOperationCatalog,
   ingredients: data.ingredients,
+  nutritionDataset: data.nutritionDataset,
   rightsRegistry: data.rightsRegistry,
-  now: "2026-09-08",
+  now: getContentRightsEvaluationDate(),
 });
 const minimumArgument = process.argv.find((argument) => argument.startsWith("--minimum-exportable="));
 const minimumExportable = minimumArgument ? Number(minimumArgument.split("=")[1]) : 0;

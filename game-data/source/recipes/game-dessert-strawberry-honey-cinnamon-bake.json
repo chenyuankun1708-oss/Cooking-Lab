@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-994ca6ec2dcdf28f",
+  "artifactVersion": "clv1-9c03af27fd5ccac3",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -15,8 +15,8 @@
     {
       "ingredientId": "usda-strawberry",
       "initialState": "raw",
-      "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+      "massG": 440,
+      "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
       "optional": false,
       "phase": "fruit",
       "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-01"
@@ -24,56 +24,47 @@
     {
       "ingredientId": "usda-oats",
       "initialState": "dry",
-      "massG": 120,
+      "massG": 150,
       "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-02"
     },
     {
-      "ingredientId": "usda-wheat-flour",
-      "initialState": "dry",
-      "massG": 80,
-      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 35,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
       "optional": false,
       "phase": "dry",
       "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-03"
     },
     {
-      "ingredientId": "usda-almond",
-      "initialState": "raw",
-      "massG": 45,
-      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
-      "optional": false,
-      "phase": "dry",
-      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-04"
-    },
-    {
       "ingredientId": "usda-butter",
-      "initialState": "raw",
-      "massG": 45,
+      "initialState": "prepared",
+      "massG": 35,
       "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
       "optional": false,
       "phase": "fat",
-      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-05"
+      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-04"
     },
     {
       "ingredientId": "usda-honey",
       "initialState": "raw",
-      "massG": 40,
+      "massG": 52,
       "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
       "optional": false,
       "phase": "sweetener",
-      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-06"
+      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-05"
     },
     {
       "ingredientId": "usda-cinnamon",
       "initialState": "dry",
-      "massG": 2,
+      "massG": 3,
       "nutritionProvenanceId": "usda-fdc:171320:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-07"
+      "portionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-06"
     }
   ],
   "itemType": "dessert",
@@ -81,28 +72,28 @@
     "estimated": true,
     "method": "ingredient-sum-v1",
     "perServing": {
-      "addedSugar": 8.21,
-      "calories": 405.3225,
-      "carbs": 54.10975,
-      "fat": 17.1617,
-      "fiber": 1.5005,
-      "protein": 9.875325,
-      "saturatedFat": 6.108225,
-      "sodium": 2.6879,
-      "sugar": 13.0876
+      "addedSugar": 10.673,
+      "calories": 337.335,
+      "carbs": 47.28225,
+      "fat": 14.11555,
+      "fiber": 7.46925,
+      "protein": 7.82405,
+      "saturatedFat": 4.768588,
+      "sodium": 2.908,
+      "sugar": 16.073525
     },
     "provenance": [
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-strawberry",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:167762:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346409",
+        "upstreamRecordId": "167762",
         "yieldFactor": 1
       },
       {
@@ -116,19 +107,6 @@
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
         "upstreamRecordId": "2346396",
-        "yieldFactor": 1
-      },
-      {
-        "accessedAt": "2026-09-08",
-        "basis": "per-100g",
-        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-wheat-flour",
-        "ingredientState": "dry",
-        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
-        "provider": "USDA FoodData Central",
-        "retentionFactor": 1,
-        "upstreamRecordId": "789951",
         "yieldFactor": 1
       },
       {
@@ -150,7 +128,7 @@
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-butter",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -186,15 +164,15 @@
     ],
     "servings": 4,
     "total": {
-      "addedSugar": 32.84,
-      "calories": 1621.29,
-      "carbs": 216.439,
-      "fat": 68.6468,
-      "fiber": 6.002,
-      "protein": 39.5013,
-      "saturatedFat": 24.4329,
-      "sodium": 10.7516,
-      "sugar": 52.3504
+      "addedSugar": 42.692,
+      "calories": 1349.34,
+      "carbs": 189.129,
+      "fat": 56.4622,
+      "fiber": 29.877,
+      "protein": 31.2962,
+      "saturatedFat": 19.07435,
+      "sodium": 11.632,
+      "sugar": 64.2941
     }
   },
   "operationGraph": {
@@ -239,8 +217,7 @@
           "game-dessert-strawberry-honey-cinnamon-bake-portion-03",
           "game-dessert-strawberry-honey-cinnamon-bake-portion-04",
           "game-dessert-strawberry-honey-cinnamon-bake-portion-05",
-          "game-dessert-strawberry-honey-cinnamon-bake-portion-06",
-          "game-dessert-strawberry-honey-cinnamon-bake-portion-07"
+          "game-dessert-strawberry-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-strawberry-honey-cinnamon-bake-op-002-mix",
         "operationType": "mix",
@@ -273,8 +250,7 @@
           "game-dessert-strawberry-honey-cinnamon-bake-portion-03",
           "game-dessert-strawberry-honey-cinnamon-bake-portion-04",
           "game-dessert-strawberry-honey-cinnamon-bake-portion-05",
-          "game-dessert-strawberry-honey-cinnamon-bake-portion-06",
-          "game-dessert-strawberry-honey-cinnamon-bake-portion-07"
+          "game-dessert-strawberry-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-strawberry-honey-cinnamon-bake-op-003-bake",
         "operationType": "bake",
@@ -312,8 +288,7 @@
           "game-dessert-strawberry-honey-cinnamon-bake-portion-03",
           "game-dessert-strawberry-honey-cinnamon-bake-portion-04",
           "game-dessert-strawberry-honey-cinnamon-bake-portion-05",
-          "game-dessert-strawberry-honey-cinnamon-bake-portion-06",
-          "game-dessert-strawberry-honey-cinnamon-bake-portion-07"
+          "game-dessert-strawberry-honey-cinnamon-bake-portion-06"
         ],
         "nodeId": "game-dessert-strawberry-honey-cinnamon-bake-op-004-serve",
         "operationType": "serve",
@@ -353,7 +328,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-994ca6ec2dcdf28f",
+      "baselineArtifactVersion": "clv1-9c03af27fd5ccac3",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -378,14 +353,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-994ca6ec2dcdf28f",
+      "baselineArtifactVersion": "clv1-9c03af27fd5ccac3",
       "causeCodes": [
         "omit:mix"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -402,7 +377,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-994ca6ec2dcdf28f",
+      "baselineArtifactVersion": "clv1-9c03af27fd5ccac3",
       "causeCodes": [
         "heat-too-high:bake"
       ],
@@ -437,7 +412,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-994ca6ec2dcdf28f",
+      "baselineArtifactVersion": "clv1-9c03af27fd5ccac3",
       "causeCodes": [
         "supplemental:allowed-substitution"
       ],
@@ -450,12 +425,12 @@
       ],
       "expectedFaultCodes": [],
       "mutation": {
-        "replacementIngredientId": "usda-strawberry",
+        "replacementIngredientId": "usda-banana",
         "targetNodeId": "game-dessert-strawberry-honey-cinnamon-bake-op-001-dice",
         "targetPortionId": "game-dessert-strawberry-honey-cinnamon-bake-portion-01",
         "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "recoverable",
       "scenarioId": "game-dessert-strawberry-honey-cinnamon-bake-scenario-supplemental"
     }

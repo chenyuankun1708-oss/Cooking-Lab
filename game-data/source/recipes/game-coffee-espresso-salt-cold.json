@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-1bd05c8bd8ed4dde",
+  "artifactVersion": "clv1-df6c5495079158bb",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -8,28 +8,28 @@
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-game-coffee-coffee-almond-cold",
+    "riskClassificationId": "game-risk-game-coffee-espresso-salt-cold",
     "riskLevel": "low"
   },
   "ingredientPortions": [
     {
-      "ingredientId": "usda-coffee-brewed",
+      "ingredientId": "usda-espresso",
       "initialState": "liquid",
-      "massG": 480,
-      "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
-      "portionId": "game-coffee-coffee-almond-cold-portion-01",
-      "volumeMl": 480
+      "portionId": "game-coffee-espresso-salt-cold-portion-01",
+      "volumeMl": 120
     },
     {
-      "ingredientId": "usda-almond",
-      "initialState": "raw",
-      "massG": 30,
-      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+      "ingredientId": "usda-salt",
+      "initialState": "dry",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
-      "portionId": "game-coffee-coffee-almond-cold-portion-02"
+      "portionId": "game-coffee-espresso-salt-cold-portion-02"
     }
   ],
   "itemType": "coffee",
@@ -38,13 +38,13 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 96.3,
-      "carbs": 3,
-      "fat": 7.713,
-      "fiber": 1.62,
-      "protein": 3.513,
-      "saturatedFat": 0.5718,
-      "sodium": 4.8,
+      "calories": 5.4,
+      "carbs": 1.002,
+      "fat": 0.108,
+      "fiber": 0,
+      "protein": 0.072,
+      "saturatedFat": 0.0552,
+      "sodium": 23288.4,
       "sugar": 0
     },
     "provenance": [
@@ -53,38 +53,38 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
-        "ingredientId": "usda-coffee-brewed",
+        "ingredientId": "usda-espresso",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "171890",
+        "upstreamRecordId": "171891",
         "yieldFactor": 1
       },
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-almond",
-        "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "2346393",
+        "upstreamRecordId": "173468",
         "yieldFactor": 1
       }
     ],
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 192.6,
-      "carbs": 6,
-      "fat": 15.426,
-      "fiber": 3.24,
-      "protein": 7.026,
-      "saturatedFat": 1.1436,
-      "sodium": 9.6,
+      "calories": 10.8,
+      "carbs": 2.004,
+      "fat": 0.216,
+      "fiber": 0,
+      "protein": 0.144,
+      "saturatedFat": 0.1104,
+      "sodium": 46576.8,
       "sugar": 0
     }
   },
@@ -96,12 +96,12 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-coffee-coffee-almond-cold-portion-02"
+          "game-coffee-espresso-salt-cold-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-almond-cold-op-001-dice",
+        "nodeId": "game-coffee-espresso-salt-cold-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
-          "game-coffee-coffee-almond-cold-state-001"
+          "game-coffee-espresso-salt-cold-state-001"
         ],
         "parameters": {
           "cutSizeMm": 10,
@@ -121,17 +121,17 @@
         "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [
-          "game-coffee-coffee-almond-cold-op-001-dice"
+          "game-coffee-espresso-salt-cold-op-001-dice"
         ],
         "equipmentId": "container",
         "inputPortionIds": [
-          "game-coffee-coffee-almond-cold-portion-01",
-          "game-coffee-coffee-almond-cold-portion-02"
+          "game-coffee-espresso-salt-cold-portion-01",
+          "game-coffee-espresso-salt-cold-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-almond-cold-op-002-chill",
+        "nodeId": "game-coffee-espresso-salt-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-coffee-coffee-almond-cold-state-002"
+          "game-coffee-espresso-salt-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -149,17 +149,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-coffee-coffee-almond-cold-op-002-chill"
+          "game-coffee-espresso-salt-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-coffee-coffee-almond-cold-portion-01",
-          "game-coffee-coffee-almond-cold-portion-02"
+          "game-coffee-espresso-salt-cold-portion-01",
+          "game-coffee-espresso-salt-cold-portion-02"
         ],
-        "nodeId": "game-coffee-coffee-almond-cold-op-003-serve",
+        "nodeId": "game-coffee-espresso-salt-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-coffee-coffee-almond-cold-state-003"
+          "game-coffee-espresso-salt-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -167,13 +167,13 @@
       }
     ]
   },
-  "recipeId": "game-coffee-coffee-almond-cold",
+  "recipeId": "game-coffee-espresso-salt-cold",
   "rights": {
     "artifactIds": [
-      "game-artifact-game-coffee-coffee-almond-cold-identity",
-      "game-artifact-game-coffee-coffee-almond-cold-preparation",
-      "game-artifact-game-coffee-coffee-almond-cold-nutrition",
-      "game-artifact-game-coffee-coffee-almond-cold-simulation"
+      "game-artifact-game-coffee-espresso-salt-cold-identity",
+      "game-artifact-game-coffee-espresso-salt-cold-preparation",
+      "game-artifact-game-coffee-espresso-salt-cold-nutrition",
+      "game-artifact-game-coffee-espresso-salt-cold-simulation"
     ],
     "evidenceIds": [
       "evidence-usda-fdc-subset",
@@ -185,16 +185,16 @@
       "fda-caffeine-guidance"
     ],
     "usageDecisionIds": [
-      "game-usage-game-coffee-coffee-almond-cold-identity",
-      "game-usage-game-coffee-coffee-almond-cold-preparation",
-      "game-usage-game-coffee-coffee-almond-cold-nutrition",
-      "game-usage-game-coffee-coffee-almond-cold-simulation"
+      "game-usage-game-coffee-espresso-salt-cold-identity",
+      "game-usage-game-coffee-espresso-salt-cold-preparation",
+      "game-usage-game-coffee-espresso-salt-cold-nutrition",
+      "game-usage-game-coffee-espresso-salt-cold-simulation"
     ]
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1bd05c8bd8ed4dde",
+      "baselineArtifactVersion": "clv1-df6c5495079158bb",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -210,29 +210,24 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-coffee-coffee-almond-cold-op-001-dice",
+        "targetNodeId": "game-coffee-espresso-salt-cold-op-001-dice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-coffee-coffee-almond-cold-scenario-001-dice"
+      "scenarioId": "game-coffee-espresso-salt-cold-scenario-001-dice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1bd05c8bd8ed4dde",
+      "baselineArtifactVersion": "clv1-df6c5495079158bb",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -240,16 +235,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-coffee-coffee-almond-cold-op-002-chill",
+        "targetNodeId": "game-coffee-espresso-salt-cold-op-003-chill",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-coffee-coffee-almond-cold-scenario-002-chill"
+      "scenarioId": "game-coffee-espresso-salt-cold-scenario-003-chill"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1bd05c8bd8ed4dde",
+      "baselineArtifactVersion": "clv1-df6c5495079158bb",
       "causeCodes": [
         "supplemental:missing-state-transition"
       ],
@@ -264,20 +259,20 @@
         "fault-missing-state-transition"
       ],
       "mutation": {
-        "targetNodeId": "game-coffee-coffee-almond-cold-op-001-dice",
+        "targetNodeId": "game-coffee-espresso-salt-cold-op-001-dice",
         "type": "missing-state-transition"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-coffee-coffee-almond-cold-scenario-supplemental"
+      "scenarioId": "game-coffee-espresso-salt-cold-scenario-supplemental"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",
   "servings": 2,
   "simulationProfile": "requires-cat-kitchen-v2",
-  "slug": "game-coffee-coffee-almond-cold",
+  "slug": "game-coffee-espresso-salt-cold",
   "yield": {
-    "amount": 480,
-    "unit": "ml"
+    "amount": 240,
+    "unit": "g"
   }
 }

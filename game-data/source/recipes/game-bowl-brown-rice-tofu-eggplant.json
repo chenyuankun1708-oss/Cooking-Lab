@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4f935402a668813d",
+  "artifactVersion": "clv1-b4a76163bc002cb6",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -22,13 +22,23 @@
       "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-01"
     },
     {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base-cooking-water",
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-02",
+      "volumeMl": 480
+    },
+    {
       "ingredientId": "usda-tofu",
-      "initialState": "raw",
+      "initialState": "prepared",
       "massG": 300,
       "nutritionProvenanceId": "usda-fdc:172476:sr-legacy-2018-04",
       "optional": false,
       "phase": "primary",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-02"
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-03"
     },
     {
       "ingredientId": "usda-eggplant",
@@ -37,7 +47,7 @@
       "nutritionProvenanceId": "usda-fdc:2685577:foundation-2026-04-30",
       "optional": false,
       "phase": "vegetable",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-03"
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-04"
     },
     {
       "ingredientId": "usda-onion",
@@ -46,16 +56,16 @@
       "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-04"
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-05"
     },
     {
       "ingredientId": "usda-garlic",
       "initialState": "raw",
       "massG": 12,
-      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
       "optional": false,
       "phase": "aromatic",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-05"
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-06"
     },
     {
       "ingredientId": "usda-canola-oil",
@@ -64,7 +74,7 @@
       "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
       "optional": false,
       "phase": "cooking",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-06",
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-07",
       "volumeMl": 21.978022
     },
     {
@@ -74,7 +84,7 @@
       "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-07"
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-08"
     },
     {
       "ingredientId": "usda-vinegar",
@@ -83,7 +93,7 @@
       "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-08",
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-09",
       "volumeMl": 12
     },
     {
@@ -93,7 +103,7 @@
       "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "seasoning",
-      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-09"
+      "portionId": "game-bowl-brown-rice-tofu-eggplant-portion-10"
     }
   ],
   "itemType": "dish",
@@ -102,14 +112,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 358.66,
-      "carbs": 54.9887,
-      "fat": 10.7194,
-      "fiber": 4.593,
-      "protein": 11.9047,
-      "saturatedFat": 0.8899,
-      "sodium": 571.4136,
-      "sugar": 3.8212
+      "calories": 358.84,
+      "carbs": 55.1357,
+      "fat": 10.723,
+      "fiber": 4.575,
+      "protein": 11.8969,
+      "saturatedFat": 0.89257,
+      "sodium": 576.7236,
+      "sugar": 3.8512
     },
     "provenance": [
       {
@@ -130,8 +140,21 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-tofu",
-        "ingredientState": "raw",
+        "ingredientState": "prepared",
         "nutritionProvenanceId": "usda-fdc:172476:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
@@ -168,13 +191,13 @@
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-garlic",
         "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "nutritionProvenanceId": "usda-fdc:169230:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1104647",
+        "upstreamRecordId": "169230",
         "yieldFactor": 1
       },
       {
@@ -233,14 +256,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 0,
-      "calories": 1434.64,
-      "carbs": 219.9548,
-      "fat": 42.8776,
-      "fiber": 18.372,
-      "protein": 47.6188,
-      "saturatedFat": 3.5596,
-      "sodium": 2285.6544,
-      "sugar": 15.2848
+      "calories": 1435.36,
+      "carbs": 220.5428,
+      "fat": 42.892,
+      "fiber": 18.3,
+      "protein": 47.5876,
+      "saturatedFat": 3.57028,
+      "sodium": 2306.8944,
+      "sugar": 15.4048
     }
   },
   "operationGraph": {
@@ -251,8 +274,8 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-brown-rice-tofu-eggplant-portion-03",
-          "game-bowl-brown-rice-tofu-eggplant-portion-04"
+          "game-bowl-brown-rice-tofu-eggplant-portion-04",
+          "game-bowl-brown-rice-tofu-eggplant-portion-05"
         ],
         "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-001-dice",
         "operationType": "dice",
@@ -279,7 +302,7 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-bowl-brown-rice-tofu-eggplant-portion-05"
+          "game-bowl-brown-rice-tofu-eggplant-portion-06"
         ],
         "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-002-mince",
         "operationType": "mince",
@@ -306,10 +329,11 @@
         "dependsOn": [],
         "equipmentId": "pot",
         "inputPortionIds": [
-          "game-bowl-brown-rice-tofu-eggplant-portion-01"
+          "game-bowl-brown-rice-tofu-eggplant-portion-01",
+          "game-bowl-brown-rice-tofu-eggplant-portion-02"
         ],
-        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-003-boil",
-        "operationType": "boil",
+        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-003-simmer",
+        "operationType": "simmer",
         "outputStateIds": [
           "game-bowl-brown-rice-tofu-eggplant-state-003"
         ],
@@ -325,7 +349,7 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 900000
+        "waitDurationMs": 2100000
       },
       {
         "activeDurationMs": 180000,
@@ -336,16 +360,16 @@
         ],
         "equipmentId": "pan",
         "inputPortionIds": [
-          "game-bowl-brown-rice-tofu-eggplant-portion-02",
           "game-bowl-brown-rice-tofu-eggplant-portion-03",
           "game-bowl-brown-rice-tofu-eggplant-portion-04",
           "game-bowl-brown-rice-tofu-eggplant-portion-05",
-          "game-bowl-brown-rice-tofu-eggplant-portion-06"
+          "game-bowl-brown-rice-tofu-eggplant-portion-06",
+          "game-bowl-brown-rice-tofu-eggplant-portion-07"
         ],
-        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-005-pan-fry",
+        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-004-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "game-bowl-brown-rice-tofu-eggplant-state-005"
+          "game-bowl-brown-rice-tofu-eggplant-state-004"
         ],
         "parameters": {
           "capacityG": 900,
@@ -370,18 +394,18 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "game-bowl-brown-rice-tofu-eggplant-op-005-pan-fry"
+          "game-bowl-brown-rice-tofu-eggplant-op-004-pan-fry"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-bowl-brown-rice-tofu-eggplant-portion-07",
           "game-bowl-brown-rice-tofu-eggplant-portion-08",
-          "game-bowl-brown-rice-tofu-eggplant-portion-09"
+          "game-bowl-brown-rice-tofu-eggplant-portion-09",
+          "game-bowl-brown-rice-tofu-eggplant-portion-10"
         ],
-        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-006-season",
+        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-005-season",
         "operationType": "season",
         "outputStateIds": [
-          "game-bowl-brown-rice-tofu-eggplant-state-006"
+          "game-bowl-brown-rice-tofu-eggplant-state-005"
         ],
         "parameters": {
           "quantityG": 35
@@ -399,25 +423,25 @@
         "activeDurationMs": 90000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-brown-rice-tofu-eggplant-op-003-boil",
-          "game-bowl-brown-rice-tofu-eggplant-op-006-season"
+          "game-bowl-brown-rice-tofu-eggplant-op-003-simmer",
+          "game-bowl-brown-rice-tofu-eggplant-op-005-season"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-brown-rice-tofu-eggplant-portion-01",
-          "game-bowl-brown-rice-tofu-eggplant-portion-02",
           "game-bowl-brown-rice-tofu-eggplant-portion-03",
           "game-bowl-brown-rice-tofu-eggplant-portion-04",
           "game-bowl-brown-rice-tofu-eggplant-portion-05",
           "game-bowl-brown-rice-tofu-eggplant-portion-06",
           "game-bowl-brown-rice-tofu-eggplant-portion-07",
           "game-bowl-brown-rice-tofu-eggplant-portion-08",
-          "game-bowl-brown-rice-tofu-eggplant-portion-09"
+          "game-bowl-brown-rice-tofu-eggplant-portion-09",
+          "game-bowl-brown-rice-tofu-eggplant-portion-10"
         ],
-        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-007-assemble",
+        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-006-assemble",
         "operationType": "assemble",
         "outputStateIds": [
-          "game-bowl-brown-rice-tofu-eggplant-state-007"
+          "game-bowl-brown-rice-tofu-eggplant-state-006"
         ],
         "parameters": {},
         "targetStates": [],
@@ -427,24 +451,24 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-bowl-brown-rice-tofu-eggplant-op-007-assemble"
+          "game-bowl-brown-rice-tofu-eggplant-op-006-assemble"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
           "game-bowl-brown-rice-tofu-eggplant-portion-01",
-          "game-bowl-brown-rice-tofu-eggplant-portion-02",
           "game-bowl-brown-rice-tofu-eggplant-portion-03",
           "game-bowl-brown-rice-tofu-eggplant-portion-04",
           "game-bowl-brown-rice-tofu-eggplant-portion-05",
           "game-bowl-brown-rice-tofu-eggplant-portion-06",
           "game-bowl-brown-rice-tofu-eggplant-portion-07",
           "game-bowl-brown-rice-tofu-eggplant-portion-08",
-          "game-bowl-brown-rice-tofu-eggplant-portion-09"
+          "game-bowl-brown-rice-tofu-eggplant-portion-09",
+          "game-bowl-brown-rice-tofu-eggplant-portion-10"
         ],
-        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-008-serve",
+        "nodeId": "game-bowl-brown-rice-tofu-eggplant-op-007-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-bowl-brown-rice-tofu-eggplant-state-008"
+          "game-bowl-brown-rice-tofu-eggplant-state-007"
         ],
         "parameters": {},
         "targetStates": [],
@@ -479,7 +503,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4f935402a668813d",
+      "baselineArtifactVersion": "clv1-b4a76163bc002cb6",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -504,7 +528,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4f935402a668813d",
+      "baselineArtifactVersion": "clv1-b4a76163bc002cb6",
       "causeCodes": [
         "cut-size-too-large:mince"
       ],
@@ -529,9 +553,9 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4f935402a668813d",
+      "baselineArtifactVersion": "clv1-b4a76163bc002cb6",
       "causeCodes": [
-        "duration-too-short:boil"
+        "duration-too-short:simmer"
       ],
       "expectedDeltas": [
         {
@@ -550,16 +574,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-003-boil",
+        "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-003-simmer",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-bowl-brown-rice-tofu-eggplant-scenario-003-boil"
+      "scenarioId": "game-bowl-brown-rice-tofu-eggplant-scenario-003-simmer"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4f935402a668813d",
+      "baselineArtifactVersion": "clv1-b4a76163bc002cb6",
       "causeCodes": [
         "overcrowding:pan-fry"
       ],
@@ -580,16 +604,16 @@
       ],
       "mutation": {
         "scalar": 1.5,
-        "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-005-pan-fry",
+        "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-004-pan-fry",
         "type": "overcrowding"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-brown-rice-tofu-eggplant-scenario-005-pan-fry"
+      "scenarioId": "game-bowl-brown-rice-tofu-eggplant-scenario-004-pan-fry"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4f935402a668813d",
+      "baselineArtifactVersion": "clv1-b4a76163bc002cb6",
       "causeCodes": [
         "season-too-early:season"
       ],
@@ -597,23 +621,28 @@
         {
           "confidence": "rule-based",
           "dimension": "salt",
-          "direction": "increase"
+          "direction": "unchanged"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
         }
       ],
       "expectedFaultCodes": [
         "fault-season-too-early"
       ],
       "mutation": {
-        "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-006-season",
+        "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-005-season",
         "type": "season-too-early"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-bowl-brown-rice-tofu-eggplant-scenario-006-season"
+      "scenarioId": "game-bowl-brown-rice-tofu-eggplant-scenario-005-season"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4f935402a668813d",
+      "baselineArtifactVersion": "clv1-b4a76163bc002cb6",
       "causeCodes": [
         "supplemental:quantity-too-high"
       ],
@@ -630,7 +659,7 @@
       "mutation": {
         "scalar": 1.5,
         "targetNodeId": "game-bowl-brown-rice-tofu-eggplant-op-001-dice",
-        "targetPortionId": "game-bowl-brown-rice-tofu-eggplant-portion-03",
+        "targetPortionId": "game-bowl-brown-rice-tofu-eggplant-portion-05",
         "type": "quantity-too-high"
       },
       "nutritionEffect": "recalculate-from-quantities",

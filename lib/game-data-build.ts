@@ -1,21 +1,35 @@
 import { createHash } from "node:crypto";
-import { mkdirSync, renameSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
+import { homedir, tmpdir } from "node:os";
+import { basename, dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { Source } from "@/types/culinary";
 import type {
   GameDataManifestV1,
   GameIngredientCatalogV1,
+  GameNutritionDatasetSubsetV1,
   GameOperationDefinitionV1,
   GameRecipeV1,
   GameRightsRegistryV1,
 } from "@/types/game-recipe";
+import { compileCatKitchenGoal1Recipe } from "./cat-kitchen-goal1-compiler";
+import {
+  parseGameDataManifest,
+  parseGameIngredientCatalog,
+  parseGameNutritionDataset,
+  parseGameOperationCatalog,
+  parseGameRecipe,
+  parseGameRightsRegistry,
+  parseGodotGameRecipe,
+  type GodotGameRecipeV1,
+} from "./game-data-runtime-schema";
 import { assertGameRecipeCorpusReady, evaluateGameRecipeCorpus } from "./game-recipe-validation";
 import { stableJson } from "./stable-json";
 
 export interface GameDataBuildInput {
   recipes: readonly GameRecipeV1[];
   ingredients: GameIngredientCatalogV1;
+  nutritionDataset: GameNutritionDatasetSubsetV1;
   operations: readonly GameOperationDefinitionV1[];
   rightsRegistry: GameRightsRegistryV1;
   now: string;
@@ -32,9 +46,12 @@ export function buildGameData(
   input: GameDataBuildInput,
   outputDirectory = resolve(process.cwd(), ".local/game-data"),
 ): GameDataBuildResult {
+  const targetDirectory = assertSafeOutputDirectory(outputDirectory);
+  assertRuntimeBuildInput(input);
   const canonicalAudit = evaluateGameRecipeCorpus(input.recipes, {
     operations: input.operations,
     ingredients: input.ingredients,
+    nutritionDataset: input.nutritionDataset,
     rightsRegistry: input.rightsRegistry,
     now: input.now,
   });
@@ -44,12 +61,21 @@ export function buildGameData(
   const exportable = input.recipes
     .filter((recipe) => recipe.eligibility === "exportable")
     .sort((left, right) => left.recipeId.localeCompare(right.recipeId));
+  if (exportable.length === 0) {
+    throw new Error("Game data gate blocked export: no exportable recipes");
+  }
   assertGameRecipeCorpusReady(exportable, {
     operations: input.operations,
     ingredients: input.ingredients,
+    nutritionDataset: input.nutritionDataset,
     rightsRegistry: input.rightsRegistry,
     now: input.now,
   });
+  for (const recipe of exportable) {
+    if (recipe.simulationProfile === "cat-kitchen-goal1-v1") {
+      compileCatKitchenGoal1Recipe(recipe, input.ingredients, input.operations);
+    }
+  }
 
   const usedIngredientIds = new Set(exportable.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.ingredientId)));
   const exportIngredients: GameIngredientCatalogV1 = {
@@ -58,6 +84,7 @@ export function buildGameData(
       .filter((ingredient) => usedIngredientIds.has(ingredient.ingredientId))
       .sort((left, right) => left.ingredientId.localeCompare(right.ingredientId)),
   };
+  const exportNutritionDataset = createExportNutritionDataset(input.nutritionDataset, usedIngredientIds);
   const usedArtifactIds = new Set(exportable.flatMap((recipe) => recipe.rights.artifactIds));
   const usedSourceIds = new Set(exportable.flatMap((recipe) => recipe.rights.sourceIds));
   const attribution = {
@@ -66,72 +93,114 @@ export function buildGameData(
     sources: input.rightsRegistry.sources.filter((source) => usedSourceIds.has(source.id)).sort(byId).map(sourceAttribution),
     requirements: input.rightsRegistry.attributions.filter((entry) => usedArtifactIds.has(entry.artifactId)).sort(byId),
   };
-  const rightsExport = {
-    schemaVersion: input.rightsRegistry.schemaVersion,
-    policyVersion: input.rightsRegistry.policyVersion,
-    artifacts: input.rightsRegistry.artifacts.filter((entry) => usedArtifactIds.has(entry.id)).sort(byId),
-    decisions: input.rightsRegistry.decisions.filter((entry) => usedArtifactIds.has(entry.artifactId)).sort(byId),
-  };
-
-  rmSync(outputDirectory, { recursive: true, force: true });
-  const recipeDirectory = resolve(outputDirectory, "godot/recipes");
-  mkdirSync(recipeDirectory, { recursive: true });
-  const recipeEntries: GameDataManifestV1["recipes"] = [];
-  for (const recipe of exportable) {
-    const relativePath = `godot/recipes/${recipe.recipeId}.json`;
-    const content = stableJson(toGodotRecipe(recipe));
-    writeFileSync(resolve(outputDirectory, relativePath), content);
-    recipeEntries.push({
-      recipeId: recipe.recipeId,
-      path: relativePath,
-      sha256: sha256(content),
-      artifactVersion: recipe.artifactVersion,
-      simulationProfile: recipe.simulationProfile,
+  const rightsExport = createRightsExport(input.rightsRegistry, exportable, usedArtifactIds, usedSourceIds);
+  mkdirSync(dirname(targetDirectory), { recursive: true });
+  const stagingDirectory = mkdtempSync(resolve(dirname(targetDirectory), `.${basename(targetDirectory)}.staging-`));
+  try {
+    const recipeDirectory = resolve(stagingDirectory, "godot/recipes");
+    mkdirSync(recipeDirectory, { recursive: true });
+    const recipeEntries: GameDataManifestV1["recipes"] = [];
+    for (const recipe of exportable) {
+      const relativePath = `godot/recipes/${recipe.recipeId}.json`;
+      const content = stableJson(toGodotRecipe(recipe));
+      writeFileSync(resolve(stagingDirectory, relativePath), content);
+      recipeEntries.push({
+        recipeId: recipe.recipeId,
+        path: relativePath,
+        sha256: sha256(content),
+        artifactVersion: recipe.artifactVersion,
+        simulationProfile: recipe.simulationProfile,
+      });
+    }
+    const ingredientPath = "godot/ingredients.json";
+    const nutritionPath = "nutrition-dataset.json";
+    const operationPath = "godot/operations.json";
+    const attributionPath = "attribution.json";
+    const rightsPath = "rights-registry.json";
+    const ingredientContent = stableJson(exportIngredients);
+    const nutritionContent = stableJson(exportNutritionDataset);
+    const operationContent = stableJson({
+      version: "cooking-lab-game-operations-v1",
+      operations: input.operations,
     });
-  }
-  const ingredientPath = "godot/ingredients.json";
-  const operationPath = "godot/operations.json";
-  const attributionPath = "attribution.json";
-  const rightsPath = "rights-registry.json";
-  const ingredientContent = stableJson(exportIngredients);
-  const operationContent = stableJson({
-    version: "cooking-lab-game-operations-v1",
-    operations: input.operations,
-  });
-  const attributionContent = stableJson(attribution);
-  const rightsContent = stableJson(rightsExport);
-  writeArtifact(outputDirectory, ingredientPath, ingredientContent);
-  writeArtifact(outputDirectory, operationPath, operationContent);
-  writeArtifact(outputDirectory, attributionPath, attributionContent);
-  writeArtifact(outputDirectory, rightsPath, rightsContent);
+    const attributionContent = stableJson(attribution);
+    const rightsContent = stableJson(rightsExport);
+    writeArtifact(stagingDirectory, ingredientPath, ingredientContent);
+    writeArtifact(stagingDirectory, nutritionPath, nutritionContent);
+    writeArtifact(stagingDirectory, operationPath, operationContent);
+    writeArtifact(stagingDirectory, attributionPath, attributionContent);
+    writeArtifact(stagingDirectory, rightsPath, rightsContent);
 
-  const manifest: GameDataManifestV1 = {
+    const supportingHashes = {
+      ingredientCatalog: sha256(ingredientContent),
+      nutritionDataset: sha256(nutritionContent),
+      operationCatalog: sha256(operationContent),
+      rightsRegistry: sha256(rightsContent),
+      attribution: sha256(attributionContent),
+    };
+    const manifest: GameDataManifestV1 = {
+      schemaVersion: "cooking-lab-game-manifest-v1",
+      catalogVersion: createGameDataCatalogVersion(recipeEntries, supportingHashes),
+      generatorVersion: "cooking-lab-game-data-build-v1",
+      minimumAdapterVersion: "cat-kitchen-game-data-adapter-v1",
+      recipeCount: exportable.length,
+      recipes: recipeEntries,
+      ingredientCatalog: { path: ingredientPath, sha256: supportingHashes.ingredientCatalog },
+      nutritionDataset: {
+        path: nutritionPath,
+        sha256: supportingHashes.nutritionDataset,
+        schemaVersion: exportNutritionDataset.schemaVersion,
+        provider: exportNutritionDataset.provider,
+        upstreamArchives: exportNutritionDataset.upstreamArchives.map(({ datasetVersion, sha256: archiveHash }) => ({ datasetVersion, sha256: archiveHash })),
+      },
+      operationCatalog: {
+        path: operationPath,
+        sha256: supportingHashes.operationCatalog,
+        version: "cooking-lab-game-operations-v1",
+      },
+      rightsRegistry: {
+        path: rightsPath,
+        sha256: supportingHashes.rightsRegistry,
+        version: "cooking-lab-game-rights-v1",
+      },
+      attribution: { path: attributionPath, sha256: supportingHashes.attribution },
+    };
+    writeFileSync(resolve(stagingDirectory, "manifest.json"), stableJson(manifest));
+
+    writeSqlite(resolve(stagingDirectory, "game-data.sqlite"), exportable, exportIngredients, input.rightsRegistry);
+    writeFileSync(resolve(stagingDirectory, "audit.md"), createGameDataAuditReport(input, exportable));
+    verifyExportParity(stagingDirectory, manifest, exportable, exportIngredients);
+    replaceDirectory(stagingDirectory, targetDirectory);
+    return {
+      manifest,
+      outputDirectory: targetDirectory,
+      sqlitePath: resolve(targetDirectory, "game-data.sqlite"),
+      auditReportPath: resolve(targetDirectory, "audit.md"),
+    };
+  } catch (error) {
+    rmSync(stagingDirectory, { recursive: true, force: true });
+    throw error;
+  }
+}
+
+export function createGameDataCatalogVersion(
+  recipes: readonly GameDataManifestV1["recipes"][number][],
+  supportingHashes: {
+    ingredientCatalog: string;
+    nutritionDataset: string;
+    operationCatalog: string;
+    rightsRegistry: string;
+    attribution: string;
+  },
+): string {
+  const payload = stableJson({
     schemaVersion: "cooking-lab-game-manifest-v1",
-    catalogVersion: exportIngredients.catalogVersion,
     generatorVersion: "cooking-lab-game-data-build-v1",
     minimumAdapterVersion: "cat-kitchen-game-data-adapter-v1",
-    recipeCount: exportable.length,
-    recipes: recipeEntries,
-    ingredientCatalog: { path: ingredientPath, sha256: sha256(ingredientContent) },
-    operationCatalog: {
-      path: operationPath,
-      sha256: sha256(operationContent),
-      version: "cooking-lab-game-operations-v1",
-    },
-    rightsRegistry: {
-      path: rightsPath,
-      sha256: sha256(rightsContent),
-      version: "cooking-lab-game-rights-v1",
-    },
-    attribution: { path: attributionPath, sha256: sha256(attributionContent) },
-  };
-  writeFileSync(resolve(outputDirectory, "manifest.json"), stableJson(manifest));
-
-  const sqlitePath = resolve(outputDirectory, "game-data.sqlite");
-  writeSqlite(sqlitePath, exportable, exportIngredients, input.rightsRegistry);
-  const auditReportPath = resolve(outputDirectory, "audit.md");
-  writeFileSync(auditReportPath, createGameDataAuditReport(input, exportable));
-  return { manifest, outputDirectory, sqlitePath, auditReportPath };
+    recipes: [...recipes].sort((left, right) => left.recipeId.localeCompare(right.recipeId)),
+    supportingHashes,
+  });
+  return `clgcv1-${sha256(payload).slice(0, 24)}`;
 }
 
 export function createGameDataAuditReport(input: GameDataBuildInput, exportable: readonly GameRecipeV1[]): string {
@@ -154,7 +223,7 @@ export function createGameDataAuditReport(input: GameDataBuildInput, exportable:
   ].join("\n");
 }
 
-function toGodotRecipe(recipe: GameRecipeV1) {
+function toGodotRecipe(recipe: GameRecipeV1): GodotGameRecipeV1 {
   return {
     schemaVersion: recipe.schemaVersion,
     artifactVersion: recipe.artifactVersion,
@@ -184,34 +253,45 @@ function writeSqlite(
     PRAGMA journal_mode = DELETE;
     PRAGMA synchronous = FULL;
     PRAGMA user_version = 1;
-    CREATE TABLE recipes (recipe_id TEXT PRIMARY KEY, artifact_version TEXT NOT NULL, item_type TEXT NOT NULL, simulation_profile TEXT NOT NULL, servings REAL NOT NULL, yield_amount REAL NOT NULL, yield_unit TEXT NOT NULL);
-    CREATE TABLE ingredients (ingredient_id TEXT PRIMARY KEY, default_state TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, nutrition_json TEXT NOT NULL, source_json TEXT NOT NULL);
-    CREATE TABLE recipe_ingredients (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, ingredient_id TEXT NOT NULL, mass_g REAL NOT NULL, volume_ml REAL, optional INTEGER NOT NULL, phase TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id));
-    CREATE TABLE operations (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, operation_type TEXT NOT NULL, equipment_id TEXT, active_duration_ms INTEGER NOT NULL, wait_duration_ms INTEGER NOT NULL, parameters_json TEXT NOT NULL, criticality TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id));
+    CREATE TABLE recipes (recipe_id TEXT PRIMARY KEY, artifact_version TEXT NOT NULL, item_type TEXT NOT NULL, simulation_profile TEXT NOT NULL, servings REAL NOT NULL, yield_amount REAL NOT NULL, yield_unit TEXT NOT NULL, recipe_json TEXT NOT NULL);
+    CREATE TABLE ingredients (ingredient_id TEXT PRIMARY KEY, default_state TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, nutrition_json TEXT NOT NULL, source_json TEXT NOT NULL, definition_json TEXT NOT NULL);
+    CREATE TABLE recipe_ingredients (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, ingredient_id TEXT NOT NULL, initial_state TEXT NOT NULL, mass_g REAL NOT NULL, volume_ml REAL, optional INTEGER NOT NULL, phase TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id));
+    CREATE TABLE operations (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, operation_type TEXT NOT NULL, equipment_id TEXT, active_duration_ms INTEGER NOT NULL, wait_duration_ms INTEGER NOT NULL, parameters_json TEXT NOT NULL, criticality TEXT NOT NULL, source_step_order INTEGER, PRIMARY KEY (recipe_id, node_id));
     CREATE TABLE operation_dependencies (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, depends_on_node_id TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id, depends_on_node_id));
+    CREATE TABLE operation_inputs (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, portion_id TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id, portion_id));
+    CREATE TABLE operation_outputs (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, state_id TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id, state_id));
     CREATE TABLE target_states (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, dimension TEXT NOT NULL, minimum REAL, maximum REAL, unit TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id, dimension));
     CREATE TABLE nutrition (recipe_id TEXT NOT NULL, scope TEXT NOT NULL, calories REAL NOT NULL, protein REAL NOT NULL, fat REAL NOT NULL, saturated_fat REAL NOT NULL, carbs REAL NOT NULL, sugar REAL NOT NULL, added_sugar REAL NOT NULL, fiber REAL NOT NULL, sodium REAL NOT NULL, provenance_json TEXT NOT NULL, PRIMARY KEY (recipe_id, scope));
     CREATE TABLE sources (source_id TEXT PRIMARY KEY, title TEXT NOT NULL, institution TEXT NOT NULL, rights_status TEXT NOT NULL, source_json TEXT NOT NULL);
     CREATE TABLE rights_decisions (decision_id TEXT PRIMARY KEY, artifact_id TEXT NOT NULL, intended_use TEXT NOT NULL, decision TEXT NOT NULL, decision_json TEXT NOT NULL);
     CREATE TABLE scenarios (recipe_id TEXT NOT NULL, scenario_id TEXT NOT NULL, mutation_type TEXT NOT NULL, recoverability TEXT NOT NULL, nutrition_effect TEXT NOT NULL, scenario_json TEXT NOT NULL, PRIMARY KEY (recipe_id, scenario_id));
-    CREATE TABLE mutations (recipe_id TEXT NOT NULL, scenario_id TEXT NOT NULL, mutation_type TEXT NOT NULL, target_node_id TEXT, target_portion_id TEXT, scalar REAL, replacement_ingredient_id TEXT, PRIMARY KEY (recipe_id, scenario_id));
+    CREATE TABLE mutations (recipe_id TEXT NOT NULL, scenario_id TEXT NOT NULL, mutation_type TEXT NOT NULL, target_node_id TEXT, destination_before_node_id TEXT, target_portion_id TEXT, scalar REAL, replacement_ingredient_id TEXT, replacement_equipment_id TEXT, PRIMARY KEY (recipe_id, scenario_id));
   `);
   database.exec("BEGIN IMMEDIATE");
   try {
-    const insertRecipe = database.prepare("INSERT INTO recipes VALUES (?, ?, ?, ?, ?, ?, ?)");
-    const insertIngredient = database.prepare("INSERT INTO ingredients VALUES (?, ?, ?, ?, ?)");
-    const insertPortion = database.prepare("INSERT INTO recipe_ingredients VALUES (?, ?, ?, ?, ?, ?, ?)");
-    const insertOperation = database.prepare("INSERT INTO operations VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    const insertRecipe = database.prepare("INSERT INTO recipes VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    const insertIngredient = database.prepare("INSERT INTO ingredients VALUES (?, ?, ?, ?, ?, ?)");
+    const insertPortion = database.prepare("INSERT INTO recipe_ingredients VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    const insertOperation = database.prepare("INSERT INTO operations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     const insertDependency = database.prepare("INSERT INTO operation_dependencies VALUES (?, ?, ?)");
+    const insertOperationInput = database.prepare("INSERT INTO operation_inputs VALUES (?, ?, ?)");
+    const insertOperationOutput = database.prepare("INSERT INTO operation_outputs VALUES (?, ?, ?)");
     const insertTarget = database.prepare("INSERT INTO target_states VALUES (?, ?, ?, ?, ?, ?)");
     const insertNutrition = database.prepare("INSERT INTO nutrition VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     const insertSource = database.prepare("INSERT INTO sources VALUES (?, ?, ?, ?, ?)");
     const insertDecision = database.prepare("INSERT INTO rights_decisions VALUES (?, ?, ?, ?, ?)");
     const insertScenario = database.prepare("INSERT INTO scenarios VALUES (?, ?, ?, ?, ?, ?)");
-    const insertMutation = database.prepare("INSERT INTO mutations VALUES (?, ?, ?, ?, ?, ?, ?)");
+    const insertMutation = database.prepare("INSERT INTO mutations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     for (const ingredient of ingredients.ingredients) {
-      insertIngredient.run(ingredient.ingredientId, ingredient.defaultState, ingredient.nutritionProvenanceId, compactJson(ingredient.nutritionPer100g), compactJson(ingredient.nutritionSource));
+      insertIngredient.run(
+        ingredient.ingredientId,
+        ingredient.defaultState,
+        ingredient.nutritionProvenanceId,
+        compactJson(ingredient.nutritionPer100g),
+        compactJson(ingredient.nutritionSource),
+        compactJson(ingredient),
+      );
     }
     const sourceIds = new Set(recipes.flatMap((recipe) => recipe.rights.sourceIds));
     for (const source of rightsRegistry.sources.filter((entry) => sourceIds.has(entry.id)).sort(byId)) {
@@ -222,13 +302,44 @@ function writeSqlite(
       insertDecision.run(decision.id, decision.artifactId, decision.intendedUse, decision.decision, compactJson(decision));
     }
     for (const recipe of recipes) {
-      insertRecipe.run(recipe.recipeId, recipe.artifactVersion, recipe.itemType, recipe.simulationProfile, recipe.servings, recipe.yield.amount, recipe.yield.unit);
+      insertRecipe.run(
+        recipe.recipeId,
+        recipe.artifactVersion,
+        recipe.itemType,
+        recipe.simulationProfile,
+        recipe.servings,
+        recipe.yield.amount,
+        recipe.yield.unit,
+        compactJson(toGodotRecipe(recipe)),
+      );
       for (const portion of recipe.ingredientPortions) {
-        insertPortion.run(recipe.recipeId, portion.portionId, portion.ingredientId, portion.massG, portion.volumeMl ?? null, portion.optional ? 1 : 0, portion.phase);
+        insertPortion.run(
+          recipe.recipeId,
+          portion.portionId,
+          portion.ingredientId,
+          portion.initialState,
+          portion.massG,
+          portion.volumeMl ?? null,
+          portion.optional ? 1 : 0,
+          portion.phase,
+          portion.nutritionProvenanceId,
+        );
       }
       for (const node of recipe.operationGraph.nodes) {
-        insertOperation.run(recipe.recipeId, node.nodeId, node.operationType, node.equipmentId ?? null, node.activeDurationMs, node.waitDurationMs, compactJson(node.parameters), node.criticality);
+        insertOperation.run(
+          recipe.recipeId,
+          node.nodeId,
+          node.operationType,
+          node.equipmentId ?? null,
+          node.activeDurationMs,
+          node.waitDurationMs,
+          compactJson(node.parameters),
+          node.criticality,
+          node.sourceStepOrder ?? null,
+        );
         for (const dependency of [...node.dependsOn].sort()) insertDependency.run(recipe.recipeId, node.nodeId, dependency);
+        for (const portionId of [...node.inputPortionIds].sort()) insertOperationInput.run(recipe.recipeId, node.nodeId, portionId);
+        for (const stateId of [...node.outputStateIds].sort()) insertOperationOutput.run(recipe.recipeId, node.nodeId, stateId);
         for (const target of [...node.targetStates].sort((left, right) => left.dimension.localeCompare(right.dimension))) {
           insertTarget.run(recipe.recipeId, node.nodeId, target.dimension, target.minimum ?? null, target.maximum ?? null, target.unit);
         }
@@ -244,7 +355,9 @@ function writeSqlite(
         insertScenario.run(recipe.recipeId, scenario.scenarioId, scenario.mutation.type, scenario.recoverability, scenario.nutritionEffect, compactJson(scenario));
         insertMutation.run(
           recipe.recipeId, scenario.scenarioId, scenario.mutation.type, scenario.mutation.targetNodeId ?? null,
-          scenario.mutation.targetPortionId ?? null, scenario.mutation.scalar ?? null, scenario.mutation.replacementIngredientId ?? null,
+          scenario.mutation.destinationBeforeNodeId ?? null, scenario.mutation.targetPortionId ?? null,
+          scenario.mutation.scalar ?? null, scenario.mutation.replacementIngredientId ?? null,
+          scenario.mutation.replacementEquipmentId ?? null,
         );
       }
     }
@@ -258,6 +371,147 @@ function writeSqlite(
   database.close();
   rmSync(path, { force: true });
   renameSync(temporaryPath, path);
+}
+
+function createExportNutritionDataset(
+  dataset: GameNutritionDatasetSubsetV1,
+  usedIngredientIds: ReadonlySet<string>,
+): GameNutritionDatasetSubsetV1 {
+  const records = dataset.records
+    .filter((record) => usedIngredientIds.has(record.ingredientId))
+    .sort((left, right) => left.ingredientId.localeCompare(right.ingredientId));
+  const datasetVersions = new Set(records.map((record) => record.datasetVersion));
+  return {
+    ...dataset,
+    upstreamArchives: dataset.upstreamArchives
+      .filter((archive) => datasetVersions.has(archive.datasetVersion))
+      .sort((left, right) => left.datasetVersion.localeCompare(right.datasetVersion)),
+    records,
+  };
+}
+
+function createRightsExport(
+  registry: GameRightsRegistryV1,
+  recipes: readonly GameRecipeV1[],
+  usedArtifactIds: ReadonlySet<string>,
+  usedSourceIds: ReadonlySet<string>,
+): GameRightsRegistryV1 {
+  const recipeIds = new Set(recipes.map((recipe) => recipe.recipeId));
+  const usedEvidenceIds = new Set([
+    ...recipes.flatMap((recipe) => recipe.rights.evidenceIds),
+    ...registry.artifacts
+      .filter((artifact) => usedArtifactIds.has(artifact.id))
+      .flatMap((artifact) => artifact.evidenceIds),
+  ]);
+  const attestationIds = new Set(recipes.flatMap((recipe) => recipe.governance.reviewAttestationIds));
+  const classificationIds = new Set(recipes.map((recipe) => recipe.governance.riskClassificationId));
+  const samplingBatchIds = new Set(recipes.flatMap((recipe) => recipe.governance.samplingBatchId ? [recipe.governance.samplingBatchId] : []));
+  return {
+    schemaVersion: registry.schemaVersion,
+    policyVersion: registry.policyVersion,
+    artifacts: registry.artifacts.filter((entry) => usedArtifactIds.has(entry.id)).sort(byId),
+    assessments: registry.assessments.filter((entry) => usedAssessmentIds(registry, usedArtifactIds).has(entry.id)).sort(byId),
+    attributions: registry.attributions.filter((entry) => usedArtifactIds.has(entry.artifactId)).sort(byId),
+    decisions: registry.decisions.filter((entry) => usedArtifactIds.has(entry.artifactId)).sort(byId),
+    sources: registry.sources.filter((entry) => usedSourceIds.has(entry.id)).sort(byId),
+    evidence: registry.evidence.filter((entry) => usedEvidenceIds.has(entry.id)).sort(byId),
+    evidenceOrigins: registry.evidenceOrigins
+      .filter((entry) => usedEvidenceIds.has(entry.evidenceId))
+      .sort((left, right) => left.evidenceId.localeCompare(right.evidenceId)),
+    researchRecords: registry.researchRecords
+      .filter((entry) => entry.subject.type === "game-recipe" && recipeIds.has(entry.subject.id))
+      .sort(byId),
+    governance: {
+      policyVersion: registry.governance.policyVersion,
+      attestations: registry.governance.attestations.filter((entry) => attestationIds.has(entry.id)).sort(byId),
+      riskClassifications: registry.governance.riskClassifications.filter((entry) => classificationIds.has(entry.id)).sort(byId),
+      samplingBatches: registry.governance.samplingBatches.filter((entry) => samplingBatchIds.has(entry.id)).sort(byId),
+    },
+  };
+}
+
+function assertRuntimeBuildInput(input: GameDataBuildInput) {
+  input.recipes.forEach((recipe, index) => parseGameRecipe(recipe, `build.recipes[${index}]`));
+  parseGameIngredientCatalog(input.ingredients, "build.ingredients");
+  parseGameNutritionDataset(input.nutritionDataset, "build.nutritionDataset");
+  parseGameOperationCatalog({ version: "cooking-lab-game-operations-v1", operations: input.operations }, "build.operations");
+  parseGameRightsRegistry(input.rightsRegistry, "build.rightsRegistry");
+}
+
+function verifyExportParity(
+  root: string,
+  expectedManifest: GameDataManifestV1,
+  recipes: readonly GameRecipeV1[],
+  ingredients: GameIngredientCatalogV1,
+) {
+  const manifestContent = readFileSync(resolve(root, "manifest.json"), "utf8");
+  const manifest = parseGameDataManifest(JSON.parse(manifestContent) as unknown, "manifest.json");
+  if (stableJson(manifest) !== stableJson(expectedManifest)) throw new Error("Generated manifest does not match the in-memory manifest");
+  const supporting = [manifest.ingredientCatalog, manifest.nutritionDataset, manifest.operationCatalog, manifest.rightsRegistry, manifest.attribution];
+  for (const artifact of supporting) {
+    const content = readFileSync(resolve(root, artifact.path), "utf8");
+    if (sha256(content) !== artifact.sha256) throw new Error(`Generated artifact hash mismatch: ${artifact.path}`);
+  }
+  parseGameIngredientCatalog(JSON.parse(readFileSync(resolve(root, manifest.ingredientCatalog.path), "utf8")) as unknown, manifest.ingredientCatalog.path);
+  parseGameNutritionDataset(JSON.parse(readFileSync(resolve(root, manifest.nutritionDataset.path), "utf8")) as unknown, manifest.nutritionDataset.path);
+  parseGameOperationCatalog(JSON.parse(readFileSync(resolve(root, manifest.operationCatalog.path), "utf8")) as unknown, manifest.operationCatalog.path);
+  parseGameRightsRegistry(JSON.parse(readFileSync(resolve(root, manifest.rightsRegistry.path), "utf8")) as unknown, manifest.rightsRegistry.path);
+
+  const database = new DatabaseSync(resolve(root, "game-data.sqlite"), { readOnly: true });
+  try {
+    const recipeById = new Map(recipes.map((recipe) => [recipe.recipeId, recipe]));
+    for (const entry of manifest.recipes) {
+      const content = readFileSync(resolve(root, entry.path), "utf8");
+      if (sha256(content) !== entry.sha256) throw new Error(`Generated recipe hash mismatch: ${entry.recipeId}`);
+      const parsed = parseGodotGameRecipe(JSON.parse(content) as unknown, entry.path);
+      const expected = recipeById.get(entry.recipeId);
+      if (!expected || stableJson(parsed) !== stableJson(toGodotRecipe(expected))) {
+        throw new Error(`Godot recipe does not match canonical recipe: ${entry.recipeId}`);
+      }
+      const sqliteRecipe = database.prepare("SELECT recipe_json FROM recipes WHERE recipe_id = ?").get(entry.recipeId) as { recipe_json?: string } | undefined;
+      if (!sqliteRecipe?.recipe_json || stableJson(JSON.parse(sqliteRecipe.recipe_json) as unknown) !== stableJson(parsed)) {
+        throw new Error(`SQLite recipe does not round-trip to Godot JSON: ${entry.recipeId}`);
+      }
+      assertSqliteCount(database, "recipe_ingredients", entry.recipeId, parsed.ingredientPortions.length);
+      assertSqliteCount(database, "operations", entry.recipeId, parsed.operationGraph.nodes.length);
+      assertSqliteCount(database, "operation_dependencies", entry.recipeId, parsed.operationGraph.nodes.reduce((sum, node) => sum + node.dependsOn.length, 0));
+      assertSqliteCount(database, "operation_inputs", entry.recipeId, parsed.operationGraph.nodes.reduce((sum, node) => sum + node.inputPortionIds.length, 0));
+      assertSqliteCount(database, "operation_outputs", entry.recipeId, parsed.operationGraph.nodes.reduce((sum, node) => sum + node.outputStateIds.length, 0));
+      assertSqliteCount(database, "target_states", entry.recipeId, parsed.operationGraph.nodes.reduce((sum, node) => sum + node.targetStates.length, 0));
+      assertSqliteCount(database, "scenarios", entry.recipeId, parsed.scenarios.length);
+    }
+    const ingredientRows = database.prepare("SELECT ingredient_id, definition_json FROM ingredients ORDER BY ingredient_id").all() as Array<{ ingredient_id: string; definition_json: string }>;
+    if (ingredientRows.length !== ingredients.ingredients.length) throw new Error("SQLite ingredient count does not match the Godot ingredient catalog");
+    for (const [index, ingredient] of ingredients.ingredients.entries()) {
+      const row = ingredientRows[index];
+      if (row.ingredient_id !== ingredient.ingredientId || stableJson(JSON.parse(row.definition_json) as unknown) !== stableJson(ingredient)) {
+        throw new Error(`SQLite ingredient does not round-trip to Godot JSON: ${ingredient.ingredientId}`);
+      }
+    }
+  } finally {
+    database.close();
+  }
+}
+
+function assertSqliteCount(database: DatabaseSync, table: string, recipeId: string, expected: number) {
+  const row = database.prepare(`SELECT COUNT(*) AS count FROM ${table} WHERE recipe_id = ?`).get(recipeId) as { count: number };
+  if (row.count !== expected) throw new Error(`SQLite ${table} rows do not match ${recipeId}: expected ${expected}, got ${row.count}`);
+}
+
+function replaceDirectory(stagingDirectory: string, targetDirectory: string) {
+  const backupDirectory = resolve(dirname(targetDirectory), `.${basename(targetDirectory)}.backup`);
+  if (existsSync(backupDirectory)) {
+    if (existsSync(targetDirectory)) rmSync(backupDirectory, { recursive: true, force: true });
+    else renameSync(backupDirectory, targetDirectory);
+  }
+  if (existsSync(targetDirectory)) renameSync(targetDirectory, backupDirectory);
+  try {
+    renameSync(stagingDirectory, targetDirectory);
+    rmSync(backupDirectory, { recursive: true, force: true });
+  } catch (error) {
+    if (existsSync(backupDirectory) && !existsSync(targetDirectory)) renameSync(backupDirectory, targetDirectory);
+    throw error;
+  }
 }
 
 function sourceAttribution(source: Source) {
@@ -275,6 +529,43 @@ function writeArtifact(root: string, relativePath: string, content: string) {
   const path = resolve(root, relativePath);
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, content);
+}
+
+function usedAssessmentIds(registry: GameRightsRegistryV1, artifactIds: ReadonlySet<string>): Set<string> {
+  const decisions = registry.decisions.filter((entry) => artifactIds.has(entry.artifactId));
+  const artifacts = registry.artifacts.filter((entry) => artifactIds.has(entry.id));
+  return new Set([
+    ...artifacts.map((artifact) => artifact.rightsAssessmentId),
+    ...decisions.flatMap((decision) => decision.assessmentIds),
+  ]);
+}
+
+function assertSafeOutputDirectory(outputDirectory: string): string {
+  const target = resolve(outputDirectory);
+  const projectGeneratedRoot = resolve(process.cwd(), ".local");
+  const temporaryRoot = resolve(tmpdir());
+  const temporaryContainer = dirname(target);
+  const withinProjectGeneratedRoot = isDescendant(projectGeneratedRoot, target);
+  const withinDedicatedTemporaryContainer = isDescendant(temporaryRoot, temporaryContainer)
+    && basename(temporaryContainer).startsWith("cooking-lab-game-")
+    && isDescendant(temporaryContainer, target);
+  const forbidden = new Set([
+    resolve("/"),
+    resolve(process.cwd()),
+    resolve(homedir()),
+    projectGeneratedRoot,
+    temporaryRoot,
+    temporaryContainer,
+  ]);
+  if (forbidden.has(target) || (!withinProjectGeneratedRoot && !withinDedicatedTemporaryContainer)) {
+    throw new Error(`Refusing unsafe game-data output directory: ${target}`);
+  }
+  return target;
+}
+
+function isDescendant(root: string, target: string): boolean {
+  const path = relative(root, target);
+  return path.length > 0 && path !== ".." && !path.startsWith(`..${sep}`) && !isAbsolute(path);
 }
 
 function compactJson(value: unknown): string {

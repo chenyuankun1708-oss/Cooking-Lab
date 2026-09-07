@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-247b99df0e7bfcd9",
+  "artifactVersion": "clv1-29a220ff925bbef7",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -25,7 +25,7 @@
       "ingredientId": "usda-coconut-milk",
       "initialState": "liquid",
       "massG": 400,
-      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
       "portionId": "game-dessert-pineapple-almond-coconut-pudding-portion-02",
@@ -65,14 +65,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 9.98,
-      "calories": 369.64,
-      "carbs": 33.312,
-      "fat": 25.966,
-      "fiber": 1.72725,
-      "protein": 4.2704,
-      "saturatedFat": 19.23156,
-      "sodium": 13.91,
-      "sugar": 18.53
+      "calories": 402.64,
+      "carbs": 36.042,
+      "fat": 28.466,
+      "fiber": 3.92725,
+      "protein": 4.5404,
+      "saturatedFat": 21.43156,
+      "sodium": 15.91,
+      "sugar": 21.87
     },
     "provenance": [
       {
@@ -95,10 +95,10 @@
         "datasetVersion": "sr-legacy-2018-04",
         "ingredientId": "usda-coconut-milk",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:170172:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "170173",
+        "upstreamRecordId": "170172",
         "yieldFactor": 1
       },
       {
@@ -144,14 +144,14 @@
     "servings": 4,
     "total": {
       "addedSugar": 39.92,
-      "calories": 1478.56,
-      "carbs": 133.248,
-      "fat": 103.864,
-      "fiber": 6.909,
-      "protein": 17.0816,
-      "saturatedFat": 76.92624,
-      "sodium": 55.64,
-      "sugar": 74.12
+      "calories": 1610.56,
+      "carbs": 144.168,
+      "fat": 113.864,
+      "fiber": 15.709,
+      "protein": 18.1616,
+      "saturatedFat": 85.72624,
+      "sodium": 63.64,
+      "sugar": 87.48
     }
   },
   "operationGraph": {
@@ -332,7 +332,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-247b99df0e7bfcd9",
+      "baselineArtifactVersion": "clv1-29a220ff925bbef7",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -357,14 +357,14 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-247b99df0e7bfcd9",
+      "baselineArtifactVersion": "clv1-29a220ff925bbef7",
       "causeCodes": [
         "omit:whisk"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "aroma",
+          "dimension": "structural-integrity",
           "direction": "decrease"
         }
       ],
@@ -381,7 +381,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-247b99df0e7bfcd9",
+      "baselineArtifactVersion": "clv1-29a220ff925bbef7",
       "causeCodes": [
         "duration-too-short:simmer"
       ],
@@ -411,20 +411,15 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-247b99df0e7bfcd9",
+      "baselineArtifactVersion": "clv1-29a220ff925bbef7",
       "causeCodes": [
         "duration-too-short:chill"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
@@ -441,7 +436,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-247b99df0e7bfcd9",
+      "baselineArtifactVersion": "clv1-29a220ff925bbef7",
       "causeCodes": [
         "supplemental:allowed-substitution"
       ],
@@ -454,12 +449,12 @@
       ],
       "expectedFaultCodes": [],
       "mutation": {
-        "replacementIngredientId": "usda-pineapple",
+        "replacementIngredientId": "usda-mango",
         "targetNodeId": "game-dessert-pineapple-almond-coconut-pudding-op-001-dice",
         "targetPortionId": "game-dessert-pineapple-almond-coconut-pudding-portion-01",
         "type": "allowed-substitution"
       },
-      "nutritionEffect": "unchanged",
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "recoverable",
       "scenarioId": "game-dessert-pineapple-almond-coconut-pudding-scenario-supplemental"
     }

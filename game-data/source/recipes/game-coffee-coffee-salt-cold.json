@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-04e5b4e4be8100c7",
+  "artifactVersion": "clv1-25c9c154b50babf6",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m13-formula-corpus-v1",
@@ -8,28 +8,28 @@
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-game-coffee-espresso-banana-cold",
+    "riskClassificationId": "game-risk-game-coffee-coffee-salt-cold",
     "riskLevel": "low"
   },
   "ingredientPortions": [
     {
-      "ingredientId": "usda-espresso",
+      "ingredientId": "usda-coffee-brewed",
       "initialState": "liquid",
-      "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
       "optional": false,
       "phase": "base",
-      "portionId": "game-coffee-espresso-banana-cold-portion-01",
-      "volumeMl": 120
+      "portionId": "game-coffee-coffee-salt-cold-portion-01",
+      "volumeMl": 480
     },
     {
-      "ingredientId": "usda-banana",
-      "initialState": "raw",
+      "ingredientId": "usda-salt",
+      "initialState": "dry",
       "massG": 120,
-      "nutritionProvenanceId": "usda-fdc:1105314:foundation-2026-04-30",
+      "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
       "optional": false,
       "phase": "flavor",
-      "portionId": "game-coffee-espresso-banana-cold-portion-02"
+      "portionId": "game-coffee-coffee-salt-cold-portion-02"
     }
   ],
   "itemType": "coffee",
@@ -38,14 +38,14 @@
     "method": "ingredient-sum-v1",
     "perServing": {
       "addedSugar": 0,
-      "calories": 63.6,
-      "carbs": 14.802,
-      "fat": 0.282,
-      "fiber": 1.02,
-      "protein": 0.516,
-      "saturatedFat": 0.0552,
-      "sodium": 8.4,
-      "sugar": 9.48
+      "calories": 2.4,
+      "carbs": 0,
+      "fat": 0.048,
+      "fiber": 0,
+      "protein": 0.288,
+      "saturatedFat": 0.0048,
+      "sodium": 23284.8,
+      "sugar": 0
     },
     "provenance": [
       {
@@ -53,39 +53,39 @@
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
         "datasetVersion": "sr-legacy-2018-04",
-        "ingredientId": "usda-espresso",
+        "ingredientId": "usda-coffee-brewed",
         "ingredientState": "liquid",
-        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+        "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "171891",
+        "upstreamRecordId": "171890",
         "yieldFactor": 1
       },
       {
         "accessedAt": "2026-09-08",
         "basis": "per-100g",
         "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
-        "datasetVersion": "foundation-2026-04-30",
-        "ingredientId": "usda-banana",
-        "ingredientState": "raw",
-        "nutritionProvenanceId": "usda-fdc:1105314:foundation-2026-04-30",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
         "provider": "USDA FoodData Central",
         "retentionFactor": 1,
-        "upstreamRecordId": "1105314",
+        "upstreamRecordId": "173468",
         "yieldFactor": 1
       }
     ],
     "servings": 2,
     "total": {
       "addedSugar": 0,
-      "calories": 127.2,
-      "carbs": 29.604,
-      "fat": 0.564,
-      "fiber": 2.04,
-      "protein": 1.032,
-      "saturatedFat": 0.1104,
-      "sodium": 16.8,
-      "sugar": 18.96
+      "calories": 4.8,
+      "carbs": 0,
+      "fat": 0.096,
+      "fiber": 0,
+      "protein": 0.576,
+      "saturatedFat": 0.0096,
+      "sodium": 46569.6,
+      "sugar": 0
     }
   },
   "operationGraph": {
@@ -96,12 +96,12 @@
         "dependsOn": [],
         "equipmentId": "knife",
         "inputPortionIds": [
-          "game-coffee-espresso-banana-cold-portion-02"
+          "game-coffee-coffee-salt-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-banana-cold-op-001-dice",
+        "nodeId": "game-coffee-coffee-salt-cold-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
-          "game-coffee-espresso-banana-cold-state-001"
+          "game-coffee-coffee-salt-cold-state-001"
         ],
         "parameters": {
           "cutSizeMm": 10,
@@ -121,17 +121,17 @@
         "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [
-          "game-coffee-espresso-banana-cold-op-001-dice"
+          "game-coffee-coffee-salt-cold-op-001-dice"
         ],
         "equipmentId": "container",
         "inputPortionIds": [
-          "game-coffee-espresso-banana-cold-portion-01",
-          "game-coffee-espresso-banana-cold-portion-02"
+          "game-coffee-coffee-salt-cold-portion-01",
+          "game-coffee-coffee-salt-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-banana-cold-op-002-chill",
+        "nodeId": "game-coffee-coffee-salt-cold-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
-          "game-coffee-espresso-banana-cold-state-002"
+          "game-coffee-coffee-salt-cold-state-003"
         ],
         "parameters": {
           "temperatureC": 5
@@ -149,17 +149,17 @@
         "activeDurationMs": 30000,
         "criticality": "completion",
         "dependsOn": [
-          "game-coffee-espresso-banana-cold-op-002-chill"
+          "game-coffee-coffee-salt-cold-op-003-chill"
         ],
         "equipmentId": "bowl",
         "inputPortionIds": [
-          "game-coffee-espresso-banana-cold-portion-01",
-          "game-coffee-espresso-banana-cold-portion-02"
+          "game-coffee-coffee-salt-cold-portion-01",
+          "game-coffee-coffee-salt-cold-portion-02"
         ],
-        "nodeId": "game-coffee-espresso-banana-cold-op-003-serve",
+        "nodeId": "game-coffee-coffee-salt-cold-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
-          "game-coffee-espresso-banana-cold-state-003"
+          "game-coffee-coffee-salt-cold-state-004"
         ],
         "parameters": {},
         "targetStates": [],
@@ -167,13 +167,13 @@
       }
     ]
   },
-  "recipeId": "game-coffee-espresso-banana-cold",
+  "recipeId": "game-coffee-coffee-salt-cold",
   "rights": {
     "artifactIds": [
-      "game-artifact-game-coffee-espresso-banana-cold-identity",
-      "game-artifact-game-coffee-espresso-banana-cold-preparation",
-      "game-artifact-game-coffee-espresso-banana-cold-nutrition",
-      "game-artifact-game-coffee-espresso-banana-cold-simulation"
+      "game-artifact-game-coffee-coffee-salt-cold-identity",
+      "game-artifact-game-coffee-coffee-salt-cold-preparation",
+      "game-artifact-game-coffee-coffee-salt-cold-nutrition",
+      "game-artifact-game-coffee-coffee-salt-cold-simulation"
     ],
     "evidenceIds": [
       "evidence-usda-fdc-subset",
@@ -185,16 +185,16 @@
       "fda-caffeine-guidance"
     ],
     "usageDecisionIds": [
-      "game-usage-game-coffee-espresso-banana-cold-identity",
-      "game-usage-game-coffee-espresso-banana-cold-preparation",
-      "game-usage-game-coffee-espresso-banana-cold-nutrition",
-      "game-usage-game-coffee-espresso-banana-cold-simulation"
+      "game-usage-game-coffee-coffee-salt-cold-identity",
+      "game-usage-game-coffee-coffee-salt-cold-preparation",
+      "game-usage-game-coffee-coffee-salt-cold-nutrition",
+      "game-usage-game-coffee-coffee-salt-cold-simulation"
     ]
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-04e5b4e4be8100c7",
+      "baselineArtifactVersion": "clv1-25c9c154b50babf6",
       "causeCodes": [
         "cut-size-too-large:dice"
       ],
@@ -210,48 +210,18 @@
       ],
       "mutation": {
         "scalar": 1.8,
-        "targetNodeId": "game-coffee-espresso-banana-cold-op-001-dice",
+        "targetNodeId": "game-coffee-coffee-salt-cold-op-001-dice",
         "type": "cut-size-too-large"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "game-coffee-espresso-banana-cold-scenario-001-dice"
+      "scenarioId": "game-coffee-coffee-salt-cold-scenario-001-dice"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-04e5b4e4be8100c7",
+      "baselineArtifactVersion": "clv1-25c9c154b50babf6",
       "causeCodes": [
         "duration-too-short:chill"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "fault-duration-too-short"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "game-coffee-espresso-banana-cold-op-002-chill",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "game-coffee-espresso-banana-cold-scenario-002-chill"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-04e5b4e4be8100c7",
-      "causeCodes": [
-        "supplemental:missing-state-transition"
       ],
       "expectedDeltas": [
         {
@@ -261,23 +231,50 @@
         }
       ],
       "expectedFaultCodes": [
-        "fault-missing-state-transition"
+        "fault-duration-too-short"
       ],
       "mutation": {
-        "targetNodeId": "game-coffee-espresso-banana-cold-op-001-dice",
-        "type": "missing-state-transition"
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-coffee-salt-cold-op-003-chill",
+        "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-coffee-salt-cold-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-25c9c154b50babf6",
+      "causeCodes": [
+        "supplemental:quantity-too-high"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-quantity-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-coffee-coffee-salt-cold-op-001-dice",
+        "targetPortionId": "game-coffee-coffee-salt-cold-portion-01",
+        "type": "quantity-too-high"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
       "recoverability": "partially-recoverable",
-      "scenarioId": "game-coffee-espresso-banana-cold-scenario-supplemental"
+      "scenarioId": "game-coffee-coffee-salt-cold-scenario-supplemental"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",
   "servings": 2,
   "simulationProfile": "requires-cat-kitchen-v2",
-  "slug": "game-coffee-espresso-banana-cold",
+  "slug": "game-coffee-coffee-salt-cold",
   "yield": {
-    "amount": 160,
-    "unit": "ml"
+    "amount": 600,
+    "unit": "g"
   }
 }

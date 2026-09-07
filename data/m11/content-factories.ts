@@ -12,6 +12,7 @@ import { localContentPackageVersion } from "@/types/content-bundle";
 import type { RecipeImage } from "@/types/image";
 import type { SupportedLocale, TranslationSet } from "@/types/localization";
 import type { ResearchRecord, ResearchSourceUse, ResearchTemplateId } from "@/types/research";
+import { m11BatchAImageAlts } from "./batch-a-image-alts";
 
 export const m11ReviewedAt = "2026-09-07";
 
@@ -192,10 +193,15 @@ function defaultReliability(type: Source["type"]): Source["reliability"] {
 }
 
 export function m11OriginalHero(itemId: string, alt: string): RecipeImage {
+  const localizedAlt = m11BatchAImageAlts[itemId];
+  if (!localizedAlt) throw new Error(`Missing bilingual Batch A image alt for ${itemId}`);
+  const authoredAlt = /[\u3400-\u9fff]/u.test(alt) ? localizedAlt["zh-CN"] : localizedAlt.en;
+  if (alt !== authoredAlt) throw new Error(`Batch A image alt registry is stale for ${itemId}`);
   return {
     id: `${itemId}-hero`,
     src: `/images/culinary/${itemId}/hero.webp`,
-    alt: `Cooking Lab 原创抽象料理插画：${alt}`,
+    alt: localizedAlt["zh-CN"],
+    localizedAlt,
     role: "hero",
     delivery: "local",
     width: 1500,

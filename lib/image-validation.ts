@@ -43,6 +43,9 @@ export function validateImageAssets(images: readonly RecipeImage[]): ImageValida
       report(imageId, "license", "非商业、禁止改编、未知或禁止授权的图片不能进入可用 registry");
     }
     if (image.role === "hero" && !image.alt.trim()) report(imageId, "alt", "Hero image alt 不能为空");
+    if (image.localizedAlt && (!image.localizedAlt["zh-CN"].trim() || !image.localizedAlt.en.trim())) {
+      report(imageId, "localizedAlt", "Localized image alt 必须包含非空的中英文描述");
+    }
 
     if (image.delivery === "local") {
       if (!localImagePath.test(image.src)) report(imageId, "src", "本地图片路径必须符合 recipe 或 culinary asset naming convention");

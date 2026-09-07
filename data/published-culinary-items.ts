@@ -32,48 +32,72 @@ import {
 } from "@/lib/publishing-governance";
 import { createImageAssetVersions } from "@/lib/image-asset-version";
 import { createPublishingLocalizationVersions } from "./publishing-localization-versions";
+import {
+  m11BatchAEvidence,
+  m11BatchAImages,
+  m11BatchAProductProfiles,
+  m11BatchAResearchRecords,
+  m11BatchARestaurantIdentities,
+  m11BatchASources,
+} from "./m11/batch-a";
+import { m11BatchAPublishedStories } from "./m11/batch-a-publication";
+import { m11BatchAEnglishIngredientLabels } from "./m11/batch-a-ingredient-labels";
+import { m11BatchAItemIds, m11RestaurantReconstructionItemIds } from "./m11/portfolio";
 
 export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
-const allImages = [...recipeImages, ...culinaryImages];
+export const contentImages = Object.freeze([...recipeImages, ...culinaryImages, ...m11BatchAImages]);
+export const contentStories = Object.freeze([...culinaryStories, ...m11BatchAPublishedStories]);
+export const contentEvidence = Object.freeze([...culinaryEvidence, ...m11BatchAEvidence]);
+export const contentResearchRecords = Object.freeze([...m9RecipeResearchRecords, ...m11BatchAResearchRecords]);
+const allImages = contentImages;
 export const contentImageAssetVersions = Object.freeze(createImageAssetVersions(allImages));
-export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients, culinaryStories));
+export const contentLocalizationVersions = Object.freeze(createPublishingLocalizationVersions(
+  publishedLocalContentPackages,
+  ingredients,
+  contentStories,
+  m11BatchAEnglishIngredientLabels,
+));
 const candidates: CulinaryItem[] = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
 const contentPackageByItemId = new Map(publishedLocalContentPackages.map((contentPackage) => [contentPackage.itemId, contentPackage]));
 const publishingContext: CulinaryPublishingContext = {
   ingredients,
   images: allImages,
   localAssetExists: (src) => existsSync(resolve(process.cwd(), "public", src.replace(/^\//, ""))),
-  stories: culinaryStories,
-  sources: culinarySources,
-  evidence: culinaryEvidence,
+  stories: contentStories,
+  sources: [...culinarySources, ...m11BatchASources],
+  evidence: contentEvidence,
 };
 
 assertPublishedCulinaryItemsEligible(candidates, publishingContext);
 
-const allSources = [...culinarySources, ...m9RecipeResearchSources];
-const allEvidence = [...culinaryEvidence];
+const allSources = [...culinarySources, ...m9RecipeResearchSources, ...m11BatchASources];
+const allEvidence = [...contentEvidence];
 export const contentRightsSources = Object.freeze(allSources);
 export const contentRightsRegistry = createContentRightsRegistry({
   items: candidates,
-  auditedItemIds: m10AuditedCulinaryItemIds,
+  auditedItemIds: [...m10AuditedCulinaryItemIds, ...m11BatchAItemIds],
   images: allImages,
   ingredients,
-  stories: culinaryStories,
+  stories: contentStories,
   evidence: allEvidence,
   sources: allSources,
-  researchRecords: m9RecipeResearchRecords,
-  restaurantRequirements: [],
-  restaurants: [],
+  researchRecords: contentResearchRecords,
+  restaurantRequirements: m11RestaurantReconstructionItemIds.map((culinaryItemId) => ({
+    culinaryItemId,
+    kind: "cooking-lab-reconstruction" as const,
+  })),
+  restaurants: m11BatchARestaurantIdentities,
+  productProfiles: m11BatchAProductProfiles,
 });
 const contentRightsContext = {
   items: candidates,
   images: allImages,
   ingredients,
-  stories: culinaryStories,
+  stories: contentStories,
   evidence: allEvidence,
   sources: allSources,
-  researchRecords: m9RecipeResearchRecords,
+  researchRecords: contentResearchRecords,
   now: getContentRightsEvaluationDate(),
 } as const;
 assertContentRightsReady(contentRightsRegistry, contentRightsContext);
@@ -86,8 +110,8 @@ export const publishingGovernanceRegistry = createPublishingGovernanceRegistry({
   images: allImages,
   sources: allSources,
   evidence: allEvidence,
-  stories: culinaryStories,
-  researchRecords: m9RecipeResearchRecords,
+  stories: contentStories,
+  researchRecords: contentResearchRecords,
   ingredients,
   contentPackages: publishedLocalContentPackages,
   localizationVersions: contentLocalizationVersions,
@@ -99,8 +123,8 @@ const publishingGovernanceContext = {
   images: allImages,
   sources: allSources,
   evidence: allEvidence,
-  stories: culinaryStories,
-  researchRecords: m9RecipeResearchRecords,
+  stories: contentStories,
+  researchRecords: contentResearchRecords,
   ingredients,
   contentPaths: publishedLocalContentPackages.map((contentPackage) => ({
     itemId: contentPackage.itemId,
@@ -160,8 +184,11 @@ export function isPublishedCulinaryItemLocaleComplete(item: CulinaryItem, locale
   if (recipe) return hasCompleteRecipeTranslation(recipe, locale);
   if (contentPackageByItemId.get(item.id)?.sourceKind === "standalone") {
     const ingredientLabelsReady = locale !== "en" || !("inputs" in item.preparation)
-      || item.preparation.inputs.every((input) => hasReviewedEnglishIngredientLabel(input.ingredientId));
-    return ingredientLabelsReady && hasCompleteStandaloneCulinaryTranslation(item, locale, culinaryStories);
+      || item.preparation.inputs.every((input) => hasReviewedEnglishIngredientLabel(
+        input.ingredientId,
+        m11BatchAEnglishIngredientLabels,
+      ));
+    return ingredientLabelsReady && hasCompleteStandaloneCulinaryTranslation(item, locale, contentStories);
   }
   const preparation = item.preparation;
   const hasSteps = "steps" in preparation;

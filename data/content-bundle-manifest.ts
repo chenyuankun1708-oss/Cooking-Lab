@@ -1,8 +1,9 @@
-import type { ContentBundleManifestV1 } from "@/types/content-bundle";
+import type { ContentBundleManifestEntryV1, ContentBundleManifestV1 } from "@/types/content-bundle";
+import batchAManifestEntries from "./m11/batch-a-manifest.json";
 
 // Deliberately committed rather than derived at runtime. The content audit compares
 // this review checkpoint with the live published boundary and fails when it is stale.
-export const publishedContentBundleManifest = {
+const m10PublishedContentBundleManifest = {
   "version": 1,
   "entries": [
     {
@@ -924,4 +925,15 @@ export const publishedContentBundleManifest = {
       ]
     }
   ]
+} as const satisfies ContentBundleManifestV1;
+
+// Batch A is a separately committed checkpoint rather than a runtime projection
+// of the live packages. The validator compares these literal entries with the
+// public boundary and every current rights decision.
+export const publishedContentBundleManifest = {
+  version: 1,
+  entries: [
+    ...m10PublishedContentBundleManifest.entries,
+    ...(batchAManifestEntries as ContentBundleManifestEntryV1[]),
+  ].sort((left, right) => left.slug.localeCompare(right.slug)),
 } as const satisfies ContentBundleManifestV1;

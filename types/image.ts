@@ -1,3 +1,5 @@
+import type { LocalizedLabel } from "./localization";
+
 export const recipeImageRoles = ["hero", "thumbnail", "step", "ingredient", "editorial"] as const;
 export type RecipeImageRole = (typeof recipeImageRoles)[number];
 
@@ -49,6 +51,7 @@ export interface RecipeImage {
   id: string;
   src: string;
   alt: string;
+  localizedAlt?: LocalizedLabel;
   role: RecipeImageRole;
   delivery: RecipeImageDelivery;
   width?: number;

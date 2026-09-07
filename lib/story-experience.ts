@@ -101,7 +101,7 @@ export function buildStoryPreview(story: Story, context: StoryExperienceContext)
   const copy = getLocalizedStoryTranslation(story.id, locale)?.story ?? resolveTranslation(story.content, locale).value;
   const relatedItems = findExplicitStoryItems(story, context.items);
   const leadItem = relatedItems[0];
-  const image = leadItem ? getItemHeroImage(leadItem, context.images) : undefined;
+  const image = leadItem ? getItemHeroImage(leadItem, context.images, locale) : undefined;
   const characterCount = copy.dek.length + copy.sections.reduce(
     (total, section) => total + section.heading.length + section.paragraphs.join("").length,
     0,
@@ -189,7 +189,7 @@ export function buildCulinaryItemSummary(item: CulinaryItem, context: StoryExper
     href: getCulinaryItemHref(item, context.recipeItemIds, locale),
     itemTypeLabel: getCulinaryItemTypeLabel(item.itemType, locale),
     placeLabel: getCulinaryItemPlaceLabel(item, locale),
-    image: getItemHeroImage(item, context.images),
+    image: getItemHeroImage(item, context.images, locale),
     fallbackInitial: [...copy.name][0] ?? "食",
   };
 }
@@ -202,8 +202,12 @@ export function getCulinaryItemPlaceLabel(item: CulinaryItem, locale: SupportedL
   return getItemPlaceLabel(item, locale);
 }
 
-export function getCulinaryItemHeroImage(item: CulinaryItem, images: readonly RecipeImage[]): RecipeImage | undefined {
-  return getItemHeroImage(item, images);
+export function getCulinaryItemHeroImage(
+  item: CulinaryItem,
+  images: readonly RecipeImage[],
+  locale: SupportedLocale = "zh-CN",
+): RecipeImage | undefined {
+  return getItemHeroImage(item, images, locale);
 }
 
 export function getClaimAwareContext(story: Story, locale: SupportedLocale = "zh-CN"): string {
@@ -268,11 +272,17 @@ function getIngredientIds(item: CulinaryItem): string[] {
   return "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : [];
 }
 
-function getItemHeroImage(item: CulinaryItem, images: readonly RecipeImage[]): RecipeImage | undefined {
+function getItemHeroImage(
+  item: CulinaryItem,
+  images: readonly RecipeImage[],
+  locale: SupportedLocale = "zh-CN",
+): RecipeImage | undefined {
   if (item.images.availability === "none") return undefined;
   const { primaryImageId } = item.images.references;
   const image = images.find((candidate) => candidate.id === primaryImageId);
-  return image?.role === "hero" ? image : undefined;
+  if (image?.role !== "hero") return undefined;
+  const alt = image.localizedAlt?.[locale];
+  return alt ? { ...image, alt } : image;
 }
 
 function getItemPlaceLabel(item: CulinaryItem, locale: SupportedLocale): string | undefined {

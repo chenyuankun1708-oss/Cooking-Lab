@@ -27,8 +27,8 @@ const publishingContext = {
 };
 
 describe("Story exploration experience", () => {
-  it("publishes all six reviewed Stories and generates one static route per Story", () => {
-    expect(getPublishedStories()).toHaveLength(6);
+  it("publishes all 41 reviewed Stories and generates one static route per Story", () => {
+    expect(getPublishedStories()).toHaveLength(41);
     expect(getPublishedStoryStaticParams()).toEqual(
       getPublishedStories().map((story) => ({ slug: story.id })),
     );
@@ -168,6 +168,6 @@ describe("Story exploration experience", () => {
     expect(isCanonicalCulinaryPath(nativeItem, `/culinary/${nativeItem.slug}`, recipeIds)).toBe(false);
     expect(getPublishedNativeCulinaryItemStaticParams()).toHaveLength(16);
     expect(getPublishedRecipes()).toHaveLength(34);
-    expect(publishedItems).toHaveLength(50);
+    expect(publishedItems).toHaveLength(85);
   });
 });

@@ -48,6 +48,7 @@ import contentPackage47 from "./hibiscus-agua-fresca";
 import contentPackage48 from "./salted-lassi";
 import contentPackage49 from "./fino-sherry";
 import contentPackage50 from "./junmai-sake";
+import { m11BatchAPublishedContentPackages } from "../m11/batch-a-publication";
 
 export const publishedLocalContentPackages = Object.freeze([
   contentPackage01,
@@ -100,4 +101,5 @@ export const publishedLocalContentPackages = Object.freeze([
   contentPackage48,
   contentPackage49,
   contentPackage50,
+  ...m11BatchAPublishedContentPackages,
 ]);

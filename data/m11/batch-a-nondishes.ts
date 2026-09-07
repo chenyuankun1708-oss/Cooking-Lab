@@ -259,7 +259,7 @@ const seeds: readonly Seed[] = [
       { title: "The Perfect Brew", publisher: "UK Tea & Infusions Association", url: "https://www.tea.co.uk/make-a-perfect-brew", locator: "Water and infusion controls", note: "Independent preparation reference for water and infusion variables.", type: "professional-organization", uses: ["preparation"] },
       { title: "Gongfu Tea", publisher: "Wikipedia contributors", url: "https://en.wikipedia.org/wiki/Gongfu_tea", locator: "Small-vessel preparation and repeated short infusions", note: "General secondary cross-check for the small-vessel repeated-infusion identity; no ceremonial wording or sequence is copied.", type: "open-educational-resource", reliability: "general-secondary", uses: ["identity", "preparation", "culture"] },
     ],
-    storyEvidenceIndexes: [0, 2],
+    storyEvidenceIndexes: [0, 1, 2],
     nutrition: { applicability: "not-modeled", reason: "out-of-scope" }, cost: { source: "ingredient-derived", currency: "CNY" },
     alt: "白瓷盖碗、茶海、小杯和舒展茶叶组成的铁观音抽象冲泡场景",
     preparation: {

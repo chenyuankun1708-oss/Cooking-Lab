@@ -28,6 +28,42 @@ import {
 const items = publishedLocalContentPackages.map((contentPackage) => contentPackage.item);
 const allImages = [...recipeImages, ...culinaryImages];
 const contentRightsSources = [...culinarySources, ...m9RecipeResearchSources];
+const m10ItemIdSet = new Set<string>(m10AuditedCulinaryItemIds);
+const m10ContentPackages = publishedLocalContentPackages.filter((contentPackage) => (
+  m10ItemIdSet.has(contentPackage.itemId)
+));
+const m10Items = m10ContentPackages.map((contentPackage) => contentPackage.item);
+const m10ContentRightsRegistry = createContentRightsRegistry({
+  items: m10Items,
+  auditedItemIds: m10AuditedCulinaryItemIds,
+  images: allImages,
+  ingredients,
+  stories: culinaryStories,
+  evidence: culinaryEvidence,
+  sources: contentRightsSources,
+  researchRecords: m9RecipeResearchRecords,
+  restaurantRequirements: [],
+  restaurants: [],
+});
+const m10ContentLocalizationVersions = createPublishingLocalizationVersions(m10ContentPackages, ingredients);
+const m10Context: PublishingGovernanceContext = {
+  items: m10Items,
+  rightsRegistry: m10ContentRightsRegistry,
+  images: allImages,
+  sources: contentRightsSources,
+  evidence: culinaryEvidence,
+  stories: culinaryStories,
+  researchRecords: m9RecipeResearchRecords,
+  ingredients,
+  contentPaths: m10ContentPackages.map((contentPackage) => ({
+    itemId: contentPackage.itemId,
+    kind: contentPackage.sourceKind === "legacy-recipe"
+      ? "adapted-recipe" as const
+      : "native-culinary" as const,
+  })),
+  localizationVersions: m10ContentLocalizationVersions,
+  imageAssetVersions: createImageAssetVersions(allImages),
+};
 const contentRightsRegistry = createContentRightsRegistry({
   items,
   auditedItemIds: m10AuditedCulinaryItemIds,
@@ -161,16 +197,16 @@ function issueCodes(registry: PublishingGovernanceRegistry, customContext = cont
 describe("risk-based publishing governance", () => {
   it("preserves failed sampling history and clears only after two current clean recovery batches", () => {
     const registry = createPublishingGovernanceRegistry({
-      items,
-      rightsRegistry: contentRightsRegistry,
+      items: m10Items,
+      rightsRegistry: m10ContentRightsRegistry,
       images: allImages,
       sources: contentRightsSources,
       evidence: culinaryEvidence,
       stories: culinaryStories,
       researchRecords: m9RecipeResearchRecords,
       ingredients,
-      contentPackages: publishedLocalContentPackages,
-      localizationVersions: contentLocalizationVersions,
+      contentPackages: m10ContentPackages,
+      localizationVersions: m10ContentLocalizationVersions,
       imageAssetVersions: contentImageAssetVersions,
     });
     expect(registry.samplingBatches).toHaveLength(5);
@@ -215,10 +251,10 @@ describe("risk-based publishing governance", () => {
       verdict: "pass",
       metrics: { escapeCount: 0, reworkItemCount: 0 },
     });
-    expect(issueCodes(registry)).not.toContain("missing-sampling-coverage");
-    expect(issueCodes(registry)).not.toContain("sampling-class-frozen");
-    expect(issueCodes(registry)).not.toContain("sampling-metrics-invalid");
-    expect(evaluatePublishingGovernance(registry, context).ready).toBe(true);
+    expect(issueCodes(registry, m10Context)).not.toContain("missing-sampling-coverage");
+    expect(issueCodes(registry, m10Context)).not.toContain("sampling-class-frozen");
+    expect(issueCodes(registry, m10Context)).not.toContain("sampling-metrics-invalid");
+    expect(evaluatePublishingGovernance(registry, m10Context).ready).toBe(true);
     expect(registry.attestations.filter((entry) => entry.batchId === "issue-96-medium-content-visual-9c018f6-run-0276f44d"))
       .toEqual(expect.arrayContaining([
         expect.objectContaining({ reviewedCommit: "9c018f6be00be66ea89d59e37d0feab2da0a2995" }),
@@ -229,7 +265,7 @@ describe("risk-based publishing governance", () => {
     const registry = readyRegistry();
     const result = evaluatePublishingGovernance(registry, context);
     expect(result.ready, result.issues.map((issue) => `${issue.code}:${issue.subjectId}`).join(", ")).toBe(true);
-    expect(result.auditedItemIds).toHaveLength(50);
+    expect(result.auditedItemIds).toHaveLength(85);
     expect(registry.attestations.every((entry) => entry.reviewer.actorType === "agent")).toBe(true);
     expect(registry.attestations.every((entry) => !entry.representations.humanApproval)).toBe(true);
   });

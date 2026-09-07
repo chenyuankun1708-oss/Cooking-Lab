@@ -24,6 +24,7 @@ import type {
   SamplingQaSample,
 } from "@/types/publishing-governance";
 import { m10AuditedCulinaryItemIds } from "./content-rights";
+import { m11BatchAItemIds } from "./m11/portfolio";
 
 export const publishingGovernancePolicyVersion = "m10.1-risk-based-2026-09-06";
 
@@ -596,7 +597,7 @@ export function createPublishingGovernanceRegistry(
     })),
   ];
 
-  return {
+  const baseRegistry: PublishingGovernanceRegistry = {
     policyVersion: publishingGovernancePolicyVersion,
     attestations,
     riskClassifications,
@@ -607,5 +608,51 @@ export function createPublishingGovernanceRegistry(
       createRecoverySamplingBatch4(riskClassifications),
       createRecoverySamplingBatch5(riskClassifications),
     ],
+  };
+
+  const publishedBatchAItemIds = m11BatchAItemIds.filter((itemId) =>
+    input.items.some((item) => item.id === itemId && item.publication.status === "published"),
+  );
+  if (!publishedBatchAItemIds.length) return baseRegistry;
+  if (publishedBatchAItemIds.length !== m11BatchAItemIds.length) {
+    throw new Error("M11 Batch A publication must be atomic across all 35 reviewed items");
+  }
+  return mergePublishingGovernanceRegistries(
+    baseRegistry,
+    createM11BatchAPublishingGovernanceRegistry(input),
+  );
+}
+
+function createM11BatchAPublishingGovernanceRegistry(
+  input: CreatePublishingGovernanceRegistryInput,
+): PublishingGovernanceRegistry {
+  const itemIds = [...m11BatchAItemIds] as [string, ...string[]];
+  const context = createPublishingGovernanceContext(input);
+  const riskClassifications = input.items
+    .filter((item) => itemIds.includes(item.id))
+    .map((item): PublishingRiskClassification => {
+      const minimum = deriveMinimumPublishingRisk(item, input.rightsRegistry);
+      return {
+        id: `risk-${item.id}-${publishingGovernancePolicyVersion}`,
+        itemId: item.id,
+        artifactSetVersion: createArtifactSetVersion([item.id], context),
+        level: minimum.level,
+        reasonCodes: minimum.reasonCodes as PublishingRiskClassification["reasonCodes"],
+        equivalenceClassKeys: deriveEquivalenceClassKeys(item, context, minimum) as [string, ...string[]],
+        policyVersion: publishingGovernancePolicyVersion,
+        classifiedAt: "2026-09-07",
+      };
+    });
+  if (riskClassifications.some((classification) => classification.level === "high")) {
+    throw new Error("M11 Batch A contains HIGH risk content and cannot use the agent-only publication route");
+  }
+
+  // Publication remains fail-closed until independent reviews and the subsequent
+  // risk-equivalence sampling audit are recorded for this exact commit/artifact set.
+  return {
+    policyVersion: publishingGovernancePolicyVersion,
+    attestations: [],
+    riskClassifications,
+    samplingBatches: [],
   };
 }

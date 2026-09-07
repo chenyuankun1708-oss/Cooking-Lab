@@ -73,6 +73,16 @@ describe("recipe image system", () => {
     ]));
   });
 
+  it("rejects incomplete localized image alt text", () => {
+    const localized: RecipeImage = {
+      ...heroImage,
+      localizedAlt: { "zh-CN": heroImage.alt, en: "" },
+    };
+    expect(validateImageAssets([localized])).toEqual(expect.arrayContaining([
+      expect.objectContaining({ imageId: localized.id, field: "localizedAlt" }),
+    ]));
+  });
+
   it("requires attribution metadata for CC BY assets and valid recipe references", () => {
     const ccByImage: RecipeImage = {
       ...heroImage,

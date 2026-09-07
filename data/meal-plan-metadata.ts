@@ -1,4 +1,5 @@
 import type { MealPlanStepMetadataRegistry } from "@/lib/meal-plan";
+import { m11BatchAMealPlanStepMetadata } from "./m11/batch-a-meal-plan-metadata";
 
 // These authored overrides describe attention at the current step granularity. Use wait or
 // prepare-ahead only when the step is predominantly hands-off; mixed steps with simultaneous
@@ -144,4 +145,5 @@ export const mealPlanStepMetadata = Object.freeze({
   "salted-lassi": {
     3: { kind: "serve", resourceIds: [] },
   },
+  ...m11BatchAMealPlanStepMetadata,
 } as const satisfies MealPlanStepMetadataRegistry);

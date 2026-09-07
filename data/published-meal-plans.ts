@@ -3,6 +3,8 @@ import { getLocalizedCulinaryCopy } from "./localization/public-culinary";
 import { getLocalizedRecipe } from "./localization/public-recipes";
 import { ingredients } from "./ingredients";
 import { mealPlanStepMetadata } from "./meal-plan-metadata";
+import { m11BatchAEnglishIngredientLabels } from "./m11/batch-a-ingredient-labels";
+import { m11BatchAItemIds } from "./m11/portfolio";
 import {
   getPublishedCulinaryItemForLocaleBySlug,
   getPublishedCulinaryItemsForLocale,
@@ -38,6 +40,9 @@ export function getPublishedMealPlanCatalog(
   const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
 
   for (const item of items) {
+    const ingredientLabelOverrides = (m11BatchAItemIds as readonly string[]).includes(item.id)
+      ? m11BatchAEnglishIngredientLabels
+      : undefined;
     buildItems.push({ id: item.id, slug: item.slug, preparation: item.preparation });
     const sourceRecipe = getPublishedRecipeBySlug(item.slug);
     const recipe = sourceRecipe ? getLocalizedRecipe(sourceRecipe, locale) : undefined;
@@ -52,7 +57,12 @@ export function getPublishedMealPlanCatalog(
     if ("inputs" in item.preparation) {
       for (const input of item.preparation.inputs) {
         const ingredient = ingredientById.get(input.ingredientId);
-        ingredientLabels[input.ingredientId] = getIngredientLabel(input.ingredientId, ingredient?.name, locale);
+        ingredientLabels[input.ingredientId] = getIngredientLabel(
+          input.ingredientId,
+          ingredient?.name,
+          locale,
+          ingredientLabelOverrides,
+        );
       }
       const localizedSteps: Array<{ instruction: string; stateCue?: string }> = recipe?.steps.map((step) => ({ instruction: step.instruction }))
         ?? nativeCopy?.steps

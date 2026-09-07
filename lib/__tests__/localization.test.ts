@@ -126,8 +126,8 @@ describe("reviewed public translation policy", () => {
     }
   });
 
-  it("covers all six Stories and preserves claim certainty in English", () => {
-    expect(getPublishedStories()).toHaveLength(6);
+  it("covers all published Stories and preserves claim certainty in English", () => {
+    expect(getPublishedStories()).toHaveLength(41);
     for (const story of culinaryStories) {
       expect(hasCompleteStoryTranslation(story.id, "en", story.claims.map((claim) => claim.id)), story.id).toBe(true);
     }

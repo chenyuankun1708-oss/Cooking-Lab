@@ -2,18 +2,18 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { createContentRightsRegistry, isCommercialImageLicense, m10AuditedCulinaryItemIds } from "@/data/content-rights";
-import { culinaryEvidence } from "@/data/culinary/evidence";
-import { culinaryImages } from "@/data/culinary/images";
-import { culinaryStories } from "@/data/culinary/stories";
 import { ingredients } from "@/data/ingredients";
 import {
+  contentEvidence,
+  contentImages,
+  contentResearchRecords,
   contentRightsAuditReport,
   contentRightsRegistry,
   contentRightsSources,
+  contentStories,
   getPublishedCulinaryItems,
 } from "@/data/published-culinary-items";
-import { recipeImages } from "@/data/recipe-images";
-import { m9RecipeResearchRecords } from "@/data/research/m9-recipe-research";
+import { m11BatchAItemIds } from "@/data/m11/portfolio";
 import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
 import type { ContentRightsRegistry, RightsAssessment } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
@@ -23,30 +23,30 @@ import { evaluateContentRightsRegistry, getContentRightsEvaluationDate } from ".
 import { generateMetadata as generateRightsMetadata } from "@/app/[locale]/content-rights/page";
 
 const items = getPublishedCulinaryItems();
-const images = [...recipeImages, ...culinaryImages];
+const images = contentImages;
 const context = {
   items,
   images,
   ingredients,
-  stories: culinaryStories,
-  evidence: culinaryEvidence,
+  stories: contentStories,
+  evidence: contentEvidence,
   sources: contentRightsSources,
-  researchRecords: m9RecipeResearchRecords,
+  researchRecords: contentResearchRecords,
   restaurantRequirements: [],
   restaurants: [],
   now: "2026-09-06",
 } as const;
 
 describe("M10 Production content-rights gate", () => {
-  it("audits exactly 50 published items and allows every current commercial usage decision", () => {
+  it("audits all 85 published items and allows every current commercial usage decision", () => {
     const result = evaluateContentRightsRegistry(contentRightsRegistry, context);
-    expect(items).toHaveLength(50);
-    expect([...m10AuditedCulinaryItemIds].sort()).toEqual(items.map((item) => item.id).sort());
+    expect(items).toHaveLength(85);
+    expect([...m10AuditedCulinaryItemIds, ...m11BatchAItemIds].sort()).toEqual(items.map((item) => item.id).sort());
     expect(result.ready, result.issues.map((issue) => `${issue.code}:${issue.subjectId}`).join(", ")).toBe(true);
-    expect(result.auditedItemIds).toHaveLength(50);
+    expect(result.auditedItemIds).toHaveLength(85);
     expect(contentRightsRegistry.decisions.every((decision) => decision.decision !== "block")).toBe(true);
     expect(contentRightsAuditReport).toContain("Status: PASS");
-    expect(contentRightsAuditReport).toContain("Published items audited: 50");
+    expect(contentRightsAuditReport).toContain("Published items audited: 85");
   });
 
   it("evaluates store, transform, publish, and commercialize separately", () => {
@@ -328,12 +328,12 @@ describe("M10 Production content-rights gate", () => {
     expect(issueCodes(unregisteredSource)).toContain("product-profile-invalid");
 
     const emptyArtifactSources = registryWithValidProductProfile();
-    const artifact = emptyArtifactSources.artifacts.find((entry) => entry.subject.type === "product-profile")!;
+    const artifact = emptyArtifactSources.artifacts.find((entry) => entry.id === "test-product-profile-artifact")!;
     artifact.sourceIds = [];
     expect(issueCodes(emptyArtifactSources)).toContain("product-profile-invalid");
 
     const unlinkedDecision = registryWithValidProductProfile();
-    const profileArtifact = unlinkedDecision.artifacts.find((entry) => entry.subject.type === "product-profile")!;
+    const profileArtifact = unlinkedDecision.artifacts.find((entry) => entry.id === "test-product-profile-artifact")!;
     const decision = unlinkedDecision.decisions.find((entry) => entry.id === profileArtifact.usageDecisionId)!;
     decision.assessmentIds = [profileArtifact.rightsAssessmentId];
     expect(issueCodes(unlinkedDecision)).toContain("product-profile-invalid");
@@ -396,7 +396,7 @@ describe("M10 Production content-rights gate", () => {
   });
 
   it("cannot bypass Story rights by removing the reverse item.storyIds link", () => {
-    const storyId = culinaryStories[0].id;
+    const storyId = contentStories[0].id;
     const unlinkedItems = items.map((item) => ({ ...item, storyIds: item.storyIds.filter((id) => id !== storyId) })) as CulinaryItem[];
     const regenerated = createContentRightsRegistry({ ...context, items: unlinkedItems, auditedItemIds: m10AuditedCulinaryItemIds });
     expect(regenerated.artifacts.some((artifact) => artifact.subject.type === "story" && artifact.subject.id === storyId)).toBe(true);
@@ -464,7 +464,7 @@ describe("M10 Production content-rights gate", () => {
     const usedIngredientIds = new Set(items.flatMap((item) => "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []));
     const nutritionIds = new Set(contentRightsRegistry.nutrition.map((entry) => entry.ingredientId));
     const costIds = new Set(contentRightsRegistry.costs.map((entry) => entry.id));
-    expect(usedIngredientIds.size).toBe(93);
+    expect(usedIngredientIds.size).toBe(106);
     for (const ingredientId of usedIngredientIds) {
       const ingredient = ingredients.find((entry) => entry.id === ingredientId)!;
       expect(nutritionIds.has(ingredientId), ingredientId).toBe(true);

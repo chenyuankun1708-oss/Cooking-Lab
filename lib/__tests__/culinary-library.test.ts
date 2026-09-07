@@ -50,17 +50,17 @@ const publishingContext: CulinaryPublishingContext = {
 const proceduralKinds = new Set(["cooking", "baking", "brewing", "extraction", "mixing", "assembly"]);
 
 describe("published culinary library", () => {
-  it("adds a balanced native portfolio to the 34 adapted published Recipes", () => {
+  it("adds Batch A to the existing adapted and native public portfolio", () => {
     const published = getPublishedCulinaryItems();
 
     expect(nativeCulinaryItems).toHaveLength(16);
-    expect(published).toHaveLength(50);
-    expect(listPublishedCulinaryItemsByType("dish")).toHaveLength(37);
-    expect(listPublishedCulinaryItemsByType("dessert")).toHaveLength(3);
-    expect(listPublishedCulinaryItemsByType("tea")).toHaveLength(4);
-    expect(listPublishedCulinaryItemsByType("coffee")).toHaveLength(2);
-    expect(listPublishedCulinaryItemsByType("non-alcoholic-drink")).toHaveLength(2);
-    expect(listPublishedCulinaryItemsByType("alcoholic-drink")).toHaveLength(2);
+    expect(published).toHaveLength(85);
+    expect(listPublishedCulinaryItemsByType("dish")).toHaveLength(57);
+    expect(listPublishedCulinaryItemsByType("dessert")).toHaveLength(7);
+    expect(listPublishedCulinaryItemsByType("tea")).toHaveLength(7);
+    expect(listPublishedCulinaryItemsByType("coffee")).toHaveLength(5);
+    expect(listPublishedCulinaryItemsByType("non-alcoholic-drink")).toHaveLength(6);
+    expect(listPublishedCulinaryItemsByType("alcoholic-drink")).toHaveLength(3);
     expect(getPublishedCulinaryItemBySlug("espresso")?.itemType).toBe("coffee");
   });
 

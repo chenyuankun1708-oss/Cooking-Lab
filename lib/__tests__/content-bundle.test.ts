@@ -10,7 +10,7 @@ describe("M11 published content bundle manifest", () => {
   it("covers every current published item with stable identity, locales, Hero and rights decisions", () => {
     const items = getPublishedCulinaryItems();
     expect(publishedContentBundleManifest.version).toBe(1);
-    expect(publishedContentBundleManifest.entries).toHaveLength(50);
+    expect(publishedContentBundleManifest.entries).toHaveLength(85);
     expect(publishedContentBundleManifest.entries.map((entry) => entry.slug)).toEqual(
       [...publishedContentBundleManifest.entries.map((entry) => entry.slug)].sort(),
     );

@@ -33,6 +33,8 @@ type ReferenceSpec = {
   editorialNotes: string;
 };
 
+type AtLeastTwo<T> = [T, T, ...T[]];
+
 type ReferenceKey = keyof typeof referenceCatalog;
 
 type StorySpec = {
@@ -45,9 +47,9 @@ type StorySpec = {
   enPractice: string;
   zhBoundary: string;
   enBoundary: string;
-  evidenceLocators: [string, string];
-  evidenceNotes: [string, string];
-  evidenceStrengths?: [Evidence["strength"], Evidence["strength"]];
+  evidenceLocators: AtLeastTwo<string>;
+  evidenceNotes: AtLeastTwo<string>;
+  evidenceStrengths?: AtLeastTwo<Evidence["strength"]>;
 };
 
 type DishSpec = {
@@ -68,7 +70,7 @@ type DishSpec = {
     toolIds: string[];
     steps: [StepSpec, StepSpec, StepSpec, StepSpec, ...StepSpec[]];
   };
-  references: [ReferenceKey, ReferenceKey];
+  references: AtLeastTwo<ReferenceKey>;
   story: StorySpec;
 };
 
@@ -78,7 +80,7 @@ const referenceCatalog = {
     publisherOrInstitution: "USDA Food Safety and Inspection Service",
     url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
     type: "government",
-    uses: ["safety", "preparation"],
+    uses: ["safety"],
     editorialNotes: "Used only for the poultry temperature boundary and thermometer placement cue.",
   },
   healthCanadaTemperatures: {
@@ -86,7 +88,7 @@ const referenceCatalog = {
     publisherOrInstitution: "Health Canada",
     url: "https://www.canada.ca/en/health-canada/services/general-food-safety-tips/safe-internal-cooking-temperatures.html",
     type: "government",
-    uses: ["safety", "preparation"],
+    uses: ["safety"],
     editorialNotes: "Independent government cross-check for cooked poultry temperature guidance.",
   },
   usdaSeafood: {
@@ -94,7 +96,7 @@ const referenceCatalog = {
     publisherOrInstitution: "USDA Food Safety and Inspection Service",
     url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
     type: "government",
-    uses: ["safety", "preparation"],
+    uses: ["safety"],
     editorialNotes: "Used only for the seafood temperature and observable doneness boundary.",
   },
   fdaSeafood: {
@@ -102,7 +104,7 @@ const referenceCatalog = {
     publisherOrInstitution: "U.S. Food and Drug Administration",
     url: "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely",
     type: "government",
-    uses: ["safety", "preparation"],
+    uses: ["safety"],
     editorialNotes: "Independent cross-check for opaque, separating flesh and safe seafood handling cues.",
   },
   fdaEggs: {
@@ -110,7 +112,7 @@ const referenceCatalog = {
     publisherOrInstitution: "U.S. Food and Drug Administration",
     url: "https://www.fda.gov/food/buy-store-serve-safe-food/what-you-need-know-about-egg-safety",
     type: "government",
-    uses: ["safety", "preparation"],
+    uses: ["safety"],
     editorialNotes: "Used only for the egg cooking and prompt-serving boundary.",
   },
   usdaEggs: {
@@ -118,8 +120,55 @@ const referenceCatalog = {
     publisherOrInstitution: "USDA Food Safety and Inspection Service",
     url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/eggs/shell-eggs-farm-table",
     type: "government",
-    uses: ["safety", "preparation"],
+    uses: ["safety"],
     editorialNotes: "Independent cross-check for cooked egg texture and holding guidance.",
+  },
+  feelGoodPanSearedChicken: {
+    title: "Pan Seared Chicken Thighs Recipe with Spiced Crust",
+    publisherOrInstitution: "Feel Good Foodie",
+    authorNames: ["Yumna Jawad"],
+    url: "https://feelgoodfoodie.net/recipe/pan-seared-chicken-thighs/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Written preparation reference for drying, seasoning, and pan-searing chicken thighs; no wording, quantities, or page structure are reused.",
+  },
+  dinnerBitePanSearedChicken: {
+    title: "Pan Seared Boneless Chicken Thighs",
+    publisherOrInstitution: "The Dinner Bite",
+    authorNames: ["Ájọkẹ"],
+    url: "https://www.thedinnerbite.com/pan-seared-boneless-chicken-thighs/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Independent written reference for a boneless stovetop chicken-thigh method and browned finish; source expression is not copied.",
+  },
+  madeWithLauSteamedSalmon: {
+    title: "The Steamed Salmon My Dad's Made 100,000 Times",
+    publisherOrInstitution: "Made With Lau",
+    url: "https://www.madewithlau.com/recipes/steamed-salmon",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Written Chinese-style steamed-salmon reference for ginger-scallion preparation and controlled steaming; no wording or quantities are reused.",
+  },
+  gabySteamedSalmon: {
+    title: "Steamed Salmon With Garlic, Herbs And Lemon",
+    publisherOrInstitution: "What's Gaby Cooking",
+    authorNames: ["Gaby Dalkin"],
+    url: "https://whatsgabycooking.com/steamed-salmon-with-garlic-herbs-and-lemon/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Independent written reference confirming salmon as a direct-steaming preparation with a moist finish; the Cooking Lab aromatics and sequence are independently authored.",
+  },
+  downshiftologyBakedSalmon: {
+    title: "Best Baked Salmon",
+    publisherOrInstitution: "Downshiftology",
+    authorNames: ["Lisa Bryan"],
+    url: "https://downshiftology.com/recipes/best-baked-salmon/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Written oven-salmon reference for drying, oiling, seasoning, and checking a brief bake; no wording or quantities are reused.",
+  },
+  mediterraneanDishLemonGarlicSalmon: {
+    title: "Lemon Garlic Salmon Recipe",
+    publisherOrInstitution: "The Mediterranean Dish",
+    authorNames: ["Suzy Karadsheh"],
+    url: "https://www.themediterraneandish.com/lemon-garlic-salmon-recipe/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Independent written reference for oven-cooked salmon with lemon and garlic and an observable flaky finish; source expression is not copied.",
   },
   woksBroccoliChicken: {
     title: "Chicken and Broccoli with Brown Sauce",
@@ -288,13 +337,32 @@ const referenceCatalog = {
     title: "Steamed Egg",
     publisherOrInstitution: "Made With Lau",
     url: "https://www.madewithlau.com/recipes/steamed-egg",
+    uses: ["identity", "preparation"],
     editorialNotes: "Used only to cross-check straining, gentle steam, and set-center cues.",
   },
-  chinaSichuanSteamedEgg: {
-    title: "Chinese Steamed Egg",
-    publisherOrInstitution: "China Sichuan Food",
-    url: "https://www.chinasichuanfood.com/chinese-steamed-egg/",
+  redHouseSteamedEgg: {
+    title: "Chinese steamed eggs, a perfectionist's guide (蒸蛋羹)",
+    publisherOrInstitution: "Red House Spice",
+    authorNames: ["Wei Guo"],
+    url: "https://redhousespice.com/chinese-steamed-eggs/",
+    uses: ["identity", "preparation"],
     editorialNotes: "Independent preparation reference for a smooth, gently set egg custard.",
+  },
+  redHouseRiceCookerChickenRice: {
+    title: "One-pot Hainanese Chicken Rice",
+    publisherOrInstitution: "Red House Spice",
+    authorNames: ["Wei Guo"],
+    url: "https://redhousespice.com/chinese-style-one-pot-chicken-rice/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Written reference for a one-pot chicken-and-rice structure with an explicit rice-cooker method; Cooking Lab does not reuse its wording or claim Hainanese authenticity.",
+  },
+  wokAndKinChickenMushroomRice: {
+    title: "Rice Cooker Chicken and Mushroom Rice",
+    publisherOrInstitution: "Wok and Kin",
+    authorNames: ["Jeannette"],
+    url: "https://www.wokandkin.com/rice-cooker-chicken-and-mushroom-rice/",
+    uses: ["identity", "preparation"],
+    editorialNotes: "Independent written reference for cooking chicken, mushroom, and rice together in a rice cooker; source wording and quantities are not reused.",
   },
   woksTomatoEggSoup: {
     title: "Tomato Egg Drop Soup",
@@ -340,40 +408,6 @@ const input = (
   unit: DishItem["preparation"]["inputs"][number]["unit"] = "g",
   optional = false,
 ): DishItem["preparation"]["inputs"][number] => ({ ingredientId, amount, unit, optional });
-
-const chickenDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
-  zhTitle,
-  enTitle,
-  zhClaim: "在鸡肉最厚处测量至 74°C，比只看表面颜色更能给家庭厨师一个可重复的完成节点。",
-  enClaim: "Measuring 74°C at the thickest part of chicken gives home cooks a more repeatable finish point than surface color alone.",
-  zhPractice: "把探针插入最厚处并避开锅面或骨头，确认后停止高温加热，可减少为了追求更深颜色而继续久煮。",
-  enPractice: "Insert the probe into the thickest part without touching the pan or bone, then stop intense heat after confirmation instead of cooking longer for deeper color.",
-  zhBoundary: "这条 Story 只讨论可观察的家庭烹饪完成节点，不表示任何来源为本配方背书。",
-  enBoundary: "This Story concerns only an observable home-cooking finish point and does not imply endorsement by either source.",
-  evidenceLocators: ["Poultry temperature row", "Poultry cooking-temperature table"],
-  evidenceNotes: [
-    "Supports the 74°C/165°F minimum temperature for poultry.",
-    "Independently supports measuring cooked poultry at its thickest part.",
-  ],
-  evidenceStrengths: ["strong", "strong"],
-});
-
-const seafoodDonenessStory = (zhTitle: string, enTitle: string): StorySpec => ({
-  zhTitle,
-  enTitle,
-  zhClaim: "63°C读数可与鱼肉不透明并易分层、虾肉珠白不透明等状态一起，构成可重复的完成提示。",
-  enClaim: "A 63°C reading can be paired with opaque, separating fish or pearly, opaque shrimp as repeatable finish cues.",
-  zhPractice: "在最厚处接近完成时就检查状态，避免为了追求更深颜色而延长加热。",
-  enPractice: "Check the thickest part as cooking nears completion instead of extending heat merely to chase deeper color.",
-  zhBoundary: "这条 Story 只记录烹饪完成状态，不作健康效果或医疗判断。",
-  enBoundary: "This Story records cooking finish states only and makes no health-effect or medical judgment.",
-  evidenceLocators: ["Fish and shellfish temperature row", "Cooking seafood safely section"],
-  evidenceNotes: [
-    "Supports the 63°C/145°F seafood boundary and opaque-flesh cues.",
-    "Independently supports opaque, separating fish and pearly opaque shrimp cues.",
-  ],
-  evidenceStrengths: ["strong", "strong"],
-});
 
 const dishSpecs = [
   {
@@ -493,7 +527,7 @@ const dishSpecs = [
     enName: "Pan-seared Chicken Thigh",
     zhDescription: "去皮鸡腿肉先平整入锅，煎出焦香边缘后以蒜和黑胡椒收味，内部保持多汁。",
     enDescription: "Boneless chicken thigh is flattened against the pan for browned edges, then finished with garlic and black pepper while the center stays juicy.",
-    heroAlt: "Pan-seared chicken thigh with browned edges",
+    heroAlt: "Pan-seared chicken thigh with browned edges, garlic, and lemon",
     taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "western" }, techniqueIds: ["sear", "pan-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["garlicky", "peppery", "roasted"], textureIds: ["juicy", "tender"], characterIds: ["hearty", "appetizing"] },
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
@@ -510,8 +544,20 @@ const dishSpecs = [
         { zh: { instruction: "离锅静置 4 分钟后逆纹切片；需要时挤少量柠檬汁再上桌。", rationale: "静置让内部汁液稳定，最后加柠檬可保留清新香气。", stateCue: "切片表面湿润但盘中没有大量汁水，中心完全不透明。" }, en: { instruction: "Rest off the heat for 4 minutes, slice across the grain, and add a small squeeze of lemon if desired.", rationale: "Resting stabilizes the juices, while last-minute lemon keeps its aroma bright.", stateCue: "Slices look moist without flooding the plate, and the center is fully opaque." }, durationMinutes: 4 },
       ],
     },
-    references: ["usdaChicken", "healthCanadaTemperatures"],
-    story: chickenDonenessStory("焦香之外，温度才是完成线", "Beyond Browning, Temperature Marks the Finish"),
+    references: ["feelGoodPanSearedChicken", "dinnerBitePanSearedChicken", "usdaChicken", "healthCanadaTemperatures"],
+    story: {
+      zhTitle: "先建立锅面接触，再核验中心温度",
+      enTitle: "Build Pan Contact, Then Verify the Center",
+      zhClaim: "两份独立书面料理来源都以擦干、单层锅煎和翻面完成鸡腿；两份政府资料另支持在最厚处以 74°C 作为禽肉安全完成线。",
+      enClaim: "Two independent written culinary sources use dry surfaces, single-layer pan contact, and turning to cook chicken thighs; two government sources separately support 74°C at the thickest point as the poultry safety boundary.",
+      zhPractice: "先让第一面保持接触形成焦香，再以较温和火力完成中心，并用温度计复核，比只追求表面颜色更稳定。",
+      enPractice: "Keeping the first side in contact for browning, then finishing the center over gentler heat and checking with a thermometer is more repeatable than judging color alone.",
+      zhBoundary: "Cooking Lab 独立组织用量、火力、分钟和状态提示；料理来源仅作 reference-only 交叉核对，不授权复制表达。",
+      enBoundary: "Cooking Lab independently authored the quantities, heat, timing, and state cues; the culinary pages are reference-only cross-checks and do not authorize copied expression.",
+      evidenceLocators: ["Drying and pan-searing method", "Boneless stovetop chicken-thigh method", "Poultry temperature row", "Poultry cooking-temperature table"],
+      evidenceNotes: ["Supports drying and pan-searing chicken thighs to a browned finish.", "Independently supports a boneless chicken-thigh stovetop sequence.", "Supports the 74°C/165°F minimum temperature for poultry.", "Independently supports measuring cooked poultry at its thickest part."],
+      evidenceStrengths: ["limited", "limited", "strong", "strong"],
+    },
   },
   {
     slug: "pepper-beef-stir-fry",
@@ -630,7 +676,7 @@ const dishSpecs = [
     enName: "Shrimp Scrambled Eggs",
     zhDescription: "虾仁先单独煎至珠白，再与刚凝固的鸡蛋短暂合拢，保留虾的弹性和蛋的柔嫩。",
     enDescription: "Shrimp are cooked separately until pearly, then folded into just-set eggs to preserve springy seafood and tender curds.",
-    heroAlt: "Tender scrambled eggs folded with pearly shrimp",
+    heroAlt: "Tender scrambled eggs folded with pearly shrimp and scallion",
     taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["stir-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 2, umami: 3, sweet: 1 }, aromaIds: ["gingery"], textureIds: ["tender", "juicy", "silky"], characterIds: ["light", "comforting"] },
     pairing: { mealRoleIds: ["main"], servingContextIds: ["breakfast", "lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "silky" }] },
@@ -685,8 +731,20 @@ const dishSpecs = [
         { zh: { instruction: "倒掉盘中多余水分，撒剩余姜葱，淋酱油；将油加热至流动明显后浇在葱姜上。", rationale: "先去水再调味可避免酱汁被稀释，热油只用于释放葱姜香气。", stateCue: "盘底只有薄层酱汁，葱姜香气清楚，鱼肉表面仍湿润。" }, en: { instruction: "Pour off excess steaming liquid, add the remaining ginger and scallion, and drizzle with soy sauce. Heat the oil until fluid and pour it over the aromatics.", rationale: "Removing water first prevents dilution; the hot oil is only to release ginger-scallion aroma.", stateCue: "Only a thin sauce remains on the plate, aromatics smell vivid, and the fish stays moist." }, durationMinutes: 2 },
       ],
     },
-    references: ["usdaSeafood", "fdaSeafood"],
-    story: seafoodDonenessStory("蒸鱼的熟度可以同时看温度与分层", "Steam Doneness Can Be Read by Temperature and Flaking"),
+    references: ["madeWithLauSteamedSalmon", "gabySteamedSalmon", "usdaSeafood", "fdaSeafood"],
+    story: {
+      zhTitle: "温和蒸汽与短间隔复测",
+      enTitle: "Gentle Steam and Short Recheck Cycles",
+      zhClaim: "两份独立书面料理来源都把三文鱼作为可直接蒸制的鱼类料理；两份政府资料另支持 63°C 与鱼肉不透明、易分层的完成边界。",
+      enClaim: "Two independent written culinary sources treat salmon as a direct steaming preparation; two government sources separately support 63°C together with opaque, separating flesh as finish boundaries.",
+      zhPractice: "从较短蒸制周期开始，并在最厚处逐分钟复测，可避免因固定分钟或表面颜色而过度加热。",
+      enPractice: "Starting with a short steam and rechecking the thickest point in one-minute increments avoids overcooking from fixed timing or surface color alone.",
+      zhBoundary: "本条目只综合蒸制顺序与可观察熟度，不复制来源表达，也不把其他海鲜的状态提示套用于三文鱼。",
+      enBoundary: "This entry synthesizes only the steaming sequence and observable doneness; it copies no source expression and does not apply other seafood cues to salmon.",
+      evidenceLocators: ["Chinese-style steamed salmon method", "Direct-steaming salmon method", "Fish temperature row", "Cooking fish safely section"],
+      evidenceNotes: ["Supports ginger-scallion steamed-salmon identity and controlled steaming.", "Independently supports direct steaming to a moist salmon finish.", "Supports the 63°C/145°F fish boundary.", "Independently supports opaque, separating fish as an observable cue."],
+      evidenceStrengths: ["limited", "limited", "strong", "strong"],
+    },
   },
   {
     slug: "roasted-salmon",
@@ -694,7 +752,7 @@ const dishSpecs = [
     enName: "Roasted Salmon",
     zhDescription: "三文鱼以柠檬和黑胡椒高温短烤，边缘微焦，中心刚好不透明并保持湿润。",
     enDescription: "Salmon is briefly roasted with lemon and black pepper until the edges color and the center turns just opaque while remaining moist.",
-    heroAlt: "Roasted salmon with lemon and browned edges",
+    heroAlt: "Roasted salmon with lemon, garlic, and lightly browned edges",
     taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "western" }, techniqueIds: ["roast"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 2, sour: 2, umami: 3 }, aromaIds: ["citrusy", "roasted", "peppery"], textureIds: ["juicy", "tender"], characterIds: ["light", "appetizing"] },
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["western"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
@@ -711,8 +769,20 @@ const dishSpecs = [
         { zh: { instruction: "出炉静置 2 分钟，再挤少量柠檬汁；沿纹理轻推确认鱼肉能分层后上桌。", rationale: "最后加入柠檬保留清亮酸香，短暂静置让余温均匀分布。", stateCue: "鱼肉可轻松分层但不干散，表面有光泽，柠檬香清楚。" }, en: { instruction: "Rest for 2 minutes, add a small squeeze of lemon, and gently check that the flesh separates along its flakes before serving.", rationale: "Last-minute lemon stays bright, while a short rest distributes carryover heat.", stateCue: "The fish separates easily without looking dry, remains glossy, and smells distinctly lemony." }, durationMinutes: 2 },
       ],
     },
-    references: ["usdaSeafood", "fdaSeafood"],
-    story: seafoodDonenessStory("烤鱼不靠更深颜色判断熟度", "Roasted Fish Does Not Need Deeper Color to Be Done"),
+    references: ["downshiftologyBakedSalmon", "mediterraneanDishLemonGarlicSalmon", "usdaSeafood", "fdaSeafood"],
+    story: {
+      zhTitle: "烤三文鱼以厚度和状态收尾",
+      enTitle: "Finish Roasted Salmon by Thickness and State",
+      zhClaim: "两份独立书面料理来源都支持三文鱼以烤箱、油脂与调味完成；两份政府资料另支持 63°C 与鱼肉不透明、易分层的完成边界。",
+      enClaim: "Two independent written culinary sources support oven-cooking salmon with oil and seasoning; two government sources separately support 63°C together with opaque, separating flesh as finish boundaries.",
+      zhPractice: "先充分预热，再按厚度从较短时间开始检查并以 1 至 2 分钟递增，比等待更深颜色更能保留湿润中心。",
+      enPractice: "Preheating fully, checking early by thickness, and extending in one- to two-minute increments preserves a moist center more reliably than waiting for deeper color.",
+      zhBoundary: "Cooking Lab 独立组织柠檬、蒜和黑胡椒的用量与复测路径；来源只作 reference-only 技法核对。",
+      enBoundary: "Cooking Lab independently authored the lemon, garlic, black-pepper quantities and recheck path; sources are used only as reference-only technique checks.",
+      evidenceLocators: ["Baked salmon preparation and doneness section", "Lemon-garlic oven salmon method", "Fish temperature row", "Cooking fish safely section"],
+      evidenceNotes: ["Supports drying, seasoning, and oven-cooking salmon.", "Independently supports lemon-garlic oven salmon and a flaky finish.", "Supports the 63°C/145°F fish boundary.", "Independently supports opaque, separating fish as an observable cue."],
+      evidenceStrengths: ["limited", "limited", "strong", "strong"],
+    },
   },
   {
     slug: "steamed-egg",
@@ -720,7 +790,7 @@ const dishSpecs = [
     enName: "Home-style Steamed Egg",
     zhDescription: "蛋液与温水混合并过滤，以温和蒸汽凝成平滑柔嫩的蒸水蛋，表面完整、中心不流动。",
     enDescription: "Eggs are mixed with warm water, strained, and gently steamed into a smooth tender custard with an intact surface and fully set center.",
-    heroAlt: "Smooth home-style steamed egg custard",
+    heroAlt: "Smooth home-style steamed egg custard with fine scallion garnish",
     taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["steam"], formIds: ["side-dish"], dietaryTagIds: ["vegetarian"], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 1, umami: 2 }, aromaIds: ["herbal"], textureIds: ["silky", "soft"], characterIds: ["light", "comforting"] },
     pairing: { mealRoleIds: ["side"], servingContextIds: ["breakfast", "lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "warm" }, { dimension: "texture", value: "silky" }] },
@@ -737,19 +807,19 @@ const dishSpecs = [
         { zh: { instruction: "中心达到 71°C 且完全凝固后取出，静置 2 分钟，淋酱油和油并撒葱，温热食用。", rationale: "静置让结构稳定，最后调味避免在蒸制中形成表面深色斑块。", stateCue: "勺子划开后内部细滑、无流动蛋液，表面只有清亮调味汁。" }, en: { instruction: "Once the center reaches 71°C and is fully set, remove, rest 2 minutes, then add soy sauce, oil, and scallion; serve warm.", rationale: "Resting stabilizes the structure, and late seasoning avoids dark patches during steaming.", stateCue: "A spoon reveals a fine smooth interior with no liquid egg and only a clear seasoning layer on top." }, durationMinutes: 2 },
       ],
     },
-    references: ["fdaEggs", "usdaEggs"],
+    references: ["madeWithLauSteamedEgg", "redHouseSteamedEgg", "fdaEggs", "usdaEggs"],
     story: {
       zhTitle: "柔嫩蒸蛋也需要明确完成线",
       enTitle: "Tender Steamed Egg Still Needs a Clear Finish Line",
-      zhClaim: "两份政府食品安全资料都要求蛋类料理彻底凝固；美国农业部另以 71°C（160°F）作为含蛋料理的完成温度。",
-      enClaim: "Both government food-safety references require egg dishes to be thoroughly cooked, and USDA additionally gives 71°C (160°F) as the finish temperature for egg dishes.",
+      zhClaim: "两份独立书面料理来源都支持过滤蛋液并以温和蒸汽形成平滑蒸蛋；两份政府资料另要求蛋类料理彻底凝固，并以 71°C（160°F）作为含蛋料理完成温度。",
+      enClaim: "Two independent written culinary sources support straining the egg mixture and using gentle steam for a smooth custard; two government sources separately require thorough cooking and give 71°C (160°F) for egg dishes.",
       zhPractice: "温和蒸汽负责口感，中心温度与无流动蛋液负责完成判断；这两件事不应互相替代。",
       enPractice: "Gentle steam manages texture, while center temperature and the absence of liquid egg define completion; one does not replace the other.",
       zhBoundary: "水量、碗深和蒸锅火力会改变分钟数，因此先看中心状态，再用温度复核。",
       enBoundary: "Water ratio, bowl depth, and steamer strength change timing, so inspect the center and confirm it with temperature.",
-      evidenceLocators: ["Cooking eggs thoroughly section", "Egg dishes temperature guidance"],
-      evidenceNotes: ["Supports cooking eggs until no liquid egg remains.", "Supports the 71°C/160°F minimum for egg dishes."],
-      evidenceStrengths: ["strong", "strong"],
+      evidenceLocators: ["Straining and gentle-steam method", "Smooth steamed-egg preparation", "Cooking eggs thoroughly section", "Egg dishes temperature guidance"],
+      evidenceNotes: ["Supports straining and gentle steaming for a smooth set custard.", "Independently supports a covered, gently steamed Chinese egg custard.", "Supports cooking eggs until no liquid egg remains.", "Supports the 71°C/160°F minimum for egg dishes."],
+      evidenceStrengths: ["limited", "limited", "strong", "strong"],
     },
   },
   {
@@ -758,7 +828,7 @@ const dishSpecs = [
     enName: "Home-style Pan-fried Tofu",
     zhDescription: "北豆腐擦干后煎至两面金黄，再用蒜、葱和少量酱油薄薄收汁，外层完整、中心柔软。",
     enDescription: "Firm tofu is dried and browned on both sides, then lightly glazed with garlic, scallion, and soy sauce for an intact crust and soft center.",
-    heroAlt: "Golden pan-fried tofu with scallion and a light glaze",
+    heroAlt: "Golden pan-fried tofu with scallion, garlic, and a light glaze",
     taxonomy: { origin: { countryId: "china" }, cuisine: { cuisineId: "chinese" }, techniqueIds: ["pan-fry"], formIds: ["main-dish", "side-dish"], dietaryTagIds: ["vegan"], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 2, umami: 3 }, aromaIds: ["garlicky", "roasted"], textureIds: ["tender", "soft", "saucy"], characterIds: ["rice-friendly", "comforting"] },
     pairing: { mealRoleIds: ["main", "side"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["chinese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "tender" }] },
@@ -795,7 +865,7 @@ const dishSpecs = [
     enName: "Shredded Chicken and Cucumber Salad",
     zhDescription: "鸡胸温和煮熟，短暂放凉至便于手撕，再与黄瓜、葱和清爽酸咸汁拌匀后立即上桌。",
     enDescription: "Chicken breast is gently cooked, rested just until comfortable to shred, then tossed with cucumber, scallion, and a bright savory dressing for immediate service.",
-    heroAlt: "Cold shredded chicken with cucumber and scallion",
+    heroAlt: "Cold shredded chicken with cucumber, scallion, and a little chili",
     taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "fusion" }, techniqueIds: ["poach", "cold-mix"], formIds: ["cold-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 2, sour: 3, umami: 2, spicy: 1 }, aromaIds: ["garlicky", "herbal"], textureIds: ["tender", "crisp", "juicy"], characterIds: ["refreshing", "appetizing"] },
     pairing: { mealRoleIds: ["starter", "main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["fusion"], facets: [{ dimension: "weight", value: "light" }, { dimension: "temperature", value: "cool" }, { dimension: "texture", value: "crisp" }] },
@@ -923,8 +993,20 @@ const dishSpecs = [
         { zh: { instruction: "打开锅盖先取出两块鸡肉确认中心不透明，再由底向上轻翻米饭，撒葱后趁热分碗。", rationale: "焖后再翻松让水分均匀分布，轻翻避免把米粒压成团。", stateCue: "鸡肉中心不透明，米粒熟透无硬芯、彼此松散，锅底没有生水。" }, en: { instruction: "Open the lid, check two chicken pieces for opaque centers, then gently fold the rice from bottom to top, add scallion, and portion while hot.", rationale: "Fluffing after the rest distributes moisture, while gentle folding keeps the grains from compacting.", stateCue: "Chicken centers are opaque; rice has no hard core, separates into grains, and no raw water remains below." }, durationMinutes: 3 },
       ],
     },
-    references: ["usdaChicken", "healthCanadaTemperatures"],
-    story: chickenDonenessStory("电饭煲提示音之后还要看鸡肉状态", "After the Chime, Check the Chicken State"),
+    references: ["redHouseRiceCookerChickenRice", "wokAndKinChickenMushroomRice", "usdaChicken", "healthCanadaTemperatures"],
+    story: {
+      zhTitle: "同锅焖饭，提示音后仍要核验",
+      enTitle: "One-pot Rice Still Needs a Post-chime Check",
+      zhClaim: "两份独立书面料理来源都支持鸡肉、米与配料在电饭煲中同锅成熟；两份政府资料另支持在最厚鸡块以 74°C 作为禽肉安全完成线。",
+      enClaim: "Two independent written culinary sources support cooking chicken, rice, and accompanying ingredients together in a rice cooker; two government sources separately support 74°C at the thickest chicken piece as the poultry safety boundary.",
+      zhPractice: "让鸡块保持可见便于测温；若程序结束后仍未达温，单独补热鸡肉而不反复启动米饭程序，可同时保护安全与米粒状态。",
+      enPractice: "Keeping chicken visible makes temperature checks practical; if it is still below temperature after the cycle, finishing the chicken separately protects both safety and rice texture.",
+      zhBoundary: "本条目是 Cooking Lab 独立编写的家常焖饭，不声称为海南鸡饭正宗配方，也不复制来源的表达和结构。",
+      enBoundary: "This is an independently authored Cooking Lab home rice-cooker dish; it makes no claim to an authentic Hainanese formula and copies no source wording or structure.",
+      evidenceLocators: ["Rice-cooker method", "Chicken-and-mushroom rice-cooker method", "Poultry temperature row", "Poultry cooking-temperature table"],
+      evidenceNotes: ["Supports a one-pot chicken-and-rice structure and explicit rice-cooker option.", "Independently supports cooking chicken, mushrooms, and rice together in a rice cooker.", "Supports the 74°C/165°F minimum temperature for poultry.", "Independently supports measuring cooked poultry at its thickest part."],
+      evidenceStrengths: ["limited", "limited", "strong", "strong"],
+    },
   },
   {
     slug: "japanese-beef-potato-simmer",
@@ -1008,7 +1090,7 @@ const dishSpecs = [
     enName: "Vietnamese Lemongrass Chicken",
     zhDescription: "鸡腿肉以香茅、蒜、鱼露和青柠调味后快速煎炒，焦香边缘衬出明亮草本气息。",
     enDescription: "Chicken thigh is seasoned with lemongrass, garlic, fish sauce, and lime, then quickly seared for browned edges against bright herbal aroma.",
-    heroAlt: "Vietnamese lemongrass chicken with browned edges and herbs",
+    heroAlt: "Vietnamese lemongrass chicken with browned edges, lemongrass, and lime",
     taxonomy: { origin: { countryId: "vietnam" }, cuisine: { cuisineId: "vietnamese" }, techniqueIds: ["sear", "stir-fry"], formIds: ["main-dish"], dietaryTagIds: [], browseTagIds: ["quick"] },
     flavor: { tastes: { salty: 3, sweet: 1, sour: 2, umami: 3 }, aromaIds: ["herbal", "citrusy", "garlicky"], textureIds: ["juicy", "tender"], characterIds: ["appetizing", "rice-friendly"] },
     pairing: { mealRoleIds: ["main"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["vietnamese"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "juicy" }] },
@@ -1045,7 +1127,7 @@ const dishSpecs = [
     enName: "Mexican Chicken Fajitas",
     zhDescription: "鸡胸、彩椒和洋葱分段煎炒，以青柠、孜然和红椒粉调味，装入温热玉米饼即食。",
     enDescription: "Chicken breast, bell pepper, and onion are seared in stages with lime, cumin, and paprika, then served in warm corn tortillas.",
-    heroAlt: "Chicken fajita strips with peppers and lime",
+    heroAlt: "Chicken fajita strips with peppers, lime, and corn tortillas",
     taxonomy: { origin: { countryId: "united-states" }, cuisine: { cuisineId: "mexican" }, techniqueIds: ["sear", "stir-fry"], formIds: ["main-dish", "staple"], dietaryTagIds: [], browseTagIds: ["quick", "vegetable-rich"] },
     flavor: { tastes: { salty: 2, sour: 2, umami: 2, spicy: 1 }, aromaIds: ["spiced", "citrusy", "roasted"], textureIds: ["juicy", "crisp", "chewy"], characterIds: ["appetizing", "hearty"] },
     pairing: { mealRoleIds: ["main", "staple"], servingContextIds: ["lunch", "dinner"], cuisineIds: ["mexican"], facets: [{ dimension: "weight", value: "medium" }, { dimension: "temperature", value: "hot" }, { dimension: "texture", value: "crisp" }] },
@@ -1082,8 +1164,8 @@ const dishSpecs = [
 type BuiltDishContent = {
   item: DishItem;
   image: RecipeImage;
-  sources: [Source, Source];
-  evidence: [Evidence, Evidence];
+  sources: AtLeastTwo<Source>;
+  evidence: AtLeastTwo<Evidence>;
   story: Story;
   researchRecord: ResearchRecord;
   contentPackage: LocalContentPackageV1;
@@ -1091,9 +1173,9 @@ type BuiltDishContent = {
 
 const buildDishContent = (spec: DishSpec): BuiltDishContent => {
   const storyId = `${spec.slug}-technique-story`;
-  const sourceIds: [string, string] = [`${spec.slug}-source-a`, `${spec.slug}-source-b`];
-  const evidenceIds: [string, string] = [`${spec.slug}-evidence-a`, `${spec.slug}-evidence-b`];
-  const sourceSpecs = spec.references.map((key) => referenceCatalog[key]) as [ReferenceSpec, ReferenceSpec];
+  const sourceIds = spec.references.map((_, index) => `${spec.slug}-source-${String.fromCharCode(97 + index)}`) as AtLeastTwo<string>;
+  const evidenceIds = spec.references.map((_, index) => `${spec.slug}-evidence-${String.fromCharCode(97 + index)}`) as AtLeastTwo<string>;
+  const sourceSpecs = spec.references.map((key) => referenceCatalog[key]) as AtLeastTwo<ReferenceSpec>;
   const sources = sourceSpecs.map((sourceSpec, index) => m11ReferenceSource({
     id: sourceIds[index],
     title: sourceSpec.title,
@@ -1103,14 +1185,14 @@ const buildDishContent = (spec: DishSpec): BuiltDishContent => {
     ...(sourceSpec.type ? { type: sourceSpec.type } : {}),
     editorialNotes: sourceSpec.editorialNotes,
     health: { status: "active", checkedAt: m11ReviewedAt },
-  })) as [Source, Source];
+  })) as AtLeastTwo<Source>;
   const evidence = sources.map((source, index) => m11Evidence({
     id: evidenceIds[index],
     sourceId: source.id,
     locator: spec.story.evidenceLocators[index],
     editorialNote: spec.story.evidenceNotes[index],
     strength: spec.story.evidenceStrengths?.[index],
-  })) as [Evidence, Evidence];
+  })) as AtLeastTwo<Evidence>;
   const [firstStep, ...remainingSteps] = spec.preparation.steps;
   const steps: DishItem["preparation"]["steps"] = [
     bilingualStep(1, firstStep.zh, firstStep.en, firstStep.durationMinutes),

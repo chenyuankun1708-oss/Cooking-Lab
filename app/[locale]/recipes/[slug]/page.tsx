@@ -7,14 +7,14 @@ import { getLocalizedRecipe } from "@/data/localization/public-recipes";
 import {
   contentRightsRegistry,
   contentRightsSources,
+  contentResearchRecords,
   getPublishedCulinaryItemForLocaleBySlug,
   getPublishedCulinaryItemsForLocale,
 } from "@/data/published-culinary-items";
 import { getPublishedRecipeBySlug } from "@/data/published-recipes";
+import { m11BatchAEnglishIngredientLabels } from "@/data/m11/batch-a-ingredient-labels";
+import { m11BatchAItemIds } from "@/data/m11/portfolio";
 import { getStoryExperienceContext } from "@/data/published-stories";
-import {
-  m9RecipeResearchRecords,
-} from "@/data/research/m9-recipe-research";
 import { buildCulinaryDetailModel } from "@/lib/culinary-detail";
 import { rankSimilarCulinaryItems } from "@/lib/culinary-similarity";
 import { parseCulinaryCatalogFilters } from "@/lib/culinary-exploration";
@@ -54,6 +54,9 @@ export async function generateMetadata({
   const detail = buildCulinaryDetailModel(item, ingredients, getStoryExperienceContext(locale), locale, {
     ...(recipe ? { recipe } : {}),
     rightsRegistry: contentRightsRegistry,
+    ...(m11BatchAItemIds.includes(item.id as (typeof m11BatchAItemIds)[number])
+      ? { ingredientLabelOverrides: m11BatchAEnglishIngredientLabels }
+      : {}),
     similarItems: rankSimilarCulinaryItems(item, getPublishedCulinaryItemsForLocale(locale)).map((result) => result.item),
     researchSources: contentRightsSources,
   });
@@ -93,9 +96,12 @@ export default async function CulinaryDetailRoute({
   if (sourceRecipe && !recipe) notFound();
   const detail = buildCulinaryDetailModel(item, ingredients, getStoryExperienceContext(locale), locale, {
     ...(recipe ? { recipe } : {}),
-    researchRecords: m9RecipeResearchRecords,
+    researchRecords: contentResearchRecords,
     researchSources: contentRightsSources,
     rightsRegistry: contentRightsRegistry,
+    ...(m11BatchAItemIds.includes(item.id as (typeof m11BatchAItemIds)[number])
+      ? { ingredientLabelOverrides: m11BatchAEnglishIngredientLabels }
+      : {}),
     similarItems: rankSimilarCulinaryItems(item, getPublishedCulinaryItemsForLocale(locale)).map((result) => result.item),
   });
   const hasContext = hasDecisionContext(decisionState.context);

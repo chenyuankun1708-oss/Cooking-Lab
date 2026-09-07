@@ -16,12 +16,19 @@ import {
   m11BatchAStories,
 } from "@/data/m11/batch-a";
 import { m11BatchAMealPlanStepMetadata } from "@/data/m11/batch-a-meal-plan-metadata";
+import { m11BatchAImageAlts } from "@/data/m11/batch-a-image-alts";
+import {
+  m11BatchAPublishedContentPackages,
+  m11BatchAPublishedItems,
+  m11BatchAPublishedStories,
+} from "@/data/m11/batch-a-publication";
 import { m11BatchAItemIds, m11PortfolioTarget, m11RequiredItemIds, m11RestaurantReconstructionItemIds } from "@/data/m11/portfolio";
 import { evaluateContentRightsRegistry } from "@/lib/content-rights";
 import { evaluateCulinaryItemPublishingEligibility } from "@/lib/culinary-publishing";
 import { deriveMinimumPublishingRisk } from "@/lib/publishing-governance";
 import { validateResearchRegistry } from "@/lib/research-validation";
 import { getToolLabel } from "@/lib/tool-labels";
+import { getCulinaryItemHeroImage } from "@/lib/story-experience";
 import type { CulinaryItemType } from "@/types/culinary";
 
 const publishingContext = {
@@ -36,14 +43,8 @@ const publishingContext = {
 // M10 derives audit scope from publication status. Candidate packages intentionally remain
 // draft until independent attestations and sampling exist, so this preflight uses an isolated
 // publication projection without changing the staged source data or public package index.
-const rightsPreflightItems = m11BatchAItems.map((item) => ({
-  ...item,
-  publication: { status: "published" as const },
-}));
-const rightsPreflightStories = m11BatchAStories.map((story) => ({
-  ...story,
-  publication: { status: "published" as const },
-}));
+const rightsPreflightItems = m11BatchAPublishedItems;
+const rightsPreflightStories = m11BatchAPublishedStories;
 
 const rightsRegistry = createContentRightsRegistry({
   items: rightsPreflightItems,
@@ -63,16 +64,21 @@ const rightsRegistry = createContentRightsRegistry({
 });
 
 describe("M11 content Batch A candidate boundary", () => {
-  it("matches its exact 35-item portfolio slice while remaining outside Production", () => {
+  it("keeps authored candidates staged and publishes the exact 35-item projection atomically", () => {
     expect(m11BatchAItems).toHaveLength(35);
     expect(m11BatchAContentPackages).toHaveLength(35);
     expect(m11BatchAItems.map((item) => item.id).sort()).toEqual([...m11BatchAItemIds].sort());
     expect(m11RequiredItemIds.every((id) => m11BatchAItemIds.includes(id))).toBe(true);
     expect(m11BatchAItems.every((item) => item.publication.status === "draft")).toBe(true);
     expect(m11BatchAStories.every((story) => story.publication.status === "draft")).toBe(true);
-    expect(publishedLocalContentPackages.some((contentPackage) => (
+    expect(m11BatchAPublishedItems.every((item) => item.publication.status === "published")).toBe(true);
+    expect(m11BatchAPublishedStories.every((story) => story.publication.status === "published")).toBe(true);
+    expect(m11BatchAPublishedContentPackages.map((contentPackage) => contentPackage.itemId).sort()).toEqual(
+      [...m11BatchAItemIds].sort(),
+    );
+    expect(publishedLocalContentPackages.filter((contentPackage) => (
       (m11BatchAItemIds as readonly string[]).includes(contentPackage.itemId)
-    ))).toBe(false);
+    ))).toHaveLength(35);
 
     const counts = Object.fromEntries(Object.keys(m11PortfolioTarget).map((type) => [type, 0])) as Record<CulinaryItemType, number>;
     for (const item of m11BatchAItems) counts[item.itemType] += 1;
@@ -138,6 +144,71 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(m11BatchAEvidence.every((record) => record.locators.every((locator) => locator.kind !== "timestamp"))).toBe(true);
   });
 
+  it("uses two culinary sources for repaired preparations and keeps safety sources narrowly scoped", () => {
+    const repairedItemIds = [
+      "pan-seared-chicken-thigh",
+      "steamed-salmon",
+      "roasted-salmon",
+      "steamed-egg",
+      "rice-cooker-chicken-rice",
+    ];
+
+    for (const itemId of repairedItemIds) {
+      const record = m11BatchAResearchRecords.find((entry) => entry.subject.id === itemId)!;
+      const acceptedDecisions = record.sourceDecisions.filter((decision) => decision.disposition === "accepted");
+      const culinaryDecisions = acceptedDecisions.filter((decision) => (
+        decision.uses.includes("identity") && decision.uses.includes("preparation")
+      ));
+      const safetyDecisions = acceptedDecisions.filter((decision) => decision.uses.includes("safety"));
+
+      expect(culinaryDecisions, itemId).toHaveLength(2);
+      expect(safetyDecisions.length, itemId).toBeGreaterThanOrEqual(2);
+      expect(safetyDecisions.every((decision) => decision.uses.length === 1), itemId).toBe(true);
+      expect(culinaryDecisions.every((decision) => !decision.uses.includes("safety")), itemId).toBe(true);
+    }
+  });
+
+  it("uses every accepted Tieguanyin source in claim-level Evidence", () => {
+    const record = m11BatchAResearchRecords.find((entry) => entry.subject.id === "tieguanyin-gongfu")!;
+    const acceptedSourceIds = record.sourceDecisions
+      .filter((decision) => decision.disposition === "accepted")
+      .map((decision) => decision.sourceId)
+      .sort();
+    const evidencedSourceIds = m11BatchAEvidence
+      .filter((entry) => record.claims[0].evidenceIds.includes(entry.id))
+      .map((entry) => entry.sourceId)
+      .sort();
+
+    expect(evidencedSourceIds).toEqual(acceptedSourceIds);
+  });
+
+  it("publishes only through current split attestations and risk-equivalence sampling", async () => {
+    const {
+      publishingGovernanceAuditReport,
+      publishingGovernanceRegistry,
+    } = await import("@/data/published-culinary-items");
+    const batchClassifications = publishingGovernanceRegistry.riskClassifications.filter((entry) =>
+      (m11BatchAItemIds as readonly string[]).includes(entry.itemId),
+    );
+    const sampling = publishingGovernanceRegistry.samplingBatches.find((entry) => entry.id === "sampling-m11-batch-a-e69c26b-pass")!;
+
+    expect(batchClassifications).toHaveLength(35);
+    expect(batchClassifications.filter((entry) => entry.level === "low")).toHaveLength(24);
+    expect(batchClassifications.filter((entry) => entry.level === "medium")).toHaveLength(11);
+    expect(batchClassifications.filter((entry) => entry.level === "high")).toHaveLength(0);
+    expect(sampling.sequence).toBe(6);
+    expect(sampling.samples).toHaveLength(20);
+    expect(sampling.equivalenceClasses).toHaveLength(76);
+    expect(sampling.metrics).toMatchObject({
+      escapeCount: 0,
+      reviewerDisagreementCount: 0,
+      reworkItemCount: 0,
+      provenanceLicenseNoveltyCount: 34,
+    });
+    expect(publishingGovernanceAuditReport).toContain("Status: PASS");
+    expect(publishingGovernanceAuditReport).toContain("Published items audited: 85");
+  });
+
   it("publishes item-specific culinary stories rather than governance boilerplate", () => {
     const bannedBoilerplate = [
       "可核验的内容边界",
@@ -196,12 +267,20 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(JSON.stringify(steamedSalmon.preparation)).toContain("1-minute increments");
     expect(JSON.stringify(steamedEgg.preparation)).toContain("1-minute increments");
 
-    const altByItemId = new Map(m11BatchAImages.map((image) => [image.id.replace(/-hero$/, ""), image.alt]));
-    expect(altByItemId.get("mushroom-tofu-rice")).toContain("small mound of rice");
-    expect(altByItemId.get("black-sesame-soup")).toContain("黑芝麻粒");
-    expect(altByItemId.get("tieguanyin-gongfu")).toContain("抽象冲泡场景");
-    expect(altByItemId.get("flat-white")).toContain("矮宽陶瓷杯");
-    expect(altByItemId.get("rioja-reserva-profile")).toContain("装有深红色葡萄酒");
+    expect(Object.keys(m11BatchAImageAlts).sort()).toEqual([...m11BatchAItemIds].sort());
+    for (const image of m11BatchAImages) {
+      const itemId = image.id.replace(/-hero$/, "");
+      expect(image.alt, itemId).toBe(m11BatchAImageAlts[itemId]["zh-CN"]);
+      expect(image.localizedAlt, itemId).toEqual(m11BatchAImageAlts[itemId]);
+      const item = m11BatchAItems.find((entry) => entry.id === itemId)!;
+      expect(getCulinaryItemHeroImage(item, m11BatchAImages, "zh-CN")?.alt, itemId).toBe(m11BatchAImageAlts[itemId]["zh-CN"]);
+      expect(getCulinaryItemHeroImage(item, m11BatchAImages, "en")?.alt, itemId).toBe(m11BatchAImageAlts[itemId].en);
+    }
+    expect(m11BatchAImageAlts["mushroom-tofu-rice"].en).toContain("small mound of rice");
+    expect(m11BatchAImageAlts["black-sesame-soup"]["zh-CN"]).toContain("黑芝麻粒");
+    expect(m11BatchAImageAlts["tieguanyin-gongfu"]["zh-CN"]).toContain("抽象冲泡场景");
+    expect(m11BatchAImageAlts["flat-white"]["zh-CN"]).toContain("矮宽陶瓷杯");
+    expect(m11BatchAImageAlts["rioja-reserva-profile"]["zh-CN"]).toContain("装有深红色葡萄酒");
   });
 
   it("localizes the specialized tools introduced by Batch A", () => {

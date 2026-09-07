@@ -14,14 +14,14 @@ const context = getStoryExperienceContext("en");
 describe("unified culinary exploration", () => {
   it("lists every currently published item across all six culinary types", () => {
     const catalog = exploreCulinaryCatalog(items, {}, context, "en");
-    expect(catalog).toHaveLength(50);
+    expect(catalog).toHaveLength(85);
     expect(new Set(catalog.map(({ item }) => item.itemType))).toEqual(new Set(culinaryItemTypes));
     expect(catalog.every(({ href }) => href.startsWith("/en/recipes/"))).toBe(true);
   });
 
   it("filters story-bearing items through explicit item and Story relationships", () => {
     const results = exploreCulinaryCatalog(items, { story: "available" }, context, "en");
-    expect(results).toHaveLength(6);
+    expect(results).toHaveLength(41);
     expect(results.every(({ hasStory }) => hasStory)).toBe(true);
   });
 

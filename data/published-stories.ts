@@ -1,28 +1,29 @@
 import { storyEntityLabels, storyTypeLabels } from "./culinary/story-context";
-import { culinaryEvidence } from "./culinary/evidence";
-import { culinaryImages } from "./culinary/images";
-import { culinarySources } from "./culinary/sources";
-import { culinaryStories } from "./culinary/stories";
-import { getPublishedCulinaryItems } from "./published-culinary-items";
+import {
+  contentEvidence,
+  contentImages,
+  contentRightsSources,
+  contentStories,
+  getPublishedCulinaryItems,
+} from "./published-culinary-items";
 import { getPublishedRecipes } from "./published-recipes";
-import { recipeImages } from "./recipe-images";
 import { buildStoryPageModel, buildStoryPreview, type StoryExperienceContext } from "@/lib/story-experience";
 import { assertPublishedStoriesEligible, getPubliclyVisibleStories } from "@/lib/story-publishing";
 import type { Story } from "@/types/culinary";
 import type { SupportedLocale } from "@/types/localization";
 
 const items = getPublishedCulinaryItems();
-const publishingContext = { items, evidence: culinaryEvidence, sources: culinarySources };
-assertPublishedStoriesEligible(culinaryStories, publishingContext);
+const publishingContext = { items, evidence: contentEvidence, sources: contentRightsSources };
+assertPublishedStoriesEligible(contentStories, publishingContext);
 
-const publishedStories = Object.freeze(getPubliclyVisibleStories(culinaryStories, publishingContext));
+const publishedStories = Object.freeze(getPubliclyVisibleStories(contentStories, publishingContext));
 const storyById = new Map(publishedStories.map((story) => [story.id, story]));
 const experienceContext: StoryExperienceContext = {
   items,
   stories: publishedStories,
-  evidence: culinaryEvidence,
-  sources: culinarySources,
-  images: [...recipeImages, ...culinaryImages],
+  evidence: contentEvidence,
+  sources: contentRightsSources,
+  images: contentImages,
   recipeItemIds: new Set(getPublishedRecipes().map((recipe) => recipe.id)),
   storyTypeLabels,
   relatedEntityLabels: storyEntityLabels,

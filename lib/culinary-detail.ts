@@ -81,6 +81,7 @@ export interface CulinaryDetailOptions {
   researchSources?: readonly Source[];
   rightsRegistry?: ContentRightsRegistry;
   similarItems?: readonly CulinaryItem[];
+  ingredientLabelOverrides?: Readonly<Record<string, string>>;
 }
 
 const preparationLabels: Readonly<Record<CulinaryItem["preparation"]["kind"], Record<SupportedLocale, string>>> = {
@@ -119,8 +120,8 @@ export function buildCulinaryDetailModel(
   const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
   const relatedStories = listStoriesForCulinaryItem(item, storyContext.stories);
   const repository = createRepository(ingredients);
-  const image = getCulinaryItemHeroImage(item, storyContext.images);
-  const localizedImage = image && locale === "en"
+  const image = getCulinaryItemHeroImage(item, storyContext.images, locale);
+  const localizedImage = image && locale === "en" && !image.localizedAlt
     ? { ...image, alt: `${copy.name}, ready to serve` }
     : image;
   const rights = options.rightsRegistry
@@ -148,8 +149,8 @@ export function buildCulinaryDetailModel(
     image: localizedImage,
     fallbackInitial: [...copy.name][0] ?? "食",
     preparation: recipe
-      ? buildRecipePreparation(item, recipe, ingredientById, locale)
-      : buildPreparation(item, ingredientById, locale, translated),
+      ? buildRecipePreparation(item, recipe, ingredientById, locale, options.ingredientLabelOverrides)
+      : buildPreparation(item, ingredientById, locale, translated, options.ingredientLabelOverrides),
     stories: relatedStories.map((story) => buildStoryPreview(story, storyContext)),
     embeddedStories: relatedStories.map((story) => buildEmbeddedStoryModel(story, storyContext)),
     nutrition: buildNutrition(item, repository),
@@ -166,6 +167,7 @@ function buildRecipePreparation(
   recipe: Recipe,
   ingredientById: ReadonlyMap<string, Ingredient>,
   locale: SupportedLocale,
+  ingredientLabelOverrides?: Readonly<Record<string, string>>,
 ): CulinaryDetailPreparation {
   if (!("inputs" in item.preparation)) {
     throw new Error(`Recipe ${recipe.id} must adapt to a procedural preparation`);
@@ -178,7 +180,7 @@ function buildRecipePreparation(
     tools: recipe.tools.map((tool) => getToolLabel(tool, locale)),
     inputs: recipe.ingredients.map((input) => ({
       id: input.ingredientId,
-      name: getIngredientLabel(input.ingredientId, ingredientById.get(input.ingredientId)?.name, locale),
+      name: getIngredientLabel(input.ingredientId, ingredientById.get(input.ingredientId)?.name, locale, ingredientLabelOverrides),
       amount: `${input.amount} ${unitLabels[input.unit][locale]}`,
       optional: input.optional ?? false,
       note: locale === "zh-CN" ? input.note : undefined,
@@ -242,7 +244,13 @@ function createRepository(ingredients: readonly Ingredient[]): IngredientReposit
   return { getById: (id) => byId.get(id), list: () => ingredients };
 }
 
-function buildPreparation(item: CulinaryItem, ingredientById: ReadonlyMap<string, Ingredient>, locale: SupportedLocale, translated?: ReturnType<typeof getLocalizedCulinaryCopy>): CulinaryDetailPreparation {
+function buildPreparation(
+  item: CulinaryItem,
+  ingredientById: ReadonlyMap<string, Ingredient>,
+  locale: SupportedLocale,
+  translated?: ReturnType<typeof getLocalizedCulinaryCopy>,
+  ingredientLabelOverrides?: Readonly<Record<string, string>>,
+): CulinaryDetailPreparation {
   const preparation = item.preparation;
   if ("inputs" in preparation) {
     return {
@@ -253,7 +261,7 @@ function buildPreparation(item: CulinaryItem, ingredientById: ReadonlyMap<string
       tools: preparation.toolIds.map((tool) => getToolLabel(tool, locale)),
       inputs: preparation.inputs.map((input) => ({
         id: input.ingredientId,
-        name: getIngredientLabel(input.ingredientId, ingredientById.get(input.ingredientId)?.name, locale),
+        name: getIngredientLabel(input.ingredientId, ingredientById.get(input.ingredientId)?.name, locale, ingredientLabelOverrides),
         amount: `${input.amount} ${unitLabels[input.unit][locale]}`,
         optional: input.optional,
         note: locale === "zh-CN" ? input.note : translated?.inputNotes?.[input.ingredientId],

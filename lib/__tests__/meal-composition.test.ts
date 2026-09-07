@@ -105,9 +105,9 @@ describe("culinary pairing score", () => {
 describe("meal composition", () => {
   it("enables only templates supported by the current portfolio", () => {
     const audit = auditPairingReadiness(library);
-    expect(audit.itemCount).toBe(50);
-    expect(audit.roleCounts).toMatchObject({ starter: 4, main: 18, side: 1, staple: 10, soup: 5, dessert: 3, drink: 10 });
-    expect(audit.drinkShare).toBeCloseTo(10 / 50, 5);
+    expect(audit.itemCount).toBe(85);
+    expect(audit.roleCounts).toMatchObject({ starter: 5, main: 35, side: 5, staple: 14, soup: 6, dessert: 7, drink: 21 });
+    expect(audit.drinkShare).toBeCloseTo(21 / 85, 5);
     expect(audit.availableTemplateIds).toEqual(mealTemplates.map(({ id }) => id));
     expect(audit.items.every(({ weight, temperature }) => Boolean(weight && temperature))).toBe(true);
   });
@@ -333,9 +333,9 @@ describe("meal composition", () => {
   it("preserves the published library and Recipe regression baseline", () => {
     expect(getPublishedRecipes()).toHaveLength(34);
     expect(nativeCulinaryItems).toHaveLength(16);
-    expect(library).toHaveLength(50);
-    expect(getPublishedCulinaryItemsForLocale("zh-CN")).toHaveLength(50);
-    expect(getPublishedCulinaryItemsForLocale("en")).toHaveLength(50);
+    expect(library).toHaveLength(85);
+    expect(getPublishedCulinaryItemsForLocale("zh-CN")).toHaveLength(85);
+    expect(getPublishedCulinaryItemsForLocale("en")).toHaveLength(85);
   });
 });
 
@@ -422,10 +422,10 @@ describe("pairing presentation", () => {
     );
   });
 
-  it("wires 100 locale-complete Pairing and canonical culinary detail pages", async () => {
+  it("wires 170 locale-complete Pairing and canonical culinary detail pages", async () => {
     const pairingPage = await import("../../app/[locale]/pairing/[slug]/page");
-    expect(pairingPage.generateStaticParams()).toHaveLength(100);
-    expect(new Set(pairingPage.generateStaticParams().map(({ locale, slug }) => `${locale}:${slug}`)).size).toBe(100);
+    expect(pairingPage.generateStaticParams()).toHaveLength(170);
+    expect(new Set(pairingPage.generateStaticParams().map(({ locale, slug }) => `${locale}:${slug}`)).size).toBe(170);
     const metadata = await pairingPage.generateMetadata({ params: Promise.resolve({ locale: "en", slug: "dongpo-pork" }) });
     const languages = metadata.alternates?.languages as Record<string, string>;
     expect(metadata.alternates?.canonical).toBe("https://cooking-lab-pied.vercel.app/en/pairing/dongpo-pork");
@@ -444,6 +444,6 @@ describe("pairing presentation", () => {
     expect(nativeDetailSource).toContain("`/pairing/${detail.slug}`");
     expect(culinaryRedirectSource).toContain("permanentRedirect(");
     const recipePage = await import("../../app/[locale]/recipes/[slug]/page");
-    expect(recipePage.generateStaticParams()).toHaveLength(100);
+    expect(recipePage.generateStaticParams()).toHaveLength(170);
   });
 });

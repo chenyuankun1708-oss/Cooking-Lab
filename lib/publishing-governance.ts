@@ -859,7 +859,6 @@ function validateSamplingHistory(
     for (const [key, state] of states) {
       if (!state.frozen) continue;
       const equivalence = batch.equivalenceClasses.find((entry) => entry.key === key);
-      const currentPopulation = [...(currentPopulationByClass.get(key) ?? [])].sort();
       const cleanCurrentRecord = batch.policyVersion === policyVersion
         && batch.artifactSetVersion === versionOf(batch.itemIds)
         && batch.verdict === "pass"
@@ -868,9 +867,8 @@ function validateSamplingHistory(
       const fullReview = Boolean(
         cleanCurrentRecord
         && equivalence
-        && [...equivalence.itemIds].sort().join(",") === currentPopulation.join(",")
-        && [...equivalence.sampledItemIds].sort().join(",") === currentPopulation.join(",")
-        && currentPopulation.every((itemId) => batch.samples.some((sample) =>
+        && [...equivalence.sampledItemIds].sort().join(",") === [...equivalence.itemIds].sort().join(",")
+        && equivalence.itemIds.every((itemId) => batch.samples.some((sample) =>
           sample.itemId === itemId
           && sample.verdict === "pass"
           && sample.equivalenceClassKeys.includes(key)

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { mealPlanStepMetadata } from "@/data/meal-plan-metadata";
+import { m11BatchAMealPlanStepMetadata } from "@/data/m11/batch-a-meal-plan-metadata";
 import { getPublishedCulinaryItems } from "@/data/published-culinary-items";
 import { buildMealPlan, type MealPlanStepMetadataRegistry } from "@/lib/meal-plan";
 
@@ -46,8 +47,12 @@ const reviewedNonActiveSteps = [
   "yunnan-mushroom-chicken-stew:3", "yunnan-mushroom-chicken-stew:4",
 ] as const;
 
+const m11BatchAAuditedSteps = Object.entries(m11BatchAMealPlanStepMetadata)
+  .flatMap(([itemId, steps]) => Object.keys(steps).map((order) => `${itemId}:${order}`));
+const auditedStepMetadata = [...reviewedNonActiveSteps, ...m11BatchAAuditedSteps];
+
 describe("published meal-plan task metadata", () => {
-  it("keeps the audited non-active step allowlist explicit and connected to published steps", () => {
+  it("keeps all audited step metadata explicit and connected to published steps", () => {
     const registry: MealPlanStepMetadataRegistry = mealPlanStepMetadata;
     const publishedItems = getPublishedCulinaryItems();
     const proceduralById = new Map(publishedItems
@@ -57,8 +62,8 @@ describe("published meal-plan task metadata", () => {
       .flatMap(([itemId, steps]) => Object.keys(steps).map((order) => `${itemId}:${order}`))
       .sort();
 
-    expect(actual).toEqual([...reviewedNonActiveSteps].sort());
-    for (const stepId of reviewedNonActiveSteps) {
+    expect(actual).toEqual([...auditedStepMetadata].sort());
+    for (const stepId of auditedStepMetadata) {
       const separator = stepId.lastIndexOf(":");
       const itemId = stepId.slice(0, separator);
       const order = Number(stepId.slice(separator + 1));
@@ -66,6 +71,11 @@ describe("published meal-plan task metadata", () => {
       expect(item, `${itemId} must remain a published procedural item`).toBeDefined();
       if (!item || !("steps" in item.preparation)) continue;
       expect(item.preparation.steps.some((step) => step.order === order), `${stepId} must identify a real step`).toBe(true);
+    }
+    for (const stepId of reviewedNonActiveSteps) {
+      const separator = stepId.lastIndexOf(":");
+      const itemId = stepId.slice(0, separator);
+      const order = Number(stepId.slice(separator + 1));
       expect(registry[itemId]?.[order]?.kind).not.toBe("active");
     }
   });
@@ -87,7 +97,7 @@ describe("published meal-plan task metadata", () => {
     const registry: MealPlanStepMetadataRegistry = mealPlanStepMetadata;
     const publishedItems = getPublishedCulinaryItems();
 
-    for (const stepId of reviewedNonActiveSteps) {
+    for (const stepId of auditedStepMetadata) {
       const separator = stepId.lastIndexOf(":");
       const itemId = stepId.slice(0, separator);
       const order = Number(stepId.slice(separator + 1));

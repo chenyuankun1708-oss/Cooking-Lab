@@ -521,6 +521,13 @@ describe("M10 Production content-rights gate", () => {
     const decision = droppedLayerObligation.decisions.find((entry) => entry.artifactId === droppedLayerObligation.ai[0].artifactId)!;
     decision.conditions = decision.conditions.filter((condition) => condition !== formatAiRightsObligationCondition(gatewayAssessmentId));
     expect(issueCodes(droppedLayerObligation)).toContain("obligation-missing");
+
+    for (const subjectType of ["ai-input", "ai-service"] as const) {
+      const undisclosedAttribution = registryWithValidGatewayRoute();
+      const assessment = undisclosedAttribution.assessments.find((entry) => entry.subject.type === subjectType)!;
+      assessment.attributionRequirementIds = [undisclosedAttribution.attributions[0].id];
+      expect(issueCodes(undisclosedAttribution), subjectType).toContain("attribution-invalid");
+    }
   });
 
   it("blocks unknown or rights-changed Sources used only through an AI input", () => {

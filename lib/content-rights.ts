@@ -455,6 +455,15 @@ function validateAi(
     )) {
       report("obligation-missing", artifact.id, "usageDecision.conditions", "AI input and service terms obligations must be explicitly carried into the final UsageDecision");
     }
+    const undisclosedAiAttributionAssessmentIds = [...requiredAiAssessmentIds].filter((assessmentId) => {
+      const assessment = assessments.get(assessmentId);
+      return assessment
+        && ["ai-input", "ai-service"].includes(assessment.subject.type)
+        && Boolean(assessment.attributionRequirementIds?.length);
+    });
+    if (undisclosedAiAttributionAssessmentIds.length) {
+      report("attribution-invalid", artifact.id, "ai.attribution", "AI input or service attribution obligations cannot publish until an artifact-aligned consumer disclosure placement is implemented");
+    }
     for (const inputId of record.inputArtifactIds) {
       if (!inputsById.has(inputId)) report("missing-reference", artifact.id, "ai.inputArtifactIds", `Missing AI input artifact ${inputId}`);
     }

@@ -147,9 +147,11 @@ function vesselShape(kind, x, y, scale, liquid = palette.milk) {
   if (kind === "pot") return `${ellipse(x, y + s * .62, s * 1.2, s * .2, palette.shadow, 0, .13)}<path d="M${x - s} ${y - s * .65}h${s * 2}v${s * 1.3}q0 ${s * .7}-${s} ${s * .7}t-${s}-${s * .7}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="16"/><ellipse cx="${x}" cy="${y - s * .62}" rx="${s}" ry="${s * .22}" fill="${liquid}" stroke="${stroke}" stroke-width="12"/><path d="M${x - s * .5} ${y - s * .9}h${s}" stroke="${stroke}" stroke-width="16"/>`;
   if (["dessert-glass", "highball", "tea-glass"].includes(kind)) return `${ellipse(x, y + s * .72, s * .88, s * .16, palette.shadow, 0, .13)}<path d="M${x - s * .9} ${y - s * .9}h${s * 1.8}l-${s * .2} ${s * 1.6}h-${s * 1.4}z" fill="${palette.cream}" fill-opacity=".5" stroke="${stroke}" stroke-width="14"/><path d="M${x - s * .68} ${y - s * .18}h${s * 1.4}l-${s * .13} ${s * .65}h-${s * 1.14}z" fill="${liquid}"/>`;
   if (["matcha-bowl", "gaiwan"].includes(kind)) return `${ellipse(x, y + s * .55, s * 1.05, s * .18, palette.shadow, 0, .13)}<path d="M${x - s * .85} ${y - s * .5}Q${x - s * .72} ${y + s * .8} ${x} ${y + s}Q${x + s * .72} ${y + s * .8} ${x + s * .85} ${y - s * .5}Z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><ellipse cx="${x}" cy="${y - s * .48}" rx="${s * .7}" ry="${s * .22}" fill="${liquid}" stroke="${stroke}" stroke-width="10"/>`;
-  if (["teapot", "coffee-server"].includes(kind)) return `${ellipse(x, y + s * .63, s * 1.15, s * .18, palette.shadow, 0, .13)}<path d="M${x - s * .75} ${y - s * .48}h${s * 1.5}v${s * 1.15}q0 ${s * .55}-${s * .75} ${s * .55}t-${s * .75}-${s * .55}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><ellipse cx="${x}" cy="${y - s * .48}" rx="${s * .75}" ry="${s * .18}" fill="${liquid}"/><path d="M${x + s * .7} ${y - s * .12}q${s * .7}-${s * .25} ${s * 1.05} ${s * .35}" fill="none" stroke="${stroke}" stroke-width="12"/>`;
+  if (kind === "teapot") return `${ellipse(x, y + s * .63, s * 1.25, s * .18, palette.shadow, 0, .13)}<path d="M${x - s * .72} ${y - s * .48}h${s * 1.44}v${s * 1.12}q0 ${s * .52}-${s * .72} ${s * .52}t-${s * .72}-${s * .52}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><ellipse cx="${x}" cy="${y - s * .48}" rx="${s * .72}" ry="${s * .18}" fill="${liquid}"/><path d="M${x - s * .68} ${y - s * .22}L${x - s * 1.35} ${y - s * .52}L${x - s * .82} ${y + s * .05}" fill="${palette.cream}" stroke="${stroke}" stroke-width="12" stroke-linejoin="round"/><path d="M${x + s * .68} ${y - s * .18}q${s * .72}-${s * .3} ${s * .96} ${s * .36}" fill="none" stroke="${stroke}" stroke-width="12"/>`;
+  if (kind === "coffee-server") return `${ellipse(x, y + s * .63, s * 1.25, s * .18, palette.shadow, 0, .13)}<path d="M${x - s * .72} ${y - s * .5}h${s * 1.44}v${s * 1.14}q0 ${s * .54}-${s * .72} ${s * .54}t-${s * .72}-${s * .54}z" fill="${palette.cream}" fill-opacity=".58" stroke="${stroke}" stroke-width="14"/><path d="M${x - s * .58} ${y + s * .08}h${s * 1.16}v${s * .45}q0 ${s * .28}-${s * .58} ${s * .28}t-${s * .58}-${s * .28}z" fill="${liquid}"/><path d="M${x - s * .68} ${y - s * .28}L${x - s * 1.2} ${y - s * .5}L${x - s * .78} ${y - s * .02}" fill="${palette.cream}" fill-opacity=".58" stroke="${stroke}" stroke-width="12" stroke-linejoin="round"/><path d="M${x + s * .68} ${y - s * .14}q${s * .72}-${s * .28} ${s * .96} ${s * .4}" fill="none" stroke="${stroke}" stroke-width="12"/>`;
   if (kind === "v60") return `${ellipse(x, y + s * .68, s * 1.05, s * .16, palette.shadow, 0, .13)}<path d="M${x - s * .7} ${y - s * .6}h${s * 1.4}l-${s * .32} ${s * 1.25}h-${s * .76}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><path d="M${x - s * .48} ${y - s * .2}h${s * .96}" stroke="${palette.brown}" stroke-width="${s * .3}"/>`;
-  if (kind === "flat-white-cup" || kind === "yin-yang-cup") return `${ellipse(x, y + s * .55, s * .88, s * .15, palette.shadow, 0, .13)}<path d="M${x - s * .7} ${y - s * .55}h${s * 1.4}v${s * 1.05}q0 ${s * .55}-${s * .7} ${s * .55}t-${s * .7}-${s * .55}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><ellipse cx="${x}" cy="${y - s * .55}" rx="${s * .7}" ry="${s * .2}" fill="${liquid}"/>${kind === "yin-yang-cup" ? `<path d="M${x} ${y - s * .73}v${s * .36}" stroke="${palette.cream}" stroke-width="8"/>` : ""}`;
+  if (kind === "flat-white-cup") return `${ellipse(x, y + s * .44, s * 1.05, s * .15, palette.shadow, 0, .13)}<path d="M${x - s * .88} ${y - s * .38}h${s * 1.76}v${s * .68}q0 ${s * .44}-${s * .88} ${s * .44}t-${s * .88}-${s * .44}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><ellipse cx="${x}" cy="${y - s * .38}" rx="${s * .88}" ry="${s * .24}" fill="${liquid}"/><path d="M${x + s * .84} ${y - s * .08}q${s * .48}-${s * .18} ${s * .5} ${s * .3}q-${s * .06} ${s * .35}-${s * .46} ${s * .2}" fill="none" stroke="${stroke}" stroke-width="12"/>`;
+  if (kind === "yin-yang-cup") return `${ellipse(x, y + s * .55, s * .88, s * .15, palette.shadow, 0, .13)}<path d="M${x - s * .7} ${y - s * .55}h${s * 1.4}v${s * 1.05}q0 ${s * .55}-${s * .7} ${s * .55}t-${s * .7}-${s * .55}z" fill="${palette.cream}" stroke="${stroke}" stroke-width="14"/><ellipse cx="${x}" cy="${y - s * .55}" rx="${s * .7}" ry="${s * .2}" fill="${liquid}"/><path d="M${x} ${y - s * .73}v${s * .36}" stroke="${palette.cream}" stroke-width="8"/>`;
   if (kind === "wine-glass") return `${ellipse(x, y + s * .76, s * .9, s * .12, palette.shadow, 0, .13)}<path d="M${x - s * .72} ${y - s * .8}h${s * 1.44}q-${s * .1} ${s * 1.05}-${s * .72} ${s * 1.05}t-${s * .72}-${s * 1.05}z" fill="${palette.cream}" fill-opacity=".36" stroke="${stroke}" stroke-width="12"/><path d="M${x - s * .55} ${y - s * .1}h${s * 1.1}" stroke="${palette.purple}" stroke-width="${s * .35}"/><path d="M${x} ${y + s * .25}v${s * .55}M${x - s * .55} ${y + s * .8}h${s * 1.1}" stroke="${stroke}" stroke-width="12" stroke-linecap="round"/>`;
   throw new Error(`Unmapped art vessel: ${kind}`);
 }
@@ -255,6 +257,21 @@ function featuredScene(slug, x, y, size) {
       <path d="M${x - size * .86} ${y - size * .14}Q${x} ${y - size * .34} ${x + size * .86} ${y - size * .14}" fill="none" stroke="#d5c5a9" stroke-width="13" stroke-linecap="round"/>
       <path d="M${x - size * .78} ${y - size * .02}Q${x} ${y - size * .18} ${x + size * .78} ${y - size * .02}" fill="none" stroke="#eee1c9" stroke-width="10" stroke-linecap="round"/>`;
   }
+  if (slug === "black-sesame-soup") {
+    return `${vesselShape("sweet-soup-bowl", x, y, size, palette.ink)}
+      <ellipse cx="${x}" cy="${y - size * .1}" rx="${size * 1.02}" ry="${size * .33}" fill="#24211d"/>
+      ${[-.52,-.18,.2,.54].map((dx, i) => ellipse(x + dx * size, y - size * (.13 + (i % 2) * .08), size * .09, size * .04, "#5d554c", -20 + i * 12)).join("")}
+      ${motif("sesame", x + size * 1.45, y + size * .46, size * .42, -8)}
+      ${[0,1,2].map((i) => `<path d="M${x - size * .35 + i * size * .35} ${y - size * .7}q-${size * .12}-${size * .34} ${size * .03}-${size * .64}" fill="none" stroke="${palette.ink}" stroke-width="10" stroke-linecap="round" opacity=".34"/>`).join("")}`;
+  }
+  if (slug === "tieguanyin-gongfu") {
+    return `${vesselShape("gaiwan", x - size * .28, y, size * .82, palette.gold)}
+      <ellipse cx="${x - size * .28}" cy="${y - size * .55}" rx="${size * .52}" ry="${size * .16}" fill="${palette.cream}" stroke="${palette.ink}" stroke-width="11"/>
+      ${circle(x - size * .28, y - size * .72, size * .08, palette.cream)}
+      ${vesselShape("coffee-server", x + size * .72, y + size * .16, size * .42, palette.gold)}
+      ${abstractSmall("tea-cup", x + size * 1.25, y + size * .43, size * .35)}
+      ${[-.62,-.22,.18].map((dx, i) => leaf(x + dx * size, y + size * .58, size * .15, palette.deepGreen, -30 + i * 25)).join("")}`;
+  }
   if (slug === "mango-pomelo-sago") {
     const pearls = Array.from({ length: 18 }, (_, i) => circle(x + ((i % 6) - 2.5) * size * .22, y + (Math.floor(i / 6) - .15) * size * .18, size * .07, palette.cream, .92)).join("");
     const pomelo = [[-.28,-.04],[.32,.06]].map(([dx,dy]) => Array.from({ length: 4 }, (_, i) => circle(x + dx * size + (i % 2) * size * .1, y + dy * size + Math.floor(i / 2) * size * .1, size * .055, palette.salmon)).join("")).join("");
@@ -273,6 +290,12 @@ function featuredScene(slug, x, y, size) {
       <ellipse cx="${x}" cy="${y - size * .55}" rx="${size * .62}" ry="${size * .16}" fill="#8b573c"/>
       <path d="M${x - size * .48} ${y - size * .55}Q${x - size * .16} ${y - size * .75} ${x + size * .02} ${y - size * .55}T${x + size * .48} ${y - size * .55}" fill="none" stroke="${palette.cream}" stroke-width="22" stroke-linecap="round"/>
       <path d="M${x - size * .3} ${y - size * .55}Q${x} ${y - size * .67} ${x + size * .3} ${y - size * .55}" fill="none" stroke="#fffdf7" stroke-width="9" stroke-linecap="round"/>`;
+  }
+  if (slug === "rioja-reserva-profile") {
+    return `${vesselShape("wine-glass", x, y, size, palette.purple)}
+      <path d="M${x - size * .53} ${y - size * .1}h${size * 1.06}q-${size * .1} ${size * .48}-${size * .53} ${size * .48}t-${size * .53}-${size * .48}z" fill="${palette.purple}" opacity=".95"/>
+      ${motif("grape", x + size * 1.3, y + size * .08, size * .62)}
+      ${motif("oak", x + size * 1.1, y + size * .72, size * .5, -12)}`;
   }
   if (slug === "kumquat-lemon-tea") {
     return `${vesselShape("tea-glass", x, y, size, "#8f5b32")}
@@ -332,7 +355,7 @@ for (const [slug, item] of items) {
 }
 const fingerprints = new Set(items.map(([slug]) => createHash("sha256").update(svg(slug)).digest("hex")));
 if (fingerprints.size !== items.length) throw new Error("Duplicate M11 Batch A illustration composition detected");
-const compositionKeys = new Set(items.map(([slug, item]) => `${item.layout}|${item.vessel}|${item.motifs.join(",")}`));
+const compositionKeys = new Set(items.map(([, item]) => `${item.layout}|${item.vessel}|${item.motifs.join(",")}`));
 if (compositionKeys.size !== items.length) throw new Error("Duplicate M11 Batch A art direction composition detected");
 
 for (const [slug] of items) {

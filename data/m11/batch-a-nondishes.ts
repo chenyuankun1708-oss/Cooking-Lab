@@ -207,7 +207,7 @@ const seeds: readonly Seed[] = [
       { title: "Sesame", publisher: "Encyclopaedia Britannica", url: "https://www.britannica.com/plant/sesame-plant", locator: "Seed identity and culinary use", note: "Independent factual cross-check for sesame as the defining seed ingredient, not for health effects.", type: "publisher", uses: ["identity"] },
     ],
     nutrition: { applicability: "applicable", source: "ingredient-derived" }, cost: { source: "ingredient-derived", currency: "CNY" },
-    alt: "白瓷碗中的深黑色芝麻糊，质地顺滑并带细微光泽",
+    alt: "白色甜汤碗中的深黑芝麻糊抽象插画，碗旁点缀黑芝麻粒",
     preparation: {
       kind: "cooking", time: { prepMinutes: 12, processMinutes: 18, totalMinutes: 30, activeMinutes: 30 }, yield: { amount: 4, unit: "serving" },
       inputs: [input("black-sesame", 120), input("rice-flour", 35), input("granulated-sugar", 55), input("drinking-water", 850, "ml")],
@@ -261,7 +261,7 @@ const seeds: readonly Seed[] = [
     ],
     storyEvidenceIndexes: [0, 2],
     nutrition: { applicability: "not-modeled", reason: "out-of-scope" }, cost: { source: "ingredient-derived", currency: "CNY" },
-    alt: "白瓷盖碗、茶海和小杯中的金黄铁观音茶汤，叶片已舒展",
+    alt: "白瓷盖碗、茶海、小杯和舒展茶叶组成的铁观音抽象冲泡场景",
     preparation: {
       kind: "brewing", time: { prepMinutes: 3, processMinutes: 8, totalMinutes: 11, activeMinutes: 11 }, yield: { amount: 4, unit: "serving" },
       inputs: [input("tieguanyin-tea-leaf", 8), input("drinking-water", 650, "ml")], toolIds: ["kettle", "gaiwan", "tea-pitcher", "timer"],
@@ -285,7 +285,7 @@ const seeds: readonly Seed[] = [
       { title: "How Climate Change Is Threatening the Flavour — and Future — of India's Prized Darjeeling Tea", publisher: "CBC News", url: "https://www.cbc.ca/news/world/darjeeling-tea-india-drought-rain-climate-change-9.7152129", locator: "Late-February and early-March first-flush harvest and Darjeeling growing context", note: "Authored reporting independently supports first flush as the early harvest; tasting adjectives and marketing language are not reused.", type: "reputable-media", reliability: "general-secondary", uses: ["identity", "culture"] },
     ],
     nutrition: { applicability: "not-modeled", reason: "out-of-scope" }, cost: { source: "not-modeled" },
-    alt: "无品牌白色茶壶中的浅金色大吉岭茶汤，壶身旁点缀展开的春摘茶叶",
+    alt: "无品牌白色带柄茶具、浅金茶汤和展开茶叶组成的大吉岭春摘档案插画",
     preparation: { kind: "serving-guidance", estimatedMinutes: 5, toolIds: ["kettle", "teapot", "timer"], content: bilingual(
       { guidance: "档案基线：每 250 毫升水用 3 克散茶，约 90°C 浸泡 3 分钟后完全出汤；先按具体茶叶标签调整。本页不展示品牌包装、营销 tasting notes 或购买建议。" },
       { guidance: "Profile baseline: use 3 g loose leaf per 250 ml water, steep near 90°C for 3 minutes, and decant fully; defer to the specific tea label. This page shows no brand packaging, marketing tasting notes, or buying advice." },
@@ -332,7 +332,7 @@ const seeds: readonly Seed[] = [
     storyEvidenceIndexes: [0, 1, 2],
     storyKind: "disputed-attribution",
     nutrition: { applicability: "applicable", source: "ingredient-derived" }, cost: { source: "ingredient-derived", currency: "CNY" },
-    alt: "小陶瓷杯中的 flat white，表面是薄而细密的白色微泡牛奶",
+    alt: "矮宽陶瓷杯中的 flat white 抽象插画，棕色咖啡表面有薄层白色微泡曲线",
     preparation: {
       kind: "extraction", time: { prepMinutes: 4, processMinutes: 4, totalMinutes: 8, activeMinutes: 8 }, yield: { amount: 1, unit: "serving" },
       inputs: [input("ground-coffee", 18), input("drinking-water", 40, "ml"), input("milk", 130, "ml")], toolIds: ["espresso-machine", "portafilter", "milk-pitcher", "scale"],
@@ -358,7 +358,7 @@ const seeds: readonly Seed[] = [
     ],
     storyEvidenceIndexes: [0, 1, 2],
     nutrition: { applicability: "not-modeled", reason: "out-of-scope" }, cost: { source: "not-modeled" },
-    alt: "无品牌咖啡分享壶、烘焙咖啡豆与花朵构成的耶加雪菲产区档案插画",
+    alt: "无品牌带柄咖啡分享壶、咖啡豆与花朵构成的耶加雪菲产区档案插画",
     preparation: { kind: "serving-guidance", estimatedMinutes: 6, toolIds: ["pour-over-dripper", "kettle", "scale"], content: bilingual(
       { guidance: "档案基线：先按烘焙商标签冲泡；无标签时可从 15 克咖啡、250 克水、92°C 和约 3 分钟开始。档案不刊载商品 tasting notes、杯测分数、包装或购买链接。" },
       { guidance: "Profile baseline: follow the roaster label first; if absent, start with 15 g coffee, 250 g water at 92°C, and about 3 minutes. The profile publishes no product tasting notes, cupping scores, packaging, or purchase links." },
@@ -481,7 +481,7 @@ const seeds: readonly Seed[] = [
       { title: "Rioja (Wine)", publisher: "Wikipedia contributors", url: "https://en.wikipedia.org/wiki/Rioja_(wine)", locator: "Designation and ageing categories", note: "Independent general cross-check for Rioja classification; no tasting-note language is reused.", type: "open-educational-resource", reliability: "general-secondary", uses: ["identity", "culture"] },
     ],
     nutrition: { applicability: "not-modeled", reason: "out-of-scope" }, cost: { source: "not-modeled" },
-    alt: "无品牌高脚杯中的深红色里奥哈风格葡萄酒，旁边是葡萄与橡木意象",
+    alt: "装有深红色葡萄酒的无品牌高脚杯，与葡萄和橡木意象组成的里奥哈档案插画",
     preparation: { kind: "serving-guidance", estimatedMinutes: 10, toolIds: ["wine-glass", "bottle-opener"], content: bilingual(
       { guidance: "仅对达到法定饮酒年龄且选择饮酒的成年人：按具体酒标和当地规定服务，可从 16–18°C、小杯慢饮开始；不开车时饮酒，不提供饮用量、健康效益或购买建议。" },
       { guidance: "For adults of legal drinking age who choose to drink: follow the bottle label and local rules; a restrained baseline is 16–18°C in a small glass. Do not drink and drive. No intake amount, health benefit, or purchase advice is provided." },

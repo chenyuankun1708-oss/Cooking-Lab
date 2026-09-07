@@ -186,6 +186,24 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(openCantoneseSources.every((source) => source.type === "open-educational-resource" && source.reliability === "general-secondary")).toBe(true);
   });
 
+  it("keeps reviewed doneness checks executable and original Hero descriptions faithful", () => {
+    const byId = new Map(m11BatchAItems.map((item) => [item.id, item]));
+    const lemonChicken = byId.get("lemon-chicken-breast")!;
+    const steamedSalmon = byId.get("steamed-salmon")!;
+    const steamedEgg = byId.get("steamed-egg")!;
+
+    expect(JSON.stringify(lemonChicken.preparation)).toContain("Return it to medium-low heat");
+    expect(JSON.stringify(steamedSalmon.preparation)).toContain("1-minute increments");
+    expect(JSON.stringify(steamedEgg.preparation)).toContain("1-minute increments");
+
+    const altByItemId = new Map(m11BatchAImages.map((image) => [image.id.replace(/-hero$/, ""), image.alt]));
+    expect(altByItemId.get("mushroom-tofu-rice")).toContain("small mound of rice");
+    expect(altByItemId.get("black-sesame-soup")).toContain("黑芝麻粒");
+    expect(altByItemId.get("tieguanyin-gongfu")).toContain("抽象冲泡场景");
+    expect(altByItemId.get("flat-white")).toContain("矮宽陶瓷杯");
+    expect(altByItemId.get("rioja-reserva-profile")).toContain("装有深红色葡萄酒");
+  });
+
   it("localizes the specialized tools introduced by Batch A", () => {
     const toolIds = ["v60-dripper", "paper-filter", "milk-pitcher", "pour-over-dripper", "coffee-filter", "bottle-opener"];
     for (const toolId of toolIds) {

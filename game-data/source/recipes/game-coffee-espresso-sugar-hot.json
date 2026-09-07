@@ -1,0 +1,224 @@
+{
+  "artifactVersion": "clv1-1a4cf5ed439de501",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-coffee-espresso-sugar-hot",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-espresso",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-coffee-espresso-sugar-hot-portion-01",
+      "volumeMl": 120
+    },
+    {
+      "ingredientId": "usda-sugar",
+      "initialState": "dry",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-coffee-espresso-sugar-hot-portion-02"
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 11.976,
+      "calories": 51.6,
+      "carbs": 12.954,
+      "fat": 0.1464,
+      "fiber": 0,
+      "protein": 0.072,
+      "saturatedFat": 0.0552,
+      "sodium": 8.52,
+      "sugar": 11.976
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-espresso",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171891",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "746784",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 23.952,
+      "calories": 103.2,
+      "carbs": 25.908,
+      "fat": 0.2928,
+      "fiber": 0,
+      "protein": 0.144,
+      "saturatedFat": 0.1104,
+      "sodium": 17.04,
+      "sugar": 23.952
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-sugar-hot-portion-01",
+          "game-coffee-espresso-sugar-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-sugar-hot-op-002-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "game-coffee-espresso-sugar-hot-state-002"
+        ],
+        "parameters": {
+          "strength": 0.45
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-coffee-espresso-sugar-hot-op-002-mix"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-sugar-hot-portion-01",
+          "game-coffee-espresso-sugar-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-sugar-hot-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-coffee-espresso-sugar-hot-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-coffee-espresso-sugar-hot",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-coffee-espresso-sugar-hot-identity",
+      "game-artifact-game-coffee-espresso-sugar-hot-preparation",
+      "game-artifact-game-coffee-espresso-sugar-hot-nutrition",
+      "game-artifact-game-coffee-espresso-sugar-hot-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-coffee-espresso-sugar-hot-identity",
+      "game-usage-game-coffee-espresso-sugar-hot-preparation",
+      "game-usage-game-coffee-espresso-sugar-hot-nutrition",
+      "game-usage-game-coffee-espresso-sugar-hot-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1a4cf5ed439de501",
+      "causeCodes": [
+        "omit:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-sugar-hot-op-002-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-sugar-hot-scenario-002-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1a4cf5ed439de501",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-sugar-hot-op-002-mix",
+        "type": "duplicate"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-coffee-espresso-sugar-hot-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-coffee-espresso-sugar-hot",
+  "yield": {
+    "amount": 160,
+    "unit": "ml"
+  }
+}

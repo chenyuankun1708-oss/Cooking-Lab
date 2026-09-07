@@ -1,0 +1,664 @@
+{
+  "artifactVersion": "clv1-f79b969df69bae34",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-lebanese-mujadara",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "dry-lentil",
+      "initialState": "dry",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-lentil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-mujadara-portion-01"
+    },
+    {
+      "ingredientId": "rice",
+      "initialState": "raw",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-mujadara-portion-02"
+    },
+    {
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-mujadara-portion-03"
+    },
+    {
+      "ingredientId": "cumin",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-mujadara-portion-04"
+    },
+    {
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-mujadara-portion-05"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.6,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-mujadara-portion-06"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 337.255,
+      "carbs": 65.711,
+      "fat": 2.959,
+      "fiber": 5.655,
+      "protein": 13.469,
+      "saturatedFat": 0.4525,
+      "sodium": 164.19,
+      "sugar": 3.9565
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dry-lentil",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-lentil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dry-lentil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "rice",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "rice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cumin",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cumin",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1349.02,
+      "carbs": 262.844,
+      "fat": 11.836,
+      "fiber": 22.62,
+      "protein": 53.876,
+      "saturatedFat": 1.81,
+      "sodium": 656.76,
+      "sugar": 15.826
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "lebanese-mujadara-op-001-wash",
+        "operationType": "wash",
+        "outputStateIds": [
+          "lebanese-mujadara-step-1-wash"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-001-wash"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-01"
+        ],
+        "nodeId": "lebanese-mujadara-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-mujadara-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 150
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-002-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-02"
+        ],
+        "nodeId": "lebanese-mujadara-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-mujadara-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 180
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-03"
+        ],
+        "nodeId": "lebanese-mujadara-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-mujadara-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 300
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-05"
+        ],
+        "nodeId": "lebanese-mujadara-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-mujadara-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 8
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-005-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-06"
+        ],
+        "nodeId": "lebanese-mujadara-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-mujadara-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 1.6
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-mujadara-op-006-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "lebanese-mujadara-op-007-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "lebanese-mujadara-step-2-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-007-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-04"
+        ],
+        "nodeId": "lebanese-mujadara-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-mujadara-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-mujadara-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-04"
+        ],
+        "nodeId": "lebanese-mujadara-op-009-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "lebanese-mujadara-step-3-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-mujadara-op-009-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "lebanese-mujadara-op-010-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "lebanese-mujadara-step-4-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-mujadara-op-010-pan-fry"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-01",
+          "lebanese-mujadara-portion-02",
+          "lebanese-mujadara-portion-03",
+          "lebanese-mujadara-portion-04",
+          "lebanese-mujadara-portion-05",
+          "lebanese-mujadara-portion-06"
+        ],
+        "nodeId": "lebanese-mujadara-op-011-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lebanese-mujadara-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "lebanese-mujadara",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-lebanese-mujadara-identity",
+      "game-artifact-lebanese-mujadara-preparation",
+      "game-artifact-lebanese-mujadara-nutrition",
+      "game-artifact-lebanese-mujadara-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "maureen-abood-lebanese-mujadara",
+      "mediterranean-dish-mujadara"
+    ],
+    "usageDecisionIds": [
+      "game-usage-lebanese-mujadara-identity",
+      "game-usage-lebanese-mujadara-preparation",
+      "game-usage-lebanese-mujadara-nutrition",
+      "game-usage-lebanese-mujadara-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "causeCodes": [
+        "operation-omitted:wash"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-wash"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-mujadara-op-001-wash",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-001-wash-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-mujadara-op-007-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-007-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "lebanese-mujadara-op-007-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-007-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-mujadara-op-009-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-009-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "lebanese-mujadara-op-009-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-009-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-mujadara-op-010-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-010-pan-fry-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "lebanese-mujadara",
+  "sourceCulinaryItemId": "lebanese-mujadara",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

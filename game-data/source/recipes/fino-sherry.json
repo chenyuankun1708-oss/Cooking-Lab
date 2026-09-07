@@ -1,0 +1,118 @@
+{
+  "artifactVersion": "clv1-2e17e4b133a7b084",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-fino-sherry",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "fino-sherry-generic",
+      "initialState": "ready-to-serve",
+      "massG": 100,
+      "nutritionProvenanceId": "pending:fino-sherry-generic",
+      "optional": false,
+      "phase": "service",
+      "portionId": "fino-sherry-portion-01",
+      "volumeMl": 100
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 0,
+      "carbs": 0,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0,
+      "sugar": 0
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "pending",
+        "datasetVersion": "pending",
+        "ingredientId": "fino-sherry-generic",
+        "ingredientState": "ready-to-serve",
+        "nutritionProvenanceId": "pending:fino-sherry-generic",
+        "provider": "pending",
+        "retentionFactor": 1,
+        "upstreamRecordId": "pending:fino-sherry-generic",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 0,
+      "calories": 0,
+      "carbs": 0,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0,
+      "sugar": 0
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 180000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "wine-glass",
+        "inputPortionIds": [
+          "fino-sherry-portion-01"
+        ],
+        "nodeId": "fino-sherry-op-001-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "fino-sherry-served"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "fino-sherry",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-fino-sherry-identity",
+      "game-artifact-fino-sherry-preparation",
+      "game-artifact-fino-sherry-nutrition",
+      "game-artifact-fino-sherry-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-fino-sherry-identity",
+      "game-usage-fino-sherry-preparation",
+      "game-usage-fino-sherry-nutrition",
+      "game-usage-fino-sherry-simulation"
+    ]
+  },
+  "scenarios": [],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "data-only",
+  "slug": "fino-sherry",
+  "sourceCulinaryItemId": "fino-sherry",
+  "yield": {
+    "amount": 1,
+    "unit": "serving"
+  }
+}

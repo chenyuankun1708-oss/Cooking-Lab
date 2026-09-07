@@ -1,0 +1,417 @@
+{
+  "artifactVersion": "clv1-d938d01b5b477390",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-espresso",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "ground-coffee",
+      "initialState": "raw",
+      "massG": 18,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ground-coffee",
+      "optional": false,
+      "phase": "main",
+      "portionId": "espresso-portion-01"
+    },
+    {
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "espresso-portion-02",
+      "volumeMl": 40
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 63.54,
+      "carbs": 9.72,
+      "fat": 2.52,
+      "fiber": 5.04,
+      "protein": 2.52,
+      "saturatedFat": 0.9,
+      "sodium": 2.16,
+      "sugar": 0
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ground-coffee",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ground-coffee",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ground-coffee",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 0,
+      "calories": 63.54,
+      "carbs": 9.72,
+      "fat": 2.52,
+      "fiber": 5.04,
+      "protein": 2.52,
+      "saturatedFat": 0.9,
+      "sodium": 2.16,
+      "sugar": 0
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "espresso-machine",
+        "inputPortionIds": [
+          "espresso-portion-01"
+        ],
+        "nodeId": "espresso-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "espresso-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "espresso-op-001-add"
+        ],
+        "equipmentId": "espresso-machine",
+        "inputPortionIds": [
+          "espresso-portion-02"
+        ],
+        "nodeId": "espresso-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "espresso-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 40
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "espresso-op-002-add"
+        ],
+        "equipmentId": "espresso-machine",
+        "inputPortionIds": [
+          "espresso-portion-01",
+          "espresso-portion-02"
+        ],
+        "nodeId": "espresso-op-003-extract",
+        "operationType": "extract",
+        "outputStateIds": [
+          "espresso-step-1-extract"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "bitterness",
+            "maximum": 0.7,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "aroma",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 120000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "espresso-op-003-extract"
+        ],
+        "equipmentId": "espresso-machine",
+        "inputPortionIds": [],
+        "nodeId": "espresso-op-004-extract",
+        "operationType": "extract",
+        "outputStateIds": [
+          "espresso-step-2-extract"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "bitterness",
+            "maximum": 0.7,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "aroma",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 60000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "espresso-op-004-extract"
+        ],
+        "equipmentId": "espresso-machine",
+        "inputPortionIds": [],
+        "nodeId": "espresso-op-005-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "espresso-step-3-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "espresso-op-005-stir"
+        ],
+        "equipmentId": "timer",
+        "inputPortionIds": [
+          "espresso-portion-01",
+          "espresso-portion-02"
+        ],
+        "nodeId": "espresso-op-006-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "espresso-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "espresso",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-espresso-identity",
+      "game-artifact-espresso-preparation",
+      "game-artifact-espresso-nutrition",
+      "game-artifact-espresso-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-espresso-identity",
+      "game-usage-espresso-preparation",
+      "game-usage-espresso-nutrition",
+      "game-usage-espresso-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "causeCodes": [
+        "operation-omitted:extract"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "bitterness",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-extract"
+      ],
+      "mutation": {
+        "targetNodeId": "espresso-op-003-extract",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "espresso-espresso-op-003-extract-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "causeCodes": [
+        "duration-short:extract"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "bitterness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "espresso-op-003-extract",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "espresso-espresso-op-003-extract-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "causeCodes": [
+        "operation-omitted:extract"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "bitterness",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-extract"
+      ],
+      "mutation": {
+        "targetNodeId": "espresso-op-004-extract",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "espresso-espresso-op-004-extract-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "causeCodes": [
+        "duration-short:extract"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "bitterness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "espresso-op-004-extract",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "espresso-espresso-op-004-extract-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "espresso-op-005-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "espresso-espresso-op-005-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "espresso",
+  "sourceCulinaryItemId": "espresso",
+  "yield": {
+    "amount": 1,
+    "unit": "serving"
+  }
+}

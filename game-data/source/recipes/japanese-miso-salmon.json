@@ -1,0 +1,713 @@
+{
+  "artifactVersion": "clv1-9199999f0152962c",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-japanese-miso-salmon",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "salmon",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salmon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-salmon-portion-01"
+    },
+    {
+      "ingredientId": "miso",
+      "initialState": "raw",
+      "massG": 18,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-miso",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-salmon-portion-02"
+    },
+    {
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-salmon-portion-03"
+    },
+    {
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 4,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-salmon-portion-04"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 0.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-salmon-portion-05"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 371.59,
+      "carbs": 3.052,
+      "fat": 24.012,
+      "fiber": 0.53,
+      "protein": 33.792,
+      "saturatedFat": 5.338,
+      "sodium": 467.22,
+      "sugar": 0.608
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salmon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salmon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salmon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "miso",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-miso",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "miso",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 743.18,
+      "carbs": 6.104,
+      "fat": 48.024,
+      "fiber": 1.06,
+      "protein": 67.584,
+      "saturatedFat": 10.676,
+      "sodium": 934.44,
+      "sugar": 1.216
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-01"
+        ],
+        "nodeId": "japanese-miso-salmon-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-salmon-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 320
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-salmon-op-001-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-02"
+        ],
+        "nodeId": "japanese-miso-salmon-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-salmon-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-salmon-op-002-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-03"
+        ],
+        "nodeId": "japanese-miso-salmon-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-salmon-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 8
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-salmon-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-04"
+        ],
+        "nodeId": "japanese-miso-salmon-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-salmon-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 4
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-salmon-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-05"
+        ],
+        "nodeId": "japanese-miso-salmon-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-salmon-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 0.2
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-salmon-op-005-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-01",
+          "japanese-miso-salmon-portion-02",
+          "japanese-miso-salmon-portion-03",
+          "japanese-miso-salmon-portion-04",
+          "japanese-miso-salmon-portion-05"
+        ],
+        "nodeId": "japanese-miso-salmon-op-006-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "japanese-miso-salmon-step-1-chill"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-salmon-op-006-chill"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-01",
+          "japanese-miso-salmon-portion-02",
+          "japanese-miso-salmon-portion-03",
+          "japanese-miso-salmon-portion-04",
+          "japanese-miso-salmon-portion-05"
+        ],
+        "nodeId": "japanese-miso-salmon-op-007-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "japanese-miso-salmon-step-1-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-salmon-op-007-rest"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-salmon-op-008-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "japanese-miso-salmon-step-2-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-salmon-op-008-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-salmon-op-009-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "japanese-miso-salmon-step-3-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-salmon-op-009-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-salmon-op-010-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "japanese-miso-salmon-step-4-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-salmon-op-010-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-salmon-op-011-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "japanese-miso-salmon-step-4-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-salmon-op-011-rest"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "japanese-miso-salmon-portion-01",
+          "japanese-miso-salmon-portion-02",
+          "japanese-miso-salmon-portion-03",
+          "japanese-miso-salmon-portion-04",
+          "japanese-miso-salmon-portion-05"
+        ],
+        "nodeId": "japanese-miso-salmon-op-012-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "japanese-miso-salmon-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "japanese-miso-salmon",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-japanese-miso-salmon-identity",
+      "game-artifact-japanese-miso-salmon-preparation",
+      "game-artifact-japanese-miso-salmon-nutrition",
+      "game-artifact-japanese-miso-salmon-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "just-one-cookbook-miso-salmon",
+      "kikkoman-cheesy-miso-salmon"
+    ],
+    "usageDecisionIds": [
+      "game-usage-japanese-miso-salmon-identity",
+      "game-usage-japanese-miso-salmon-preparation",
+      "game-usage-japanese-miso-salmon-nutrition",
+      "game-usage-japanese-miso-salmon-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-006-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-006-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-007-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-007-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-008-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-008-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "japanese-miso-salmon-op-008-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-008-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-009-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-009-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-010-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-010-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "japanese-miso-salmon-op-010-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-010-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-011-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-011-rest-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "japanese-miso-salmon",
+  "sourceCulinaryItemId": "japanese-miso-salmon",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

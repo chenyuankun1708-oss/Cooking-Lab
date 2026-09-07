@@ -1,0 +1,1086 @@
+{
+  "artifactVersion": "clv1-9a71ce614da2e798",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-masala-chai",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "black-tea-leaf",
+      "initialState": "dry",
+      "massG": 6,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-tea-leaf",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-01"
+    },
+    {
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 250,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-02",
+      "volumeMl": 250
+    },
+    {
+      "ingredientId": "milk",
+      "initialState": "liquid",
+      "massG": 250,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-03",
+      "volumeMl": 250
+    },
+    {
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 24,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-04"
+    },
+    {
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-05"
+    },
+    {
+      "ingredientId": "cardamom",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cardamom",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-06"
+    },
+    {
+      "ingredientId": "cinnamon",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-07"
+    },
+    {
+      "ingredientId": "clove",
+      "initialState": "raw",
+      "massG": 0.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-clove",
+      "optional": false,
+      "phase": "main",
+      "portionId": "masala-chai-portion-08"
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 12,
+      "calories": 143.515,
+      "carbs": 22.045,
+      "fat": 4.4295,
+      "fiber": 1.595,
+      "protein": 4.855,
+      "saturatedFat": 2.435,
+      "sodium": 55.5225,
+      "sugar": 18.113
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "black-tea-leaf",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-tea-leaf",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "black-tea-leaf",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cardamom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cardamom",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cardamom",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cinnamon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cinnamon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "clove",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-clove",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "clove",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 24,
+      "calories": 287.03,
+      "carbs": 44.09,
+      "fat": 8.859,
+      "fiber": 3.19,
+      "protein": 9.71,
+      "saturatedFat": 4.87,
+      "sodium": 111.045,
+      "sugar": 36.226
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [],
+        "nodeId": "masala-chai-op-001-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "masala-chai-step-1-crush"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-001-crush"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-02"
+        ],
+        "nodeId": "masala-chai-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 250
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-002-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-05"
+        ],
+        "nodeId": "masala-chai-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-003-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-06"
+        ],
+        "nodeId": "masala-chai-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-004-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-07"
+        ],
+        "nodeId": "masala-chai-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-005-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-08"
+        ],
+        "nodeId": "masala-chai-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-006-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-02",
+          "masala-chai-portion-05",
+          "masala-chai-portion-06",
+          "masala-chai-portion-07",
+          "masala-chai-portion-08"
+        ],
+        "nodeId": "masala-chai-op-007-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "masala-chai-step-1-boil"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 100000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-007-boil"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-02",
+          "masala-chai-portion-05",
+          "masala-chai-portion-06",
+          "masala-chai-portion-07",
+          "masala-chai-portion-08"
+        ],
+        "nodeId": "masala-chai-op-008-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "masala-chai-step-1-simmer"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 100000
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-008-simmer"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-01"
+        ],
+        "nodeId": "masala-chai-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-009-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-03"
+        ],
+        "nodeId": "masala-chai-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 250
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-010-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-04"
+        ],
+        "nodeId": "masala-chai-op-011-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "masala-chai-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 24
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 360000,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-011-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "masala-chai-portion-01",
+          "masala-chai-portion-03",
+          "masala-chai-portion-04"
+        ],
+        "nodeId": "masala-chai-op-012-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "masala-chai-step-2-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-012-season"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [],
+        "nodeId": "masala-chai-op-013-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "masala-chai-step-3-simmer"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 60000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-013-simmer"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [],
+        "nodeId": "masala-chai-op-014-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "masala-chai-step-3-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-014-season"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [],
+        "nodeId": "masala-chai-op-015-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "masala-chai-step-3-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 60000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "masala-chai-op-015-rest"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [],
+        "nodeId": "masala-chai-op-016-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "masala-chai-step-3-strain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "masala-chai-op-016-strain"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "masala-chai-portion-01",
+          "masala-chai-portion-02",
+          "masala-chai-portion-03",
+          "masala-chai-portion-04",
+          "masala-chai-portion-05",
+          "masala-chai-portion-06",
+          "masala-chai-portion-07",
+          "masala-chai-portion-08"
+        ],
+        "nodeId": "masala-chai-op-017-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "masala-chai-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "masala-chai",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-masala-chai-identity",
+      "game-artifact-masala-chai-preparation",
+      "game-artifact-masala-chai-nutrition",
+      "game-artifact-masala-chai-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-masala-chai-identity",
+      "game-usage-masala-chai-preparation",
+      "game-usage-masala-chai-nutrition",
+      "game-usage-masala-chai-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-001-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-001-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-007-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-007-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "duration-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "masala-chai-op-007-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-007-boil-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "heat-high:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "masala-chai-op-007-boil",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-007-boil-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-008-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-008-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "duration-short:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "masala-chai-op-008-simmer",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-008-simmer-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "heat-high:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "masala-chai-op-008-simmer",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-008-simmer-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-012-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-012-season-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-013-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-013-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "duration-short:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "masala-chai-op-013-simmer",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-013-simmer-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "heat-high:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "masala-chai-op-013-simmer",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-013-simmer-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-014-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-014-season-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-015-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-015-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "masala-chai-op-015-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-015-rest-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9a71ce614da2e798",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "masala-chai-op-016-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "masala-chai-masala-chai-op-016-strain-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "masala-chai",
+  "sourceCulinaryItemId": "masala-chai",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

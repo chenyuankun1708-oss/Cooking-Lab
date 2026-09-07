@@ -1,0 +1,229 @@
+{
+  "artifactVersion": "clv1-c18396c24a8dad02",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-coffee-coffee-cocoa-cold",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-coffee-brewed",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-coffee-coffee-cocoa-cold-portion-01",
+      "volumeMl": 480
+    },
+    {
+      "ingredientId": "usda-cocoa",
+      "initialState": "dry",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:169593:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-coffee-coffee-cocoa-cold-portion-02"
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 29.76,
+      "carbs": 6.948,
+      "fat": 1.692,
+      "fiber": 4.44,
+      "protein": 2.64,
+      "saturatedFat": 0.9732,
+      "sodium": 7.32,
+      "sugar": 0.21
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-coffee-brewed",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171890:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171890",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-cocoa",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:169593:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169593",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 59.52,
+      "carbs": 13.896,
+      "fat": 3.384,
+      "fiber": 8.88,
+      "protein": 5.28,
+      "saturatedFat": 1.9464,
+      "sodium": 14.64,
+      "sugar": 0.42
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-coffee-coffee-cocoa-cold-portion-01",
+          "game-coffee-coffee-cocoa-cold-portion-02"
+        ],
+        "nodeId": "game-coffee-coffee-cocoa-cold-op-002-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-coffee-coffee-cocoa-cold-state-002"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-coffee-coffee-cocoa-cold-op-002-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-coffee-cocoa-cold-portion-01",
+          "game-coffee-coffee-cocoa-cold-portion-02"
+        ],
+        "nodeId": "game-coffee-coffee-cocoa-cold-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-coffee-coffee-cocoa-cold-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-coffee-coffee-cocoa-cold",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-coffee-coffee-cocoa-cold-identity",
+      "game-artifact-game-coffee-coffee-cocoa-cold-preparation",
+      "game-artifact-game-coffee-coffee-cocoa-cold-nutrition",
+      "game-artifact-game-coffee-coffee-cocoa-cold-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-coffee-coffee-cocoa-cold-identity",
+      "game-usage-game-coffee-coffee-cocoa-cold-preparation",
+      "game-usage-game-coffee-coffee-cocoa-cold-nutrition",
+      "game-usage-game-coffee-coffee-cocoa-cold-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c18396c24a8dad02",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-coffee-cocoa-cold-op-002-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-coffee-cocoa-cold-scenario-002-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c18396c24a8dad02",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-coffee-cocoa-cold-op-002-chill",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-coffee-coffee-cocoa-cold-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-coffee-coffee-cocoa-cold",
+  "yield": {
+    "amount": 480,
+    "unit": "ml"
+  }
+}

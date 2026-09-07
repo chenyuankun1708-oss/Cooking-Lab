@@ -1,0 +1,902 @@
+{
+  "artifactVersion": "clv1-eab91a5fcb5e73cc",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-mexican-black-bean-tacos",
+    "riskLevel": "medium"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "cooked-black-bean",
+      "initialState": "cooked",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-black-bean",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-01"
+    },
+    {
+      "ingredientId": "corn-tortilla",
+      "initialState": "raw",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-corn-tortilla",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-02"
+    },
+    {
+      "ingredientId": "tomato",
+      "initialState": "raw",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-03"
+    },
+    {
+      "ingredientId": "mushroom",
+      "initialState": "raw",
+      "massG": 160,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-04"
+    },
+    {
+      "ingredientId": "cabbage",
+      "initialState": "raw",
+      "massG": 160,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cabbage",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-05"
+    },
+    {
+      "ingredientId": "avocado",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-avocado",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-06"
+    },
+    {
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-07"
+    },
+    {
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 70,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-08"
+    },
+    {
+      "ingredientId": "cumin",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-09"
+    },
+    {
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-10"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mexican-black-bean-tacos-portion-11"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 360.766667,
+      "carbs": 57.648,
+      "fat": 11.612,
+      "fiber": 16.113333,
+      "protein": 13.222,
+      "saturatedFat": 1.646667,
+      "sodium": 206.22,
+      "sugar": 6.995333
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooked-black-bean",
+        "ingredientState": "cooked",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-black-bean",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooked-black-bean",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "corn-tortilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-corn-tortilla",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "corn-tortilla",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tomato",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tomato",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mushroom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mushroom",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cabbage",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cabbage",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cabbage",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "avocado",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-avocado",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "avocado",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cumin",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cumin",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1082.3,
+      "carbs": 172.944,
+      "fat": 34.836,
+      "fiber": 48.34,
+      "protein": 39.666,
+      "saturatedFat": 4.94,
+      "sodium": 618.66,
+      "sugar": 20.986
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "mexican-black-bean-tacos-op-001-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-001-slice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-01"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 180
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-002-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-03"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 180
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-04"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 160
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-05"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 160
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-005-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-06"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 150
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-006-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-07"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-007-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-08"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 70
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-10"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-10-added"
+        ],
+        "parameters": {
+          "quantityG": 5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-009-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-11"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-11-added"
+        ],
+        "parameters": {
+          "quantityG": 1.2
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-010-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-01",
+          "mexican-black-bean-tacos-portion-03",
+          "mexican-black-bean-tacos-portion-04",
+          "mexican-black-bean-tacos-portion-05",
+          "mexican-black-bean-tacos-portion-06",
+          "mexican-black-bean-tacos-portion-07",
+          "mexican-black-bean-tacos-portion-08",
+          "mexican-black-bean-tacos-portion-10",
+          "mexican-black-bean-tacos-portion-11"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-011-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-step-1-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-011-drain"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "mexican-black-bean-tacos-op-012-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-step-2-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-012-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-09"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-013-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-09-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-013-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-09"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-014-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-step-3-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-014-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-02"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-015-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 180
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-015-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-02"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-016-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-step-4-assemble"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "mexican-black-bean-tacos-op-016-assemble"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mexican-black-bean-tacos-portion-02"
+        ],
+        "nodeId": "mexican-black-bean-tacos-op-017-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "mexican-black-bean-tacos-step-4-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "mexican-black-bean-tacos",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-mexican-black-bean-tacos-identity",
+      "game-artifact-mexican-black-bean-tacos-preparation",
+      "game-artifact-mexican-black-bean-tacos-nutrition",
+      "game-artifact-mexican-black-bean-tacos-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "mexico-culture-tacos",
+      "mexico-health-bean-recipe-book"
+    ],
+    "usageDecisionIds": [
+      "game-usage-mexican-black-bean-tacos-identity",
+      "game-usage-mexican-black-bean-tacos-preparation",
+      "game-usage-mexican-black-bean-tacos-nutrition",
+      "game-usage-mexican-black-bean-tacos-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-eab91a5fcb5e73cc",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "mexican-black-bean-tacos-op-001-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mexican-black-bean-tacos-mexican-black-bean-tacos-op-001-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-eab91a5fcb5e73cc",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "mexican-black-bean-tacos-op-011-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mexican-black-bean-tacos-mexican-black-bean-tacos-op-011-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-eab91a5fcb5e73cc",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "mexican-black-bean-tacos-op-012-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mexican-black-bean-tacos-mexican-black-bean-tacos-op-012-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-eab91a5fcb5e73cc",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "mexican-black-bean-tacos-op-012-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mexican-black-bean-tacos-mexican-black-bean-tacos-op-012-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-eab91a5fcb5e73cc",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "mexican-black-bean-tacos-op-014-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mexican-black-bean-tacos-mexican-black-bean-tacos-op-014-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-eab91a5fcb5e73cc",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "mexican-black-bean-tacos-op-014-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mexican-black-bean-tacos-mexican-black-bean-tacos-op-014-pan-fry-hot"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "mexican-black-bean-tacos",
+  "sourceCulinaryItemId": "mexican-black-bean-tacos",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

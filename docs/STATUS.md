@@ -1,6 +1,15 @@
 # Status
 
-最近更新：2026-09-07
+最近更新：2026-09-08
+
+## M12–M13 当前状态
+
+- M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器正在 `feature/m12-game-recipe-data` 实施。
+- 当前 Web 的 50 项已迁移为独立 `GameRecipeV1` draft；它们保留原有演示营养并明确不能直接获得 `game-commercial-ready` 资格。
+- 已从 USDA FoodData Central 的 Foundation Foods 2026-04 与 SR Legacy 2018-04 下载中建立 81 条 record-level CC0 子集；完整上游数据库不进入 repo，build 不访问网络。
+- M13 已生成 520 条游戏专用的确定性结构化候选，连同 50 条 Web 迁移共 570 条 canonical JSON；全部仍为 draft，尚未被表示为独立审查通过或商业可发行。
+- Web 仍恰好公开中英文各 50 项；游戏数据没有进入页面查询、搜索、推荐、sitemap 或客户端 bundle。
+- 下一门禁是对固定 fingerprint 的 520 条候选执行真正独立的全维度 review 与风险等价类 sampling QA；在 attestations 落地前 exportable 数量保持 0。
 
 ## 当前阶段
 

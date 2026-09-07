@@ -1,0 +1,719 @@
+{
+  "artifactVersion": "clv1-d8eca42aa101e7db",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-thai-basil-chicken",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "chicken-thigh",
+      "initialState": "raw",
+      "massG": 280,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-01"
+    },
+    {
+      "ingredientId": "fresh-basil",
+      "initialState": "raw",
+      "massG": 25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-basil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-02"
+    },
+    {
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-03"
+    },
+    {
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-04"
+    },
+    {
+      "ingredientId": "soy-sauce",
+      "initialState": "liquid",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-05"
+    },
+    {
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 7,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-06"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 0.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-basil-chicken-portion-07"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 249.915,
+      "carbs": 2.8975,
+      "fat": 13.46,
+      "fiber": 0.4575,
+      "protein": 27.8675,
+      "saturatedFat": 3.02,
+      "sodium": 472.925,
+      "sugar": 0.505
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "chicken-thigh",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "chicken-thigh",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-basil",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-basil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-basil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "soy-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "soy-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 499.83,
+      "carbs": 5.795,
+      "fat": 26.92,
+      "fiber": 0.915,
+      "protein": 55.735,
+      "saturatedFat": 6.04,
+      "sodium": 945.85,
+      "sugar": 1.01
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "thai-basil-chicken-step-1-dice"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-001-dice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-002-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "thai-basil-chicken-step-1-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-002-mince"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-01"
+        ],
+        "nodeId": "thai-basil-chicken-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 280
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-02"
+        ],
+        "nodeId": "thai-basil-chicken-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 25
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-03"
+        ],
+        "nodeId": "thai-basil-chicken-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-005-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-04"
+        ],
+        "nodeId": "thai-basil-chicken-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-006-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-05"
+        ],
+        "nodeId": "thai-basil-chicken-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-007-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-06"
+        ],
+        "nodeId": "thai-basil-chicken-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 7
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-07"
+        ],
+        "nodeId": "thai-basil-chicken-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-basil-chicken-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-009-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-010-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "thai-basil-chicken-step-2-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-010-stir"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-011-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "thai-basil-chicken-step-3-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-011-stir"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-012-toss",
+        "operationType": "toss",
+        "outputStateIds": [
+          "thai-basil-chicken-step-4-toss"
+        ],
+        "parameters": {
+          "strength": 0.95
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-012-toss"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-013-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "thai-basil-chicken-step-4-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-basil-chicken-op-013-stir"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-01",
+          "thai-basil-chicken-portion-02",
+          "thai-basil-chicken-portion-03",
+          "thai-basil-chicken-portion-04",
+          "thai-basil-chicken-portion-05",
+          "thai-basil-chicken-portion-06",
+          "thai-basil-chicken-portion-07"
+        ],
+        "nodeId": "thai-basil-chicken-op-014-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "thai-basil-chicken-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "thai-basil-chicken",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-thai-basil-chicken-identity",
+      "game-artifact-thai-basil-chicken-preparation",
+      "game-artifact-thai-basil-chicken-nutrition",
+      "game-artifact-thai-basil-chicken-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-thai-basil-chicken-identity",
+      "game-usage-thai-basil-chicken-preparation",
+      "game-usage-thai-basil-chicken-nutrition",
+      "game-usage-thai-basil-chicken-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-001-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-001-dice-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-002-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-002-mince-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-010-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-010-stir-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-011-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-011-stir-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "causeCodes": [
+        "operation-omitted:toss"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-toss"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-012-toss",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-012-toss-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-013-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-013-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "cat-kitchen-goal1-v1",
+  "slug": "thai-basil-chicken",
+  "sourceCulinaryItemId": "thai-basil-chicken",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

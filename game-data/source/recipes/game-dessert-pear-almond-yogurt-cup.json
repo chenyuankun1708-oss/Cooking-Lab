@@ -1,0 +1,385 @@
+{
+  "artifactVersion": "clv1-83058926ad845659",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-dessert-pear-almond-yogurt-cup",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-pear",
+      "initialState": "raw",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:2710836:foundation-2026-04-30",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-dessert-pear-almond-yogurt-cup-portion-01"
+    },
+    {
+      "ingredientId": "usda-yogurt",
+      "initialState": "raw",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-dessert-pear-almond-yogurt-cup-portion-02"
+    },
+    {
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 40,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+      "optional": false,
+      "phase": "finish",
+      "portionId": "game-dessert-pear-almond-yogurt-cup-portion-03"
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "sweetener",
+      "portionId": "game-dessert-pear-almond-yogurt-cup-portion-04"
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 6.1575,
+      "calories": 212.93,
+      "carbs": 26.513,
+      "fat": 9.4759,
+      "fiber": 3.471,
+      "protein": 5.8913,
+      "saturatedFat": 2.466,
+      "sodium": 38.2782,
+      "sugar": 16.8585
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-pear",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2710836:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2710836",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-yogurt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2259793",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-almond",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346393",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 24.63,
+      "calories": 851.72,
+      "carbs": 106.052,
+      "fat": 37.9036,
+      "fiber": 13.884,
+      "protein": 23.5652,
+      "saturatedFat": 9.864,
+      "sodium": 153.1128,
+      "sugar": 67.434
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-dessert-pear-almond-yogurt-cup-portion-01"
+        ],
+        "nodeId": "game-dessert-pear-almond-yogurt-cup-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-dessert-pear-almond-yogurt-cup-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 15,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-dessert-pear-almond-yogurt-cup-op-001-dice"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-dessert-pear-almond-yogurt-cup-portion-01",
+          "game-dessert-pear-almond-yogurt-cup-portion-02",
+          "game-dessert-pear-almond-yogurt-cup-portion-03",
+          "game-dessert-pear-almond-yogurt-cup-portion-04"
+        ],
+        "nodeId": "game-dessert-pear-almond-yogurt-cup-op-002-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "game-dessert-pear-almond-yogurt-cup-state-002"
+        ],
+        "parameters": {
+          "strength": 0.35
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-dessert-pear-almond-yogurt-cup-op-002-fold"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-dessert-pear-almond-yogurt-cup-portion-01",
+          "game-dessert-pear-almond-yogurt-cup-portion-02",
+          "game-dessert-pear-almond-yogurt-cup-portion-03",
+          "game-dessert-pear-almond-yogurt-cup-portion-04"
+        ],
+        "nodeId": "game-dessert-pear-almond-yogurt-cup-op-003-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-dessert-pear-almond-yogurt-cup-state-003"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-dessert-pear-almond-yogurt-cup-op-003-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-dessert-pear-almond-yogurt-cup-portion-01",
+          "game-dessert-pear-almond-yogurt-cup-portion-02",
+          "game-dessert-pear-almond-yogurt-cup-portion-03",
+          "game-dessert-pear-almond-yogurt-cup-portion-04"
+        ],
+        "nodeId": "game-dessert-pear-almond-yogurt-cup-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-dessert-pear-almond-yogurt-cup-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-dessert-pear-almond-yogurt-cup",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-dessert-pear-almond-yogurt-cup-identity",
+      "game-artifact-game-dessert-pear-almond-yogurt-cup-preparation",
+      "game-artifact-game-dessert-pear-almond-yogurt-cup-nutrition",
+      "game-artifact-game-dessert-pear-almond-yogurt-cup-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-dessert-pear-almond-yogurt-cup-identity",
+      "game-usage-game-dessert-pear-almond-yogurt-cup-preparation",
+      "game-usage-game-dessert-pear-almond-yogurt-cup-nutrition",
+      "game-usage-game-dessert-pear-almond-yogurt-cup-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-83058926ad845659",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-dessert-pear-almond-yogurt-cup-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-pear-almond-yogurt-cup-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-83058926ad845659",
+      "causeCodes": [
+        "omit:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-dessert-pear-almond-yogurt-cup-op-002-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-pear-almond-yogurt-cup-scenario-002-fold"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-83058926ad845659",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-dessert-pear-almond-yogurt-cup-op-003-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-pear-almond-yogurt-cup-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-83058926ad845659",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
+      "mutation": {
+        "targetNodeId": "game-dessert-pear-almond-yogurt-cup-op-001-dice",
+        "type": "duplicate"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-dessert-pear-almond-yogurt-cup-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-dessert-pear-almond-yogurt-cup",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

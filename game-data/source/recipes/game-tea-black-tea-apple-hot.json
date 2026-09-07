@@ -1,0 +1,278 @@
+{
+  "artifactVersion": "clv1-2f2d507371b80695",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-tea-black-tea-apple-hot",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-black-tea-brewed",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:173227:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-tea-black-tea-apple-hot-portion-01",
+      "volumeMl": 480
+    },
+    {
+      "ingredientId": "usda-apple",
+      "initialState": "raw",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:1750340:foundation-2026-04-30",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-tea-black-tea-apple-hot-portion-02"
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 41.22,
+      "carbs": 10.14,
+      "fat": 0.0972,
+      "fiber": 1.248,
+      "protein": 0.0888,
+      "saturatedFat": 0.0048,
+      "sodium": 7.806,
+      "sugar": 7.98
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-black-tea-brewed",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173227:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173227",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-apple",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1750340:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1750340",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 82.44,
+      "carbs": 20.28,
+      "fat": 0.1944,
+      "fiber": 2.496,
+      "protein": 0.1776,
+      "saturatedFat": 0.0096,
+      "sodium": 15.612,
+      "sugar": 15.96
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-tea-black-tea-apple-hot-portion-02"
+        ],
+        "nodeId": "game-tea-black-tea-apple-hot-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-tea-black-tea-apple-hot-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-tea-black-tea-apple-hot-op-001-dice"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-black-tea-apple-hot-portion-01",
+          "game-tea-black-tea-apple-hot-portion-02"
+        ],
+        "nodeId": "game-tea-black-tea-apple-hot-op-002-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "game-tea-black-tea-apple-hot-state-002"
+        ],
+        "parameters": {
+          "strength": 0.45
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-tea-black-tea-apple-hot-op-002-mix"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-black-tea-apple-hot-portion-01",
+          "game-tea-black-tea-apple-hot-portion-02"
+        ],
+        "nodeId": "game-tea-black-tea-apple-hot-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-tea-black-tea-apple-hot-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-tea-black-tea-apple-hot",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-tea-black-tea-apple-hot-identity",
+      "game-artifact-game-tea-black-tea-apple-hot-preparation",
+      "game-artifact-game-tea-black-tea-apple-hot-nutrition",
+      "game-artifact-game-tea-black-tea-apple-hot-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-tea-black-tea-apple-hot-identity",
+      "game-usage-game-tea-black-tea-apple-hot-preparation",
+      "game-usage-game-tea-black-tea-apple-hot-nutrition",
+      "game-usage-game-tea-black-tea-apple-hot-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-2f2d507371b80695",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-tea-black-tea-apple-hot-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-black-tea-apple-hot-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-2f2d507371b80695",
+      "causeCodes": [
+        "omit:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-black-tea-apple-hot-op-002-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-black-tea-apple-hot-scenario-002-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-2f2d507371b80695",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-black-tea-apple-hot-op-001-dice",
+        "type": "duplicate"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-tea-black-tea-apple-hot-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-tea-black-tea-apple-hot",
+  "yield": {
+    "amount": 520,
+    "unit": "ml"
+  }
+}

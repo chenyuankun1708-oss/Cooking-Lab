@@ -1,0 +1,914 @@
+{
+  "artifactVersion": "clv1-f03569942f058789",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-malaysian-turmeric-chicken",
+    "riskLevel": "medium"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "chicken-thigh",
+      "initialState": "raw",
+      "massG": 360,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-01"
+    },
+    {
+      "ingredientId": "turmeric",
+      "initialState": "raw",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-turmeric",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-02"
+    },
+    {
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-03"
+    },
+    {
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-04"
+    },
+    {
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-05"
+    },
+    {
+      "ingredientId": "cauliflower",
+      "initialState": "raw",
+      "massG": 220,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cauliflower",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-06"
+    },
+    {
+      "ingredientId": "carrot",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-07"
+    },
+    {
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-08"
+    },
+    {
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-09"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "malaysian-turmeric-chicken-portion-10"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 267.446667,
+      "carbs": 12.773333,
+      "fat": 12.816333,
+      "fiber": 3.405333,
+      "protein": 25.325333,
+      "saturatedFat": 2.821333,
+      "sodium": 328.553333,
+      "sugar": 4.747
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "chicken-thigh",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "chicken-thigh",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "turmeric",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-turmeric",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "turmeric",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cauliflower",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cauliflower",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cauliflower",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "carrot",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "carrot",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 802.34,
+      "carbs": 38.32,
+      "fat": 38.449,
+      "fiber": 10.216,
+      "protein": 75.976,
+      "saturatedFat": 8.464,
+      "sodium": 985.66,
+      "sugar": 14.241
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-001-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-1-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-001-mince"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-002-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-002-slice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-01"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 360
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-02"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 3
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-03"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-005-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-04"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-006-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-05"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-007-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-06"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 220
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-07"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-009-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-08"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-010-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-09"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-011-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-09-added"
+        ],
+        "parameters": {
+          "quantityG": 12
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-011-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-10"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-012-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-portion-10-added"
+        ],
+        "parameters": {
+          "quantityG": 1.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-012-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-01",
+          "malaysian-turmeric-chicken-portion-02",
+          "malaysian-turmeric-chicken-portion-03",
+          "malaysian-turmeric-chicken-portion-04",
+          "malaysian-turmeric-chicken-portion-05",
+          "malaysian-turmeric-chicken-portion-06",
+          "malaysian-turmeric-chicken-portion-07",
+          "malaysian-turmeric-chicken-portion-08",
+          "malaysian-turmeric-chicken-portion-09",
+          "malaysian-turmeric-chicken-portion-10"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-013-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-1-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-013-mix"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-014-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-2-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-014-stir"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-015-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-3-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-015-stir"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-016-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-4-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6,
+          "temperatureC": 74
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-016-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-01",
+          "malaysian-turmeric-chicken-portion-02",
+          "malaysian-turmeric-chicken-portion-03",
+          "malaysian-turmeric-chicken-portion-04",
+          "malaysian-turmeric-chicken-portion-05",
+          "malaysian-turmeric-chicken-portion-06",
+          "malaysian-turmeric-chicken-portion-07",
+          "malaysian-turmeric-chicken-portion-08",
+          "malaysian-turmeric-chicken-portion-09",
+          "malaysian-turmeric-chicken-portion-10"
+        ],
+        "nodeId": "malaysian-turmeric-chicken-op-017-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "malaysian-turmeric-chicken",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-malaysian-turmeric-chicken-identity",
+      "game-artifact-malaysian-turmeric-chicken-preparation",
+      "game-artifact-malaysian-turmeric-chicken-nutrition",
+      "game-artifact-malaysian-turmeric-chicken-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "rasa-malaysia-turmeric-chicken",
+      "tourism-malaysia-food-guide"
+    ],
+    "usageDecisionIds": [
+      "game-usage-malaysian-turmeric-chicken-identity",
+      "game-usage-malaysian-turmeric-chicken-preparation",
+      "game-usage-malaysian-turmeric-chicken-nutrition",
+      "game-usage-malaysian-turmeric-chicken-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-001-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-001-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-002-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-002-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-013-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-013-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-014-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-014-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-015-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-015-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-016-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-016-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "malaysian-turmeric-chicken-op-016-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-016-pan-fry-hot"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "malaysian-turmeric-chicken",
+  "sourceCulinaryItemId": "malaysian-turmeric-chicken",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

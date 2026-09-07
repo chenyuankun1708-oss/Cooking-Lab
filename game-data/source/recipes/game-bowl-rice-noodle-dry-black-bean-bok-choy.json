@@ -1,0 +1,647 @@
+{
+  "artifactVersion": "clv1-d7ea9a081543ebdf",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-bowl-rice-noodle-dry-black-bean-bok-choy",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-rice-noodle-dry",
+      "initialState": "dry",
+      "massG": 240,
+      "nutritionProvenanceId": "usda-fdc:169742:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-01"
+    },
+    {
+      "ingredientId": "usda-black-bean",
+      "initialState": "prepared",
+      "massG": 300,
+      "nutritionProvenanceId": "usda-fdc:2644285:foundation-2026-04-30",
+      "optional": false,
+      "phase": "primary",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-02"
+    },
+    {
+      "ingredientId": "usda-bok-choy",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:2685572:foundation-2026-04-30",
+      "optional": false,
+      "phase": "vegetable",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-03"
+    },
+    {
+      "ingredientId": "usda-onion",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
+      "optional": false,
+      "phase": "aromatic",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-04"
+    },
+    {
+      "ingredientId": "usda-garlic",
+      "initialState": "raw",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "optional": false,
+      "phase": "aromatic",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-05"
+    },
+    {
+      "ingredientId": "usda-canola-oil",
+      "initialState": "liquid",
+      "massG": 20,
+      "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "cooking",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-06",
+      "volumeMl": 21.978022
+    },
+    {
+      "ingredientId": "usda-soy-sauce",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-07"
+    },
+    {
+      "ingredientId": "usda-vinegar",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-08",
+      "volumeMl": 12
+    },
+    {
+      "ingredientId": "usda-salt",
+      "initialState": "dry",
+      "massG": 3,
+      "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-09"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 384.32,
+      "carbs": 69.0242,
+      "fat": 6.5281,
+      "fiber": 2.564,
+      "protein": 10.3816,
+      "saturatedFat": 0.46345,
+      "sodium": 849.95,
+      "sugar": 1.5482
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-rice-noodle-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:169742:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169742",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-black-bean",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "usda-fdc:2644285:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2644285",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-bok-choy",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2685572:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2685572",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "790646",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1104647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-canola-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172336",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-soy-sauce",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "174277",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-vinegar",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172237",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173468",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1537.28,
+      "carbs": 276.0968,
+      "fat": 26.1124,
+      "fiber": 10.256,
+      "protein": 41.5264,
+      "saturatedFat": 1.8538,
+      "sodium": 3399.8,
+      "sugar": 6.1928
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 240000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-03",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-04"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-05"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-002-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-002"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "pot",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-01"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-003-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-003"
+        ],
+        "parameters": {
+          "heatLevel": 0.7,
+          "temperatureC": 98
+        },
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-001-dice",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-002-mince"
+        ],
+        "equipmentId": "pan",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-02",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-03",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-04",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-05",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-06"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-005-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-005"
+        ],
+        "parameters": {
+          "capacityG": 900,
+          "heatLevel": 0.65
+        },
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.35,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 480000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-005-pan-fry"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-07",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-08",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-09"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-006-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-006"
+        ],
+        "parameters": {
+          "quantityG": 35
+        },
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 90000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-003-boil",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-006-season"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-01",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-02",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-03",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-04",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-05",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-06",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-07",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-08",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-09"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-007-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-007"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-007-assemble"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-01",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-02",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-03",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-04",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-05",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-06",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-07",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-08",
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-portion-09"
+        ],
+        "nodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-bowl-rice-noodle-dry-black-bean-bok-choy-state-008"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-bowl-rice-noodle-dry-black-bean-bok-choy-identity",
+      "game-artifact-game-bowl-rice-noodle-dry-black-bean-bok-choy-preparation",
+      "game-artifact-game-bowl-rice-noodle-dry-black-bean-bok-choy-nutrition",
+      "game-artifact-game-bowl-rice-noodle-dry-black-bean-bok-choy-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-bowl-rice-noodle-dry-black-bean-bok-choy-identity",
+      "game-usage-game-bowl-rice-noodle-dry-black-bean-bok-choy-preparation",
+      "game-usage-game-bowl-rice-noodle-dry-black-bean-bok-choy-nutrition",
+      "game-usage-game-bowl-rice-noodle-dry-black-bean-bok-choy-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d7ea9a081543ebdf",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d7ea9a081543ebdf",
+      "causeCodes": [
+        "cut-size-too-large:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-002-mince",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-scenario-002-mince"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d7ea9a081543ebdf",
+      "causeCodes": [
+        "duration-too-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-003-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-scenario-003-boil"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d7ea9a081543ebdf",
+      "causeCodes": [
+        "overcrowding:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-overcrowding"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-005-pan-fry",
+        "type": "overcrowding"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-scenario-005-pan-fry"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d7ea9a081543ebdf",
+      "causeCodes": [
+        "season-too-early:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-season-too-early"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-006-season",
+        "type": "season-too-early"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-scenario-006-season"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d7ea9a081543ebdf",
+      "causeCodes": [
+        "supplemental:wrong-equipment"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-wrong-equipment"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-op-001-dice",
+        "type": "wrong-equipment"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-rice-noodle-dry-black-bean-bok-choy-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-bowl-rice-noodle-dry-black-bean-bok-choy",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

@@ -1,0 +1,755 @@
+{
+  "artifactVersion": "clv1-bddcb9c07d423447",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-greek-village-salad",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "tomato",
+      "initialState": "raw",
+      "massG": 500,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-01"
+    },
+    {
+      "ingredientId": "cucumber",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-02"
+    },
+    {
+      "ingredientId": "bell-pepper",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bell-pepper",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-03"
+    },
+    {
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-04"
+    },
+    {
+      "ingredientId": "feta",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-feta",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-05"
+    },
+    {
+      "ingredientId": "kalamata-olive",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-kalamata-olive",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-06"
+    },
+    {
+      "ingredientId": "extra-virgin-olive-oil",
+      "initialState": "liquid",
+      "massG": 35,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-extra-virgin-olive-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-07"
+    },
+    {
+      "ingredientId": "vinegar",
+      "initialState": "liquid",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-08"
+    },
+    {
+      "ingredientId": "oregano",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oregano",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-09"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-village-salad-portion-10"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 291.475,
+      "carbs": 15.09,
+      "fat": 22.9665,
+      "fiber": 3.965,
+      "protein": 8.115,
+      "saturatedFat": 7.5705,
+      "sodium": 636.2375,
+      "sugar": 8.513
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tomato",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tomato",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cucumber",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cucumber",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "bell-pepper",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bell-pepper",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "bell-pepper",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "feta",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-feta",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "feta",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "kalamata-olive",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-kalamata-olive",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "kalamata-olive",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "extra-virgin-olive-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-extra-virgin-olive-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "extra-virgin-olive-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "vinegar",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "vinegar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "oregano",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oregano",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "oregano",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1165.9,
+      "carbs": 60.36,
+      "fat": 91.866,
+      "fiber": 15.86,
+      "protein": 32.46,
+      "saturatedFat": 30.282,
+      "sodium": 2544.95,
+      "sugar": 34.052
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 480000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "greek-village-salad-op-001-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "greek-village-salad-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-001-slice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-01"
+        ],
+        "nodeId": "greek-village-salad-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 500
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-002-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-02"
+        ],
+        "nodeId": "greek-village-salad-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 300
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-03"
+        ],
+        "nodeId": "greek-village-salad-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 150
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-04"
+        ],
+        "nodeId": "greek-village-salad-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-005-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-05"
+        ],
+        "nodeId": "greek-village-salad-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 150
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-006-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-06"
+        ],
+        "nodeId": "greek-village-salad-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-007-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-07"
+        ],
+        "nodeId": "greek-village-salad-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 35
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-08"
+        ],
+        "nodeId": "greek-village-salad-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-009-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-10"
+        ],
+        "nodeId": "greek-village-salad-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-10-added"
+        ],
+        "parameters": {
+          "quantityG": 1
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 80000,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-village-salad-op-010-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "greek-village-salad-op-011-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "greek-village-salad-step-2-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-village-salad-op-011-stir"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "greek-village-salad-op-012-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "greek-village-salad-step-2-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 80000
+      },
+      {
+        "activeDurationMs": 80000,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-village-salad-op-012-rest"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "greek-village-salad-op-013-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "greek-village-salad-step-2-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-013-season"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-09"
+        ],
+        "nodeId": "greek-village-salad-op-014-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-village-salad-portion-09-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-village-salad-op-014-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-village-salad-portion-09"
+        ],
+        "nodeId": "greek-village-salad-op-015-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "greek-village-salad-step-3-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "greek-village-salad",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-greek-village-salad-identity",
+      "game-artifact-greek-village-salad-preparation",
+      "game-artifact-greek-village-salad-nutrition",
+      "game-artifact-greek-village-salad-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-greek-village-salad-identity",
+      "game-usage-greek-village-salad-preparation",
+      "game-usage-greek-village-salad-nutrition",
+      "game-usage-greek-village-salad-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-village-salad-op-001-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-village-salad-greek-village-salad-op-001-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-village-salad-op-011-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-village-salad-greek-village-salad-op-011-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-village-salad-op-012-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-village-salad-greek-village-salad-op-012-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "greek-village-salad-op-012-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "greek-village-salad-greek-village-salad-op-012-rest-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-village-salad-op-013-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-village-salad-greek-village-salad-op-013-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "greek-village-salad",
+  "sourceCulinaryItemId": "greek-village-salad",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

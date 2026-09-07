@@ -1,0 +1,330 @@
+{
+  "artifactVersion": "clv1-bce5e6582a5fe38f",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-drink-strawberry-basil-infused",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-strawberry",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-drink-strawberry-basil-infused-portion-01"
+    },
+    {
+      "ingredientId": "usda-basil",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "usda-fdc:172232:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "accent",
+      "portionId": "game-drink-strawberry-basil-infused-portion-02"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 700,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-drink-strawberry-basil-infused-portion-03",
+      "volumeMl": 700
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": true,
+      "phase": "sweetener",
+      "portionId": "game-drink-strawberry-basil-infused-portion-04"
+    }
+  ],
+  "itemType": "non-alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 4.926,
+      "calories": 47.935,
+      "carbs": 11.37825,
+      "fat": 0.192,
+      "fiber": 0.052,
+      "protein": 0.60955,
+      "saturatedFat": 0.001025,
+      "sodium": 7.34,
+      "sugar": 8.8215
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-strawberry",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2346409:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346409",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-basil",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:172232:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172232",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 19.704,
+      "calories": 191.74,
+      "carbs": 45.513,
+      "fat": 0.768,
+      "fiber": 0.208,
+      "protein": 2.4382,
+      "saturatedFat": 0.0041,
+      "sodium": 29.36,
+      "sugar": 35.286
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-drink-strawberry-basil-infused-portion-01",
+          "game-drink-strawberry-basil-infused-portion-02"
+        ],
+        "nodeId": "game-drink-strawberry-basil-infused-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-drink-strawberry-basil-infused-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-drink-strawberry-basil-infused-op-001-dice"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-drink-strawberry-basil-infused-portion-01",
+          "game-drink-strawberry-basil-infused-portion-02",
+          "game-drink-strawberry-basil-infused-portion-03",
+          "game-drink-strawberry-basil-infused-portion-04"
+        ],
+        "nodeId": "game-drink-strawberry-basil-infused-op-002-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "game-drink-strawberry-basil-infused-state-002"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-drink-strawberry-basil-infused-op-002-rest"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-drink-strawberry-basil-infused-portion-01",
+          "game-drink-strawberry-basil-infused-portion-02",
+          "game-drink-strawberry-basil-infused-portion-03",
+          "game-drink-strawberry-basil-infused-portion-04"
+        ],
+        "nodeId": "game-drink-strawberry-basil-infused-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-drink-strawberry-basil-infused-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-drink-strawberry-basil-infused",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-drink-strawberry-basil-infused-identity",
+      "game-artifact-game-drink-strawberry-basil-infused-preparation",
+      "game-artifact-game-drink-strawberry-basil-infused-nutrition",
+      "game-artifact-game-drink-strawberry-basil-infused-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-drink-strawberry-basil-infused-identity",
+      "game-usage-game-drink-strawberry-basil-infused-preparation",
+      "game-usage-game-drink-strawberry-basil-infused-nutrition",
+      "game-usage-game-drink-strawberry-basil-infused-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bce5e6582a5fe38f",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-drink-strawberry-basil-infused-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-strawberry-basil-infused-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bce5e6582a5fe38f",
+      "causeCodes": [
+        "duration-too-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-drink-strawberry-basil-infused-op-002-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-strawberry-basil-infused-scenario-002-rest"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bce5e6582a5fe38f",
+      "causeCodes": [
+        "supplemental:wrong-equipment"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-wrong-equipment"
+      ],
+      "mutation": {
+        "targetNodeId": "game-drink-strawberry-basil-infused-op-001-dice",
+        "type": "wrong-equipment"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-drink-strawberry-basil-infused-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-drink-strawberry-basil-infused",
+  "yield": {
+    "amount": 1000,
+    "unit": "ml"
+  }
+}

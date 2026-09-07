@@ -1,0 +1,647 @@
+{
+  "artifactVersion": "clv1-c3beb54e22b26406",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-bowl-pasta-dry-mushroom-spinach",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-pasta-dry",
+      "initialState": "dry",
+      "massG": 240,
+      "nutritionProvenanceId": "usda-fdc:169736:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-01"
+    },
+    {
+      "ingredientId": "usda-mushroom",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "usda-fdc:1999629:foundation-2026-04-30",
+      "optional": false,
+      "phase": "primary",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-02"
+    },
+    {
+      "ingredientId": "usda-spinach",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:1999632:foundation-2026-04-30",
+      "optional": false,
+      "phase": "vegetable",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-03"
+    },
+    {
+      "ingredientId": "usda-onion",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
+      "optional": false,
+      "phase": "aromatic",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-04"
+    },
+    {
+      "ingredientId": "usda-garlic",
+      "initialState": "raw",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "optional": false,
+      "phase": "aromatic",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-05"
+    },
+    {
+      "ingredientId": "usda-canola-oil",
+      "initialState": "liquid",
+      "massG": 20,
+      "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "cooking",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-06",
+      "volumeMl": 21.978022
+    },
+    {
+      "ingredientId": "usda-soy-sauce",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-07"
+    },
+    {
+      "ingredientId": "usda-vinegar",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-08",
+      "volumeMl": 12
+    },
+    {
+      "ingredientId": "usda-salt",
+      "initialState": "dry",
+      "massG": 3,
+      "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-pasta-dry-mushroom-spinach-portion-09"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 328.46,
+      "carbs": 53.0542,
+      "fat": 6.73185,
+      "fiber": 5.054,
+      "protein": 13.0606,
+      "saturatedFat": 0.53785,
+      "sodium": 663.04,
+      "sugar": 3.0782
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-pasta-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:169736:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169736",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-mushroom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1999629:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1999629",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-spinach",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1999632:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1999632",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "790646",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1104647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-canola-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172336",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-soy-sauce",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "174277",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-vinegar",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172237",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173468",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1313.84,
+      "carbs": 212.2168,
+      "fat": 26.9274,
+      "fiber": 20.216,
+      "protein": 52.2424,
+      "saturatedFat": 2.1514,
+      "sodium": 2652.16,
+      "sugar": 12.3128
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 240000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-03",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-04"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-05"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-002-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-002"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "pot",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-01"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-003-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-003"
+        ],
+        "parameters": {
+          "heatLevel": 0.7,
+          "temperatureC": 98
+        },
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-spinach-op-001-dice",
+          "game-bowl-pasta-dry-mushroom-spinach-op-002-mince"
+        ],
+        "equipmentId": "pan",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-02",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-03",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-04",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-05",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-06"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-005-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-005"
+        ],
+        "parameters": {
+          "capacityG": 900,
+          "heatLevel": 0.65
+        },
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.35,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 480000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-spinach-op-005-pan-fry"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-07",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-08",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-09"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-006-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-006"
+        ],
+        "parameters": {
+          "quantityG": 35
+        },
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 90000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-spinach-op-003-boil",
+          "game-bowl-pasta-dry-mushroom-spinach-op-006-season"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-01",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-02",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-03",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-04",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-05",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-06",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-07",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-08",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-09"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-007-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-007"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-spinach-op-007-assemble"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-portion-01",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-02",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-03",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-04",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-05",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-06",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-07",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-08",
+          "game-bowl-pasta-dry-mushroom-spinach-portion-09"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-spinach-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-spinach-state-008"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-bowl-pasta-dry-mushroom-spinach",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-bowl-pasta-dry-mushroom-spinach-identity",
+      "game-artifact-game-bowl-pasta-dry-mushroom-spinach-preparation",
+      "game-artifact-game-bowl-pasta-dry-mushroom-spinach-nutrition",
+      "game-artifact-game-bowl-pasta-dry-mushroom-spinach-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-bowl-pasta-dry-mushroom-spinach-identity",
+      "game-usage-game-bowl-pasta-dry-mushroom-spinach-preparation",
+      "game-usage-game-bowl-pasta-dry-mushroom-spinach-nutrition",
+      "game-usage-game-bowl-pasta-dry-mushroom-spinach-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c3beb54e22b26406",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-spinach-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-spinach-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c3beb54e22b26406",
+      "causeCodes": [
+        "cut-size-too-large:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-spinach-op-002-mince",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-spinach-scenario-002-mince"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c3beb54e22b26406",
+      "causeCodes": [
+        "duration-too-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-spinach-op-003-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-spinach-scenario-003-boil"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c3beb54e22b26406",
+      "causeCodes": [
+        "overcrowding:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-overcrowding"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-spinach-op-005-pan-fry",
+        "type": "overcrowding"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-spinach-scenario-005-pan-fry"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c3beb54e22b26406",
+      "causeCodes": [
+        "season-too-early:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-season-too-early"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-spinach-op-006-season",
+        "type": "season-too-early"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-spinach-scenario-006-season"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c3beb54e22b26406",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-spinach-op-001-dice",
+        "type": "reorder"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-spinach-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-bowl-pasta-dry-mushroom-spinach",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

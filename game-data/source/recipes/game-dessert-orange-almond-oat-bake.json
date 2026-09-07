@@ -1,0 +1,471 @@
+{
+  "artifactVersion": "clv1-f67e104ae5c0cc0b",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-dessert-orange-almond-oat-bake",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-orange",
+      "initialState": "raw",
+      "massG": 400,
+      "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-01"
+    },
+    {
+      "ingredientId": "usda-oats",
+      "initialState": "dry",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
+      "optional": false,
+      "phase": "dry",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-02"
+    },
+    {
+      "ingredientId": "usda-wheat-flour",
+      "initialState": "dry",
+      "massG": 80,
+      "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+      "optional": false,
+      "phase": "dry",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-03"
+    },
+    {
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 45,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+      "optional": false,
+      "phase": "dry",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-04"
+    },
+    {
+      "ingredientId": "usda-butter",
+      "initialState": "raw",
+      "massG": 45,
+      "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "fat",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-05"
+    },
+    {
+      "ingredientId": "usda-sugar",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
+      "optional": false,
+      "phase": "sweetener",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-06"
+    },
+    {
+      "ingredientId": "usda-cinnamon",
+      "initialState": "dry",
+      "massG": 2,
+      "nutritionProvenanceId": "usda-fdc:171320:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-dessert-orange-almond-oat-bake-portion-07"
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 9.98,
+      "calories": 424.0225,
+      "carbs": 59.66975,
+      "fat": 17.1237,
+      "fiber": 3.4805,
+      "protein": 10.114325,
+      "saturatedFat": 6.108225,
+      "sodium": 11.3879,
+      "sugar": 18.5676
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-orange",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "746771",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-oats",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:2346396:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346396",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:789951:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "789951",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-almond",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346393",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173430",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:746784:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "746784",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-cinnamon",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:171320:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171320",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 39.92,
+      "calories": 1696.09,
+      "carbs": 238.679,
+      "fat": 68.4948,
+      "fiber": 13.922,
+      "protein": 40.4573,
+      "saturatedFat": 24.4329,
+      "sodium": 45.5516,
+      "sugar": 74.2704
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-dessert-orange-almond-oat-bake-portion-01"
+        ],
+        "nodeId": "game-dessert-orange-almond-oat-bake-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-dessert-orange-almond-oat-bake-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 15,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-dessert-orange-almond-oat-bake-op-001-dice"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-dessert-orange-almond-oat-bake-portion-01",
+          "game-dessert-orange-almond-oat-bake-portion-02",
+          "game-dessert-orange-almond-oat-bake-portion-03",
+          "game-dessert-orange-almond-oat-bake-portion-04",
+          "game-dessert-orange-almond-oat-bake-portion-05",
+          "game-dessert-orange-almond-oat-bake-portion-06",
+          "game-dessert-orange-almond-oat-bake-portion-07"
+        ],
+        "nodeId": "game-dessert-orange-almond-oat-bake-op-002-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "game-dessert-orange-almond-oat-bake-state-002"
+        ],
+        "parameters": {
+          "strength": 0.55
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-dessert-orange-almond-oat-bake-op-002-mix"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "game-dessert-orange-almond-oat-bake-portion-01",
+          "game-dessert-orange-almond-oat-bake-portion-02",
+          "game-dessert-orange-almond-oat-bake-portion-03",
+          "game-dessert-orange-almond-oat-bake-portion-04",
+          "game-dessert-orange-almond-oat-bake-portion-05",
+          "game-dessert-orange-almond-oat-bake-portion-06",
+          "game-dessert-orange-almond-oat-bake-portion-07"
+        ],
+        "nodeId": "game-dessert-orange-almond-oat-bake-op-003-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "game-dessert-orange-almond-oat-bake-state-003"
+        ],
+        "parameters": {
+          "temperatureC": 180
+        },
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.35,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-dessert-orange-almond-oat-bake-op-003-bake"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-dessert-orange-almond-oat-bake-portion-01",
+          "game-dessert-orange-almond-oat-bake-portion-02",
+          "game-dessert-orange-almond-oat-bake-portion-03",
+          "game-dessert-orange-almond-oat-bake-portion-04",
+          "game-dessert-orange-almond-oat-bake-portion-05",
+          "game-dessert-orange-almond-oat-bake-portion-06",
+          "game-dessert-orange-almond-oat-bake-portion-07"
+        ],
+        "nodeId": "game-dessert-orange-almond-oat-bake-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-dessert-orange-almond-oat-bake-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-dessert-orange-almond-oat-bake",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-dessert-orange-almond-oat-bake-identity",
+      "game-artifact-game-dessert-orange-almond-oat-bake-preparation",
+      "game-artifact-game-dessert-orange-almond-oat-bake-nutrition",
+      "game-artifact-game-dessert-orange-almond-oat-bake-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-dessert-orange-almond-oat-bake-identity",
+      "game-usage-game-dessert-orange-almond-oat-bake-preparation",
+      "game-usage-game-dessert-orange-almond-oat-bake-nutrition",
+      "game-usage-game-dessert-orange-almond-oat-bake-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f67e104ae5c0cc0b",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-dessert-orange-almond-oat-bake-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-orange-almond-oat-bake-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f67e104ae5c0cc0b",
+      "causeCodes": [
+        "omit:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-dessert-orange-almond-oat-bake-op-002-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-orange-almond-oat-bake-scenario-002-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f67e104ae5c0cc0b",
+      "causeCodes": [
+        "heat-too-high:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-heat-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.2,
+        "targetNodeId": "game-dessert-orange-almond-oat-bake-op-003-bake",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-dessert-orange-almond-oat-bake-scenario-003-bake"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f67e104ae5c0cc0b",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
+      "mutation": {
+        "targetNodeId": "game-dessert-orange-almond-oat-bake-op-001-dice",
+        "type": "duplicate"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-dessert-orange-almond-oat-bake-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-dessert-orange-almond-oat-bake",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

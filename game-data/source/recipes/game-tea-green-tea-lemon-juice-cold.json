@@ -1,0 +1,232 @@
+{
+  "artifactVersion": "clv1-798838e9c6d592b1",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-tea-green-tea-lemon-juice-cold",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-green-tea-brewed",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-tea-green-tea-lemon-juice-cold-portion-01",
+      "volumeMl": 480
+    },
+    {
+      "ingredientId": "usda-lemon-juice",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:167747:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-tea-green-tea-lemon-juice-cold-portion-02",
+      "volumeMl": 120
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 15.6,
+      "carbs": 4.14,
+      "fat": 0.144,
+      "fiber": 0.18,
+      "protein": 0.738,
+      "saturatedFat": 0.024,
+      "sodium": 3,
+      "sugar": 1.512
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-green-tea-brewed",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171917",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-lemon-juice",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:167747:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "167747",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 31.2,
+      "carbs": 8.28,
+      "fat": 0.288,
+      "fiber": 0.36,
+      "protein": 1.476,
+      "saturatedFat": 0.048,
+      "sodium": 6,
+      "sugar": 3.024
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-tea-green-tea-lemon-juice-cold-portion-01",
+          "game-tea-green-tea-lemon-juice-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-lemon-juice-cold-op-002-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-tea-green-tea-lemon-juice-cold-state-002"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-tea-green-tea-lemon-juice-cold-op-002-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-green-tea-lemon-juice-cold-portion-01",
+          "game-tea-green-tea-lemon-juice-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-lemon-juice-cold-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-tea-green-tea-lemon-juice-cold-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-tea-green-tea-lemon-juice-cold",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-tea-green-tea-lemon-juice-cold-identity",
+      "game-artifact-game-tea-green-tea-lemon-juice-cold-preparation",
+      "game-artifact-game-tea-green-tea-lemon-juice-cold-nutrition",
+      "game-artifact-game-tea-green-tea-lemon-juice-cold-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-tea-green-tea-lemon-juice-cold-identity",
+      "game-usage-game-tea-green-tea-lemon-juice-cold-preparation",
+      "game-usage-game-tea-green-tea-lemon-juice-cold-nutrition",
+      "game-usage-game-tea-green-tea-lemon-juice-cold-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-798838e9c6d592b1",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-tea-green-tea-lemon-juice-cold-op-002-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-lemon-juice-cold-scenario-002-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-798838e9c6d592b1",
+      "causeCodes": [
+        "supplemental:quantity-too-high"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-quantity-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-tea-green-tea-lemon-juice-cold-op-002-chill",
+        "targetPortionId": "game-tea-green-tea-lemon-juice-cold-portion-01",
+        "type": "quantity-too-high"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-tea-green-tea-lemon-juice-cold-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-tea-green-tea-lemon-juice-cold",
+  "yield": {
+    "amount": 520,
+    "unit": "ml"
+  }
+}

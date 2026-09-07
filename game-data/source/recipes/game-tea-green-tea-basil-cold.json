@@ -1,0 +1,283 @@
+{
+  "artifactVersion": "clv1-3a726799ce347ee3",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-tea-green-tea-basil-cold",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-green-tea-brewed",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-tea-green-tea-basil-cold-portion-01",
+      "volumeMl": 480
+    },
+    {
+      "ingredientId": "usda-basil",
+      "initialState": "raw",
+      "massG": 3,
+      "nutritionProvenanceId": "usda-fdc:172232:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-tea-green-tea-basil-cold-portion-02"
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 2.745,
+      "carbs": 0.03975,
+      "fat": 0.0096,
+      "fiber": 0.024,
+      "protein": 0.57525,
+      "saturatedFat": 0.000615,
+      "sodium": 2.46,
+      "sugar": 0.0045
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-green-tea-brewed",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171917",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-basil",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:172232:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172232",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 5.49,
+      "carbs": 0.0795,
+      "fat": 0.0192,
+      "fiber": 0.048,
+      "protein": 1.1505,
+      "saturatedFat": 0.00123,
+      "sodium": 4.92,
+      "sugar": 0.009
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-tea-green-tea-basil-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-basil-cold-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-tea-green-tea-basil-cold-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-tea-green-tea-basil-cold-op-001-dice"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-tea-green-tea-basil-cold-portion-01",
+          "game-tea-green-tea-basil-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-basil-cold-op-002-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-tea-green-tea-basil-cold-state-002"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-tea-green-tea-basil-cold-op-002-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-green-tea-basil-cold-portion-01",
+          "game-tea-green-tea-basil-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-basil-cold-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-tea-green-tea-basil-cold-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-tea-green-tea-basil-cold",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-tea-green-tea-basil-cold-identity",
+      "game-artifact-game-tea-green-tea-basil-cold-preparation",
+      "game-artifact-game-tea-green-tea-basil-cold-nutrition",
+      "game-artifact-game-tea-green-tea-basil-cold-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-tea-green-tea-basil-cold-identity",
+      "game-usage-game-tea-green-tea-basil-cold-preparation",
+      "game-usage-game-tea-green-tea-basil-cold-nutrition",
+      "game-usage-game-tea-green-tea-basil-cold-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3a726799ce347ee3",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-tea-green-tea-basil-cold-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-basil-cold-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3a726799ce347ee3",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-tea-green-tea-basil-cold-op-002-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-basil-cold-scenario-002-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3a726799ce347ee3",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-basil",
+        "targetNodeId": "game-tea-green-tea-basil-cold-op-001-dice",
+        "targetPortionId": "game-tea-green-tea-basil-cold-portion-02",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-basil-cold-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-tea-green-tea-basil-cold",
+  "yield": {
+    "amount": 520,
+    "unit": "ml"
+  }
+}

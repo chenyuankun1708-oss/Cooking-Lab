@@ -1,0 +1,230 @@
+{
+  "artifactVersion": "clv1-677de807cbb3d903",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-coffee-espresso-whole-milk-cold",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-espresso",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-coffee-espresso-whole-milk-cold-portion-01",
+      "volumeMl": 120
+    },
+    {
+      "ingredientId": "usda-whole-milk",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-coffee-espresso-whole-milk-cold-portion-02",
+      "volumeMl": 120
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 41.4,
+      "carbs": 3.78,
+      "fat": 2.028,
+      "fiber": 0,
+      "protein": 2.034,
+      "saturatedFat": 1.1712,
+      "sodium": 31.2,
+      "sugar": 2.886
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-espresso",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171891",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-whole-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "746782",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 82.8,
+      "carbs": 7.56,
+      "fat": 4.056,
+      "fiber": 0,
+      "protein": 4.068,
+      "saturatedFat": 2.3424,
+      "sodium": 62.4,
+      "sugar": 5.772
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-coffee-espresso-whole-milk-cold-portion-01",
+          "game-coffee-espresso-whole-milk-cold-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-whole-milk-cold-op-002-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-coffee-espresso-whole-milk-cold-state-002"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-coffee-espresso-whole-milk-cold-op-002-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-whole-milk-cold-portion-01",
+          "game-coffee-espresso-whole-milk-cold-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-whole-milk-cold-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-coffee-espresso-whole-milk-cold-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-coffee-espresso-whole-milk-cold",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-coffee-espresso-whole-milk-cold-identity",
+      "game-artifact-game-coffee-espresso-whole-milk-cold-preparation",
+      "game-artifact-game-coffee-espresso-whole-milk-cold-nutrition",
+      "game-artifact-game-coffee-espresso-whole-milk-cold-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-coffee-espresso-whole-milk-cold-identity",
+      "game-usage-game-coffee-espresso-whole-milk-cold-preparation",
+      "game-usage-game-coffee-espresso-whole-milk-cold-nutrition",
+      "game-usage-game-coffee-espresso-whole-milk-cold-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-677de807cbb3d903",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-espresso-whole-milk-cold-op-002-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-whole-milk-cold-scenario-002-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-677de807cbb3d903",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-whole-milk-cold-op-002-chill",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-coffee-espresso-whole-milk-cold-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-coffee-espresso-whole-milk-cold",
+  "yield": {
+    "amount": 160,
+    "unit": "ml"
+  }
+}

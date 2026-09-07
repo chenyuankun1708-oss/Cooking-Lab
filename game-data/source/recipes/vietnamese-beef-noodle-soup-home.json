@@ -1,0 +1,857 @@
+{
+  "artifactVersion": "clv1-c99eedf01866957c",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-vietnamese-beef-noodle-soup-home",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "rice-noodles",
+      "initialState": "dry",
+      "massG": 210,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice-noodles",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-01"
+    },
+    {
+      "ingredientId": "beef-lean",
+      "initialState": "raw",
+      "massG": 260,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-beef-lean",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-02"
+    },
+    {
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-03"
+    },
+    {
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 18,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-04"
+    },
+    {
+      "ingredientId": "scallion",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-05"
+    },
+    {
+      "ingredientId": "cilantro",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cilantro",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-06"
+    },
+    {
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 70,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-07"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-beef-noodle-soup-home-portion-08"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 437.066667,
+      "carbs": 64.779667,
+      "fat": 8.754667,
+      "fiber": 3.06,
+      "protein": 23.121333,
+      "saturatedFat": 3.445333,
+      "sodium": 297.58,
+      "sugar": 2.913667
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "rice-noodles",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice-noodles",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "rice-noodles",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "beef-lean",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-beef-lean",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "beef-lean",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scallion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scallion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cilantro",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cilantro",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cilantro",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1311.2,
+      "carbs": 194.339,
+      "fat": 26.264,
+      "fiber": 9.18,
+      "protein": 69.364,
+      "saturatedFat": 10.336,
+      "sodium": 892.74,
+      "sugar": 8.741
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-01"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 210
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-001-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-04"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-002-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-05"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-003-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-08"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 1.8
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-004-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-01",
+          "vietnamese-beef-noodle-soup-home-portion-04",
+          "vietnamese-beef-noodle-soup-home-portion-05",
+          "vietnamese-beef-noodle-soup-home-portion-08"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-005-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-step-1-boil"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-005-boil"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-01",
+          "vietnamese-beef-noodle-soup-home-portion-04",
+          "vietnamese-beef-noodle-soup-home-portion-05",
+          "vietnamese-beef-noodle-soup-home-portion-08"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-006-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-step-1-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-006-drain"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-007-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-step-2-crush"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-007-crush"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-02"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 260
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-03"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 150
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-009-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-06"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 20
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-010-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-07"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-011-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 70
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-011-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-012-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-step-3-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-012-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-013-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-step-4-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-013-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-014-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-step-5-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-beef-noodle-soup-home-op-014-pan-fry"
+        ],
+        "equipmentId": "colander",
+        "inputPortionIds": [
+          "vietnamese-beef-noodle-soup-home-portion-01",
+          "vietnamese-beef-noodle-soup-home-portion-02",
+          "vietnamese-beef-noodle-soup-home-portion-03",
+          "vietnamese-beef-noodle-soup-home-portion-04",
+          "vietnamese-beef-noodle-soup-home-portion-05",
+          "vietnamese-beef-noodle-soup-home-portion-06",
+          "vietnamese-beef-noodle-soup-home-portion-07",
+          "vietnamese-beef-noodle-soup-home-portion-08"
+        ],
+        "nodeId": "vietnamese-beef-noodle-soup-home-op-015-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "vietnamese-beef-noodle-soup-home-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "vietnamese-beef-noodle-soup-home",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-vietnamese-beef-noodle-soup-home-identity",
+      "game-artifact-vietnamese-beef-noodle-soup-home-preparation",
+      "game-artifact-vietnamese-beef-noodle-soup-home-nutrition",
+      "game-artifact-vietnamese-beef-noodle-soup-home-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-vietnamese-beef-noodle-soup-home-identity",
+      "game-usage-vietnamese-beef-noodle-soup-home-preparation",
+      "game-usage-vietnamese-beef-noodle-soup-home-nutrition",
+      "game-usage-vietnamese-beef-noodle-soup-home-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-005-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-005-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-006-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-006-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-007-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-007-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-012-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-012-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-012-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-012-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-013-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-013-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-013-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-013-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c99eedf01866957c",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-beef-noodle-soup-home-op-014-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-beef-noodle-soup-home-vietnamese-beef-noodle-soup-home-op-014-pan-fry-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "vietnamese-beef-noodle-soup-home",
+  "sourceCulinaryItemId": "vietnamese-beef-noodle-soup-home",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

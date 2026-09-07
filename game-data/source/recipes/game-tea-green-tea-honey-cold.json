@@ -1,0 +1,231 @@
+{
+  "artifactVersion": "clv1-6da02e4162bab2e4",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-tea-green-tea-honey-cold",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-green-tea-brewed",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-tea-green-tea-honey-cold-portion-01",
+      "volumeMl": 480
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-tea-green-tea-honey-cold-portion-02"
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 9.852,
+      "calories": 38.88,
+      "carbs": 9.888,
+      "fat": 0,
+      "fiber": 0.024,
+      "protein": 0.564,
+      "saturatedFat": 0,
+      "sodium": 2.88,
+      "sugar": 9.852
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-green-tea-brewed",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171917:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171917",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 19.704,
+      "calories": 77.76,
+      "carbs": 19.776,
+      "fat": 0,
+      "fiber": 0.048,
+      "protein": 1.128,
+      "saturatedFat": 0,
+      "sodium": 5.76,
+      "sugar": 19.704
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-tea-green-tea-honey-cold-portion-01",
+          "game-tea-green-tea-honey-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-honey-cold-op-002-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-tea-green-tea-honey-cold-state-002"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-tea-green-tea-honey-cold-op-002-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-green-tea-honey-cold-portion-01",
+          "game-tea-green-tea-honey-cold-portion-02"
+        ],
+        "nodeId": "game-tea-green-tea-honey-cold-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-tea-green-tea-honey-cold-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-tea-green-tea-honey-cold",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-tea-green-tea-honey-cold-identity",
+      "game-artifact-game-tea-green-tea-honey-cold-preparation",
+      "game-artifact-game-tea-green-tea-honey-cold-nutrition",
+      "game-artifact-game-tea-green-tea-honey-cold-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-tea-green-tea-honey-cold-identity",
+      "game-usage-game-tea-green-tea-honey-cold-preparation",
+      "game-usage-game-tea-green-tea-honey-cold-nutrition",
+      "game-usage-game-tea-green-tea-honey-cold-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6da02e4162bab2e4",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-tea-green-tea-honey-cold-op-002-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-green-tea-honey-cold-scenario-002-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6da02e4162bab2e4",
+      "causeCodes": [
+        "supplemental:quantity-too-high"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-quantity-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-tea-green-tea-honey-cold-op-002-chill",
+        "targetPortionId": "game-tea-green-tea-honey-cold-portion-01",
+        "type": "quantity-too-high"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-tea-green-tea-honey-cold-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-tea-green-tea-honey-cold",
+  "yield": {
+    "amount": 520,
+    "unit": "ml"
+  }
+}

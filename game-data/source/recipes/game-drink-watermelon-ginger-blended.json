@@ -1,0 +1,329 @@
+{
+  "artifactVersion": "clv1-1cef74b8c8de8f31",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-drink-watermelon-ginger-blended",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-watermelon",
+      "initialState": "liquid",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-drink-watermelon-ginger-blended-portion-01",
+      "volumeMl": 320
+    },
+    {
+      "ingredientId": "usda-ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "usda-fdc:169231:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "accent",
+      "portionId": "game-drink-watermelon-ginger-blended-portion-02"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 700,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-drink-watermelon-ginger-blended-portion-03",
+      "volumeMl": 700
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": true,
+      "phase": "sweetener",
+      "portionId": "game-drink-watermelon-ginger-blended-portion-04"
+    }
+  ],
+  "itemType": "non-alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 4.926,
+      "calories": 44.24,
+      "carbs": 11.429,
+      "fat": 0.13875,
+      "fiber": 0.382,
+      "protein": 0.5515,
+      "saturatedFat": 0.017875,
+      "sodium": 8.365,
+      "sugar": 9.9285
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-watermelon",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:167765:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "167765",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169231:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169231",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 19.704,
+      "calories": 176.96,
+      "carbs": 45.716,
+      "fat": 0.555,
+      "fiber": 1.528,
+      "protein": 2.206,
+      "saturatedFat": 0.0715,
+      "sodium": 33.46,
+      "sugar": 39.714
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-drink-watermelon-ginger-blended-portion-02"
+        ],
+        "nodeId": "game-drink-watermelon-ginger-blended-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-drink-watermelon-ginger-blended-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-drink-watermelon-ginger-blended-op-001-dice"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "game-drink-watermelon-ginger-blended-portion-01",
+          "game-drink-watermelon-ginger-blended-portion-02",
+          "game-drink-watermelon-ginger-blended-portion-03",
+          "game-drink-watermelon-ginger-blended-portion-04"
+        ],
+        "nodeId": "game-drink-watermelon-ginger-blended-op-002-blend",
+        "operationType": "blend",
+        "outputStateIds": [
+          "game-drink-watermelon-ginger-blended-state-002"
+        ],
+        "parameters": {
+          "strength": 0.75
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-drink-watermelon-ginger-blended-op-002-blend"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-drink-watermelon-ginger-blended-portion-01",
+          "game-drink-watermelon-ginger-blended-portion-02",
+          "game-drink-watermelon-ginger-blended-portion-03",
+          "game-drink-watermelon-ginger-blended-portion-04"
+        ],
+        "nodeId": "game-drink-watermelon-ginger-blended-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-drink-watermelon-ginger-blended-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-drink-watermelon-ginger-blended",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-drink-watermelon-ginger-blended-identity",
+      "game-artifact-game-drink-watermelon-ginger-blended-preparation",
+      "game-artifact-game-drink-watermelon-ginger-blended-nutrition",
+      "game-artifact-game-drink-watermelon-ginger-blended-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-drink-watermelon-ginger-blended-identity",
+      "game-usage-game-drink-watermelon-ginger-blended-preparation",
+      "game-usage-game-drink-watermelon-ginger-blended-nutrition",
+      "game-usage-game-drink-watermelon-ginger-blended-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1cef74b8c8de8f31",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-drink-watermelon-ginger-blended-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-watermelon-ginger-blended-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1cef74b8c8de8f31",
+      "causeCodes": [
+        "omit:blend"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-drink-watermelon-ginger-blended-op-002-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-watermelon-ginger-blended-scenario-002-blend"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1cef74b8c8de8f31",
+      "causeCodes": [
+        "supplemental:quantity-too-high"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-quantity-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-drink-watermelon-ginger-blended-op-001-dice",
+        "targetPortionId": "game-drink-watermelon-ginger-blended-portion-03",
+        "type": "quantity-too-high"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-drink-watermelon-ginger-blended-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-drink-watermelon-ginger-blended",
+  "yield": {
+    "amount": 1000,
+    "unit": "ml"
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "artifactVersion": "clv1-3788c5e78b55252f",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-coffee-espresso-almond-hot",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-espresso",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-coffee-espresso-almond-hot-portion-01",
+      "volumeMl": 120
+    },
+    {
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-coffee-espresso-almond-hot-portion-02"
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 99.3,
+      "carbs": 4.002,
+      "fat": 7.773,
+      "fiber": 1.62,
+      "protein": 3.297,
+      "saturatedFat": 0.6222,
+      "sodium": 8.4,
+      "sugar": 0
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-espresso",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171891",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-almond",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346393",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 198.6,
+      "carbs": 8.004,
+      "fat": 15.546,
+      "fiber": 3.24,
+      "protein": 6.594,
+      "saturatedFat": 1.2444,
+      "sodium": 16.8,
+      "sugar": 0
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-coffee-espresso-almond-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-almond-hot-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-coffee-espresso-almond-hot-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-coffee-espresso-almond-hot-op-001-dice"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-almond-hot-portion-01",
+          "game-coffee-espresso-almond-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-almond-hot-op-002-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "game-coffee-espresso-almond-hot-state-002"
+        ],
+        "parameters": {
+          "strength": 0.45
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-coffee-espresso-almond-hot-op-002-mix"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-almond-hot-portion-01",
+          "game-coffee-espresso-almond-hot-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-almond-hot-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-coffee-espresso-almond-hot-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-coffee-espresso-almond-hot",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-coffee-espresso-almond-hot-identity",
+      "game-artifact-game-coffee-espresso-almond-hot-preparation",
+      "game-artifact-game-coffee-espresso-almond-hot-nutrition",
+      "game-artifact-game-coffee-espresso-almond-hot-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-coffee-espresso-almond-hot-identity",
+      "game-usage-game-coffee-espresso-almond-hot-preparation",
+      "game-usage-game-coffee-espresso-almond-hot-nutrition",
+      "game-usage-game-coffee-espresso-almond-hot-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3788c5e78b55252f",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-coffee-espresso-almond-hot-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-almond-hot-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3788c5e78b55252f",
+      "causeCodes": [
+        "omit:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-almond-hot-op-002-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-almond-hot-scenario-002-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3788c5e78b55252f",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-almond",
+        "targetNodeId": "game-coffee-espresso-almond-hot-op-001-dice",
+        "targetPortionId": "game-coffee-espresso-almond-hot-portion-02",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-almond-hot-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-coffee-espresso-almond-hot",
+  "yield": {
+    "amount": 160,
+    "unit": "ml"
+  }
+}

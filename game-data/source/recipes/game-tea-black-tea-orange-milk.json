@@ -1,0 +1,303 @@
+{
+  "artifactVersion": "clv1-d9c8d7c80889b749",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-tea-black-tea-orange-milk",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-black-tea-brewed",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "usda-fdc:173227:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-tea-black-tea-orange-milk-portion-01",
+      "volumeMl": 480
+    },
+    {
+      "ingredientId": "usda-orange",
+      "initialState": "raw",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-tea-black-tea-orange-milk-portion-02"
+    },
+    {
+      "ingredientId": "usda-whole-milk",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
+      "optional": false,
+      "phase": "finish",
+      "portionId": "game-tea-black-tea-orange-milk-portion-03",
+      "volumeMl": 120
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 66.6,
+      "carbs": 10.578,
+      "fat": 2.01,
+      "fiber": 1.2,
+      "protein": 2.508,
+      "saturatedFat": 1.1208,
+      "sodium": 35.4,
+      "sugar": 8.028
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-black-tea-brewed",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173227:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173227",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-orange",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "746771",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-whole-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:746782:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "746782",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 133.2,
+      "carbs": 21.156,
+      "fat": 4.02,
+      "fiber": 2.4,
+      "protein": 5.016,
+      "saturatedFat": 2.2416,
+      "sodium": 70.8,
+      "sugar": 16.056
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-tea-black-tea-orange-milk-portion-02"
+        ],
+        "nodeId": "game-tea-black-tea-orange-milk-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-tea-black-tea-orange-milk-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-tea-black-tea-orange-milk-op-001-dice"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-black-tea-orange-milk-portion-01",
+          "game-tea-black-tea-orange-milk-portion-02",
+          "game-tea-black-tea-orange-milk-portion-03"
+        ],
+        "nodeId": "game-tea-black-tea-orange-milk-op-002-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "game-tea-black-tea-orange-milk-state-002"
+        ],
+        "parameters": {
+          "strength": 0.45
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-tea-black-tea-orange-milk-op-002-mix"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-tea-black-tea-orange-milk-portion-01",
+          "game-tea-black-tea-orange-milk-portion-02",
+          "game-tea-black-tea-orange-milk-portion-03"
+        ],
+        "nodeId": "game-tea-black-tea-orange-milk-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-tea-black-tea-orange-milk-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-tea-black-tea-orange-milk",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-tea-black-tea-orange-milk-identity",
+      "game-artifact-game-tea-black-tea-orange-milk-preparation",
+      "game-artifact-game-tea-black-tea-orange-milk-nutrition",
+      "game-artifact-game-tea-black-tea-orange-milk-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-tea-black-tea-orange-milk-identity",
+      "game-usage-game-tea-black-tea-orange-milk-preparation",
+      "game-usage-game-tea-black-tea-orange-milk-nutrition",
+      "game-usage-game-tea-black-tea-orange-milk-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d9c8d7c80889b749",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-tea-black-tea-orange-milk-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-black-tea-orange-milk-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d9c8d7c80889b749",
+      "causeCodes": [
+        "omit:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-black-tea-orange-milk-op-002-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-tea-black-tea-orange-milk-scenario-002-mix"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d9c8d7c80889b749",
+      "causeCodes": [
+        "supplemental:reorder"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-reorder"
+      ],
+      "mutation": {
+        "targetNodeId": "game-tea-black-tea-orange-milk-op-001-dice",
+        "type": "reorder"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-tea-black-tea-orange-milk-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-tea-black-tea-orange-milk",
+  "yield": {
+    "amount": 520,
+    "unit": "ml"
+  }
+}

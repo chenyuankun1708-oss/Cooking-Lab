@@ -1,0 +1,330 @@
+{
+  "artifactVersion": "clv1-1e014eadeb1a61e1",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-drink-pineapple-ginger-infused",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-pineapple",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:2346398:foundation-2026-04-30",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-drink-pineapple-ginger-infused-portion-01"
+    },
+    {
+      "ingredientId": "usda-ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "usda-fdc:169231:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "accent",
+      "portionId": "game-drink-pineapple-ginger-infused-portion-02"
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 700,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-drink-pineapple-ginger-infused-portion-03",
+      "volumeMl": 700
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": true,
+      "phase": "sweetener",
+      "portionId": "game-drink-pineapple-ginger-infused-portion-04"
+    }
+  ],
+  "itemType": "non-alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 4.926,
+      "calories": 68.32,
+      "carbs": 16.669,
+      "fat": 0.18755,
+      "fiber": 0.81,
+      "protein": 0.4323,
+      "saturatedFat": 0.005075,
+      "sodium": 7.565,
+      "sugar": 14.0885
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-pineapple",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2346398:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346398",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169231:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169231",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 19.704,
+      "calories": 273.28,
+      "carbs": 66.676,
+      "fat": 0.7502,
+      "fiber": 3.24,
+      "protein": 1.7292,
+      "saturatedFat": 0.0203,
+      "sodium": 30.26,
+      "sugar": 56.354
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-drink-pineapple-ginger-infused-portion-01",
+          "game-drink-pineapple-ginger-infused-portion-02"
+        ],
+        "nodeId": "game-drink-pineapple-ginger-infused-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-drink-pineapple-ginger-infused-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-drink-pineapple-ginger-infused-op-001-dice"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-drink-pineapple-ginger-infused-portion-01",
+          "game-drink-pineapple-ginger-infused-portion-02",
+          "game-drink-pineapple-ginger-infused-portion-03",
+          "game-drink-pineapple-ginger-infused-portion-04"
+        ],
+        "nodeId": "game-drink-pineapple-ginger-infused-op-002-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "game-drink-pineapple-ginger-infused-state-002"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-drink-pineapple-ginger-infused-op-002-rest"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-drink-pineapple-ginger-infused-portion-01",
+          "game-drink-pineapple-ginger-infused-portion-02",
+          "game-drink-pineapple-ginger-infused-portion-03",
+          "game-drink-pineapple-ginger-infused-portion-04"
+        ],
+        "nodeId": "game-drink-pineapple-ginger-infused-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-drink-pineapple-ginger-infused-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-drink-pineapple-ginger-infused",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-drink-pineapple-ginger-infused-identity",
+      "game-artifact-game-drink-pineapple-ginger-infused-preparation",
+      "game-artifact-game-drink-pineapple-ginger-infused-nutrition",
+      "game-artifact-game-drink-pineapple-ginger-infused-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-drink-pineapple-ginger-infused-identity",
+      "game-usage-game-drink-pineapple-ginger-infused-preparation",
+      "game-usage-game-drink-pineapple-ginger-infused-nutrition",
+      "game-usage-game-drink-pineapple-ginger-infused-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1e014eadeb1a61e1",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-drink-pineapple-ginger-infused-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-pineapple-ginger-infused-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1e014eadeb1a61e1",
+      "causeCodes": [
+        "duration-too-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-drink-pineapple-ginger-infused-op-002-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-pineapple-ginger-infused-scenario-002-rest"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1e014eadeb1a61e1",
+      "causeCodes": [
+        "supplemental:duplicate"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duplicate"
+      ],
+      "mutation": {
+        "targetNodeId": "game-drink-pineapple-ginger-infused-op-001-dice",
+        "type": "duplicate"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-drink-pineapple-ginger-infused-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-drink-pineapple-ginger-infused",
+  "yield": {
+    "amount": 1000,
+    "unit": "ml"
+  }
+}

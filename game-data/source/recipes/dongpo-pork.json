@@ -1,0 +1,820 @@
+{
+  "artifactVersion": "clv1-61aac625a7e41846",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-dongpo-pork",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "pork-belly",
+      "initialState": "raw",
+      "massG": 800,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pork-belly",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-01"
+    },
+    {
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 35,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-02"
+    },
+    {
+      "ingredientId": "shaoxing-wine",
+      "initialState": "raw",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-shaoxing-wine",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-03",
+      "volumeMl": 80
+    },
+    {
+      "ingredientId": "soy-sauce",
+      "initialState": "liquid",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-04"
+    },
+    {
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-05"
+    },
+    {
+      "ingredientId": "scallion",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-06"
+    },
+    {
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 700,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-07",
+      "volumeMl": 700
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dongpo-pork-portion-08"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 8.75,
+      "calories": 1102.35,
+      "carbs": 11.9225,
+      "fat": 106.145,
+      "fiber": 0.415,
+      "protein": 20.04,
+      "saturatedFat": 38.025,
+      "sodium": 1087.3,
+      "sugar": 9.0675
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "pork-belly",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pork-belly",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "pork-belly",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "shaoxing-wine",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-shaoxing-wine",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "shaoxing-wine",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "soy-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "soy-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scallion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scallion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 35,
+      "calories": 4409.4,
+      "carbs": 47.69,
+      "fat": 424.58,
+      "fiber": 1.66,
+      "protein": 80.16,
+      "saturatedFat": 152.1,
+      "sodium": 4349.2,
+      "sugar": 36.27
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 900000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [],
+        "nodeId": "dongpo-pork-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "dongpo-pork-step-1-dice"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-001-dice"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-01"
+        ],
+        "nodeId": "dongpo-pork-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 800
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-002-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-05"
+        ],
+        "nodeId": "dongpo-pork-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 20
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-003-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-06"
+        ],
+        "nodeId": "dongpo-pork-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 30
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-004-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-07"
+        ],
+        "nodeId": "dongpo-pork-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 700
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-005-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-08"
+        ],
+        "nodeId": "dongpo-pork-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 600000,
+        "criticality": "quality",
+        "dependsOn": [
+          "dongpo-pork-op-006-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [],
+        "nodeId": "dongpo-pork-op-007-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "dongpo-pork-step-2-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-007-pan-fry"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-02"
+        ],
+        "nodeId": "dongpo-pork-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-008-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-03"
+        ],
+        "nodeId": "dongpo-pork-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-009-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-04"
+        ],
+        "nodeId": "dongpo-pork-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dongpo-pork-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 600000,
+        "criticality": "quality",
+        "dependsOn": [
+          "dongpo-pork-op-010-add"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [
+          "dongpo-pork-portion-02",
+          "dongpo-pork-portion-03",
+          "dongpo-pork-portion-04"
+        ],
+        "nodeId": "dongpo-pork-op-011-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "dongpo-pork-step-3-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "dongpo-pork-op-011-pan-fry"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [],
+        "nodeId": "dongpo-pork-op-012-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "dongpo-pork-step-4-boil"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 5100000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "dongpo-pork-op-012-boil"
+        ],
+        "equipmentId": "heavy-pot",
+        "inputPortionIds": [],
+        "nodeId": "dongpo-pork-op-013-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "dongpo-pork-step-5-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dongpo-pork-op-013-rest"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "dongpo-pork-portion-01",
+          "dongpo-pork-portion-02",
+          "dongpo-pork-portion-03",
+          "dongpo-pork-portion-04",
+          "dongpo-pork-portion-05",
+          "dongpo-pork-portion-06",
+          "dongpo-pork-portion-07",
+          "dongpo-pork-portion-08"
+        ],
+        "nodeId": "dongpo-pork-op-014-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "dongpo-pork-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "dongpo-pork",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-dongpo-pork-identity",
+      "game-artifact-dongpo-pork-preparation",
+      "game-artifact-dongpo-pork-nutrition",
+      "game-artifact-dongpo-pork-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-dongpo-pork-identity",
+      "game-usage-dongpo-pork-preparation",
+      "game-usage-dongpo-pork-nutrition",
+      "game-usage-dongpo-pork-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "dongpo-pork-op-001-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-001-dice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "dongpo-pork-op-007-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-007-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "dongpo-pork-op-011-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-011-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "dongpo-pork-op-011-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-011-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "dongpo-pork-op-012-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-012-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "duration-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "dongpo-pork-op-012-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-012-boil-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "dongpo-pork-op-013-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-013-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "dongpo-pork-op-013-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "dongpo-pork-dongpo-pork-op-013-rest-short"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "dongpo-pork",
+  "sourceCulinaryItemId": "dongpo-pork",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

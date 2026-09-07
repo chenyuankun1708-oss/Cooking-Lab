@@ -1,0 +1,1063 @@
+{
+  "artifactVersion": "clv1-56447f2f00a0c973",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-tomyum-kung",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "shrimp",
+      "initialState": "raw",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-shrimp",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-01"
+    },
+    {
+      "ingredientId": "mushroom",
+      "initialState": "raw",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-02"
+    },
+    {
+      "ingredientId": "lemongrass",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemongrass",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-03"
+    },
+    {
+      "ingredientId": "galangal",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-galangal",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-04"
+    },
+    {
+      "ingredientId": "makrut-lime-leaf",
+      "initialState": "raw",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-makrut-lime-leaf",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-05"
+    },
+    {
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-06"
+    },
+    {
+      "ingredientId": "fish-sauce",
+      "initialState": "liquid",
+      "massG": 35,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fish-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-07"
+    },
+    {
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 140,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-08"
+    },
+    {
+      "ingredientId": "cilantro",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cilantro",
+      "optional": true,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-09"
+    },
+    {
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 1000,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tomyum-kung-portion-10",
+      "volumeMl": 1000
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 131.15,
+      "carbs": 11.6225,
+      "fat": 1.12,
+      "fiber": 1.75625,
+      "protein": 21.16375,
+      "saturatedFat": 0.265,
+      "sodium": 811.7375,
+      "sugar": 2.13125
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "shrimp",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-shrimp",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "shrimp",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mushroom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mushroom",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemongrass",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemongrass",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemongrass",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "galangal",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-galangal",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "galangal",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "makrut-lime-leaf",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-makrut-lime-leaf",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "makrut-lime-leaf",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fish-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fish-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fish-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cilantro",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cilantro",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cilantro",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 524.6,
+      "carbs": 46.49,
+      "fat": 4.48,
+      "fiber": 7.025,
+      "protein": 84.655,
+      "saturatedFat": 1.06,
+      "sodium": 3246.95,
+      "sugar": 8.525
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [],
+        "nodeId": "tomyum-kung-op-001-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "tomyum-kung-step-1-crush"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tomyum-kung-op-001-crush"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [],
+        "nodeId": "tomyum-kung-op-002-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "tomyum-kung-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tomyum-kung-op-002-slice"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [],
+        "nodeId": "tomyum-kung-op-003-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "tomyum-kung-step-1-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-003-mince"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-01"
+        ],
+        "nodeId": "tomyum-kung-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 400
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-004-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-02"
+        ],
+        "nodeId": "tomyum-kung-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 200
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-005-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-03"
+        ],
+        "nodeId": "tomyum-kung-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 30
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-006-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-04"
+        ],
+        "nodeId": "tomyum-kung-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 20
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-007-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-05"
+        ],
+        "nodeId": "tomyum-kung-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-008-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-06"
+        ],
+        "nodeId": "tomyum-kung-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-009-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-08"
+        ],
+        "nodeId": "tomyum-kung-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 140
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-010-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-10"
+        ],
+        "nodeId": "tomyum-kung-op-011-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-10-added"
+        ],
+        "parameters": {
+          "quantityG": 1000
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "tomyum-kung-op-011-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-10"
+        ],
+        "nodeId": "tomyum-kung-op-012-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "tomyum-kung-step-2-boil"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 240000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "tomyum-kung-op-012-boil"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-10"
+        ],
+        "nodeId": "tomyum-kung-op-013-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "tomyum-kung-step-2-simmer"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 240000
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-013-simmer"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-07"
+        ],
+        "nodeId": "tomyum-kung-op-014-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tomyum-kung-op-014-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-07"
+        ],
+        "nodeId": "tomyum-kung-op-015-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "tomyum-kung-step-3-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-015-pan-fry"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-09"
+        ],
+        "nodeId": "tomyum-kung-op-016-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tomyum-kung-portion-09-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tomyum-kung-op-016-add"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "tomyum-kung-portion-09"
+        ],
+        "nodeId": "tomyum-kung-op-017-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "tomyum-kung-step-4-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tomyum-kung-op-017-pan-fry"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "tomyum-kung-portion-01",
+          "tomyum-kung-portion-02",
+          "tomyum-kung-portion-03",
+          "tomyum-kung-portion-04",
+          "tomyum-kung-portion-05",
+          "tomyum-kung-portion-06",
+          "tomyum-kung-portion-07",
+          "tomyum-kung-portion-08",
+          "tomyum-kung-portion-09",
+          "tomyum-kung-portion-10"
+        ],
+        "nodeId": "tomyum-kung-op-018-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "tomyum-kung-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "tomyum-kung",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-tomyum-kung-identity",
+      "game-artifact-tomyum-kung-preparation",
+      "game-artifact-tomyum-kung-nutrition",
+      "game-artifact-tomyum-kung-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-tomyum-kung-identity",
+      "game-usage-tomyum-kung-preparation",
+      "game-usage-tomyum-kung-nutrition",
+      "game-usage-tomyum-kung-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-001-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-001-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-002-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-002-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-003-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-003-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-012-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-012-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "duration-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "tomyum-kung-op-012-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-012-boil-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "heat-high:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "tomyum-kung-op-012-boil",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-012-boil-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-013-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-013-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "duration-short:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "tomyum-kung-op-013-simmer",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-013-simmer-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "heat-high:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "tomyum-kung-op-013-simmer",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-013-simmer-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-015-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-015-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-56447f2f00a0c973",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "tomyum-kung-op-017-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tomyum-kung-tomyum-kung-op-017-pan-fry-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "tomyum-kung",
+  "sourceCulinaryItemId": "tomyum-kung",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

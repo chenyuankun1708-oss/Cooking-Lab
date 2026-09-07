@@ -1,0 +1,330 @@
+{
+  "artifactVersion": "clv1-825dcafc5a82f188",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-drink-banana-lemon-juice-infused",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-banana",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:1105314:foundation-2026-04-30",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-drink-banana-lemon-juice-infused-portion-01"
+    },
+    {
+      "ingredientId": "usda-lemon-juice",
+      "initialState": "liquid",
+      "massG": 45,
+      "nutritionProvenanceId": "usda-fdc:167747:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "accent",
+      "portionId": "game-drink-banana-lemon-juice-infused-portion-02",
+      "volumeMl": 45
+    },
+    {
+      "ingredientId": "usda-water",
+      "initialState": "liquid",
+      "massG": 700,
+      "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-drink-banana-lemon-juice-infused-portion-03",
+      "volumeMl": 700
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 24,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": true,
+      "phase": "sweetener",
+      "portionId": "game-drink-banana-lemon-juice-infused-portion-04"
+    }
+  ],
+  "itemType": "non-alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 4.926,
+      "calories": 98.315,
+      "carbs": 24.12025,
+      "fat": 0.259,
+      "fiber": 1.40575,
+      "protein": 0.649375,
+      "saturatedFat": 0.0045,
+      "sodium": 7.3525,
+      "sugar": 17.8495
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-banana",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1105314:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1105314",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-lemon-juice",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:167747:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "167747",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:173647:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 19.704,
+      "calories": 393.26,
+      "carbs": 96.481,
+      "fat": 1.036,
+      "fiber": 5.623,
+      "protein": 2.5975,
+      "saturatedFat": 0.018,
+      "sodium": 29.41,
+      "sugar": 71.398
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-drink-banana-lemon-juice-infused-portion-01"
+        ],
+        "nodeId": "game-drink-banana-lemon-juice-infused-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-drink-banana-lemon-juice-infused-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-drink-banana-lemon-juice-infused-op-001-dice"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-drink-banana-lemon-juice-infused-portion-01",
+          "game-drink-banana-lemon-juice-infused-portion-02",
+          "game-drink-banana-lemon-juice-infused-portion-03",
+          "game-drink-banana-lemon-juice-infused-portion-04"
+        ],
+        "nodeId": "game-drink-banana-lemon-juice-infused-op-002-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "game-drink-banana-lemon-juice-infused-state-002"
+        ],
+        "parameters": {},
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-drink-banana-lemon-juice-infused-op-002-rest"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-drink-banana-lemon-juice-infused-portion-01",
+          "game-drink-banana-lemon-juice-infused-portion-02",
+          "game-drink-banana-lemon-juice-infused-portion-03",
+          "game-drink-banana-lemon-juice-infused-portion-04"
+        ],
+        "nodeId": "game-drink-banana-lemon-juice-infused-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-drink-banana-lemon-juice-infused-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-drink-banana-lemon-juice-infused",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-drink-banana-lemon-juice-infused-identity",
+      "game-artifact-game-drink-banana-lemon-juice-infused-preparation",
+      "game-artifact-game-drink-banana-lemon-juice-infused-nutrition",
+      "game-artifact-game-drink-banana-lemon-juice-infused-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-drink-banana-lemon-juice-infused-identity",
+      "game-usage-game-drink-banana-lemon-juice-infused-preparation",
+      "game-usage-game-drink-banana-lemon-juice-infused-nutrition",
+      "game-usage-game-drink-banana-lemon-juice-infused-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-825dcafc5a82f188",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-drink-banana-lemon-juice-infused-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-banana-lemon-juice-infused-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-825dcafc5a82f188",
+      "causeCodes": [
+        "duration-too-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-drink-banana-lemon-juice-infused-op-002-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-banana-lemon-juice-infused-scenario-002-rest"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-825dcafc5a82f188",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-honey",
+        "targetNodeId": "game-drink-banana-lemon-juice-infused-op-001-dice",
+        "targetPortionId": "game-drink-banana-lemon-juice-infused-portion-04",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-drink-banana-lemon-juice-infused-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-drink-banana-lemon-juice-infused",
+  "yield": {
+    "amount": 1000,
+    "unit": "ml"
+  }
+}

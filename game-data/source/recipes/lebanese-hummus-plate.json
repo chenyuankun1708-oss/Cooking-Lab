@@ -1,0 +1,833 @@
+{
+  "artifactVersion": "clv1-f0e3bea86561c1be",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-lebanese-hummus-plate",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "cooked-chickpea",
+      "initialState": "cooked",
+      "massG": 220,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-chickpea",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-01"
+    },
+    {
+      "ingredientId": "sesame-paste",
+      "initialState": "raw",
+      "massG": 45,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sesame-paste",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-02"
+    },
+    {
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 90,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-03"
+    },
+    {
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-04"
+    },
+    {
+      "ingredientId": "cumin",
+      "initialState": "raw",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-05"
+    },
+    {
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-06"
+    },
+    {
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lebanese-hummus-plate-portion-07"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 178.63,
+      "carbs": 20.2975,
+      "fat": 8.88825,
+      "fiber": 5.9245,
+      "protein": 7.2275,
+      "saturatedFat": 1.1895,
+      "sodium": 135.8975,
+      "sugar": 3.2845
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooked-chickpea",
+        "ingredientState": "cooked",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-chickpea",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooked-chickpea",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sesame-paste",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sesame-paste",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sesame-paste",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cumin",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cumin",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 714.52,
+      "carbs": 81.19,
+      "fat": 35.553,
+      "fiber": 23.698,
+      "protein": 28.91,
+      "saturatedFat": 4.758,
+      "sodium": 543.59,
+      "sugar": 13.138
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "blender",
+        "inputPortionIds": [],
+        "nodeId": "lebanese-hummus-plate-op-001-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-1-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-001-mince"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-01"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 220
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-002-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-03"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 90
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-003-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-04"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 8
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-004-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-06"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-005-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-07"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 1.2
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-006-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-01",
+          "lebanese-hummus-plate-portion-03",
+          "lebanese-hummus-plate-portion-04",
+          "lebanese-hummus-plate-portion-06",
+          "lebanese-hummus-plate-portion-07"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-007-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-1-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-007-drain"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-01",
+          "lebanese-hummus-plate-portion-03",
+          "lebanese-hummus-plate-portion-04",
+          "lebanese-hummus-plate-portion-06",
+          "lebanese-hummus-plate-portion-07"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-1-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-008-serve"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-02"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 45
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-009-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-02"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-010-blend",
+        "operationType": "blend",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-2-blend"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-010-blend"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-02"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-011-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-2-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-011-stir"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-02"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-012-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-2-whisk"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-012-whisk"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [],
+        "nodeId": "lebanese-hummus-plate-op-013-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-3-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-013-stir"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [],
+        "nodeId": "lebanese-hummus-plate-op-014-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-3-whisk"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-014-whisk"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-05"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-015-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lebanese-hummus-plate-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 1
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-015-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-05"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-016-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-4-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "lebanese-hummus-plate-op-016-season"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "lebanese-hummus-plate-portion-05"
+        ],
+        "nodeId": "lebanese-hummus-plate-op-017-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lebanese-hummus-plate-step-4-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "lebanese-hummus-plate",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-lebanese-hummus-plate-identity",
+      "game-artifact-lebanese-hummus-plate-preparation",
+      "game-artifact-lebanese-hummus-plate-nutrition",
+      "game-artifact-lebanese-hummus-plate-simulation"
+    ],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": [
+      "game-usage-lebanese-hummus-plate-identity",
+      "game-usage-lebanese-hummus-plate-preparation",
+      "game-usage-lebanese-hummus-plate-nutrition",
+      "game-usage-lebanese-hummus-plate-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-001-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-001-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-007-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-007-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:blend"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-blend"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-010-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-010-blend-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-011-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-011-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-012-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-012-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-013-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-013-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-014-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-014-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0e3bea86561c1be",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "lebanese-hummus-plate-op-016-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lebanese-hummus-plate-lebanese-hummus-plate-op-016-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "lebanese-hummus-plate",
+  "sourceCulinaryItemId": "lebanese-hummus-plate",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

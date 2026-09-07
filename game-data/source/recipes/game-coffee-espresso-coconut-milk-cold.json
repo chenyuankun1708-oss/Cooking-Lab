@@ -1,0 +1,230 @@
+{
+  "artifactVersion": "clv1-074fdcdb24b0e3f4",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-coffee-espresso-coconut-milk-cold",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-espresso",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-coffee-espresso-coconut-milk-cold-portion-01",
+      "volumeMl": 120
+    },
+    {
+      "ingredientId": "usda-coconut-milk",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "flavor",
+      "portionId": "game-coffee-espresso-coconut-milk-cold-portion-02",
+      "volumeMl": 120
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 123.6,
+      "carbs": 2.688,
+      "fat": 12.888,
+      "fiber": 0,
+      "protein": 1.284,
+      "saturatedFat": 11.3952,
+      "sodium": 16.2,
+      "sugar": 0
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-espresso",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:171891:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "171891",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-coconut-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:170173:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "170173",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 247.2,
+      "carbs": 5.376,
+      "fat": 25.776,
+      "fiber": 0,
+      "protein": 2.568,
+      "saturatedFat": 22.7904,
+      "sodium": 32.4,
+      "sugar": 0
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-coffee-espresso-coconut-milk-cold-portion-01",
+          "game-coffee-espresso-coconut-milk-cold-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-coconut-milk-cold-op-002-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-coffee-espresso-coconut-milk-cold-state-002"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-coffee-espresso-coconut-milk-cold-op-002-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-coffee-espresso-coconut-milk-cold-portion-01",
+          "game-coffee-espresso-coconut-milk-cold-portion-02"
+        ],
+        "nodeId": "game-coffee-espresso-coconut-milk-cold-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-coffee-espresso-coconut-milk-cold-state-003"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-coffee-espresso-coconut-milk-cold",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-coffee-espresso-coconut-milk-cold-identity",
+      "game-artifact-game-coffee-espresso-coconut-milk-cold-preparation",
+      "game-artifact-game-coffee-espresso-coconut-milk-cold-nutrition",
+      "game-artifact-game-coffee-espresso-coconut-milk-cold-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-caffeine-context"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-caffeine-guidance"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-coffee-espresso-coconut-milk-cold-identity",
+      "game-usage-game-coffee-espresso-coconut-milk-cold-preparation",
+      "game-usage-game-coffee-espresso-coconut-milk-cold-nutrition",
+      "game-usage-game-coffee-espresso-coconut-milk-cold-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-074fdcdb24b0e3f4",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-coffee-espresso-coconut-milk-cold-op-002-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-coffee-espresso-coconut-milk-cold-scenario-002-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-074fdcdb24b0e3f4",
+      "causeCodes": [
+        "supplemental:missing-state-transition"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-missing-state-transition"
+      ],
+      "mutation": {
+        "targetNodeId": "game-coffee-espresso-coconut-milk-cold-op-002-chill",
+        "type": "missing-state-transition"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-coffee-espresso-coconut-milk-cold-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-coffee-espresso-coconut-milk-cold",
+  "yield": {
+    "amount": 160,
+    "unit": "ml"
+  }
+}

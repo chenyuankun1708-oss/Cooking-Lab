@@ -1,0 +1,649 @@
+{
+  "artifactVersion": "clv1-535666d536103c51",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-bowl-pasta-dry-mushroom-carrot",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-pasta-dry",
+      "initialState": "dry",
+      "massG": 240,
+      "nutritionProvenanceId": "usda-fdc:169736:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-01"
+    },
+    {
+      "ingredientId": "usda-mushroom",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "usda-fdc:1999629:foundation-2026-04-30",
+      "optional": false,
+      "phase": "primary",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-02"
+    },
+    {
+      "ingredientId": "usda-carrot",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "usda-fdc:2258586:foundation-2026-04-30",
+      "optional": false,
+      "phase": "vegetable",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-03"
+    },
+    {
+      "ingredientId": "usda-onion",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
+      "optional": false,
+      "phase": "aromatic",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-04"
+    },
+    {
+      "ingredientId": "usda-garlic",
+      "initialState": "raw",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+      "optional": false,
+      "phase": "aromatic",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-05"
+    },
+    {
+      "ingredientId": "usda-canola-oil",
+      "initialState": "liquid",
+      "massG": 20,
+      "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "cooking",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-06",
+      "volumeMl": 21.978022
+    },
+    {
+      "ingredientId": "usda-soy-sauce",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-07"
+    },
+    {
+      "ingredientId": "usda-vinegar",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-08",
+      "volumeMl": 12
+    },
+    {
+      "ingredientId": "usda-salt",
+      "initialState": "dry",
+      "massG": 3,
+      "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "seasoning",
+      "portionId": "game-bowl-pasta-dry-mushroom-carrot-portion-09"
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 345.58,
+      "carbs": 59.3662,
+      "fat": 6.51745,
+      "fiber": 6.286,
+      "protein": 11.5334,
+      "saturatedFat": 0.53785,
+      "sodium": 643.52,
+      "sugar": 3.0782
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-pasta-dry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:169736:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169736",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-mushroom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1999629:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1999629",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-carrot",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2258586:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2258586",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:790646:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "790646",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:1104647:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "1104647",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-canola-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172336",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-soy-sauce",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:174277:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "174277",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-vinegar",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172237:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "172237",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:173468:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "173468",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1382.32,
+      "carbs": 237.4648,
+      "fat": 26.0698,
+      "fiber": 25.144,
+      "protein": 46.1336,
+      "saturatedFat": 2.1514,
+      "sodium": 2574.08,
+      "sugar": 12.3128
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 240000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-03",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-04"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-05"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-002-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-002"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "pot",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-01"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-003-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-003"
+        ],
+        "parameters": {
+          "heatLevel": 0.7,
+          "temperatureC": 98
+        },
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-carrot-op-001-dice",
+          "game-bowl-pasta-dry-mushroom-carrot-op-002-mince"
+        ],
+        "equipmentId": "pan",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-02",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-03",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-04",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-05",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-06"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-005-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-005"
+        ],
+        "parameters": {
+          "capacityG": 900,
+          "heatLevel": 0.65
+        },
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.35,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 480000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-carrot-op-005-pan-fry"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-07",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-08",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-09"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-006-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-006"
+        ],
+        "parameters": {
+          "quantityG": 35
+        },
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 90000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-carrot-op-003-boil",
+          "game-bowl-pasta-dry-mushroom-carrot-op-006-season"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-01",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-02",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-03",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-04",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-05",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-06",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-07",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-08",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-09"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-007-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-007"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-bowl-pasta-dry-mushroom-carrot-op-007-assemble"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-portion-01",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-02",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-03",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-04",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-05",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-06",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-07",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-08",
+          "game-bowl-pasta-dry-mushroom-carrot-portion-09"
+        ],
+        "nodeId": "game-bowl-pasta-dry-mushroom-carrot-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-bowl-pasta-dry-mushroom-carrot-state-008"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-bowl-pasta-dry-mushroom-carrot",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-bowl-pasta-dry-mushroom-carrot-identity",
+      "game-artifact-game-bowl-pasta-dry-mushroom-carrot-preparation",
+      "game-artifact-game-bowl-pasta-dry-mushroom-carrot-nutrition",
+      "game-artifact-game-bowl-pasta-dry-mushroom-carrot-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-bowl-pasta-dry-mushroom-carrot-identity",
+      "game-usage-game-bowl-pasta-dry-mushroom-carrot-preparation",
+      "game-usage-game-bowl-pasta-dry-mushroom-carrot-nutrition",
+      "game-usage-game-bowl-pasta-dry-mushroom-carrot-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-535666d536103c51",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-carrot-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-carrot-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-535666d536103c51",
+      "causeCodes": [
+        "cut-size-too-large:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-carrot-op-002-mince",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-carrot-scenario-002-mince"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-535666d536103c51",
+      "causeCodes": [
+        "duration-too-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-carrot-op-003-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-carrot-scenario-003-boil"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-535666d536103c51",
+      "causeCodes": [
+        "overcrowding:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-overcrowding"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-carrot-op-005-pan-fry",
+        "type": "overcrowding"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-carrot-scenario-005-pan-fry"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-535666d536103c51",
+      "causeCodes": [
+        "season-too-early:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-season-too-early"
+      ],
+      "mutation": {
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-carrot-op-006-season",
+        "type": "season-too-early"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-carrot-scenario-006-season"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-535666d536103c51",
+      "causeCodes": [
+        "supplemental:quantity-too-high"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-quantity-too-high"
+      ],
+      "mutation": {
+        "scalar": 1.5,
+        "targetNodeId": "game-bowl-pasta-dry-mushroom-carrot-op-001-dice",
+        "targetPortionId": "game-bowl-pasta-dry-mushroom-carrot-portion-03",
+        "type": "quantity-too-high"
+      },
+      "nutritionEffect": "recalculate-from-quantities",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "game-bowl-pasta-dry-mushroom-carrot-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-bowl-pasta-dry-mushroom-carrot",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

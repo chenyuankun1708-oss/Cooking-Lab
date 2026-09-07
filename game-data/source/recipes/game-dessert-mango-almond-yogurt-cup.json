@@ -1,0 +1,385 @@
+{
+  "artifactVersion": "clv1-dc685f5623c734c2",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-formula-corpus-v1",
+    "method": "deterministic-source-normalization"
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "game-risk-game-dessert-mango-almond-yogurt-cup",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "ingredientId": "usda-mango",
+      "initialState": "raw",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:2710833:foundation-2026-04-30",
+      "optional": false,
+      "phase": "fruit",
+      "portionId": "game-dessert-mango-almond-yogurt-cup-portion-01"
+    },
+    {
+      "ingredientId": "usda-yogurt",
+      "initialState": "raw",
+      "massG": 360,
+      "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
+      "optional": false,
+      "phase": "base",
+      "portionId": "game-dessert-mango-almond-yogurt-cup-portion-02"
+    },
+    {
+      "ingredientId": "usda-almond",
+      "initialState": "raw",
+      "massG": 40,
+      "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+      "optional": false,
+      "phase": "finish",
+      "portionId": "game-dessert-mango-almond-yogurt-cup-portion-03"
+    },
+    {
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "sweetener",
+      "portionId": "game-dessert-mango-almond-yogurt-cup-portion-04"
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 6.1575,
+      "calories": 217.25,
+      "carbs": 26.963,
+      "fat": 9.6568,
+      "fiber": 2.67,
+      "protein": 6.1163,
+      "saturatedFat": 2.466,
+      "sodium": 37.92,
+      "sugar": 19.4685
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-mango",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2710833:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2710833",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-yogurt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2259793",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "foundation-2026-04-30",
+        "ingredientId": "usda-almond",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2346393:foundation-2026-04-30",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "2346393",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-08",
+        "basis": "per-100g",
+        "conversionMethod": "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals",
+        "datasetVersion": "sr-legacy-2018-04",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "USDA FoodData Central",
+        "retentionFactor": 1,
+        "upstreamRecordId": "169640",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 24.63,
+      "calories": 869,
+      "carbs": 107.852,
+      "fat": 38.6272,
+      "fiber": 10.68,
+      "protein": 24.4652,
+      "saturatedFat": 9.864,
+      "sodium": 151.68,
+      "sugar": 77.874
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "game-dessert-mango-almond-yogurt-cup-portion-01"
+        ],
+        "nodeId": "game-dessert-mango-almond-yogurt-cup-op-001-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "game-dessert-mango-almond-yogurt-cup-state-001"
+        ],
+        "parameters": {
+          "cutSizeMm": 15,
+          "uniformity": 0.8
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-dessert-mango-almond-yogurt-cup-op-001-dice"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-dessert-mango-almond-yogurt-cup-portion-01",
+          "game-dessert-mango-almond-yogurt-cup-portion-02",
+          "game-dessert-mango-almond-yogurt-cup-portion-03",
+          "game-dessert-mango-almond-yogurt-cup-portion-04"
+        ],
+        "nodeId": "game-dessert-mango-almond-yogurt-cup-op-002-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "game-dessert-mango-almond-yogurt-cup-state-002"
+        ],
+        "parameters": {
+          "strength": 0.35
+        },
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.9,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "game-dessert-mango-almond-yogurt-cup-op-002-fold"
+        ],
+        "equipmentId": "container",
+        "inputPortionIds": [
+          "game-dessert-mango-almond-yogurt-cup-portion-01",
+          "game-dessert-mango-almond-yogurt-cup-portion-02",
+          "game-dessert-mango-almond-yogurt-cup-portion-03",
+          "game-dessert-mango-almond-yogurt-cup-portion-04"
+        ],
+        "nodeId": "game-dessert-mango-almond-yogurt-cup-op-003-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "game-dessert-mango-almond-yogurt-cup-state-003"
+        ],
+        "parameters": {
+          "temperatureC": 5
+        },
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "game-dessert-mango-almond-yogurt-cup-op-003-chill"
+        ],
+        "equipmentId": "bowl",
+        "inputPortionIds": [
+          "game-dessert-mango-almond-yogurt-cup-portion-01",
+          "game-dessert-mango-almond-yogurt-cup-portion-02",
+          "game-dessert-mango-almond-yogurt-cup-portion-03",
+          "game-dessert-mango-almond-yogurt-cup-portion-04"
+        ],
+        "nodeId": "game-dessert-mango-almond-yogurt-cup-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "game-dessert-mango-almond-yogurt-cup-state-004"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "game-dessert-mango-almond-yogurt-cup",
+  "rights": {
+    "artifactIds": [
+      "game-artifact-game-dessert-mango-almond-yogurt-cup-identity",
+      "game-artifact-game-dessert-mango-almond-yogurt-cup-preparation",
+      "game-artifact-game-dessert-mango-almond-yogurt-cup-nutrition",
+      "game-artifact-game-dessert-mango-almond-yogurt-cup-simulation"
+    ],
+    "evidenceIds": [
+      "evidence-usda-fdc-subset",
+      "evidence-fda-produce-handling"
+    ],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [
+      "usda-fdc-downloads",
+      "fda-produce-handling"
+    ],
+    "usageDecisionIds": [
+      "game-usage-game-dessert-mango-almond-yogurt-cup-identity",
+      "game-usage-game-dessert-mango-almond-yogurt-cup-preparation",
+      "game-usage-game-dessert-mango-almond-yogurt-cup-nutrition",
+      "game-usage-game-dessert-mango-almond-yogurt-cup-simulation"
+    ]
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dc685f5623c734c2",
+      "causeCodes": [
+        "cut-size-too-large:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-cut-size-too-large"
+      ],
+      "mutation": {
+        "scalar": 1.8,
+        "targetNodeId": "game-dessert-mango-almond-yogurt-cup-op-001-dice",
+        "type": "cut-size-too-large"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-mango-almond-yogurt-cup-scenario-001-dice"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dc685f5623c734c2",
+      "causeCodes": [
+        "omit:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-omit"
+      ],
+      "mutation": {
+        "targetNodeId": "game-dessert-mango-almond-yogurt-cup-op-002-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-mango-almond-yogurt-cup-scenario-002-fold"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dc685f5623c734c2",
+      "causeCodes": [
+        "duration-too-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "fault-duration-too-short"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "game-dessert-mango-almond-yogurt-cup-op-003-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-mango-almond-yogurt-cup-scenario-003-chill"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dc685f5623c734c2",
+      "causeCodes": [
+        "supplemental:allowed-substitution"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [],
+      "mutation": {
+        "replacementIngredientId": "usda-honey",
+        "targetNodeId": "game-dessert-mango-almond-yogurt-cup-op-001-dice",
+        "targetPortionId": "game-dessert-mango-almond-yogurt-cup-portion-04",
+        "type": "allowed-substitution"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "game-dessert-mango-almond-yogurt-cup-scenario-supplemental"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "game-dessert-mango-almond-yogurt-cup",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

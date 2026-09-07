@@ -559,6 +559,28 @@ describe("M10 Production content-rights gate", () => {
     ghostSource.decisions.find((entry) => entry.id === ghostArtifact.usageDecisionId)!.assessmentIds.push(ghostAssessmentId);
     expect(issueCodes(ghostSource, ghostContext)).toContain("ai-input-rights-unknown");
 
+    const unknownAiOnlySource = registryWithValidAiArtifact();
+    const outputArtifact = unknownAiOnlySource.artifacts.find((entry) => entry.id === unknownAiOnlySource.ai[0].artifactId)!;
+    const aiOnlySourceId = unknownAiOnlySource.aiInputs[0].sourceIds[0];
+    outputArtifact.sourceIds = outputArtifact.sourceIds.filter((sourceId) => sourceId !== aiOnlySourceId);
+    expect(issueCodes(unknownAiOnlySource, {
+      ...context,
+      sources: context.sources.map((source) => source.id === aiOnlySourceId
+        ? { ...source, rights: { status: "unknown" as const, notes: "Mutation fixture" } }
+        : source),
+    })).toContain("source-rights-unknown");
+
+    const changedAiOnlySource = registryWithValidAiArtifact();
+    const changedOutputArtifact = changedAiOnlySource.artifacts.find((entry) => entry.id === changedAiOnlySource.ai[0].artifactId)!;
+    const changedSourceId = changedAiOnlySource.aiInputs[0].sourceIds[0];
+    changedOutputArtifact.sourceIds = changedOutputArtifact.sourceIds.filter((sourceId) => sourceId !== changedSourceId);
+    expect(issueCodes(changedAiOnlySource, {
+      ...context,
+      sources: context.sources.map((source) => source.id === changedSourceId
+        ? { ...source, health: { ...source.health, status: "rights-changed" as const } }
+        : source),
+    })).toContain("source-rights-changed");
+
     const unclosedInput = registryWithValidAiArtifact();
     (unclosedInput.aiInputs[0] as { containsThirdPartyExpression: boolean }).containsThirdPartyExpression = true;
     unclosedInput.aiInputs[0].rightsAssessmentIds = [unclosedInput.aiInputs[0].rightsAssessmentIds[0]];

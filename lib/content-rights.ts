@@ -621,6 +621,11 @@ function validateSources(
       const evidence = evidenceById.get(evidenceId);
       return evidence ? [evidence.sourceId] : [];
     })),
+    ...registry.aiInputs.flatMap((input) => input.sourceIds),
+    ...registry.aiInputs.flatMap((input) => input.evidenceIds.flatMap((evidenceId) => {
+      const evidence = evidenceById.get(evidenceId);
+      return evidence ? [evidence.sourceId] : [];
+    })),
     ...registry.externalMedia.map((media) => media.sourceId),
     ...registry.restaurants.flatMap((identity) => "sourceIds" in identity ? identity.sourceIds : []),
     ...registry.productProfiles.flatMap((profile) => profile.sourceIds),

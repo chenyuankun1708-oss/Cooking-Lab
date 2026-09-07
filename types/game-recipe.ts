@@ -71,10 +71,16 @@ export interface GameIngredientPortionV1 {
   portionId: string;
   ingredientId: string;
   initialState: GameIngredientState;
+  sourceQuantity: {
+    amount: number;
+    unit: "g" | "kg" | "ml" | "piece" | "tbsp" | "tsp";
+    conversionRecordId: string;
+  };
   massG: number;
   volumeMl?: number;
   optional: boolean;
   phase: string;
+  allowedSubstitutionIngredientIds: string[];
   nutritionProvenanceId: string;
 }
 

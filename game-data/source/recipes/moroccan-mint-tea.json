@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-cf2bd9828efd91a5",
+  "artifactVersion": "clv1-c7a9835ef03478b7",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -33,33 +33,52 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "gunpowder-green-tea-leaf",
       "initialState": "dry",
       "massG": 6,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gunpowder-green-tea-leaf",
       "optional": false,
       "phase": "main",
-      "portionId": "moroccan-mint-tea-portion-01"
+      "portionId": "moroccan-mint-tea-portion-01",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-mint",
       "initialState": "raw",
       "massG": 25,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-mint",
       "optional": false,
       "phase": "main",
-      "portionId": "moroccan-mint-tea-portion-02"
+      "portionId": "moroccan-mint-tea-portion-02",
+      "sourceQuantity": {
+        "amount": 25,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 50,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "moroccan-mint-tea-portion-03"
+      "portionId": "moroccan-mint-tea-portion-03",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 750,
@@ -67,6 +86,11 @@
       "optional": false,
       "phase": "main",
       "portionId": "moroccan-mint-tea-portion-04",
+      "sourceQuantity": {
+        "amount": 750,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 750
     }
   ],
@@ -302,7 +326,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
+      "baselineArtifactVersion": "clv1-c7a9835ef03478b7",
       "causeCodes": [
         "operation-omitted:rinse"
       ],
@@ -326,7 +350,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
+      "baselineArtifactVersion": "clv1-c7a9835ef03478b7",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -350,7 +374,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
+      "baselineArtifactVersion": "clv1-c7a9835ef03478b7",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -379,7 +403,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
+      "baselineArtifactVersion": "clv1-c7a9835ef03478b7",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -409,7 +433,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
+      "baselineArtifactVersion": "clv1-c7a9835ef03478b7",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -433,7 +457,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
+      "baselineArtifactVersion": "clv1-c7a9835ef03478b7",
       "causeCodes": [
         "duration-short:rest"
       ],

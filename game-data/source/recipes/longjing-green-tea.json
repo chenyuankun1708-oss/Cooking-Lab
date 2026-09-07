@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c481eb34ff8d8dbd",
+  "artifactVersion": "clv1-4ba7098f7d548f59",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -37,15 +37,22 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "longjing-tea-leaf",
       "initialState": "dry",
       "massG": 4,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-longjing-tea-leaf",
       "optional": false,
       "phase": "main",
-      "portionId": "longjing-green-tea-portion-01"
+      "portionId": "longjing-green-tea-portion-01",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 300,
@@ -53,6 +60,11 @@
       "optional": false,
       "phase": "main",
       "portionId": "longjing-green-tea-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 300
     }
   ],
@@ -313,7 +325,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -342,7 +354,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -372,7 +384,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -407,7 +419,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -431,7 +443,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -456,7 +468,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -485,7 +497,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -515,7 +527,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -544,7 +556,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -574,7 +586,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -598,7 +610,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
+      "baselineArtifactVersion": "clv1-4ba7098f7d548f59",
       "causeCodes": [
         "duration-short:rest"
       ],

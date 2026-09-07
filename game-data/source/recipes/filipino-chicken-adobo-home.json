@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-9d072f1f98d6a683",
+  "artifactVersion": "clv1-26f97c9f95016e56",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -39,67 +39,109 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "chicken-thigh",
       "initialState": "raw",
       "massG": 450,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-01"
+      "portionId": "filipino-chicken-adobo-home-portion-01",
+      "sourceQuantity": {
+        "amount": 450,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "vinegar",
       "initialState": "liquid",
       "massG": 35,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-02"
+      "portionId": "filipino-chicken-adobo-home-portion-02",
+      "sourceQuantity": {
+        "amount": 35,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "soy-sauce",
       "initialState": "liquid",
       "massG": 22,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-03"
+      "portionId": "filipino-chicken-adobo-home-portion-03",
+      "sourceQuantity": {
+        "amount": 22,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 14,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-04"
+      "portionId": "filipino-chicken-adobo-home-portion-04",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "black-pepper",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-pepper",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-05"
+      "portionId": "filipino-chicken-adobo-home-portion-05",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-06"
+      "portionId": "filipino-chicken-adobo-home-portion-06",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.3,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "filipino-chicken-adobo-home-portion-07"
+      "portionId": "filipino-chicken-adobo-home-portion-07",
+      "sourceQuantity": {
+        "amount": 0.3,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -411,7 +453,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
+      "baselineArtifactVersion": "clv1-26f97c9f95016e56",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -435,7 +477,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
+      "baselineArtifactVersion": "clv1-26f97c9f95016e56",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -464,7 +506,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
+      "baselineArtifactVersion": "clv1-26f97c9f95016e56",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -499,7 +541,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
+      "baselineArtifactVersion": "clv1-26f97c9f95016e56",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -523,7 +565,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
+      "baselineArtifactVersion": "clv1-26f97c9f95016e56",
       "causeCodes": [
         "operation-omitted:season"
       ],

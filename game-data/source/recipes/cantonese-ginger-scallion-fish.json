@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6ef394a62d1c515c",
+  "artifactVersion": "clv1-4c4b2f7b564de3d1",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -31,58 +31,94 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "white-fish",
       "initialState": "raw",
       "massG": 320,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-fish",
       "optional": false,
       "phase": "main",
-      "portionId": "cantonese-ginger-scallion-fish-portion-01"
+      "portionId": "cantonese-ginger-scallion-fish-portion-01",
+      "sourceQuantity": {
+        "amount": 320,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ginger",
       "initialState": "raw",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
       "optional": false,
       "phase": "main",
-      "portionId": "cantonese-ginger-scallion-fish-portion-02"
+      "portionId": "cantonese-ginger-scallion-fish-portion-02",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "scallion",
       "initialState": "raw",
       "massG": 20,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
       "optional": false,
       "phase": "main",
-      "portionId": "cantonese-ginger-scallion-fish-portion-03"
+      "portionId": "cantonese-ginger-scallion-fish-portion-03",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "soy-sauce",
       "initialState": "liquid",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "cantonese-ginger-scallion-fish-portion-04"
+      "portionId": "cantonese-ginger-scallion-fish-portion-04",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 4,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "cantonese-ginger-scallion-fish-portion-05"
+      "portionId": "cantonese-ginger-scallion-fish-portion-05",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "cantonese-ginger-scallion-fish-portion-06"
+      "portionId": "cantonese-ginger-scallion-fish-portion-06",
+      "sourceQuantity": {
+        "amount": 0.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -318,7 +354,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef394a62d1c515c",
+      "baselineArtifactVersion": "clv1-4c4b2f7b564de3d1",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -347,7 +383,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef394a62d1c515c",
+      "baselineArtifactVersion": "clv1-4c4b2f7b564de3d1",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

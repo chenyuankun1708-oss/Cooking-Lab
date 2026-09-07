@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-d5ace36deed485e1",
+  "artifactVersion": "clv1-d5d976691f2ca2a5",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -39,76 +39,124 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 450,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-01"
+      "portionId": "french-ratatouille-portion-01",
+      "sourceQuantity": {
+        "amount": 450,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "eggplant",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-eggplant",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-02"
+      "portionId": "french-ratatouille-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "zucchini",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-zucchini",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-03"
+      "portionId": "french-ratatouille-portion-03",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-04"
+      "portionId": "french-ratatouille-portion-04",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 12,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-05"
+      "portionId": "french-ratatouille-portion-05",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-basil",
       "initialState": "raw",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-basil",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-06"
+      "portionId": "french-ratatouille-portion-06",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-07"
+      "portionId": "french-ratatouille-portion-07",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "french-ratatouille-portion-08"
+      "portionId": "french-ratatouille-portion-08",
+      "sourceQuantity": {
+        "amount": 1.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -533,7 +581,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
+      "baselineArtifactVersion": "clv1-d5d976691f2ca2a5",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -557,7 +605,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
+      "baselineArtifactVersion": "clv1-d5d976691f2ca2a5",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -581,7 +629,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
+      "baselineArtifactVersion": "clv1-d5d976691f2ca2a5",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -605,7 +653,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
+      "baselineArtifactVersion": "clv1-d5d976691f2ca2a5",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -629,7 +677,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
+      "baselineArtifactVersion": "clv1-d5d976691f2ca2a5",
       "causeCodes": [
         "operation-omitted:mix"
       ],

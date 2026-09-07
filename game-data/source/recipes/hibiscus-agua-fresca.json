@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-316620db55e6c4e5",
+  "artifactVersion": "clv1-af179bdab61c1cb3",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -35,15 +35,22 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "dried-hibiscus",
       "initialState": "dry",
       "massG": 25,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dried-hibiscus",
       "optional": false,
       "phase": "main",
-      "portionId": "hibiscus-agua-fresca-portion-01"
+      "portionId": "hibiscus-agua-fresca-portion-01",
+      "sourceQuantity": {
+        "amount": 25,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 1000,
@@ -51,34 +58,57 @@
       "optional": false,
       "phase": "main",
       "portionId": "hibiscus-agua-fresca-portion-02",
+      "sourceQuantity": {
+        "amount": 1000,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 1000
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 60,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "hibiscus-agua-fresca-portion-03"
+      "portionId": "hibiscus-agua-fresca-portion-03",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lime",
       "initialState": "raw",
       "massG": 70,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
       "optional": false,
       "phase": "main",
-      "portionId": "hibiscus-agua-fresca-portion-04"
+      "portionId": "hibiscus-agua-fresca-portion-04",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lime:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ice",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
       "optional": false,
       "phase": "main",
-      "portionId": "hibiscus-agua-fresca-portion-05"
+      "portionId": "hibiscus-agua-fresca-portion-05",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "non-alcoholic-drink",
@@ -443,7 +473,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -472,7 +502,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -502,7 +532,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -531,7 +561,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -561,7 +591,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -585,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -610,7 +640,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "operation-omitted:strain"
       ],
@@ -634,7 +664,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -658,7 +688,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -682,7 +712,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
+      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
       "causeCodes": [
         "duration-short:chill"
       ],

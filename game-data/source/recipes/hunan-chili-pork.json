@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-613d31dbf0f4152f",
+  "artifactVersion": "clv1-3eb4084cad29e610",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -61,58 +61,94 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "pork-shoulder",
       "initialState": "raw",
       "massG": 260,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pork-shoulder",
       "optional": false,
       "phase": "main",
-      "portionId": "hunan-chili-pork-portion-01"
+      "portionId": "hunan-chili-pork-portion-01",
+      "sourceQuantity": {
+        "amount": 260,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-chili",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
       "optional": false,
       "phase": "main",
-      "portionId": "hunan-chili-pork-portion-02"
+      "portionId": "hunan-chili-pork-portion-02",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "hunan-chili-pork-portion-03"
+      "portionId": "hunan-chili-pork-portion-03",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "soy-sauce",
       "initialState": "liquid",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "hunan-chili-pork-portion-04"
+      "portionId": "hunan-chili-pork-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 6,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "hunan-chili-pork-portion-05"
+      "portionId": "hunan-chili-pork-portion-05",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "hunan-chili-pork-portion-06"
+      "portionId": "hunan-chili-pork-portion-06",
+      "sourceQuantity": {
+        "amount": 0.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -546,7 +582,7 @@
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -570,7 +606,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -594,7 +630,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -618,7 +654,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -642,7 +678,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -671,7 +707,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -695,7 +731,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -719,7 +755,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -748,7 +784,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "baselineArtifactVersion": "clv1-3eb4084cad29e610",
       "causeCodes": [
         "operation-omitted:season"
       ],

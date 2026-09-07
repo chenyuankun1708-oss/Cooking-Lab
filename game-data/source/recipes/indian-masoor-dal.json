@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-9494810b7877a240",
+  "artifactVersion": "clv1-ed80fdee0d61bf5f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -40,85 +40,139 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "dry-lentil",
       "initialState": "dry",
       "massG": 200,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-lentil",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-01"
+      "portionId": "indian-masoor-dal-portion-01",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-02"
+      "portionId": "indian-masoor-dal-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 130,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-03"
+      "portionId": "indian-masoor-dal-portion-03",
+      "sourceQuantity": {
+        "amount": 130,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-04"
+      "portionId": "indian-masoor-dal-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ginger",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-05"
+      "portionId": "indian-masoor-dal-portion-05",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "turmeric",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-turmeric",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-06"
+      "portionId": "indian-masoor-dal-portion-06",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cumin",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-07"
+      "portionId": "indian-masoor-dal-portion-07",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-08"
+      "portionId": "indian-masoor-dal-portion-08",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-masoor-dal-portion-09"
+      "portionId": "indian-masoor-dal-portion-09",
+      "sourceQuantity": {
+        "amount": 1.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -561,7 +615,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9494810b7877a240",
+      "baselineArtifactVersion": "clv1-ed80fdee0d61bf5f",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -585,7 +639,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9494810b7877a240",
+      "baselineArtifactVersion": "clv1-ed80fdee0d61bf5f",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -609,7 +663,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9494810b7877a240",
+      "baselineArtifactVersion": "clv1-ed80fdee0d61bf5f",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -633,7 +687,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9494810b7877a240",
+      "baselineArtifactVersion": "clv1-ed80fdee0d61bf5f",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -662,7 +716,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9494810b7877a240",
+      "baselineArtifactVersion": "clv1-ed80fdee0d61bf5f",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -697,7 +751,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9494810b7877a240",
+      "baselineArtifactVersion": "clv1-ed80fdee0d61bf5f",
       "causeCodes": [
         "operation-omitted:season"
       ],

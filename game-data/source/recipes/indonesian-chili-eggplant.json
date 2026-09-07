@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6e49fdc7ebe84151",
+  "artifactVersion": "clv1-f4440e9a8828cb95",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -46,58 +46,94 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "eggplant",
       "initialState": "raw",
       "massG": 450,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-eggplant",
       "optional": false,
       "phase": "main",
-      "portionId": "indonesian-chili-eggplant-portion-01"
+      "portionId": "indonesian-chili-eggplant-portion-01",
+      "sourceQuantity": {
+        "amount": 450,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "indonesian-chili-eggplant-portion-02"
+      "portionId": "indonesian-chili-eggplant-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-chili",
       "initialState": "raw",
       "massG": 20,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
       "optional": false,
       "phase": "main",
-      "portionId": "indonesian-chili-eggplant-portion-03"
+      "portionId": "indonesian-chili-eggplant-portion-03",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "indonesian-chili-eggplant-portion-04"
+      "portionId": "indonesian-chili-eggplant-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 9,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "indonesian-chili-eggplant-portion-05"
+      "portionId": "indonesian-chili-eggplant-portion-05",
+      "sourceQuantity": {
+        "amount": 9,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "indonesian-chili-eggplant-portion-06"
+      "portionId": "indonesian-chili-eggplant-portion-06",
+      "sourceQuantity": {
+        "amount": 1.2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -477,7 +513,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -501,7 +537,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -525,7 +561,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -554,7 +590,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -589,7 +625,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -618,7 +654,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -653,7 +689,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -677,7 +713,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -706,7 +742,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
+      "baselineArtifactVersion": "clv1-f4440e9a8828cb95",
       "causeCodes": [
         "heat-high:simmer"
       ],

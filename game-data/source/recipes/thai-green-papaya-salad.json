@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-e32d5c0501a6894b",
+  "artifactVersion": "clv1-801a7d7bd6f3da2f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -64,85 +64,139 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "green-papaya",
       "initialState": "raw",
       "massG": 400,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-green-papaya",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-01"
+      "portionId": "thai-green-papaya-salad-portion-01",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "carrot",
       "initialState": "raw",
       "massG": 80,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-02"
+      "portionId": "thai-green-papaya-salad-portion-02",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-03"
+      "portionId": "thai-green-papaya-salad-portion-03",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lime",
       "initialState": "raw",
       "massG": 70,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-04"
+      "portionId": "thai-green-papaya-salad-portion-04",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lime:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-chili",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-05"
+      "portionId": "thai-green-papaya-salad-portion-05",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-06"
+      "portionId": "thai-green-papaya-salad-portion-06",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fish-sauce",
       "initialState": "liquid",
       "massG": 12,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fish-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-07"
+      "portionId": "thai-green-papaya-salad-portion-07",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "roasted-peanut",
       "initialState": "cooked",
       "massG": 30,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-roasted-peanut",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-08"
+      "portionId": "thai-green-papaya-salad-portion-08",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "thai-green-papaya-salad-portion-09"
+      "portionId": "thai-green-papaya-salad-portion-09",
+      "sourceQuantity": {
+        "amount": 0.2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -778,7 +832,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:peel"
       ],
@@ -802,7 +856,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -826,7 +880,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -850,7 +904,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -874,7 +928,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -898,7 +952,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -922,7 +976,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -946,7 +1000,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -970,7 +1024,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -994,7 +1048,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e32d5c0501a6894b",
+      "baselineArtifactVersion": "clv1-801a7d7bd6f3da2f",
       "causeCodes": [
         "operation-omitted:season"
       ],

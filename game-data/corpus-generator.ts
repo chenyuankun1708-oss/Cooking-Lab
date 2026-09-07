@@ -224,10 +224,12 @@ function createRecipe(input: {
       portionId: `${input.recipeId}-portion-${String(index + 1).padStart(2, "0")}`,
       ingredientId: portion.ingredientId,
       initialState: ingredient.defaultState,
+      sourceQuantity: { amount: portion.massG, unit: "g", conversionRecordId: "canonical-grams-v1" },
       massG: portion.massG,
       ...(density ? { volumeMl: round(portion.massG / density) } : {}),
       optional: portion.optional ?? false,
       phase: portion.phase,
+      allowedSubstitutionIngredientIds: substitutionFor(portion.ingredientId) ? [substitutionFor(portion.ingredientId)!] : [],
       nutritionProvenanceId: ingredient.nutritionProvenanceId,
     };
   });
@@ -600,7 +602,7 @@ function createScenarios(recipe: GameRecipeV1, sequence: number): GameRecipeScen
       baselineArtifactVersion: "",
       mutation: {
         type,
-        targetNodeId: qualityNode.nodeId,
+        ...(["reorder", "duplicate", "wrong-equipment", "missing-state-transition"].includes(type) ? { targetNodeId: qualityNode.nodeId } : {}),
         ...(type === "reorder" && reorderDestination ? { destinationBeforeNodeId: reorderDestination.nodeId } : {}),
         ...(type === "quantity-too-high" || type === "allowed-substitution" ? { targetPortionId: portion.portionId } : {}),
         ...(type === "quantity-too-high" ? { scalar: 1.5 } : {}),

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-cc14737dc7e3240d",
+  "artifactVersion": "clv1-f1862fd5947a56e4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -64,85 +64,139 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "rice",
       "initialState": "raw",
       "massG": 160,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-01"
+      "portionId": "korean-bibimbap-home-portion-01",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "beef-lean",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-beef-lean",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-02"
+      "portionId": "korean-bibimbap-home-portion-02",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "egg",
       "initialState": "raw",
       "massG": 100,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-03"
+      "portionId": "korean-bibimbap-home-portion-03",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "spinach",
       "initialState": "raw",
       "massG": 160,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-spinach",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-04"
+      "portionId": "korean-bibimbap-home-portion-04",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "carrot",
       "initialState": "raw",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-05"
+      "portionId": "korean-bibimbap-home-portion-05",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "mushroom",
       "initialState": "raw",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-06"
+      "portionId": "korean-bibimbap-home-portion-06",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "gochujang",
       "initialState": "raw",
       "massG": 18,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gochujang",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-07"
+      "portionId": "korean-bibimbap-home-portion-07",
+      "sourceQuantity": {
+        "amount": 18,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 7,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-08"
+      "portionId": "korean-bibimbap-home-portion-08",
+      "sourceQuantity": {
+        "amount": 7,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-bibimbap-home-portion-09"
+      "portionId": "korean-bibimbap-home-portion-09",
+      "sourceQuantity": {
+        "amount": 0.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -720,7 +774,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -744,7 +798,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -768,7 +822,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -792,7 +846,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -816,7 +870,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -845,7 +899,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -869,7 +923,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -898,7 +952,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -922,7 +976,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -946,7 +1000,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -975,7 +1029,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -1010,7 +1064,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "baselineArtifactVersion": "clv1-f1862fd5947a56e4",
       "causeCodes": [
         "operation-omitted:mix"
       ],

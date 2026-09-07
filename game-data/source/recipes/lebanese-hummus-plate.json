@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-68dd6dee8e94cb6a",
+  "artifactVersion": "clv1-22d5b18e4ecfb42b",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -53,67 +53,109 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooked-chickpea",
       "initialState": "cooked",
       "massG": 220,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-chickpea",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-01"
+      "portionId": "lebanese-hummus-plate-portion-01",
+      "sourceQuantity": {
+        "amount": 220,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "sesame-paste",
       "initialState": "raw",
       "massG": 45,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sesame-paste",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-02"
+      "portionId": "lebanese-hummus-plate-portion-02",
+      "sourceQuantity": {
+        "amount": 45,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lemon",
       "initialState": "raw",
       "massG": 90,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-03"
+      "portionId": "lebanese-hummus-plate-portion-03",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lemon:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-04"
+      "portionId": "lebanese-hummus-plate-portion-04",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cumin",
       "initialState": "raw",
       "massG": 1,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-05"
+      "portionId": "lebanese-hummus-plate-portion-05",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-06"
+      "portionId": "lebanese-hummus-plate-portion-06",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "lebanese-hummus-plate-portion-07"
+      "portionId": "lebanese-hummus-plate-portion-07",
+      "sourceQuantity": {
+        "amount": 1.2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -589,7 +631,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -613,7 +655,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -637,7 +679,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:blend"
       ],
@@ -661,7 +703,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -685,7 +727,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -709,7 +751,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -733,7 +775,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -757,7 +799,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-68dd6dee8e94cb6a",
+      "baselineArtifactVersion": "clv1-22d5b18e4ecfb42b",
       "causeCodes": [
         "operation-omitted:season"
       ],

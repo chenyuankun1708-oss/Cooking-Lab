@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-323c340c2d6531be",
+  "artifactVersion": "clv1-7bda436db68a0285",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -42,67 +42,109 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooked-chickpea",
       "initialState": "cooked",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-chickpea",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-01"
+      "portionId": "spanish-chickpea-spinach-portion-01",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "spinach",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-spinach",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-02"
+      "portionId": "spanish-chickpea-spinach-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 250,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-03"
+      "portionId": "spanish-chickpea-spinach-portion-03",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-04"
+      "portionId": "spanish-chickpea-spinach-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "paprika",
       "initialState": "raw",
       "massG": 3,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-paprika",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-05"
+      "portionId": "spanish-chickpea-spinach-portion-05",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 6,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-06"
+      "portionId": "spanish-chickpea-spinach-portion-06",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "spanish-chickpea-spinach-portion-07"
+      "portionId": "spanish-chickpea-spinach-portion-07",
+      "sourceQuantity": {
+        "amount": 1.5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -520,7 +562,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -544,7 +586,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -568,7 +610,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -592,7 +634,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -616,7 +658,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -645,7 +687,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -680,7 +722,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -709,7 +751,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-323c340c2d6531be",
+      "baselineArtifactVersion": "clv1-7bda436db68a0285",
       "causeCodes": [
         "heat-high:simmer"
       ],

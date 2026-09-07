@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4efe62b8ce382cc0",
+  "artifactVersion": "clv1-9b0009b976e50e93",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -30,15 +30,22 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "yogurt",
       "initialState": "raw",
       "massG": 400,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-yogurt",
       "optional": false,
       "phase": "main",
-      "portionId": "salted-lassi-portion-01"
+      "portionId": "salted-lassi-portion-01",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 200,
@@ -46,34 +53,57 @@
       "optional": false,
       "phase": "main",
       "portionId": "salted-lassi-portion-02",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 200
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ice",
       "initialState": "raw",
       "massG": 100,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
       "optional": false,
       "phase": "main",
-      "portionId": "salted-lassi-portion-03"
+      "portionId": "salted-lassi-portion-03",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "salted-lassi-portion-04"
+      "portionId": "salted-lassi-portion-04",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cumin",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
       "optional": false,
       "phase": "main",
-      "portionId": "salted-lassi-portion-05"
+      "portionId": "salted-lassi-portion-05",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "non-alcoholic-drink",
@@ -354,7 +384,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4efe62b8ce382cc0",
+      "baselineArtifactVersion": "clv1-9b0009b976e50e93",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -378,7 +408,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4efe62b8ce382cc0",
+      "baselineArtifactVersion": "clv1-9b0009b976e50e93",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -402,7 +432,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4efe62b8ce382cc0",
+      "baselineArtifactVersion": "clv1-9b0009b976e50e93",
       "causeCodes": [
         "operation-omitted:whisk"
       ],

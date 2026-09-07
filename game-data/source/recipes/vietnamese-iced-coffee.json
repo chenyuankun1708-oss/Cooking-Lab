@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-bee4de379b70ff82",
+  "artifactVersion": "clv1-d3a41a6637ae37fd",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -23,15 +23,22 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ground-coffee",
       "initialState": "raw",
       "massG": 25,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ground-coffee",
       "optional": false,
       "phase": "main",
-      "portionId": "vietnamese-iced-coffee-portion-01"
+      "portionId": "vietnamese-iced-coffee-portion-01",
+      "sourceQuantity": {
+        "amount": 25,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 100,
@@ -39,25 +46,42 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-iced-coffee-portion-02",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 100
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "sweetened-condensed-milk",
       "initialState": "liquid",
       "massG": 45,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
       "optional": false,
       "phase": "main",
-      "portionId": "vietnamese-iced-coffee-portion-03"
+      "portionId": "vietnamese-iced-coffee-portion-03",
+      "sourceQuantity": {
+        "amount": 45,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ice",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
       "optional": false,
       "phase": "main",
-      "portionId": "vietnamese-iced-coffee-portion-04"
+      "portionId": "vietnamese-iced-coffee-portion-04",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "coffee",
@@ -272,7 +296,7 @@
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bee4de379b70ff82",
+      "baselineArtifactVersion": "clv1-d3a41a6637ae37fd",
       "causeCodes": [
         "operation-omitted:stir"
       ],

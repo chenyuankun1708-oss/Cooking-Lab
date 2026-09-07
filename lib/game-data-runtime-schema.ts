@@ -553,6 +553,24 @@ const scenarioSchema = exactObject({
   applicableEngine: enumValue(["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"]),
 });
 
+const gameIngredientPortionSchema = exactObject({
+  portionId: stringValue,
+  ingredientId: stringValue,
+  initialState: enumValue(["raw", "dry", "liquid", "cooked", "prepared", "ready-to-serve"]),
+  sourceQuantity: exactObject({
+    amount: numberValue,
+    unit: enumValue(["g", "kg", "ml", "piece", "tbsp", "tsp"]),
+    conversionRecordId: stringValue,
+  }),
+  massG: numberValue,
+  optional: booleanValue,
+  phase: stringValue,
+  allowedSubstitutionIngredientIds: arrayOf(stringValue),
+  nutritionProvenanceId: stringValue,
+}, {
+  volumeMl: numberValue,
+});
+
 const gameRecipeSchema = exactObject({
   schemaVersion: literal(gameRecipeSchemaVersion),
   artifactVersion: stringValue,
@@ -563,17 +581,7 @@ const gameRecipeSchema = exactObject({
   simulationProfile: enumValue(["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"]),
   servings: numberValue,
   yield: exactObject({ amount: numberValue, unit: enumValue(["serving", "piece", "ml", "g"]) }),
-  ingredientPortions: arrayOf(exactObject({
-    portionId: stringValue,
-    ingredientId: stringValue,
-    initialState: enumValue(["raw", "dry", "liquid", "cooked", "prepared", "ready-to-serve"]),
-    massG: numberValue,
-    optional: booleanValue,
-    phase: stringValue,
-    nutritionProvenanceId: stringValue,
-  }, {
-    volumeMl: numberValue,
-  })),
+  ingredientPortions: arrayOf(gameIngredientPortionSchema),
   operationGraph: exactObject({ nodes: arrayOf(operationNodeSchema) }),
   nutritionProfile: exactObject({
     method: literal("ingredient-sum-v1"),
@@ -616,17 +624,7 @@ const godotGameRecipeSchema = exactObject({
   simulationProfile: enumValue(["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"]),
   servings: numberValue,
   yield: exactObject({ amount: numberValue, unit: enumValue(["serving", "piece", "ml", "g"]) }),
-  ingredientPortions: arrayOf(exactObject({
-    portionId: stringValue,
-    ingredientId: stringValue,
-    initialState: enumValue(["raw", "dry", "liquid", "cooked", "prepared", "ready-to-serve"]),
-    massG: numberValue,
-    optional: booleanValue,
-    phase: stringValue,
-    nutritionProvenanceId: stringValue,
-  }, {
-    volumeMl: numberValue,
-  })),
+  ingredientPortions: arrayOf(gameIngredientPortionSchema),
   operationGraph: exactObject({ nodes: arrayOf(operationNodeSchema) }),
   nutritionProfile: exactObject({
     method: literal("ingredient-sum-v1"),

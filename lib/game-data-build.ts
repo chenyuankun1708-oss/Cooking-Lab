@@ -302,7 +302,8 @@ function writeSqlite(
     PRAGMA user_version = 1;
     CREATE TABLE recipes (recipe_id TEXT PRIMARY KEY, artifact_version TEXT NOT NULL, item_type TEXT NOT NULL, simulation_profile TEXT NOT NULL, servings REAL NOT NULL, yield_amount REAL NOT NULL, yield_unit TEXT NOT NULL, recipe_json TEXT NOT NULL);
     CREATE TABLE ingredients (ingredient_id TEXT PRIMARY KEY, default_state TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, nutrition_json TEXT NOT NULL, source_json TEXT NOT NULL, definition_json TEXT NOT NULL);
-    CREATE TABLE recipe_ingredients (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, ingredient_id TEXT NOT NULL, initial_state TEXT NOT NULL, mass_g REAL NOT NULL, volume_ml REAL, optional INTEGER NOT NULL, phase TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id));
+    CREATE TABLE recipe_ingredients (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, ingredient_id TEXT NOT NULL, initial_state TEXT NOT NULL, source_amount REAL NOT NULL, source_unit TEXT NOT NULL, conversion_record_id TEXT NOT NULL, mass_g REAL NOT NULL, volume_ml REAL, optional INTEGER NOT NULL, phase TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id));
+    CREATE TABLE ingredient_substitutions (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, replacement_ingredient_id TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id, replacement_ingredient_id));
     CREATE TABLE operations (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, operation_type TEXT NOT NULL, equipment_id TEXT, active_duration_ms INTEGER NOT NULL, wait_duration_ms INTEGER NOT NULL, parameters_json TEXT NOT NULL, criticality TEXT NOT NULL, source_step_order INTEGER, PRIMARY KEY (recipe_id, node_id));
     CREATE TABLE operation_dependencies (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, depends_on_node_id TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id, depends_on_node_id));
     CREATE TABLE operation_inputs (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, portion_id TEXT NOT NULL, PRIMARY KEY (recipe_id, node_id, portion_id));
@@ -318,7 +319,8 @@ function writeSqlite(
   try {
     const insertRecipe = database.prepare("INSERT INTO recipes VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     const insertIngredient = database.prepare("INSERT INTO ingredients VALUES (?, ?, ?, ?, ?, ?)");
-    const insertPortion = database.prepare("INSERT INTO recipe_ingredients VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    const insertPortion = database.prepare("INSERT INTO recipe_ingredients VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    const insertSubstitution = database.prepare("INSERT INTO ingredient_substitutions VALUES (?, ?, ?)");
     const insertOperation = database.prepare("INSERT INTO operations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     const insertDependency = database.prepare("INSERT INTO operation_dependencies VALUES (?, ?, ?)");
     const insertOperationInput = database.prepare("INSERT INTO operation_inputs VALUES (?, ?, ?)");
@@ -365,12 +367,18 @@ function writeSqlite(
           portion.portionId,
           portion.ingredientId,
           portion.initialState,
+          portion.sourceQuantity.amount,
+          portion.sourceQuantity.unit,
+          portion.sourceQuantity.conversionRecordId,
           portion.massG,
           portion.volumeMl ?? null,
           portion.optional ? 1 : 0,
           portion.phase,
           portion.nutritionProvenanceId,
         );
+        for (const replacementId of portion.allowedSubstitutionIngredientIds) {
+          insertSubstitution.run(recipe.recipeId, portion.portionId, replacementId);
+        }
       }
       for (const node of recipe.operationGraph.nodes) {
         insertOperation.run(
@@ -541,17 +549,25 @@ function verifyExportParity(
       source_json: compactJson(ingredient.nutritionSource),
       definition_json: compactJson(ingredient),
     })));
-    assertSqliteRows(database, "recipe_ingredients", "SELECT recipe_id, portion_id, ingredient_id, initial_state, mass_g, volume_ml, optional, phase, nutrition_provenance_id FROM recipe_ingredients ORDER BY recipe_id, portion_id", sortedRows(parsedRecipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => ({
+    assertSqliteRows(database, "recipe_ingredients", "SELECT recipe_id, portion_id, ingredient_id, initial_state, source_amount, source_unit, conversion_record_id, mass_g, volume_ml, optional, phase, nutrition_provenance_id FROM recipe_ingredients ORDER BY recipe_id, portion_id", sortedRows(parsedRecipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => ({
       recipe_id: recipe.recipeId,
       portion_id: portion.portionId,
       ingredient_id: portion.ingredientId,
       initial_state: portion.initialState,
+      source_amount: portion.sourceQuantity.amount,
+      source_unit: portion.sourceQuantity.unit,
+      conversion_record_id: portion.sourceQuantity.conversionRecordId,
       mass_g: portion.massG,
       volume_ml: portion.volumeMl ?? null,
       optional: portion.optional ? 1 : 0,
       phase: portion.phase,
       nutrition_provenance_id: portion.nutritionProvenanceId,
     }))), (row) => `${row.recipe_id}\0${row.portion_id}`));
+    assertSqliteRows(database, "ingredient_substitutions", "SELECT recipe_id, portion_id, replacement_ingredient_id FROM ingredient_substitutions ORDER BY recipe_id, portion_id, replacement_ingredient_id", sortedRows(parsedRecipes.flatMap((recipe) => recipe.ingredientPortions.flatMap((portion) => portion.allowedSubstitutionIngredientIds.map((replacementId) => ({
+      recipe_id: recipe.recipeId,
+      portion_id: portion.portionId,
+      replacement_ingredient_id: replacementId,
+    })))), rowKey));
     assertSqliteRows(database, "operations", "SELECT recipe_id, node_id, operation_type, equipment_id, active_duration_ms, wait_duration_ms, parameters_json, criticality, source_step_order FROM operations ORDER BY recipe_id, node_id", sortedRows(parsedRecipes.flatMap((recipe) => recipe.operationGraph.nodes.map((node) => ({
       recipe_id: recipe.recipeId,
       node_id: node.nodeId,

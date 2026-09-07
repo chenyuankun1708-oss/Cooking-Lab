@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-26f6a5115783e763",
+  "artifactVersion": "clv1-c51ce137a9b70588",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -43,42 +43,67 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "egg",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
       "optional": false,
       "phase": "main",
-      "portionId": "tiramisu-portion-01"
+      "portionId": "tiramisu-portion-01",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 80,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "tiramisu-portion-02"
+      "portionId": "tiramisu-portion-02",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "mascarpone",
       "initialState": "raw",
       "massG": 500,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mascarpone",
       "optional": false,
       "phase": "main",
-      "portionId": "tiramisu-portion-03"
+      "portionId": "tiramisu-portion-03",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ladyfinger-biscuit",
       "initialState": "raw",
       "massG": 240,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ladyfinger-biscuit",
       "optional": false,
       "phase": "main",
-      "portionId": "tiramisu-portion-04"
+      "portionId": "tiramisu-portion-04",
+      "sourceQuantity": {
+        "amount": 240,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "brewed-espresso",
       "initialState": "cooked",
       "massG": 250,
@@ -86,16 +111,27 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-05",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "brewed-espresso:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 250
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cocoa-powder",
       "initialState": "dry",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cocoa-powder",
       "optional": false,
       "phase": "main",
-      "portionId": "tiramisu-portion-06"
+      "portionId": "tiramisu-portion-06",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dessert",
@@ -507,7 +543,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -531,7 +567,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -555,7 +591,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -579,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -603,7 +639,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -627,7 +663,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -652,7 +688,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -681,7 +717,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -711,7 +747,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -735,7 +771,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-26f6a5115783e763",
+      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
       "causeCodes": [
         "duration-short:chill"
       ],

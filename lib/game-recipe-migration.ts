@@ -200,10 +200,12 @@ function createPortions(
       portionId: `${item.id}-portion-01`,
       ingredientId: `${item.id}-generic`,
       initialState: "ready-to-serve",
+      sourceQuantity: { amount: 100, unit: "g", conversionRecordId: "unresolved-serving-guidance-quantity" },
       massG: 100,
       volumeMl: 100,
       optional: false,
       phase: "service",
+      allowedSubstitutionIngredientIds: [],
       nutritionProvenanceId: `pending:${item.id}-generic`,
     }];
   }
@@ -214,10 +216,16 @@ function createPortions(
       portionId: `${item.id}-portion-${String(index + 1).padStart(2, "0")}`,
       ingredientId: input.ingredientId,
       initialState: inferIngredientState(input.ingredientId),
+      sourceQuantity: {
+        amount: input.amount,
+        unit: input.unit,
+        conversionRecordId: input.unit === "g" ? "canonical-grams-v1" : input.unit === "kg" ? "kilograms-to-grams-v1" : `${input.ingredientId}:${input.unit}:weight-v1`,
+      },
       massG: round(toGrams(input.amount, input.unit, ingredient)),
       ...(input.unit === "ml" ? { volumeMl: round(input.amount) } : {}),
       optional: input.optional,
       phase: "main",
+      allowedSubstitutionIngredientIds: [],
       nutritionProvenanceId: ingredient.nutritionProvenanceId,
     };
   });

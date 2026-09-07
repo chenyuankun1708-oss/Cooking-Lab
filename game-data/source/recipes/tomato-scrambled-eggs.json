@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-2c6ca8242b8f08d4",
+  "artifactVersion": "clv1-a725f0ae1a388af4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -36,40 +36,64 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "egg",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
       "optional": false,
       "phase": "main",
-      "portionId": "tomato-scrambled-eggs-portion-01"
+      "portionId": "tomato-scrambled-eggs-portion-01",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 360,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "tomato-scrambled-eggs-portion-02"
+      "portionId": "tomato-scrambled-eggs-portion-02",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "tomato:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "tomato-scrambled-eggs-portion-03"
+      "portionId": "tomato-scrambled-eggs-portion-03",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "tomato-scrambled-eggs-portion-04"
+      "portionId": "tomato-scrambled-eggs-portion-04",
+      "sourceQuantity": {
+        "amount": 1.5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -335,7 +359,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
+      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -359,7 +383,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
+      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -394,7 +418,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
+      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -418,7 +442,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
+      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -442,7 +466,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
+      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
       "causeCodes": [
         "operation-omitted:fold"
       ],

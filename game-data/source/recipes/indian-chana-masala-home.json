@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-fccc40ce5285af55",
+  "artifactVersion": "clv1-38c2ec35726ddd80",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -51,94 +51,154 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooked-chickpea",
       "initialState": "cooked",
       "massG": 220,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-chickpea",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-01"
+      "portionId": "indian-chana-masala-home-portion-01",
+      "sourceQuantity": {
+        "amount": 220,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 400,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-02"
+      "portionId": "indian-chana-masala-home-portion-02",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 160,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-03"
+      "portionId": "indian-chana-masala-home-portion-03",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-04"
+      "portionId": "indian-chana-masala-home-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ginger",
       "initialState": "raw",
       "massG": 12,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-05"
+      "portionId": "indian-chana-masala-home-portion-05",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garam-masala",
       "initialState": "raw",
       "massG": 4,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garam-masala",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-06"
+      "portionId": "indian-chana-masala-home-portion-06",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cumin",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-07"
+      "portionId": "indian-chana-masala-home-portion-07",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "turmeric",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-turmeric",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-08"
+      "portionId": "indian-chana-masala-home-portion-08",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 7,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-09"
+      "portionId": "indian-chana-masala-home-portion-09",
+      "sourceQuantity": {
+        "amount": 7,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "indian-chana-masala-home-portion-10"
+      "portionId": "indian-chana-masala-home-portion-10",
+      "sourceQuantity": {
+        "amount": 1.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -648,7 +708,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -672,7 +732,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -696,7 +756,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -720,7 +780,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -744,7 +804,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -768,7 +828,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -797,7 +857,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -832,7 +892,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
+      "baselineArtifactVersion": "clv1-38c2ec35726ddd80",
       "causeCodes": [
         "operation-omitted:season"
       ],

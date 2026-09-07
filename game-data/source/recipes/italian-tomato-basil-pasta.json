@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4aa3dd70fb45f6ea",
+  "artifactVersion": "clv1-6560b0d207680970",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -37,58 +37,94 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "pasta",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pasta",
       "optional": false,
       "phase": "main",
-      "portionId": "italian-tomato-basil-pasta-portion-01"
+      "portionId": "italian-tomato-basil-pasta-portion-01",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 400,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "italian-tomato-basil-pasta-portion-02"
+      "portionId": "italian-tomato-basil-pasta-portion-02",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "italian-tomato-basil-pasta-portion-03"
+      "portionId": "italian-tomato-basil-pasta-portion-03",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-basil",
       "initialState": "raw",
       "massG": 18,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-basil",
       "optional": false,
       "phase": "main",
-      "portionId": "italian-tomato-basil-pasta-portion-04"
+      "portionId": "italian-tomato-basil-pasta-portion-04",
+      "sourceQuantity": {
+        "amount": 18,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "italian-tomato-basil-pasta-portion-05"
+      "portionId": "italian-tomato-basil-pasta-portion-05",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "italian-tomato-basil-pasta-portion-06"
+      "portionId": "italian-tomato-basil-pasta-portion-06",
+      "sourceQuantity": {
+        "amount": 1.8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -365,7 +401,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4aa3dd70fb45f6ea",
+      "baselineArtifactVersion": "clv1-6560b0d207680970",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -389,7 +425,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4aa3dd70fb45f6ea",
+      "baselineArtifactVersion": "clv1-6560b0d207680970",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -413,7 +449,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4aa3dd70fb45f6ea",
+      "baselineArtifactVersion": "clv1-6560b0d207680970",
       "causeCodes": [
         "operation-omitted:mix"
       ],

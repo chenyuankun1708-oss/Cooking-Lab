@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-f8d412e7577c4bb5",
+  "artifactVersion": "clv1-282741e4c196ea88",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -31,15 +31,22 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ground-coffee",
       "initialState": "raw",
       "massG": 18,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ground-coffee",
       "optional": false,
       "phase": "main",
-      "portionId": "espresso-portion-01"
+      "portionId": "espresso-portion-01",
+      "sourceQuantity": {
+        "amount": 18,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 40,
@@ -47,6 +54,11 @@
       "optional": false,
       "phase": "main",
       "portionId": "espresso-portion-02",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 40
     }
   ],
@@ -234,7 +246,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
+      "baselineArtifactVersion": "clv1-282741e4c196ea88",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -258,7 +270,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
+      "baselineArtifactVersion": "clv1-282741e4c196ea88",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -287,7 +299,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
+      "baselineArtifactVersion": "clv1-282741e4c196ea88",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -317,7 +329,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
+      "baselineArtifactVersion": "clv1-282741e4c196ea88",
       "causeCodes": [
         "operation-omitted:stir"
       ],

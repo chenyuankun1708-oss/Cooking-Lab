@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4e6094419b4f90e6",
+  "artifactVersion": "clv1-6b042b0f213e90bb",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -56,24 +56,37 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "glutinous-rice",
       "initialState": "dry",
       "massG": 250,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-glutinous-rice",
       "optional": false,
       "phase": "main",
-      "portionId": "mango-sticky-rice-portion-01"
+      "portionId": "mango-sticky-rice-portion-01",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "mango",
       "initialState": "raw",
       "massG": 600,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
       "optional": false,
       "phase": "main",
-      "portionId": "mango-sticky-rice-portion-02"
+      "portionId": "mango-sticky-rice-portion-02",
+      "sourceQuantity": {
+        "amount": 600,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "coconut-milk",
       "initialState": "liquid",
       "massG": 400,
@@ -81,27 +94,45 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-03",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "coconut-milk:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 400
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 60,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "mango-sticky-rice-portion-04"
+      "portionId": "mango-sticky-rice-portion-04",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "mango-sticky-rice-portion-05"
+      "portionId": "mango-sticky-rice-portion-05",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 800,
@@ -109,6 +140,11 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-06",
+      "sourceQuantity": {
+        "amount": 800,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 800
     }
   ],
@@ -670,7 +706,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -694,7 +730,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -718,7 +754,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -743,7 +779,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -767,7 +803,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -791,7 +827,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -820,7 +856,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "duration-short:steam"
       ],
@@ -850,7 +886,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -879,7 +915,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -909,7 +945,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -944,7 +980,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -968,7 +1004,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -1003,7 +1039,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -1032,7 +1068,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -1062,7 +1098,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -1097,7 +1133,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -1121,7 +1157,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -1145,7 +1181,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -1170,7 +1206,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -1194,7 +1230,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:peel"
       ],
@@ -1218,7 +1254,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e6094419b4f90e6",
+      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
       "causeCodes": [
         "operation-omitted:slice"
       ],

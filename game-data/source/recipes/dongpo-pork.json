@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-fc5e08df88ff9828",
+  "artifactVersion": "clv1-76b9affe8620d83a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -36,24 +36,37 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "pork-belly",
       "initialState": "raw",
       "massG": 800,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pork-belly",
       "optional": false,
       "phase": "main",
-      "portionId": "dongpo-pork-portion-01"
+      "portionId": "dongpo-pork-portion-01",
+      "sourceQuantity": {
+        "amount": 800,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 35,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "dongpo-pork-portion-02"
+      "portionId": "dongpo-pork-portion-02",
+      "sourceQuantity": {
+        "amount": 35,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "shaoxing-wine",
       "initialState": "raw",
       "massG": 80,
@@ -61,36 +74,60 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-03",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "shaoxing-wine:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 80
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "soy-sauce",
       "initialState": "liquid",
       "massG": 60,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "dongpo-pork-portion-04"
+      "portionId": "dongpo-pork-portion-04",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ginger",
       "initialState": "raw",
       "massG": 20,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
       "optional": false,
       "phase": "main",
-      "portionId": "dongpo-pork-portion-05"
+      "portionId": "dongpo-pork-portion-05",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "scallion",
       "initialState": "raw",
       "massG": 30,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
       "optional": false,
       "phase": "main",
-      "portionId": "dongpo-pork-portion-06"
+      "portionId": "dongpo-pork-portion-06",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 700,
@@ -98,16 +135,27 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-07",
+      "sourceQuantity": {
+        "amount": 700,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 700
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "dongpo-pork-portion-08"
+      "portionId": "dongpo-pork-portion-08",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -474,7 +522,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
+      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -498,7 +546,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
+      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -527,7 +575,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
+      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -556,7 +604,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
+      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -586,7 +634,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
+      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -610,7 +658,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
+      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
       "causeCodes": [
         "duration-short:rest"
       ],

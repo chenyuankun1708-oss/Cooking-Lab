@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ab380db7ee5484fe",
+  "artifactVersion": "clv1-9f2d20121daef9c9",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -40,67 +40,109 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cucumber",
       "initialState": "raw",
       "massG": 320,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-01"
+      "portionId": "sichuan-smashed-cucumber-portion-01",
+      "sourceQuantity": {
+        "amount": 320,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-02"
+      "portionId": "sichuan-smashed-cucumber-portion-02",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-chili",
       "initialState": "raw",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-03"
+      "portionId": "sichuan-smashed-cucumber-portion-03",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "vinegar",
       "initialState": "liquid",
       "massG": 14,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-04"
+      "portionId": "sichuan-smashed-cucumber-portion-04",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "soy-sauce",
       "initialState": "liquid",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-05"
+      "portionId": "sichuan-smashed-cucumber-portion-05",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 3,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-06"
+      "portionId": "sichuan-smashed-cucumber-portion-06",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "sichuan-smashed-cucumber-portion-07"
+      "portionId": "sichuan-smashed-cucumber-portion-07",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -444,7 +486,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
+      "baselineArtifactVersion": "clv1-9f2d20121daef9c9",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -468,7 +510,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
+      "baselineArtifactVersion": "clv1-9f2d20121daef9c9",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -492,7 +534,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
+      "baselineArtifactVersion": "clv1-9f2d20121daef9c9",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -516,7 +558,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
+      "baselineArtifactVersion": "clv1-9f2d20121daef9c9",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -540,7 +582,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
+      "baselineArtifactVersion": "clv1-9f2d20121daef9c9",
       "causeCodes": [
         "operation-omitted:fold"
       ],

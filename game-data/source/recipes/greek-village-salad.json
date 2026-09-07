@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-3e99e9aee2235a21",
+  "artifactVersion": "clv1-ad765d0a9585a2ec",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -34,94 +34,154 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 500,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-01"
+      "portionId": "greek-village-salad-portion-01",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cucumber",
       "initialState": "raw",
       "massG": 300,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-02"
+      "portionId": "greek-village-salad-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "bell-pepper",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bell-pepper",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-03"
+      "portionId": "greek-village-salad-portion-03",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 80,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-04"
+      "portionId": "greek-village-salad-portion-04",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "feta",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-feta",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-05"
+      "portionId": "greek-village-salad-portion-05",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "kalamata-olive",
       "initialState": "raw",
       "massG": 100,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-kalamata-olive",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-06"
+      "portionId": "greek-village-salad-portion-06",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "extra-virgin-olive-oil",
       "initialState": "liquid",
       "massG": 35,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-extra-virgin-olive-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-07"
+      "portionId": "greek-village-salad-portion-07",
+      "sourceQuantity": {
+        "amount": 35,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "vinegar",
       "initialState": "liquid",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-08"
+      "portionId": "greek-village-salad-portion-08",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "oregano",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oregano",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-09"
+      "portionId": "greek-village-salad-portion-09",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "greek-village-salad-portion-10"
+      "portionId": "greek-village-salad-portion-10",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -529,7 +589,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
+      "baselineArtifactVersion": "clv1-ad765d0a9585a2ec",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -553,7 +613,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
+      "baselineArtifactVersion": "clv1-ad765d0a9585a2ec",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -577,7 +637,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
+      "baselineArtifactVersion": "clv1-ad765d0a9585a2ec",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -601,7 +661,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
+      "baselineArtifactVersion": "clv1-ad765d0a9585a2ec",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -626,7 +686,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
+      "baselineArtifactVersion": "clv1-ad765d0a9585a2ec",
       "causeCodes": [
         "operation-omitted:season"
       ],

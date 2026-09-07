@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4bbdc69fe757f4ba",
+  "artifactVersion": "clv1-0b58a85c7587868a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -53,67 +53,109 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tofu",
       "initialState": "raw",
       "massG": 420,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tofu",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-01"
+      "portionId": "home-mapo-tofu-portion-01",
+      "sourceQuantity": {
+        "amount": 420,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "pork-tenderloin",
       "initialState": "raw",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pork-tenderloin",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-02"
+      "portionId": "home-mapo-tofu-portion-02",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "chili-bean-paste",
       "initialState": "raw",
       "massG": 18,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chili-bean-paste",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-03"
+      "portionId": "home-mapo-tofu-portion-03",
+      "sourceQuantity": {
+        "amount": 18,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-04"
+      "portionId": "home-mapo-tofu-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "scallion",
       "initialState": "raw",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-05"
+      "portionId": "home-mapo-tofu-portion-05",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-06"
+      "portionId": "home-mapo-tofu-portion-06",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.6,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "home-mapo-tofu-portion-07"
+      "portionId": "home-mapo-tofu-portion-07",
+      "sourceQuantity": {
+        "amount": 0.6,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -526,7 +568,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -555,7 +597,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -579,7 +621,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -603,7 +645,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -627,7 +669,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -662,7 +704,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -691,7 +733,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -726,7 +768,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -750,7 +792,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -779,7 +821,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -814,7 +856,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "baselineArtifactVersion": "clv1-0b58a85c7587868a",
       "causeCodes": [
         "operation-omitted:season"
       ],

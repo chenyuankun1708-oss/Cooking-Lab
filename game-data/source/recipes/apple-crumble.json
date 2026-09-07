@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-bd933add2873b4e5",
+  "artifactVersion": "clv1-7ed73493dfb6af9b",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -39,76 +39,124 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "apple",
       "initialState": "raw",
       "massG": 720,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-apple",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-01"
+      "portionId": "apple-crumble-portion-01",
+      "sourceQuantity": {
+        "amount": 720,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "wheat-flour",
       "initialState": "dry",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-02"
+      "portionId": "apple-crumble-portion-02",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "oats",
       "initialState": "raw",
       "massG": 50,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oats",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-03"
+      "portionId": "apple-crumble-portion-03",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "butter",
       "initialState": "raw",
       "massG": 100,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-04"
+      "portionId": "apple-crumble-portion-04",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 80,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-05"
+      "portionId": "apple-crumble-portion-05",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cinnamon",
       "initialState": "raw",
       "massG": 3,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-06"
+      "portionId": "apple-crumble-portion-06",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lemon",
       "initialState": "raw",
       "massG": 90,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-07"
+      "portionId": "apple-crumble-portion-07",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lemon:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "apple-crumble-portion-08"
+      "portionId": "apple-crumble-portion-08",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dessert",
@@ -632,7 +680,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:bake"
       ],
@@ -661,7 +709,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "duration-short:bake"
       ],
@@ -691,7 +739,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "heat-high:bake"
       ],
@@ -726,7 +774,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -750,7 +798,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -785,7 +833,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -809,7 +857,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -833,7 +881,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:shape"
       ],
@@ -857,7 +905,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:bake"
       ],
@@ -886,7 +934,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "duration-short:bake"
       ],
@@ -916,7 +964,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -940,7 +988,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "baselineArtifactVersion": "clv1-7ed73493dfb6af9b",
       "causeCodes": [
         "duration-short:rest"
       ],

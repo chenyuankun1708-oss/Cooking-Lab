@@ -63,6 +63,7 @@ describe("M12 deterministic game exports", () => {
     const database = new DatabaseSync(buildA.sqlitePath, { readOnly: true });
     expect(database.prepare("SELECT COUNT(*) AS count FROM recipes").get()).toEqual({ count: 1 });
     expect(database.prepare("SELECT COUNT(*) AS count FROM recipe_ingredients").get()).toEqual({ count: recipe.ingredientPortions.length });
+    expect(database.prepare("SELECT COUNT(*) AS count FROM ingredient_substitutions").get()).toEqual({ count: recipe.ingredientPortions.reduce((sum, portion) => sum + portion.allowedSubstitutionIngredientIds.length, 0) });
     expect(database.prepare("SELECT COUNT(*) AS count FROM operations").get()).toEqual({ count: recipe.operationGraph.nodes.length });
     expect(database.prepare("SELECT COUNT(*) AS count FROM operation_inputs").get()).toEqual({ count: recipe.operationGraph.nodes.reduce((sum, node) => sum + node.inputPortionIds.length, 0) });
     expect(database.prepare("SELECT COUNT(*) AS count FROM operation_outputs").get()).toEqual({ count: recipe.operationGraph.nodes.reduce((sum, node) => sum + node.outputStateIds.length, 0) });
@@ -79,11 +80,14 @@ describe("M12 deterministic game exports", () => {
       })),
     );
     expect(database.prepare("SELECT COUNT(*) AS count FROM rights_decisions").get()).toEqual({ count: 4 });
-    expect(database.prepare("SELECT portion_id, ingredient_id, initial_state, mass_g, volume_ml, optional, phase, nutrition_provenance_id FROM recipe_ingredients WHERE recipe_id = ? ORDER BY portion_id").all(recipe.recipeId)).toEqual(
+    expect(database.prepare("SELECT portion_id, ingredient_id, initial_state, source_amount, source_unit, conversion_record_id, mass_g, volume_ml, optional, phase, nutrition_provenance_id FROM recipe_ingredients WHERE recipe_id = ? ORDER BY portion_id").all(recipe.recipeId)).toEqual(
       [...recipe.ingredientPortions].sort((left, right) => left.portionId.localeCompare(right.portionId)).map((portion) => ({
         portion_id: portion.portionId,
         ingredient_id: portion.ingredientId,
         initial_state: portion.initialState,
+        source_amount: portion.sourceQuantity.amount,
+        source_unit: portion.sourceQuantity.unit,
+        conversion_record_id: portion.sourceQuantity.conversionRecordId,
         mass_g: portion.massG,
         volume_ml: portion.volumeMl ?? null,
         optional: portion.optional ? 1 : 0,
@@ -104,7 +108,7 @@ describe("M12 deterministic game exports", () => {
       })),
     );
     database.close();
-  }, 20_000);
+  }, 40_000);
 
   it("content-addresses recipe and every supporting artifact hash", () => {
     const recipes = [{

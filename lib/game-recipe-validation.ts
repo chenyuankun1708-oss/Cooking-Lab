@@ -336,6 +336,24 @@ function evaluateRecipe(
     } else if (portion.nutritionProvenanceId !== ingredient.nutritionProvenanceId) {
       report("invalid-nutrition", recipe.recipeId, `ingredientPortions.${portion.portionId}.nutritionProvenanceId`, "Portion provenance must match the ingredient catalog");
     }
+    if (!isPositive(portion.sourceQuantity.amount) || !portion.sourceQuantity.conversionRecordId.trim()) {
+      report("invalid-number", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity`, "Source quantity requires a positive amount and explicit conversion record");
+    }
+    reportDuplicateStrings(portion.allowedSubstitutionIngredientIds, recipe.recipeId, `ingredientPortions.${portion.portionId}.allowedSubstitutionIngredientIds`, report);
+    for (const replacementId of portion.allowedSubstitutionIngredientIds) {
+      if (replacementId === portion.ingredientId || !ingredientById.has(replacementId)) {
+        report("missing-reference", recipe.recipeId, `ingredientPortions.${portion.portionId}.allowedSubstitutionIngredientIds`, "Allowed substitutions must identify a different catalog ingredient");
+      }
+    }
+    if (recipe.eligibility === "exportable" && ingredient) {
+      const expectedMass = sourceQuantityMassG(portion.sourceQuantity, ingredient);
+      if (expectedMass === null || Math.abs(expectedMass - portion.massG) > 0.011) {
+        report("invalid-number", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity`, "Canonical mass must match the recorded unit conversion");
+      }
+      if (portion.volumeMl !== undefined && (ingredient.densityGPerMl === undefined || Math.abs(portion.volumeMl * ingredient.densityGPerMl - portion.massG) > 0.011)) {
+        report("invalid-number", recipe.recipeId, `ingredientPortions.${portion.portionId}.volumeMl`, "Exported volume requires catalog density and must reproduce canonical mass");
+      }
+    }
   }
   if (!portionIds.size) report("missing-reference", recipe.recipeId, "ingredientPortions", "Every game recipe requires at least one quantified ingredient portion");
 
@@ -1361,7 +1379,7 @@ function validateScenarios(
     }
     if (scenario.mutation.targetNodeId) {
       if (!nodeById.has(scenario.mutation.targetNodeId)) report("missing-reference", recipe.recipeId, `scenarios.${scenario.scenarioId}.targetNodeId`, "Mutation target node is missing");
-      coveredCriticalNodes.add(scenario.mutation.targetNodeId);
+      if (nodeTargetMutationTypes.has(scenario.mutation.type)) coveredCriticalNodes.add(scenario.mutation.targetNodeId);
     }
     if (scenario.mutation.targetPortionId && !portionIds.has(scenario.mutation.targetPortionId)) {
       report("missing-reference", recipe.recipeId, `scenarios.${scenario.scenarioId}.targetPortionId`, "Mutation target portion is missing");
@@ -1400,6 +1418,8 @@ function validateScenarios(
         report("missing-reference", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementIngredientId`, "Allowed substitution requires a replacement from the ingredient catalog");
       } else if (targetPortion?.ingredientId === replacementIngredientId) {
         report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementIngredientId`, "Allowed substitution must change the ingredient");
+      } else if (targetPortion && replacementIngredientId && !targetPortion.allowedSubstitutionIngredientIds.includes(replacementIngredientId)) {
+        report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementIngredientId`, "Allowed substitution must be declared on the target portion");
       }
       if (scenario.nutritionEffect !== "recalculate-from-quantities") {
         report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.nutritionEffect`, "Allowed substitution must recalculate nutrition from ingredient quantities");
@@ -1407,6 +1427,9 @@ function validateScenarios(
     }
     if (!scenario.expectedDeltas.length && !scenario.expectedFaultCodes.length) {
       report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}`, "Scenario requires a directional delta or expected fault");
+    }
+    if (scenario.mutation.type !== "allowed-substitution" && !scenario.expectedFaultCodes.length && scenario.expectedDeltas.every((delta) => delta.direction === "unchanged")) {
+      report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}`, "A fault mutation requires an expected fault or at least one directional change");
     }
     if (["reorder", "duplicate"].includes(scenario.mutation.type) && scenario.nutritionEffect !== "unchanged") {
       report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.nutritionEffect`, "Order-only mutations cannot change nutrition");
@@ -1420,6 +1443,33 @@ function validateScenarios(
   }
 }
 
+const nodeTargetMutationTypes = new Set<GameRecipeV1["scenarios"][number]["mutation"]["type"]>([
+  "omit", "reorder", "duplicate", "heat-too-low", "heat-too-high", "duration-too-short", "duration-too-long",
+  "cut-size-too-small", "cut-size-too-large", "low-uniformity", "season-too-early", "season-too-late",
+  "overcrowding", "wrong-equipment", "missing-state-transition",
+]);
+
+const mutationAllowedFields: Record<GameRecipeV1["scenarios"][number]["mutation"]["type"], ReadonlySet<keyof GameRecipeV1["scenarios"][number]["mutation"]>> = {
+  omit: new Set(["targetNodeId"]),
+  reorder: new Set(["targetNodeId", "destinationBeforeNodeId"]),
+  duplicate: new Set(["targetNodeId"]),
+  "quantity-too-low": new Set(["targetPortionId", "scalar"]),
+  "quantity-too-high": new Set(["targetPortionId", "scalar"]),
+  "heat-too-low": new Set(["targetNodeId", "scalar"]),
+  "heat-too-high": new Set(["targetNodeId", "scalar"]),
+  "duration-too-short": new Set(["targetNodeId", "scalar"]),
+  "duration-too-long": new Set(["targetNodeId", "scalar"]),
+  "cut-size-too-small": new Set(["targetNodeId", "scalar"]),
+  "cut-size-too-large": new Set(["targetNodeId", "scalar"]),
+  "low-uniformity": new Set(["targetNodeId", "scalar"]),
+  "season-too-early": new Set(["targetNodeId"]),
+  "season-too-late": new Set(["targetNodeId"]),
+  overcrowding: new Set(["targetNodeId", "scalar"]),
+  "wrong-equipment": new Set(["targetNodeId", "replacementEquipmentId"]),
+  "missing-state-transition": new Set(["targetNodeId"]),
+  "allowed-substitution": new Set(["targetPortionId", "replacementIngredientId"]),
+};
+
 function validateMutationContract(
   recipe: GameRecipeV1,
   scenario: GameRecipeV1["scenarios"][number],
@@ -1429,9 +1479,15 @@ function validateMutationContract(
 ) {
   const { mutation } = scenario;
   const field = `scenarios.${scenario.scenarioId}`;
-  const nodeTypes = new Set(["omit", "reorder", "duplicate", "heat-too-low", "heat-too-high", "duration-too-short", "duration-too-long", "cut-size-too-small", "cut-size-too-large", "low-uniformity", "season-too-early", "season-too-late", "overcrowding", "wrong-equipment", "missing-state-transition"]);
+  const nodeTypes = nodeTargetMutationTypes;
   const quantityTypes = new Set(["quantity-too-low", "quantity-too-high"]);
   const targetNode = mutation.targetNodeId ? nodeById.get(mutation.targetNodeId) : undefined;
+  const allowedFields = mutationAllowedFields[mutation.type];
+  for (const fieldName of ["targetNodeId", "destinationBeforeNodeId", "targetPortionId", "scalar", "replacementIngredientId", "replacementEquipmentId"] as const) {
+    if (mutation[fieldName] !== undefined && !allowedFields.has(fieldName)) {
+      report("invalid-scenario", recipe.recipeId, `${field}.${fieldName}`, `${mutation.type} does not permit ${fieldName}`);
+    }
+  }
   if (nodeTypes.has(mutation.type) && !targetNode) {
     report("missing-reference", recipe.recipeId, `${field}.targetNodeId`, `${mutation.type} requires an existing target operation`);
   }
@@ -1519,6 +1575,16 @@ function assessmentMatchesSourceRights(assessment: RightsAssessment, source: Sou
     case "unknown":
       return false;
   }
+}
+
+function sourceQuantityMassG(
+  quantity: GameRecipeV1["ingredientPortions"][number]["sourceQuantity"],
+  ingredient: GameIngredientCatalogV1["ingredients"][number],
+): number | null {
+  if (quantity.unit === "g") return quantity.amount;
+  if (quantity.unit === "kg") return quantity.amount * 1_000;
+  const weight = quantity.unit === "ml" ? ingredient.densityGPerMl ?? ingredient.unitWeightsG.ml : ingredient.unitWeightsG[quantity.unit];
+  return weight === undefined ? null : quantity.amount * weight;
 }
 
 function allowedTargetDimensions(operationType: GameRecipeV1["operationGraph"]["nodes"][number]["operationType"]): ReadonlySet<string> {

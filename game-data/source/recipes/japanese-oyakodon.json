@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-762df3e12c83e49a",
+  "artifactVersion": "clv1-3151d3d805988564",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -26,58 +26,94 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "rice",
       "initialState": "raw",
       "massG": 160,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
       "optional": false,
       "phase": "main",
-      "portionId": "japanese-oyakodon-portion-01"
+      "portionId": "japanese-oyakodon-portion-01",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "chicken-thigh",
       "initialState": "raw",
       "massG": 220,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
       "optional": false,
       "phase": "main",
-      "portionId": "japanese-oyakodon-portion-02"
+      "portionId": "japanese-oyakodon-portion-02",
+      "sourceQuantity": {
+        "amount": 220,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "egg",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
       "optional": false,
       "phase": "main",
-      "portionId": "japanese-oyakodon-portion-03"
+      "portionId": "japanese-oyakodon-portion-03",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "japanese-oyakodon-portion-04"
+      "portionId": "japanese-oyakodon-portion-04",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "soy-sauce",
       "initialState": "liquid",
       "massG": 12,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "japanese-oyakodon-portion-05"
+      "portionId": "japanese-oyakodon-portion-05",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.4,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "japanese-oyakodon-portion-06"
+      "portionId": "japanese-oyakodon-portion-06",
+      "sourceQuantity": {
+        "amount": 0.4,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -320,7 +356,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-762df3e12c83e49a",
+      "baselineArtifactVersion": "clv1-3151d3d805988564",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -349,7 +385,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-762df3e12c83e49a",
+      "baselineArtifactVersion": "clv1-3151d3d805988564",
       "causeCodes": [
         "heat-high:simmer"
       ],

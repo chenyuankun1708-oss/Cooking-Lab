@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-4902eba47062d22f",
+  "artifactVersion": "clv1-0127f2e6416e6ee4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -40,103 +40,169 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooked-black-bean",
       "initialState": "cooked",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-black-bean",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-01"
+      "portionId": "mexican-black-bean-tacos-portion-01",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "corn-tortilla",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-corn-tortilla",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-02"
+      "portionId": "mexican-black-bean-tacos-portion-02",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "corn-tortilla:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-03"
+      "portionId": "mexican-black-bean-tacos-portion-03",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "mushroom",
       "initialState": "raw",
       "massG": 160,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-04"
+      "portionId": "mexican-black-bean-tacos-portion-04",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cabbage",
       "initialState": "raw",
       "massG": 160,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cabbage",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-05"
+      "portionId": "mexican-black-bean-tacos-portion-05",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "avocado",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-avocado",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-06"
+      "portionId": "mexican-black-bean-tacos-portion-06",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 80,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-07"
+      "portionId": "mexican-black-bean-tacos-portion-07",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lime",
       "initialState": "raw",
       "massG": 70,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-08"
+      "portionId": "mexican-black-bean-tacos-portion-08",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lime:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cumin",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-09"
+      "portionId": "mexican-black-bean-tacos-portion-09",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-10"
+      "portionId": "mexican-black-bean-tacos-portion-10",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "mexican-black-bean-tacos-portion-11"
+      "portionId": "mexican-black-bean-tacos-portion-11",
+      "sourceQuantity": {
+        "amount": 1.2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -685,7 +751,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -709,7 +775,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -733,7 +799,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -762,7 +828,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -797,7 +863,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -826,7 +892,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -861,7 +927,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4902eba47062d22f",
+      "baselineArtifactVersion": "clv1-0127f2e6416e6ee4",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

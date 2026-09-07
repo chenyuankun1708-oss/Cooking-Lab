@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c1b4762e19509aec",
+  "artifactVersion": "clv1-1c42e2372be263df",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -36,87 +36,142 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "shrimp",
       "initialState": "raw",
       "massG": 400,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-shrimp",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-01"
+      "portionId": "tomyum-kung-portion-01",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "mushroom",
       "initialState": "raw",
       "massG": 200,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-02"
+      "portionId": "tomyum-kung-portion-02",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lemongrass",
       "initialState": "raw",
       "massG": 30,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemongrass",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-03"
+      "portionId": "tomyum-kung-portion-03",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "galangal",
       "initialState": "raw",
       "massG": 20,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-galangal",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-04"
+      "portionId": "tomyum-kung-portion-04",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "makrut-lime-leaf",
       "initialState": "raw",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-makrut-lime-leaf",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-05"
+      "portionId": "tomyum-kung-portion-05",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-chili",
       "initialState": "raw",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-06"
+      "portionId": "tomyum-kung-portion-06",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fish-sauce",
       "initialState": "liquid",
       "massG": 35,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fish-sauce",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-07"
+      "portionId": "tomyum-kung-portion-07",
+      "sourceQuantity": {
+        "amount": 35,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "lime",
       "initialState": "raw",
       "massG": 140,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
       "optional": false,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-08"
+      "portionId": "tomyum-kung-portion-08",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "lime:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cilantro",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cilantro",
       "optional": true,
       "phase": "main",
-      "portionId": "tomyum-kung-portion-09"
+      "portionId": "tomyum-kung-portion-09",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 1000,
@@ -124,6 +179,11 @@
       "optional": false,
       "phase": "main",
       "portionId": "tomyum-kung-portion-10",
+      "sourceQuantity": {
+        "amount": 1000,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 1000
     }
   ],
@@ -632,7 +692,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -656,7 +716,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -680,7 +740,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -704,7 +764,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -733,7 +793,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -763,7 +823,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -798,7 +858,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -827,7 +887,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -857,7 +917,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1b4762e19509aec",
+      "baselineArtifactVersion": "clv1-1c42e2372be263df",
       "causeCodes": [
         "heat-high:simmer"
       ],

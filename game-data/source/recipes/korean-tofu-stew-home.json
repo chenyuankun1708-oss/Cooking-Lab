@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6fab33041535dc41",
+  "artifactVersion": "clv1-f69368523ca662c4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -41,76 +41,124 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tofu",
       "initialState": "raw",
       "massG": 360,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tofu",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-01"
+      "portionId": "korean-tofu-stew-home-portion-01",
+      "sourceQuantity": {
+        "amount": 360,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "mushroom",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-02"
+      "portionId": "korean-tofu-stew-home-portion-02",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "napa-cabbage",
       "initialState": "raw",
       "massG": 260,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-napa-cabbage",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-03"
+      "portionId": "korean-tofu-stew-home-portion-03",
+      "sourceQuantity": {
+        "amount": 260,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "egg",
       "initialState": "raw",
       "massG": 50,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-04"
+      "portionId": "korean-tofu-stew-home-portion-04",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "gochujang",
       "initialState": "raw",
       "massG": 22,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gochujang",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-05"
+      "portionId": "korean-tofu-stew-home-portion-05",
+      "sourceQuantity": {
+        "amount": 22,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-06"
+      "portionId": "korean-tofu-stew-home-portion-06",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "scallion",
       "initialState": "raw",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-07"
+      "portionId": "korean-tofu-stew-home-portion-07",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 0.5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "korean-tofu-stew-home-portion-08"
+      "portionId": "korean-tofu-stew-home-portion-08",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -519,7 +567,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6fab33041535dc41",
+      "baselineArtifactVersion": "clv1-f69368523ca662c4",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -543,7 +591,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6fab33041535dc41",
+      "baselineArtifactVersion": "clv1-f69368523ca662c4",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -567,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6fab33041535dc41",
+      "baselineArtifactVersion": "clv1-f69368523ca662c4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -591,7 +639,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6fab33041535dc41",
+      "baselineArtifactVersion": "clv1-f69368523ca662c4",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -620,7 +668,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6fab33041535dc41",
+      "baselineArtifactVersion": "clv1-f69368523ca662c4",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -655,7 +703,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6fab33041535dc41",
+      "baselineArtifactVersion": "clv1-f69368523ca662c4",
       "causeCodes": [
         "operation-omitted:season"
       ],

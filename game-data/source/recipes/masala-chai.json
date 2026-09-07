@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ce4e9837e5324e63",
+  "artifactVersion": "clv1-5de615aacdd0da59",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -48,15 +48,22 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "black-tea-leaf",
       "initialState": "dry",
       "massG": 6,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-tea-leaf",
       "optional": false,
       "phase": "main",
-      "portionId": "masala-chai-portion-01"
+      "portionId": "masala-chai-portion-01",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "drinking-water",
       "initialState": "liquid",
       "massG": 250,
@@ -64,9 +71,15 @@
       "optional": false,
       "phase": "main",
       "portionId": "masala-chai-portion-02",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 250
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "milk",
       "initialState": "liquid",
       "massG": 250,
@@ -74,52 +87,87 @@
       "optional": false,
       "phase": "main",
       "portionId": "masala-chai-portion-03",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "milk:ml:weight-v1",
+        "unit": "ml"
+      },
       "volumeMl": 250
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "granulated-sugar",
       "initialState": "dry",
       "massG": 24,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
       "optional": false,
       "phase": "main",
-      "portionId": "masala-chai-portion-04"
+      "portionId": "masala-chai-portion-04",
+      "sourceQuantity": {
+        "amount": 24,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ginger",
       "initialState": "raw",
       "massG": 10,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
       "optional": false,
       "phase": "main",
-      "portionId": "masala-chai-portion-05"
+      "portionId": "masala-chai-portion-05",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cardamom",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cardamom",
       "optional": false,
       "phase": "main",
-      "portionId": "masala-chai-portion-06"
+      "portionId": "masala-chai-portion-06",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cinnamon",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
       "optional": false,
       "phase": "main",
-      "portionId": "masala-chai-portion-07"
+      "portionId": "masala-chai-portion-07",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "clove",
       "initialState": "raw",
       "massG": 0.5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-clove",
       "optional": false,
       "phase": "main",
-      "portionId": "masala-chai-portion-08"
+      "portionId": "masala-chai-portion-08",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "tea",
@@ -625,7 +673,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -649,7 +697,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -678,7 +726,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -708,7 +756,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -743,7 +791,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -772,7 +820,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -802,7 +850,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -837,7 +885,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -861,7 +909,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -890,7 +938,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -920,7 +968,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -955,7 +1003,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -979,7 +1027,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -1003,7 +1051,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -1028,7 +1076,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ce4e9837e5324e63",
+      "baselineArtifactVersion": "clv1-5de615aacdd0da59",
       "causeCodes": [
         "operation-omitted:strain"
       ],

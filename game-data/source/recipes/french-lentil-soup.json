@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-cb18aebdaeeccde6",
+  "artifactVersion": "clv1-18adcd29e4eb09da",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -32,76 +32,124 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "dry-lentil",
       "initialState": "dry",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-lentil",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-01"
+      "portionId": "french-lentil-soup-portion-01",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "carrot",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-02"
+      "portionId": "french-lentil-soup-portion-02",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 150,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-03"
+      "portionId": "french-lentil-soup-portion-03",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 250,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-04"
+      "portionId": "french-lentil-soup-portion-04",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "garlic",
       "initialState": "raw",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-05"
+      "portionId": "french-lentil-soup-portion-05",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "oregano",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oregano",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-06"
+      "portionId": "french-lentil-soup-portion-06",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-07"
+      "portionId": "french-lentil-soup-portion-07",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 2,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "french-lentil-soup-portion-08"
+      "portionId": "french-lentil-soup-portion-08",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -467,7 +515,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cb18aebdaeeccde6",
+      "baselineArtifactVersion": "clv1-18adcd29e4eb09da",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -491,7 +539,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cb18aebdaeeccde6",
+      "baselineArtifactVersion": "clv1-18adcd29e4eb09da",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -515,7 +563,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cb18aebdaeeccde6",
+      "baselineArtifactVersion": "clv1-18adcd29e4eb09da",
       "causeCodes": [
         "operation-omitted:season"
       ],

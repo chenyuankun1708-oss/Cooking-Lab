@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-50e80509efd56aec",
+  "artifactVersion": "clv1-52dda3a1164b8e5f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -34,76 +34,124 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "egg",
       "initialState": "raw",
       "massG": 100,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-01"
+      "portionId": "huevos-rancheros-home-portion-01",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "corn-tortilla",
       "initialState": "raw",
       "massG": 120,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-corn-tortilla",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-02"
+      "portionId": "huevos-rancheros-home-portion-02",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "corn-tortilla:piece:weight-v1",
+        "unit": "piece"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooked-black-bean",
       "initialState": "cooked",
       "massG": 100,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-black-bean",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-03"
+      "portionId": "huevos-rancheros-home-portion-03",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "tomato",
       "initialState": "raw",
       "massG": 260,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-04"
+      "portionId": "huevos-rancheros-home-portion-04",
+      "sourceQuantity": {
+        "amount": 260,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "onion",
       "initialState": "raw",
       "massG": 80,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-05"
+      "portionId": "huevos-rancheros-home-portion-05",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "fresh-chili",
       "initialState": "raw",
       "massG": 8,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-06"
+      "portionId": "huevos-rancheros-home-portion-06",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-07"
+      "portionId": "huevos-rancheros-home-portion-07",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "huevos-rancheros-home-portion-08"
+      "portionId": "huevos-rancheros-home-portion-08",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -515,7 +563,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-50e80509efd56aec",
+      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -539,7 +587,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-50e80509efd56aec",
+      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -563,7 +611,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-50e80509efd56aec",
+      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -592,7 +640,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-50e80509efd56aec",
+      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -627,7 +675,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-50e80509efd56aec",
+      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

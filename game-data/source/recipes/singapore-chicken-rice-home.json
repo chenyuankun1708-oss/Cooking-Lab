@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ed357b8ffc17efa4",
+  "artifactVersion": "clv1-b80903daabeef720",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -50,67 +50,109 @@
   },
   "ingredientPortions": [
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "rice",
       "initialState": "raw",
       "massG": 210,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-01"
+      "portionId": "singapore-chicken-rice-home-portion-01",
+      "sourceQuantity": {
+        "amount": 210,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "chicken-thigh",
       "initialState": "raw",
       "massG": 330,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-02"
+      "portionId": "singapore-chicken-rice-home-portion-02",
+      "sourceQuantity": {
+        "amount": 330,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "ginger",
       "initialState": "raw",
       "massG": 15,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-03"
+      "portionId": "singapore-chicken-rice-home-portion-03",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "scallion",
       "initialState": "raw",
       "massG": 20,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-04"
+      "portionId": "singapore-chicken-rice-home-portion-04",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cucumber",
       "initialState": "raw",
       "massG": 180,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-05"
+      "portionId": "singapore-chicken-rice-home-portion-05",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "cooking-oil",
       "initialState": "liquid",
       "massG": 5,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-06"
+      "portionId": "singapore-chicken-rice-home-portion-06",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     },
     {
+      "allowedSubstitutionIngredientIds": [],
       "ingredientId": "salt",
       "initialState": "raw",
       "massG": 1.3,
       "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
       "optional": false,
       "phase": "main",
-      "portionId": "singapore-chicken-rice-home-portion-07"
+      "portionId": "singapore-chicken-rice-home-portion-07",
+      "sourceQuantity": {
+        "amount": 1.3,
+        "conversionRecordId": "canonical-grams-v1",
+        "unit": "g"
+      }
     }
   ],
   "itemType": "dish",
@@ -427,7 +469,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ed357b8ffc17efa4",
+      "baselineArtifactVersion": "clv1-b80903daabeef720",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -451,7 +493,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ed357b8ffc17efa4",
+      "baselineArtifactVersion": "clv1-b80903daabeef720",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -475,7 +517,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ed357b8ffc17efa4",
+      "baselineArtifactVersion": "clv1-b80903daabeef720",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -499,7 +541,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ed357b8ffc17efa4",
+      "baselineArtifactVersion": "clv1-b80903daabeef720",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -523,7 +565,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ed357b8ffc17efa4",
+      "baselineArtifactVersion": "clv1-b80903daabeef720",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -547,7 +589,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ed357b8ffc17efa4",
+      "baselineArtifactVersion": "clv1-b80903daabeef720",
       "causeCodes": [
         "operation-omitted:dice"
       ],

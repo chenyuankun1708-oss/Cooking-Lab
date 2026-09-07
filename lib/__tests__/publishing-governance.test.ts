@@ -37,7 +37,7 @@ const contentRightsRegistry = createContentRightsRegistry({
   evidence: culinaryEvidence,
   sources: contentRightsSources,
   researchRecords: m9RecipeResearchRecords,
-  textArtifactDerivations: createM10TextArtifactDerivations(items, culinaryStories, m9RecipeResearchRecords),
+  textArtifactDerivations: createM10TextArtifactDerivations(items, culinaryStories),
 });
 const contentImageAssetVersions = createImageAssetVersions(allImages);
 const contentLocalizationVersions = createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients);
@@ -568,6 +568,78 @@ describe("risk-based publishing governance", () => {
     expect(changedKeys.filter((key) => key.startsWith("cost-transform:"))).not.toEqual(
       originalKeys.filter((key) => key.startsWith("cost-transform:")),
     );
+  });
+
+  it("includes AI-input-only Sources and Evidence domains in sampling novelty coverage", () => {
+    const item = items[0];
+    const changedContext = structuredClone(context);
+    const artifact = changedContext.rightsRegistry.artifacts.find((entry) => (
+      entry.subject.type === "culinary-item" && entry.subject.id === item.id && entry.kind === "identity"
+    ))!;
+    const aiOnlySource: Source = {
+      ...structuredClone(changedContext.sources[0]),
+      id: "ai-input-only-source",
+      locators: [{ kind: "url", url: "https://ai-input-only.example.test/reference", accessedAt: "2026-09-07" }],
+    };
+    const aiOnlyEvidence: Evidence = {
+      id: "ai-input-only-evidence",
+      sourceId: aiOnlySource.id,
+      relation: "supports",
+      strength: "strong",
+      locators: [{ kind: "section", value: "Test" }],
+      editorialNote: "Sampling coverage fixture for AI-input-only provenance.",
+    };
+    Object.assign(changedContext, {
+      sources: [...changedContext.sources, aiOnlySource],
+      evidence: [...changedContext.evidence, aiOnlyEvidence],
+    });
+    changedContext.rightsRegistry.aiInputs = [{
+      id: "sampling-ai-input",
+      version: "sampling-ai-input-v1",
+      contentHash: "clv1-1111111111111111",
+      kind: "structured-research-bundle",
+      sourceIds: [aiOnlySource.id],
+      evidenceIds: [aiOnlyEvidence.id],
+      researchRecordIds: [changedContext.researchRecords[0].id],
+      rightsAssessmentIds: [artifact.rightsAssessmentId],
+      containsThirdPartyExpression: false,
+    }];
+    changedContext.rightsRegistry.ai = [{
+      id: "sampling-ai-record",
+      artifactId: artifact.id,
+      outputArtifactVersion: artifact.version,
+      author: { actorType: "agent", actorId: "sampling-author", runId: "sampling-run", contextId: "sampling-context" },
+      provider: "Sampling Provider",
+      model: "sampling-model",
+      modelVersion: "sampling-model-v1",
+      generatedAt: "2026-09-07",
+      serviceRoute: "direct",
+      serviceChain: [{ serviceId: "sampling-provider", provider: "Sampling Provider", role: "model-provider", termsAssessmentId: artifact.rightsAssessmentId }],
+      termsAssessmentIds: [artifact.rightsAssessmentId],
+      promptTemplateId: "sampling-prompt",
+      promptTemplateVersion: "1",
+      promptTemplateHash: "clv1-2222222222222222",
+      inputArtifactIds: ["sampling-ai-input"],
+      reviewAttestationIds: ["sampling-attestation"],
+      similarityReview: "passed",
+      trademarkReview: "not-applicable",
+    }];
+
+    expect(artifact.sourceIds).not.toContain(aiOnlySource.id);
+    expect(artifact.evidenceIds).not.toContain(aiOnlyEvidence.id);
+    const keys = deriveEquivalenceClassKeys(item, changedContext);
+    expect(keys).toContain("source-domain:ai-input-only.example.test");
+    const noveltyKeys = deriveProvenanceLicenseNoveltyClassKeys(createSamplingEquivalenceClasses([{
+      id: "risk-ai-input-only-sampling",
+      itemId: item.id,
+      level: "low",
+      reasonCodes: ["clear-first-party-or-reference-only-rights"],
+      artifactSetVersion: "clv1-1111111111111111",
+      policyVersion: "m10.1-risk-based-publishing-v1",
+      equivalenceClassKeys: keys as [string, ...string[]],
+      classifiedAt: "2026-09-07",
+    }]));
+    expect(noveltyKeys).toContain("source-domain:ai-input-only.example.test");
   });
 
   it("covers artifact, risk, restaurant, external-media, product-profile, and Evidence-derived Source paths", () => {

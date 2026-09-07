@@ -45,7 +45,7 @@ const recipeRightsRegistry = createContentRightsRegistry({
   evidence: m9RecipeResearchRegistry.evidence,
   sources: m9RecipeResearchRegistry.sources,
   researchRecords: m9RecipeResearchRegistry.records,
-  textArtifactDerivations: createM10TextArtifactDerivations(recipeRightsItems, [], m9RecipeResearchRegistry.records),
+  textArtifactDerivations: createM10TextArtifactDerivations(recipeRightsItems, []),
 });
 assertContentRightsReady(recipeRightsRegistry, {
   items: recipeRightsItems,

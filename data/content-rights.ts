@@ -14,6 +14,7 @@ import type { Ingredient } from "@/types/ingredient";
 import type { RecipeImage, RecipeImageLicense } from "@/types/image";
 import type { ResearchRecord } from "@/types/research";
 import { createContentVersion } from "@/lib/content-version";
+import { formatAiRightsObligationCondition } from "@/lib/content-rights";
 
 const assessedAt = "2026-09-06";
 const reviewDueAt = "2027-03-06";
@@ -131,6 +132,8 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
   for (const source of input.sources.filter((entry) => usedSourceIds.has(entry.id))) {
     assessments.push(buildSourceAssessment(source));
   }
+  assessments.push(...(input.aiAssessments ?? []));
+  const assessmentById = new Map(assessments.map((assessment) => [assessment.id, assessment]));
   for (const decision of decisions) {
     const artifact = artifacts.find((entry) => entry.id === decision.artifactId);
     if (!artifact) continue;
@@ -143,6 +146,17 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
         ])
       : [];
     decision.assessmentIds = [artifact.rightsAssessmentId, ...sourceAssessments, ...aiAssessmentIds];
+    const aiObligationAssessmentIds = aiAssessmentIds.filter((assessmentId) => {
+      const assessment = assessmentById.get(assessmentId);
+      return assessment && Object.values(assessment.permissions).some((permission) => permission.status === "allowed-with-obligations");
+    });
+    if (aiObligationAssessmentIds.length) {
+      decision.decision = "allow-with-obligations";
+      decision.conditions = [
+        ...decision.conditions,
+        ...aiObligationAssessmentIds.map(formatAiRightsObligationCondition),
+      ];
+    }
     if (artifact.derivation === "generated" && !aiRecord) {
       decision.decision = "block";
       decision.conditions = [
@@ -155,7 +169,6 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
   const costAssessmentId = "rights-cooking-lab-cn-price-estimate-2026-09";
   assessments.push(firstPartyAssessment(costAssessmentId, { type: "dataset", id: "cooking-lab-cn-price-estimate-2026-09" }));
   assessments.push(approvedFutureDatasets.usdaFoodDataCentral.rightsAssessment);
-  assessments.push(...(input.aiAssessments ?? []));
 
   const nutrition = input.ingredients.map((ingredient) => ({
     ingredientId: ingredient.id,
@@ -258,7 +271,6 @@ export const m10AuditedCulinaryItemIds = Object.freeze([
 export function createM10TextArtifactDerivations(
   items: readonly CulinaryItem[],
   stories: readonly Story[],
-  researchRecords: readonly ResearchRecord[],
 ): CreateContentRightsRegistryInput["textArtifactDerivations"] {
   const m10ItemIds = new Set<string>(m10AuditedCulinaryItemIds);
   const publishedItems = items.filter((item) => item.publication.status === "published");
@@ -267,19 +279,68 @@ export function createM10TextArtifactDerivations(
     throw new Error(`M10 non-AI authoring baseline cannot declare later content: ${unsupportedItemIds.join(", ")}`);
   }
   const linkedStoryIds = new Set(publishedItems.flatMap((item) => item.storyIds));
-  const sourcedItemIds = new Set(researchRecords
-    .filter((record) => record.status === "closed" && record.sourceDecisions.some((decision) => decision.disposition === "accepted"))
-    .map((record) => record.subject.id));
-  return [
-    ...publishedItems.flatMap((item) => ([
-      { artifactId: `${item.id}-identity`, derivation: sourcedItemIds.has(item.id) ? "factual-synthesis" as const : "original" as const },
-      { artifactId: `${item.id}-preparation`, derivation: sourcedItemIds.has(item.id) ? "factual-synthesis" as const : "original" as const },
-    ])),
+  const requiredArtifactIds = new Set([
+    ...publishedItems.flatMap((item) => [`${item.id}-identity`, `${item.id}-preparation`]),
     ...stories
       .filter((story) => story.publication.status === "published" && linkedStoryIds.has(story.id))
-      .map((story) => ({ artifactId: `${story.id}-story`, derivation: "factual-synthesis" as const })),
-  ];
+      .map((story) => `${story.id}-story`),
+  ]);
+  const missingArtifactIds = [...requiredArtifactIds].filter((artifactId) => !m10TextArtifactDerivationBaseline.has(artifactId));
+  if (missingArtifactIds.length) {
+    throw new Error(`M10 text artifact derivation baseline is missing: ${missingArtifactIds.join(", ")}`);
+  }
+  return [...requiredArtifactIds].map((artifactId) => ({
+    artifactId,
+    derivation: m10TextArtifactDerivationBaseline.get(artifactId)!,
+  }));
 }
+
+const m10FactualSynthesisItemIds = new Set<string>([
+  "cantonese-mushroom-steamed-chicken",
+  "cantonese-ginger-scallion-fish",
+  "hunan-chili-pork",
+  "yunnan-mushroom-chicken-stew",
+  "northwest-cumin-lamb",
+  "chaoshan-fish-congee",
+  "french-lentil-soup",
+  "spanish-potato-omelet",
+  "spanish-chickpea-spinach",
+  "greek-lemon-oregano-chicken",
+  "japanese-oyakodon",
+  "japanese-miso-salmon",
+  "korean-glass-noodle-stir-fry",
+  "korean-tofu-stew-home",
+  "thai-green-papaya-salad",
+  "malaysian-turmeric-chicken",
+  "singapore-chicken-rice-home",
+  "indonesian-chili-eggplant",
+  "filipino-chicken-adobo-home",
+  "mexican-black-bean-tacos",
+  "huevos-rancheros-home",
+  "indian-chana-masala-home",
+  "indian-masoor-dal",
+  "lebanese-mujadara",
+] as const);
+
+const m10StoryArtifactIds = [
+  "dongpo-pork-name-and-attribution-story",
+  "tomyum-kung-documented-practice-story",
+  "espresso-developed-through-stages-story",
+  "longjing-within-living-tea-practice-story",
+  "sake-making-with-koji-story",
+  "fino-aged-under-flor-story",
+] as const;
+
+const m10TextArtifactDerivationBaseline = new Map<string, ContentDerivation>([
+  ...m10AuditedCulinaryItemIds.flatMap((itemId) => {
+    const derivation: ContentDerivation = m10FactualSynthesisItemIds.has(itemId) ? "factual-synthesis" : "original";
+    return [
+      [`${itemId}-identity`, derivation] as const,
+      [`${itemId}-preparation`, derivation] as const,
+    ];
+  }),
+  ...m10StoryArtifactIds.map((artifactId) => [artifactId, "factual-synthesis"] as const),
+]);
 
 function addFirstPartyArtifact(
   input: Pick<ContentArtifact, "id" | "version" | "subject" | "kind" | "derivation" | "sourceIds" | "evidenceIds">,

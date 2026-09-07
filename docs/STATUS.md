@@ -413,6 +413,6 @@ PR #36 已合并 Living Editorial Hero：
 ## 下一步
 
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
-- M10 已完成并继续作为 M11 的强制发布门禁。
-- M11 工程、内容包基础和视觉升级进入 PR 交付；Epic #87 与内容 Issues #91/#92 保持开放。
-- 完整 120 项发布现在等待 Issue #96 的 M10.1 fail-closed governance 先落地，再按 LOW/MEDIUM/HIGH 路由完成 70 项独立 agent review、sampling QA 或适用的人类/专家/法律 checkpoint。新门禁生效前不得把新增内容放入公开 manifest。
+- M10 与 M10.1 已完成并继续作为所有公开内容的强制发布门禁。
+- M11 以当前 50 项产品闭环、内容包容量、视觉升级和治理能力收口；#91/#92 的内容扩充由 Product Director 延期，不是进行中任务。
+- 完成治理收口 PR、当前 50 项 Production smoke、GitHub Issues/Epic 与 Ultragoal ledger 收尾后停止；不启动 M12 或新内容 Goal。

@@ -215,9 +215,17 @@ export function deriveEquivalenceClassKeys(
   const image = context.images.find((entry) => entry.id === imageId);
   const sourceById = new Map(context.sources.map((source) => [source.id, source]));
   const evidenceById = new Map(context.evidence.map((evidence) => [evidence.id, evidence]));
+  const aiRecords = artifacts.flatMap((artifact) => context.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
+  const aiInputIds = new Set(aiRecords.flatMap((record) => record.inputArtifactIds));
+  const aiInputs = context.rightsRegistry.aiInputs.filter((entry) => aiInputIds.has(entry.id));
   const provenanceSourceIds = new Set([
     ...artifacts.flatMap((artifact) => artifact.sourceIds),
     ...artifacts.flatMap((artifact) => artifact.evidenceIds.flatMap((evidenceId) => {
+      const evidence = evidenceById.get(evidenceId);
+      return evidence ? [evidence.sourceId] : [];
+    })),
+    ...aiInputs.flatMap((input) => input.sourceIds),
+    ...aiInputs.flatMap((input) => input.evidenceIds.flatMap((evidenceId) => {
       const evidence = evidenceById.get(evidenceId);
       return evidence ? [evidence.sourceId] : [];
     })),
@@ -239,9 +247,6 @@ export function deriveEquivalenceClassKeys(
   const externalMedia = context.rightsRegistry.externalMedia.filter((entry) => provenanceSourceIds.has(entry.sourceId));
   const restaurant = context.rightsRegistry.restaurants.find((entry) => entry.culinaryItemId === item.id);
   const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => entry.culinaryItemId === item.id);
-  const aiRecords = artifacts.flatMap((artifact) => context.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
-  const aiInputIds = new Set(aiRecords.flatMap((record) => record.inputArtifactIds));
-  const aiInputs = context.rightsRegistry.aiInputs.filter((entry) => aiInputIds.has(entry.id));
   const assessmentIds = new Set([
     ...artifacts.flatMap((artifact) => {
       const decision = context.rightsRegistry.decisions.find((entry) => entry.id === artifact.usageDecisionId);

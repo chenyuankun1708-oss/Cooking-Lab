@@ -61,7 +61,7 @@ export const contentRightsRegistry = createContentRightsRegistry({
   evidence: allEvidence,
   sources: allSources,
   researchRecords: m9RecipeResearchRecords,
-  textArtifactDerivations: createM10TextArtifactDerivations(candidates, culinaryStories, m9RecipeResearchRecords),
+  textArtifactDerivations: createM10TextArtifactDerivations(candidates, culinaryStories),
 });
 const contentRightsContext = {
   items: candidates,

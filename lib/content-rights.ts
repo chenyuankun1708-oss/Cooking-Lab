@@ -151,6 +151,10 @@ export function formatContentRightsIssues(issues: readonly ContentRightsIssue[])
   return issues.map((issue) => `${issue.code}:${issue.subjectId}:${issue.field}`).join("; ");
 }
 
+export function formatAiRightsObligationCondition(assessmentId: string): string {
+  return `Comply with obligations recorded in RightsAssessment ${assessmentId}.`;
+}
+
 export function createContentRightsAuditReport(result: ContentRightsAuditResult): string {
   const header = [
     "# Content rights audit",
@@ -440,6 +444,16 @@ function validateAi(
     ]);
     if (!decision || [...requiredAiAssessmentIds].some((assessmentId) => !decision.assessmentIds.includes(assessmentId))) {
       report("ai-input-rights-unknown", artifact.id, "usageDecision.assessmentIds", "UsageDecision must close over every AI input, Source, gateway, and model-provider assessment");
+    }
+    const obligationAssessmentIds = [...requiredAiAssessmentIds].filter((assessmentId) => {
+      const assessment = assessments.get(assessmentId);
+      return assessment && rightsActions.some((action) => assessment.permissions[action].status === "allowed-with-obligations");
+    });
+    if (obligationAssessmentIds.length && (
+      decision?.decision !== "allow-with-obligations"
+      || obligationAssessmentIds.some((assessmentId) => !decision.conditions.includes(formatAiRightsObligationCondition(assessmentId)))
+    )) {
+      report("obligation-missing", artifact.id, "usageDecision.conditions", "AI input and service terms obligations must be explicitly carried into the final UsageDecision");
     }
     for (const inputId of record.inputArtifactIds) {
       if (!inputsById.has(inputId)) report("missing-reference", artifact.id, "ai.inputArtifactIds", `Missing AI input artifact ${inputId}`);

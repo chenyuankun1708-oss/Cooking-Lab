@@ -1,6 +1,6 @@
 # Content Research Workflow
 
-最近更新：2026-09-06
+最近更新：2026-09-07
 
 > M10 在本工作流末端增加统一 commercial-use gate。研究质量与内容权利是两个不同维度：可靠 Source 不自动授权复制，开放许可也不自动证明 claim 真实。完整政策见 `docs/CONTENT_RIGHTS_POLICY.md`。
 
@@ -14,7 +14,7 @@ M10 后的发布链实际为：
 
 `ResearchRecord / Source / Evidence -> ContentArtifact -> RightsAssessment -> AttributionRequirement -> UsageDecision -> unified Production validator`
 
-它用于稳定地产出可追溯、可重新定位、经过权利审核的 Culinary Knowledge。当前实现是人工/半自动工作流、类型 contract、确定性 validation 和三个 research exercises；没有 crawler、定时任务、AI 内容生成、CMS、数据库或新公开内容。
+它用于稳定地产出可追溯、可重新定位、经过权利审核的 Culinary Knowledge。当前实现是类型 contract、确定性 validation、risk-based independent review 和三个 research exercises；没有 crawler、定时任务、CMS 或数据库。当前 50 项没有生成式文字 provenance；未来 AI-assisted expression 只有在完整输入、服务条款、独立审查与 sampling 链闭合后才能发布。
 
 ## Workflow
 
@@ -28,8 +28,10 @@ M10 后的发布链实际为：
 | Claim classification | 问题与 Evidence | considered claims + kind + disposition | Editor/researcher | ID、枚举、引用完整性 | 事实/传统/争议/传说分类与不确定性 | unsupported claim 被排除或延期 |
 | Original draft | 已纳入 claims | 自主撰写的 Draft Story/CulinaryItem | Writer/editor | schema 和缺字段检查 | 组织叙事、避免复制原表达 | 事实与创意表达边界清楚 |
 | Editorial review | draft、ResearchRecord、registries | 修订稿与 review decision | Fact, rights, culinary reviewers | broken refs、license 完整性 | 事实解释、文化措辞、料理合理性 | checklist 通过或退回研究 |
-| Publication candidate | reviewed draft | `publication.status = reviewed` 的候选 | Managing editor | eligibility 预检 | 是否值得公开、是否达到产品标准 | 人工批准进入发布决策 |
-| Publishing gate | candidate + reachable registries | deterministic issues / eligible result | Application | schema、translation、image 和 provenance traversal | validator 不能替代发布决定 | 只有人工设为 `published` 且 gate 通过才公开 |
+| Publication candidate | reviewed draft | `publication.status = reviewed` 的候选 | Publishing pipeline | eligibility 预检、独立 agent review、risk-equivalence sampling | MEDIUM 抽样或分歧判断；HIGH 的适用人类/专家/法律 checkpoint | LOW 全维度 PASS；MEDIUM 双上下文 PASS；HIGH 明确解除或 BLOCK |
+| Publishing gate | candidate + reachable registries | deterministic issues / eligible result | Application | schema、translation、image、rights、provenance、attestation 和 sampling traversal | validator 不能替代 HIGH 风险 checkpoint | `published`、全部 fail-closed gate 通过且无 unresolved finding 才公开 |
+
+Human Approval 是独立的第六审查维度，不是所有条目的默认步骤。LOW 内容允许 `AI-assisted creation → deterministic gates → independent agent review → risk-based sampling QA → publish`；MEDIUM 至少使用两个分离 reviewer context；HIGH 才进入明确的人类、领域专家或法律 checkpoint。任何 agent review 都不得标记为 human approval、料理实测或法律意见。
 
 在任何阶段，如果进一步检索不会改变 claim 分类、权利判断或编辑决策，应停止扩展搜索并记录 unresolved questions。资料多并不自动等于结论更可靠。
 

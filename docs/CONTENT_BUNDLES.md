@@ -40,8 +40,8 @@ The manifest is a release index, not an alternative content database. Existing r
 - LOW content may use one genuinely independent agent context across all applicable dimensions. MEDIUM requires separate rights/provenance and content/visual reviewer contexts. HIGH remains blocked without the applicable human, expert, or legal checkpoint.
 - The implementation context cannot mark its own copy reviewed. Agent review is recorded as `actorType: agent` and never represented as human review, culinary field testing, legal opinion, or human approval.
 - Unreviewed packages stay draft and do not enter `getPublishedCulinaryItems()` or the public manifest.
-- Reference-only video may support manual fact checking by URL and timestamp; no video, subtitle, transcript, or frame is stored.
+- M11 不使用视频路线：不观看或总结视频，不保存 timestamp、字幕、转录、截图、下载或 `ExternalMediaReference`。
 
 ## Scale limits
 
-The manifest and validators are linear in item/artifact count and introduce no network access at build time. Capacity beyond 500 items does not require a CMS or database. Operationally, CI duration, independent review throughput, sampling escape rate, disagreement and rework should be measured before choosing a later storage migration.
+The manifest and validators are linear in item/artifact count and introduce no network access at build time. Capacity beyond 500 items does not require a CMS or database. The Product Director deferred the M11 50 → 120 expansion, so the current manifest intentionally remains at 50. Operationally, CI duration, independent review throughput, sampling escape rate, disagreement and rework should be measured before a later Goal chooses to resume content growth or change storage.

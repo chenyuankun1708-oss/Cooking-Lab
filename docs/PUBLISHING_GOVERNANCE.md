@@ -1,6 +1,6 @@
 # Risk-based publishing governance
 
-最近更新：2026-09-06  
+最近更新：2026-09-07
 适用版本：`m10.1-risk-based-2026-09-06`
 
 ## 不变的安全底线
@@ -60,4 +60,10 @@ Sampling 不使用固定百分比。每批必须覆盖新增或改变的风险�
 
 Artifact-set version 覆盖实际料理、Story、Source、Evidence、RightsAssessment、UsageDecision、Attribution、AI metadata、营养/成本 dataset 与转换、内容路径、图片 metadata 及本地图片文件 SHA-256。Committed attestation 保存对应 version；任一内容或依赖证据修改、scope 改变、policy 变化、缺少 risk classification、缺少适用 dimension、MEDIUM 独立性不足、HIGH 缺少 checkpoint 或 sampling coverage 不完整都会使 Production import、测试与 build 失败。每个 sampling checkpoint 另外保存覆盖成员、sample 映射、finding、指标、reviewer 身份和 evidence reference 的固定 evidence digest；当前分类代码若重建出不同历史内容会立即 fail closed。历史 sampling record 可以保留其原始 artifact version，但不能被动态规则静默改写，也不能为已经改变的当前 item 提供 publication coverage。
 
+文字 artifact 的 `derivation` 必须逐项显式声明；registry 不从“有来源”推断作者方式。当前 50 项使用提交到代码库的固定 authoring baseline，删除 ResearchRecord 或 Source 只能触发 provenance blocker，不能把 `factual-synthesis` 自动改称 `original`。AI-assisted expression 还必须使用 canonical hash 的结构化输入包，并显式声明 `direct` 或 `gateway` 路线。Direct 只允许一个 model provider；gateway 至少包含一个 gateway 并以唯一 model provider 结束。每层条款 assessment 必须分别允许 store、transform、publish、commercialize，并闭合进入最终 `UsageDecision`；任何 `allowed-with-obligations` 的 AI input 或服务 assessment 还必须逐项进入 decision conditions，不能只登记 ID 后丢失义务。在专用消费级展示位置实现前，AI input 或服务条款只要携带 attribution requirement 就 fail closed，不能借用无关署名记录通过。输入中引用的 Source 必须真实注册；即使该 Source 只出现在 AI input 中，unknown 或 rights-changed 仍会阻止发布，并且该 Source 及其 Evidence 域必须进入 sampling equivalence 与 provenance/license novelty 覆盖。
+
+无法可靠恢复生成输入、author run/context、prompt identity、实际服务链或适用条款时，生成式 artifact 保持 BLOCK。不得事后补造 provenance，也不得把 derivation 改名为 original 或 factual-synthesis 绕过。
+
 当前 M10 50 项的 migration 记录明确标为独立 agent review，不标为 human review、field test 或 legal opinion。旧 M10 review 没有被追溯包装成 sampling PASS；registry 保留首次 major escape、修复复核和后续 alt mismatch 的完整历史，并只在当前 artifact version 完成连续两个 clean、100% `visual-fidelity:dish` recovery batch 后解除冻结。当前 50 项由五批真实逐项审计记录覆盖，最终 registry 为 `ready=true`。未来批次必须追加新的 batch attestation，不得修改旧 checkpoint 来“继承”PASS。
+
+M11 的内容扩充已由 Product Director 延期。35 个 Batch A 候选与 Batch B 没有继承当前 50 项 attestation，也没有被标记为 rights、provenance、editorial 或 human PASS。

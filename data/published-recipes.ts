@@ -10,7 +10,7 @@ import { hasCompleteRecipeTranslation } from "./localization/public-recipes";
 import { assertM9RecipesPublicationReady } from "@/lib/m9-recipe-publishing";
 import { adaptRecipeToCulinaryItem } from "@/lib/culinary-item-adapter";
 import { assertContentRightsReady, getContentRightsEvaluationDate } from "@/lib/content-rights";
-import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
+import { createContentRightsRegistry, createM10TextArtifactDerivations, m10AuditedCulinaryItemIds } from "./content-rights";
 import {
   assertPublishedRecipesEligible,
   getPubliclyVisibleRecipes,
@@ -45,6 +45,7 @@ const recipeRightsRegistry = createContentRightsRegistry({
   evidence: m9RecipeResearchRegistry.evidence,
   sources: m9RecipeResearchRegistry.sources,
   researchRecords: m9RecipeResearchRegistry.records,
+  textArtifactDerivations: createM10TextArtifactDerivations(recipeRightsItems, []),
 });
 assertContentRightsReady(recipeRightsRegistry, {
   items: recipeRightsItems,

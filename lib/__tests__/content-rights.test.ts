@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { createContentRightsRegistry, isCommercialImageLicense, m10AuditedCulinaryItemIds } from "@/data/content-rights";
+import { createContentRightsRegistry, createM10TextArtifactDerivations, isCommercialImageLicense, m10AuditedCulinaryItemIds } from "@/data/content-rights";
 import { culinaryEvidence } from "@/data/culinary/evidence";
 import { culinaryImages } from "@/data/culinary/images";
 import { culinaryStories } from "@/data/culinary/stories";
@@ -19,7 +19,8 @@ import type { ContentRightsRegistry, RightsAssessment } from "@/types/content-ri
 import type { RecipeImage } from "@/types/image";
 import type { ContentRightsContext } from "../content-rights";
 import { buildConsumerRightsDisclosure } from "../content-rights-consumer";
-import { evaluateContentRightsRegistry, getContentRightsEvaluationDate } from "../content-rights";
+import { evaluateContentRightsRegistry, formatAiRightsObligationCondition, getContentRightsEvaluationDate } from "../content-rights";
+import { createContentVersion } from "../content-version";
 import { generateMetadata as generateRightsMetadata } from "@/app/[locale]/content-rights/page";
 
 const items = getPublishedCulinaryItems();
@@ -32,6 +33,7 @@ const context = {
   evidence: culinaryEvidence,
   sources: contentRightsSources,
   researchRecords: m9RecipeResearchRecords,
+  textArtifactDerivations: createM10TextArtifactDerivations(items, culinaryStories),
   now: "2026-09-06",
 } as const;
 
@@ -368,10 +370,11 @@ describe("M10 Production content-rights gate", () => {
   it("cannot bypass Story rights by removing the reverse item.storyIds link", () => {
     const storyId = culinaryStories[0].id;
     const unlinkedItems = items.map((item) => ({ ...item, storyIds: item.storyIds.filter((id) => id !== storyId) })) as CulinaryItem[];
-    const regenerated = createContentRightsRegistry({ ...context, items: unlinkedItems, auditedItemIds: m10AuditedCulinaryItemIds });
-    expect(regenerated.artifacts.some((artifact) => artifact.subject.type === "story" && artifact.subject.id === storyId)).toBe(true);
-    regenerated.artifacts = regenerated.artifacts.filter((artifact) => artifact.subject.type !== "story" || artifact.subject.id !== storyId);
-    expect(issueCodes(regenerated, { ...context, items: unlinkedItems })).toContain("missing-artifact");
+    expect(() => createContentRightsRegistry({
+      ...context,
+      items: unlinkedItems,
+      auditedItemIds: m10AuditedCulinaryItemIds,
+    })).toThrow(`Text artifact derivation declarations do not resolve: ${storyId}-story`);
   });
 
   it("requires every artifact Evidence to close through its Source rights assessment and UsageDecision", () => {
@@ -411,15 +414,19 @@ describe("M10 Production content-rights gate", () => {
     registry.ai = [{
       id: "ai-test",
       artifactId: artifact.id,
+      outputArtifactVersion: "",
+      author: { actorType: "agent", actorId: "", runId: "", contextId: "" },
       provider: "",
       model: "",
       modelVersion: "",
       generatedAt: "2026-09-06",
-      termsUrl: "",
-      termsEffectiveDate: "",
+      serviceRoute: "direct",
+      serviceChain: [{ serviceId: "", provider: "", role: "model-provider", termsAssessmentId: "missing-terms-assessment" }],
+      termsAssessmentIds: ["missing-terms-assessment"],
+      promptTemplateId: "",
       promptTemplateVersion: "",
-      inputArtifactIds: [],
-      inputRightsReviewed: false,
+      promptTemplateHash: "",
+      inputArtifactIds: ["missing-ai-input"],
       reviewAttestationIds: [] as unknown as [string, ...string[]],
       similarityReview: "required",
       trademarkReview: "required",
@@ -428,6 +435,145 @@ describe("M10 Production content-rights gate", () => {
     const codes = issueCodes(registry);
     expect(codes).toContain("ai-review-incomplete");
     expect(codes).toContain("ai-input-rights-unknown");
+  });
+
+  it("requires exact generated-output, AI-input, service-route, permission, and decision provenance", () => {
+    const valid = registryWithValidAiArtifact();
+    expect(issueCodes(valid)).not.toContain("ai-review-incomplete");
+    expect(issueCodes(valid)).not.toContain("ai-input-rights-unknown");
+
+    const stale = registryWithValidAiArtifact();
+    stale.ai[0].outputArtifactVersion = "clv1-stale";
+    expect(issueCodes(stale)).toContain("ai-review-incomplete");
+
+    const forgedInputHash = registryWithValidAiArtifact();
+    forgedInputHash.aiInputs[0].contentHash = "clv1-0000000000000000";
+    expect(issueCodes(forgedInputHash)).toContain("ai-review-incomplete");
+
+    for (const action of ["store", "transform", "publish", "commercialize"] as const) {
+      const blocked = registryWithValidAiArtifact();
+      const terms = blocked.assessments.find((assessment) => assessment.subject.type === "ai-service")!;
+      terms.permissions[action].status = action === "publish" ? "review-required" : "prohibited";
+      expect(issueCodes(blocked)).toContain("ai-input-rights-unknown");
+    }
+
+    const omittedGateway = registryWithValidAiArtifact();
+    omittedGateway.ai[0].serviceRoute = "gateway";
+    expect(issueCodes(omittedGateway)).toContain("ai-input-rights-unknown");
+
+    const wrongProvider = registryWithValidAiArtifact();
+    wrongProvider.ai[0].serviceChain[0].provider = "Another Provider";
+    expect(issueCodes(wrongProvider)).toContain("ai-input-rights-unknown");
+
+    const missingDecisionClosure = registryWithValidAiArtifact();
+    const generatedArtifact = missingDecisionClosure.artifacts.find((entry) => entry.id === missingDecisionClosure.ai[0].artifactId)!;
+    const generatedDecision = missingDecisionClosure.decisions.find((entry) => entry.id === generatedArtifact.usageDecisionId)!;
+    generatedDecision.assessmentIds = generatedDecision.assessmentIds.filter((id) => id !== missingDecisionClosure.ai[0].termsAssessmentIds[0]) as [string, ...string[]];
+    expect(issueCodes(missingDecisionClosure)).toContain("ai-input-rights-unknown");
+
+    const droppedObligation = registryWithValidAiArtifact();
+    const obligationArtifact = droppedObligation.artifacts.find((entry) => entry.id === droppedObligation.ai[0].artifactId)!;
+    const obligationDecision = droppedObligation.decisions.find((entry) => entry.id === obligationArtifact.usageDecisionId)!;
+    obligationDecision.decision = "allow";
+    obligationDecision.conditions = [];
+    expect(issueCodes(droppedObligation)).toContain("obligation-missing");
+  });
+
+  it("validates a complete gateway route and every service-layer permission and obligation", () => {
+    const validGateway = registryWithValidGatewayRoute();
+    expect(issueCodes(validGateway)).not.toContain("ai-input-rights-unknown");
+    expect(issueCodes(validGateway)).not.toContain("obligation-missing");
+    const validRecord = validGateway.ai[0];
+    const validDecision = validGateway.decisions.find((entry) => entry.artifactId === validRecord.artifactId)!;
+    expect(validDecision.conditions).toEqual(expect.arrayContaining(
+      validRecord.termsAssessmentIds.map(formatAiRightsObligationCondition),
+    ));
+
+    for (const role of ["gateway", "model-provider"] as const) {
+      for (const action of ["store", "transform", "publish", "commercialize"] as const) {
+        const blocked = registryWithValidGatewayRoute();
+        const chainEntry = blocked.ai[0].serviceChain.find((entry) => entry.role === role)!;
+        blocked.assessments.find((assessment) => assessment.id === chainEntry.termsAssessmentId)!.permissions[action].status = "review-required";
+        expect(issueCodes(blocked), `${role}:${action}`).toContain("ai-input-rights-unknown");
+      }
+    }
+
+    const wrongOrder = registryWithValidGatewayRoute();
+    wrongOrder.ai[0].serviceChain.reverse();
+    expect(issueCodes(wrongOrder)).toContain("ai-input-rights-unknown");
+
+    const missingGateway = registryWithValidGatewayRoute();
+    missingGateway.ai[0].serviceChain = missingGateway.ai[0].serviceChain.filter((entry) => entry.role !== "gateway") as typeof missingGateway.ai[0]["serviceChain"];
+    missingGateway.ai[0].termsAssessmentIds = missingGateway.ai[0].serviceChain.map((entry) => entry.termsAssessmentId) as [string, ...string[]];
+    expect(issueCodes(missingGateway)).toContain("ai-input-rights-unknown");
+
+    const duplicateService = registryWithValidGatewayRoute();
+    duplicateService.ai[0].serviceChain[0].serviceId = duplicateService.ai[0].serviceChain[1].serviceId;
+    expect(issueCodes(duplicateService)).toContain("ai-input-rights-unknown");
+
+    const duplicateAssessment = registryWithValidGatewayRoute();
+    duplicateAssessment.ai[0].serviceChain[0].termsAssessmentId = duplicateAssessment.ai[0].serviceChain[1].termsAssessmentId;
+    duplicateAssessment.ai[0].termsAssessmentIds = duplicateAssessment.ai[0].serviceChain.map((entry) => entry.termsAssessmentId) as [string, ...string[]];
+    expect(issueCodes(duplicateAssessment)).toContain("ai-input-rights-unknown");
+
+    const droppedLayerObligation = registryWithValidGatewayRoute();
+    const gatewayAssessmentId = droppedLayerObligation.ai[0].serviceChain.find((entry) => entry.role === "gateway")!.termsAssessmentId;
+    const decision = droppedLayerObligation.decisions.find((entry) => entry.artifactId === droppedLayerObligation.ai[0].artifactId)!;
+    decision.conditions = decision.conditions.filter((condition) => condition !== formatAiRightsObligationCondition(gatewayAssessmentId));
+    expect(issueCodes(droppedLayerObligation)).toContain("obligation-missing");
+
+    for (const subjectType of ["ai-input", "ai-service"] as const) {
+      const undisclosedAttribution = registryWithValidGatewayRoute();
+      const assessment = undisclosedAttribution.assessments.find((entry) => entry.subject.type === subjectType)!;
+      assessment.attributionRequirementIds = [undisclosedAttribution.attributions[0].id];
+      expect(issueCodes(undisclosedAttribution), subjectType).toContain("attribution-invalid");
+    }
+  });
+
+  it("blocks unknown or rights-changed Sources used only through an AI input", () => {
+    for (const status of ["unknown", "rights-changed"] as const) {
+      const registry = registryWithValidAiArtifact();
+      const outputArtifact = registry.artifacts.find((entry) => entry.id === registry.ai[0].artifactId)!;
+      const aiOnlySourceId = registry.aiInputs[0].sourceIds[0];
+      outputArtifact.sourceIds = outputArtifact.sourceIds.filter((sourceId) => sourceId !== aiOnlySourceId);
+      const customContext = {
+        ...context,
+        sources: context.sources.map((source) => {
+          if (source.id !== aiOnlySourceId) return source;
+          return status === "unknown"
+            ? { ...source, rights: { status: "unknown" as const, notes: "Mutation fixture" } }
+            : { ...source, health: { ...source.health, status: "rights-changed" as const } };
+        }),
+      };
+      expect(issueCodes(registry, customContext)).toContain(status === "unknown" ? "source-rights-unknown" : "source-rights-changed");
+    }
+  });
+
+  it("requires explicit derivation declarations and keeps M11 free of external media records", () => {
+    expect(() => createContentRightsRegistry({
+      ...context,
+      auditedItemIds: m10AuditedCulinaryItemIds,
+      textArtifactDerivations: undefined as unknown as [],
+    })).toThrow("textArtifactDerivations is required; content origin cannot be inferred safely");
+    expect(contentRightsRegistry.externalMedia).toEqual([]);
+  });
+
+  it("keeps the M10 authoring baseline stable when research provenance is removed", () => {
+    const itemId = "japanese-oyakodon";
+    const reducedResearchRecords = m9RecipeResearchRecords.filter((record) => record.subject.id !== itemId);
+    const registry = createContentRightsRegistry({
+      ...context,
+      auditedItemIds: m10AuditedCulinaryItemIds,
+      researchRecords: reducedResearchRecords,
+      textArtifactDerivations: createM10TextArtifactDerivations(items, culinaryStories),
+    });
+    const identity = registry.artifacts.find((artifact) => artifact.id === `${itemId}-identity`)!;
+    const preparation = registry.artifacts.find((artifact) => artifact.id === `${itemId}-preparation`)!;
+
+    expect(identity.derivation).toBe("factual-synthesis");
+    expect(preparation.derivation).toBe("factual-synthesis");
+    expect(identity.sourceIds).toEqual([]);
+    expect(issueCodes(registry, { ...context, researchRecords: reducedResearchRecords })).toContain("review-incomplete");
   });
 
   it("covers every used ingredient with explicit nutrition and cost provenance", () => {
@@ -531,4 +677,141 @@ function registryWithValidProductProfile(): ContentRightsRegistry {
     rightsAssessmentId: assessmentId,
   }];
   return registry;
+}
+
+function registryWithValidAiArtifact(): ContentRightsRegistry {
+  const registry = cloneRegistry();
+  const artifact = registry.artifacts.find((entry) => (
+    entry.subject.type === "culinary-item"
+    && entry.kind === "identity"
+    && entry.sourceIds.length > 0
+    && context.researchRecords.some((record) => record.subject.id === entry.subject.id)
+  ))!;
+  const researchRecord = context.researchRecords.find((record) => record.subject.id === artifact.subject.id)!;
+  const inputId = `ai-input-${artifact.subject.id}`;
+  const inputAssessmentId = `rights-${inputId}`;
+  const termsAssessmentId = "rights-ai-service-test-provider";
+  const sourceAssessmentIds = artifact.sourceIds.map((sourceId) => `source-rights-${sourceId}`);
+  const baseAssessment = structuredClone(registry.assessments.find((entry) => entry.id === artifact.rightsAssessmentId)!);
+  artifact.derivation = "generated";
+  registry.assessments = [
+    ...registry.assessments,
+    {
+      ...structuredClone(baseAssessment),
+      id: inputAssessmentId,
+      subject: { type: "ai-input", id: inputId },
+    },
+    {
+      ...structuredClone(baseAssessment),
+      id: termsAssessmentId,
+      subject: { type: "ai-service", id: "test-provider" },
+      basis: {
+        kind: "terms",
+        provider: "Test Provider",
+        termsUrl: "https://example.test/terms",
+        effectiveDate: "2026-09-01",
+      },
+    },
+  ];
+  const inputPayload = {
+    kind: "structured-research-bundle" as const,
+    sourceIds: [...artifact.sourceIds].sort(),
+    evidenceIds: [...artifact.evidenceIds].sort(),
+    researchRecordIds: [researchRecord.id],
+    rightsAssessmentIds: [inputAssessmentId, ...sourceAssessmentIds].sort(),
+    containsThirdPartyExpression: false as const,
+  };
+  registry.aiInputs = [{
+    id: inputId,
+    version: "m11-ai-input-v1",
+    contentHash: createContentVersion(inputPayload),
+    kind: inputPayload.kind,
+    sourceIds: [...artifact.sourceIds],
+    evidenceIds: [...artifact.evidenceIds],
+    researchRecordIds: [researchRecord.id],
+    rightsAssessmentIds: [inputAssessmentId, ...sourceAssessmentIds],
+    containsThirdPartyExpression: false,
+  }];
+  registry.ai = [{
+    id: `ai-${artifact.id}`,
+    artifactId: artifact.id,
+    outputArtifactVersion: artifact.version,
+    author: {
+      actorType: "agent",
+      actorId: "test-author-agent",
+      runId: "test-author-run",
+      contextId: "test-author-context",
+    },
+    provider: "Test Provider",
+    model: "test-model",
+    modelVersion: "test-model-2026-09-01",
+    generatedAt: "2026-09-06",
+    serviceRoute: "direct",
+    serviceChain: [{
+      serviceId: "test-provider",
+      provider: "Test Provider",
+      role: "model-provider",
+      termsAssessmentId,
+    }],
+    termsAssessmentIds: [termsAssessmentId],
+    promptTemplateId: "m11-content-synthesis",
+    promptTemplateVersion: "1",
+    promptTemplateHash: "clv1-2222222222222222",
+    inputArtifactIds: [inputId],
+    reviewAttestationIds: ["attestation-test-rights", "attestation-test-provenance", "attestation-test-editorial"],
+    similarityReview: "passed",
+    trademarkReview: "not-applicable",
+  }];
+  closeAiDecision(registry);
+  return registry;
+}
+
+function registryWithValidGatewayRoute(): ContentRightsRegistry {
+  const registry = registryWithValidAiArtifact();
+  const record = registry.ai[0];
+  const modelProvider = record.serviceChain[0];
+  const modelAssessment = registry.assessments.find((assessment) => assessment.id === modelProvider.termsAssessmentId)!;
+  modelAssessment.permissions.transform.status = "allowed-with-obligations";
+  const gatewayAssessmentId = "rights-ai-service-test-gateway";
+  const gatewayAssessment: RightsAssessment = {
+    ...structuredClone(modelAssessment),
+    id: gatewayAssessmentId,
+    subject: { type: "ai-service", id: "test-gateway" },
+    basis: {
+      kind: "terms",
+      provider: "Test Gateway",
+      termsUrl: "https://gateway.example.test/terms",
+      effectiveDate: "2026-09-01",
+    },
+  };
+  gatewayAssessment.permissions.store.status = "allowed-with-obligations";
+  registry.assessments = [...registry.assessments, gatewayAssessment];
+  record.serviceRoute = "gateway";
+  record.serviceChain = [{
+    serviceId: "test-gateway",
+    provider: "Test Gateway",
+    role: "gateway",
+    termsAssessmentId: gatewayAssessmentId,
+  }, modelProvider];
+  record.termsAssessmentIds = [gatewayAssessmentId, modelProvider.termsAssessmentId];
+  closeAiDecision(registry);
+  return registry;
+}
+
+function closeAiDecision(registry: ContentRightsRegistry) {
+  const record = registry.ai[0];
+  const input = registry.aiInputs.find((entry) => record.inputArtifactIds.includes(entry.id))!;
+  const decision = registry.decisions.find((entry) => entry.artifactId === record.artifactId)!;
+  const aiAssessmentIds = [...new Set([
+    ...decision.assessmentIds,
+    ...input.rightsAssessmentIds,
+    ...record.termsAssessmentIds,
+  ])] as [string, ...string[]];
+  decision.assessmentIds = aiAssessmentIds;
+  const obligationAssessmentIds = aiAssessmentIds.filter((assessmentId) => {
+    const assessment = registry.assessments.find((entry) => entry.id === assessmentId);
+    return assessment && Object.values(assessment.permissions).some((permission) => permission.status === "allowed-with-obligations");
+  });
+  decision.decision = obligationAssessmentIds.length ? "allow-with-obligations" : "allow";
+  decision.conditions = obligationAssessmentIds.map(formatAiRightsObligationCondition);
 }

@@ -106,19 +106,10 @@ export function createArtifactSetVersion(
   const itemIdSet = new Set(itemIds);
   const requestedItems = context.items.filter((item) => itemIdSet.has(item.id)).sort((left, right) => left.id.localeCompare(right.id));
   const artifactIds = new Set(requestedItems.flatMap((item) => getItemArtifacts(item, context.rightsRegistry).map((artifact) => artifact.id)));
-  let discoveredAiInput = true;
-  while (discoveredAiInput) {
-    discoveredAiInput = false;
-    for (const record of context.rightsRegistry.ai) {
-      if (!artifactIds.has(record.artifactId)) continue;
-      for (const inputArtifactId of record.inputArtifactIds) {
-        if (artifactIds.has(inputArtifactId)) continue;
-        artifactIds.add(inputArtifactId);
-        discoveredAiInput = true;
-      }
-    }
-  }
   const artifacts = context.rightsRegistry.artifacts.filter((artifact) => artifactIds.has(artifact.id)).sort(byId);
+  const ai = context.rightsRegistry.ai.filter((entry) => artifactIds.has(entry.artifactId)).sort(byId);
+  const aiInputIds = new Set(ai.flatMap((record) => record.inputArtifactIds));
+  const aiInputs = context.rightsRegistry.aiInputs.filter((entry) => aiInputIds.has(entry.id)).sort(byId);
   const relatedItemIds = new Set([
     ...itemIds,
     ...artifacts.flatMap((artifact) => artifact.subject.type === "culinary-item" ? [artifact.subject.id] : []),
@@ -131,10 +122,14 @@ export function createArtifactSetVersion(
   const items = context.items.filter((item) => relatedItemIds.has(item.id)).sort((left, right) => left.id.localeCompare(right.id));
   const decisions = uniqueById(artifacts.flatMap((artifact) => context.rightsRegistry.decisions.filter((decision) => decision.id === artifact.usageDecisionId)));
   const attributions = context.rightsRegistry.attributions.filter((entry) => artifactIds.has(entry.artifactId)).sort(byId);
-  const evidenceIds = new Set(artifacts.flatMap((artifact) => artifact.evidenceIds));
+  const evidenceIds = new Set([
+    ...artifacts.flatMap((artifact) => artifact.evidenceIds),
+    ...aiInputs.flatMap((input) => input.evidenceIds),
+  ]);
   const evidence = context.evidence.filter((entry) => evidenceIds.has(entry.id)).sort(byId);
   const sourceIds = new Set([
     ...artifacts.flatMap((artifact) => artifact.sourceIds),
+    ...aiInputs.flatMap((input) => input.sourceIds),
     ...evidence.map((entry) => entry.sourceId),
   ]);
   const sources = context.sources.filter((source) => sourceIds.has(source.id)).sort(byId);
@@ -149,7 +144,7 @@ export function createArtifactSetVersion(
     ...artifacts.map((artifact) => artifact.subject.id),
   ]);
   const researchRecords = context.researchRecords
-    .filter((record) => researchSubjectIds.has(record.subject.id))
+    .filter((record) => researchSubjectIds.has(record.subject.id) || aiInputs.some((input) => input.researchRecordIds.includes(record.id)))
     .sort(byId);
   const imageIds = new Set([
     ...items.flatMap((item) => item.images.availability === "available" ? item.images.references.imageIds : []),
@@ -167,7 +162,6 @@ export function createArtifactSetVersion(
   const costs = context.rightsRegistry.costs.filter((entry) => costIds.has(entry.id)).sort(byId);
   const datasetIds = new Set(nutrition.flatMap((entry) => entry.kind === "dataset" ? [entry.datasetId] : []));
   const datasets = context.rightsRegistry.datasets.filter((entry) => datasetIds.has(entry.id)).sort(byId);
-  const ai = context.rightsRegistry.ai.filter((entry) => artifacts.some((artifact) => artifact.id === entry.artifactId)).sort(byId);
   const externalMedia = context.rightsRegistry.externalMedia.filter((entry) => sourceIds.has(entry.sourceId)).sort(byId);
   const restaurants = context.rightsRegistry.restaurants.filter((entry) => relatedItemIds.has(entry.culinaryItemId)).sort((left, right) => left.culinaryItemId.localeCompare(right.culinaryItemId));
   const productProfiles = context.rightsRegistry.productProfiles.filter((entry) => relatedItemIds.has(entry.culinaryItemId)).sort(byId);
@@ -178,6 +172,8 @@ export function createArtifactSetVersion(
     ...costs.map((cost) => cost.rightsAssessmentId),
     ...externalMedia.map((media) => media.rightsAssessmentId),
     ...productProfiles.map((profile) => profile.rightsAssessmentId),
+    ...aiInputs.flatMap((input) => input.rightsAssessmentIds),
+    ...ai.flatMap((record) => record.termsAssessmentIds),
   ]);
   const assessments = context.rightsRegistry.assessments.filter((assessment) => assessmentIds.has(assessment.id)).sort(byId);
   const contentPaths = context.contentPaths.filter((entry) => relatedItemIds.has(entry.itemId)).sort((left, right) => left.itemId.localeCompare(right.itemId));
@@ -199,6 +195,7 @@ export function createArtifactSetVersion(
     nutrition,
     costs,
     datasets,
+    ...(aiInputs.length ? { aiInputs } : {}),
     ai,
     externalMedia,
     restaurants,
@@ -218,9 +215,17 @@ export function deriveEquivalenceClassKeys(
   const image = context.images.find((entry) => entry.id === imageId);
   const sourceById = new Map(context.sources.map((source) => [source.id, source]));
   const evidenceById = new Map(context.evidence.map((evidence) => [evidence.id, evidence]));
+  const aiRecords = artifacts.flatMap((artifact) => context.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
+  const aiInputIds = new Set(aiRecords.flatMap((record) => record.inputArtifactIds));
+  const aiInputs = context.rightsRegistry.aiInputs.filter((entry) => aiInputIds.has(entry.id));
   const provenanceSourceIds = new Set([
     ...artifacts.flatMap((artifact) => artifact.sourceIds),
     ...artifacts.flatMap((artifact) => artifact.evidenceIds.flatMap((evidenceId) => {
+      const evidence = evidenceById.get(evidenceId);
+      return evidence ? [evidence.sourceId] : [];
+    })),
+    ...aiInputs.flatMap((input) => input.sourceIds),
+    ...aiInputs.flatMap((input) => input.evidenceIds.flatMap((evidenceId) => {
       const evidence = evidenceById.get(evidenceId);
       return evidence ? [evidence.sourceId] : [];
     })),
@@ -251,12 +256,13 @@ export function deriveEquivalenceClassKeys(
     ...costs.map((cost) => cost.rightsAssessmentId),
     ...externalMedia.map((media) => media.rightsAssessmentId),
     ...productProfiles.map((profile) => profile.rightsAssessmentId),
+    ...aiInputs.flatMap((input) => input.rightsAssessmentIds),
+    ...aiRecords.flatMap((record) => record.termsAssessmentIds),
   ]);
   const rightsBases = new Set(context.rightsRegistry.assessments.filter((entry) => assessmentIds.has(entry.id)).map((entry) => entry.basis.kind));
   const rightsAuthorities = new Set(context.rightsRegistry.assessments
     .filter((entry) => assessmentIds.has(entry.id))
     .map((entry) => `${rightsBasisIdentity(entry.basis)}:${entry.authorityVersion}`));
-  const aiRecords = artifacts.flatMap((artifact) => context.rightsRegistry.ai.filter((record) => record.artifactId === artifact.id));
   const nutritionTransforms = nutritionRecords
     .map((entry) => entry.kind === "dataset" ? `dataset:${entry.datasetId}:${entry.conversionMethod}` : `editorial:${entry.method}`);
   const costTransforms = costs
@@ -290,7 +296,7 @@ export function deriveEquivalenceClassKeys(
     ...[...rightsAuthorities].sort().map((authority) => `rights-authority:${authority}`),
     ...nutritionTransforms.sort().map((transform) => `data-transform:${transform}`),
     ...costTransforms.sort().map((transform) => `cost-transform:${transform}`),
-    ...aiRecords.map((record) => `model-prompt:${record.provider}/${record.model}/${record.modelVersion}/${record.promptTemplateVersion}`),
+    ...aiRecords.map((record) => `model-prompt:${record.provider}/${record.model}/${record.modelVersion}/${record.promptTemplateId}/${record.promptTemplateVersion}/${record.promptTemplateHash}`),
     ...(restaurant ? [`restaurant:${restaurant.kind}`] : []),
     ...externalMedia.map((media) => `external-media:${media.platform}:${media.use}:${media.privacyReview}`),
     ...(productProfiles.length ? ["product-profile:versioned-independent-editorial"] : []),
@@ -414,12 +420,26 @@ export function evaluatePublishingGovernance(
       .filter((item) => getItemArtifacts(item, context.rightsRegistry).some((artifact) => artifact.id === record.artifactId))
       .map((item) => item.id);
     const linked = record.reviewAttestationIds.map((id) => governance.attestations.find((entry) => entry.id === id));
+    const requiredAiDimensions: ReviewDimension[] = ["rights-license", "provenance", "editorial"];
+    const currentPassingDimensions = new Set(linked.flatMap((attestation) => {
+      if (
+        !attestation
+        || attestation.verdict !== "pass"
+        || attestation.policyVersion !== governance.policyVersion
+        || attestation.artifactSetVersion !== versionOf(attestation.itemIds)
+        || !ownerItemIds.some((itemId) => attestation.itemIds.includes(itemId))
+        || !sameActor(attestation.author, record.author)
+        || !actorsAreIndependent(attestation.reviewer, record.author)
+        || attestation.reviewerModifiedContent !== false
+      ) return [];
+      return [attestation.dimension];
+    }));
     if (
       !ownerItemIds.length
       || linked.some((entry) => !entry)
-      || !linked.some((entry) => entry?.verdict === "pass" && entry.dimension === "editorial" && ownerItemIds.some((itemId) => entry.itemIds.includes(itemId)))
+      || requiredAiDimensions.some((dimension) => !currentPassingDimensions.has(dimension))
     ) {
-      report("ai-attestation-missing", record.artifactId, "AI artifact requires a linked passing editorial review attestation");
+      report("ai-attestation-missing", record.artifactId, "AI artifact requires linked current rights/license, provenance, and editorial PASS attestations whose author identity matches the generation record");
     }
   }
 
@@ -428,6 +448,25 @@ export function evaluatePublishingGovernance(
     issues: issues.sort((left, right) => `${left.subjectId}:${left.code}`.localeCompare(`${right.subjectId}:${right.code}`)),
     auditedItemIds: publishedItems.map((item) => item.id).sort(),
   };
+}
+
+function sameActor(
+  left: ReviewAttestation["author"],
+  right: ReviewAttestation["author"],
+): boolean {
+  return left.actorType === right.actorType
+    && left.actorId === right.actorId
+    && left.runId === right.runId
+    && left.contextId === right.contextId;
+}
+
+function actorsAreIndependent(
+  left: ReviewAttestation["reviewer"],
+  right: ReviewAttestation["author"],
+): boolean {
+  return left.actorId !== right.actorId
+    && left.runId !== right.runId
+    && left.contextId !== right.contextId;
 }
 
 export function assertPublishingGovernanceReady(
@@ -483,11 +522,7 @@ function validateAttestation(
   if (attestation.itemIds.some((itemId) => !publishedItemIds.has(itemId))) {
     report("invalid-review-attestation", attestation.id, "Attestation includes an item outside the published boundary");
   }
-  if (
-    attestation.author.actorId === attestation.reviewer.actorId
-    || attestation.author.runId === attestation.reviewer.runId
-    || attestation.author.contextId === attestation.reviewer.contextId
-  ) {
+  if (!actorsAreIndependent(attestation.author, attestation.reviewer)) {
     report("reviewer-not-independent", attestation.id, "Author and reviewer actor, run, and context must be distinct");
   }
   if (attestation.reviewerModifiedContent !== false) {

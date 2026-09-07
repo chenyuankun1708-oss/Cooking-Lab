@@ -1,6 +1,6 @@
 # Roadmap
 
-最近更新：2026-09-06
+最近更新：2026-09-07
 
 ## 当前发布状态
 
@@ -29,7 +29,9 @@ GitHub tracking：Epic `#87`，Issues `#88-#94`。
 - 已建立 `MealPlanV1`、确定性购物合并、最早可用设备时间线、追加/替换分离的安全 URL codec、V0 migration 与版本化 localStorage。
 - 已增加双语 `/{locale}/plan`、推荐/详情/Pairing 入口、首页继续计划、详情章节导航、相似料理和双主题视觉基础。
 - 当前 50 项已通过逐项 package module 进入 repository，并建立独立提交的 deterministic manifest 与 `content:audit`。
-- 120 项公开验收仍缺 70 个完全通过 M10 rights gate、M10.1 风险分级独立审查与 sampling QA 的本地内容包。agent review 必须保留真实 actor/run/context 身份，不能表示为 human approval、料理实测或法律意见；HIGH 风险继续进入适用的人类、领域专家或法律 checkpoint。
+- M10.1 fail-closed governance 已由 Issue #96 / PR #97 交付并在现有 50 项上生效。
+- M11 不观看或总结视频，也不创建 timestamp Evidence 或 `ExternalMediaReference`；每项仍需至少两个可靠的非视频来源。
+- 120 项公开验收仍缺 70 个完全通过 M10 rights gate、M10.1 风险分级独立审查与 sampling QA 的本地内容包。Batch A 35 项目前因历史 AI author/run/prompt/input 与 NewAPI→上游商业输出条款链不能可靠证明而保持 BLOCK。agent review 必须保留真实 actor/run/context 身份，不能表示为 human approval、料理实测或法律意见；HIGH 风险继续进入适用的人类、领域专家或法律 checkpoint。
 
 完整边界与当前停止条件见 `docs/M11_DECISION_TO_TABLE.md`。
 

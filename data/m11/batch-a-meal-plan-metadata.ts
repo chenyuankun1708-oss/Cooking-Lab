@@ -125,9 +125,6 @@ export const m11BatchAMealPlanStepMetadata = Object.freeze({
   "flat-white": {
     1: { kind: "active", durationMinutes: 4 }, 2: { kind: "active", durationMinutes: 4 },
   },
-  "cha-chaan-teng-lemon-coke": {
-    1: { kind: "active", durationMinutes: 4 }, 2: { kind: "active", durationMinutes: 3 },
-  },
   "kumquat-lemon-tea": {
     1: { kind: "active", durationMinutes: 5 }, 2: { kind: "active", durationMinutes: 12 },
     3: { kind: "active", durationMinutes: 3 },

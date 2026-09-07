@@ -37,8 +37,10 @@ The manifest is a release index, not an alternative content database. Existing r
 
 - AI output is never Evidence.
 - AI-assisted expression requires an `AiGenerationRecord`, reviewed inputs, similarity/trademark review where applicable, and current risk-based `ReviewAttestation` coverage before publication.
+- The record is artifact-specific and binds the current output version to the actual author actor/run/context, immutable model identity, versioned prompt hash, structured input bundle, closed research records, source-rights assessments, and every gateway/upstream terms assessment. Missing historical provenance is a blocker, not a field to reconstruct by guesswork.
 - LOW content may use one genuinely independent agent context across all applicable dimensions. MEDIUM requires separate rights/provenance and content/visual reviewer contexts. HIGH remains blocked without the applicable human, expert, or legal checkpoint.
 - The implementation context cannot mark its own copy reviewed. Agent review is recorded as `actorType: agent` and never represented as human review, culinary field testing, legal opinion, or human approval.
+- M11 Batch A currently demonstrates this fail-closed path: its 108 AI-assisted text artifacts are classified as `generated`, while unverifiable historical run/prompt/input and NewAPI/upstream terms metadata are intentionally not fabricated. Those 35 candidates remain outside Production.
 - Unreviewed packages stay draft and do not enter `getPublishedCulinaryItems()` or the public manifest.
 - The generic M10 media model remains available for other goals. M11 content batches do not use it: no video viewing, timestamp Evidence, subtitle, transcript, download, frame capture, or `ExternalMediaReference` is produced.
 

@@ -19,6 +19,12 @@ import {
   batchANonDishStories,
 } from "./batch-a-nondishes";
 import { m11BatchAItemIds } from "./portfolio";
+export {
+  m11BatchAAiGenerationRecords,
+  m11BatchAAiInputs,
+  m11BatchAAiServiceAssessments,
+  m11BatchAGeneratedArtifactIds,
+} from "./ai-provenance";
 
 export const m11BatchAItems = Object.freeze([...batchADishItems, ...batchANonDishItems]);
 export const m11BatchAImages = Object.freeze([...batchADishImages, ...batchANonDishImages]);

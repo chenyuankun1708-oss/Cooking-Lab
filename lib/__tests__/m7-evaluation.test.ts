@@ -108,11 +108,11 @@ describe("M7 canonical evaluation", () => {
     expect(meal?.primary).toMatchObject({
       templateId: "partial-pair",
       completenessLabel: "The current library supports a partial composition",
-      preparation: { elapsedTimeLabel: "Estimated coordinated time: about 23 min" },
+      preparation: { elapsedTimeLabel: "Estimated coordinated time: about 30 min" },
     });
     expect(meal?.primary?.items.map(({ id }) => id)).toEqual([
       "greek-village-salad",
-      "roasted-salmon",
+      "tomato-scrambled-eggs",
     ]);
     expect(meal?.alternatives).toEqual([]);
     expect(meal?.emptyReason).toBeUndefined();

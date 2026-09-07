@@ -1,3 +1,5 @@
+import type { ReviewActorIdentity } from "./review-identity";
+
 export const contentArtifactKinds = [
   "identity",
   "preparation",
@@ -43,7 +45,7 @@ export interface RightsRiskReview {
 
 export interface RightsAssessment {
   id: string;
-  subject: { type: "artifact" | "source" | "dataset" | "external-media"; id: string };
+  subject: { type: "artifact" | "source" | "dataset" | "external-media" | "ai-input" | "ai-service"; id: string };
   jurisdictionBaseline: readonly ["CN", "US", "EU", "UK"];
   basis: RightsAssessmentBasis;
   authorityVersion: string;
@@ -158,18 +160,32 @@ export interface CostProvenance {
   rightsAssessmentId: string;
 }
 
+export interface AiInputArtifact {
+  id: string;
+  version: string;
+  contentHash: string;
+  kind: "structured-research-bundle" | "first-party-brief";
+  sourceIds: string[];
+  evidenceIds: string[];
+  researchRecordIds: string[];
+  rightsAssessmentIds: [string, ...string[]];
+  containsThirdPartyExpression: false;
+}
+
 export interface AiGenerationRecord {
   id: string;
   artifactId: string;
+  outputArtifactVersion: string;
+  author: ReviewActorIdentity & { actorType: "agent" };
   provider: string;
   model: string;
   modelVersion: string;
   generatedAt: string;
-  termsUrl: string;
-  termsEffectiveDate: string;
+  termsAssessmentIds: [string, ...string[]];
+  promptTemplateId: string;
   promptTemplateVersion: string;
-  inputArtifactIds: string[];
-  inputRightsReviewed: boolean;
+  promptTemplateHash: string;
+  inputArtifactIds: [string, ...string[]];
   reviewAttestationIds: [string, ...string[]];
   similarityReview: "passed" | "required";
   trademarkReview: "passed" | "not-applicable" | "required";
@@ -251,6 +267,7 @@ export interface ContentRightsRegistry {
   datasets: readonly DatasetSource[];
   nutrition: readonly NutritionProvenance[];
   costs: readonly CostProvenance[];
+  aiInputs: readonly AiInputArtifact[];
   ai: readonly AiGenerationRecord[];
   externalMedia: readonly ExternalMediaReference[];
   restaurantRequirements: readonly RestaurantContentRequirement[];

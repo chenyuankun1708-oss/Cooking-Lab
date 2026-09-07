@@ -1,3 +1,5 @@
+import type { ReviewActorIdentity } from "./review-identity";
+
 export const reviewDimensions = [
   "rights-license",
   "provenance",
@@ -8,15 +10,9 @@ export const reviewDimensions = [
 ] as const;
 export type ReviewDimension = (typeof reviewDimensions)[number];
 
-export type ReviewActorType = "agent" | "human" | "domain-expert" | "lawyer";
 export type PublishingRiskLevel = "low" | "medium" | "high";
 
-export interface ReviewActorIdentity {
-  actorType: ReviewActorType;
-  actorId: string;
-  runId: string;
-  contextId: string;
-}
+export type { ReviewActorIdentity, ReviewActorType } from "./review-identity";
 
 export interface ReviewFinding {
   code: string;

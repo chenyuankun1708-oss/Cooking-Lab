@@ -1,6 +1,8 @@
 import type { CulinaryItem, Evidence, Source, Story } from "@/types/culinary";
 import type {
   AttributionRequirement,
+  AiGenerationRecord,
+  AiInputArtifact,
   ContentArtifact,
   ContentRightsRegistry,
   ProductProfile,
@@ -32,18 +34,31 @@ export interface CreateContentRightsRegistryInput {
   restaurantRequirements: readonly RestaurantContentRequirement[];
   restaurants: readonly RestaurantContentIdentity[];
   productProfiles?: readonly ProductProfile[];
+  aiInputs?: readonly AiInputArtifact[];
+  ai?: readonly AiGenerationRecord[];
+  aiAssessments?: readonly RightsAssessment[];
+  generatedArtifactIds?: readonly string[];
+  preciseSourceUseItemIds?: readonly string[];
 }
 
 export function createContentRightsRegistry(input: CreateContentRightsRegistryInput): ContentRightsRegistry {
   const auditedItemIds = new Set(input.auditedItemIds);
   const publishedItems = input.items.filter((item) => item.publication.status === "published" && auditedItemIds.has(item.id));
   const itemIds = new Set(publishedItems.map((item) => item.id));
+  const storyIds = new Set(publishedItems.flatMap((item) => item.storyIds));
   const imageIds = new Set(publishedItems.flatMap((item) => item.images.availability === "available" ? [item.images.references.primaryImageId] : []));
   const researchBySubject = new Map<string, ResearchRecord[]>();
   for (const record of input.researchRecords.filter((entry) => entry.status === "closed" && itemIds.has(entry.subject.id))) {
     researchBySubject.set(record.subject.id, [...(researchBySubject.get(record.subject.id) ?? []), record]);
   }
   const evidenceById = new Map(input.evidence.map((entry) => [entry.id, entry]));
+  const aiArtifactIds = new Set([
+    ...(input.generatedArtifactIds ?? []),
+    ...(input.ai ?? []).map((record) => record.artifactId),
+  ]);
+  const aiRecordByArtifactId = new Map((input.ai ?? []).map((record) => [record.artifactId, record]));
+  const aiInputById = new Map((input.aiInputs ?? []).map((artifact) => [artifact.id, artifact]));
+  const preciseSourceUseItemIds = new Set(input.preciseSourceUseItemIds ?? []);
 
   const artifacts: ContentArtifact[] = [];
   const assessments: RightsAssessment[] = [];
@@ -52,15 +67,23 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
 
   for (const item of publishedItems) {
     const records = researchBySubject.get(item.id) ?? [];
-    const sourceIds = unique(records.flatMap((record) => record.sourceDecisions.flatMap((decision) => decision.disposition === "accepted" ? [decision.sourceId] : [])));
-    const derivation = sourceIds.length ? "factual-synthesis" as const : "original" as const;
     for (const kind of ["identity", "preparation"] as const) {
+      const acceptedUses = kind === "identity" ? new Set(["identity"]) : new Set(["preparation", "safety"]);
+      const sourceIds = unique(records.flatMap((record) => record.sourceDecisions.flatMap((decision) =>
+        decision.disposition === "accepted" && (
+          !preciseSourceUseItemIds.has(item.id)
+          || decision.uses.some((use) => acceptedUses.has(use))
+        )
+          ? [decision.sourceId]
+          : [])));
       addFirstPartyArtifact({
         id: `${item.id}-${kind}`,
         version: createContentVersion({ kind, item, sourceIds }),
         subject: { type: "culinary-item", id: item.id },
         kind,
-        derivation,
+        derivation: aiArtifactIds.has(`${item.id}-${kind}`)
+          ? "generated"
+          : sourceIds.length ? "factual-synthesis" : "original",
         sourceIds,
         evidenceIds: [],
       }, artifacts, assessments, decisions);
@@ -78,7 +101,7 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     }
   }
 
-  for (const story of input.stories.filter((entry) => entry.publication.status === "published")) {
+  for (const story of input.stories.filter((entry) => entry.publication.status === "published" && storyIds.has(entry.id))) {
     const evidenceIds = unique(story.claims.flatMap((claim) => claim.evidenceIds));
     const sourceIds = unique(evidenceIds.flatMap((evidenceId) => {
       const evidence = evidenceById.get(evidenceId);
@@ -89,7 +112,7 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
       version: createContentVersion({ kind: "story", story, sourceIds, evidenceIds }),
       subject: { type: "story", id: story.id },
       kind: "story",
-      derivation: "factual-synthesis",
+      derivation: aiArtifactIds.has(`${story.id}-story`) ? "generated" : "factual-synthesis",
       sourceIds,
       evidenceIds,
     }, artifacts, assessments, decisions);
@@ -106,10 +129,16 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
       version: createContentVersion({ kind: "product-profile", profile }),
       subject: { type: "product-profile", id: profile.id },
       kind: "product-profile",
-      derivation: "factual-synthesis",
+      derivation: aiArtifactIds.has(`${profile.id}-product-profile`) ? "generated" : "factual-synthesis",
       sourceIds: [...profile.sourceIds],
       evidenceIds: [],
     }, artifacts, assessments, decisions);
+  }
+
+  const artifactIds = new Set(artifacts.map((artifact) => artifact.id));
+  const missingGeneratedArtifactIds = [...aiArtifactIds].filter((artifactId) => !artifactIds.has(artifactId));
+  if (missingGeneratedArtifactIds.length) {
+    throw new Error(`Generated artifact declarations do not resolve: ${missingGeneratedArtifactIds.join(", ")}`);
   }
 
   const usedSourceIds = new Set(artifacts.flatMap((artifact) => artifact.sourceIds));
@@ -120,12 +149,27 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
     const artifact = artifacts.find((entry) => entry.id === decision.artifactId);
     if (!artifact) continue;
     const sourceAssessments = artifact.sourceIds.map((sourceId) => `source-rights-${sourceId}`);
-    decision.assessmentIds = [artifact.rightsAssessmentId, ...sourceAssessments];
+    const aiRecord = aiRecordByArtifactId.get(artifact.id);
+    const aiAssessmentIds = aiRecord
+      ? unique([
+          ...aiRecord.termsAssessmentIds,
+          ...aiRecord.inputArtifactIds.flatMap((inputId) => aiInputById.get(inputId)?.rightsAssessmentIds ?? []),
+        ])
+      : [];
+    decision.assessmentIds = [artifact.rightsAssessmentId, ...sourceAssessments, ...aiAssessmentIds];
+    if (artifact.derivation === "generated" && !aiRecord) {
+      decision.decision = "block";
+      decision.conditions = [
+        ...decision.conditions,
+        "Generated expression has no complete, current AI provenance and service-terms chain.",
+      ];
+    }
   }
 
   const costAssessmentId = "rights-cooking-lab-cn-price-estimate-2026-09";
   assessments.push(firstPartyAssessment(costAssessmentId, { type: "dataset", id: "cooking-lab-cn-price-estimate-2026-09" }));
   assessments.push(approvedFutureDatasets.usdaFoodDataCentral.rightsAssessment);
+  assessments.push(...(input.aiAssessments ?? []));
 
   const nutrition = input.ingredients.map((ingredient) => ({
     ingredientId: ingredient.id,
@@ -164,7 +208,8 @@ export function createContentRightsRegistry(input: CreateContentRightsRegistryIn
       methodology: "Static Cooking Lab editorial estimates per 100 g; no retailer database or systematic extraction is used.",
       rightsAssessmentId: costAssessmentId,
     }],
-    ai: [],
+    aiInputs: input.aiInputs ?? [],
+    ai: input.ai ?? [],
     externalMedia: [],
     restaurantRequirements: input.restaurantRequirements.filter((requirement) => itemIds.has(requirement.culinaryItemId)),
     restaurants: input.restaurants.filter((identity) => itemIds.has(identity.culinaryItemId)),

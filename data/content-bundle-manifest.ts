@@ -930,10 +930,12 @@ const m10PublishedContentBundleManifest = {
 // Batch A is a separately committed checkpoint rather than a runtime projection
 // of the live packages. The validator compares these literal entries with the
 // public boundary and every current rights decision.
-export const publishedContentBundleManifest = {
+export const m11BatchAPublicationCandidateManifest = {
   version: 1,
   entries: [
     ...m10PublishedContentBundleManifest.entries,
     ...(batchAManifestEntries as ContentBundleManifestEntryV1[]),
   ].sort((left, right) => left.slug.localeCompare(right.slug)),
 } as const satisfies ContentBundleManifestV1;
+
+export const publishedContentBundleManifest = m10PublishedContentBundleManifest;

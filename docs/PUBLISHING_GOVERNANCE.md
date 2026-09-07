@@ -1,6 +1,6 @@
 # Risk-based publishing governance
 
-最近更新：2026-09-06  
+最近更新：2026-09-07
 适用版本：`m10.1-risk-based-2026-09-06`
 
 ## 不变的安全底线
@@ -59,6 +59,8 @@ Sampling 不使用固定百分比。每批必须覆盖新增或改变的风险�
 ## Fail-closed enforcement
 
 Artifact-set version 覆盖实际料理、Story、Source、Evidence、RightsAssessment、UsageDecision、Attribution、AI metadata、营养/成本 dataset 与转换、内容路径、图片 metadata 及本地图片文件 SHA-256。Committed attestation 保存对应 version；任一内容或依赖证据修改、scope 改变、policy 变化、缺少 risk classification、缺少适用 dimension、MEDIUM 独立性不足、HIGH 缺少 checkpoint 或 sampling coverage 不完整都会使 Production import、测试与 build 失败。每个 sampling checkpoint 另外保存覆盖成员、sample 映射、finding、指标、reviewer 身份和 evidence reference 的固定 evidence digest；当前分类代码若重建出不同历史内容会立即 fail closed。历史 sampling record 可以保留其原始 artifact version，但不能被动态规则静默改写，也不能为已经改变的当前 item 提供 publication coverage。
+
+AI-assisted expression 另外要求一对一的 `AiGenerationRecord`。记录必须与当前输出 version 对齐，author 身份必须与所链接 attestation 的 author 完全一致；rights/license、provenance、editorial 三个 PASS 既要覆盖所属 item，也要来自与 author 不同的 reviewer actor/run/context。输入包只能保存 Source、Evidence、ResearchRecord 和 rights assessment 的结构化 ID/hash，不能保存第三方受保护表达；网关与真实上游服务的商业输出条款必须逐层完成可复核 assessment。历史运行、prompt、输入或服务链无法可靠恢复时，候选保持 `generated + block`，不得用空记录、推测记录或 derivation 改名绕过。
 
 当前 M10 50 项的 migration 记录明确标为独立 agent review，不标为 human review、field test 或 legal opinion。旧 M10 review 没有被追溯包装成 sampling PASS；registry 保留首次 major escape、修复复核和后续 alt mismatch 的完整历史，并只在当前 artifact version 完成连续两个 clean、100% `visual-fidelity:dish` recovery batch 后解除冻结。当前 50 项由五批真实逐项审计记录覆盖，最终 registry 为 `ready=true`。未来批次必须追加新的 batch attestation，不得修改旧 checkpoint 来“继承”PASS。
 

@@ -6,7 +6,11 @@ import { createContentRightsRegistry } from "@/data/content-rights";
 import { ingredients } from "@/data/ingredients";
 import {
   m11BatchAContentPackages,
+  m11BatchAAiGenerationRecords,
+  m11BatchAAiInputs,
+  m11BatchAAiServiceAssessments,
   m11BatchAEvidence,
+  m11BatchAGeneratedArtifactIds,
   m11BatchAImages,
   m11BatchAItems,
   m11BatchAProductProfiles,
@@ -61,6 +65,11 @@ const rightsRegistry = createContentRightsRegistry({
   })),
   restaurants: m11BatchARestaurantIdentities,
   productProfiles: m11BatchAProductProfiles,
+  aiInputs: m11BatchAAiInputs,
+  ai: m11BatchAAiGenerationRecords,
+  aiAssessments: m11BatchAAiServiceAssessments,
+  generatedArtifactIds: m11BatchAGeneratedArtifactIds,
+  preciseSourceUseItemIds: m11BatchAItemIds,
 });
 
 describe("M11 content Batch A candidate boundary", () => {
@@ -78,7 +87,7 @@ describe("M11 content Batch A candidate boundary", () => {
     );
     expect(publishedLocalContentPackages.filter((contentPackage) => (
       (m11BatchAItemIds as readonly string[]).includes(contentPackage.itemId)
-    ))).toHaveLength(35);
+    ))).toHaveLength(0);
 
     const counts = Object.fromEntries(Object.keys(m11PortfolioTarget).map((type) => [type, 0])) as Record<CulinaryItemType, number>;
     for (const item of m11BatchAItems) counts[item.itemType] += 1;
@@ -99,7 +108,7 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(issues, issues.map((issue) => `${issue.code}:${issue.field}:${issue.message}`).join("\n")).toEqual([]);
   });
 
-  it("passes closed multi-source research and the M10 commercial-rights gate", () => {
+  it("passes closed multi-source research but fails closed on unrecoverable AI provenance", () => {
     expect(validateResearchRegistry({
       sources: m11BatchASources,
       evidence: m11BatchAEvidence,
@@ -113,11 +122,25 @@ describe("M11 content Batch A candidate boundary", () => {
       evidence: m11BatchAEvidence,
       sources: m11BatchASources,
       researchRecords: m11BatchAResearchRecords,
+      minimumPreparationSourceItemIds: m11BatchAItemIds,
       now: "2026-09-06",
     });
-    expect(result.ready, result.issues.map((issue) => `${issue.code}:${issue.subjectId}`).join("\n")).toBe(true);
+    expect(result.ready).toBe(false);
+    expect(result.issues.map((issue) => issue.code)).toEqual(expect.arrayContaining([
+      "ai-review-incomplete",
+      "permission-blocked",
+    ]));
     expect(result.auditedItemIds).toHaveLength(35);
-    expect(rightsRegistry.decisions.every((decision) => decision.decision !== "block")).toBe(true);
+    expect(rightsRegistry.decisions.filter((decision) => decision.decision === "block")).toHaveLength(
+      m11BatchAGeneratedArtifactIds.length,
+    );
+    expect(m11BatchAGeneratedArtifactIds).toHaveLength(108);
+    expect(rightsRegistry.aiInputs).toEqual([]);
+    expect(rightsRegistry.ai).toEqual([]);
+    expect(rightsRegistry.artifacts.filter((artifact) => artifact.kind === "image").every((artifact) => (
+      artifact.derivation !== "generated"
+      && !m11BatchAGeneratedArtifactIds.includes(artifact.id)
+    ))).toBe(true);
     expect(rightsRegistry.restaurants).toHaveLength(8);
     expect(rightsRegistry.productProfiles).toHaveLength(3);
 
@@ -182,7 +205,7 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(evidencedSourceIds).toEqual(acceptedSourceIds);
   });
 
-  it("publishes only through current split attestations and risk-equivalence sampling", async () => {
+  it("keeps Batch A outside Production until current split attestations and sampling exist", async () => {
     const {
       publishingGovernanceAuditReport,
       publishingGovernanceRegistry,
@@ -190,23 +213,10 @@ describe("M11 content Batch A candidate boundary", () => {
     const batchClassifications = publishingGovernanceRegistry.riskClassifications.filter((entry) =>
       (m11BatchAItemIds as readonly string[]).includes(entry.itemId),
     );
-    const sampling = publishingGovernanceRegistry.samplingBatches.find((entry) => entry.id === "sampling-m11-batch-a-e69c26b-pass")!;
-
-    expect(batchClassifications).toHaveLength(35);
-    expect(batchClassifications.filter((entry) => entry.level === "low")).toHaveLength(24);
-    expect(batchClassifications.filter((entry) => entry.level === "medium")).toHaveLength(11);
-    expect(batchClassifications.filter((entry) => entry.level === "high")).toHaveLength(0);
-    expect(sampling.sequence).toBe(6);
-    expect(sampling.samples).toHaveLength(20);
-    expect(sampling.equivalenceClasses).toHaveLength(76);
-    expect(sampling.metrics).toMatchObject({
-      escapeCount: 0,
-      reviewerDisagreementCount: 0,
-      reworkItemCount: 0,
-      provenanceLicenseNoveltyCount: 34,
-    });
+    expect(batchClassifications).toHaveLength(0);
+    expect(publishedLocalContentPackages).toHaveLength(50);
     expect(publishingGovernanceAuditReport).toContain("Status: PASS");
-    expect(publishingGovernanceAuditReport).toContain("Published items audited: 85");
+    expect(publishingGovernanceAuditReport).toContain("Published items audited: 50");
   });
 
   it("publishes item-specific culinary stories rather than governance boilerplate", () => {

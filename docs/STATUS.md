@@ -18,7 +18,7 @@ Cooking Lab Public Beta v0.1 已上线，M5、M5.1、M6、M7、M9 与 M10 已完
 - Product Director 已批准 M10.1 risk-based governance：LOW 使用确定性门禁、独立 agent 全维度审查和 sampling QA；MEDIUM 使用分离 reviewer contexts；HIGH 保留人类、专家或法律 checkpoint。Issue #96 负责先让 schema、validator、CI 与文档 fail closed，生效前不得发布新增内容。
 - Issue #96 的 reviewer hardening 已在 PR #97 完成实现与本地验证：artifact fingerprint 覆盖 Source、Evidence、rights、attribution、AI/data/translation 路径及本地图片 SHA-256；sampling 使用真实 item 的风险等价类覆盖，major finding 自动冻结并要求连续两个 clean 100% re-review 批次。五批历史完整保留，当前 artifact 已完成两轮连续 clean recovery，registry 为 `ready=true`；合并和 CI 上线前新增 70 项仍保持未发布。
 - Product Director 已移除 M11 的公开视频核对路线。Batch A/B 不观看或总结视频，不创建 timestamp Evidence，也不保存字幕、转录、截图、帧、下载或 `ExternalMediaReference`；每项仍须具备至少两个可靠的非视频来源。M10 的通用外部媒体防滥用规则保持不变。
-- Batch A 的 35 项候选、双语 Story、明确的 step metadata 和原创本地 Hero 已建立；源条目继续保持 draft，独立的原子发布 projection 与 committed manifest 已准备好，但当前 fingerprint 的独立审查和 sampling 证据尚未登记，因此统一 governance validator 会 fail closed，Production 仍为 50 项。泛化栏目页与失效跳转已由直接的非视频机构、出版或专业来源替换。独立 dish audit 对 8 个餐厅风格重构发现旧 `culinaryReview: passed` 裸断言与 restaurant registry fail-open 风险，并发现 6 项来源仅支持安全温度、不支持料理身份或准备；当前修订已把 review requirement 与 PASS 分离、强制 requirement/identity 一一覆盖，并为受影响条目换成至少两个料理相关的非视频书面来源。
+- Batch A 的 35 项候选、双语 Story、明确的 step metadata 和原创本地 Hero 已建立；源条目继续保持 draft，独立的原子发布 projection 与 committed manifest 已准备好，但 Production 仍为 50 项。当前 108 个 AI-assisted 文字 artifact 已如实标为 `generated`；历史 author/run/prompt/input 与 NewAPI→真实上游商业输出条款链不能从可靠记录重建，因此没有事后伪造 `AiGenerationRecord`，对应 UsageDecision 自动 BLOCK。泛化栏目页与失效跳转已由直接的非视频机构、出版或专业来源替换。独立 dish audit 对 8 个餐厅风格重构发现旧 `culinaryReview: passed` 裸断言与 restaurant registry fail-open 风险，并发现 6 项来源仅支持安全温度、不支持料理身份或准备；当前修订已把 review requirement 与 PASS 分离、强制 requirement/identity 一一覆盖，并为受影响条目换成至少两个料理相关的非视频书面来源。
 - frozen commit `e2d838c` 的独立 agent rights/provenance review 为 35/35 PASS；独立 content/visual review 对其余范围报告 10 个 major finding：柠檬鸡锅汁火力语义、清蒸三文鱼和蒸水蛋的续蒸复测路径，以及 7 张原创 Hero 的主体或 alt fidelity。修订已增加明确的复热/逐分钟复测路径，重绘黑芝麻糊、铁观音茶具、Flat White、咖啡分享壶与里奥哈酒杯等插画并收紧对应 alt。旧 content/visual REQUEST_CHANGES 保留为历史 evidence；发布仍等待新 fingerprint 的全新独立复审和风险等价类 sampling QA。
 
 Production URL：
@@ -415,4 +415,4 @@ PR #36 已合并 Living Editorial Hero：
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
 - M10 已完成并继续作为 M11 的强制发布门禁。
 - M11 工程、内容包基础和视觉升级进入 PR 交付；Epic #87 与内容 Issues #91/#92 保持开放。
-- 完整 120 项发布现在等待 Issue #96 的 M10.1 fail-closed governance 先落地，再按 LOW/MEDIUM/HIGH 路由完成 70 项独立 agent review、sampling QA 或适用的人类/专家/法律 checkpoint。新门禁生效前不得把新增内容放入公开 manifest。
+- M10.1 fail-closed governance 已由 Issue #96 / PR #97 落地。完整 120 项发布现在等待新增内容按 LOW/MEDIUM/HIGH 路由完成可证明的 AI/service provenance、独立 agent review、sampling QA 或适用的人类/专家/法律 checkpoint；当前 Batch A 35 项因 AI 服务链商业权利与历史生成记录无法证明而保持 BLOCK，未进入公开 manifest。

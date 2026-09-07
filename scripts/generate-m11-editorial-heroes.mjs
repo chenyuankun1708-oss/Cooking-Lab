@@ -16,7 +16,7 @@ const art = {
   "broccoli-chicken": { type: "dish", layout: "bowl-right", vessel: "bowl", motifs: ["chicken", "broccoli", "scallion"], accent: "leaf" },
   "mushroom-tofu-rice": { type: "dish", layout: "bowl-left", vessel: "rice-bowl", motifs: ["tofu", "mushroom", "rice"], accent: "earth" },
   "pan-seared-chicken-thigh": { type: "dish", layout: "skillet-right", vessel: "skillet", motifs: ["chicken", "garlic", "lemon"], accent: "ember" },
-  "pepper-beef-stir-fry": { type: "dish", layout: "wok-left", vessel: "wok", motifs: ["beef", "pepper", "onion"], accent: "pepper" },
+  "pepper-beef-stir-fry": { type: "dish", layout: "wok-left", vessel: "wok", motifs: ["beef", "red-bell-pepper", "green-bell-pepper"], accent: "pepper" },
   "tomato-beef-stew": { type: "dish", layout: "pot-right", vessel: "pot", motifs: ["beef", "tomato", "carrot"], accent: "tomato" },
   "potato-beef-stew": { type: "dish", layout: "pot-left", vessel: "pot", motifs: ["beef", "potato", "carrot"], accent: "earth" },
   "shrimp-scrambled-eggs": { type: "dish", layout: "plate-right", vessel: "plate", motifs: ["shrimp", "egg", "scallion"], accent: "citrus" },
@@ -69,6 +69,7 @@ function leaf(x, y, size, fill = palette.green, rotate = 0) { return ellipse(x, 
 function lemon(x, y, size, rotate = 0) { return `<g transform="rotate(${rotate} ${x} ${y})">${circle(x, y, size, palette.lemon)}${line(x - size * .7, y, x + size * .7, y, palette.paper, 7)}${line(x, y - size * .7, x, y + size * .7, palette.paper, 7)}${circle(x, y, size * .22, palette.paper, .8)}</g>`; }
 function tomato(x, y, size, rotate = 0) { return `<g transform="rotate(${rotate} ${x} ${y})">${circle(x, y, size, palette.salmon)}${leaf(x, y - size * .7, size * .22, palette.green, -20)}${leaf(x + size * .24, y - size * .65, size * .2, palette.green, 24)}</g>`; }
 function pepper(x, y, size, fill = palette.red, rotate = 0) { return `<path d="M${x - size * .7} ${y - size * .2}C${x - size * .25} ${y - size * .9},${x + size * .7} ${y - size * .8},${x + size * .65} ${y}C${x + size * .5} ${y + size * .85},${x - size * .35} ${y + size * .9},${x - size * .7} ${y + size * .2}Z" fill="${fill}" transform="rotate(${rotate} ${x} ${y})"/>`; }
+function pepperStrip(x, y, size, fill, rotate = 0) { return `<path d="M${x - size} ${y - size * .2}Q${x} ${y - size * .55} ${x + size} ${y - size * .05}L${x + size * .82} ${y + size * .28}Q${x} ${y - size * .08} ${x - size * .9} ${y + size * .2}Z" fill="${fill}" stroke="${palette.paper}" stroke-width="6" transform="rotate(${rotate} ${x} ${y})"/>`; }
 function mushroom(x, y, size, rotate = 0) { return `<g transform="rotate(${rotate} ${x} ${y})"><path d="M${x - size} ${y}Q${x} ${y - size * .95} ${x + size} ${y}Z" fill="${palette.brown}"/><path d="M${x - size * .42} ${y}h${size * .84}v${size * .85}q-${size * .42} ${size * .3}-${size * .84} 0z" fill="${palette.milk}"/></g>`; }
 function broccoli(x, y, size) { return `<g>${circle(x - size * .45, y, size * .5, palette.green)}${circle(x + size * .1, y - size * .18, size * .57, palette.deepGreen)}${circle(x + size * .55, y + size * .04, size * .44, palette.green)}${line(x, y + size * .25, x, y + size * .95, palette.green, size * .25)}</g>`; }
 function shrimp(x, y, size, rotate = 0) { return `<path d="M${x - size} ${y + size * .2}Q${x - size * .35} ${y - size} ${x + size * .65} ${y - size * .3}Q${x + size} ${y + size * .2} ${x + size * .3} ${y + size * .7}Q${x - size * .25} ${y + size * .92} ${x - size} ${y + size * .2}Z" fill="${palette.salmon}" stroke="${palette.red}" stroke-width="8" transform="rotate(${rotate} ${x} ${y})"/>`; }
@@ -108,6 +109,8 @@ function motif(kind, x, y, size, rotate = 0) {
     case "tofu": return tofu(x, y, size * .75, rotate);
     case "beef": return ellipse(x, y, size * 1.2, size * .34, palette.brown, rotate);
     case "pepper": case "chili": return pepper(x, y, size * .8, palette.red, rotate);
+    case "red-bell-pepper": return pepperStrip(x, y, size, palette.red, rotate);
+    case "green-bell-pepper": return pepperStrip(x, y, size, palette.green, rotate);
     case "onion": case "soy": return circle(x, y, size * .6, palette.milk, .92);
     case "garlic": return [0, 1, 2].map((i) => circle(x + (i - 1) * size * .42, y + (i % 2) * size * .18, size * .4, palette.cream)).join("");
     case "tomato": return tomato(x, y, size * .65, rotate);

@@ -15,7 +15,6 @@ import { nativeCulinaryItems } from "@/data/culinary/items";
 import { culinarySources } from "@/data/culinary/sources";
 import { culinaryStories } from "@/data/culinary/stories";
 import { ingredients } from "@/data/ingredients";
-import { m11BatchAItems } from "@/data/m11/batch-a";
 import {
   getPublishedCulinaryItemBySlug,
   getPublishedCulinaryItems,
@@ -50,17 +49,17 @@ const publishingContext: CulinaryPublishingContext = {
 const proceduralKinds = new Set(["cooking", "baking", "brewing", "extraction", "mixing", "assembly"]);
 
 describe("published culinary library", () => {
-  it("adds Batch A to the existing adapted and native public portfolio", () => {
+  it("adds a balanced native portfolio to the 34 adapted published Recipes", () => {
     const published = getPublishedCulinaryItems();
 
     expect(nativeCulinaryItems).toHaveLength(16);
-    expect(published).toHaveLength(85);
-    expect(listPublishedCulinaryItemsByType("dish")).toHaveLength(57);
-    expect(listPublishedCulinaryItemsByType("dessert")).toHaveLength(7);
-    expect(listPublishedCulinaryItemsByType("tea")).toHaveLength(7);
-    expect(listPublishedCulinaryItemsByType("coffee")).toHaveLength(5);
-    expect(listPublishedCulinaryItemsByType("non-alcoholic-drink")).toHaveLength(6);
-    expect(listPublishedCulinaryItemsByType("alcoholic-drink")).toHaveLength(3);
+    expect(published).toHaveLength(50);
+    expect(listPublishedCulinaryItemsByType("dish")).toHaveLength(37);
+    expect(listPublishedCulinaryItemsByType("dessert")).toHaveLength(3);
+    expect(listPublishedCulinaryItemsByType("tea")).toHaveLength(4);
+    expect(listPublishedCulinaryItemsByType("coffee")).toHaveLength(2);
+    expect(listPublishedCulinaryItemsByType("non-alcoholic-drink")).toHaveLength(2);
+    expect(listPublishedCulinaryItemsByType("alcoholic-drink")).toHaveLength(2);
     expect(getPublishedCulinaryItemBySlug("espresso")?.itemType).toBe("coffee");
   });
 
@@ -142,26 +141,21 @@ describe("published culinary library", () => {
     }
   });
 
-  it("resolves every native ingredient reference without expanding the Recipe dataset", () => {
+  it("resolves every published ingredient reference without expanding the Recipe dataset", () => {
     const ingredientIds = new Set(ingredients.map((ingredient) => ingredient.id));
-    const recipeIngredientIds = new Set(recipes.flatMap((recipe) => recipe.ingredients.map((input) => input.ingredientId)));
     const nativeIngredientIds = new Set(nativeCulinaryItems.flatMap((item) =>
       proceduralKinds.has(item.preparation.kind)
         ? (item.preparation as Extract<CulinaryItem["preparation"], { inputs: unknown }>).inputs.map((input) => input.ingredientId)
         : [],
     ));
-    const candidateIngredientIds = new Set(m11BatchAItems.flatMap((item) =>
+    const publishedIngredientIds = new Set(getPublishedCulinaryItems().flatMap((item) =>
       proceduralKinds.has(item.preparation.kind)
         ? (item.preparation as Extract<CulinaryItem["preparation"], { inputs: unknown }>).inputs.map((input) => input.ingredientId)
         : [],
     ));
 
     expect([...nativeIngredientIds].every((id) => ingredientIds.has(id))).toBe(true);
-    expect(ingredients.filter((ingredient) => (
-      !recipeIngredientIds.has(ingredient.id)
-      && !nativeIngredientIds.has(ingredient.id)
-      && !candidateIngredientIds.has(ingredient.id)
-    )).map((ingredient) => ingredient.id)).toEqual([]);
+    expect([...publishedIngredientIds].every((id) => ingredientIds.has(id))).toBe(true);
     expect(recipes).toHaveLength(100);
     expect(getPublishedRecipes()).toHaveLength(34);
   });

@@ -13,7 +13,6 @@ import {
   contentStories,
   getPublishedCulinaryItems,
 } from "@/data/published-culinary-items";
-import { m11BatchAItemIds } from "@/data/m11/portfolio";
 import type { CulinaryItem, Evidence, Source } from "@/types/culinary";
 import type { ContentRightsRegistry, RightsAssessment } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
@@ -38,15 +37,15 @@ const context = {
 } as const;
 
 describe("M10 Production content-rights gate", () => {
-  it("audits all 85 published items and allows every current commercial usage decision", () => {
+  it("audits the 50-item Production boundary and allows every current commercial usage decision", () => {
     const result = evaluateContentRightsRegistry(contentRightsRegistry, context);
-    expect(items).toHaveLength(85);
-    expect([...m10AuditedCulinaryItemIds, ...m11BatchAItemIds].sort()).toEqual(items.map((item) => item.id).sort());
+    expect(items).toHaveLength(50);
+    expect([...m10AuditedCulinaryItemIds].sort()).toEqual(items.map((item) => item.id).sort());
     expect(result.ready, result.issues.map((issue) => `${issue.code}:${issue.subjectId}`).join(", ")).toBe(true);
-    expect(result.auditedItemIds).toHaveLength(85);
+    expect(result.auditedItemIds).toHaveLength(50);
     expect(contentRightsRegistry.decisions.every((decision) => decision.decision !== "block")).toBe(true);
     expect(contentRightsAuditReport).toContain("Status: PASS");
-    expect(contentRightsAuditReport).toContain("Published items audited: 85");
+    expect(contentRightsAuditReport).toContain("Published items audited: 50");
   });
 
   it("evaluates store, transform, publish, and commercialize separately", () => {
@@ -399,8 +398,7 @@ describe("M10 Production content-rights gate", () => {
     const storyId = contentStories[0].id;
     const unlinkedItems = items.map((item) => ({ ...item, storyIds: item.storyIds.filter((id) => id !== storyId) })) as CulinaryItem[];
     const regenerated = createContentRightsRegistry({ ...context, items: unlinkedItems, auditedItemIds: m10AuditedCulinaryItemIds });
-    expect(regenerated.artifacts.some((artifact) => artifact.subject.type === "story" && artifact.subject.id === storyId)).toBe(true);
-    regenerated.artifacts = regenerated.artifacts.filter((artifact) => artifact.subject.type !== "story" || artifact.subject.id !== storyId);
+    expect(regenerated.artifacts.some((artifact) => artifact.subject.type === "story" && artifact.subject.id === storyId)).toBe(false);
     expect(issueCodes(regenerated, { ...context, items: unlinkedItems })).toContain("missing-artifact");
   });
 
@@ -441,15 +439,17 @@ describe("M10 Production content-rights gate", () => {
     registry.ai = [{
       id: "ai-test",
       artifactId: artifact.id,
+      outputArtifactVersion: "",
+      author: { actorType: "agent", actorId: "", runId: "", contextId: "" },
       provider: "",
       model: "",
       modelVersion: "",
       generatedAt: "2026-09-06",
-      termsUrl: "",
-      termsEffectiveDate: "",
+      termsAssessmentIds: ["missing-terms-assessment"],
+      promptTemplateId: "",
       promptTemplateVersion: "",
-      inputArtifactIds: [],
-      inputRightsReviewed: false,
+      promptTemplateHash: "",
+      inputArtifactIds: ["missing-ai-input"],
       reviewAttestationIds: [] as unknown as [string, ...string[]],
       similarityReview: "required",
       trademarkReview: "required",
@@ -460,11 +460,70 @@ describe("M10 Production content-rights gate", () => {
     expect(codes).toContain("ai-input-rights-unknown");
   });
 
+  it("requires exact generated-output, AI-input, service-terms, and author provenance", () => {
+    const valid = registryWithValidAiArtifact();
+    expect(issueCodes(valid)).not.toContain("ai-review-incomplete");
+    expect(issueCodes(valid)).not.toContain("ai-input-rights-unknown");
+
+    const duplicate = registryWithValidAiArtifact();
+    duplicate.ai = [...duplicate.ai, { ...structuredClone(duplicate.ai[0]), id: "ai-test-duplicate" }];
+    expect(issueCodes(duplicate)).toEqual(expect.arrayContaining(["duplicate-id", "ai-review-incomplete"]));
+
+    const orphan = registryWithValidAiArtifact();
+    orphan.ai = [{ ...orphan.ai[0], id: "ai-test-orphan", artifactId: "missing-generated-artifact" }];
+    expect(issueCodes(orphan)).toContain("ai-review-incomplete");
+
+    const stale = registryWithValidAiArtifact();
+    stale.ai[0].outputArtifactVersion = "clv1-stale";
+    expect(issueCodes(stale)).toContain("ai-review-incomplete");
+
+    const incompleteIdentity = registryWithValidAiArtifact();
+    incompleteIdentity.ai[0].author.runId = "";
+    incompleteIdentity.ai[0].promptTemplateHash = "not-a-content-hash";
+    expect(issueCodes(incompleteIdentity)).toContain("ai-review-incomplete");
+
+    const unknownTerms = registryWithValidAiArtifact();
+    const terms = unknownTerms.assessments.find((assessment) => assessment.subject.type === "ai-service")!;
+    terms.permissions.commercialize.status = "review-required";
+    expect(issueCodes(unknownTerms)).toContain("ai-input-rights-unknown");
+
+    const unclosedInput = registryWithValidAiArtifact();
+    (unclosedInput.aiInputs[0] as { containsThirdPartyExpression: boolean }).containsThirdPartyExpression = true;
+    unclosedInput.aiInputs[0].rightsAssessmentIds = [unclosedInput.aiInputs[0].rightsAssessmentIds[0]];
+    expect(issueCodes(unclosedInput)).toContain("ai-input-rights-unknown");
+
+    const changedResearch = {
+      ...structuredClone(context),
+      researchRecords: structuredClone(context.researchRecords).map((record) => (
+        record.id === valid.aiInputs[0].researchRecordIds[0]
+          ? { ...record, status: "in-progress" as const }
+          : record
+      )),
+    };
+    expect(issueCodes(valid, changedResearch)).toContain("ai-input-rights-unknown");
+  });
+
+  it("fails registry construction when a generated-artifact declaration cannot resolve", () => {
+    expect(() => createContentRightsRegistry({
+      ...context,
+      auditedItemIds: m10AuditedCulinaryItemIds,
+      generatedArtifactIds: ["missing-generated-artifact"],
+    })).toThrow("Generated artifact declarations do not resolve: missing-generated-artifact");
+  });
+
+  it("does not fabricate AI provenance for non-generated Hero assets", () => {
+    const registry = cloneRegistry();
+    const artifact = registry.artifacts.find((entry) => entry.kind === "image")!;
+    expect(artifact.derivation).not.toBe("generated");
+    expect(registry.ai.some((record) => record.artifactId === artifact.id)).toBe(false);
+    expect(issueCodes(registry)).not.toContain("ai-review-incomplete");
+  });
+
   it("covers every used ingredient with explicit nutrition and cost provenance", () => {
     const usedIngredientIds = new Set(items.flatMap((item) => "inputs" in item.preparation ? item.preparation.inputs.map((input) => input.ingredientId) : []));
     const nutritionIds = new Set(contentRightsRegistry.nutrition.map((entry) => entry.ingredientId));
     const costIds = new Set(contentRightsRegistry.costs.map((entry) => entry.id));
-    expect(usedIngredientIds.size).toBe(106);
+    expect(usedIngredientIds.size).toBe(93);
     for (const ingredientId of usedIngredientIds) {
       const ingredient = ingredients.find((entry) => entry.id === ingredientId)!;
       expect(nutritionIds.has(ingredientId), ingredientId).toBe(true);
@@ -559,6 +618,77 @@ function registryWithValidProductProfile(): ContentRightsRegistry {
     impliesEndorsement: false,
     affiliateSales: false,
     rightsAssessmentId: assessmentId,
+  }];
+  return registry;
+}
+
+function registryWithValidAiArtifact(): ContentRightsRegistry {
+  const registry = cloneRegistry();
+  const artifact = registry.artifacts.find((entry) => (
+    entry.subject.type === "culinary-item"
+    && entry.kind === "identity"
+    && entry.sourceIds.length > 0
+    && context.researchRecords.some((record) => record.subject.id === entry.subject.id)
+  ))!;
+  const researchRecord = context.researchRecords.find((record) => record.subject.id === artifact.subject.id)!;
+  const inputId = `ai-input-${artifact.subject.id}`;
+  const inputAssessmentId = `rights-${inputId}`;
+  const termsAssessmentId = "rights-ai-service-test-provider";
+  const sourceAssessmentIds = artifact.sourceIds.map((sourceId) => `source-rights-${sourceId}`);
+  const baseAssessment = structuredClone(registry.assessments.find((entry) => entry.id === artifact.rightsAssessmentId)!);
+  artifact.derivation = "generated";
+  registry.assessments = [
+    ...registry.assessments,
+    {
+      ...structuredClone(baseAssessment),
+      id: inputAssessmentId,
+      subject: { type: "ai-input", id: inputId },
+    },
+    {
+      ...structuredClone(baseAssessment),
+      id: termsAssessmentId,
+      subject: { type: "ai-service", id: "test-provider" },
+      basis: {
+        kind: "terms",
+        provider: "Test Provider",
+        termsUrl: "https://example.test/terms",
+        effectiveDate: "2026-09-01",
+      },
+    },
+  ];
+  registry.aiInputs = [{
+    id: inputId,
+    version: "m11-ai-input-v1",
+    contentHash: "clv1-1111111111111111",
+    kind: "structured-research-bundle",
+    sourceIds: [...artifact.sourceIds],
+    evidenceIds: [...artifact.evidenceIds],
+    researchRecordIds: [researchRecord.id],
+    rightsAssessmentIds: [inputAssessmentId, ...sourceAssessmentIds],
+    containsThirdPartyExpression: false,
+  }];
+  registry.ai = [{
+    id: `ai-${artifact.id}`,
+    artifactId: artifact.id,
+    outputArtifactVersion: artifact.version,
+    author: {
+      actorType: "agent",
+      actorId: "test-author-agent",
+      runId: "test-author-run",
+      contextId: "test-author-context",
+    },
+    provider: "Test Provider",
+    model: "test-model",
+    modelVersion: "test-model-2026-09-01",
+    generatedAt: "2026-09-06",
+    termsAssessmentIds: [termsAssessmentId],
+    promptTemplateId: "m11-content-synthesis",
+    promptTemplateVersion: "1",
+    promptTemplateHash: "clv1-2222222222222222",
+    inputArtifactIds: [inputId],
+    reviewAttestationIds: ["attestation-test-rights", "attestation-test-provenance", "attestation-test-editorial"],
+    similarityReview: "passed",
+    trademarkReview: "not-applicable",
   }];
   return registry;
 }

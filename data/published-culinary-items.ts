@@ -40,14 +40,13 @@ import {
   m11BatchARestaurantIdentities,
   m11BatchASources,
 } from "./m11/batch-a";
-import { m11BatchAPublishedStories } from "./m11/batch-a-publication";
 import { m11BatchAEnglishIngredientLabels } from "./m11/batch-a-ingredient-labels";
 import { m11BatchAItemIds, m11RestaurantReconstructionItemIds } from "./m11/portfolio";
 
 export { publishedContentBundleManifest } from "./content-bundle-manifest";
 
 export const contentImages = Object.freeze([...recipeImages, ...culinaryImages, ...m11BatchAImages]);
-export const contentStories = Object.freeze([...culinaryStories, ...m11BatchAPublishedStories]);
+export const contentStories = Object.freeze([...culinaryStories]);
 export const contentEvidence = Object.freeze([...culinaryEvidence, ...m11BatchAEvidence]);
 export const contentResearchRecords = Object.freeze([...m9RecipeResearchRecords, ...m11BatchAResearchRecords]);
 const allImages = contentImages;
@@ -89,6 +88,7 @@ export const contentRightsRegistry = createContentRightsRegistry({
   })),
   restaurants: m11BatchARestaurantIdentities,
   productProfiles: m11BatchAProductProfiles,
+  preciseSourceUseItemIds: m11BatchAItemIds,
 });
 const contentRightsContext = {
   items: candidates,
@@ -98,6 +98,7 @@ const contentRightsContext = {
   evidence: allEvidence,
   sources: allSources,
   researchRecords: contentResearchRecords,
+  minimumPreparationSourceItemIds: m11BatchAItemIds,
   now: getContentRightsEvaluationDate(),
 } as const;
 assertContentRightsReady(contentRightsRegistry, contentRightsContext);

@@ -1,7 +1,7 @@
 # Content Rights Policy
 
-最近更新：2026-09-06  
-适用阶段：M10 / Public Beta commercial-readiness gate  
+最近更新：2026-09-07
+适用阶段：M10 / Public Beta commercial-readiness gate
 性质：工程与编辑风险控制，不是法律意见
 
 ## 发布原则
@@ -59,7 +59,7 @@ USDA FoodData Central 已登记为未来首选 CC0 数据源，但当前状态�
 
 图片必须逐文件检查原始文件页、作者、准确许可、允许的改编和构图身份。人物、品牌包装、餐厅标识和受保护场所需要额外复核。M10 审计发现旧 Fino、Junmai 与 Espresso 图片分别以品牌包装或商业小包装为显著构图元素，因此已替换为无标识的酒桶/酒花、清酒器具和白色咖啡杯图片；不能用“附带编辑语境”替代构图级商标与背书审查。任何酒类推广、导购、联盟用途或图片换版都必须重新审权。
 
-AI 输出永远不能作为 Evidence，也不能修复输入权利缺陷。任何未来 AI artifact 必须记录 provider、model/version、生成日期、条款版本、prompt template、输入 artifact、输入权利复核、risk-based `ReviewAttestation`、相似性检查和商标检查。LOW 可由真正独立的 agent context 完成全维度审查；MEDIUM 需要分离的双 reviewer context；HIGH 继续进入明确的人类、专家或法律 checkpoint。agent review 不得表示为 human review、料理实测或法律意见。完整路由见 `docs/PUBLISHING_GOVERNANCE.md`。
+AI 输出永远不能作为 Evidence，也不能修复输入权利缺陷。任何未来 AI artifact 必须记录 provider、不可变 model/version、生成日期、author actor/run/context、输出 artifact version、版本化 prompt ID/hash、只含结构化引用 ID/hash 的输入 artifact、closed ResearchRecord、输入 Source 权利、完整网关与上游服务条款链、risk-based `ReviewAttestation`、相似性检查和商标检查。缺少任一环节时必须标为 `generated` 并 BLOCK，不能改名为 `factual-synthesis`，也不能事后猜填运行或条款记录。LOW 可由真正独立的 agent context 完成全维度审查；MEDIUM 需要分离的双 reviewer context；HIGH 继续进入明确的人类、专家或法律 checkpoint。agent review 不得表示为 human review、料理实测或法律意见。完整路由见 `docs/PUBLISHING_GOVERNANCE.md`。
 
 ## 专业复核 checkpoint
 

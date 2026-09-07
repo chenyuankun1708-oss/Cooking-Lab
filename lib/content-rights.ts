@@ -53,6 +53,7 @@ export interface ContentRightsContext {
   evidence: readonly Evidence[];
   sources: readonly Source[];
   researchRecords: readonly ResearchRecord[];
+  minimumPreparationSourceItemIds?: readonly string[];
   now: string;
 }
 
@@ -80,6 +81,7 @@ export function evaluateContentRightsRegistry(
   const attributions = uniqueMap(registry.attributions, "AttributionRequirement", report);
   uniqueMap(registry.datasets, "DatasetSource", report);
   uniqueMap(registry.costs, "CostProvenance", report);
+  uniqueMap(registry.aiInputs, "AiInputArtifact", report);
   uniqueMap(registry.ai, "AiGenerationRecord", report);
   uniqueMap(registry.externalMedia, "ExternalMediaReference", report);
   uniqueMap(registry.productProfiles, "ProductProfile", report);
@@ -114,7 +116,7 @@ export function evaluateContentRightsRegistry(
   }
 
   validateAttributions(registry, artifacts, report);
-  validateAi(registry, artifacts, report);
+  validateAi(registry, context, artifacts, assessments, report);
   validateDatasets(registry, assessments, report);
   validateCosts(registry, assessments, report);
   validateExternalMedia(registry, assessments, context.sources, report);
@@ -285,25 +287,115 @@ function validateAttributions(
 
 function validateAi(
   registry: ContentRightsRegistry,
+  context: ContentRightsContext,
   artifacts: ReadonlyMap<string, ContentArtifact>,
+  assessments: ReadonlyMap<string, RightsAssessment>,
   report: (code: ContentRightsIssueCode, subjectId: string, field: string, message: string) => void,
 ) {
-  const recordsByArtifact = new Map(registry.ai.map((record) => [record.artifactId, record]));
+  const inputsById = new Map(registry.aiInputs.map((input) => [input.id, input]));
+  const recordsByArtifact = new Map<string, (typeof registry.ai)[number][]>();
+  for (const record of registry.ai) {
+    recordsByArtifact.set(record.artifactId, [...(recordsByArtifact.get(record.artifactId) ?? []), record]);
+    const artifact = artifacts.get(record.artifactId);
+    if (!artifact || artifact.derivation !== "generated") {
+      report("ai-review-incomplete", record.id, "artifactId", "AI provenance may only reference an existing generated ContentArtifact");
+    }
+  }
+
+  const usedInputIds = new Set(registry.ai.flatMap((record) => record.inputArtifactIds));
+  for (const input of registry.aiInputs) {
+    if (!usedInputIds.has(input.id)) {
+      report("ai-review-incomplete", input.id, "usage", "AI input provenance cannot be retained as unused publication metadata");
+    }
+    if (!input.version.trim() || !isContentHash(input.contentHash)) {
+      report("ai-review-incomplete", input.id, "version", "AI input requires a deterministic version and content hash");
+    }
+    if (input.containsThirdPartyExpression !== false) {
+      report("ai-input-rights-unknown", input.id, "containsThirdPartyExpression", "AI input bundles cannot contain copied third-party expression");
+    }
+    if (new Set(input.sourceIds).size !== input.sourceIds.length
+      || new Set(input.evidenceIds).size !== input.evidenceIds.length
+      || new Set(input.researchRecordIds).size !== input.researchRecordIds.length
+      || new Set(input.rightsAssessmentIds).size !== input.rightsAssessmentIds.length) {
+      report("ai-review-incomplete", input.id, "references", "AI input references must be unique");
+    }
+
+    const sourceIds = new Set(input.sourceIds);
+    const evidence = input.evidenceIds.map((id) => context.evidence.find((entry) => entry.id === id));
+    const researchRecords = input.researchRecordIds.map((id) => context.researchRecords.find((entry) => entry.id === id));
+    if (evidence.some((entry) => !entry) || evidence.some((entry) => entry && !sourceIds.has(entry.sourceId))) {
+      report("ai-input-rights-unknown", input.id, "evidenceIds", "Every AI input Evidence record must resolve to one of the input Sources");
+    }
+    if (researchRecords.some((entry) => !entry || entry.status !== "closed")) {
+      report("ai-input-rights-unknown", input.id, "researchRecordIds", "AI input ResearchRecords must exist and be closed");
+    }
+    const acceptedSourceIds = new Set(researchRecords.flatMap((record) => record?.sourceDecisions.flatMap((decision) =>
+      decision.disposition === "accepted" ? [decision.sourceId] : []) ?? []));
+    if (input.kind === "structured-research-bundle" && (!input.sourceIds.length || input.sourceIds.some((id) => !acceptedSourceIds.has(id)))) {
+      report("ai-input-rights-unknown", input.id, "sourceIds", "Structured AI inputs must contain only Sources accepted by the linked closed ResearchRecords");
+    }
+
+    const linkedAssessments = input.rightsAssessmentIds.map((id) => assessments.get(id));
+    const inputAssessment = linkedAssessments.find((assessment) => assessment?.subject.type === "ai-input" && assessment.subject.id === input.id);
+    const sourceAssessmentsComplete = input.sourceIds.every((sourceId) => linkedAssessments.some((assessment) =>
+      assessment?.subject.type === "source" && assessment.subject.id === sourceId));
+    const transformAllowed = linkedAssessments.every((assessment) => assessment
+      && !["prohibited", "review-required"].includes(assessment.permissions.store.status)
+      && !["prohibited", "review-required"].includes(assessment.permissions.transform.status));
+    if (!inputAssessment || !sourceAssessmentsComplete || !transformAllowed) {
+      report("ai-input-rights-unknown", input.id, "rightsAssessmentIds", "AI input requires its own assessment plus every Source assessment, all allowing storage and transformation");
+    }
+  }
+
   for (const artifact of registry.artifacts.filter((entry) => entry.derivation === "generated")) {
-    const record = recordsByArtifact.get(artifact.id);
-    if (!record) {
-      report("ai-review-incomplete", artifact.id, "ai", "Generated artifact has no AI provenance record");
+    const records = recordsByArtifact.get(artifact.id) ?? [];
+    if (records.length !== 1) {
+      report("ai-review-incomplete", artifact.id, "ai", "Generated artifact requires exactly one AI provenance record");
       continue;
     }
-    if (!record.provider.trim() || !record.model.trim() || !record.modelVersion.trim() || !record.promptTemplateVersion.trim() || !isHttps(record.termsUrl) || !isIsoDate(record.termsEffectiveDate) || !isIsoDate(record.generatedAt)) {
-      report("ai-review-incomplete", artifact.id, "ai.terms", "AI provider, model version, and dated terms are required");
+    const [record] = records;
+    if (record.outputArtifactVersion !== artifact.version) {
+      report("ai-review-incomplete", artifact.id, "ai.outputArtifactVersion", "AI provenance must identify the current output artifact version");
+    }
+    if (
+      record.author.actorType !== "agent"
+      || !record.author.actorId.trim()
+      || !record.author.runId.trim()
+      || !record.author.contextId.trim()
+      || !record.provider.trim()
+      || !record.model.trim()
+      || !record.modelVersion.trim()
+      || !isIsoDate(record.generatedAt)
+      || !record.promptTemplateId.trim()
+      || !record.promptTemplateVersion.trim()
+      || !isContentHash(record.promptTemplateHash)
+    ) {
+      report("ai-review-incomplete", artifact.id, "ai.identity", "AI author context, provider/model version, generation date, and versioned prompt identity are required");
     }
     if (!record.reviewAttestationIds.length || record.similarityReview !== "passed" || record.trademarkReview === "required") {
       report("ai-review-incomplete", artifact.id, "ai.review", "Risk-based review attestations, similarity review, and trademark review must be present before Production");
     }
-    if (!record.inputRightsReviewed) report("ai-input-rights-unknown", artifact.id, "ai.inputRightsReviewed", "AI inputs must have cleared rights");
+    const termsAssessments = record.termsAssessmentIds.map((id) => assessments.get(id));
+    const termsAllowed = termsAssessments.length > 0 && termsAssessments.every((assessment) =>
+      assessment?.subject.type === "ai-service"
+      && assessment.basis.kind === "terms"
+      && !["prohibited", "review-required"].includes(assessment.permissions.transform.status)
+      && !["prohibited", "review-required"].includes(assessment.permissions.publish.status)
+      && !["prohibited", "review-required"].includes(assessment.permissions.commercialize.status));
+    if (!termsAllowed) {
+      report("ai-input-rights-unknown", artifact.id, "ai.termsAssessmentIds", "Every provider or gateway in the AI service chain requires a dated assessment allowing transformation, publication, and commercial use");
+    }
+    const inputs = record.inputArtifactIds.map((inputId) => inputsById.get(inputId));
+    if (inputs.some((input) => !input)) {
+      report("missing-reference", artifact.id, "ai.inputArtifactIds", "AI input provenance record is missing");
+    }
+    const inputSources = new Set(inputs.flatMap((input) => input?.sourceIds ?? []));
+    const inputEvidence = new Set(inputs.flatMap((input) => input?.evidenceIds ?? []));
+    if (artifact.sourceIds.some((sourceId) => !inputSources.has(sourceId)) || artifact.evidenceIds.some((evidenceId) => !inputEvidence.has(evidenceId))) {
+      report("ai-input-rights-unknown", artifact.id, "ai.inputArtifactIds", "Generated output provenance must be contained in its versioned AI input bundles");
+    }
     for (const inputId of record.inputArtifactIds) {
-      if (!artifacts.has(inputId)) report("missing-reference", artifact.id, "ai.inputArtifactIds", `Missing input artifact ${inputId}`);
+      if (!inputsById.has(inputId)) report("missing-reference", artifact.id, "ai.inputArtifactIds", `Missing AI input artifact ${inputId}`);
     }
   }
 }
@@ -574,13 +666,36 @@ function validatePublishedCoverage(
         if (!ingredient || !cost || !costIds.has(ingredient.costProvenanceId) || !costAllowed) report("cost-provenance-missing", item.id, `ingredient.${input.ingredientId}`, "Ingredient cost provenance or its allowed assessment is missing");
       }
     }
-    const hasFactualSynthesis = registry.artifacts.some((artifact) => artifact.subject.type === "culinary-item" && artifact.subject.id === item.id && artifact.derivation === "factual-synthesis");
-    if (hasFactualSynthesis) {
-      const records = closedResearch.filter((record) => record.subject.type === "culinary-item" && record.subject.id === item.id);
-      const acceptedSourceIds = new Set(records.flatMap((record) => record.sourceDecisions.flatMap((decision) => decision.disposition === "accepted" ? [decision.sourceId] : [])));
-      const synthesisArtifacts = registry.artifacts.filter((artifact) => artifact.subject.type === "culinary-item" && artifact.subject.id === item.id && artifact.derivation === "factual-synthesis");
-      const sourcesAligned = acceptedSourceIds.size >= 2 && synthesisArtifacts.every((artifact) => artifact.sourceIds.length === acceptedSourceIds.size && artifact.sourceIds.every((sourceId) => acceptedSourceIds.has(sourceId)));
-      if (!sourcesAligned) report("review-incomplete", item.id, "researchRecord", "Factual synthesis requires two accepted Sources from a closed subject ResearchRecord, aligned to every synthesis artifact");
+    const records = closedResearch.filter((record) => record.subject.type === "culinary-item" && record.subject.id === item.id);
+    const expectedSources = (uses: readonly ("identity" | "preparation" | "safety")[]) => new Set(records.flatMap((record) =>
+      record.sourceDecisions.flatMap((decision) =>
+        decision.disposition === "accepted" && decision.uses.some((use) => uses.includes(use as "identity" | "preparation" | "safety"))
+          ? [decision.sourceId]
+          : [])));
+    const identitySources = expectedSources(["identity"]);
+    const preparationSources = expectedSources(["preparation", "safety"]);
+    const allAcceptedSources = new Set(records.flatMap((record) => record.sourceDecisions.flatMap((decision) =>
+      decision.disposition === "accepted" ? [decision.sourceId] : [])));
+    const preciseSourceUses = context.minimumPreparationSourceItemIds?.includes(item.id) ?? false;
+    const culinaryArtifacts = registry.artifacts.filter((artifact) =>
+      artifact.subject.type === "culinary-item"
+      && artifact.subject.id === item.id
+      && ["identity", "preparation"].includes(artifact.kind)
+      && ["factual-synthesis", "generated"].includes(artifact.derivation));
+    const sourcesAligned = culinaryArtifacts.every((artifact) => sameStringSet(
+      artifact.sourceIds,
+      [...(preciseSourceUses
+        ? artifact.kind === "identity" ? identitySources : preparationSources
+        : allAcceptedSources)],
+    ));
+    if (!sourcesAligned) {
+      report("review-incomplete", item.id, "researchRecord", "Identity and preparation provenance must exactly match the accepted ResearchSourceDecision uses for that artifact kind");
+    }
+    if ("steps" in item.preparation && context.minimumPreparationSourceItemIds?.includes(item.id)) {
+      const independentPreparationSources = expectedSources(["preparation"]);
+      if (independentPreparationSources.size < 2) {
+        report("review-incomplete", item.id, "preparationSources", "Procedural content requires at least two accepted preparation-specific sources; safety-only sources cannot satisfy the minimum");
+      }
     }
   }
 
@@ -666,6 +781,10 @@ function sameStringSet(left: readonly string[], right: readonly string[]): boole
 
 function isIsoDate(value: string): boolean {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
+}
+
+function isContentHash(value: string): boolean {
+  return /^clv1-[a-f0-9]{16}$/.test(value);
 }
 
 export function permissionStatuses(assessment: RightsAssessment): Record<RightsAction, string> {

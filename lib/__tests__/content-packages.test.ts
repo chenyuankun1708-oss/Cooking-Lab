@@ -8,8 +8,8 @@ import { localContentPackageVersion } from "@/types/content-bundle";
 
 describe("local culinary content packages", () => {
   it("routes every published item through one deterministic package", () => {
-    expect(publishedLocalContentPackages).toHaveLength(85);
-    expect(new Set(publishedLocalContentPackages.map((contentPackage) => contentPackage.itemId)).size).toBe(85);
+    expect(publishedLocalContentPackages).toHaveLength(50);
+    expect(new Set(publishedLocalContentPackages.map((contentPackage) => contentPackage.itemId)).size).toBe(50);
     expect(publishedLocalContentPackages.every((contentPackage) => contentPackage.version === localContentPackageVersion)).toBe(true);
     expect(publishedLocalContentPackages.every((contentPackage) => contentPackage.manifestEntry.itemId === contentPackage.itemId)).toBe(true);
 
@@ -30,13 +30,12 @@ describe("local culinary content packages", () => {
       ...getPublishedRecipes().map((recipe) => recipe.id),
       ...nativeCulinaryItems.map((item) => item.id),
     ].filter((itemId) => manifestIds.has(itemId));
-    expect(publishedLocalContentPackages.slice(0, legacyPublishedOrder.length).map((contentPackage) => contentPackage.itemId)).toEqual(legacyPublishedOrder);
+    expect(publishedLocalContentPackages.map((contentPackage) => contentPackage.itemId)).toEqual(legacyPublishedOrder);
   });
 
   it("keeps legacy migration provenance explicit until standalone package authoring", () => {
-    expect(publishedLocalContentPackages.slice(0, 50).every((contentPackage) => (
+    expect(publishedLocalContentPackages.every((contentPackage) => (
       contentPackage.sourceKind === "legacy-recipe" || contentPackage.sourceKind === "legacy-native"
     ))).toBe(true);
-    expect(publishedLocalContentPackages.slice(50).every((contentPackage) => contentPackage.sourceKind === "standalone")).toBe(true);
   });
 });

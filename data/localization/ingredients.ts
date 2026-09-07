@@ -31,11 +31,19 @@ const englishIngredientLabels: Readonly<Record<string, string>> = Object.freeze(
   cola: "cola", kumquat: "kumquats",
 });
 
-export function getIngredientLabel(id: string, zhLabel: string | undefined, locale: SupportedLocale): string {
+export function getIngredientLabel(
+  id: string,
+  zhLabel: string | undefined,
+  locale: SupportedLocale,
+  reviewedOverrides: Readonly<Record<string, string>> = {},
+): string {
   if (locale === "zh-CN") return zhLabel ?? `未知食材（${id}）`;
-  return englishIngredientLabels[id] ?? id.replaceAll("-", " ");
+  return reviewedOverrides[id] ?? englishIngredientLabels[id] ?? id.replaceAll("-", " ");
 }
 
-export function hasReviewedEnglishIngredientLabel(id: string): boolean {
-  return Boolean(englishIngredientLabels[id]);
+export function hasReviewedEnglishIngredientLabel(
+  id: string,
+  reviewedOverrides: Readonly<Record<string, string>> = {},
+): boolean {
+  return Boolean(reviewedOverrides[id] ?? englishIngredientLabels[id]);
 }

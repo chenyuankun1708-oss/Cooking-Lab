@@ -12,6 +12,7 @@ export function createPublishingLocalizationVersions(
   contentPackages: readonly LocalContentPackageV1[],
   ingredients: readonly Ingredient[],
   standaloneStories: readonly Story[] = [],
+  standaloneEnglishIngredientLabels: Readonly<Record<string, string>> = {},
 ): PublishingLocalizationVersion[] {
   const ingredientById = new Map(ingredients.map((ingredient) => [ingredient.id, ingredient]));
   const standaloneStoryById = new Map(standaloneStories.map((story) => [story.id, story]));
@@ -44,7 +45,12 @@ export function createPublishingLocalizationVersions(
       : [];
     const englishIngredientLabels = ingredientIds.map((ingredientId) => ({
       ingredientId,
-      label: getIngredientLabel(ingredientId, ingredientById.get(ingredientId)?.name, "en"),
+      label: getIngredientLabel(
+        ingredientId,
+        ingredientById.get(ingredientId)?.name,
+        "en",
+        contentPackage.sourceKind === "standalone" ? standaloneEnglishIngredientLabels : undefined,
+      ),
     }));
 
     return {

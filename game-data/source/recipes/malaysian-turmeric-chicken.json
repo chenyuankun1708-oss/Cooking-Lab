@@ -1,14 +1,58 @@
 {
-  "artifactVersion": "clv1-f03569942f058789",
+  "artifactVersion": "clv1-f43bfb6aa3935de1",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:malaysian-turmeric-chicken-op-001-mince:duration",
+      "operation:malaysian-turmeric-chicken-op-001-mince:parameters-source",
+      "operation:malaysian-turmeric-chicken-op-001-mince:targets-source",
+      "operation:malaysian-turmeric-chicken-op-002-slice:duration",
+      "operation:malaysian-turmeric-chicken-op-002-slice:parameters-source",
+      "operation:malaysian-turmeric-chicken-op-002-slice:targets-source",
+      "operation:malaysian-turmeric-chicken-op-007-mix:duration",
+      "operation:malaysian-turmeric-chicken-op-007-mix:equipment",
+      "operation:malaysian-turmeric-chicken-op-007-mix:parameters-source",
+      "operation:malaysian-turmeric-chicken-op-007-mix:targets-source",
+      "operation:malaysian-turmeric-chicken-op-008-set-heat:duration",
+      "operation:malaysian-turmeric-chicken-op-008-set-heat:parameters",
+      "operation:malaysian-turmeric-chicken-op-009-stir:duration",
+      "operation:malaysian-turmeric-chicken-op-009-stir:inputs",
+      "operation:malaysian-turmeric-chicken-op-009-stir:parameters-source",
+      "operation:malaysian-turmeric-chicken-op-009-stir:targets-source",
+      "operation:malaysian-turmeric-chicken-op-010-stir:duration",
+      "operation:malaysian-turmeric-chicken-op-010-stir:inputs",
+      "operation:malaysian-turmeric-chicken-op-010-stir:parameters-source",
+      "operation:malaysian-turmeric-chicken-op-010-stir:targets-source",
+      "operation:malaysian-turmeric-chicken-op-011-pan-fry:duration",
+      "operation:malaysian-turmeric-chicken-op-011-pan-fry:inputs",
+      "operation:malaysian-turmeric-chicken-op-011-pan-fry:parameters",
+      "operation:malaysian-turmeric-chicken-op-011-pan-fry:targets-source",
+      "operation:malaysian-turmeric-chicken-op-012-pan-fry:duration",
+      "operation:malaysian-turmeric-chicken-op-012-pan-fry:inputs",
+      "operation:malaysian-turmeric-chicken-op-012-pan-fry:targets-source",
+      "portion:malaysian-turmeric-chicken-portion-01:source-step",
+      "portion:malaysian-turmeric-chicken-portion-03:source-step",
+      "portion:malaysian-turmeric-chicken-portion-04:source-step",
+      "portion:malaysian-turmeric-chicken-portion-06:source-step",
+      "portion:malaysian-turmeric-chicken-portion-09:source-step",
+      "portion:malaysian-turmeric-chicken-portion-10:source-step",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-001-mince-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-002-slice-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-007-mix-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-008-set-heat-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-009-stir-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-010-stir-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-011-pan-fry-omit:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-012-pan-fry-hot:expected-outcome",
+      "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-012-pan-fry-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-malaysian-turmeric-chicken",
+    "riskClassificationId": "",
     "riskLevel": "medium"
   },
   "ingredientPortions": [
@@ -270,7 +314,12 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-02",
+          "malaysian-turmeric-chicken-portion-05",
+          "malaysian-turmeric-chicken-portion-07",
+          "malaysian-turmeric-chicken-portion-08"
+        ],
         "nodeId": "malaysian-turmeric-chicken-op-001-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -298,7 +347,12 @@
           "malaysian-turmeric-chicken-op-001-mince"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "malaysian-turmeric-chicken-portion-02",
+          "malaysian-turmeric-chicken-portion-05",
+          "malaysian-turmeric-chicken-portion-07",
+          "malaysian-turmeric-chicken-portion-08"
+        ],
         "nodeId": "malaysian-turmeric-chicken-op-002-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -325,33 +379,11 @@
         "dependsOn": [
           "malaysian-turmeric-chicken-op-002-slice"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-01"
-        ],
-        "nodeId": "malaysian-turmeric-chicken-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "malaysian-turmeric-chicken-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 360
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "malaysian-turmeric-chicken-op-003-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "malaysian-turmeric-chicken-portion-02"
         ],
-        "nodeId": "malaysian-turmeric-chicken-op-004-add",
+        "nodeId": "malaysian-turmeric-chicken-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "malaysian-turmeric-chicken-portion-02-added"
@@ -367,57 +399,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-004-add"
+          "malaysian-turmeric-chicken-op-003-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-03"
-        ],
-        "nodeId": "malaysian-turmeric-chicken-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "malaysian-turmeric-chicken-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "malaysian-turmeric-chicken-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-04"
-        ],
-        "nodeId": "malaysian-turmeric-chicken-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "malaysian-turmeric-chicken-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "malaysian-turmeric-chicken-op-006-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "malaysian-turmeric-chicken-portion-05"
         ],
-        "nodeId": "malaysian-turmeric-chicken-op-007-add",
+        "nodeId": "malaysian-turmeric-chicken-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "malaysian-turmeric-chicken-portion-05-added"
@@ -433,35 +421,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-007-add"
+          "malaysian-turmeric-chicken-op-004-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-06"
-        ],
-        "nodeId": "malaysian-turmeric-chicken-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "malaysian-turmeric-chicken-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 220
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "malaysian-turmeric-chicken-op-008-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "malaysian-turmeric-chicken-portion-07"
         ],
-        "nodeId": "malaysian-turmeric-chicken-op-009-add",
+        "nodeId": "malaysian-turmeric-chicken-op-005-add",
         "operationType": "add",
         "outputStateIds": [
           "malaysian-turmeric-chicken-portion-07-added"
@@ -477,13 +443,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-009-add"
+          "malaysian-turmeric-chicken-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "malaysian-turmeric-chicken-portion-08"
         ],
-        "nodeId": "malaysian-turmeric-chicken-op-010-add",
+        "nodeId": "malaysian-turmeric-chicken-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "malaysian-turmeric-chicken-portion-08-added"
@@ -496,69 +462,18 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "malaysian-turmeric-chicken-op-010-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-09"
-        ],
-        "nodeId": "malaysian-turmeric-chicken-op-011-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "malaysian-turmeric-chicken-portion-09-added"
-        ],
-        "parameters": {
-          "quantityG": 12
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "malaysian-turmeric-chicken-op-011-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-10"
-        ],
-        "nodeId": "malaysian-turmeric-chicken-op-012-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "malaysian-turmeric-chicken-portion-10-added"
-        ],
-        "parameters": {
-          "quantityG": 1.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-012-add"
+          "malaysian-turmeric-chicken-op-006-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
-          "malaysian-turmeric-chicken-portion-01",
           "malaysian-turmeric-chicken-portion-02",
-          "malaysian-turmeric-chicken-portion-03",
-          "malaysian-turmeric-chicken-portion-04",
           "malaysian-turmeric-chicken-portion-05",
-          "malaysian-turmeric-chicken-portion-06",
           "malaysian-turmeric-chicken-portion-07",
-          "malaysian-turmeric-chicken-portion-08",
-          "malaysian-turmeric-chicken-portion-09",
-          "malaysian-turmeric-chicken-portion-10"
+          "malaysian-turmeric-chicken-portion-08"
         ],
-        "nodeId": "malaysian-turmeric-chicken-op-013-mix",
+        "nodeId": "malaysian-turmeric-chicken-op-007-mix",
         "operationType": "mix",
         "outputStateIds": [
           "malaysian-turmeric-chicken-step-1-mix"
@@ -581,11 +496,29 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-013-mix"
+          "malaysian-turmeric-chicken-op-007-mix"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "malaysian-turmeric-chicken-op-014-stir",
+        "nodeId": "malaysian-turmeric-chicken-op-008-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-2-set-heat"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-008-set-heat"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-009-stir",
         "operationType": "stir",
         "outputStateIds": [
           "malaysian-turmeric-chicken-step-2-stir"
@@ -608,11 +541,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-014-stir"
+          "malaysian-turmeric-chicken-op-009-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "malaysian-turmeric-chicken-op-015-stir",
+        "nodeId": "malaysian-turmeric-chicken-op-010-stir",
         "operationType": "stir",
         "outputStateIds": [
           "malaysian-turmeric-chicken-step-3-stir"
@@ -635,11 +568,41 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-015-stir"
+          "malaysian-turmeric-chicken-op-010-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "malaysian-turmeric-chicken-op-016-pan-fry",
+        "nodeId": "malaysian-turmeric-chicken-op-011-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "malaysian-turmeric-chicken-step-3-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "malaysian-turmeric-chicken-op-011-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "malaysian-turmeric-chicken-op-012-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "malaysian-turmeric-chicken-step-4-pan-fry"
@@ -668,7 +631,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "malaysian-turmeric-chicken-op-016-pan-fry"
+          "malaysian-turmeric-chicken-op-012-pan-fry"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -683,7 +646,7 @@
           "malaysian-turmeric-chicken-portion-09",
           "malaysian-turmeric-chicken-portion-10"
         ],
-        "nodeId": "malaysian-turmeric-chicken-op-017-serve",
+        "nodeId": "malaysian-turmeric-chicken-op-013-serve",
         "operationType": "serve",
         "outputStateIds": [
           "malaysian-turmeric-chicken-served"
@@ -697,29 +660,16 @@
   },
   "recipeId": "malaysian-turmeric-chicken",
   "rights": {
-    "artifactIds": [
-      "game-artifact-malaysian-turmeric-chicken-identity",
-      "game-artifact-malaysian-turmeric-chicken-preparation",
-      "game-artifact-malaysian-turmeric-chicken-nutrition",
-      "game-artifact-malaysian-turmeric-chicken-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "rasa-malaysia-turmeric-chicken",
-      "tourism-malaysia-food-guide"
-    ],
-    "usageDecisionIds": [
-      "game-usage-malaysian-turmeric-chicken-identity",
-      "game-usage-malaysian-turmeric-chicken-preparation",
-      "game-usage-malaysian-turmeric-chicken-nutrition",
-      "game-usage-malaysian-turmeric-chicken-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -743,7 +693,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -767,7 +717,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -782,16 +732,40 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "malaysian-turmeric-chicken-op-013-mix",
+        "targetNodeId": "malaysian-turmeric-chicken-op-007-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-013-mix-omit"
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-007-mix-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-008-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-008-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -806,16 +780,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "malaysian-turmeric-chicken-op-014-stir",
+        "targetNodeId": "malaysian-turmeric-chicken-op-009-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-014-stir-omit"
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-009-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -830,16 +804,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "malaysian-turmeric-chicken-op-015-stir",
+        "targetNodeId": "malaysian-turmeric-chicken-op-010-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-015-stir-omit"
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-010-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -859,16 +833,45 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "malaysian-turmeric-chicken-op-016-pan-fry",
+        "targetNodeId": "malaysian-turmeric-chicken-op-011-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-016-pan-fry-omit"
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-011-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f03569942f058789",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "malaysian-turmeric-chicken-op-012-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-012-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f43bfb6aa3935de1",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -894,12 +897,12 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "malaysian-turmeric-chicken-op-016-pan-fry",
+        "targetNodeId": "malaysian-turmeric-chicken-op-012-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-016-pan-fry-hot"
+      "scenarioId": "malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-012-pan-fry-hot"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

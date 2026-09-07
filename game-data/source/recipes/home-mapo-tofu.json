@@ -1,14 +1,54 @@
 {
-  "artifactVersion": "clv1-4360f201eb083eec",
+  "artifactVersion": "clv1-4bbdc69fe757f4ba",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:home-mapo-tofu-op-002-brew:duration",
+      "operation:home-mapo-tofu-op-002-brew:equipment",
+      "operation:home-mapo-tofu-op-002-brew:parameters",
+      "operation:home-mapo-tofu-op-002-brew:targets-source",
+      "operation:home-mapo-tofu-op-003-rest:duration",
+      "operation:home-mapo-tofu-op-004-drain:duration",
+      "operation:home-mapo-tofu-op-004-drain:equipment",
+      "operation:home-mapo-tofu-op-004-drain:inputs",
+      "operation:home-mapo-tofu-op-005-set-heat:duration",
+      "operation:home-mapo-tofu-op-006-pan-fry:duration",
+      "operation:home-mapo-tofu-op-006-pan-fry:inputs",
+      "operation:home-mapo-tofu-op-006-pan-fry:targets-source",
+      "operation:home-mapo-tofu-op-008-stir:duration",
+      "operation:home-mapo-tofu-op-008-stir:parameters-source",
+      "operation:home-mapo-tofu-op-008-stir:targets-source",
+      "operation:home-mapo-tofu-op-009-pan-fry:duration",
+      "operation:home-mapo-tofu-op-009-pan-fry:targets-source",
+      "operation:home-mapo-tofu-op-010-season:duration",
+      "operation:home-mapo-tofu-op-010-season:inputs",
+      "operation:home-mapo-tofu-op-010-season:parameters",
+      "operation:home-mapo-tofu-op-010-season:targets-source",
+      "portion:home-mapo-tofu-portion-02:source-step",
+      "portion:home-mapo-tofu-portion-04:source-step",
+      "portion:home-mapo-tofu-portion-05:source-step",
+      "portion:home-mapo-tofu-portion-06:source-step",
+      "portion:home-mapo-tofu-portion-07:source-step",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-002-brew-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-003-rest-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-004-drain-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-005-set-heat-hot:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-005-set-heat-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-006-pan-fry-hot:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-006-pan-fry-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-008-stir-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-009-pan-fry-hot:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-009-pan-fry-omit:expected-outcome",
+      "scenario:home-mapo-tofu-home-mapo-tofu-op-010-season-omit:expected-outcome",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-home-mapo-tofu",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -203,7 +243,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "home-mapo-tofu-portion-01"
         ],
@@ -220,131 +260,15 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "home-mapo-tofu-op-001-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "home-mapo-tofu-portion-02"
-        ],
-        "nodeId": "home-mapo-tofu-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "home-mapo-tofu-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 120
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "home-mapo-tofu-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "home-mapo-tofu-portion-04"
-        ],
-        "nodeId": "home-mapo-tofu-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "home-mapo-tofu-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "home-mapo-tofu-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "home-mapo-tofu-portion-05"
-        ],
-        "nodeId": "home-mapo-tofu-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "home-mapo-tofu-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "home-mapo-tofu-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "home-mapo-tofu-portion-06"
-        ],
-        "nodeId": "home-mapo-tofu-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "home-mapo-tofu-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "home-mapo-tofu-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "home-mapo-tofu-portion-07"
-        ],
-        "nodeId": "home-mapo-tofu-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "home-mapo-tofu-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 0.6
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "home-mapo-tofu-op-006-add"
+          "home-mapo-tofu-op-001-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
-          "home-mapo-tofu-portion-01",
-          "home-mapo-tofu-portion-02",
-          "home-mapo-tofu-portion-04",
-          "home-mapo-tofu-portion-05",
-          "home-mapo-tofu-portion-06",
-          "home-mapo-tofu-portion-07"
+          "home-mapo-tofu-portion-01"
         ],
-        "nodeId": "home-mapo-tofu-op-007-brew",
+        "nodeId": "home-mapo-tofu-op-002-brew",
         "operationType": "brew",
         "outputStateIds": [
           "home-mapo-tofu-step-1-brew"
@@ -369,18 +293,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "home-mapo-tofu-op-007-brew"
+          "home-mapo-tofu-op-002-brew"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
-          "home-mapo-tofu-portion-01",
-          "home-mapo-tofu-portion-02",
-          "home-mapo-tofu-portion-04",
-          "home-mapo-tofu-portion-05",
-          "home-mapo-tofu-portion-06",
-          "home-mapo-tofu-portion-07"
+          "home-mapo-tofu-portion-01"
         ],
-        "nodeId": "home-mapo-tofu-op-008-rest",
+        "nodeId": "home-mapo-tofu-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
           "home-mapo-tofu-step-1-rest"
@@ -394,11 +313,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "home-mapo-tofu-op-008-rest"
+          "home-mapo-tofu-op-003-rest"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "home-mapo-tofu-op-009-drain",
+        "nodeId": "home-mapo-tofu-op-004-drain",
         "operationType": "drain",
         "outputStateIds": [
           "home-mapo-tofu-step-2-drain"
@@ -409,16 +327,68 @@
         "waitDurationMs": 0
       },
       {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "home-mapo-tofu-op-004-drain"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "home-mapo-tofu-op-005-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "home-mapo-tofu-step-2-set-heat"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "home-mapo-tofu-op-005-set-heat"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "home-mapo-tofu-op-006-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "home-mapo-tofu-step-2-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "home-mapo-tofu-op-009-drain"
+          "home-mapo-tofu-op-006-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "home-mapo-tofu-portion-03"
         ],
-        "nodeId": "home-mapo-tofu-op-010-add",
+        "nodeId": "home-mapo-tofu-op-007-add",
         "operationType": "add",
         "outputStateIds": [
           "home-mapo-tofu-portion-03-added"
@@ -434,13 +404,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "home-mapo-tofu-op-010-add"
+          "home-mapo-tofu-op-007-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "home-mapo-tofu-portion-03"
         ],
-        "nodeId": "home-mapo-tofu-op-011-stir",
+        "nodeId": "home-mapo-tofu-op-008-stir",
         "operationType": "stir",
         "outputStateIds": [
           "home-mapo-tofu-step-3-stir"
@@ -463,17 +433,21 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "home-mapo-tofu-op-011-stir"
+          "home-mapo-tofu-op-008-stir"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "home-mapo-tofu-op-012-pan-fry",
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "home-mapo-tofu-portion-03"
+        ],
+        "nodeId": "home-mapo-tofu-op-009-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "home-mapo-tofu-step-4-pan-fry"
+          "home-mapo-tofu-step-3-pan-fry"
         ],
-        "parameters": {},
-        "sourceStepOrder": 4,
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
         "targetStates": [
           {
             "dimension": "browning",
@@ -493,11 +467,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "home-mapo-tofu-op-012-pan-fry"
+          "home-mapo-tofu-op-009-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "home-mapo-tofu-op-013-season",
+        "nodeId": "home-mapo-tofu-op-010-season",
         "operationType": "season",
         "outputStateIds": [
           "home-mapo-tofu-step-5-season"
@@ -517,7 +491,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "home-mapo-tofu-op-013-season"
+          "home-mapo-tofu-op-010-season"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -529,7 +503,7 @@
           "home-mapo-tofu-portion-06",
           "home-mapo-tofu-portion-07"
         ],
-        "nodeId": "home-mapo-tofu-op-014-serve",
+        "nodeId": "home-mapo-tofu-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
           "home-mapo-tofu-served"
@@ -543,26 +517,16 @@
   },
   "recipeId": "home-mapo-tofu",
   "rights": {
-    "artifactIds": [
-      "game-artifact-home-mapo-tofu-identity",
-      "game-artifact-home-mapo-tofu-preparation",
-      "game-artifact-home-mapo-tofu-nutrition",
-      "game-artifact-home-mapo-tofu-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-home-mapo-tofu-identity",
-      "game-usage-home-mapo-tofu-preparation",
-      "game-usage-home-mapo-tofu-nutrition",
-      "game-usage-home-mapo-tofu-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4360f201eb083eec",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -582,16 +546,16 @@
         "missing-brew"
       ],
       "mutation": {
-        "targetNodeId": "home-mapo-tofu-op-007-brew",
+        "targetNodeId": "home-mapo-tofu-op-002-brew",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-007-brew-omit"
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-002-brew-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4360f201eb083eec",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -606,16 +570,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "home-mapo-tofu-op-008-rest",
+        "targetNodeId": "home-mapo-tofu-op-003-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-008-rest-omit"
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-003-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4360f201eb083eec",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -630,18 +594,18 @@
         "missing-drain"
       ],
       "mutation": {
-        "targetNodeId": "home-mapo-tofu-op-009-drain",
+        "targetNodeId": "home-mapo-tofu-op-004-drain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-009-drain-omit"
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-004-drain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4360f201eb083eec",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
       "causeCodes": [
-        "operation-omitted:stir"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
@@ -651,19 +615,54 @@
         }
       ],
       "expectedFaultCodes": [
-        "missing-stir"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "home-mapo-tofu-op-011-stir",
+        "targetNodeId": "home-mapo-tofu-op-005-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-011-stir-omit"
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-005-set-heat-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4360f201eb083eec",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "home-mapo-tofu-op-005-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-005-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -683,16 +682,139 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "home-mapo-tofu-op-012-pan-fry",
+        "targetNodeId": "home-mapo-tofu-op-006-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-012-pan-fry-omit"
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-006-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4360f201eb083eec",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "home-mapo-tofu-op-006-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-006-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "home-mapo-tofu-op-008-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-008-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "home-mapo-tofu-op-009-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-009-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "home-mapo-tofu-op-009-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-009-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4bbdc69fe757f4ba",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -707,12 +829,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "home-mapo-tofu-op-013-season",
+        "targetNodeId": "home-mapo-tofu-op-010-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-013-season-omit"
+      "scenarioId": "home-mapo-tofu-home-mapo-tofu-op-010-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

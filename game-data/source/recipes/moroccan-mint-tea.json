@@ -1,14 +1,34 @@
 {
-  "artifactVersion": "clv1-4ce25e97152fd0b2",
+  "artifactVersion": "clv1-cf2bd9828efd91a5",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:moroccan-mint-tea-op-001-rinse:inputs",
+      "operation:moroccan-mint-tea-op-002-add:equipment",
+      "operation:moroccan-mint-tea-op-003-season:equipment",
+      "operation:moroccan-mint-tea-op-003-season:parameters",
+      "operation:moroccan-mint-tea-op-003-season:targets-source",
+      "operation:moroccan-mint-tea-op-004-brew:parameters",
+      "operation:moroccan-mint-tea-op-004-brew:targets-source",
+      "operation:moroccan-mint-tea-op-005-rest:equipment",
+      "portion:moroccan-mint-tea-portion-01:source-step",
+      "portion:moroccan-mint-tea-portion-02:source-step",
+      "portion:moroccan-mint-tea-portion-04:source-step",
+      "scenario:moroccan-mint-tea-moroccan-mint-tea-op-001-rinse-omit:expected-outcome",
+      "scenario:moroccan-mint-tea-moroccan-mint-tea-op-003-season-omit:expected-outcome",
+      "scenario:moroccan-mint-tea-moroccan-mint-tea-op-004-brew-omit:expected-outcome",
+      "scenario:moroccan-mint-tea-moroccan-mint-tea-op-004-brew-short:expected-outcome",
+      "scenario:moroccan-mint-tea-moroccan-mint-tea-op-005-rest-omit:expected-outcome",
+      "scenario:moroccan-mint-tea-moroccan-mint-tea-op-005-rest-short:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-moroccan-mint-tea",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -138,7 +158,7 @@
         "activeDurationMs": 120000,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "kettle",
+        "equipmentId": "teapot",
         "inputPortionIds": [],
         "nodeId": "moroccan-mint-tea-op-001-rinse",
         "operationType": "rinse",
@@ -156,77 +176,10 @@
         "dependsOn": [
           "moroccan-mint-tea-op-001-rinse"
         ],
-        "equipmentId": "kettle",
-        "inputPortionIds": [
-          "moroccan-mint-tea-portion-01"
-        ],
-        "nodeId": "moroccan-mint-tea-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "moroccan-mint-tea-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 6
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "moroccan-mint-tea-op-002-add"
-        ],
-        "equipmentId": "kettle",
-        "inputPortionIds": [
-          "moroccan-mint-tea-portion-02"
-        ],
-        "nodeId": "moroccan-mint-tea-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "moroccan-mint-tea-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 25
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "moroccan-mint-tea-op-003-add"
-        ],
-        "equipmentId": "kettle",
-        "inputPortionIds": [
-          "moroccan-mint-tea-portion-04"
-        ],
-        "nodeId": "moroccan-mint-tea-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "moroccan-mint-tea-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 750
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "moroccan-mint-tea-op-004-add"
-        ],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "moroccan-mint-tea-portion-03"
         ],
-        "nodeId": "moroccan-mint-tea-op-005-add",
+        "nodeId": "moroccan-mint-tea-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "moroccan-mint-tea-portion-03-added"
@@ -242,13 +195,12 @@
         "activeDurationMs": 100000,
         "criticality": "quality",
         "dependsOn": [
-          "moroccan-mint-tea-op-005-add"
+          "moroccan-mint-tea-op-002-add"
         ],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "moroccan-mint-tea-portion-03"
         ],
-        "nodeId": "moroccan-mint-tea-op-006-season",
+        "nodeId": "moroccan-mint-tea-op-003-season",
         "operationType": "season",
         "outputStateIds": [
           "moroccan-mint-tea-step-2-season"
@@ -268,13 +220,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "moroccan-mint-tea-op-006-season"
+          "moroccan-mint-tea-op-003-season"
         ],
-        "equipmentId": "kettle",
+        "equipmentId": "teapot",
         "inputPortionIds": [
           "moroccan-mint-tea-portion-03"
         ],
-        "nodeId": "moroccan-mint-tea-op-007-brew",
+        "nodeId": "moroccan-mint-tea-op-004-brew",
         "operationType": "brew",
         "outputStateIds": [
           "moroccan-mint-tea-step-2-brew"
@@ -299,13 +251,12 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "moroccan-mint-tea-op-007-brew"
+          "moroccan-mint-tea-op-004-brew"
         ],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "moroccan-mint-tea-portion-03"
         ],
-        "nodeId": "moroccan-mint-tea-op-008-rest",
+        "nodeId": "moroccan-mint-tea-op-005-rest",
         "operationType": "rest",
         "outputStateIds": [
           "moroccan-mint-tea-step-2-rest"
@@ -316,39 +267,10 @@
         "waitDurationMs": 100000
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "moroccan-mint-tea-op-008-rest"
-        ],
-        "equipmentId": "kettle",
-        "inputPortionIds": [],
-        "nodeId": "moroccan-mint-tea-op-009-brew",
-        "operationType": "brew",
-        "outputStateIds": [
-          "moroccan-mint-tea-step-3-brew"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "bitterness",
-            "maximum": 0.7,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "aroma",
-            "minimum": 0.45,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 180000
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "moroccan-mint-tea-op-009-brew"
+          "moroccan-mint-tea-op-005-rest"
         ],
         "equipmentId": "teapot",
         "inputPortionIds": [
@@ -357,7 +279,7 @@
           "moroccan-mint-tea-portion-03",
           "moroccan-mint-tea-portion-04"
         ],
-        "nodeId": "moroccan-mint-tea-op-010-serve",
+        "nodeId": "moroccan-mint-tea-op-006-serve",
         "operationType": "serve",
         "outputStateIds": [
           "moroccan-mint-tea-served"
@@ -371,26 +293,16 @@
   },
   "recipeId": "moroccan-mint-tea",
   "rights": {
-    "artifactIds": [
-      "game-artifact-moroccan-mint-tea-identity",
-      "game-artifact-moroccan-mint-tea-preparation",
-      "game-artifact-moroccan-mint-tea-nutrition",
-      "game-artifact-moroccan-mint-tea-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-moroccan-mint-tea-identity",
-      "game-usage-moroccan-mint-tea-preparation",
-      "game-usage-moroccan-mint-tea-nutrition",
-      "game-usage-moroccan-mint-tea-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
+      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
       "causeCodes": [
         "operation-omitted:rinse"
       ],
@@ -414,7 +326,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
+      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -429,16 +341,16 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "moroccan-mint-tea-op-006-season",
+        "targetNodeId": "moroccan-mint-tea-op-003-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-006-season-omit"
+      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-003-season-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
+      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -458,16 +370,16 @@
         "missing-brew"
       ],
       "mutation": {
-        "targetNodeId": "moroccan-mint-tea-op-007-brew",
+        "targetNodeId": "moroccan-mint-tea-op-004-brew",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-007-brew-omit"
+      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-004-brew-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
+      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -488,16 +400,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "moroccan-mint-tea-op-007-brew",
+        "targetNodeId": "moroccan-mint-tea-op-004-brew",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-007-brew-short"
+      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-004-brew-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
+      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -512,16 +424,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "moroccan-mint-tea-op-008-rest",
+        "targetNodeId": "moroccan-mint-tea-op-005-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-008-rest-omit"
+      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-005-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
+      "baselineArtifactVersion": "clv1-cf2bd9828efd91a5",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -537,71 +449,12 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "moroccan-mint-tea-op-008-rest",
+        "targetNodeId": "moroccan-mint-tea-op-005-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-008-rest-short"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
-      "causeCodes": [
-        "operation-omitted:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "unchanged"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-brew"
-      ],
-      "mutation": {
-        "targetNodeId": "moroccan-mint-tea-op-009-brew",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-009-brew-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ce25e97152fd0b2",
-      "causeCodes": [
-        "duration-short:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "underprocessed"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "moroccan-mint-tea-op-009-brew",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-009-brew-short"
+      "scenarioId": "moroccan-mint-tea-moroccan-mint-tea-op-005-rest-short"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

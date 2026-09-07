@@ -62,6 +62,17 @@ const booleanValue: Validator = (value, path) => {
   if (typeof value !== "boolean") fail(path, "expected boolean");
 };
 
+const artifactPathValue: Validator = (value, path) => {
+  if (typeof value !== "string" || value.length === 0) fail(path, "expected non-empty relative artifact path");
+  const portablePath = value.replaceAll("\\", "/");
+  if (portablePath.startsWith("/") || /^[A-Za-z]:\//.test(portablePath)) {
+    fail(path, "artifact path must be relative");
+  }
+  if (portablePath.split("/").some((segment) => segment.length === 0 || segment === "." || segment === "..")) {
+    fail(path, "artifact path must not contain empty, current-directory, or parent-directory segments");
+  }
+};
+
 function fail(path: string, message: string): never {
   throw new GameDataSchemaError(path, message);
 }
@@ -591,6 +602,7 @@ const gameRecipeSchema = exactObject({
     method: enumValue(["deterministic-migration", "deterministic-source-normalization"]),
     generatorVersion: stringValue,
     containsGeneratedExpression: literal(false),
+    unresolvedMappings: arrayOf(stringValue),
   }),
 }, {
   sourceCulinaryItemId: stringValue,
@@ -652,6 +664,13 @@ const gameRightsRegistrySchema = exactObject({
   sources: arrayOf(sourceSchema),
   evidence: arrayOf(evidenceSchema),
   evidenceOrigins: arrayOf(exactObject({ evidenceId: stringValue, origin: enumValue(["source-record", "ai-output"]) })),
+  sourceRoles: arrayOf(exactObject({
+    sourceId: stringValue,
+    role: enumValue(["recipe-primary", "recipe-cross-check", "nutrition", "safety"]),
+  }, {
+    recipeId: stringValue,
+    workFamilyId: stringValue,
+  })),
   researchRecords: arrayOf(researchRecordSchema),
   governance: governanceSchema,
 });
@@ -662,6 +681,12 @@ const operationDefinitionSchema = exactObject({
   compatibility: enumValue(["supported-now", "macro-supported", "requires-engine-v2", "presentation-only"]),
   simulationAffecting: booleanValue,
   allowedParameters: arrayOf(enumValue(["cutSizeMm", "uniformity", "heatLevel", "temperatureC", "strength", "quantityG", "capacityG"])),
+  requiredParameterGroups: arrayOf(arrayOf(enumValue(["cutSizeMm", "uniformity", "heatLevel", "temperatureC", "strength", "quantityG", "capacityG"]), 1)),
+  inputRequirement: enumValue(["none", "one-or-more"]),
+  equipmentRequired: booleanValue,
+  compatibleEquipmentIds: arrayOf(stringValue),
+  durationRequirement: enumValue(["none", "active", "wait", "either"]),
+  targetStateRequired: booleanValue,
 }, {
   legacyCommand: enumValue(["CUT", "ADD", "SET_HEAT", "WAIT", "STIR", "SEASON", "PLATE"]),
 });
@@ -696,22 +721,38 @@ const manifestSchema = exactObject({
   recipeCount: integerValue,
   recipes: arrayOf(exactObject({
     recipeId: stringValue,
-    path: stringValue,
+    path: artifactPathValue,
     sha256: stringValue,
     artifactVersion: stringValue,
     simulationProfile: enumValue(["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"]),
   })),
-  ingredientCatalog: exactObject({ path: stringValue, sha256: stringValue }),
+  rightsSummary: exactObject({
+    intendedUse: literal("game-commercial-ready"),
+    artifactCount: integerValue,
+    decisionCount: integerValue,
+    allowCount: integerValue,
+    allowWithObligationsCount: integerValue,
+    sourceCount: integerValue,
+    licenseIds: arrayOf(stringValue),
+  }),
+  reviewSummary: exactObject({
+    riskCounts: exactObject({ low: integerValue, medium: integerValue, high: integerValue }),
+    attestationCount: integerValue,
+    samplingBatchCount: integerValue,
+    reviewedRecipeCount: integerValue,
+  }),
+  ingredientCatalog: exactObject({ path: artifactPathValue, sha256: stringValue }),
   nutritionDataset: exactObject({
-    path: stringValue,
+    path: artifactPathValue,
     sha256: stringValue,
     schemaVersion: literal("cooking-lab-usda-subset-v1"),
     provider: literal("USDA FoodData Central"),
     upstreamArchives: arrayOf(exactObject({ datasetVersion: stringValue, sha256: stringValue })),
   }),
-  operationCatalog: exactObject({ path: stringValue, sha256: stringValue, version: literal(gameOperationCatalogVersion) }),
-  rightsRegistry: exactObject({ path: stringValue, sha256: stringValue, version: literal(gameRightsRegistrySchemaVersion) }),
-  attribution: exactObject({ path: stringValue, sha256: stringValue }),
+  operationCatalog: exactObject({ path: artifactPathValue, sha256: stringValue, version: literal(gameOperationCatalogVersion) }),
+  rightsRegistry: exactObject({ path: artifactPathValue, sha256: stringValue, version: literal(gameRightsRegistrySchemaVersion) }),
+  attribution: exactObject({ path: artifactPathValue, sha256: stringValue }),
+  sqlite: exactObject({ path: artifactPathValue, sha256: stringValue }),
 });
 
 export function parseGameRecipe(value: unknown, path = "GameRecipeV1"): GameRecipeV1 {
@@ -757,6 +798,11 @@ export function parseGameOperationCatalog(
 export function parseGameDataManifest(value: unknown, path = "GameDataManifestV1"): GameDataManifestV1 {
   manifestSchema(value, path);
   return value as GameDataManifestV1;
+}
+
+export function parseGameDataArtifactPath(value: unknown, path = "GameDataArtifactPath"): string {
+  artifactPathValue(value, path);
+  return value as string;
 }
 
 export function parseContentArtifact(value: unknown, path = "ContentArtifact"): ContentArtifact {

@@ -1,14 +1,44 @@
 {
-  "artifactVersion": "clv1-4ad258d2b3f9eabf",
+  "artifactVersion": "clv1-26f6a5115783e763",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:tiramisu-op-002-stir:parameters-source",
+      "operation:tiramisu-op-002-stir:targets-source",
+      "operation:tiramisu-op-003-whisk:parameters-source",
+      "operation:tiramisu-op-003-whisk:targets-source",
+      "operation:tiramisu-op-004-mix:inputs",
+      "operation:tiramisu-op-004-mix:parameters-source",
+      "operation:tiramisu-op-004-mix:targets-source",
+      "operation:tiramisu-op-005-whisk:inputs",
+      "operation:tiramisu-op-005-whisk:parameters-source",
+      "operation:tiramisu-op-005-whisk:targets-source",
+      "operation:tiramisu-op-008-extract:equipment",
+      "operation:tiramisu-op-008-extract:parameters",
+      "operation:tiramisu-op-008-extract:targets-source",
+      "operation:tiramisu-op-011-chill:parameters",
+      "portion:tiramisu-portion-01:source-step",
+      "portion:tiramisu-portion-03:source-step",
+      "portion:tiramisu-portion-05:source-step",
+      "scenario:tiramisu-tiramisu-op-002-stir-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-003-whisk-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-004-mix-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-005-whisk-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-007-rest-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-007-rest-short:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-008-extract-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-008-extract-short:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-011-chill-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-011-chill-short:expected-outcome",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-tiramisu",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -184,31 +214,9 @@
         "dependsOn": [],
         "equipmentId": "heatproof-bowl",
         "inputPortionIds": [
-          "tiramisu-portion-01"
-        ],
-        "nodeId": "tiramisu-op-001-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "tiramisu-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 150
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "tiramisu-op-001-add"
-        ],
-        "equipmentId": "heatproof-bowl",
-        "inputPortionIds": [
           "tiramisu-portion-02"
         ],
-        "nodeId": "tiramisu-op-002-add",
+        "nodeId": "tiramisu-op-001-add",
         "operationType": "add",
         "outputStateIds": [
           "tiramisu-portion-02-added"
@@ -221,63 +229,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "tiramisu-op-002-add"
-        ],
-        "equipmentId": "heatproof-bowl",
-        "inputPortionIds": [
-          "tiramisu-portion-03"
-        ],
-        "nodeId": "tiramisu-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "tiramisu-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 500
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "tiramisu-op-003-add"
-        ],
-        "equipmentId": "heatproof-bowl",
-        "inputPortionIds": [
-          "tiramisu-portion-05"
-        ],
-        "nodeId": "tiramisu-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "tiramisu-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 250
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 300000,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-004-add"
+          "tiramisu-op-001-add"
         ],
         "equipmentId": "heatproof-bowl",
         "inputPortionIds": [
-          "tiramisu-portion-01",
-          "tiramisu-portion-02",
-          "tiramisu-portion-03",
-          "tiramisu-portion-05"
+          "tiramisu-portion-02"
         ],
-        "nodeId": "tiramisu-op-005-stir",
+        "nodeId": "tiramisu-op-002-stir",
         "operationType": "stir",
         "outputStateIds": [
           "tiramisu-step-1-stir"
@@ -300,16 +261,13 @@
         "activeDurationMs": 300000,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-005-stir"
+          "tiramisu-op-002-stir"
         ],
-        "equipmentId": "heatproof-bowl",
+        "equipmentId": "whisk",
         "inputPortionIds": [
-          "tiramisu-portion-01",
-          "tiramisu-portion-02",
-          "tiramisu-portion-03",
-          "tiramisu-portion-05"
+          "tiramisu-portion-02"
         ],
-        "nodeId": "tiramisu-op-006-whisk",
+        "nodeId": "tiramisu-op-003-whisk",
         "operationType": "whisk",
         "outputStateIds": [
           "tiramisu-step-1-whisk"
@@ -332,11 +290,11 @@
         "activeDurationMs": 240000,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-006-whisk"
+          "tiramisu-op-003-whisk"
         ],
         "equipmentId": "heatproof-bowl",
         "inputPortionIds": [],
-        "nodeId": "tiramisu-op-007-mix",
+        "nodeId": "tiramisu-op-004-mix",
         "operationType": "mix",
         "outputStateIds": [
           "tiramisu-step-2-mix"
@@ -359,11 +317,11 @@
         "activeDurationMs": 240000,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-007-mix"
+          "tiramisu-op-004-mix"
         ],
-        "equipmentId": "heatproof-bowl",
+        "equipmentId": "whisk",
         "inputPortionIds": [],
-        "nodeId": "tiramisu-op-008-whisk",
+        "nodeId": "tiramisu-op-005-whisk",
         "operationType": "whisk",
         "outputStateIds": [
           "tiramisu-step-2-whisk"
@@ -386,13 +344,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "tiramisu-op-008-whisk"
+          "tiramisu-op-005-whisk"
         ],
         "equipmentId": "heatproof-bowl",
         "inputPortionIds": [
           "tiramisu-portion-04"
         ],
-        "nodeId": "tiramisu-op-009-add",
+        "nodeId": "tiramisu-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "tiramisu-portion-04-added"
@@ -408,13 +366,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-009-add"
+          "tiramisu-op-006-add"
         ],
         "equipmentId": "heatproof-bowl",
         "inputPortionIds": [
           "tiramisu-portion-04"
         ],
-        "nodeId": "tiramisu-op-010-rest",
+        "nodeId": "tiramisu-op-007-rest",
         "operationType": "rest",
         "outputStateIds": [
           "tiramisu-step-3-rest"
@@ -428,13 +386,12 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-010-rest"
+          "tiramisu-op-007-rest"
         ],
-        "equipmentId": "heatproof-bowl",
         "inputPortionIds": [
           "tiramisu-portion-04"
         ],
-        "nodeId": "tiramisu-op-011-extract",
+        "nodeId": "tiramisu-op-008-extract",
         "operationType": "extract",
         "outputStateIds": [
           "tiramisu-step-3-extract"
@@ -459,13 +416,13 @@
         "activeDurationMs": 140000,
         "criticality": "completion",
         "dependsOn": [
-          "tiramisu-op-011-extract"
+          "tiramisu-op-008-extract"
         ],
-        "equipmentId": "heatproof-bowl",
+        "equipmentId": "square-dish",
         "inputPortionIds": [
           "tiramisu-portion-04"
         ],
-        "nodeId": "tiramisu-op-012-assemble",
+        "nodeId": "tiramisu-op-009-assemble",
         "operationType": "assemble",
         "outputStateIds": [
           "tiramisu-step-3-assemble"
@@ -476,34 +433,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 600000,
-        "criticality": "completion",
-        "dependsOn": [
-          "tiramisu-op-012-assemble"
-        ],
-        "equipmentId": "heatproof-bowl",
-        "inputPortionIds": [],
-        "nodeId": "tiramisu-op-013-assemble",
-        "operationType": "assemble",
-        "outputStateIds": [
-          "tiramisu-step-4-assemble"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 4,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "tiramisu-op-013-assemble"
+          "tiramisu-op-009-assemble"
         ],
         "equipmentId": "heatproof-bowl",
         "inputPortionIds": [
           "tiramisu-portion-06"
         ],
-        "nodeId": "tiramisu-op-014-add",
+        "nodeId": "tiramisu-op-010-add",
         "operationType": "add",
         "outputStateIds": [
           "tiramisu-portion-06-added"
@@ -519,13 +458,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "tiramisu-op-014-add"
+          "tiramisu-op-010-add"
         ],
-        "equipmentId": "heatproof-bowl",
+        "equipmentId": "refrigerator",
         "inputPortionIds": [
           "tiramisu-portion-06"
         ],
-        "nodeId": "tiramisu-op-015-chill",
+        "nodeId": "tiramisu-op-011-chill",
         "operationType": "chill",
         "outputStateIds": [
           "tiramisu-step-5-chill"
@@ -539,13 +478,13 @@
         "activeDurationMs": 10800000,
         "criticality": "completion",
         "dependsOn": [
-          "tiramisu-op-015-chill"
+          "tiramisu-op-011-chill"
         ],
-        "equipmentId": "heatproof-bowl",
+        "equipmentId": "square-dish",
         "inputPortionIds": [
           "tiramisu-portion-06"
         ],
-        "nodeId": "tiramisu-op-016-serve",
+        "nodeId": "tiramisu-op-012-serve",
         "operationType": "serve",
         "outputStateIds": [
           "tiramisu-step-5-serve"
@@ -559,26 +498,16 @@
   },
   "recipeId": "tiramisu",
   "rights": {
-    "artifactIds": [
-      "game-artifact-tiramisu-identity",
-      "game-artifact-tiramisu-preparation",
-      "game-artifact-tiramisu-nutrition",
-      "game-artifact-tiramisu-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-tiramisu-identity",
-      "game-usage-tiramisu-preparation",
-      "game-usage-tiramisu-nutrition",
-      "game-usage-tiramisu-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -593,16 +522,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-005-stir",
+        "targetNodeId": "tiramisu-op-002-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-005-stir-omit"
+      "scenarioId": "tiramisu-tiramisu-op-002-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -617,16 +546,16 @@
         "missing-whisk"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-006-whisk",
+        "targetNodeId": "tiramisu-op-003-whisk",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-006-whisk-omit"
+      "scenarioId": "tiramisu-tiramisu-op-003-whisk-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -641,16 +570,16 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-007-mix",
+        "targetNodeId": "tiramisu-op-004-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-007-mix-omit"
+      "scenarioId": "tiramisu-tiramisu-op-004-mix-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -665,16 +594,16 @@
         "missing-whisk"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-008-whisk",
+        "targetNodeId": "tiramisu-op-005-whisk",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-008-whisk-omit"
+      "scenarioId": "tiramisu-tiramisu-op-005-whisk-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -689,16 +618,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-010-rest",
+        "targetNodeId": "tiramisu-op-007-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-010-rest-omit"
+      "scenarioId": "tiramisu-tiramisu-op-007-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -714,16 +643,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "tiramisu-op-010-rest",
+        "targetNodeId": "tiramisu-op-007-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-010-rest-short"
+      "scenarioId": "tiramisu-tiramisu-op-007-rest-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -743,16 +672,16 @@
         "missing-extract"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-011-extract",
+        "targetNodeId": "tiramisu-op-008-extract",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-011-extract-omit"
+      "scenarioId": "tiramisu-tiramisu-op-008-extract-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -773,16 +702,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "tiramisu-op-011-extract",
+        "targetNodeId": "tiramisu-op-008-extract",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-011-extract-short"
+      "scenarioId": "tiramisu-tiramisu-op-008-extract-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -797,16 +726,16 @@
         "missing-chill"
       ],
       "mutation": {
-        "targetNodeId": "tiramisu-op-015-chill",
+        "targetNodeId": "tiramisu-op-011-chill",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-015-chill-omit"
+      "scenarioId": "tiramisu-tiramisu-op-011-chill-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4ad258d2b3f9eabf",
+      "baselineArtifactVersion": "clv1-26f6a5115783e763",
       "causeCodes": [
         "duration-short:chill"
       ],
@@ -822,12 +751,12 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "tiramisu-op-015-chill",
+        "targetNodeId": "tiramisu-op-011-chill",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "tiramisu-tiramisu-op-015-chill-short"
+      "scenarioId": "tiramisu-tiramisu-op-011-chill-short"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

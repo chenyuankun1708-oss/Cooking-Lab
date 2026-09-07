@@ -1,14 +1,40 @@
 {
-  "artifactVersion": "clv1-01330bbfc3e2e49a",
+  "artifactVersion": "clv1-9d072f1f98d6a683",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:filipino-chicken-adobo-home-op-001-crush:duration",
+      "operation:filipino-chicken-adobo-home-op-001-crush:parameters-source",
+      "operation:filipino-chicken-adobo-home-op-003-pan-fry:duration",
+      "operation:filipino-chicken-adobo-home-op-003-pan-fry:inputs",
+      "operation:filipino-chicken-adobo-home-op-003-pan-fry:targets-source",
+      "operation:filipino-chicken-adobo-home-op-005-stir:duration",
+      "operation:filipino-chicken-adobo-home-op-005-stir:inputs",
+      "operation:filipino-chicken-adobo-home-op-005-stir:parameters-source",
+      "operation:filipino-chicken-adobo-home-op-005-stir:targets-source",
+      "operation:filipino-chicken-adobo-home-op-006-season:duration",
+      "operation:filipino-chicken-adobo-home-op-006-season:inputs",
+      "operation:filipino-chicken-adobo-home-op-006-season:parameters",
+      "operation:filipino-chicken-adobo-home-op-006-season:targets-source",
+      "portion:filipino-chicken-adobo-home-portion-01:source-step",
+      "portion:filipino-chicken-adobo-home-portion-02:source-step",
+      "portion:filipino-chicken-adobo-home-portion-04:source-step",
+      "portion:filipino-chicken-adobo-home-portion-06:source-step",
+      "portion:filipino-chicken-adobo-home-portion-07:source-step",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-001-crush-omit:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-hot:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-omit:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-005-stir-omit:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-006-season-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-filipino-chicken-adobo-home",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -204,7 +230,9 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "filipino-chicken-adobo-home-portion-03"
+        ],
         "nodeId": "filipino-chicken-adobo-home-op-001-crush",
         "operationType": "crush",
         "outputStateIds": [
@@ -223,55 +251,11 @@
         "dependsOn": [
           "filipino-chicken-adobo-home-op-001-crush"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "filipino-chicken-adobo-home-portion-01"
-        ],
-        "nodeId": "filipino-chicken-adobo-home-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "filipino-chicken-adobo-home-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 450
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "filipino-chicken-adobo-home-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "filipino-chicken-adobo-home-portion-02"
-        ],
-        "nodeId": "filipino-chicken-adobo-home-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "filipino-chicken-adobo-home-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 35
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "filipino-chicken-adobo-home-op-003-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "filipino-chicken-adobo-home-portion-03"
         ],
-        "nodeId": "filipino-chicken-adobo-home-op-004-add",
+        "nodeId": "filipino-chicken-adobo-home-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "filipino-chicken-adobo-home-portion-03-added"
@@ -284,80 +268,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "filipino-chicken-adobo-home-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "filipino-chicken-adobo-home-portion-04"
-        ],
-        "nodeId": "filipino-chicken-adobo-home-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "filipino-chicken-adobo-home-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 14
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "filipino-chicken-adobo-home-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "filipino-chicken-adobo-home-portion-06"
-        ],
-        "nodeId": "filipino-chicken-adobo-home-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "filipino-chicken-adobo-home-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "filipino-chicken-adobo-home-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "filipino-chicken-adobo-home-portion-07"
-        ],
-        "nodeId": "filipino-chicken-adobo-home-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "filipino-chicken-adobo-home-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 0.3
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "filipino-chicken-adobo-home-op-007-add"
+          "filipino-chicken-adobo-home-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "filipino-chicken-adobo-home-op-008-pan-fry",
+        "nodeId": "filipino-chicken-adobo-home-op-003-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "filipino-chicken-adobo-home-step-2-pan-fry"
@@ -385,13 +303,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "filipino-chicken-adobo-home-op-008-pan-fry"
+          "filipino-chicken-adobo-home-op-003-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "filipino-chicken-adobo-home-portion-05"
         ],
-        "nodeId": "filipino-chicken-adobo-home-op-009-add",
+        "nodeId": "filipino-chicken-adobo-home-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "filipino-chicken-adobo-home-portion-05-added"
@@ -407,46 +325,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "filipino-chicken-adobo-home-op-009-add"
+          "filipino-chicken-adobo-home-op-004-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "filipino-chicken-adobo-home-portion-05"
-        ],
-        "nodeId": "filipino-chicken-adobo-home-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "filipino-chicken-adobo-home-step-3-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35,
-          "temperatureC": 74
-        },
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "filipino-chicken-adobo-home-op-010-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "filipino-chicken-adobo-home-op-011-stir",
+        "nodeId": "filipino-chicken-adobo-home-op-005-stir",
         "operationType": "stir",
         "outputStateIds": [
           "filipino-chicken-adobo-home-step-4-stir"
@@ -469,11 +352,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "filipino-chicken-adobo-home-op-011-stir"
+          "filipino-chicken-adobo-home-op-005-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "filipino-chicken-adobo-home-op-012-season",
+        "nodeId": "filipino-chicken-adobo-home-op-006-season",
         "operationType": "season",
         "outputStateIds": [
           "filipino-chicken-adobo-home-step-4-season"
@@ -493,7 +376,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "filipino-chicken-adobo-home-op-012-season"
+          "filipino-chicken-adobo-home-op-006-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -505,7 +388,7 @@
           "filipino-chicken-adobo-home-portion-06",
           "filipino-chicken-adobo-home-portion-07"
         ],
-        "nodeId": "filipino-chicken-adobo-home-op-013-serve",
+        "nodeId": "filipino-chicken-adobo-home-op-007-serve",
         "operationType": "serve",
         "outputStateIds": [
           "filipino-chicken-adobo-home-served"
@@ -519,29 +402,16 @@
   },
   "recipeId": "filipino-chicken-adobo-home",
   "rights": {
-    "artifactIds": [
-      "game-artifact-filipino-chicken-adobo-home-identity",
-      "game-artifact-filipino-chicken-adobo-home-preparation",
-      "game-artifact-filipino-chicken-adobo-home-nutrition",
-      "game-artifact-filipino-chicken-adobo-home-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "panlasang-pinoy-chicken-adobo",
-      "philippine-cultural-education-adobo"
-    ],
-    "usageDecisionIds": [
-      "game-usage-filipino-chicken-adobo-home-identity",
-      "game-usage-filipino-chicken-adobo-home-preparation",
-      "game-usage-filipino-chicken-adobo-home-nutrition",
-      "game-usage-filipino-chicken-adobo-home-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
+      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -565,7 +435,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
+      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -585,16 +455,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "filipino-chicken-adobo-home-op-008-pan-fry",
+        "targetNodeId": "filipino-chicken-adobo-home-op-003-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-008-pan-fry-omit"
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
+      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -620,80 +490,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "filipino-chicken-adobo-home-op-008-pan-fry",
+        "targetNodeId": "filipino-chicken-adobo-home-op-003-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-008-pan-fry-hot"
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "filipino-chicken-adobo-home-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-010-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "filipino-chicken-adobo-home-op-010-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-010-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
+      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -708,16 +514,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "filipino-chicken-adobo-home-op-011-stir",
+        "targetNodeId": "filipino-chicken-adobo-home-op-005-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-011-stir-omit"
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-005-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-01330bbfc3e2e49a",
+      "baselineArtifactVersion": "clv1-9d072f1f98d6a683",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -732,12 +538,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "filipino-chicken-adobo-home-op-012-season",
+        "targetNodeId": "filipino-chicken-adobo-home-op-006-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-012-season-omit"
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-006-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

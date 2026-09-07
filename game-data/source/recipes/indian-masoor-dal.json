@@ -1,14 +1,41 @@
 {
-  "artifactVersion": "clv1-aef4a66938fa9d82",
+  "artifactVersion": "clv1-9494810b7877a240",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:indian-masoor-dal-op-001-wash:duration",
+      "operation:indian-masoor-dal-op-001-wash:equipment",
+      "operation:indian-masoor-dal-op-002-mince:duration",
+      "operation:indian-masoor-dal-op-002-mince:parameters-source",
+      "operation:indian-masoor-dal-op-002-mince:targets-source",
+      "operation:indian-masoor-dal-op-008-stir:duration",
+      "operation:indian-masoor-dal-op-008-stir:parameters-source",
+      "operation:indian-masoor-dal-op-008-stir:targets-source",
+      "operation:indian-masoor-dal-op-009-pan-fry:duration",
+      "operation:indian-masoor-dal-op-009-pan-fry:targets-source",
+      "operation:indian-masoor-dal-op-010-season:duration",
+      "operation:indian-masoor-dal-op-010-season:inputs",
+      "operation:indian-masoor-dal-op-010-season:parameters",
+      "operation:indian-masoor-dal-op-010-season:targets-source",
+      "portion:indian-masoor-dal-portion-04:source-step",
+      "portion:indian-masoor-dal-portion-05:source-step",
+      "portion:indian-masoor-dal-portion-08:source-step",
+      "portion:indian-masoor-dal-portion-09:source-step",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-001-wash-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-002-mince-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-008-stir-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-hot:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-010-season-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-indian-masoor-dal",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -247,8 +274,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-01",
+          "indian-masoor-dal-portion-02",
+          "indian-masoor-dal-portion-03"
+        ],
         "nodeId": "indian-masoor-dal-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -266,7 +296,11 @@
           "indian-masoor-dal-op-001-wash"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-01",
+          "indian-masoor-dal-portion-02",
+          "indian-masoor-dal-portion-03"
+        ],
         "nodeId": "indian-masoor-dal-op-002-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -293,7 +327,7 @@
         "dependsOn": [
           "indian-masoor-dal-op-002-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-masoor-dal-portion-01"
         ],
@@ -315,7 +349,7 @@
         "dependsOn": [
           "indian-masoor-dal-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-masoor-dal-portion-02"
         ],
@@ -337,7 +371,7 @@
         "dependsOn": [
           "indian-masoor-dal-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-masoor-dal-portion-03"
         ],
@@ -359,99 +393,11 @@
         "dependsOn": [
           "indian-masoor-dal-op-005-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-masoor-dal-portion-04"
-        ],
-        "nodeId": "indian-masoor-dal-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-masoor-dal-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-masoor-dal-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-masoor-dal-portion-05"
-        ],
-        "nodeId": "indian-masoor-dal-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-masoor-dal-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-masoor-dal-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-masoor-dal-portion-08"
-        ],
-        "nodeId": "indian-masoor-dal-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-masoor-dal-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-masoor-dal-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-masoor-dal-portion-09"
-        ],
-        "nodeId": "indian-masoor-dal-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-masoor-dal-portion-09-added"
-        ],
-        "parameters": {
-          "quantityG": 1.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-masoor-dal-op-009-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-masoor-dal-portion-06"
         ],
-        "nodeId": "indian-masoor-dal-op-010-add",
+        "nodeId": "indian-masoor-dal-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "indian-masoor-dal-portion-06-added"
@@ -467,13 +413,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "indian-masoor-dal-op-010-add"
+          "indian-masoor-dal-op-006-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-masoor-dal-portion-07"
         ],
-        "nodeId": "indian-masoor-dal-op-011-add",
+        "nodeId": "indian-masoor-dal-op-007-add",
         "operationType": "add",
         "outputStateIds": [
           "indian-masoor-dal-portion-07-added"
@@ -489,14 +435,14 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-masoor-dal-op-011-add"
+          "indian-masoor-dal-op-007-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-masoor-dal-portion-06",
           "indian-masoor-dal-portion-07"
         ],
-        "nodeId": "indian-masoor-dal-op-012-stir",
+        "nodeId": "indian-masoor-dal-op-008-stir",
         "operationType": "stir",
         "outputStateIds": [
           "indian-masoor-dal-step-2-stir"
@@ -519,19 +465,22 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-masoor-dal-op-012-stir"
+          "indian-masoor-dal-op-008-stir"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "indian-masoor-dal-op-013-pan-fry",
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-06",
+          "indian-masoor-dal-portion-07"
+        ],
+        "nodeId": "indian-masoor-dal-op-009-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "indian-masoor-dal-step-3-pan-fry"
+          "indian-masoor-dal-step-2-pan-fry"
         ],
         "parameters": {
           "heatLevel": 0.35
         },
-        "sourceStepOrder": 3,
+        "sourceStepOrder": 2,
         "targetStates": [
           {
             "dimension": "browning",
@@ -551,11 +500,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-masoor-dal-op-013-pan-fry"
+          "indian-masoor-dal-op-009-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "indian-masoor-dal-op-014-season",
+        "nodeId": "indian-masoor-dal-op-010-season",
         "operationType": "season",
         "outputStateIds": [
           "indian-masoor-dal-step-4-season"
@@ -575,7 +524,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "indian-masoor-dal-op-014-season"
+          "indian-masoor-dal-op-010-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -589,7 +538,7 @@
           "indian-masoor-dal-portion-08",
           "indian-masoor-dal-portion-09"
         ],
-        "nodeId": "indian-masoor-dal-op-015-serve",
+        "nodeId": "indian-masoor-dal-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
           "indian-masoor-dal-served"
@@ -603,29 +552,16 @@
   },
   "recipeId": "indian-masoor-dal",
   "rights": {
-    "artifactIds": [
-      "game-artifact-indian-masoor-dal-identity",
-      "game-artifact-indian-masoor-dal-preparation",
-      "game-artifact-indian-masoor-dal-nutrition",
-      "game-artifact-indian-masoor-dal-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "dassana-masoor-dal",
-      "swasthi-masoor-dal"
-    ],
-    "usageDecisionIds": [
-      "game-usage-indian-masoor-dal-identity",
-      "game-usage-indian-masoor-dal-preparation",
-      "game-usage-indian-masoor-dal-nutrition",
-      "game-usage-indian-masoor-dal-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aef4a66938fa9d82",
+      "baselineArtifactVersion": "clv1-9494810b7877a240",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -649,7 +585,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aef4a66938fa9d82",
+      "baselineArtifactVersion": "clv1-9494810b7877a240",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -673,7 +609,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aef4a66938fa9d82",
+      "baselineArtifactVersion": "clv1-9494810b7877a240",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -688,16 +624,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "indian-masoor-dal-op-012-stir",
+        "targetNodeId": "indian-masoor-dal-op-008-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-012-stir-omit"
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-008-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aef4a66938fa9d82",
+      "baselineArtifactVersion": "clv1-9494810b7877a240",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -717,16 +653,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "indian-masoor-dal-op-013-pan-fry",
+        "targetNodeId": "indian-masoor-dal-op-009-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-013-pan-fry-omit"
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aef4a66938fa9d82",
+      "baselineArtifactVersion": "clv1-9494810b7877a240",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -752,16 +688,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "indian-masoor-dal-op-013-pan-fry",
+        "targetNodeId": "indian-masoor-dal-op-009-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-013-pan-fry-hot"
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aef4a66938fa9d82",
+      "baselineArtifactVersion": "clv1-9494810b7877a240",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -776,12 +712,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "indian-masoor-dal-op-014-season",
+        "targetNodeId": "indian-masoor-dal-op-010-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-014-season-omit"
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-010-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

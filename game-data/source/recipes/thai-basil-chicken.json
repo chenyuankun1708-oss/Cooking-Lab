@@ -1,14 +1,60 @@
 {
-  "artifactVersion": "clv1-d8eca42aa101e7db",
+  "artifactVersion": "clv1-e7502f31e45db470",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:thai-basil-chicken-op-001-dice:duration",
+      "operation:thai-basil-chicken-op-001-dice:parameters-source",
+      "operation:thai-basil-chicken-op-001-dice:targets-source",
+      "operation:thai-basil-chicken-op-002-mince:duration",
+      "operation:thai-basil-chicken-op-002-mince:parameters-source",
+      "operation:thai-basil-chicken-op-002-mince:targets-source",
+      "operation:thai-basil-chicken-op-007-set-heat:duration",
+      "operation:thai-basil-chicken-op-007-set-heat:parameters",
+      "operation:thai-basil-chicken-op-008-stir:duration",
+      "operation:thai-basil-chicken-op-008-stir:inputs",
+      "operation:thai-basil-chicken-op-008-stir:parameters-source",
+      "operation:thai-basil-chicken-op-008-stir:targets-source",
+      "operation:thai-basil-chicken-op-009-stir:duration",
+      "operation:thai-basil-chicken-op-009-stir:inputs",
+      "operation:thai-basil-chicken-op-009-stir:parameters-source",
+      "operation:thai-basil-chicken-op-009-stir:targets-source",
+      "operation:thai-basil-chicken-op-010-pan-fry:duration",
+      "operation:thai-basil-chicken-op-010-pan-fry:inputs",
+      "operation:thai-basil-chicken-op-010-pan-fry:targets-source",
+      "operation:thai-basil-chicken-op-011-toss:duration",
+      "operation:thai-basil-chicken-op-011-toss:inputs",
+      "operation:thai-basil-chicken-op-011-toss:parameters-source",
+      "operation:thai-basil-chicken-op-011-toss:targets-source",
+      "operation:thai-basil-chicken-op-012-stir:duration",
+      "operation:thai-basil-chicken-op-012-stir:inputs",
+      "operation:thai-basil-chicken-op-012-stir:parameters-source",
+      "operation:thai-basil-chicken-op-012-stir:targets-source",
+      "operation:thai-basil-chicken-op-013-pan-fry:duration",
+      "operation:thai-basil-chicken-op-013-pan-fry:inputs",
+      "operation:thai-basil-chicken-op-013-pan-fry:parameters",
+      "operation:thai-basil-chicken-op-013-pan-fry:targets-source",
+      "portion:thai-basil-chicken-portion-04:source-step",
+      "portion:thai-basil-chicken-portion-06:source-step",
+      "portion:thai-basil-chicken-portion-07:source-step",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-001-dice-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-002-mince-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-007-set-heat-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-008-stir-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-009-stir-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-010-pan-fry-hot:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-010-pan-fry-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-011-toss-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-012-stir-omit:expected-outcome",
+      "scenario:thai-basil-chicken-thai-basil-chicken-op-013-pan-fry-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-thai-basil-chicken",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -204,7 +250,12 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-01",
+          "thai-basil-chicken-portion-02",
+          "thai-basil-chicken-portion-03",
+          "thai-basil-chicken-portion-05"
+        ],
         "nodeId": "thai-basil-chicken-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
@@ -232,7 +283,12 @@
           "thai-basil-chicken-op-001-dice"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "thai-basil-chicken-portion-01",
+          "thai-basil-chicken-portion-02",
+          "thai-basil-chicken-portion-03",
+          "thai-basil-chicken-portion-05"
+        ],
         "nodeId": "thai-basil-chicken-op-002-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -259,7 +315,7 @@
         "dependsOn": [
           "thai-basil-chicken-op-002-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "thai-basil-chicken-portion-01"
         ],
@@ -281,7 +337,7 @@
         "dependsOn": [
           "thai-basil-chicken-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "thai-basil-chicken-portion-02"
         ],
@@ -303,7 +359,7 @@
         "dependsOn": [
           "thai-basil-chicken-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "thai-basil-chicken-portion-03"
         ],
@@ -325,33 +381,11 @@
         "dependsOn": [
           "thai-basil-chicken-op-005-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "thai-basil-chicken-portion-04"
-        ],
-        "nodeId": "thai-basil-chicken-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "thai-basil-chicken-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "thai-basil-chicken-op-006-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "thai-basil-chicken-portion-05"
         ],
-        "nodeId": "thai-basil-chicken-op-007-add",
+        "nodeId": "thai-basil-chicken-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "thai-basil-chicken-portion-05-added"
@@ -364,46 +398,20 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 0,
+        "criticality": "quality",
         "dependsOn": [
-          "thai-basil-chicken-op-007-add"
+          "thai-basil-chicken-op-006-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "thai-basil-chicken-portion-06"
-        ],
-        "nodeId": "thai-basil-chicken-op-008-add",
-        "operationType": "add",
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-007-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "thai-basil-chicken-portion-06-added"
+          "thai-basil-chicken-step-2-set-heat"
         ],
-        "parameters": {
-          "quantityG": 7
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "thai-basil-chicken-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "thai-basil-chicken-portion-07"
-        ],
-        "nodeId": "thai-basil-chicken-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "thai-basil-chicken-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 0.5
-        },
-        "sourceStepOrder": 1,
+        "parameters": {},
+        "sourceStepOrder": 2,
         "targetStates": [],
         "waitDurationMs": 0
       },
@@ -411,11 +419,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "thai-basil-chicken-op-009-add"
+          "thai-basil-chicken-op-007-set-heat"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "thai-basil-chicken-op-010-stir",
+        "nodeId": "thai-basil-chicken-op-008-stir",
         "operationType": "stir",
         "outputStateIds": [
           "thai-basil-chicken-step-2-stir"
@@ -438,11 +446,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "thai-basil-chicken-op-010-stir"
+          "thai-basil-chicken-op-008-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "thai-basil-chicken-op-011-stir",
+        "nodeId": "thai-basil-chicken-op-009-stir",
         "operationType": "stir",
         "outputStateIds": [
           "thai-basil-chicken-step-3-stir"
@@ -465,11 +473,43 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "thai-basil-chicken-op-011-stir"
+          "thai-basil-chicken-op-009-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "thai-basil-chicken-op-012-toss",
+        "nodeId": "thai-basil-chicken-op-010-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "thai-basil-chicken-step-3-pan-fry"
+        ],
+        "parameters": {
+          "temperatureC": 74
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-010-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-011-toss",
         "operationType": "toss",
         "outputStateIds": [
           "thai-basil-chicken-step-4-toss"
@@ -492,11 +532,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "thai-basil-chicken-op-012-toss"
+          "thai-basil-chicken-op-011-toss"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "thai-basil-chicken-op-013-stir",
+        "nodeId": "thai-basil-chicken-op-012-stir",
         "operationType": "stir",
         "outputStateIds": [
           "thai-basil-chicken-step-4-stir"
@@ -516,10 +556,40 @@
         "waitDurationMs": 0
       },
       {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-basil-chicken-op-012-stir"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "thai-basil-chicken-op-013-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "thai-basil-chicken-step-4-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "thai-basil-chicken-op-013-stir"
+          "thai-basil-chicken-op-013-pan-fry"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -545,26 +615,16 @@
   },
   "recipeId": "thai-basil-chicken",
   "rights": {
-    "artifactIds": [
-      "game-artifact-thai-basil-chicken-identity",
-      "game-artifact-thai-basil-chicken-preparation",
-      "game-artifact-thai-basil-chicken-nutrition",
-      "game-artifact-thai-basil-chicken-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-thai-basil-chicken-identity",
-      "game-usage-thai-basil-chicken-preparation",
-      "game-usage-thai-basil-chicken-nutrition",
-      "game-usage-thai-basil-chicken-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -588,7 +648,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -612,7 +672,31 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-007-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-007-set-heat-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -627,16 +711,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "thai-basil-chicken-op-010-stir",
+        "targetNodeId": "thai-basil-chicken-op-008-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-010-stir-omit"
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-008-stir-omit"
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -651,16 +735,80 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "thai-basil-chicken-op-011-stir",
+        "targetNodeId": "thai-basil-chicken-op-009-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-011-stir-omit"
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-009-stir-omit"
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-010-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-010-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "thai-basil-chicken-op-010-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-010-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -675,16 +823,16 @@
         "missing-toss"
       ],
       "mutation": {
-        "targetNodeId": "thai-basil-chicken-op-012-toss",
+        "targetNodeId": "thai-basil-chicken-op-011-toss",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-012-toss-omit"
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-011-toss-omit"
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-d8eca42aa101e7db",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -699,12 +847,41 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "thai-basil-chicken-op-013-stir",
+        "targetNodeId": "thai-basil-chicken-op-012-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-013-stir-omit"
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-012-stir-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-e7502f31e45db470",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-basil-chicken-op-013-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-basil-chicken-thai-basil-chicken-op-013-pan-fry-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

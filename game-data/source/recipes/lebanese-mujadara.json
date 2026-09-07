@@ -1,14 +1,25 @@
 {
-  "artifactVersion": "clv1-f79b969df69bae34",
+  "artifactVersion": "clv1-19087190204e2311",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:lebanese-mujadara-op-001-wash:duration",
+      "operation:lebanese-mujadara-op-001-wash:equipment",
+      "portion:lebanese-mujadara-portion-02:source-step",
+      "portion:lebanese-mujadara-portion-05:source-step",
+      "portion:lebanese-mujadara-portion-06:source-step",
+      "scenario:lebanese-mujadara-lebanese-mujadara-op-001-wash-omit:expected-outcome",
+      "source-step:2:operation",
+      "source-step:3:operation",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-lebanese-mujadara",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -181,8 +192,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "lebanese-mujadara-portion-01",
+          "lebanese-mujadara-portion-03"
+        ],
         "nodeId": "lebanese-mujadara-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -199,7 +212,7 @@
         "dependsOn": [
           "lebanese-mujadara-op-001-wash"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "lebanese-mujadara-portion-01"
         ],
@@ -221,33 +234,11 @@
         "dependsOn": [
           "lebanese-mujadara-op-002-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "lebanese-mujadara-portion-02"
-        ],
-        "nodeId": "lebanese-mujadara-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "lebanese-mujadara-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 180
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "lebanese-mujadara-op-003-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "lebanese-mujadara-portion-03"
         ],
-        "nodeId": "lebanese-mujadara-op-004-add",
+        "nodeId": "lebanese-mujadara-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "lebanese-mujadara-portion-03-added"
@@ -263,89 +254,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "lebanese-mujadara-op-004-add"
+          "lebanese-mujadara-op-003-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "lebanese-mujadara-portion-05"
-        ],
-        "nodeId": "lebanese-mujadara-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "lebanese-mujadara-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "lebanese-mujadara-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "lebanese-mujadara-portion-06"
-        ],
-        "nodeId": "lebanese-mujadara-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "lebanese-mujadara-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 1.6
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "lebanese-mujadara-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "lebanese-mujadara-op-007-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "lebanese-mujadara-step-2-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.6
-        },
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "lebanese-mujadara-op-007-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "lebanese-mujadara-portion-04"
         ],
-        "nodeId": "lebanese-mujadara-op-008-add",
+        "nodeId": "lebanese-mujadara-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "lebanese-mujadara-portion-04-added"
@@ -358,74 +273,10 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "lebanese-mujadara-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "lebanese-mujadara-portion-04"
-        ],
-        "nodeId": "lebanese-mujadara-op-009-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "lebanese-mujadara-step-3-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35
-        },
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "lebanese-mujadara-op-009-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "lebanese-mujadara-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "lebanese-mujadara-step-4-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "lebanese-mujadara-op-010-pan-fry"
+          "lebanese-mujadara-op-004-add"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -436,7 +287,7 @@
           "lebanese-mujadara-portion-05",
           "lebanese-mujadara-portion-06"
         ],
-        "nodeId": "lebanese-mujadara-op-011-serve",
+        "nodeId": "lebanese-mujadara-op-005-serve",
         "operationType": "serve",
         "outputStateIds": [
           "lebanese-mujadara-served"
@@ -450,29 +301,16 @@
   },
   "recipeId": "lebanese-mujadara",
   "rights": {
-    "artifactIds": [
-      "game-artifact-lebanese-mujadara-identity",
-      "game-artifact-lebanese-mujadara-preparation",
-      "game-artifact-lebanese-mujadara-nutrition",
-      "game-artifact-lebanese-mujadara-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "maureen-abood-lebanese-mujadara",
-      "mediterranean-dish-mujadara"
-    ],
-    "usageDecisionIds": [
-      "game-usage-lebanese-mujadara-identity",
-      "game-usage-lebanese-mujadara-preparation",
-      "game-usage-lebanese-mujadara-nutrition",
-      "game-usage-lebanese-mujadara-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f79b969df69bae34",
+      "baselineArtifactVersion": "clv1-19087190204e2311",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -493,163 +331,6 @@
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-001-wash-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f79b969df69bae34",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "lebanese-mujadara-op-007-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-007-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f79b969df69bae34",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "lebanese-mujadara-op-007-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-007-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f79b969df69bae34",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "lebanese-mujadara-op-009-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-009-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f79b969df69bae34",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "lebanese-mujadara-op-009-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-009-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f79b969df69bae34",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "lebanese-mujadara-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "lebanese-mujadara-lebanese-mujadara-op-010-pan-fry-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

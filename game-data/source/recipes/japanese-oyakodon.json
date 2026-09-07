@@ -1,14 +1,27 @@
 {
-  "artifactVersion": "clv1-fe58b88f24085479",
+  "artifactVersion": "clv1-762df3e12c83e49a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:japanese-oyakodon-op-004-simmer:duration",
+      "operation:japanese-oyakodon-op-004-simmer:inputs",
+      "operation:japanese-oyakodon-op-004-simmer:targets-source",
+      "portion:japanese-oyakodon-portion-01:source-step",
+      "portion:japanese-oyakodon-portion-02:source-step",
+      "portion:japanese-oyakodon-portion-06:source-step",
+      "scenario:japanese-oyakodon-japanese-oyakodon-op-004-simmer-hot:expected-outcome",
+      "scenario:japanese-oyakodon-japanese-oyakodon-op-004-simmer-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:2:operation",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-japanese-oyakodon",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -181,55 +194,11 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-oyakodon-portion-01"
-        ],
-        "nodeId": "japanese-oyakodon-op-001-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "japanese-oyakodon-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 160
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "japanese-oyakodon-op-001-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-oyakodon-portion-02"
-        ],
-        "nodeId": "japanese-oyakodon-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "japanese-oyakodon-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 220
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "japanese-oyakodon-op-002-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "japanese-oyakodon-portion-03"
         ],
-        "nodeId": "japanese-oyakodon-op-003-add",
+        "nodeId": "japanese-oyakodon-op-001-add",
         "operationType": "add",
         "outputStateIds": [
           "japanese-oyakodon-portion-03-added"
@@ -245,13 +214,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "japanese-oyakodon-op-003-add"
+          "japanese-oyakodon-op-001-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "japanese-oyakodon-portion-04"
         ],
-        "nodeId": "japanese-oyakodon-op-004-add",
+        "nodeId": "japanese-oyakodon-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "japanese-oyakodon-portion-04-added"
@@ -267,71 +236,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "japanese-oyakodon-op-004-add"
+          "japanese-oyakodon-op-002-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-oyakodon-portion-06"
-        ],
-        "nodeId": "japanese-oyakodon-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "japanese-oyakodon-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 0.4
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "japanese-oyakodon-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-oyakodon-portion-01",
-          "japanese-oyakodon-portion-02",
-          "japanese-oyakodon-portion-03",
-          "japanese-oyakodon-portion-04",
-          "japanese-oyakodon-portion-06"
-        ],
-        "nodeId": "japanese-oyakodon-op-006-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "japanese-oyakodon-step-1-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "japanese-oyakodon-op-006-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "japanese-oyakodon-portion-05"
         ],
-        "nodeId": "japanese-oyakodon-op-007-add",
+        "nodeId": "japanese-oyakodon-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "japanese-oyakodon-portion-05-added"
@@ -347,45 +258,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "japanese-oyakodon-op-007-add"
+          "japanese-oyakodon-op-003-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-oyakodon-portion-05"
-        ],
-        "nodeId": "japanese-oyakodon-op-008-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "japanese-oyakodon-step-2-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.6
-        },
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "japanese-oyakodon-op-008-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "japanese-oyakodon-op-009-simmer",
+        "nodeId": "japanese-oyakodon-op-004-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "japanese-oyakodon-step-3-simmer"
@@ -406,42 +283,12 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "japanese-oyakodon-op-009-simmer"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "japanese-oyakodon-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "japanese-oyakodon-step-4-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "japanese-oyakodon-op-010-pan-fry"
+          "japanese-oyakodon-op-004-simmer"
         ],
-        "equipmentId": "rice-cooker",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "japanese-oyakodon-portion-01",
           "japanese-oyakodon-portion-02",
@@ -450,7 +297,7 @@
           "japanese-oyakodon-portion-05",
           "japanese-oyakodon-portion-06"
         ],
-        "nodeId": "japanese-oyakodon-op-011-serve",
+        "nodeId": "japanese-oyakodon-op-005-serve",
         "operationType": "serve",
         "outputStateIds": [
           "japanese-oyakodon-served"
@@ -464,122 +311,16 @@
   },
   "recipeId": "japanese-oyakodon",
   "rights": {
-    "artifactIds": [
-      "game-artifact-japanese-oyakodon-identity",
-      "game-artifact-japanese-oyakodon-preparation",
-      "game-artifact-japanese-oyakodon-nutrition",
-      "game-artifact-japanese-oyakodon-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "just-one-cookbook-oyakodon",
-      "maff-oyakodon-regional-menu"
-    ],
-    "usageDecisionIds": [
-      "game-usage-japanese-oyakodon-identity",
-      "game-usage-japanese-oyakodon-preparation",
-      "game-usage-japanese-oyakodon-nutrition",
-      "game-usage-japanese-oyakodon-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fe58b88f24085479",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-oyakodon-op-006-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-006-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fe58b88f24085479",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-oyakodon-op-008-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-008-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fe58b88f24085479",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "japanese-oyakodon-op-008-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-008-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fe58b88f24085479",
+      "baselineArtifactVersion": "clv1-762df3e12c83e49a",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -599,16 +340,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "japanese-oyakodon-op-009-simmer",
+        "targetNodeId": "japanese-oyakodon-op-004-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-009-simmer-omit"
+      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-004-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fe58b88f24085479",
+      "baselineArtifactVersion": "clv1-762df3e12c83e49a",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -634,41 +375,12 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "japanese-oyakodon-op-009-simmer",
+        "targetNodeId": "japanese-oyakodon-op-004-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-009-simmer-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fe58b88f24085479",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-oyakodon-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-010-pan-fry-omit"
+      "scenarioId": "japanese-oyakodon-japanese-oyakodon-op-004-simmer-hot"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

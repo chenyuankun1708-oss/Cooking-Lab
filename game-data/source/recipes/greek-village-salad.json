@@ -1,14 +1,35 @@
 {
-  "artifactVersion": "clv1-bddcb9c07d423447",
+  "artifactVersion": "clv1-3e99e9aee2235a21",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:greek-village-salad-op-001-slice:parameters-source",
+      "operation:greek-village-salad-op-001-slice:targets-source",
+      "operation:greek-village-salad-op-006-stir:inputs",
+      "operation:greek-village-salad-op-006-stir:parameters-source",
+      "operation:greek-village-salad-op-006-stir:targets-source",
+      "operation:greek-village-salad-op-007-rest:inputs",
+      "operation:greek-village-salad-op-008-season:inputs",
+      "operation:greek-village-salad-op-008-season:parameters",
+      "operation:greek-village-salad-op-008-season:targets-source",
+      "portion:greek-village-salad-portion-05:source-step",
+      "portion:greek-village-salad-portion-06:source-step",
+      "portion:greek-village-salad-portion-07:source-step",
+      "portion:greek-village-salad-portion-08:source-step",
+      "portion:greek-village-salad-portion-10:source-step",
+      "scenario:greek-village-salad-greek-village-salad-op-001-slice-omit:expected-outcome",
+      "scenario:greek-village-salad-greek-village-salad-op-006-stir-omit:expected-outcome",
+      "scenario:greek-village-salad-greek-village-salad-op-007-rest-omit:expected-outcome",
+      "scenario:greek-village-salad-greek-village-salad-op-007-rest-short:expected-outcome",
+      "scenario:greek-village-salad-greek-village-salad-op-008-season-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-greek-village-salad",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -270,7 +291,12 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "greek-village-salad-portion-01",
+          "greek-village-salad-portion-02",
+          "greek-village-salad-portion-03",
+          "greek-village-salad-portion-04"
+        ],
         "nodeId": "greek-village-salad-op-001-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -297,7 +323,7 @@
         "dependsOn": [
           "greek-village-salad-op-001-slice"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "greek-village-salad-portion-01"
         ],
@@ -319,7 +345,7 @@
         "dependsOn": [
           "greek-village-salad-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "greek-village-salad-portion-02"
         ],
@@ -341,7 +367,7 @@
         "dependsOn": [
           "greek-village-salad-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "greek-village-salad-portion-03"
         ],
@@ -363,7 +389,7 @@
         "dependsOn": [
           "greek-village-salad-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "greek-village-salad-portion-04"
         ],
@@ -380,124 +406,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-village-salad-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-village-salad-portion-05"
-        ],
-        "nodeId": "greek-village-salad-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-village-salad-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 150
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-village-salad-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-village-salad-portion-06"
-        ],
-        "nodeId": "greek-village-salad-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-village-salad-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 100
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-village-salad-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-village-salad-portion-07"
-        ],
-        "nodeId": "greek-village-salad-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-village-salad-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 35
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-village-salad-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-village-salad-portion-08"
-        ],
-        "nodeId": "greek-village-salad-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-village-salad-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-village-salad-op-009-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-village-salad-portion-10"
-        ],
-        "nodeId": "greek-village-salad-op-010-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-village-salad-portion-10-added"
-        ],
-        "parameters": {
-          "quantityG": 1
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 80000,
         "criticality": "quality",
         "dependsOn": [
-          "greek-village-salad-op-010-add"
+          "greek-village-salad-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "greek-village-salad-op-011-stir",
+        "nodeId": "greek-village-salad-op-006-stir",
         "operationType": "stir",
         "outputStateIds": [
           "greek-village-salad-step-2-stir"
@@ -520,11 +436,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "greek-village-salad-op-011-stir"
+          "greek-village-salad-op-006-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "greek-village-salad-op-012-rest",
+        "nodeId": "greek-village-salad-op-007-rest",
         "operationType": "rest",
         "outputStateIds": [
           "greek-village-salad-step-2-rest"
@@ -538,11 +454,11 @@
         "activeDurationMs": 80000,
         "criticality": "quality",
         "dependsOn": [
-          "greek-village-salad-op-012-rest"
+          "greek-village-salad-op-007-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "greek-village-salad-op-013-season",
+        "nodeId": "greek-village-salad-op-008-season",
         "operationType": "season",
         "outputStateIds": [
           "greek-village-salad-step-2-season"
@@ -562,13 +478,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "greek-village-salad-op-013-season"
+          "greek-village-salad-op-008-season"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "greek-village-salad-portion-09"
         ],
-        "nodeId": "greek-village-salad-op-014-add",
+        "nodeId": "greek-village-salad-op-009-add",
         "operationType": "add",
         "outputStateIds": [
           "greek-village-salad-portion-09-added"
@@ -584,13 +500,13 @@
         "activeDurationMs": 180000,
         "criticality": "completion",
         "dependsOn": [
-          "greek-village-salad-op-014-add"
+          "greek-village-salad-op-009-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "greek-village-salad-portion-09"
         ],
-        "nodeId": "greek-village-salad-op-015-serve",
+        "nodeId": "greek-village-salad-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
           "greek-village-salad-step-3-serve"
@@ -604,26 +520,16 @@
   },
   "recipeId": "greek-village-salad",
   "rights": {
-    "artifactIds": [
-      "game-artifact-greek-village-salad-identity",
-      "game-artifact-greek-village-salad-preparation",
-      "game-artifact-greek-village-salad-nutrition",
-      "game-artifact-greek-village-salad-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-greek-village-salad-identity",
-      "game-usage-greek-village-salad-preparation",
-      "game-usage-greek-village-salad-nutrition",
-      "game-usage-greek-village-salad-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -647,7 +553,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -662,16 +568,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "greek-village-salad-op-011-stir",
+        "targetNodeId": "greek-village-salad-op-006-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-village-salad-greek-village-salad-op-011-stir-omit"
+      "scenarioId": "greek-village-salad-greek-village-salad-op-006-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -686,16 +592,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "greek-village-salad-op-012-rest",
+        "targetNodeId": "greek-village-salad-op-007-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-village-salad-greek-village-salad-op-012-rest-omit"
+      "scenarioId": "greek-village-salad-greek-village-salad-op-007-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -711,16 +617,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "greek-village-salad-op-012-rest",
+        "targetNodeId": "greek-village-salad-op-007-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "greek-village-salad-greek-village-salad-op-012-rest-short"
+      "scenarioId": "greek-village-salad-greek-village-salad-op-007-rest-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-bddcb9c07d423447",
+      "baselineArtifactVersion": "clv1-3e99e9aee2235a21",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -735,12 +641,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "greek-village-salad-op-013-season",
+        "targetNodeId": "greek-village-salad-op-008-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-village-salad-greek-village-salad-op-013-season-omit"
+      "scenarioId": "greek-village-salad-greek-village-salad-op-008-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

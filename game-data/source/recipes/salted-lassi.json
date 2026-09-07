@@ -1,14 +1,31 @@
 {
-  "artifactVersion": "clv1-74952c202ef06093",
+  "artifactVersion": "clv1-4efe62b8ce382cc0",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:salted-lassi-op-003-stir:equipment",
+      "operation:salted-lassi-op-003-stir:parameters-source",
+      "operation:salted-lassi-op-003-stir:targets-source",
+      "operation:salted-lassi-op-004-mix:equipment",
+      "operation:salted-lassi-op-004-mix:parameters-source",
+      "operation:salted-lassi-op-004-mix:targets-source",
+      "operation:salted-lassi-op-006-whisk:equipment",
+      "operation:salted-lassi-op-006-whisk:parameters-source",
+      "operation:salted-lassi-op-006-whisk:targets-source",
+      "operation:salted-lassi-op-007-serve:inputs",
+      "portion:salted-lassi-portion-02:source-step",
+      "portion:salted-lassi-portion-04:source-step",
+      "scenario:salted-lassi-salted-lassi-op-003-stir-omit:expected-outcome",
+      "scenario:salted-lassi-salted-lassi-op-004-mix-omit:expected-outcome",
+      "scenario:salted-lassi-salted-lassi-op-006-whisk-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-salted-lassi",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -160,7 +177,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "blender",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "salted-lassi-portion-01"
         ],
@@ -182,55 +199,11 @@
         "dependsOn": [
           "salted-lassi-op-001-add"
         ],
-        "equipmentId": "blender",
-        "inputPortionIds": [
-          "salted-lassi-portion-02"
-        ],
-        "nodeId": "salted-lassi-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "salted-lassi-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 200
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "salted-lassi-op-002-add"
-        ],
-        "equipmentId": "blender",
-        "inputPortionIds": [
-          "salted-lassi-portion-04"
-        ],
-        "nodeId": "salted-lassi-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "salted-lassi-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 2
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "salted-lassi-op-003-add"
-        ],
-        "equipmentId": "blender",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "salted-lassi-portion-05"
         ],
-        "nodeId": "salted-lassi-op-004-add",
+        "nodeId": "salted-lassi-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "salted-lassi-portion-05-added"
@@ -246,16 +219,13 @@
         "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [
-          "salted-lassi-op-004-add"
+          "salted-lassi-op-002-add"
         ],
-        "equipmentId": "blender",
         "inputPortionIds": [
           "salted-lassi-portion-01",
-          "salted-lassi-portion-02",
-          "salted-lassi-portion-04",
           "salted-lassi-portion-05"
         ],
-        "nodeId": "salted-lassi-op-005-stir",
+        "nodeId": "salted-lassi-op-003-stir",
         "operationType": "stir",
         "outputStateIds": [
           "salted-lassi-step-1-stir"
@@ -278,16 +248,13 @@
         "activeDurationMs": 30000,
         "criticality": "quality",
         "dependsOn": [
-          "salted-lassi-op-005-stir"
+          "salted-lassi-op-003-stir"
         ],
-        "equipmentId": "blender",
         "inputPortionIds": [
           "salted-lassi-portion-01",
-          "salted-lassi-portion-02",
-          "salted-lassi-portion-04",
           "salted-lassi-portion-05"
         ],
-        "nodeId": "salted-lassi-op-006-mix",
+        "nodeId": "salted-lassi-op-004-mix",
         "operationType": "mix",
         "outputStateIds": [
           "salted-lassi-step-1-mix"
@@ -310,13 +277,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "salted-lassi-op-006-mix"
+          "salted-lassi-op-004-mix"
         ],
-        "equipmentId": "blender",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "salted-lassi-portion-03"
         ],
-        "nodeId": "salted-lassi-op-007-add",
+        "nodeId": "salted-lassi-op-005-add",
         "operationType": "add",
         "outputStateIds": [
           "salted-lassi-portion-03-added"
@@ -332,13 +299,12 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "salted-lassi-op-007-add"
+          "salted-lassi-op-005-add"
         ],
-        "equipmentId": "blender",
         "inputPortionIds": [
           "salted-lassi-portion-03"
         ],
-        "nodeId": "salted-lassi-op-008-whisk",
+        "nodeId": "salted-lassi-op-006-whisk",
         "operationType": "whisk",
         "outputStateIds": [
           "salted-lassi-step-2-whisk"
@@ -361,11 +327,11 @@
         "activeDurationMs": 60000,
         "criticality": "completion",
         "dependsOn": [
-          "salted-lassi-op-008-whisk"
+          "salted-lassi-op-006-whisk"
         ],
-        "equipmentId": "blender",
+        "equipmentId": "glass",
         "inputPortionIds": [],
-        "nodeId": "salted-lassi-op-009-serve",
+        "nodeId": "salted-lassi-op-007-serve",
         "operationType": "serve",
         "outputStateIds": [
           "salted-lassi-step-3-serve"
@@ -379,26 +345,16 @@
   },
   "recipeId": "salted-lassi",
   "rights": {
-    "artifactIds": [
-      "game-artifact-salted-lassi-identity",
-      "game-artifact-salted-lassi-preparation",
-      "game-artifact-salted-lassi-nutrition",
-      "game-artifact-salted-lassi-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-salted-lassi-identity",
-      "game-usage-salted-lassi-preparation",
-      "game-usage-salted-lassi-nutrition",
-      "game-usage-salted-lassi-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-74952c202ef06093",
+      "baselineArtifactVersion": "clv1-4efe62b8ce382cc0",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -413,16 +369,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "salted-lassi-op-005-stir",
+        "targetNodeId": "salted-lassi-op-003-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "salted-lassi-salted-lassi-op-005-stir-omit"
+      "scenarioId": "salted-lassi-salted-lassi-op-003-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-74952c202ef06093",
+      "baselineArtifactVersion": "clv1-4efe62b8ce382cc0",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -437,16 +393,16 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "salted-lassi-op-006-mix",
+        "targetNodeId": "salted-lassi-op-004-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "salted-lassi-salted-lassi-op-006-mix-omit"
+      "scenarioId": "salted-lassi-salted-lassi-op-004-mix-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-74952c202ef06093",
+      "baselineArtifactVersion": "clv1-4efe62b8ce382cc0",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -461,12 +417,12 @@
         "missing-whisk"
       ],
       "mutation": {
-        "targetNodeId": "salted-lassi-op-008-whisk",
+        "targetNodeId": "salted-lassi-op-006-whisk",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "salted-lassi-salted-lassi-op-008-whisk-omit"
+      "scenarioId": "salted-lassi-salted-lassi-op-006-whisk-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

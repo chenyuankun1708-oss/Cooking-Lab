@@ -1,14 +1,38 @@
 {
-  "artifactVersion": "clv1-aca5f62223445eff",
+  "artifactVersion": "clv1-c481eb34ff8d8dbd",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:longjing-green-tea-op-001-add:equipment",
+      "operation:longjing-green-tea-op-002-boil:targets-source",
+      "operation:longjing-green-tea-op-003-rest:equipment",
+      "operation:longjing-green-tea-op-004-add:equipment",
+      "operation:longjing-green-tea-op-005-brew:parameters",
+      "operation:longjing-green-tea-op-005-brew:targets-source",
+      "operation:longjing-green-tea-op-006-brew:inputs",
+      "operation:longjing-green-tea-op-006-brew:parameters",
+      "operation:longjing-green-tea-op-006-brew:targets-source",
+      "operation:longjing-green-tea-op-007-rest:equipment",
+      "operation:longjing-green-tea-op-007-rest:inputs",
+      "scenario:longjing-green-tea-longjing-green-tea-op-002-boil-hot:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-002-boil-omit:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-002-boil-short:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-003-rest-omit:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-003-rest-short:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-005-brew-omit:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-005-brew-short:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-006-brew-omit:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-006-brew-short:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-007-rest-omit:expected-outcome",
+      "scenario:longjing-green-tea-longjing-green-tea-op-007-rest-short:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-longjing-green-tea",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -94,7 +118,6 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "longjing-green-tea-portion-02"
         ],
@@ -145,7 +168,6 @@
         "dependsOn": [
           "longjing-green-tea-op-002-boil"
         ],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "longjing-green-tea-portion-02"
         ],
@@ -165,7 +187,6 @@
         "dependsOn": [
           "longjing-green-tea-op-003-rest"
         ],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "longjing-green-tea-portion-01"
         ],
@@ -187,7 +208,7 @@
         "dependsOn": [
           "longjing-green-tea-op-004-add"
         ],
-        "equipmentId": "kettle",
+        "equipmentId": "gaiwan",
         "inputPortionIds": [
           "longjing-green-tea-portion-01"
         ],
@@ -218,7 +239,7 @@
         "dependsOn": [
           "longjing-green-tea-op-005-brew"
         ],
-        "equipmentId": "kettle",
+        "equipmentId": "gaiwan",
         "inputPortionIds": [],
         "nodeId": "longjing-green-tea-op-006-brew",
         "operationType": "brew",
@@ -247,7 +268,6 @@
         "dependsOn": [
           "longjing-green-tea-op-006-brew"
         ],
-        "equipmentId": "kettle",
         "inputPortionIds": [],
         "nodeId": "longjing-green-tea-op-007-rest",
         "operationType": "rest",
@@ -265,7 +285,7 @@
         "dependsOn": [
           "longjing-green-tea-op-007-rest"
         ],
-        "equipmentId": "scale",
+        "equipmentId": "gaiwan",
         "inputPortionIds": [
           "longjing-green-tea-portion-01",
           "longjing-green-tea-portion-02"
@@ -284,26 +304,16 @@
   },
   "recipeId": "longjing-green-tea",
   "rights": {
-    "artifactIds": [
-      "game-artifact-longjing-green-tea-identity",
-      "game-artifact-longjing-green-tea-preparation",
-      "game-artifact-longjing-green-tea-nutrition",
-      "game-artifact-longjing-green-tea-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-longjing-green-tea-identity",
-      "game-usage-longjing-green-tea-preparation",
-      "game-usage-longjing-green-tea-nutrition",
-      "game-usage-longjing-green-tea-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -332,7 +342,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -362,7 +372,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -397,7 +407,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -421,7 +431,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -446,7 +456,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -475,7 +485,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -505,7 +515,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -534,7 +544,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -564,7 +574,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -588,7 +598,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-aca5f62223445eff",
+      "baselineArtifactVersion": "clv1-c481eb34ff8d8dbd",
       "causeCodes": [
         "duration-short:rest"
       ],

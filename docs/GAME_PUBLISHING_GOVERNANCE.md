@@ -13,6 +13,8 @@ Status: M12 policy v1
 
 Each artifact must point to its own RightsAssessment and `game-commercial-ready` UsageDecision. The recipe fingerprint binds the structured payload, sources, Evidence, assessments and decisions. Any content or provenance change invalidates the old risk classification, ReviewAttestation and sampling result.
 
+An assessment is complete only when its authority version, access date, reviewer, basis and all four permission scopes are present. License and terms authorities must use HTTPS. CC BY and OGL material require complete artifact-level attribution. Merely listing a second source is insufficient: identity and preparation artifacts must contain claim-level Evidence that materially covers two independent source institutions, or encode the approved public-domain-primary plus independent cross-check path.
+
 ## Hard blockers
 
 Export fails when any input has unknown, NC, ND or changed rights; commercial use is unresolved; provenance or attribution is missing; an assessment is expired; ShareAlike content enters the core corpus; AI output is used as Evidence; generated expression is not covered by a complete approved service route; or a reference-only source is used to justify copied/adapted expression.

@@ -14,6 +14,7 @@ import type {
 import type { Ingredient } from "@/types/ingredient";
 import { emptyNutrition, type Nutrition } from "@/types/nutrition";
 import type { PublishingGovernanceRegistry } from "@/types/publishing-governance";
+import { gameOperationById } from "@/game-data/operation-catalog";
 import { toGrams } from "./unit-conversion";
 import { createGameRecipeArtifactVersion } from "./game-recipe-validation";
 
@@ -102,7 +103,7 @@ const operationPatterns: ReadonlyArray<{ operationType: GameOperationId; pattern
   { operationType: "strain", pattern: /过滤|滤出|过筛|细筛|筛入/ },
   { operationType: "blend", pattern: /搅拌机|料理机|打成泥|打碎/ },
   { operationType: "deep-fry", pattern: /油炸|炸至|下油锅炸/ },
-  { operationType: "pan-fry", pattern: /煎至|煎熟|煎香|煎上色|煎\s*\d/ },
+  { operationType: "pan-fry", pattern: /煎至|煎熟|煎香|煎上色|煎\s*\d|下锅炒|入锅炒|炒至|炒香|炒熟/ },
   { operationType: "steam", pattern: /蒸至|蒸熟|上锅蒸|蒸\s*\d/ },
   { operationType: "bake", pattern: /烘烤|烤箱|烤至|入炉/ },
   { operationType: "roast", pattern: /烤制|炙烤/ },
@@ -118,6 +119,7 @@ const operationPatterns: ReadonlyArray<{ operationType: GameOperationId; pattern
   { operationType: "season", pattern: /调味|加盐|加入.*糖|尝.*味|淋入.*酱|倒入.*酱/ },
   { operationType: "mix", pattern: /拌匀|混合|拌入|拌上|抓匀/ },
   { operationType: "rest", pattern: /静置|浸泡|放凉|回温/ },
+  { operationType: "set-heat", pattern: /热锅|锅.*烧热|预热|加热至/ },
   { operationType: "assemble", pattern: /铺一层|分层|组合|摆放|排成|装入/ },
   { operationType: "garnish", pattern: /点缀|撒上|饰以/ },
   { operationType: "serve", pattern: /装盘|上桌|分装|倒入杯|分入杯|切块.*食用|食用前/ },
@@ -133,20 +135,20 @@ export function migratePublishedItemToGameRecipe(
 ): GameRecipeV1 {
   const ingredientById = new Map(context.ingredients.map((ingredient) => [ingredient.id, ingredient]));
   const portions = createPortions(item, ingredientById);
-  const nodes = createOperationGraph(item, portions, ingredientById);
+  const { nodes, unresolvedMappings: graphMappings } = createOperationGraph(item, portions, ingredientById);
+  const unresolvedMappings = [
+    ...graphMappings,
+    ...(!("inputs" in item.preparation)
+      ? portions.flatMap((portion) => [
+          `portion:${portion.portionId}:identity`,
+          `portion:${portion.portionId}:quantity`,
+          `portion:${portion.portionId}:nutrition`,
+        ])
+      : []),
+  ];
   const simulationProfile = deriveSimulationProfile(nodes);
-  const sourceArtifacts = context.rightsRegistry.artifacts.filter((artifact) =>
-    artifact.subject.type === "culinary-item"
-    && artifact.subject.id === item.id
-    && ["identity", "preparation", "nutrition"].includes(artifact.kind),
-  );
-  const sourceIds = [...new Set(sourceArtifacts.flatMap((artifact) => artifact.sourceIds))].sort();
-  const evidenceIds = [...new Set(sourceArtifacts.flatMap((artifact) => artifact.evidenceIds))].sort();
   const existingRisk = context.governanceRegistry.riskClassifications.find((entry) => entry.itemId === item.id);
   const nutritionProfile = createNutritionProfile(item, portions, ingredientById);
-  const artifactIds = ["identity", "preparation", "nutrition", "simulation"].map((kind) => `game-artifact-${item.id}-${kind}`);
-  const usageDecisionIds = artifactIds.map((artifactId) => `game-usage-${artifactId.replace(/^game-artifact-/, "")}`);
-
   const draft: GameRecipeV1 = {
     schemaVersion: "cooking-lab-game-recipe-v1",
     artifactVersion: "",
@@ -163,24 +165,27 @@ export function migratePublishedItemToGameRecipe(
     nutritionProfile,
     scenarios: [],
     rights: {
-      artifactIds,
-      usageDecisionIds,
-      sourceIds,
-      evidenceIds,
+      artifactIds: [],
+      usageDecisionIds: [],
+      sourceIds: [],
+      evidenceIds: [],
       intendedUse: "game-commercial-ready",
     },
     governance: {
       riskLevel: existingRisk?.level ?? "low",
-      riskClassificationId: `game-risk-${item.id}`,
+      riskClassificationId: "",
       reviewAttestationIds: [],
     },
     authoring: {
       method: "deterministic-migration",
       generatorVersion: currentGameRecipeMigrationVersion,
       containsGeneratedExpression: false,
+      unresolvedMappings,
     },
   };
   draft.scenarios = createScenarios(draft);
+  unresolvedMappings.push(...draft.scenarios.map((scenario) => `scenario:${scenario.scenarioId}:expected-outcome`));
+  draft.authoring.unresolvedMappings = [...new Set(unresolvedMappings)].sort();
   draft.artifactVersion = createGameRecipeArtifactVersion(draft);
   draft.scenarios = draft.scenarios.map((scenario) => ({ ...scenario, baselineArtifactVersion: draft.artifactVersion }));
   return draft;
@@ -222,25 +227,37 @@ function createOperationGraph(
   item: CulinaryItem,
   portions: readonly GameIngredientPortionV1[],
   ingredientById: ReadonlyMap<string, Ingredient>,
-): GameOperationNodeV1[] {
+): { nodes: GameOperationNodeV1[]; unresolvedMappings: string[] } {
   const preparation = item.preparation;
   if (!("steps" in preparation)) {
-    return [{
+    const node: GameOperationNodeV1 = {
       nodeId: `${item.id}-op-001-serve`,
       operationType: "serve",
       dependsOn: [],
       inputPortionIds: portions.map((portion) => portion.portionId),
       outputStateIds: [`${item.id}-served`],
-      equipmentId: "toolIds" in preparation ? preparation.toolIds[0] : undefined,
+      equipmentId: "toolIds" in preparation ? selectEquipment("serve", preparation.toolIds) : undefined,
       activeDurationMs: "estimatedMinutes" in preparation ? preparation.estimatedMinutes * 60_000 : 0,
       waitDurationMs: 0,
       parameters: {},
       targetStates: [],
       criticality: "completion",
-    }];
+    };
+    return {
+      nodes: [node],
+      unresolvedMappings: [
+        ...(node.equipmentId ? [] : [`operation:${node.nodeId}:equipment`]),
+        ...(node.activeDurationMs > 0 ? [] : [`operation:${node.nodeId}:duration`]),
+      ],
+    };
   }
 
-  const portionStep = new Map(portions.map((portion) => [portion.portionId, findIngredientStep(preparation.steps, portion.ingredientId, ingredientById)]));
+  const unresolvedMappings: string[] = [];
+  const portionStep = new Map(portions.map((portion) => {
+    const stepOrder = findIngredientStep(preparation.steps, portion.ingredientId, ingredientById);
+    if (stepOrder === undefined) unresolvedMappings.push(`portion:${portion.portionId}:source-step`);
+    return [portion.portionId, stepOrder] as const;
+  }));
   const nodes: GameOperationNodeV1[] = [];
   let previousNodeId: string | undefined;
   let sequence = 0;
@@ -254,6 +271,7 @@ function createOperationGraph(
   for (const step of [...preparation.steps].sort((left, right) => left.order - right.order)) {
     const instruction = getStepInstruction(step);
     const matches = findOperationMatches(instruction, preparation.kind);
+    if (!matches.length) unresolvedMappings.push(`source-step:${step.order}:operation`);
     const stepPortions = portions.filter((portion) => portionStep.get(portion.portionId) === step.order);
     const preparatory = matches.filter((match) => ["wash", "rinse", "peel", "slice", "dice", "mince", "crush", "grind"].includes(match.operationType));
     const processing = matches.filter((match) => !preparatory.includes(match));
@@ -261,13 +279,21 @@ function createOperationGraph(
     const durationMs = Math.max(0, Math.round((step.durationMinutes ?? 0) * 60_000));
     const perOperationDuration = operations.length ? Math.round(durationMs / operations.length) : durationMs;
 
-    preparatory.forEach((match) => appendNode(createNodeBody(item.id, preparation.toolIds, step, instruction, match.operationType, [], perOperationDuration)));
+    preparatory.forEach((match) => appendNode(createNodeBody(
+      item.id,
+      preparation.toolIds,
+      step,
+      instruction,
+      match.operationType,
+      stepPortions.map((portion) => portion.portionId),
+      perOperationDuration,
+    )));
     for (const portion of stepPortions) {
       appendNode({
         operationType: "add",
         inputPortionIds: [portion.portionId],
         outputStateIds: [`${portion.portionId}-added`],
-        equipmentId: preparation.toolIds[0],
+        equipmentId: selectEquipment("add", preparation.toolIds),
         activeDurationMs: 1_000,
         waitDurationMs: 0,
         parameters: { quantityG: portion.massG },
@@ -278,28 +304,12 @@ function createOperationGraph(
     }
     processing.forEach((match) => appendNode(createNodeBody(item.id, preparation.toolIds, step, instruction, match.operationType, stepPortions.map((portion) => portion.portionId), perOperationDuration)));
   }
-  const added = new Set(nodes.filter((node) => node.operationType === "add").flatMap((node) => node.inputPortionIds));
-  for (const portion of portions) {
-    if (added.has(portion.portionId)) continue;
-    appendNode({
-      operationType: "add",
-      inputPortionIds: [portion.portionId],
-      outputStateIds: [`${portion.portionId}-added`],
-      equipmentId: preparation.toolIds[0],
-      activeDurationMs: 1_000,
-      waitDurationMs: 0,
-      parameters: { quantityG: portion.massG },
-      targetStates: [],
-      criticality: "completion",
-      sourceStepOrder: preparation.steps[0].order,
-    });
-  }
   if (!nodes.some((node) => node.operationType === "serve")) {
     appendNode({
       operationType: "serve",
       inputPortionIds: portions.map((portion) => portion.portionId),
       outputStateIds: [`${item.id}-served`],
-      equipmentId: preparation.toolIds.at(-1),
+      equipmentId: selectEquipment("serve", preparation.toolIds),
       activeDurationMs: 1_000,
       waitDurationMs: 0,
       parameters: {},
@@ -308,7 +318,35 @@ function createOperationGraph(
       sourceStepOrder: preparation.steps.at(-1)?.order,
     });
   }
-  return nodes;
+  for (const node of nodes) {
+    const definition = gameOperationById.get(node.operationType);
+    if (!definition) {
+      unresolvedMappings.push(`operation:${node.nodeId}:definition`);
+      continue;
+    }
+    if (definition.inputRequirement === "one-or-more" && !node.inputPortionIds.length) {
+      unresolvedMappings.push(`operation:${node.nodeId}:inputs`);
+    }
+    if (definition.equipmentRequired && !node.equipmentId) {
+      unresolvedMappings.push(`operation:${node.nodeId}:equipment`);
+    }
+    if (definition.requiredParameterGroups.some((group) => !group.some((key) => node.parameters[key] !== undefined))) {
+      unresolvedMappings.push(`operation:${node.nodeId}:parameters`);
+    }
+    const hasRequiredDuration = definition.durationRequirement === "none"
+      || (definition.durationRequirement === "active" && node.activeDurationMs > 0)
+      || (definition.durationRequirement === "wait" && node.waitDurationMs > 0)
+      || (definition.durationRequirement === "either" && node.activeDurationMs + node.waitDurationMs > 0);
+    if (!hasRequiredDuration) unresolvedMappings.push(`operation:${node.nodeId}:duration`);
+    if (definition.targetStateRequired && !node.targetStates.length) {
+      unresolvedMappings.push(`operation:${node.nodeId}:targets`);
+    }
+    if (node.parameters.cutSizeMm !== undefined || node.parameters.uniformity !== undefined || node.parameters.strength !== undefined) {
+      unresolvedMappings.push(`operation:${node.nodeId}:parameters-source`);
+    }
+    if (node.targetStates.length) unresolvedMappings.push(`operation:${node.nodeId}:targets-source`);
+  }
+  return { nodes, unresolvedMappings: [...new Set(unresolvedMappings)].sort() };
 }
 
 function createNodeBody(
@@ -325,7 +363,7 @@ function createNodeBody(
     operationType,
     inputPortionIds,
     outputStateIds: [`${itemId}-step-${step.order}-${operationType}`],
-    equipmentId: toolIds[0],
+    equipmentId: selectEquipment(operationType, toolIds),
     activeDurationMs: waiting ? 0 : durationMs,
     waitDurationMs: waiting ? durationMs : 0,
     parameters: inferParameters(operationType, instruction),
@@ -341,16 +379,13 @@ function findOperationMatches(instruction: string, preparationKind: string): Ope
     return index < 0 ? [] : [{ operationType, index }];
   }).sort((left, right) => left.index - right.index || left.operationType.localeCompare(right.operationType));
   const unique = matches.filter((match, index) => matches.findIndex((candidate) => candidate.operationType === match.operationType) === index);
-  if (unique.length) return unique;
-  const fallback: Record<string, GameOperationId> = {
-    cooking: "pan-fry",
-    baking: "bake",
-    brewing: "brew",
-    extraction: "extract",
-    mixing: "mix",
-    assembly: "assemble",
-  };
-  return [{ operationType: fallback[preparationKind] ?? "assemble", index: 0 }];
+  void preparationKind;
+  return unique;
+}
+
+function selectEquipment(operationType: GameOperationId, toolIds: readonly string[]): string | undefined {
+  const definition = gameOperationById.get(operationType);
+  return definition?.compatibleEquipmentIds.find((toolId) => toolIds.includes(toolId));
 }
 
 function inferParameters(operationType: GameOperationId, instruction: string): GameOperationNodeV1["parameters"] {
@@ -494,10 +529,11 @@ function findIngredientStep(
   steps: readonly PreparationStep[],
   ingredientId: string,
   ingredientById: ReadonlyMap<string, Ingredient>,
-): number {
+): number | undefined {
   const ingredient = ingredientById.get(ingredientId);
   const terms = [ingredient?.name, ...(ingredient?.aliases ?? []), ...ingredientId.split("-")].filter((term): term is string => Boolean(term && term.length > 1));
-  return steps.find((step) => terms.some((term) => getStepInstruction(step).includes(term)))?.order ?? steps[0].order;
+  const matched = steps.find((step) => terms.some((term) => getStepInstruction(step).includes(term)));
+  return matched?.order;
 }
 
 function getStepInstruction(step: PreparationStep): string {

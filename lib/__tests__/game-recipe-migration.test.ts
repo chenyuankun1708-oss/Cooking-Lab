@@ -27,6 +27,8 @@ describe("M12 deterministic migration", () => {
     expect(new Set(recipes.map((recipe) => recipe.recipeId)).size).toBe(50);
     expect(recipes.every((recipe) => recipe.eligibility === "draft")).toBe(true);
     expect(recipes.every((recipe) => recipe.authoring.containsGeneratedExpression === false)).toBe(true);
+    expect(recipes.some((recipe) => recipe.authoring.unresolvedMappings.length > 0)).toBe(true);
+    expect(recipes.every((recipe) => recipe.rights.artifactIds.length === 0)).toBe(true);
   });
 
   it("produces quantified portions, acyclic operations and deterministic mistake scenarios", () => {

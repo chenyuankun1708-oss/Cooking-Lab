@@ -1,14 +1,37 @@
 {
-  "artifactVersion": "clv1-9199999f0152962c",
+  "artifactVersion": "clv1-8d29683c45a53e51",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:japanese-miso-salmon-op-003-chill:duration",
+      "operation:japanese-miso-salmon-op-003-chill:equipment",
+      "operation:japanese-miso-salmon-op-003-chill:parameters",
+      "operation:japanese-miso-salmon-op-004-rest:duration",
+      "operation:japanese-miso-salmon-op-005-set-heat:duration",
+      "operation:japanese-miso-salmon-op-006-pan-fry:duration",
+      "operation:japanese-miso-salmon-op-006-pan-fry:inputs",
+      "operation:japanese-miso-salmon-op-006-pan-fry:targets-source",
+      "operation:japanese-miso-salmon-op-007-rest:duration",
+      "operation:japanese-miso-salmon-op-007-rest:inputs",
+      "portion:japanese-miso-salmon-portion-03:source-step",
+      "portion:japanese-miso-salmon-portion-04:source-step",
+      "portion:japanese-miso-salmon-portion-05:source-step",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-003-chill-omit:expected-outcome",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-004-rest-omit:expected-outcome",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-005-set-heat-hot:expected-outcome",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-005-set-heat-omit:expected-outcome",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-006-pan-fry-hot:expected-outcome",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-006-pan-fry-omit:expected-outcome",
+      "scenario:japanese-miso-salmon-japanese-miso-salmon-op-007-rest-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-japanese-miso-salmon",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -159,7 +182,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "japanese-miso-salmon-portion-01"
         ],
@@ -181,7 +204,7 @@
         "dependsOn": [
           "japanese-miso-salmon-op-001-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "japanese-miso-salmon-portion-02"
         ],
@@ -198,86 +221,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "japanese-miso-salmon-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-miso-salmon-portion-03"
-        ],
-        "nodeId": "japanese-miso-salmon-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "japanese-miso-salmon-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "japanese-miso-salmon-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-miso-salmon-portion-04"
-        ],
-        "nodeId": "japanese-miso-salmon-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "japanese-miso-salmon-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 4
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "japanese-miso-salmon-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "japanese-miso-salmon-portion-05"
-        ],
-        "nodeId": "japanese-miso-salmon-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "japanese-miso-salmon-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 0.2
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "japanese-miso-salmon-op-005-add"
+          "japanese-miso-salmon-op-002-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "japanese-miso-salmon-portion-01",
-          "japanese-miso-salmon-portion-02",
-          "japanese-miso-salmon-portion-03",
-          "japanese-miso-salmon-portion-04",
-          "japanese-miso-salmon-portion-05"
+          "japanese-miso-salmon-portion-02"
         ],
-        "nodeId": "japanese-miso-salmon-op-006-chill",
+        "nodeId": "japanese-miso-salmon-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
           "japanese-miso-salmon-step-1-chill"
@@ -291,17 +244,14 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "japanese-miso-salmon-op-006-chill"
+          "japanese-miso-salmon-op-003-chill"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "japanese-miso-salmon-portion-01",
-          "japanese-miso-salmon-portion-02",
-          "japanese-miso-salmon-portion-03",
-          "japanese-miso-salmon-portion-04",
-          "japanese-miso-salmon-portion-05"
+          "japanese-miso-salmon-portion-02"
         ],
-        "nodeId": "japanese-miso-salmon-op-007-rest",
+        "nodeId": "japanese-miso-salmon-op-004-rest",
         "operationType": "rest",
         "outputStateIds": [
           "japanese-miso-salmon-step-1-rest"
@@ -315,73 +265,31 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "japanese-miso-salmon-op-007-rest"
+          "japanese-miso-salmon-op-004-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "japanese-miso-salmon-op-008-pan-fry",
-        "operationType": "pan-fry",
+        "nodeId": "japanese-miso-salmon-op-005-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "japanese-miso-salmon-step-2-pan-fry"
+          "japanese-miso-salmon-step-2-set-heat"
         ],
         "parameters": {
           "heatLevel": 0.6
         },
         "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "japanese-miso-salmon-op-008-pan-fry"
+          "japanese-miso-salmon-op-005-set-heat"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "japanese-miso-salmon-op-009-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "japanese-miso-salmon-step-3-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "japanese-miso-salmon-op-009-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "japanese-miso-salmon-op-010-pan-fry",
+        "nodeId": "japanese-miso-salmon-op-006-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "japanese-miso-salmon-step-4-pan-fry"
@@ -409,11 +317,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "japanese-miso-salmon-op-010-pan-fry"
+          "japanese-miso-salmon-op-006-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "japanese-miso-salmon-op-011-rest",
+        "nodeId": "japanese-miso-salmon-op-007-rest",
         "operationType": "rest",
         "outputStateIds": [
           "japanese-miso-salmon-step-4-rest"
@@ -427,7 +335,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "japanese-miso-salmon-op-011-rest"
+          "japanese-miso-salmon-op-007-rest"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -437,7 +345,7 @@
           "japanese-miso-salmon-portion-04",
           "japanese-miso-salmon-portion-05"
         ],
-        "nodeId": "japanese-miso-salmon-op-012-serve",
+        "nodeId": "japanese-miso-salmon-op-008-serve",
         "operationType": "serve",
         "outputStateIds": [
           "japanese-miso-salmon-served"
@@ -451,29 +359,16 @@
   },
   "recipeId": "japanese-miso-salmon",
   "rights": {
-    "artifactIds": [
-      "game-artifact-japanese-miso-salmon-identity",
-      "game-artifact-japanese-miso-salmon-preparation",
-      "game-artifact-japanese-miso-salmon-nutrition",
-      "game-artifact-japanese-miso-salmon-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "just-one-cookbook-miso-salmon",
-      "kikkoman-cheesy-miso-salmon"
-    ],
-    "usageDecisionIds": [
-      "game-usage-japanese-miso-salmon-identity",
-      "game-usage-japanese-miso-salmon-preparation",
-      "game-usage-japanese-miso-salmon-nutrition",
-      "game-usage-japanese-miso-salmon-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -488,16 +383,163 @@
         "missing-chill"
       ],
       "mutation": {
-        "targetNodeId": "japanese-miso-salmon-op-006-chill",
+        "targetNodeId": "japanese-miso-salmon-op-003-chill",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-006-chill-omit"
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-003-chill-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-004-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-004-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-005-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-005-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "japanese-miso-salmon-op-005-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-005-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-salmon-op-006-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-006-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "japanese-miso-salmon-op-006-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-006-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8d29683c45a53e51",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -518,187 +560,6 @@
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-007-rest-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-miso-salmon-op-008-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-008-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "japanese-miso-salmon-op-008-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-008-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-miso-salmon-op-009-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-009-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-miso-salmon-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-010-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "japanese-miso-salmon-op-010-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-010-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9199999f0152962c",
-      "causeCodes": [
-        "operation-omitted:rest"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "structural-integrity",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-rest"
-      ],
-      "mutation": {
-        "targetNodeId": "japanese-miso-salmon-op-011-rest",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "japanese-miso-salmon-japanese-miso-salmon-op-011-rest-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

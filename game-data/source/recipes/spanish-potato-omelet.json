@@ -1,14 +1,44 @@
 {
-  "artifactVersion": "clv1-8fb39f9ce94f31bd",
+  "artifactVersion": "clv1-9ac634a65f79bbd9",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:spanish-potato-omelet-op-001-slice:duration",
+      "operation:spanish-potato-omelet-op-001-slice:parameters-source",
+      "operation:spanish-potato-omelet-op-001-slice:targets-source",
+      "operation:spanish-potato-omelet-op-005-stir:duration",
+      "operation:spanish-potato-omelet-op-005-stir:inputs",
+      "operation:spanish-potato-omelet-op-005-stir:parameters-source",
+      "operation:spanish-potato-omelet-op-005-stir:targets-source",
+      "operation:spanish-potato-omelet-op-006-mix:duration",
+      "operation:spanish-potato-omelet-op-006-mix:equipment",
+      "operation:spanish-potato-omelet-op-006-mix:inputs",
+      "operation:spanish-potato-omelet-op-006-mix:parameters-source",
+      "operation:spanish-potato-omelet-op-006-mix:targets-source",
+      "operation:spanish-potato-omelet-op-007-rest:duration",
+      "operation:spanish-potato-omelet-op-007-rest:inputs",
+      "operation:spanish-potato-omelet-op-008-pan-fry:duration",
+      "operation:spanish-potato-omelet-op-008-pan-fry:inputs",
+      "operation:spanish-potato-omelet-op-008-pan-fry:targets-source",
+      "operation:spanish-potato-omelet-op-009-rest:duration",
+      "operation:spanish-potato-omelet-op-009-rest:inputs",
+      "portion:spanish-potato-omelet-portion-04:source-step",
+      "portion:spanish-potato-omelet-portion-05:source-step",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-001-slice-omit:expected-outcome",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-005-stir-omit:expected-outcome",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-006-mix-omit:expected-outcome",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-007-rest-omit:expected-outcome",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-008-pan-fry-hot:expected-outcome",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-008-pan-fry-omit:expected-outcome",
+      "scenario:spanish-potato-omelet-spanish-potato-omelet-op-009-rest-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-spanish-potato-omelet",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -160,7 +190,11 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "spanish-potato-omelet-portion-01",
+          "spanish-potato-omelet-portion-02",
+          "spanish-potato-omelet-portion-03"
+        ],
         "nodeId": "spanish-potato-omelet-op-001-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -187,7 +221,7 @@
         "dependsOn": [
           "spanish-potato-omelet-op-001-slice"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "spanish-potato-omelet-portion-01"
         ],
@@ -209,7 +243,7 @@
         "dependsOn": [
           "spanish-potato-omelet-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "spanish-potato-omelet-portion-02"
         ],
@@ -231,7 +265,7 @@
         "dependsOn": [
           "spanish-potato-omelet-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "spanish-potato-omelet-portion-03"
         ],
@@ -248,58 +282,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "spanish-potato-omelet-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "spanish-potato-omelet-portion-04"
-        ],
-        "nodeId": "spanish-potato-omelet-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "spanish-potato-omelet-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 12
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "spanish-potato-omelet-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "spanish-potato-omelet-portion-05"
-        ],
-        "nodeId": "spanish-potato-omelet-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "spanish-potato-omelet-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 1.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-potato-omelet-op-006-add"
+          "spanish-potato-omelet-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "spanish-potato-omelet-op-007-stir",
+        "nodeId": "spanish-potato-omelet-op-005-stir",
         "operationType": "stir",
         "outputStateIds": [
           "spanish-potato-omelet-step-2-stir"
@@ -322,11 +312,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-potato-omelet-op-007-stir"
+          "spanish-potato-omelet-op-005-stir"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "spanish-potato-omelet-op-008-mix",
+        "nodeId": "spanish-potato-omelet-op-006-mix",
         "operationType": "mix",
         "outputStateIds": [
           "spanish-potato-omelet-step-3-mix"
@@ -349,11 +338,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-potato-omelet-op-008-mix"
+          "spanish-potato-omelet-op-006-mix"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "spanish-potato-omelet-op-009-rest",
+        "nodeId": "spanish-potato-omelet-op-007-rest",
         "operationType": "rest",
         "outputStateIds": [
           "spanish-potato-omelet-step-3-rest"
@@ -367,11 +356,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-potato-omelet-op-009-rest"
+          "spanish-potato-omelet-op-007-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "spanish-potato-omelet-op-010-pan-fry",
+        "nodeId": "spanish-potato-omelet-op-008-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "spanish-potato-omelet-step-3-pan-fry"
@@ -399,11 +388,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-potato-omelet-op-010-pan-fry"
+          "spanish-potato-omelet-op-008-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "spanish-potato-omelet-op-011-rest",
+        "nodeId": "spanish-potato-omelet-op-009-rest",
         "operationType": "rest",
         "outputStateIds": [
           "spanish-potato-omelet-step-4-rest"
@@ -417,7 +406,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "spanish-potato-omelet-op-011-rest"
+          "spanish-potato-omelet-op-009-rest"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -427,7 +416,7 @@
           "spanish-potato-omelet-portion-04",
           "spanish-potato-omelet-portion-05"
         ],
-        "nodeId": "spanish-potato-omelet-op-012-serve",
+        "nodeId": "spanish-potato-omelet-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
           "spanish-potato-omelet-served"
@@ -441,29 +430,16 @@
   },
   "recipeId": "spanish-potato-omelet",
   "rights": {
-    "artifactIds": [
-      "game-artifact-spanish-potato-omelet-identity",
-      "game-artifact-spanish-potato-omelet-preparation",
-      "game-artifact-spanish-potato-omelet-nutrition",
-      "game-artifact-spanish-potato-omelet-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "spain-info-potato-omelette",
-      "spanish-sabores-tortilla"
-    ],
-    "usageDecisionIds": [
-      "game-usage-spanish-potato-omelet-identity",
-      "game-usage-spanish-potato-omelet-preparation",
-      "game-usage-spanish-potato-omelet-nutrition",
-      "game-usage-spanish-potato-omelet-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -487,7 +463,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -502,16 +478,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "spanish-potato-omelet-op-007-stir",
+        "targetNodeId": "spanish-potato-omelet-op-005-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-007-stir-omit"
+      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-005-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -526,16 +502,16 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "spanish-potato-omelet-op-008-mix",
+        "targetNodeId": "spanish-potato-omelet-op-006-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-008-mix-omit"
+      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-006-mix-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -550,16 +526,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "spanish-potato-omelet-op-009-rest",
+        "targetNodeId": "spanish-potato-omelet-op-007-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-009-rest-omit"
+      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-007-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -579,16 +555,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "spanish-potato-omelet-op-010-pan-fry",
+        "targetNodeId": "spanish-potato-omelet-op-008-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-010-pan-fry-omit"
+      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-008-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -614,16 +590,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "spanish-potato-omelet-op-010-pan-fry",
+        "targetNodeId": "spanish-potato-omelet-op-008-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-010-pan-fry-hot"
+      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-008-pan-fry-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8fb39f9ce94f31bd",
+      "baselineArtifactVersion": "clv1-9ac634a65f79bbd9",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -638,12 +614,12 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "spanish-potato-omelet-op-011-rest",
+        "targetNodeId": "spanish-potato-omelet-op-009-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-011-rest-omit"
+      "scenarioId": "spanish-potato-omelet-spanish-potato-omelet-op-009-rest-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

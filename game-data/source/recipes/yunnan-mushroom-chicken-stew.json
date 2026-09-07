@@ -1,14 +1,31 @@
 {
-  "artifactVersion": "clv1-b60b50d53904bef1",
+  "artifactVersion": "clv1-228ae7d2c2c95e74",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:yunnan-mushroom-chicken-stew-op-002-set-heat:duration",
+      "operation:yunnan-mushroom-chicken-stew-op-002-set-heat:parameters",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:duration",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:inputs",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:parameters",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:targets-source",
+      "portion:yunnan-mushroom-chicken-stew-portion-01:source-step",
+      "portion:yunnan-mushroom-chicken-stew-portion-03:source-step",
+      "portion:yunnan-mushroom-chicken-stew-portion-04:source-step",
+      "portion:yunnan-mushroom-chicken-stew-portion-05:source-step",
+      "scenario:yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-002-set-heat-omit:expected-outcome",
+      "scenario:yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-003-season-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:2:operation",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-yunnan-mushroom-chicken-stew",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -159,33 +176,11 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "yunnan-mushroom-chicken-stew-portion-01"
-        ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-001-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 360
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-001-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "yunnan-mushroom-chicken-stew-portion-02"
         ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-002-add",
+        "nodeId": "yunnan-mushroom-chicken-stew-op-001-add",
         "operationType": "add",
         "outputStateIds": [
           "yunnan-mushroom-chicken-stew-portion-02-added"
@@ -198,179 +193,32 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "yunnan-mushroom-chicken-stew-portion-03"
-        ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 12
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "yunnan-mushroom-chicken-stew-portion-04"
-        ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "yunnan-mushroom-chicken-stew-portion-05"
-        ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 1.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-005-add"
+          "yunnan-mushroom-chicken-stew-op-001-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "yunnan-mushroom-chicken-stew-portion-01",
-          "yunnan-mushroom-chicken-stew-portion-02",
-          "yunnan-mushroom-chicken-stew-portion-03",
-          "yunnan-mushroom-chicken-stew-portion-04",
-          "yunnan-mushroom-chicken-stew-portion-05"
-        ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-006-pan-fry",
-        "operationType": "pan-fry",
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "yunnan-mushroom-chicken-stew-op-002-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-step-1-pan-fry"
+          "yunnan-mushroom-chicken-stew-step-4-set-heat"
         ],
         "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "sourceStepOrder": 4,
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-006-pan-fry"
+          "yunnan-mushroom-chicken-stew-op-002-set-heat"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-007-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-step-2-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-007-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-008-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "yunnan-mushroom-chicken-stew-step-3-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35,
-          "temperatureC": 74
-        },
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-008-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-009-season",
+        "nodeId": "yunnan-mushroom-chicken-stew-op-003-season",
         "operationType": "season",
         "outputStateIds": [
           "yunnan-mushroom-chicken-stew-step-4-season"
@@ -390,7 +238,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "yunnan-mushroom-chicken-stew-op-009-season"
+          "yunnan-mushroom-chicken-stew-op-003-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -400,7 +248,7 @@
           "yunnan-mushroom-chicken-stew-portion-04",
           "yunnan-mushroom-chicken-stew-portion-05"
         ],
-        "nodeId": "yunnan-mushroom-chicken-stew-op-010-serve",
+        "nodeId": "yunnan-mushroom-chicken-stew-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
           "yunnan-mushroom-chicken-stew-served"
@@ -414,151 +262,40 @@
   },
   "recipeId": "yunnan-mushroom-chicken-stew",
   "rights": {
-    "artifactIds": [
-      "game-artifact-yunnan-mushroom-chicken-stew-identity",
-      "game-artifact-yunnan-mushroom-chicken-stew-preparation",
-      "game-artifact-yunnan-mushroom-chicken-stew-nutrition",
-      "game-artifact-yunnan-mushroom-chicken-stew-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "usda-safe-temperature-chart",
-      "woks-of-life-braised-chicken-mushrooms"
-    ],
-    "usageDecisionIds": [
-      "game-usage-yunnan-mushroom-chicken-stew-identity",
-      "game-usage-yunnan-mushroom-chicken-stew-preparation",
-      "game-usage-yunnan-mushroom-chicken-stew-nutrition",
-      "game-usage-yunnan-mushroom-chicken-stew-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-b60b50d53904bef1",
+      "baselineArtifactVersion": "clv1-228ae7d2c2c95e74",
       "causeCodes": [
-        "operation-omitted:pan-fry"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-pan-fry"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "yunnan-mushroom-chicken-stew-op-006-pan-fry",
+        "targetNodeId": "yunnan-mushroom-chicken-stew-op-002-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-006-pan-fry-omit"
+      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-002-set-heat-omit"
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-b60b50d53904bef1",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "yunnan-mushroom-chicken-stew-op-007-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-007-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-b60b50d53904bef1",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "yunnan-mushroom-chicken-stew-op-008-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-008-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-b60b50d53904bef1",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "yunnan-mushroom-chicken-stew-op-008-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-008-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-b60b50d53904bef1",
+      "baselineArtifactVersion": "clv1-228ae7d2c2c95e74",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -573,12 +310,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "yunnan-mushroom-chicken-stew-op-009-season",
+        "targetNodeId": "yunnan-mushroom-chicken-stew-op-003-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-009-season-omit"
+      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-003-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

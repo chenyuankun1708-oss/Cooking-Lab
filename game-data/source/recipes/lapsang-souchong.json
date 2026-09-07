@@ -1,14 +1,27 @@
 {
-  "artifactVersion": "clv1-407e1df785fff5ed",
+  "artifactVersion": "clv1-826182517f100c07",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:lapsang-souchong-op-001-add:equipment",
+      "operation:lapsang-souchong-op-002-boil:parameters",
+      "operation:lapsang-souchong-op-002-boil:targets-source",
+      "operation:lapsang-souchong-op-003-rest:equipment",
+      "operation:lapsang-souchong-op-003-rest:inputs",
+      "operation:lapsang-souchong-op-004-serve:inputs",
+      "portion:lapsang-souchong-portion-01:source-step",
+      "scenario:lapsang-souchong-lapsang-souchong-op-002-boil-omit:expected-outcome",
+      "scenario:lapsang-souchong-lapsang-souchong-op-002-boil-short:expected-outcome",
+      "scenario:lapsang-souchong-lapsang-souchong-op-003-rest-omit:expected-outcome",
+      "scenario:lapsang-souchong-lapsang-souchong-op-003-rest-short:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-lapsang-souchong",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -94,33 +107,10 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "kettle",
-        "inputPortionIds": [
-          "lapsang-souchong-portion-01"
-        ],
-        "nodeId": "lapsang-souchong-op-001-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "lapsang-souchong-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 4
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "lapsang-souchong-op-001-add"
-        ],
-        "equipmentId": "kettle",
         "inputPortionIds": [
           "lapsang-souchong-portion-02"
         ],
-        "nodeId": "lapsang-souchong-op-002-add",
+        "nodeId": "lapsang-souchong-op-001-add",
         "operationType": "add",
         "outputStateIds": [
           "lapsang-souchong-portion-02-added"
@@ -136,14 +126,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "lapsang-souchong-op-002-add"
+          "lapsang-souchong-op-001-add"
         ],
         "equipmentId": "kettle",
         "inputPortionIds": [
-          "lapsang-souchong-portion-01",
           "lapsang-souchong-portion-02"
         ],
-        "nodeId": "lapsang-souchong-op-003-boil",
+        "nodeId": "lapsang-souchong-op-002-boil",
         "operationType": "boil",
         "outputStateIds": [
           "lapsang-souchong-step-1-boil"
@@ -164,11 +153,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "lapsang-souchong-op-003-boil"
+          "lapsang-souchong-op-002-boil"
         ],
-        "equipmentId": "kettle",
         "inputPortionIds": [],
-        "nodeId": "lapsang-souchong-op-004-rest",
+        "nodeId": "lapsang-souchong-op-003-rest",
         "operationType": "rest",
         "outputStateIds": [
           "lapsang-souchong-step-2-rest"
@@ -182,11 +170,11 @@
         "activeDurationMs": 60000,
         "criticality": "completion",
         "dependsOn": [
-          "lapsang-souchong-op-004-rest"
+          "lapsang-souchong-op-003-rest"
         ],
-        "equipmentId": "kettle",
+        "equipmentId": "teapot",
         "inputPortionIds": [],
-        "nodeId": "lapsang-souchong-op-005-serve",
+        "nodeId": "lapsang-souchong-op-004-serve",
         "operationType": "serve",
         "outputStateIds": [
           "lapsang-souchong-step-3-serve"
@@ -200,26 +188,16 @@
   },
   "recipeId": "lapsang-souchong",
   "rights": {
-    "artifactIds": [
-      "game-artifact-lapsang-souchong-identity",
-      "game-artifact-lapsang-souchong-preparation",
-      "game-artifact-lapsang-souchong-nutrition",
-      "game-artifact-lapsang-souchong-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-lapsang-souchong-identity",
-      "game-usage-lapsang-souchong-preparation",
-      "game-usage-lapsang-souchong-nutrition",
-      "game-usage-lapsang-souchong-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-407e1df785fff5ed",
+      "baselineArtifactVersion": "clv1-826182517f100c07",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -239,16 +217,16 @@
         "missing-boil"
       ],
       "mutation": {
-        "targetNodeId": "lapsang-souchong-op-003-boil",
+        "targetNodeId": "lapsang-souchong-op-002-boil",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "lapsang-souchong-lapsang-souchong-op-003-boil-omit"
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-002-boil-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-407e1df785fff5ed",
+      "baselineArtifactVersion": "clv1-826182517f100c07",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -269,16 +247,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "lapsang-souchong-op-003-boil",
+        "targetNodeId": "lapsang-souchong-op-002-boil",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "lapsang-souchong-lapsang-souchong-op-003-boil-short"
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-002-boil-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-407e1df785fff5ed",
+      "baselineArtifactVersion": "clv1-826182517f100c07",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -293,16 +271,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "lapsang-souchong-op-004-rest",
+        "targetNodeId": "lapsang-souchong-op-003-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "lapsang-souchong-lapsang-souchong-op-004-rest-omit"
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-003-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-407e1df785fff5ed",
+      "baselineArtifactVersion": "clv1-826182517f100c07",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -318,12 +296,12 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "lapsang-souchong-op-004-rest",
+        "targetNodeId": "lapsang-souchong-op-003-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "lapsang-souchong-lapsang-souchong-op-004-rest-short"
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-003-rest-short"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

@@ -2,11 +2,13 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
+import { createM13DraftCorpus } from "@/game-data/corpus-generator";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import {
   createGameArtifactSetVersion,
   createGameRecipeArtifactVersion,
   deriveGameEquivalenceClassKeys,
+  deriveMinimumGamePublishingRisk,
   evaluateGameRecipeCorpus,
 } from "@/lib/game-recipe-validation";
 import { createSamplingBatchEvidenceDigest } from "@/lib/publishing-governance";
@@ -23,6 +25,11 @@ const nutritionDataset = JSON.parse(readFileSync(
   resolve(process.cwd(), "game-data/nutrition/usda-fooddata-central-subset.json"),
   "utf8",
 )) as GameNutritionDatasetSubsetV1;
+const canonicalFixtureSource = loadCanonicalGameData();
+const generatedFixtureSource = createM13DraftCorpus(nutritionDataset, {
+  ...canonicalFixtureSource.ingredients,
+  ingredients: canonicalFixtureSource.ingredients.ingredients.filter((ingredient) => ingredient.nutritionSource.kind === "migration-estimate"),
+});
 
 describe("M12 game governance hostile cases", () => {
   it("accepts only a fully current low-risk fixture", () => {
@@ -104,9 +111,12 @@ describe("M12 game governance hostile cases", () => {
     policyChanged.policyVersion = "next-policy";
     const operationChanged = structuredClone(fixture.context);
     operationChanged.operations = operationChanged.operations.map((operation, index) => index === 0 ? { ...operation, simulationAffecting: !operation.simulationAffecting } : operation);
+    const sourceRoleChanged = structuredClone(fixture.registry);
+    sourceRoleChanged.sourceRoles[0].workFamilyId = "different-work-family";
     expect(createGameArtifactSetVersion([fixture.recipe], originChanged, fixture.context)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], policyChanged, fixture.context)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, operationChanged)).not.toBe(base);
+    expect(createGameArtifactSetVersion([fixture.recipe], sourceRoleChanged, fixture.context)).not.toBe(base);
   });
 
   it("rejects a USDA subset that no longer exactly matches the ingredient catalog", () => {
@@ -136,6 +146,240 @@ describe("M12 game governance hostile cases", () => {
     expect(audit(wrongEquipment).issues.some((issue) => issue.field.endsWith("replacementEquipmentId"))).toBe(true);
   });
 
+  it("enforces operation inputs, compatible equipment, required parameters, duration and targets", () => {
+    const mutations: Array<[string, (recipe: GameRecipeV1) => void]> = [
+      ["inputs", (recipe) => { recipe.operationGraph.nodes.find((node) => node.operationType === "pan-fry")!.inputPortionIds = []; }],
+      ["equipment", (recipe) => { recipe.operationGraph.nodes.find((node) => node.operationType === "simmer")!.equipmentId = "knife"; }],
+      ["parameters", (recipe) => { recipe.operationGraph.nodes.find((node) => node.operationType === "pan-fry")!.parameters = {}; }],
+      ["duration", (recipe) => {
+        const node = recipe.operationGraph.nodes.find((entry) => entry.operationType === "simmer")!;
+        node.activeDurationMs = 0;
+        node.waitDurationMs = 0;
+      }],
+      ["targets", (recipe) => { recipe.operationGraph.nodes.find((node) => node.operationType === "pan-fry")!.targetStates = []; }],
+    ];
+    for (const [field, mutate] of mutations) {
+      const fixture = readyFixture();
+      mutate(fixture.recipe);
+      expect(audit(fixture).issues.some((issue) => issue.field.endsWith(`.${field}`))).toBe(true);
+    }
+  });
+
+  it("rejects malformed target-state bounds", () => {
+    const fixture = readyFixture();
+    const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.targetStates.length > 0)!;
+    node.targetStates[0].minimum = 1.1;
+    node.targetStates[0].maximum = -0.1;
+    expect(audit(fixture).issues.some((issue) => issue.field.includes("targetStates"))).toBe(true);
+  });
+
+  it("rejects operation-incompatible targets and incomplete scenario provenance", () => {
+    const target = readyFixture();
+    target.recipe.operationGraph.nodes.find((node) => node.operationType === "pan-fry")!.targetStates = [{ dimension: "salt", maximum: 0.8, unit: "normalized" }];
+    expect(audit(target).issues.some((issue) => issue.message.includes("not meaningful"))).toBe(true);
+
+    const scenario = readyFixture();
+    scenario.recipe.scenarios[0].applicableEngine = scenario.recipe.simulationProfile === "cat-kitchen-goal1-v1" ? "requires-cat-kitchen-v2" : "cat-kitchen-goal1-v1";
+    scenario.recipe.scenarios[0].causeCodes = [];
+    const issues = audit(scenario).issues;
+    expect(issues.some((issue) => issue.field.endsWith(".applicableEngine"))).toBe(true);
+    expect(issues.some((issue) => issue.field.endsWith(".causeCodes"))).toBe(true);
+  });
+
+  it("requires unique output transitions and physically valid operation parameters", () => {
+    const missingOutput = readyFixture();
+    missingOutput.recipe.operationGraph.nodes[0].outputStateIds = [];
+    expect(audit(missingOutput).issues.some((issue) => issue.field.endsWith(".outputStateIds"))).toBe(true);
+
+    const duplicateOutput = readyFixture();
+    const stateId = duplicateOutput.recipe.operationGraph.nodes[0].outputStateIds[0];
+    duplicateOutput.recipe.operationGraph.nodes[0].outputStateIds = [stateId, stateId];
+    expect(audit(duplicateOutput).issues.some((issue) => issue.code === "duplicate-id" && issue.field.endsWith(".outputStateIds"))).toBe(true);
+
+    const invalidCapacity = readyFixture();
+    invalidCapacity.recipe.operationGraph.nodes.find((node) => node.operationType === "pan-fry")!.parameters.capacityG = -1;
+    expect(audit(invalidCapacity).issues.some((issue) => issue.field.endsWith(".capacityG"))).toBe(true);
+
+    const invalidTemperature = readyFixture();
+    invalidTemperature.recipe.operationGraph.nodes.find((node) => node.operationType === "simmer")!.parameters.temperatureC = -300;
+    expect(audit(invalidTemperature).issues.some((issue) => issue.field.endsWith(".temperatureC"))).toBe(true);
+  });
+
+  it("requires mutation-specific targets and scalar direction", () => {
+    const fixture = readyFixture();
+    const scenario = fixture.recipe.scenarios[0];
+    scenario.mutation = { type: "quantity-too-low", scalar: 2 };
+    scenario.nutritionEffect = "unchanged";
+    const issues = audit(fixture).issues;
+    expect(issues.some((issue) => issue.field.endsWith("targetPortionId"))).toBe(true);
+    expect(issues.some((issue) => issue.field.endsWith("scalar"))).toBe(true);
+    expect(issues.some((issue) => issue.field.endsWith("nutritionEffect"))).toBe(true);
+  });
+
+  it("binds assessments exactly and blocks unapproved or ShareAlike licenses", () => {
+    const wrongSubject = readyFixture();
+    const sourceAssessment = wrongSubject.registry.assessments.find((entry) => entry.subject.type === "source")!;
+    sourceAssessment.subject = { type: "source", id: "unrelated-source" };
+    expect(audit(wrongSubject).issues.some((issue) => issue.field.endsWith(".subject"))).toBe(true);
+
+    const unapproved = readyFixture();
+    const source = unapproved.registry.sources[0];
+    source.rights = {
+      status: "open-license",
+      licenseId: "custom-open",
+      licenseUrl: "https://example.invalid/license",
+      attribution: "test",
+      adaptationStatus: "adapted",
+      shareAlikeRequired: false,
+      notes: "hostile fixture",
+    };
+    expect(audit(unapproved).issues.some((issue) => issue.field.endsWith("licenseId"))).toBe(true);
+
+    const shareAlike = readyFixture();
+    const shareAlikeSource = shareAlike.registry.sources[0];
+    if (shareAlikeSource.rights.status !== "open-license") throw new Error("open-license fixture missing");
+    shareAlikeSource.rights.shareAlikeRequired = true;
+    expect(audit(shareAlike).issues.some((issue) => issue.field.endsWith("shareAlikeRequired"))).toBe(true);
+  });
+
+  it("requires complete CC BY attribution and globally unique registry IDs", () => {
+    const attribution = readyFixture();
+    const source = attribution.registry.sources[0];
+    source.rights = {
+      status: "open-license",
+      licenseId: "CC-BY-4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+      attribution: "Required",
+      adaptationStatus: "adapted",
+      shareAlikeRequired: false,
+      notes: "hostile fixture",
+    };
+    expect(audit(attribution).issues.some((issue) => issue.field.endsWith("attributionRequirementIds"))).toBe(true);
+
+    const duplicate = readyFixture();
+    duplicate.registry.assessments[1].id = duplicate.registry.artifacts[0].id;
+    expect(audit(duplicate).issues).toContainEqual(expect.objectContaining({
+      code: "duplicate-id",
+      recipeId: "rights-registry",
+    }));
+  });
+
+  it("requires complete OGL attribution and complete assessment provenance", () => {
+    const ogl = readyFixture();
+    const source = ogl.registry.sources[0];
+    source.rights = {
+      status: "open-license",
+      licenseId: "OGL-3.0",
+      licenseUrl: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+      attribution: "Required",
+      adaptationStatus: "adapted",
+      shareAlikeRequired: false,
+      notes: "hostile fixture",
+    };
+    expect(audit(ogl).issues.some((issue) => issue.field.endsWith("attributionRequirementIds"))).toBe(true);
+
+    const incomplete = readyFixture();
+    const assessment = incomplete.registry.assessments[0];
+    assessment.authorityVersion = "";
+    assessment.accessedAt = "not-a-date";
+    assessment.reviewer = "";
+    assessment.permissions.publish.scope = "";
+    assessment.basis = { kind: "open-license", licenseId: "CC-BY-4.0", licenseUrl: "http://example.invalid/license" };
+    const issues = audit(incomplete).issues;
+    expect(issues.some((issue) => issue.field.endsWith(".provenance"))).toBe(true);
+    expect(issues.some((issue) => issue.field.endsWith(".basis"))).toBe(true);
+    expect(issues.some((issue) => issue.field.endsWith(".permissions.publish.scope"))).toBe(true);
+  });
+
+  it("requires usage decision review metadata and material two-institution evidence", () => {
+    const invalidDecision = readyFixture();
+    invalidDecision.registry.decisions[0].reviewer = "";
+    invalidDecision.registry.decisions[0].decidedAt = "not-a-date";
+    expect(audit(invalidDecision).issues.some((issue) => issue.field.endsWith(".review"))).toBe(true);
+
+    const unusedSecondSource = readyFixture();
+    const firstEvidence = unusedSecondSource.recipe.rights.evidenceIds[0];
+    for (const artifact of unusedSecondSource.registry.artifacts.filter((entry) =>
+      entry.subject.id === unusedSecondSource.recipe.recipeId && (entry.kind === "identity" || entry.kind === "preparation"))) {
+      artifact.evidenceIds = [firstEvidence];
+    }
+    expect(audit(unusedSecondSource).issues.some((issue) => issue.field === "rights.materialSourceCoverage")).toBe(true);
+  });
+
+  it("does not treat identity-only evidence as a preparation cross-check", () => {
+    const fixture = readyFixture();
+    const crossCheckSourceId = fixture.recipe.rights.sourceIds[1];
+    const preparation = fixture.registry.artifacts.find((entry) => entry.subject.id === fixture.recipe.recipeId && entry.kind === "preparation")!;
+    preparation.evidenceIds = preparation.evidenceIds.filter((evidenceId) =>
+      fixture.registry.evidence.find((evidence) => evidence.id === evidenceId)?.sourceId !== crossCheckSourceId);
+    expect(audit(fixture).issues).toContainEqual(expect.objectContaining({
+      code: "invalid-rights",
+      field: "rights.materialSourceCoverage",
+    }));
+  });
+
+  it("requires exact artifact assessments and rejects undeclared or AI-origin artifact Evidence", () => {
+    const wrongAssessment = readyFixture();
+    const artifact = wrongAssessment.registry.artifacts.find((entry) => entry.subject.id === wrongAssessment.recipe.recipeId)!;
+    const sourceAssessment = wrongAssessment.registry.assessments.find((entry) => entry.subject.type === "source")!;
+    artifact.rightsAssessmentId = sourceAssessment.id;
+    const decision = wrongAssessment.registry.decisions.find((entry) => entry.id === artifact.usageDecisionId)!;
+    if (!decision.assessmentIds.includes(sourceAssessment.id)) decision.assessmentIds.push(sourceAssessment.id);
+    expect(audit(wrongAssessment).issues.some((issue) => issue.field.endsWith(".rightsAssessmentId"))).toBe(true);
+
+    const aiEvidence = readyFixture();
+    const aiArtifact = aiEvidence.registry.artifacts.find((entry) => entry.subject.id === aiEvidence.recipe.recipeId)!;
+    const newEvidenceId = "hostile-ai-artifact-evidence";
+    aiEvidence.registry.evidence.push({
+      id: newEvidenceId,
+      sourceId: aiArtifact.sourceIds[0],
+      relation: "supports",
+      strength: "limited",
+      locators: [{ kind: "section", value: "hostile fixture" }],
+      editorialNote: "Hostile fixture only.",
+    });
+    aiEvidence.registry.evidenceOrigins.push({ evidenceId: newEvidenceId, origin: "ai-output" });
+    aiArtifact.evidenceIds.push(newEvidenceId);
+    expect(audit(aiEvidence).issues.some((issue) => issue.field.endsWith(".evidenceIds") && issue.message.includes("source record"))).toBe(true);
+  });
+
+  it("rejects duplicate or non-neutral ingredient-sum provenance and escalates permission sources", () => {
+    const nutrition = readyFixture();
+    nutrition.recipe.nutritionProfile.provenance.push(structuredClone(nutrition.recipe.nutritionProfile.provenance[0]));
+    nutrition.recipe.nutritionProfile.provenance.at(-1)!.yieldFactor = 0.8;
+    const issues = audit(nutrition).issues;
+    expect(issues.some((issue) => issue.field === "nutritionProfile.provenance")).toBe(true);
+    expect(issues.some((issue) => issue.field.includes("nutritionProfile.provenance.") && issue.message.includes("neutral yield"))).toBe(true);
+
+    const permission = readyFixture();
+    const source = permission.registry.sources[0];
+    source.rights = { status: "permission-granted", notes: "Hostile fixture permission route." };
+    const assessment = permission.registry.assessments.find((entry) => entry.subject.type === "source" && entry.subject.id === source.id)!;
+    assessment.basis = { kind: "permission", permissionReferenceId: "hostile-permission" };
+    expect(deriveMinimumGamePublishingRisk(permission.recipe, permission.registry).level).toBe("high");
+  });
+
+  it("rejects portion-state drift from ingredient-sum provenance", () => {
+    const fixture = readyFixture();
+    const portion = fixture.recipe.ingredientPortions[0];
+    portion.initialState = portion.initialState === "raw" ? "prepared" : "raw";
+    expect(audit(fixture).issues.some((issue) => issue.field.includes(`nutritionProfile.provenance.${portion.ingredientId}`))).toBe(true);
+  });
+
+  it("rejects dangling rights references even while a recipe remains draft", () => {
+    const recipe = structuredClone(canonicalFixtureSource.recipes[0]);
+    recipe.rights.artifactIds = ["missing-artifact"];
+    expect(evaluateGameRecipeCorpus([recipe], {
+      operations: gameOperationCatalog,
+      ingredients: canonicalFixtureSource.ingredients,
+      rightsRegistry: canonicalFixtureSource.rightsRegistry,
+      now: "2026-09-08",
+    }).issues).toContainEqual(expect.objectContaining({
+      code: "missing-reference",
+      field: "rights.artifactIds",
+    }));
+  });
+
   it("freezes a risk class after any major sampling escape", () => {
     const fixture = readyFixture();
     const sampling = fixture.registry.governance.samplingBatches[0];
@@ -154,20 +398,70 @@ describe("M12 game governance hostile cases", () => {
       field: "sampling.history",
     }));
   });
+
+  it("does not thaw a frozen class with an incomplete historical full-review sample", () => {
+    const fixture = readyFixture();
+    const base = fixture.registry.governance.samplingBatches[0];
+    const key = base.equivalenceClasses[0].key;
+    const major = structuredClone(base);
+    major.id = "hostile-history-major";
+    major.sequence = 1;
+    delete major.previousBatchId;
+    major.evidenceReference = "hostile-history-major-evidence";
+    major.auditor.runId = "hostile-history-major-run";
+    major.auditor.contextId = "hostile-history-major-context";
+    major.findings = [{ code: "major-history", kind: "quality", severity: "major", summary: "hostile fixture", disposition: "resolved", equivalenceClassKeys: [key] }];
+    major.metrics.escapeCount = 1;
+    major.evidenceDigest = createSamplingBatchEvidenceDigest(major);
+
+    const incomplete = structuredClone(base);
+    incomplete.id = "hostile-history-incomplete";
+    incomplete.sequence = 2;
+    incomplete.previousBatchId = major.id;
+    incomplete.evidenceReference = "hostile-history-incomplete-evidence";
+    incomplete.auditor.runId = "hostile-history-incomplete-run";
+    incomplete.auditor.contextId = "hostile-history-incomplete-context";
+    incomplete.metrics.provenanceLicenseNoveltyClassKeys = [];
+    incomplete.metrics.provenanceLicenseNoveltyCount = 0;
+    incomplete.samples[0].dimensions = ["rights-license"];
+    incomplete.evidenceDigest = createSamplingBatchEvidenceDigest(incomplete);
+
+    const clean = structuredClone(base);
+    clean.id = "hostile-history-clean";
+    clean.sequence = 3;
+    clean.previousBatchId = incomplete.id;
+    clean.evidenceReference = "hostile-history-clean-evidence";
+    clean.auditor.runId = "hostile-history-clean-run";
+    clean.auditor.contextId = "hostile-history-clean-context";
+    clean.metrics.provenanceLicenseNoveltyClassKeys = [];
+    clean.metrics.provenanceLicenseNoveltyCount = 0;
+    clean.evidenceDigest = createSamplingBatchEvidenceDigest(clean);
+
+    fixture.recipe.governance.samplingBatchId = clean.id;
+    fixture.registry.governance.samplingBatches = [major, incomplete, clean];
+    expect(audit(fixture).issues).toContainEqual(expect.objectContaining({
+      code: "invalid-governance",
+      field: "sampling.history",
+      message: expect.stringContaining("remains frozen"),
+    }));
+  });
 });
 
 function readyFixture() {
-  const source = loadCanonicalGameData();
-  const recipe = structuredClone(source.recipes.find((entry) => !entry.sourceCulinaryItemId)) as GameRecipeV1;
-  const registry = structuredClone(source.rightsRegistry) as GameRightsRegistryV1;
+  const recipe = structuredClone(generatedFixtureSource.recipes[0]) as GameRecipeV1;
+  const registry = structuredClone(generatedFixtureSource.rightsRegistry) as GameRightsRegistryV1;
   const context = {
     operations: structuredClone(gameOperationCatalog),
-    ingredients: structuredClone(source.ingredients),
+    ingredients: structuredClone(generatedFixtureSource.ingredients),
     nutritionDataset: structuredClone(nutritionDataset),
     rightsRegistry: registry,
     now: "2026-09-08",
   };
   recipe.eligibility = "exportable";
+  registry.sourceRoles = [
+    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "hostile-fixture-primary" },
+    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "hostile-fixture-cross-check" },
+  ];
   for (const scenario of recipe.scenarios) {
     if (scenario.mutation.type === "reorder" && scenario.mutation.targetNodeId) {
       scenario.mutation.destinationBeforeNodeId = recipe.operationGraph.nodes.find((node) => node.nodeId !== scenario.mutation.targetNodeId)?.nodeId;
@@ -175,7 +469,7 @@ function readyFixture() {
     if (scenario.mutation.type === "wrong-equipment") scenario.mutation.replacementEquipmentId = "deliberately-incompatible-test-tool";
     if (scenario.mutation.type === "allowed-substitution" && scenario.mutation.targetPortionId) {
       const target = recipe.ingredientPortions.find((portion) => portion.portionId === scenario.mutation.targetPortionId);
-      scenario.mutation.replacementIngredientId = source.ingredients.ingredients.find((ingredient) => ingredient.ingredientId !== target?.ingredientId)?.ingredientId;
+      scenario.mutation.replacementIngredientId = generatedFixtureSource.ingredients.ingredients.find((ingredient) => ingredient.ingredientId !== target?.ingredientId)?.ingredientId;
       scenario.nutritionEffect = "recalculate-from-quantities";
     }
   }

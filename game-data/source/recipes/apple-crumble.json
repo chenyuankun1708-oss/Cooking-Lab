@@ -1,14 +1,40 @@
 {
-  "artifactVersion": "clv1-fa87d019772802b9",
+  "artifactVersion": "clv1-bd933add2873b4e5",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:apple-crumble-op-005-bake:targets-source",
+      "operation:apple-crumble-op-007-mix:parameters-source",
+      "operation:apple-crumble-op-007-mix:targets-source",
+      "operation:apple-crumble-op-011-mix:parameters-source",
+      "operation:apple-crumble-op-011-mix:targets-source",
+      "operation:apple-crumble-op-012-shape:targets-source",
+      "operation:apple-crumble-op-013-bake:inputs",
+      "operation:apple-crumble-op-013-bake:parameters",
+      "operation:apple-crumble-op-013-bake:targets-source",
+      "operation:apple-crumble-op-014-rest:inputs",
+      "operation:apple-crumble-op-015-serve:inputs",
+      "portion:apple-crumble-portion-08:source-step",
+      "scenario:apple-crumble-apple-crumble-op-005-bake-hot:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-005-bake-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-005-bake-short:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-006-set-heat-hot:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-006-set-heat-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-007-mix-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-011-mix-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-012-shape-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-013-bake-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-013-bake-short:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-014-rest-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-014-rest-short:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-apple-crumble",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -225,7 +251,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-01"
         ],
@@ -247,7 +273,7 @@
         "dependsOn": [
           "apple-crumble-op-001-add"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-05"
         ],
@@ -269,7 +295,7 @@
         "dependsOn": [
           "apple-crumble-op-002-add"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-06"
         ],
@@ -291,7 +317,7 @@
         "dependsOn": [
           "apple-crumble-op-003-add"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-07"
         ],
@@ -308,42 +334,19 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "apple-crumble-op-004-add"
-        ],
-        "equipmentId": "oven",
-        "inputPortionIds": [
-          "apple-crumble-portion-08"
-        ],
-        "nodeId": "apple-crumble-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "apple-crumble-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 1
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "apple-crumble-op-005-add"
+          "apple-crumble-op-004-add"
         ],
         "equipmentId": "oven",
         "inputPortionIds": [
           "apple-crumble-portion-01",
           "apple-crumble-portion-05",
           "apple-crumble-portion-06",
-          "apple-crumble-portion-07",
-          "apple-crumble-portion-08"
+          "apple-crumble-portion-07"
         ],
-        "nodeId": "apple-crumble-op-006-bake",
+        "nodeId": "apple-crumble-op-005-bake",
         "operationType": "bake",
         "outputStateIds": [
           "apple-crumble-step-1-bake"
@@ -365,21 +368,45 @@
             "unit": "normalized"
           }
         ],
-        "waitDurationMs": 240000
+        "waitDurationMs": 160000
       },
       {
-        "activeDurationMs": 240000,
+        "activeDurationMs": 160000,
         "criticality": "quality",
         "dependsOn": [
-          "apple-crumble-op-006-bake"
+          "apple-crumble-op-005-bake"
         ],
         "equipmentId": "oven",
         "inputPortionIds": [
           "apple-crumble-portion-01",
           "apple-crumble-portion-05",
           "apple-crumble-portion-06",
-          "apple-crumble-portion-07",
-          "apple-crumble-portion-08"
+          "apple-crumble-portion-07"
+        ],
+        "nodeId": "apple-crumble-op-006-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "apple-crumble-step-1-set-heat"
+        ],
+        "parameters": {
+          "temperatureC": 190
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 160000,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-006-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-01",
+          "apple-crumble-portion-05",
+          "apple-crumble-portion-06",
+          "apple-crumble-portion-07"
         ],
         "nodeId": "apple-crumble-op-007-mix",
         "operationType": "mix",
@@ -406,7 +433,7 @@
         "dependsOn": [
           "apple-crumble-op-007-mix"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-02"
         ],
@@ -428,7 +455,7 @@
         "dependsOn": [
           "apple-crumble-op-008-add"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-03"
         ],
@@ -450,7 +477,7 @@
         "dependsOn": [
           "apple-crumble-op-009-add"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-04"
         ],
@@ -472,7 +499,7 @@
         "dependsOn": [
           "apple-crumble-op-010-add"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "apple-crumble-portion-02",
           "apple-crumble-portion-03",
@@ -503,7 +530,7 @@
         "dependsOn": [
           "apple-crumble-op-011-mix"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "baking-dish",
         "inputPortionIds": [
           "apple-crumble-portion-02",
           "apple-crumble-portion-03",
@@ -562,7 +589,7 @@
         "dependsOn": [
           "apple-crumble-op-013-bake"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
         "nodeId": "apple-crumble-op-014-rest",
         "operationType": "rest",
@@ -580,7 +607,7 @@
         "dependsOn": [
           "apple-crumble-op-014-rest"
         ],
-        "equipmentId": "oven",
+        "equipmentId": "baking-dish",
         "inputPortionIds": [],
         "nodeId": "apple-crumble-op-015-serve",
         "operationType": "serve",
@@ -596,26 +623,16 @@
   },
   "recipeId": "apple-crumble",
   "rights": {
-    "artifactIds": [
-      "game-artifact-apple-crumble-identity",
-      "game-artifact-apple-crumble-preparation",
-      "game-artifact-apple-crumble-nutrition",
-      "game-artifact-apple-crumble-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-apple-crumble-identity",
-      "game-usage-apple-crumble-preparation",
-      "game-usage-apple-crumble-nutrition",
-      "game-usage-apple-crumble-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "operation-omitted:bake"
       ],
@@ -635,16 +652,16 @@
         "missing-bake"
       ],
       "mutation": {
-        "targetNodeId": "apple-crumble-op-006-bake",
+        "targetNodeId": "apple-crumble-op-005-bake",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "terminal",
-      "scenarioId": "apple-crumble-apple-crumble-op-006-bake-omit"
+      "scenarioId": "apple-crumble-apple-crumble-op-005-bake-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "duration-short:bake"
       ],
@@ -665,16 +682,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "apple-crumble-op-006-bake",
+        "targetNodeId": "apple-crumble-op-005-bake",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "apple-crumble-apple-crumble-op-006-bake-short"
+      "scenarioId": "apple-crumble-apple-crumble-op-005-bake-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "heat-high:bake"
       ],
@@ -700,16 +717,75 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "apple-crumble-op-006-bake",
+        "targetNodeId": "apple-crumble-op-005-bake",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "apple-crumble-apple-crumble-op-006-bake-hot"
+      "scenarioId": "apple-crumble-apple-crumble-op-005-bake-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-006-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-006-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "apple-crumble-op-006-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-006-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -733,7 +809,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -757,7 +833,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "operation-omitted:shape"
       ],
@@ -781,7 +857,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "operation-omitted:bake"
       ],
@@ -810,7 +886,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "duration-short:bake"
       ],
@@ -840,7 +916,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -864,7 +940,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-fa87d019772802b9",
+      "baselineArtifactVersion": "clv1-bd933add2873b4e5",
       "causeCodes": [
         "duration-short:rest"
       ],

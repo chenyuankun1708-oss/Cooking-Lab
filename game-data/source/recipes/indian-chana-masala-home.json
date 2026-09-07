@@ -1,14 +1,52 @@
 {
-  "artifactVersion": "clv1-e16bb7c0b067e531",
+  "artifactVersion": "clv1-fccc40ce5285af55",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:indian-chana-masala-home-op-001-mince:duration",
+      "operation:indian-chana-masala-home-op-001-mince:parameters-source",
+      "operation:indian-chana-masala-home-op-001-mince:targets-source",
+      "operation:indian-chana-masala-home-op-002-dice:duration",
+      "operation:indian-chana-masala-home-op-002-dice:parameters-source",
+      "operation:indian-chana-masala-home-op-002-dice:targets-source",
+      "operation:indian-chana-masala-home-op-006-drain:duration",
+      "operation:indian-chana-masala-home-op-006-drain:equipment",
+      "operation:indian-chana-masala-home-op-009-toss:duration",
+      "operation:indian-chana-masala-home-op-009-toss:equipment",
+      "operation:indian-chana-masala-home-op-009-toss:parameters-source",
+      "operation:indian-chana-masala-home-op-009-toss:targets-source",
+      "operation:indian-chana-masala-home-op-010-stir:duration",
+      "operation:indian-chana-masala-home-op-010-stir:parameters-source",
+      "operation:indian-chana-masala-home-op-010-stir:targets-source",
+      "operation:indian-chana-masala-home-op-011-simmer:duration",
+      "operation:indian-chana-masala-home-op-011-simmer:inputs",
+      "operation:indian-chana-masala-home-op-011-simmer:targets-source",
+      "operation:indian-chana-masala-home-op-012-season:duration",
+      "operation:indian-chana-masala-home-op-012-season:inputs",
+      "operation:indian-chana-masala-home-op-012-season:parameters",
+      "operation:indian-chana-masala-home-op-012-season:targets-source",
+      "portion:indian-chana-masala-home-portion-04:source-step",
+      "portion:indian-chana-masala-home-portion-05:source-step",
+      "portion:indian-chana-masala-home-portion-06:source-step",
+      "portion:indian-chana-masala-home-portion-09:source-step",
+      "portion:indian-chana-masala-home-portion-10:source-step",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-001-mince-omit:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-002-dice-omit:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-006-drain-omit:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-009-toss-omit:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-010-stir-omit:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-011-simmer-hot:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-011-simmer-omit:expected-outcome",
+      "scenario:indian-chana-masala-home-indian-chana-masala-home-op-012-season-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-indian-chana-masala-home",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -270,7 +308,11 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "indian-chana-masala-home-portion-01",
+          "indian-chana-masala-home-portion-02",
+          "indian-chana-masala-home-portion-03"
+        ],
         "nodeId": "indian-chana-masala-home-op-001-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -298,7 +340,11 @@
           "indian-chana-masala-home-op-001-mince"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "indian-chana-masala-home-portion-01",
+          "indian-chana-masala-home-portion-02",
+          "indian-chana-masala-home-portion-03"
+        ],
         "nodeId": "indian-chana-masala-home-op-002-dice",
         "operationType": "dice",
         "outputStateIds": [
@@ -325,7 +371,7 @@
         "dependsOn": [
           "indian-chana-masala-home-op-002-dice"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-01"
         ],
@@ -347,7 +393,7 @@
         "dependsOn": [
           "indian-chana-masala-home-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-02"
         ],
@@ -369,7 +415,7 @@
         "dependsOn": [
           "indian-chana-masala-home-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-03"
         ],
@@ -386,133 +432,17 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-chana-masala-home-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-chana-masala-home-portion-04"
-        ],
-        "nodeId": "indian-chana-masala-home-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-chana-masala-home-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-chana-masala-home-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-chana-masala-home-portion-05"
-        ],
-        "nodeId": "indian-chana-masala-home-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-chana-masala-home-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 12
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-chana-masala-home-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-chana-masala-home-portion-06"
-        ],
-        "nodeId": "indian-chana-masala-home-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-chana-masala-home-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 4
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-chana-masala-home-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-chana-masala-home-portion-09"
-        ],
-        "nodeId": "indian-chana-masala-home-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-chana-masala-home-portion-09-added"
-        ],
-        "parameters": {
-          "quantityG": 7
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indian-chana-masala-home-op-009-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indian-chana-masala-home-portion-10"
-        ],
-        "nodeId": "indian-chana-masala-home-op-010-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indian-chana-masala-home-portion-10-added"
-        ],
-        "parameters": {
-          "quantityG": 1.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-chana-masala-home-op-010-add"
+          "indian-chana-masala-home-op-005-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-01",
           "indian-chana-masala-home-portion-02",
-          "indian-chana-masala-home-portion-03",
-          "indian-chana-masala-home-portion-04",
-          "indian-chana-masala-home-portion-05",
-          "indian-chana-masala-home-portion-06",
-          "indian-chana-masala-home-portion-09",
-          "indian-chana-masala-home-portion-10"
+          "indian-chana-masala-home-portion-03"
         ],
-        "nodeId": "indian-chana-masala-home-op-011-drain",
+        "nodeId": "indian-chana-masala-home-op-006-drain",
         "operationType": "drain",
         "outputStateIds": [
           "indian-chana-masala-home-step-1-drain"
@@ -526,13 +456,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "indian-chana-masala-home-op-011-drain"
+          "indian-chana-masala-home-op-006-drain"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-07"
         ],
-        "nodeId": "indian-chana-masala-home-op-012-add",
+        "nodeId": "indian-chana-masala-home-op-007-add",
         "operationType": "add",
         "outputStateIds": [
           "indian-chana-masala-home-portion-07-added"
@@ -548,13 +478,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "indian-chana-masala-home-op-012-add"
+          "indian-chana-masala-home-op-007-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-08"
         ],
-        "nodeId": "indian-chana-masala-home-op-013-add",
+        "nodeId": "indian-chana-masala-home-op-008-add",
         "operationType": "add",
         "outputStateIds": [
           "indian-chana-masala-home-portion-08-added"
@@ -570,14 +500,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-chana-masala-home-op-013-add"
+          "indian-chana-masala-home-op-008-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-07",
           "indian-chana-masala-home-portion-08"
         ],
-        "nodeId": "indian-chana-masala-home-op-014-toss",
+        "nodeId": "indian-chana-masala-home-op-009-toss",
         "operationType": "toss",
         "outputStateIds": [
           "indian-chana-masala-home-step-2-toss"
@@ -600,14 +529,14 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-chana-masala-home-op-014-toss"
+          "indian-chana-masala-home-op-009-toss"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "indian-chana-masala-home-portion-07",
           "indian-chana-masala-home-portion-08"
         ],
-        "nodeId": "indian-chana-masala-home-op-015-stir",
+        "nodeId": "indian-chana-masala-home-op-010-stir",
         "operationType": "stir",
         "outputStateIds": [
           "indian-chana-masala-home-step-2-stir"
@@ -630,41 +559,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-chana-masala-home-op-015-stir"
+          "indian-chana-masala-home-op-010-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "indian-chana-masala-home-op-016-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "indian-chana-masala-home-step-3-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "indian-chana-masala-home-op-016-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "indian-chana-masala-home-op-017-simmer",
+        "nodeId": "indian-chana-masala-home-op-011-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "indian-chana-masala-home-step-4-simmer"
@@ -687,11 +586,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indian-chana-masala-home-op-017-simmer"
+          "indian-chana-masala-home-op-011-simmer"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "indian-chana-masala-home-op-018-season",
+        "nodeId": "indian-chana-masala-home-op-012-season",
         "operationType": "season",
         "outputStateIds": [
           "indian-chana-masala-home-step-4-season"
@@ -711,7 +610,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "indian-chana-masala-home-op-018-season"
+          "indian-chana-masala-home-op-012-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -726,7 +625,7 @@
           "indian-chana-masala-home-portion-09",
           "indian-chana-masala-home-portion-10"
         ],
-        "nodeId": "indian-chana-masala-home-op-019-serve",
+        "nodeId": "indian-chana-masala-home-op-013-serve",
         "operationType": "serve",
         "outputStateIds": [
           "indian-chana-masala-home-served"
@@ -740,29 +639,16 @@
   },
   "recipeId": "indian-chana-masala-home",
   "rights": {
-    "artifactIds": [
-      "game-artifact-indian-chana-masala-home-identity",
-      "game-artifact-indian-chana-masala-home-preparation",
-      "game-artifact-indian-chana-masala-home-nutrition",
-      "game-artifact-indian-chana-masala-home-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "dassana-chana-masala",
-      "swasthi-chana-masala"
-    ],
-    "usageDecisionIds": [
-      "game-usage-indian-chana-masala-home-identity",
-      "game-usage-indian-chana-masala-home-preparation",
-      "game-usage-indian-chana-masala-home-nutrition",
-      "game-usage-indian-chana-masala-home-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -786,7 +672,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -810,7 +696,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -825,16 +711,16 @@
         "missing-drain"
       ],
       "mutation": {
-        "targetNodeId": "indian-chana-masala-home-op-011-drain",
+        "targetNodeId": "indian-chana-masala-home-op-006-drain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-011-drain-omit"
+      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-006-drain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -849,16 +735,16 @@
         "missing-toss"
       ],
       "mutation": {
-        "targetNodeId": "indian-chana-masala-home-op-014-toss",
+        "targetNodeId": "indian-chana-masala-home-op-009-toss",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-014-toss-omit"
+      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-009-toss-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -873,45 +759,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "indian-chana-masala-home-op-015-stir",
+        "targetNodeId": "indian-chana-masala-home-op-010-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-015-stir-omit"
+      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-010-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "indian-chana-masala-home-op-016-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-016-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -931,16 +788,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "indian-chana-masala-home-op-017-simmer",
+        "targetNodeId": "indian-chana-masala-home-op-011-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-017-simmer-omit"
+      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-011-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -966,16 +823,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "indian-chana-masala-home-op-017-simmer",
+        "targetNodeId": "indian-chana-masala-home-op-011-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-017-simmer-hot"
+      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-011-simmer-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e16bb7c0b067e531",
+      "baselineArtifactVersion": "clv1-fccc40ce5285af55",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -990,12 +847,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "indian-chana-masala-home-op-018-season",
+        "targetNodeId": "indian-chana-masala-home-op-012-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-018-season-omit"
+      "scenarioId": "indian-chana-masala-home-indian-chana-masala-home-op-012-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

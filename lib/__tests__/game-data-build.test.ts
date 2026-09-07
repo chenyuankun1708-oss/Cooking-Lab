@@ -1,9 +1,11 @@
-import { mkdtempSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, statSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
+import { createM13DraftCorpus } from "@/game-data/corpus-generator";
 import { buildGameData, createGameDataCatalogVersion } from "@/lib/game-data-build";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import { createGameArtifactSetVersion, deriveGameEquivalenceClassKeys } from "@/lib/game-recipe-validation";
@@ -15,14 +17,19 @@ import type { ReviewDimension } from "@/types/publishing-governance";
 describe("M12 deterministic game exports", () => {
   it("builds byte-stable Godot JSON, SQLite, rights and attribution from one canonical source", () => {
     const source = loadCanonicalGameData();
-    const recipe = structuredClone(source.recipes.find((entry) => !entry.sourceCulinaryItemId)) as GameRecipeV1;
-    const registry = structuredClone(source.rightsRegistry);
-    promoteFixture(recipe, registry, source.ingredients, source.nutritionDataset, gameOperationCatalog);
-    const rootA = resolve(mkdtempSync(resolve(tmpdir(), "cooking-lab-game-a-")), "output");
-    const rootB = resolve(mkdtempSync(resolve(tmpdir(), "cooking-lab-game-b-")), "output");
+    const generated = createM13DraftCorpus(source.nutritionDataset, source.ingredients);
+    const fixtureIngredients = {
+      ...generated.ingredients,
+      ingredients: [...new Map(generated.ingredients.ingredients.map((ingredient) => [ingredient.ingredientId, ingredient])).values()],
+    };
+    const recipe = structuredClone(generated.recipes[0]) as GameRecipeV1;
+    const registry = structuredClone(generated.rightsRegistry);
+    promoteFixture(recipe, registry, fixtureIngredients, source.nutritionDataset, gameOperationCatalog);
+    const rootA = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-a-")), "output");
+    const rootB = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-b-")), "output");
     const buildA = buildGameData({
       recipes: [recipe],
-      ingredients: source.ingredients,
+      ingredients: fixtureIngredients,
       nutritionDataset: source.nutritionDataset,
       operations: gameOperationCatalog,
       rightsRegistry: registry,
@@ -30,7 +37,7 @@ describe("M12 deterministic game exports", () => {
     }, rootA);
     buildGameData({
       recipes: [recipe],
-      ingredients: source.ingredients,
+      ingredients: fixtureIngredients,
       nutritionDataset: source.nutritionDataset,
       operations: gameOperationCatalog,
       rightsRegistry: registry,
@@ -38,6 +45,20 @@ describe("M12 deterministic game exports", () => {
     }, rootB);
 
     expect(buildA.manifest.recipeCount).toBe(1);
+    expect(buildA.manifest.rightsSummary).toMatchObject({
+      intendedUse: "game-commercial-ready",
+      artifactCount: 4,
+      decisionCount: 4,
+      sourceCount: 2,
+    });
+    expect(buildA.manifest.reviewSummary).toMatchObject({
+      riskCounts: { low: 1, medium: 0, high: 0 },
+      reviewedRecipeCount: 1,
+    });
+    expect(buildA.manifest.sqlite).toEqual({
+      path: "game-data.sqlite",
+      sha256: createHash("sha256").update(readFileSync(buildA.sqlitePath)).digest("hex"),
+    });
     expect(fileMap(rootA)).toEqual(fileMap(rootB));
     const database = new DatabaseSync(buildA.sqlitePath, { readOnly: true });
     expect(database.prepare("SELECT COUNT(*) AS count FROM recipes").get()).toEqual({ count: 1 });
@@ -83,7 +104,7 @@ describe("M12 deterministic game exports", () => {
       })),
     );
     database.close();
-  });
+  }, 20_000);
 
   it("content-addresses recipe and every supporting artifact hash", () => {
     const recipes = [{
@@ -99,6 +120,7 @@ describe("M12 deterministic game exports", () => {
       operationCatalog: "operations-a",
       rightsRegistry: "rights-a",
       attribution: "attribution-a",
+      sqlite: "sqlite-a",
     };
     const baseline = createGameDataCatalogVersion(recipes, supporting);
     expect(createGameDataCatalogVersion([{ ...recipes[0], sha256: "recipe-b" }], supporting)).not.toBe(baseline);
@@ -120,9 +142,30 @@ describe("M12 deterministic game exports", () => {
     }, process.cwd())).toThrow(/unsafe game-data output directory/);
   });
 
+  it("refuses a symlinked output path component", () => {
+    const source = loadCanonicalGameData();
+    const external = mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-external-"));
+    const symlinkContainer = mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-symlink-"));
+    rmSync(symlinkContainer, { recursive: true });
+    symlinkSync(external, symlinkContainer, "dir");
+    try {
+      expect(() => buildGameData({
+        recipes: source.recipes,
+        ingredients: source.ingredients,
+        nutritionDataset: source.nutritionDataset,
+        operations: gameOperationCatalog,
+        rightsRegistry: source.rightsRegistry,
+        now: "2026-09-08",
+      }, resolve(symlinkContainer, "output"))).toThrow(/symlinked game-data output path/);
+    } finally {
+      rmSync(symlinkContainer, { force: true });
+      rmSync(external, { recursive: true, force: true });
+    }
+  });
+
   it("fails closed with a clear reason when no recipe is exportable", () => {
     const source = loadCanonicalGameData();
-    const output = resolve(mkdtempSync(resolve(tmpdir(), "cooking-lab-game-empty-")), "output");
+    const output = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-empty-")), "output");
     expect(() => buildGameData({
       recipes: source.recipes,
       ingredients: source.ingredients,
@@ -145,6 +188,10 @@ function promoteFixture(
   const attestationIds = dimensions.map((dimension) => `fixture-attestation-${dimension}`);
   const samplingId = "fixture-sampling";
   recipe.eligibility = "exportable";
+  registry.sourceRoles = [
+    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "fixture-primary" },
+    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "fixture-cross-check" },
+  ];
   recipe.governance.reviewAttestationIds = attestationIds;
   recipe.governance.samplingBatchId = samplingId;
   const researchRecord = registry.researchRecords.find((entry) => entry.subject.type === "game-recipe" && entry.subject.id === recipe.recipeId);

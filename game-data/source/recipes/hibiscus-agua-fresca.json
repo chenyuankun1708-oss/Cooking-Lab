@@ -1,14 +1,36 @@
 {
-  "artifactVersion": "clv1-21713e77b6403573",
+  "artifactVersion": "clv1-316620db55e6c4e5",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:hibiscus-agua-fresca-op-003-boil:parameters",
+      "operation:hibiscus-agua-fresca-op-003-boil:targets-source",
+      "operation:hibiscus-agua-fresca-op-004-brew:equipment",
+      "operation:hibiscus-agua-fresca-op-004-brew:parameters",
+      "operation:hibiscus-agua-fresca-op-004-brew:targets-source",
+      "operation:hibiscus-agua-fresca-op-008-season:parameters",
+      "operation:hibiscus-agua-fresca-op-008-season:targets-source",
+      "operation:hibiscus-agua-fresca-op-010-chill:parameters",
+      "portion:hibiscus-agua-fresca-portion-05:source-step",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-003-boil-omit:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-003-boil-short:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-004-brew-omit:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-004-brew-short:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-005-rest-omit:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-005-rest-short:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-007-strain-omit:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-008-season-omit:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-010-chill-omit:expected-outcome",
+      "scenario:hibiscus-agua-fresca-hibiscus-agua-fresca-op-010-chill-short:expected-outcome",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-hibiscus-agua-fresca",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -199,40 +221,17 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 0,
+        "criticality": "quality",
         "dependsOn": [
           "hibiscus-agua-fresca-op-002-add"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
-          "hibiscus-agua-fresca-portion-05"
-        ],
-        "nodeId": "hibiscus-agua-fresca-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "hibiscus-agua-fresca-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 300
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "hibiscus-agua-fresca-op-003-add"
-        ],
-        "equipmentId": "saucepan",
-        "inputPortionIds": [
           "hibiscus-agua-fresca-portion-01",
-          "hibiscus-agua-fresca-portion-02",
-          "hibiscus-agua-fresca-portion-05"
+          "hibiscus-agua-fresca-portion-02"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-004-boil",
+        "nodeId": "hibiscus-agua-fresca-op-003-boil",
         "operationType": "boil",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-1-boil"
@@ -253,15 +252,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-004-boil"
+          "hibiscus-agua-fresca-op-003-boil"
         ],
-        "equipmentId": "saucepan",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-01",
-          "hibiscus-agua-fresca-portion-02",
-          "hibiscus-agua-fresca-portion-05"
+          "hibiscus-agua-fresca-portion-02"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-005-brew",
+        "nodeId": "hibiscus-agua-fresca-op-004-brew",
         "operationType": "brew",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-1-brew"
@@ -286,15 +283,14 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-005-brew"
+          "hibiscus-agua-fresca-op-004-brew"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-01",
-          "hibiscus-agua-fresca-portion-02",
-          "hibiscus-agua-fresca-portion-05"
+          "hibiscus-agua-fresca-portion-02"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-006-rest",
+        "nodeId": "hibiscus-agua-fresca-op-005-rest",
         "operationType": "rest",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-1-rest"
@@ -308,13 +304,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-006-rest"
+          "hibiscus-agua-fresca-op-005-rest"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-03"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-007-add",
+        "nodeId": "hibiscus-agua-fresca-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "hibiscus-agua-fresca-portion-03-added"
@@ -330,13 +326,13 @@
         "activeDurationMs": 150000,
         "criticality": "quality",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-007-add"
+          "hibiscus-agua-fresca-op-006-add"
         ],
-        "equipmentId": "saucepan",
+        "equipmentId": "fine-strainer",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-03"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-008-strain",
+        "nodeId": "hibiscus-agua-fresca-op-007-strain",
         "operationType": "strain",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-2-strain"
@@ -350,13 +346,13 @@
         "activeDurationMs": 150000,
         "criticality": "quality",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-008-strain"
+          "hibiscus-agua-fresca-op-007-strain"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-03"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-009-season",
+        "nodeId": "hibiscus-agua-fresca-op-008-season",
         "operationType": "season",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-2-season"
@@ -376,13 +372,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-009-season"
+          "hibiscus-agua-fresca-op-008-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-04"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-010-add",
+        "nodeId": "hibiscus-agua-fresca-op-009-add",
         "operationType": "add",
         "outputStateIds": [
           "hibiscus-agua-fresca-portion-04-added"
@@ -398,13 +394,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-010-add"
+          "hibiscus-agua-fresca-op-009-add"
         ],
-        "equipmentId": "saucepan",
+        "equipmentId": "refrigerator",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-04"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-011-chill",
+        "nodeId": "hibiscus-agua-fresca-op-010-chill",
         "operationType": "chill",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-3-chill"
@@ -418,13 +414,13 @@
         "activeDurationMs": 1800000,
         "criticality": "completion",
         "dependsOn": [
-          "hibiscus-agua-fresca-op-011-chill"
+          "hibiscus-agua-fresca-op-010-chill"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
           "hibiscus-agua-fresca-portion-04"
         ],
-        "nodeId": "hibiscus-agua-fresca-op-012-serve",
+        "nodeId": "hibiscus-agua-fresca-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
           "hibiscus-agua-fresca-step-3-serve"
@@ -433,60 +429,21 @@
         "sourceStepOrder": 3,
         "targetStates": [],
         "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "hibiscus-agua-fresca-op-012-serve"
-        ],
-        "equipmentId": "saucepan",
-        "inputPortionIds": [],
-        "nodeId": "hibiscus-agua-fresca-op-013-brew",
-        "operationType": "brew",
-        "outputStateIds": [
-          "hibiscus-agua-fresca-step-4-brew"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "bitterness",
-            "maximum": 0.7,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "aroma",
-            "minimum": 0.45,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 60000
       }
     ]
   },
   "recipeId": "hibiscus-agua-fresca",
   "rights": {
-    "artifactIds": [
-      "game-artifact-hibiscus-agua-fresca-identity",
-      "game-artifact-hibiscus-agua-fresca-preparation",
-      "game-artifact-hibiscus-agua-fresca-nutrition",
-      "game-artifact-hibiscus-agua-fresca-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-hibiscus-agua-fresca-identity",
-      "game-usage-hibiscus-agua-fresca-preparation",
-      "game-usage-hibiscus-agua-fresca-nutrition",
-      "game-usage-hibiscus-agua-fresca-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -506,16 +463,16 @@
         "missing-boil"
       ],
       "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-004-boil",
+        "targetNodeId": "hibiscus-agua-fresca-op-003-boil",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-004-boil-omit"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-003-boil-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -536,16 +493,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "hibiscus-agua-fresca-op-004-boil",
+        "targetNodeId": "hibiscus-agua-fresca-op-003-boil",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-004-boil-short"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-003-boil-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -565,16 +522,16 @@
         "missing-brew"
       ],
       "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-005-brew",
+        "targetNodeId": "hibiscus-agua-fresca-op-004-brew",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-005-brew-omit"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-004-brew-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -595,16 +552,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "hibiscus-agua-fresca-op-005-brew",
+        "targetNodeId": "hibiscus-agua-fresca-op-004-brew",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-005-brew-short"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-004-brew-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -619,16 +576,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-006-rest",
+        "targetNodeId": "hibiscus-agua-fresca-op-005-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-006-rest-omit"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-005-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -644,16 +601,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "hibiscus-agua-fresca-op-006-rest",
+        "targetNodeId": "hibiscus-agua-fresca-op-005-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-006-rest-short"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-005-rest-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "operation-omitted:strain"
       ],
@@ -668,16 +625,16 @@
         "missing-strain"
       ],
       "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-008-strain",
+        "targetNodeId": "hibiscus-agua-fresca-op-007-strain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-008-strain-omit"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-007-strain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -692,16 +649,16 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-009-season",
+        "targetNodeId": "hibiscus-agua-fresca-op-008-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-009-season-omit"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-008-season-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -716,16 +673,16 @@
         "missing-chill"
       ],
       "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-011-chill",
+        "targetNodeId": "hibiscus-agua-fresca-op-010-chill",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-011-chill-omit"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-010-chill-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
+      "baselineArtifactVersion": "clv1-316620db55e6c4e5",
       "causeCodes": [
         "duration-short:chill"
       ],
@@ -741,71 +698,12 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "hibiscus-agua-fresca-op-011-chill",
+        "targetNodeId": "hibiscus-agua-fresca-op-010-chill",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-011-chill-short"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
-      "causeCodes": [
-        "operation-omitted:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "unchanged"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-brew"
-      ],
-      "mutation": {
-        "targetNodeId": "hibiscus-agua-fresca-op-013-brew",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-013-brew-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-21713e77b6403573",
-      "causeCodes": [
-        "duration-short:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "underprocessed"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "hibiscus-agua-fresca-op-013-brew",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-013-brew-short"
+      "scenarioId": "hibiscus-agua-fresca-hibiscus-agua-fresca-op-010-chill-short"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

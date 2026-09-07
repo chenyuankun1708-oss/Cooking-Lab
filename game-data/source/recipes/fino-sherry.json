@@ -1,14 +1,19 @@
 {
-  "artifactVersion": "clv1-2e17e4b133a7b084",
+  "artifactVersion": "clv1-de4a66370b152559",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "portion:fino-sherry-portion-01:identity",
+      "portion:fino-sherry-portion-01:nutrition",
+      "portion:fino-sherry-portion-01:quantity"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-fino-sherry",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -89,21 +94,11 @@
   },
   "recipeId": "fino-sherry",
   "rights": {
-    "artifactIds": [
-      "game-artifact-fino-sherry-identity",
-      "game-artifact-fino-sherry-preparation",
-      "game-artifact-fino-sherry-nutrition",
-      "game-artifact-fino-sherry-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-fino-sherry-identity",
-      "game-usage-fino-sherry-preparation",
-      "game-usage-fino-sherry-nutrition",
-      "game-usage-fino-sherry-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [],
   "schemaVersion": "cooking-lab-game-recipe-v1",

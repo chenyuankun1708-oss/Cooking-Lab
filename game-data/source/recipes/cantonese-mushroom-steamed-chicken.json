@@ -1,14 +1,40 @@
 {
-  "artifactVersion": "clv1-2d4dc3a46cc6aac5",
+  "artifactVersion": "clv1-06d61b094212dd71",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:cantonese-mushroom-steamed-chicken-op-003-mix:duration",
+      "operation:cantonese-mushroom-steamed-chicken-op-003-mix:parameters-source",
+      "operation:cantonese-mushroom-steamed-chicken-op-003-mix:targets-source",
+      "operation:cantonese-mushroom-steamed-chicken-op-004-rest:duration",
+      "operation:cantonese-mushroom-steamed-chicken-op-005-steam:duration",
+      "operation:cantonese-mushroom-steamed-chicken-op-005-steam:inputs",
+      "operation:cantonese-mushroom-steamed-chicken-op-005-steam:targets-source",
+      "operation:cantonese-mushroom-steamed-chicken-op-006-rest:duration",
+      "operation:cantonese-mushroom-steamed-chicken-op-006-rest:inputs",
+      "operation:cantonese-mushroom-steamed-chicken-op-007-stir:duration",
+      "operation:cantonese-mushroom-steamed-chicken-op-007-stir:inputs",
+      "operation:cantonese-mushroom-steamed-chicken-op-007-stir:parameters-source",
+      "operation:cantonese-mushroom-steamed-chicken-op-007-stir:targets-source",
+      "portion:cantonese-mushroom-steamed-chicken-portion-01:source-step",
+      "portion:cantonese-mushroom-steamed-chicken-portion-03:source-step",
+      "portion:cantonese-mushroom-steamed-chicken-portion-04:source-step",
+      "portion:cantonese-mushroom-steamed-chicken-portion-06:source-step",
+      "scenario:cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-003-mix-omit:expected-outcome",
+      "scenario:cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-004-rest-omit:expected-outcome",
+      "scenario:cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-005-steam-hot:expected-outcome",
+      "scenario:cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-005-steam-omit:expected-outcome",
+      "scenario:cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-006-rest-omit:expected-outcome",
+      "scenario:cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-007-stir-omit:expected-outcome",
+      "source-step:2:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-cantonese-mushroom-steamed-chicken",
+    "riskClassificationId": "",
     "riskLevel": "medium"
   },
   "ingredientPortions": [
@@ -181,33 +207,11 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-mushroom-steamed-chicken-portion-01"
-        ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-001-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-mushroom-steamed-chicken-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 320
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-001-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "cantonese-mushroom-steamed-chicken-portion-02"
         ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-002-add",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-001-add",
         "operationType": "add",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-portion-02-added"
@@ -223,57 +227,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-002-add"
+          "cantonese-mushroom-steamed-chicken-op-001-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-mushroom-steamed-chicken-portion-03"
-        ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-mushroom-steamed-chicken-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 12
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-mushroom-steamed-chicken-portion-04"
-        ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-mushroom-steamed-chicken-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-004-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "cantonese-mushroom-steamed-chicken-portion-05"
         ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-005-add",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-portion-05-added"
@@ -286,43 +246,17 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-mushroom-steamed-chicken-portion-06"
-        ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-mushroom-steamed-chicken-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 0.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-006-add"
+          "cantonese-mushroom-steamed-chicken-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
-          "cantonese-mushroom-steamed-chicken-portion-01",
           "cantonese-mushroom-steamed-chicken-portion-02",
-          "cantonese-mushroom-steamed-chicken-portion-03",
-          "cantonese-mushroom-steamed-chicken-portion-04",
-          "cantonese-mushroom-steamed-chicken-portion-05",
-          "cantonese-mushroom-steamed-chicken-portion-06"
+          "cantonese-mushroom-steamed-chicken-portion-05"
         ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-007-mix",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-step-1-mix"
@@ -345,18 +279,14 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-007-mix"
+          "cantonese-mushroom-steamed-chicken-op-003-mix"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
-          "cantonese-mushroom-steamed-chicken-portion-01",
           "cantonese-mushroom-steamed-chicken-portion-02",
-          "cantonese-mushroom-steamed-chicken-portion-03",
-          "cantonese-mushroom-steamed-chicken-portion-04",
-          "cantonese-mushroom-steamed-chicken-portion-05",
-          "cantonese-mushroom-steamed-chicken-portion-06"
+          "cantonese-mushroom-steamed-chicken-portion-05"
         ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-008-rest",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-004-rest",
         "operationType": "rest",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-step-1-rest"
@@ -370,41 +300,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-008-rest"
+          "cantonese-mushroom-steamed-chicken-op-004-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "steamer",
         "inputPortionIds": [],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-009-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "cantonese-mushroom-steamed-chicken-step-2-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-009-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-010-steam",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-005-steam",
         "operationType": "steam",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-step-3-steam"
@@ -427,11 +327,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-010-steam"
+          "cantonese-mushroom-steamed-chicken-op-005-steam"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-011-rest",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-006-rest",
         "operationType": "rest",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-step-4-rest"
@@ -445,11 +345,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-011-rest"
+          "cantonese-mushroom-steamed-chicken-op-006-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-012-stir",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-007-stir",
         "operationType": "stir",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-step-4-stir"
@@ -472,7 +372,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "cantonese-mushroom-steamed-chicken-op-012-stir"
+          "cantonese-mushroom-steamed-chicken-op-007-stir"
         ],
         "equipmentId": "heatproof-plate",
         "inputPortionIds": [
@@ -483,7 +383,7 @@
           "cantonese-mushroom-steamed-chicken-portion-05",
           "cantonese-mushroom-steamed-chicken-portion-06"
         ],
-        "nodeId": "cantonese-mushroom-steamed-chicken-op-013-serve",
+        "nodeId": "cantonese-mushroom-steamed-chicken-op-008-serve",
         "operationType": "serve",
         "outputStateIds": [
           "cantonese-mushroom-steamed-chicken-served"
@@ -497,29 +397,16 @@
   },
   "recipeId": "cantonese-mushroom-steamed-chicken",
   "rights": {
-    "artifactIds": [
-      "game-artifact-cantonese-mushroom-steamed-chicken-identity",
-      "game-artifact-cantonese-mushroom-steamed-chicken-preparation",
-      "game-artifact-cantonese-mushroom-steamed-chicken-nutrition",
-      "game-artifact-cantonese-mushroom-steamed-chicken-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "guangdong-cantonese-cuisine-history",
-      "woks-of-life-steamed-chicken-mushrooms"
-    ],
-    "usageDecisionIds": [
-      "game-usage-cantonese-mushroom-steamed-chicken-identity",
-      "game-usage-cantonese-mushroom-steamed-chicken-preparation",
-      "game-usage-cantonese-mushroom-steamed-chicken-nutrition",
-      "game-usage-cantonese-mushroom-steamed-chicken-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
+      "baselineArtifactVersion": "clv1-06d61b094212dd71",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -534,16 +421,16 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-007-mix",
+        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-003-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-007-mix-omit"
+      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-003-mix-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
+      "baselineArtifactVersion": "clv1-06d61b094212dd71",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -558,45 +445,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-008-rest",
+        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-004-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-008-rest-omit"
+      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-004-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-009-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-009-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
+      "baselineArtifactVersion": "clv1-06d61b094212dd71",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -616,16 +474,16 @@
         "missing-steam"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-010-steam",
+        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-005-steam",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "terminal",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-010-steam-omit"
+      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-005-steam-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
+      "baselineArtifactVersion": "clv1-06d61b094212dd71",
       "causeCodes": [
         "heat-high:steam"
       ],
@@ -651,16 +509,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-010-steam",
+        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-005-steam",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-010-steam-hot"
+      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-005-steam-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
+      "baselineArtifactVersion": "clv1-06d61b094212dd71",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -675,16 +533,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-011-rest",
+        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-006-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-011-rest-omit"
+      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-006-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2d4dc3a46cc6aac5",
+      "baselineArtifactVersion": "clv1-06d61b094212dd71",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -699,12 +557,12 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-012-stir",
+        "targetNodeId": "cantonese-mushroom-steamed-chicken-op-007-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-012-stir-omit"
+      "scenarioId": "cantonese-mushroom-steamed-chicken-cantonese-mushroom-steamed-chicken-op-007-stir-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

@@ -81,7 +81,7 @@ export function createM13DraftCorpus(
   subset: GameNutritionDatasetSubsetV1,
   migrationIngredients: GameIngredientCatalogV1,
 ): GeneratedM13Corpus {
-  const ingredients = createIngredientCatalog(subset, migrationIngredients);
+  const ingredients = createGameIngredientCatalogFromUsdaSubset(subset, migrationIngredients);
   const ingredientById = new Map(ingredients.ingredients.map((ingredient) => [ingredient.ingredientId, ingredient]));
   const recipes: GameRecipeV1[] = [];
   let sequence = 0;
@@ -173,7 +173,7 @@ export function createM13DraftCorpus(
   return { recipes, ingredients, rightsRegistry };
 }
 
-function createIngredientCatalog(
+export function createGameIngredientCatalogFromUsdaSubset(
   subset: GameNutritionDatasetSubsetV1,
   migrationIngredients: GameIngredientCatalogV1,
 ): GameIngredientCatalogV1 {
@@ -267,6 +267,7 @@ function createRecipe(input: {
       method: "deterministic-source-normalization",
       generatorVersion: m13CorpusGeneratorVersion,
       containsGeneratedExpression: false,
+      unresolvedMappings: [],
     },
   };
   draft.scenarios = createScenarios(draft, input.sequence);
@@ -749,6 +750,11 @@ function createRightsRegistry(
     sources,
     evidence,
     evidenceOrigins: evidence.map((entry) => ({ evidenceId: entry.id, origin: "source-record" as const })),
+    sourceRoles: [
+      { sourceId: "usda-fdc-downloads", role: "nutrition" },
+      { sourceId: "fda-produce-handling", role: "safety" },
+      { sourceId: "fda-caffeine-guidance", role: "safety" },
+    ],
     researchRecords,
     governance: {
       policyVersion: m13PolicyVersion,
@@ -953,13 +959,14 @@ const liquidIngredientIds = new Set([
 ]);
 
 function equipmentFor(operation: GameOperationId): string {
-  if (["boil", "simmer"].includes(operation)) return "pot";
-  if (operation === "pan-fry") return "pan";
+  if (["boil", "simmer"].includes(operation)) return "heavy-pot";
+  if (operation === "pan-fry") return "frying-pan";
   if (operation === "bake") return "oven";
-  if (["chill", "rest"].includes(operation)) return "container";
+  if (operation === "chill") return "refrigerator";
+  if (operation === "rest") return "mixing-bowl";
   if (operation === "blend") return "blender";
   if (["slice", "dice", "mince"].includes(operation)) return "knife";
-  return "bowl";
+  return "mixing-bowl";
 }
 
 function cutTarget(): GameTargetStateV1[] {

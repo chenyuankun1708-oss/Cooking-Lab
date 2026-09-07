@@ -1,14 +1,24 @@
 {
-  "artifactVersion": "clv1-5776693336c3a8c9",
+  "artifactVersion": "clv1-bee4de379b70ff82",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:vietnamese-iced-coffee-op-004-stir:equipment",
+      "operation:vietnamese-iced-coffee-op-004-stir:parameters-source",
+      "operation:vietnamese-iced-coffee-op-004-stir:targets-source",
+      "portion:vietnamese-iced-coffee-portion-02:source-step",
+      "scenario:vietnamese-iced-coffee-vietnamese-iced-coffee-op-004-stir-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:2:operation",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-vietnamese-iced-coffee",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -138,7 +148,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "phin-filter",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "vietnamese-iced-coffee-portion-01"
         ],
@@ -160,33 +170,11 @@
         "dependsOn": [
           "vietnamese-iced-coffee-op-001-add"
         ],
-        "equipmentId": "phin-filter",
-        "inputPortionIds": [
-          "vietnamese-iced-coffee-portion-02"
-        ],
-        "nodeId": "vietnamese-iced-coffee-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "vietnamese-iced-coffee-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 100
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "vietnamese-iced-coffee-op-002-add"
-        ],
-        "equipmentId": "phin-filter",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "vietnamese-iced-coffee-portion-03"
         ],
-        "nodeId": "vietnamese-iced-coffee-op-003-add",
+        "nodeId": "vietnamese-iced-coffee-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "vietnamese-iced-coffee-portion-03-added"
@@ -199,109 +187,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "vietnamese-iced-coffee-op-003-add"
-        ],
-        "equipmentId": "phin-filter",
-        "inputPortionIds": [
-          "vietnamese-iced-coffee-portion-01",
-          "vietnamese-iced-coffee-portion-02",
-          "vietnamese-iced-coffee-portion-03"
-        ],
-        "nodeId": "vietnamese-iced-coffee-op-004-brew",
-        "operationType": "brew",
-        "outputStateIds": [
-          "vietnamese-iced-coffee-step-1-brew"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "bitterness",
-            "maximum": 0.7,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "aroma",
-            "minimum": 0.45,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 180000
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "vietnamese-iced-coffee-op-004-brew"
-        ],
-        "equipmentId": "phin-filter",
-        "inputPortionIds": [],
-        "nodeId": "vietnamese-iced-coffee-op-005-brew",
-        "operationType": "brew",
-        "outputStateIds": [
-          "vietnamese-iced-coffee-step-2-brew"
-        ],
-        "parameters": {
-          "temperatureC": 96
-        },
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "bitterness",
-            "maximum": 0.7,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "aroma",
-            "minimum": 0.45,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 60000
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "vietnamese-iced-coffee-op-005-brew"
-        ],
-        "equipmentId": "phin-filter",
-        "inputPortionIds": [],
-        "nodeId": "vietnamese-iced-coffee-op-006-brew",
-        "operationType": "brew",
-        "outputStateIds": [
-          "vietnamese-iced-coffee-step-3-brew"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "bitterness",
-            "maximum": 0.7,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "aroma",
-            "minimum": 0.45,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 420000
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "vietnamese-iced-coffee-op-006-brew"
+          "vietnamese-iced-coffee-op-002-add"
         ],
-        "equipmentId": "phin-filter",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "vietnamese-iced-coffee-portion-04"
         ],
-        "nodeId": "vietnamese-iced-coffee-op-007-add",
+        "nodeId": "vietnamese-iced-coffee-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "vietnamese-iced-coffee-portion-04-added"
@@ -317,13 +212,12 @@
         "activeDurationMs": 120000,
         "criticality": "quality",
         "dependsOn": [
-          "vietnamese-iced-coffee-op-007-add"
+          "vietnamese-iced-coffee-op-003-add"
         ],
-        "equipmentId": "phin-filter",
         "inputPortionIds": [
           "vietnamese-iced-coffee-portion-04"
         ],
-        "nodeId": "vietnamese-iced-coffee-op-008-stir",
+        "nodeId": "vietnamese-iced-coffee-op-004-stir",
         "operationType": "stir",
         "outputStateIds": [
           "vietnamese-iced-coffee-step-4-stir"
@@ -346,16 +240,16 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "vietnamese-iced-coffee-op-008-stir"
+          "vietnamese-iced-coffee-op-004-stir"
         ],
-        "equipmentId": "scale",
+        "equipmentId": "glass",
         "inputPortionIds": [
           "vietnamese-iced-coffee-portion-01",
           "vietnamese-iced-coffee-portion-02",
           "vietnamese-iced-coffee-portion-03",
           "vietnamese-iced-coffee-portion-04"
         ],
-        "nodeId": "vietnamese-iced-coffee-op-009-serve",
+        "nodeId": "vietnamese-iced-coffee-op-005-serve",
         "operationType": "serve",
         "outputStateIds": [
           "vietnamese-iced-coffee-served"
@@ -369,238 +263,16 @@
   },
   "recipeId": "vietnamese-iced-coffee",
   "rights": {
-    "artifactIds": [
-      "game-artifact-vietnamese-iced-coffee-identity",
-      "game-artifact-vietnamese-iced-coffee-preparation",
-      "game-artifact-vietnamese-iced-coffee-nutrition",
-      "game-artifact-vietnamese-iced-coffee-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-vietnamese-iced-coffee-identity",
-      "game-usage-vietnamese-iced-coffee-preparation",
-      "game-usage-vietnamese-iced-coffee-nutrition",
-      "game-usage-vietnamese-iced-coffee-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "operation-omitted:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "unchanged"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-brew"
-      ],
-      "mutation": {
-        "targetNodeId": "vietnamese-iced-coffee-op-004-brew",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-004-brew-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "duration-short:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "underprocessed"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "vietnamese-iced-coffee-op-004-brew",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-004-brew-short"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "operation-omitted:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "unchanged"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-brew"
-      ],
-      "mutation": {
-        "targetNodeId": "vietnamese-iced-coffee-op-005-brew",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-005-brew-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "duration-short:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "underprocessed"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "vietnamese-iced-coffee-op-005-brew",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-005-brew-short"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "heat-high:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "vietnamese-iced-coffee-op-005-brew",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-005-brew-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "operation-omitted:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "unchanged"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-brew"
-      ],
-      "mutation": {
-        "targetNodeId": "vietnamese-iced-coffee-op-006-brew",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-006-brew-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
-      "causeCodes": [
-        "duration-short:brew"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "underprocessed"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "vietnamese-iced-coffee-op-006-brew",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-006-brew-short"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5776693336c3a8c9",
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-bee4de379b70ff82",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -615,17 +287,17 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "vietnamese-iced-coffee-op-008-stir",
+        "targetNodeId": "vietnamese-iced-coffee-op-004-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-008-stir-omit"
+      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-004-stir-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",
   "servings": 1,
-  "simulationProfile": "requires-cat-kitchen-v2",
+  "simulationProfile": "cat-kitchen-goal1-v1",
   "slug": "vietnamese-iced-coffee",
   "sourceCulinaryItemId": "vietnamese-iced-coffee",
   "yield": {

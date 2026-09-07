@@ -1,14 +1,47 @@
 {
-  "artifactVersion": "clv1-d8e31211a8f491c9",
+  "artifactVersion": "clv1-6e49fdc7ebe84151",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:indonesian-chili-eggplant-op-001-mince:duration",
+      "operation:indonesian-chili-eggplant-op-001-mince:parameters-source",
+      "operation:indonesian-chili-eggplant-op-001-mince:targets-source",
+      "operation:indonesian-chili-eggplant-op-005-rest:duration",
+      "operation:indonesian-chili-eggplant-op-006-pan-fry:duration",
+      "operation:indonesian-chili-eggplant-op-006-pan-fry:inputs",
+      "operation:indonesian-chili-eggplant-op-006-pan-fry:targets-source",
+      "operation:indonesian-chili-eggplant-op-007-simmer:duration",
+      "operation:indonesian-chili-eggplant-op-007-simmer:equipment",
+      "operation:indonesian-chili-eggplant-op-007-simmer:inputs",
+      "operation:indonesian-chili-eggplant-op-007-simmer:targets-source",
+      "operation:indonesian-chili-eggplant-op-008-stir:duration",
+      "operation:indonesian-chili-eggplant-op-008-stir:inputs",
+      "operation:indonesian-chili-eggplant-op-008-stir:parameters-source",
+      "operation:indonesian-chili-eggplant-op-008-stir:targets-source",
+      "operation:indonesian-chili-eggplant-op-009-simmer:duration",
+      "operation:indonesian-chili-eggplant-op-009-simmer:equipment",
+      "operation:indonesian-chili-eggplant-op-009-simmer:inputs",
+      "operation:indonesian-chili-eggplant-op-009-simmer:targets-source",
+      "portion:indonesian-chili-eggplant-portion-04:source-step",
+      "portion:indonesian-chili-eggplant-portion-05:source-step",
+      "portion:indonesian-chili-eggplant-portion-06:source-step",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-001-mince-omit:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-005-rest-omit:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-006-pan-fry-hot:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-006-pan-fry-omit:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-007-simmer-hot:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-007-simmer-omit:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-008-stir-omit:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-simmer-hot:expected-outcome",
+      "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-simmer-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-indonesian-chili-eggplant",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -182,7 +215,11 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "indonesian-chili-eggplant-portion-01",
+          "indonesian-chili-eggplant-portion-02",
+          "indonesian-chili-eggplant-portion-03"
+        ],
         "nodeId": "indonesian-chili-eggplant-op-001-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -209,7 +246,7 @@
         "dependsOn": [
           "indonesian-chili-eggplant-op-001-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "indonesian-chili-eggplant-portion-01"
         ],
@@ -231,7 +268,7 @@
         "dependsOn": [
           "indonesian-chili-eggplant-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "indonesian-chili-eggplant-portion-02"
         ],
@@ -253,7 +290,7 @@
         "dependsOn": [
           "indonesian-chili-eggplant-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "indonesian-chili-eggplant-portion-03"
         ],
@@ -270,87 +307,18 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indonesian-chili-eggplant-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indonesian-chili-eggplant-portion-04"
-        ],
-        "nodeId": "indonesian-chili-eggplant-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indonesian-chili-eggplant-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indonesian-chili-eggplant-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indonesian-chili-eggplant-portion-05"
-        ],
-        "nodeId": "indonesian-chili-eggplant-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indonesian-chili-eggplant-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 9
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "indonesian-chili-eggplant-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "indonesian-chili-eggplant-portion-06"
-        ],
-        "nodeId": "indonesian-chili-eggplant-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "indonesian-chili-eggplant-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 1.2
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indonesian-chili-eggplant-op-007-add"
+          "indonesian-chili-eggplant-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "indonesian-chili-eggplant-portion-01",
           "indonesian-chili-eggplant-portion-02",
-          "indonesian-chili-eggplant-portion-03",
-          "indonesian-chili-eggplant-portion-04",
-          "indonesian-chili-eggplant-portion-05",
-          "indonesian-chili-eggplant-portion-06"
+          "indonesian-chili-eggplant-portion-03"
         ],
-        "nodeId": "indonesian-chili-eggplant-op-008-rest",
+        "nodeId": "indonesian-chili-eggplant-op-005-rest",
         "operationType": "rest",
         "outputStateIds": [
           "indonesian-chili-eggplant-step-1-rest"
@@ -364,11 +332,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indonesian-chili-eggplant-op-008-rest"
+          "indonesian-chili-eggplant-op-005-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "indonesian-chili-eggplant-op-009-pan-fry",
+        "nodeId": "indonesian-chili-eggplant-op-006-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "indonesian-chili-eggplant-step-2-pan-fry"
@@ -396,11 +364,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indonesian-chili-eggplant-op-009-pan-fry"
+          "indonesian-chili-eggplant-op-006-pan-fry"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "indonesian-chili-eggplant-op-010-simmer",
+        "nodeId": "indonesian-chili-eggplant-op-007-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "indonesian-chili-eggplant-step-3-simmer"
@@ -423,11 +390,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indonesian-chili-eggplant-op-010-simmer"
+          "indonesian-chili-eggplant-op-007-simmer"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "indonesian-chili-eggplant-op-011-stir",
+        "nodeId": "indonesian-chili-eggplant-op-008-stir",
         "operationType": "stir",
         "outputStateIds": [
           "indonesian-chili-eggplant-step-4-stir"
@@ -450,11 +417,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "indonesian-chili-eggplant-op-011-stir"
+          "indonesian-chili-eggplant-op-008-stir"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "indonesian-chili-eggplant-op-012-simmer",
+        "nodeId": "indonesian-chili-eggplant-op-009-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "indonesian-chili-eggplant-step-4-simmer"
@@ -477,7 +443,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "indonesian-chili-eggplant-op-012-simmer"
+          "indonesian-chili-eggplant-op-009-simmer"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -488,7 +454,7 @@
           "indonesian-chili-eggplant-portion-05",
           "indonesian-chili-eggplant-portion-06"
         ],
-        "nodeId": "indonesian-chili-eggplant-op-013-serve",
+        "nodeId": "indonesian-chili-eggplant-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
           "indonesian-chili-eggplant-served"
@@ -502,29 +468,16 @@
   },
   "recipeId": "indonesian-chili-eggplant",
   "rights": {
-    "artifactIds": [
-      "game-artifact-indonesian-chili-eggplant-identity",
-      "game-artifact-indonesian-chili-eggplant-preparation",
-      "game-artifact-indonesian-chili-eggplant-nutrition",
-      "game-artifact-indonesian-chili-eggplant-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "daily-cooking-quest-terong-balado",
-      "indonesia-travel-sambal"
-    ],
-    "usageDecisionIds": [
-      "game-usage-indonesian-chili-eggplant-identity",
-      "game-usage-indonesian-chili-eggplant-preparation",
-      "game-usage-indonesian-chili-eggplant-nutrition",
-      "game-usage-indonesian-chili-eggplant-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -548,7 +501,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -563,16 +516,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "indonesian-chili-eggplant-op-008-rest",
+        "targetNodeId": "indonesian-chili-eggplant-op-005-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-008-rest-omit"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-005-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -592,16 +545,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "indonesian-chili-eggplant-op-009-pan-fry",
+        "targetNodeId": "indonesian-chili-eggplant-op-006-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-pan-fry-omit"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-006-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -627,16 +580,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "indonesian-chili-eggplant-op-009-pan-fry",
+        "targetNodeId": "indonesian-chili-eggplant-op-006-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-pan-fry-hot"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-006-pan-fry-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -656,16 +609,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "indonesian-chili-eggplant-op-010-simmer",
+        "targetNodeId": "indonesian-chili-eggplant-op-007-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-010-simmer-omit"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-007-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -691,16 +644,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "indonesian-chili-eggplant-op-010-simmer",
+        "targetNodeId": "indonesian-chili-eggplant-op-007-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-010-simmer-hot"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-007-simmer-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -715,16 +668,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "indonesian-chili-eggplant-op-011-stir",
+        "targetNodeId": "indonesian-chili-eggplant-op-008-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-011-stir-omit"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-008-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -744,16 +697,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "indonesian-chili-eggplant-op-012-simmer",
+        "targetNodeId": "indonesian-chili-eggplant-op-009-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-012-simmer-omit"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d8e31211a8f491c9",
+      "baselineArtifactVersion": "clv1-6e49fdc7ebe84151",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -779,12 +732,12 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "indonesian-chili-eggplant-op-012-simmer",
+        "targetNodeId": "indonesian-chili-eggplant-op-009-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-012-simmer-hot"
+      "scenarioId": "indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-simmer-hot"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

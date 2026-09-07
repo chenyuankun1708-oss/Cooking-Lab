@@ -1,14 +1,39 @@
 {
-  "artifactVersion": "clv1-f3ab075b91a07734",
+  "artifactVersion": "clv1-6d682b364fcc43fe",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:greek-lemon-oregano-chicken-op-001-add:equipment",
+      "operation:greek-lemon-oregano-chicken-op-002-add:equipment",
+      "operation:greek-lemon-oregano-chicken-op-003-add:equipment",
+      "operation:greek-lemon-oregano-chicken-op-004-set-heat:duration",
+      "operation:greek-lemon-oregano-chicken-op-004-set-heat:parameters",
+      "operation:greek-lemon-oregano-chicken-op-005-set-heat:duration",
+      "operation:greek-lemon-oregano-chicken-op-006-rest:duration",
+      "operation:greek-lemon-oregano-chicken-op-006-rest:equipment",
+      "operation:greek-lemon-oregano-chicken-op-006-rest:inputs",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:duration",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:equipment",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:inputs",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:parameters-source",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:targets-source",
+      "portion:greek-lemon-oregano-chicken-portion-04:source-step",
+      "portion:greek-lemon-oregano-chicken-portion-05:source-step",
+      "portion:greek-lemon-oregano-chicken-portion-06:source-step",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-004-set-heat-omit:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-hot:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-omit:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-006-rest-omit:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-007-stir-omit:expected-outcome",
+      "source-step:1:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-greek-lemon-oregano-chicken",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -181,7 +206,6 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "greek-lemon-oregano-chicken-portion-01"
         ],
@@ -203,7 +227,6 @@
         "dependsOn": [
           "greek-lemon-oregano-chicken-op-001-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "greek-lemon-oregano-chicken-portion-02"
         ],
@@ -225,7 +248,6 @@
         "dependsOn": [
           "greek-lemon-oregano-chicken-op-002-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "greek-lemon-oregano-chicken-portion-03"
         ],
@@ -242,180 +264,52 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 0,
+        "criticality": "quality",
         "dependsOn": [
           "greek-lemon-oregano-chicken-op-003-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-lemon-oregano-chicken-portion-04"
-        ],
-        "nodeId": "greek-lemon-oregano-chicken-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-lemon-oregano-chicken-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-lemon-oregano-chicken-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-lemon-oregano-chicken-portion-05"
-        ],
-        "nodeId": "greek-lemon-oregano-chicken-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-lemon-oregano-chicken-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 6
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "greek-lemon-oregano-chicken-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-lemon-oregano-chicken-portion-06"
-        ],
-        "nodeId": "greek-lemon-oregano-chicken-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "greek-lemon-oregano-chicken-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 1.2
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "greek-lemon-oregano-chicken-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "greek-lemon-oregano-chicken-portion-01",
-          "greek-lemon-oregano-chicken-portion-02",
-          "greek-lemon-oregano-chicken-portion-03",
-          "greek-lemon-oregano-chicken-portion-04",
-          "greek-lemon-oregano-chicken-portion-05",
-          "greek-lemon-oregano-chicken-portion-06"
-        ],
-        "nodeId": "greek-lemon-oregano-chicken-op-007-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "greek-lemon-oregano-chicken-step-1-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "greek-lemon-oregano-chicken-op-007-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "grill-pan",
         "inputPortionIds": [],
-        "nodeId": "greek-lemon-oregano-chicken-op-008-pan-fry",
-        "operationType": "pan-fry",
+        "nodeId": "greek-lemon-oregano-chicken-op-004-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "greek-lemon-oregano-chicken-step-2-pan-fry"
+          "greek-lemon-oregano-chicken-step-2-set-heat"
         ],
         "parameters": {},
         "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "greek-lemon-oregano-chicken-op-008-pan-fry"
+          "greek-lemon-oregano-chicken-op-004-set-heat"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "grill-pan",
         "inputPortionIds": [],
-        "nodeId": "greek-lemon-oregano-chicken-op-009-pan-fry",
-        "operationType": "pan-fry",
+        "nodeId": "greek-lemon-oregano-chicken-op-005-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "greek-lemon-oregano-chicken-step-3-pan-fry"
+          "greek-lemon-oregano-chicken-step-3-set-heat"
         ],
         "parameters": {
           "heatLevel": 0.35,
           "temperatureC": 74
         },
         "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "greek-lemon-oregano-chicken-op-009-pan-fry"
+          "greek-lemon-oregano-chicken-op-005-set-heat"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "greek-lemon-oregano-chicken-op-010-rest",
+        "nodeId": "greek-lemon-oregano-chicken-op-006-rest",
         "operationType": "rest",
         "outputStateIds": [
           "greek-lemon-oregano-chicken-step-4-rest"
@@ -429,11 +323,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "greek-lemon-oregano-chicken-op-010-rest"
+          "greek-lemon-oregano-chicken-op-006-rest"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "greek-lemon-oregano-chicken-op-011-stir",
+        "nodeId": "greek-lemon-oregano-chicken-op-007-stir",
         "operationType": "stir",
         "outputStateIds": [
           "greek-lemon-oregano-chicken-step-4-stir"
@@ -456,9 +349,9 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "greek-lemon-oregano-chicken-op-011-stir"
+          "greek-lemon-oregano-chicken-op-007-stir"
         ],
-        "equipmentId": "tongs",
+        "equipmentId": "grill-pan",
         "inputPortionIds": [
           "greek-lemon-oregano-chicken-portion-01",
           "greek-lemon-oregano-chicken-portion-02",
@@ -467,7 +360,7 @@
           "greek-lemon-oregano-chicken-portion-05",
           "greek-lemon-oregano-chicken-portion-06"
         ],
-        "nodeId": "greek-lemon-oregano-chicken-op-012-serve",
+        "nodeId": "greek-lemon-oregano-chicken-op-008-serve",
         "operationType": "serve",
         "outputStateIds": [
           "greek-lemon-oregano-chicken-served"
@@ -481,118 +374,66 @@
   },
   "recipeId": "greek-lemon-oregano-chicken",
   "rights": {
-    "artifactIds": [
-      "game-artifact-greek-lemon-oregano-chicken-identity",
-      "game-artifact-greek-lemon-oregano-chicken-preparation",
-      "game-artifact-greek-lemon-oregano-chicken-nutrition",
-      "game-artifact-greek-lemon-oregano-chicken-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "akis-greek-lemon-chicken",
-      "diane-kochilas-greek-lemon-chicken"
-    ],
-    "usageDecisionIds": [
-      "game-usage-greek-lemon-oregano-chicken-identity",
-      "game-usage-greek-lemon-oregano-chicken-preparation",
-      "game-usage-greek-lemon-oregano-chicken-nutrition",
-      "game-usage-greek-lemon-oregano-chicken-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f3ab075b91a07734",
+      "baselineArtifactVersion": "clv1-6d682b364fcc43fe",
       "causeCodes": [
-        "operation-omitted:pan-fry"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-pan-fry"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "greek-lemon-oregano-chicken-op-007-pan-fry",
+        "targetNodeId": "greek-lemon-oregano-chicken-op-004-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-007-pan-fry-omit"
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-004-set-heat-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f3ab075b91a07734",
+      "baselineArtifactVersion": "clv1-6d682b364fcc43fe",
       "causeCodes": [
-        "operation-omitted:pan-fry"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-pan-fry"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "greek-lemon-oregano-chicken-op-008-pan-fry",
+        "targetNodeId": "greek-lemon-oregano-chicken-op-005-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-008-pan-fry-omit"
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f3ab075b91a07734",
+      "baselineArtifactVersion": "clv1-6d682b364fcc43fe",
       "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "greek-lemon-oregano-chicken-op-009-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-009-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f3ab075b91a07734",
-      "causeCodes": [
-        "heat-high:pan-fry"
+        "heat-high:set-heat"
       ],
       "expectedDeltas": [
         {
@@ -616,16 +457,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "greek-lemon-oregano-chicken-op-009-pan-fry",
+        "targetNodeId": "greek-lemon-oregano-chicken-op-005-set-heat",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-009-pan-fry-hot"
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f3ab075b91a07734",
+      "baselineArtifactVersion": "clv1-6d682b364fcc43fe",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -640,16 +481,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "greek-lemon-oregano-chicken-op-010-rest",
+        "targetNodeId": "greek-lemon-oregano-chicken-op-006-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-010-rest-omit"
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-006-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f3ab075b91a07734",
+      "baselineArtifactVersion": "clv1-6d682b364fcc43fe",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -664,12 +505,12 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "greek-lemon-oregano-chicken-op-011-stir",
+        "targetNodeId": "greek-lemon-oregano-chicken-op-007-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-011-stir-omit"
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-007-stir-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

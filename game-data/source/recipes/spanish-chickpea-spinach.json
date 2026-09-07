@@ -1,14 +1,43 @@
 {
-  "artifactVersion": "clv1-72bd7337563fa392",
+  "artifactVersion": "clv1-323c340c2d6531be",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:spanish-chickpea-spinach-op-001-wash:duration",
+      "operation:spanish-chickpea-spinach-op-001-wash:equipment",
+      "operation:spanish-chickpea-spinach-op-002-mince:duration",
+      "operation:spanish-chickpea-spinach-op-002-mince:parameters-source",
+      "operation:spanish-chickpea-spinach-op-002-mince:targets-source",
+      "operation:spanish-chickpea-spinach-op-003-slice:duration",
+      "operation:spanish-chickpea-spinach-op-003-slice:parameters-source",
+      "operation:spanish-chickpea-spinach-op-003-slice:targets-source",
+      "operation:spanish-chickpea-spinach-op-007-drain:duration",
+      "operation:spanish-chickpea-spinach-op-007-drain:equipment",
+      "operation:spanish-chickpea-spinach-op-009-pan-fry:duration",
+      "operation:spanish-chickpea-spinach-op-009-pan-fry:targets-source",
+      "operation:spanish-chickpea-spinach-op-010-simmer:duration",
+      "operation:spanish-chickpea-spinach-op-010-simmer:inputs",
+      "operation:spanish-chickpea-spinach-op-010-simmer:targets-source",
+      "portion:spanish-chickpea-spinach-portion-04:source-step",
+      "portion:spanish-chickpea-spinach-portion-06:source-step",
+      "portion:spanish-chickpea-spinach-portion-07:source-step",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-001-wash-omit:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-002-mince-omit:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-003-slice-omit:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-007-drain-omit:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-009-pan-fry-hot:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-009-pan-fry-omit:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-010-simmer-hot:expected-outcome",
+      "scenario:spanish-chickpea-spinach-spanish-chickpea-spinach-op-010-simmer-omit:expected-outcome",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-spanish-chickpea-spinach",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -203,8 +232,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "spanish-chickpea-spinach-portion-01",
+          "spanish-chickpea-spinach-portion-02",
+          "spanish-chickpea-spinach-portion-03"
+        ],
         "nodeId": "spanish-chickpea-spinach-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -222,7 +254,11 @@
           "spanish-chickpea-spinach-op-001-wash"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "spanish-chickpea-spinach-portion-01",
+          "spanish-chickpea-spinach-portion-02",
+          "spanish-chickpea-spinach-portion-03"
+        ],
         "nodeId": "spanish-chickpea-spinach-op-002-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -250,7 +286,11 @@
           "spanish-chickpea-spinach-op-002-mince"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "spanish-chickpea-spinach-portion-01",
+          "spanish-chickpea-spinach-portion-02",
+          "spanish-chickpea-spinach-portion-03"
+        ],
         "nodeId": "spanish-chickpea-spinach-op-003-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -277,7 +317,7 @@
         "dependsOn": [
           "spanish-chickpea-spinach-op-003-slice"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "spanish-chickpea-spinach-portion-01"
         ],
@@ -299,7 +339,7 @@
         "dependsOn": [
           "spanish-chickpea-spinach-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "spanish-chickpea-spinach-portion-02"
         ],
@@ -321,7 +361,7 @@
         "dependsOn": [
           "spanish-chickpea-spinach-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "spanish-chickpea-spinach-portion-03"
         ],
@@ -338,87 +378,17 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "spanish-chickpea-spinach-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "spanish-chickpea-spinach-portion-04"
-        ],
-        "nodeId": "spanish-chickpea-spinach-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "spanish-chickpea-spinach-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "spanish-chickpea-spinach-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "spanish-chickpea-spinach-portion-06"
-        ],
-        "nodeId": "spanish-chickpea-spinach-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "spanish-chickpea-spinach-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 6
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "spanish-chickpea-spinach-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "spanish-chickpea-spinach-portion-07"
-        ],
-        "nodeId": "spanish-chickpea-spinach-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "spanish-chickpea-spinach-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 1.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-chickpea-spinach-op-009-add"
+          "spanish-chickpea-spinach-op-006-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "spanish-chickpea-spinach-portion-01",
           "spanish-chickpea-spinach-portion-02",
-          "spanish-chickpea-spinach-portion-03",
-          "spanish-chickpea-spinach-portion-04",
-          "spanish-chickpea-spinach-portion-06",
-          "spanish-chickpea-spinach-portion-07"
+          "spanish-chickpea-spinach-portion-03"
         ],
-        "nodeId": "spanish-chickpea-spinach-op-010-drain",
+        "nodeId": "spanish-chickpea-spinach-op-007-drain",
         "operationType": "drain",
         "outputStateIds": [
           "spanish-chickpea-spinach-step-1-drain"
@@ -432,13 +402,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "spanish-chickpea-spinach-op-010-drain"
+          "spanish-chickpea-spinach-op-007-drain"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "spanish-chickpea-spinach-portion-05"
         ],
-        "nodeId": "spanish-chickpea-spinach-op-011-add",
+        "nodeId": "spanish-chickpea-spinach-op-008-add",
         "operationType": "add",
         "outputStateIds": [
           "spanish-chickpea-spinach-portion-05-added"
@@ -454,13 +424,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-chickpea-spinach-op-011-add"
+          "spanish-chickpea-spinach-op-008-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "spanish-chickpea-spinach-portion-05"
         ],
-        "nodeId": "spanish-chickpea-spinach-op-012-pan-fry",
+        "nodeId": "spanish-chickpea-spinach-op-009-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "spanish-chickpea-spinach-step-2-pan-fry"
@@ -488,11 +458,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "spanish-chickpea-spinach-op-012-pan-fry"
+          "spanish-chickpea-spinach-op-009-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "spanish-chickpea-spinach-op-013-simmer",
+        "nodeId": "spanish-chickpea-spinach-op-010-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "spanish-chickpea-spinach-step-3-simmer"
@@ -512,40 +482,10 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "spanish-chickpea-spinach-op-013-simmer"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "spanish-chickpea-spinach-op-014-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "spanish-chickpea-spinach-step-4-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "spanish-chickpea-spinach-op-014-pan-fry"
+          "spanish-chickpea-spinach-op-010-simmer"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -557,7 +497,7 @@
           "spanish-chickpea-spinach-portion-06",
           "spanish-chickpea-spinach-portion-07"
         ],
-        "nodeId": "spanish-chickpea-spinach-op-015-serve",
+        "nodeId": "spanish-chickpea-spinach-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
           "spanish-chickpea-spinach-served"
@@ -571,29 +511,16 @@
   },
   "recipeId": "spanish-chickpea-spinach",
   "rights": {
-    "artifactIds": [
-      "game-artifact-spanish-chickpea-spinach-identity",
-      "game-artifact-spanish-chickpea-spinach-preparation",
-      "game-artifact-spanish-chickpea-spinach-nutrition",
-      "game-artifact-spanish-chickpea-spinach-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "icex-spanish-vegetarian-tapas",
-      "spanish-sabores-spinach-chickpeas"
-    ],
-    "usageDecisionIds": [
-      "game-usage-spanish-chickpea-spinach-identity",
-      "game-usage-spanish-chickpea-spinach-preparation",
-      "game-usage-spanish-chickpea-spinach-nutrition",
-      "game-usage-spanish-chickpea-spinach-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -617,7 +544,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -641,7 +568,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -665,7 +592,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -680,16 +607,16 @@
         "missing-drain"
       ],
       "mutation": {
-        "targetNodeId": "spanish-chickpea-spinach-op-010-drain",
+        "targetNodeId": "spanish-chickpea-spinach-op-007-drain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-010-drain-omit"
+      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-007-drain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -709,16 +636,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "spanish-chickpea-spinach-op-012-pan-fry",
+        "targetNodeId": "spanish-chickpea-spinach-op-009-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-012-pan-fry-omit"
+      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-009-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -744,16 +671,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "spanish-chickpea-spinach-op-012-pan-fry",
+        "targetNodeId": "spanish-chickpea-spinach-op-009-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-012-pan-fry-hot"
+      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-009-pan-fry-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -773,16 +700,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "spanish-chickpea-spinach-op-013-simmer",
+        "targetNodeId": "spanish-chickpea-spinach-op-010-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-013-simmer-omit"
+      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-010-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
+      "baselineArtifactVersion": "clv1-323c340c2d6531be",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -808,41 +735,12 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "spanish-chickpea-spinach-op-013-simmer",
+        "targetNodeId": "spanish-chickpea-spinach-op-010-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-013-simmer-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-72bd7337563fa392",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "spanish-chickpea-spinach-op-014-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-014-pan-fry-omit"
+      "scenarioId": "spanish-chickpea-spinach-spanish-chickpea-spinach-op-010-simmer-hot"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

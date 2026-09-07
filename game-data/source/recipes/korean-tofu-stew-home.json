@@ -1,14 +1,42 @@
 {
-  "artifactVersion": "clv1-deff1ceeef1bd06c",
+  "artifactVersion": "clv1-6fab33041535dc41",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:korean-tofu-stew-home-op-001-slice:duration",
+      "operation:korean-tofu-stew-home-op-001-slice:parameters-source",
+      "operation:korean-tofu-stew-home-op-001-slice:targets-source",
+      "operation:korean-tofu-stew-home-op-002-mince:duration",
+      "operation:korean-tofu-stew-home-op-002-mince:parameters-source",
+      "operation:korean-tofu-stew-home-op-002-mince:targets-source",
+      "operation:korean-tofu-stew-home-op-007-stir:duration",
+      "operation:korean-tofu-stew-home-op-007-stir:parameters-source",
+      "operation:korean-tofu-stew-home-op-007-stir:targets-source",
+      "operation:korean-tofu-stew-home-op-008-simmer:duration",
+      "operation:korean-tofu-stew-home-op-008-simmer:inputs",
+      "operation:korean-tofu-stew-home-op-008-simmer:targets-source",
+      "operation:korean-tofu-stew-home-op-009-season:duration",
+      "operation:korean-tofu-stew-home-op-009-season:inputs",
+      "operation:korean-tofu-stew-home-op-009-season:parameters",
+      "operation:korean-tofu-stew-home-op-009-season:targets-source",
+      "portion:korean-tofu-stew-home-portion-02:source-step",
+      "portion:korean-tofu-stew-home-portion-06:source-step",
+      "portion:korean-tofu-stew-home-portion-07:source-step",
+      "portion:korean-tofu-stew-home-portion-08:source-step",
+      "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-001-slice-omit:expected-outcome",
+      "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-002-mince-omit:expected-outcome",
+      "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-007-stir-omit:expected-outcome",
+      "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-008-simmer-hot:expected-outcome",
+      "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-008-simmer-omit:expected-outcome",
+      "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-009-season-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-korean-tofu-stew-home",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -226,7 +254,11 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "korean-tofu-stew-home-portion-01",
+          "korean-tofu-stew-home-portion-03",
+          "korean-tofu-stew-home-portion-04"
+        ],
         "nodeId": "korean-tofu-stew-home-op-001-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -254,7 +286,11 @@
           "korean-tofu-stew-home-op-001-slice"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "korean-tofu-stew-home-portion-01",
+          "korean-tofu-stew-home-portion-03",
+          "korean-tofu-stew-home-portion-04"
+        ],
         "nodeId": "korean-tofu-stew-home-op-002-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -281,7 +317,7 @@
         "dependsOn": [
           "korean-tofu-stew-home-op-002-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "korean-tofu-stew-home-portion-01"
         ],
@@ -303,33 +339,11 @@
         "dependsOn": [
           "korean-tofu-stew-home-op-003-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-tofu-stew-home-portion-02"
-        ],
-        "nodeId": "korean-tofu-stew-home-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-tofu-stew-home-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 180
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-tofu-stew-home-op-004-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "korean-tofu-stew-home-portion-03"
         ],
-        "nodeId": "korean-tofu-stew-home-op-005-add",
+        "nodeId": "korean-tofu-stew-home-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-tofu-stew-home-portion-03-added"
@@ -345,13 +359,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-tofu-stew-home-op-005-add"
+          "korean-tofu-stew-home-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "korean-tofu-stew-home-portion-04"
         ],
-        "nodeId": "korean-tofu-stew-home-op-006-add",
+        "nodeId": "korean-tofu-stew-home-op-005-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-tofu-stew-home-portion-04-added"
@@ -367,79 +381,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-tofu-stew-home-op-006-add"
+          "korean-tofu-stew-home-op-005-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-tofu-stew-home-portion-06"
-        ],
-        "nodeId": "korean-tofu-stew-home-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-tofu-stew-home-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-tofu-stew-home-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-tofu-stew-home-portion-07"
-        ],
-        "nodeId": "korean-tofu-stew-home-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-tofu-stew-home-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-tofu-stew-home-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-tofu-stew-home-portion-08"
-        ],
-        "nodeId": "korean-tofu-stew-home-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-tofu-stew-home-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 0.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-tofu-stew-home-op-009-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "korean-tofu-stew-home-portion-05"
         ],
-        "nodeId": "korean-tofu-stew-home-op-010-add",
+        "nodeId": "korean-tofu-stew-home-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-tofu-stew-home-portion-05-added"
@@ -455,13 +403,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-tofu-stew-home-op-010-add"
+          "korean-tofu-stew-home-op-006-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "korean-tofu-stew-home-portion-05"
         ],
-        "nodeId": "korean-tofu-stew-home-op-011-stir",
+        "nodeId": "korean-tofu-stew-home-op-007-stir",
         "operationType": "stir",
         "outputStateIds": [
           "korean-tofu-stew-home-step-2-stir"
@@ -484,11 +432,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-tofu-stew-home-op-011-stir"
+          "korean-tofu-stew-home-op-007-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "korean-tofu-stew-home-op-012-simmer",
+        "nodeId": "korean-tofu-stew-home-op-008-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "korean-tofu-stew-home-step-3-simmer"
@@ -511,11 +459,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-tofu-stew-home-op-012-simmer"
+          "korean-tofu-stew-home-op-008-simmer"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "korean-tofu-stew-home-op-013-season",
+        "nodeId": "korean-tofu-stew-home-op-009-season",
         "operationType": "season",
         "outputStateIds": [
           "korean-tofu-stew-home-step-4-season"
@@ -535,7 +483,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-tofu-stew-home-op-013-season"
+          "korean-tofu-stew-home-op-009-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -548,7 +496,7 @@
           "korean-tofu-stew-home-portion-07",
           "korean-tofu-stew-home-portion-08"
         ],
-        "nodeId": "korean-tofu-stew-home-op-014-serve",
+        "nodeId": "korean-tofu-stew-home-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
           "korean-tofu-stew-home-served"
@@ -562,29 +510,16 @@
   },
   "recipeId": "korean-tofu-stew-home",
   "rights": {
-    "artifactIds": [
-      "game-artifact-korean-tofu-stew-home-identity",
-      "game-artifact-korean-tofu-stew-home-preparation",
-      "game-artifact-korean-tofu-stew-home-nutrition",
-      "game-artifact-korean-tofu-stew-home-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "korean-bapsang-sundubu-jjigae",
-      "visitkorea-chodang-sundubu"
-    ],
-    "usageDecisionIds": [
-      "game-usage-korean-tofu-stew-home-identity",
-      "game-usage-korean-tofu-stew-home-preparation",
-      "game-usage-korean-tofu-stew-home-nutrition",
-      "game-usage-korean-tofu-stew-home-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-deff1ceeef1bd06c",
+      "baselineArtifactVersion": "clv1-6fab33041535dc41",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -608,7 +543,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-deff1ceeef1bd06c",
+      "baselineArtifactVersion": "clv1-6fab33041535dc41",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -632,7 +567,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-deff1ceeef1bd06c",
+      "baselineArtifactVersion": "clv1-6fab33041535dc41",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -647,16 +582,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "korean-tofu-stew-home-op-011-stir",
+        "targetNodeId": "korean-tofu-stew-home-op-007-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-011-stir-omit"
+      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-007-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-deff1ceeef1bd06c",
+      "baselineArtifactVersion": "clv1-6fab33041535dc41",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -676,16 +611,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "korean-tofu-stew-home-op-012-simmer",
+        "targetNodeId": "korean-tofu-stew-home-op-008-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-012-simmer-omit"
+      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-008-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-deff1ceeef1bd06c",
+      "baselineArtifactVersion": "clv1-6fab33041535dc41",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -711,16 +646,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "korean-tofu-stew-home-op-012-simmer",
+        "targetNodeId": "korean-tofu-stew-home-op-008-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-012-simmer-hot"
+      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-008-simmer-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-deff1ceeef1bd06c",
+      "baselineArtifactVersion": "clv1-6fab33041535dc41",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -735,12 +670,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "korean-tofu-stew-home-op-013-season",
+        "targetNodeId": "korean-tofu-stew-home-op-009-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-013-season-omit"
+      "scenarioId": "korean-tofu-stew-home-korean-tofu-stew-home-op-009-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

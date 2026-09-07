@@ -1,14 +1,37 @@
 {
-  "artifactVersion": "clv1-61aac625a7e41846",
+  "artifactVersion": "clv1-fc5e08df88ff9828",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:dongpo-pork-op-001-dice:equipment",
+      "operation:dongpo-pork-op-001-dice:parameters-source",
+      "operation:dongpo-pork-op-001-dice:targets-source",
+      "operation:dongpo-pork-op-003-pan-fry:inputs",
+      "operation:dongpo-pork-op-003-pan-fry:parameters",
+      "operation:dongpo-pork-op-003-pan-fry:targets-source",
+      "operation:dongpo-pork-op-007-boil:inputs",
+      "operation:dongpo-pork-op-007-boil:parameters",
+      "operation:dongpo-pork-op-007-boil:targets-source",
+      "operation:dongpo-pork-op-008-rest:inputs",
+      "portion:dongpo-pork-portion-05:source-step",
+      "portion:dongpo-pork-portion-06:source-step",
+      "portion:dongpo-pork-portion-07:source-step",
+      "portion:dongpo-pork-portion-08:source-step",
+      "scenario:dongpo-pork-dongpo-pork-op-001-dice-omit:expected-outcome",
+      "scenario:dongpo-pork-dongpo-pork-op-003-pan-fry-omit:expected-outcome",
+      "scenario:dongpo-pork-dongpo-pork-op-007-boil-omit:expected-outcome",
+      "scenario:dongpo-pork-dongpo-pork-op-007-boil-short:expected-outcome",
+      "scenario:dongpo-pork-dongpo-pork-op-008-rest-omit:expected-outcome",
+      "scenario:dongpo-pork-dongpo-pork-op-008-rest-short:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-dongpo-pork",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -227,8 +250,9 @@
         "activeDurationMs": 900000,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "heavy-pot",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "dongpo-pork-portion-01"
+        ],
         "nodeId": "dongpo-pork-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
@@ -255,7 +279,7 @@
         "dependsOn": [
           "dongpo-pork-op-001-dice"
         ],
-        "equipmentId": "heavy-pot",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "dongpo-pork-portion-01"
         ],
@@ -272,102 +296,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "dongpo-pork-op-002-add"
-        ],
-        "equipmentId": "heavy-pot",
-        "inputPortionIds": [
-          "dongpo-pork-portion-05"
-        ],
-        "nodeId": "dongpo-pork-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "dongpo-pork-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 20
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "dongpo-pork-op-003-add"
-        ],
-        "equipmentId": "heavy-pot",
-        "inputPortionIds": [
-          "dongpo-pork-portion-06"
-        ],
-        "nodeId": "dongpo-pork-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "dongpo-pork-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 30
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "dongpo-pork-op-004-add"
-        ],
-        "equipmentId": "heavy-pot",
-        "inputPortionIds": [
-          "dongpo-pork-portion-07"
-        ],
-        "nodeId": "dongpo-pork-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "dongpo-pork-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 700
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "dongpo-pork-op-005-add"
-        ],
-        "equipmentId": "heavy-pot",
-        "inputPortionIds": [
-          "dongpo-pork-portion-08"
-        ],
-        "nodeId": "dongpo-pork-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "dongpo-pork-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 2
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 600000,
         "criticality": "quality",
         "dependsOn": [
-          "dongpo-pork-op-006-add"
+          "dongpo-pork-op-002-add"
         ],
-        "equipmentId": "heavy-pot",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "dongpo-pork-op-007-pan-fry",
+        "nodeId": "dongpo-pork-op-003-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "dongpo-pork-step-2-pan-fry"
@@ -393,13 +329,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "dongpo-pork-op-007-pan-fry"
+          "dongpo-pork-op-003-pan-fry"
         ],
-        "equipmentId": "heavy-pot",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "dongpo-pork-portion-02"
         ],
-        "nodeId": "dongpo-pork-op-008-add",
+        "nodeId": "dongpo-pork-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "dongpo-pork-portion-02-added"
@@ -415,13 +351,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "dongpo-pork-op-008-add"
+          "dongpo-pork-op-004-add"
         ],
-        "equipmentId": "heavy-pot",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "dongpo-pork-portion-03"
         ],
-        "nodeId": "dongpo-pork-op-009-add",
+        "nodeId": "dongpo-pork-op-005-add",
         "operationType": "add",
         "outputStateIds": [
           "dongpo-pork-portion-03-added"
@@ -437,13 +373,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "dongpo-pork-op-009-add"
+          "dongpo-pork-op-005-add"
         ],
-        "equipmentId": "heavy-pot",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "dongpo-pork-portion-04"
         ],
-        "nodeId": "dongpo-pork-op-010-add",
+        "nodeId": "dongpo-pork-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "dongpo-pork-portion-04-added"
@@ -456,50 +392,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 600000,
-        "criticality": "quality",
-        "dependsOn": [
-          "dongpo-pork-op-010-add"
-        ],
-        "equipmentId": "heavy-pot",
-        "inputPortionIds": [
-          "dongpo-pork-portion-02",
-          "dongpo-pork-portion-03",
-          "dongpo-pork-portion-04"
-        ],
-        "nodeId": "dongpo-pork-op-011-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "dongpo-pork-step-3-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35
-        },
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "dongpo-pork-op-011-pan-fry"
+          "dongpo-pork-op-006-add"
         ],
         "equipmentId": "heavy-pot",
         "inputPortionIds": [],
-        "nodeId": "dongpo-pork-op-012-boil",
+        "nodeId": "dongpo-pork-op-007-boil",
         "operationType": "boil",
         "outputStateIds": [
           "dongpo-pork-step-4-boil"
@@ -520,11 +420,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "dongpo-pork-op-012-boil"
+          "dongpo-pork-op-007-boil"
         ],
-        "equipmentId": "heavy-pot",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "dongpo-pork-op-013-rest",
+        "nodeId": "dongpo-pork-op-008-rest",
         "operationType": "rest",
         "outputStateIds": [
           "dongpo-pork-step-5-rest"
@@ -538,7 +438,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "dongpo-pork-op-013-rest"
+          "dongpo-pork-op-008-rest"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -551,7 +451,7 @@
           "dongpo-pork-portion-07",
           "dongpo-pork-portion-08"
         ],
-        "nodeId": "dongpo-pork-op-014-serve",
+        "nodeId": "dongpo-pork-op-009-serve",
         "operationType": "serve",
         "outputStateIds": [
           "dongpo-pork-served"
@@ -565,26 +465,16 @@
   },
   "recipeId": "dongpo-pork",
   "rights": {
-    "artifactIds": [
-      "game-artifact-dongpo-pork-identity",
-      "game-artifact-dongpo-pork-preparation",
-      "game-artifact-dongpo-pork-nutrition",
-      "game-artifact-dongpo-pork-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-dongpo-pork-identity",
-      "game-usage-dongpo-pork-preparation",
-      "game-usage-dongpo-pork-nutrition",
-      "game-usage-dongpo-pork-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -608,7 +498,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -628,80 +518,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "dongpo-pork-op-007-pan-fry",
+        "targetNodeId": "dongpo-pork-op-003-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-007-pan-fry-omit"
+      "scenarioId": "dongpo-pork-dongpo-pork-op-003-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "dongpo-pork-op-011-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-011-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "dongpo-pork-op-011-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-011-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -721,16 +547,16 @@
         "missing-boil"
       ],
       "mutation": {
-        "targetNodeId": "dongpo-pork-op-012-boil",
+        "targetNodeId": "dongpo-pork-op-007-boil",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-012-boil-omit"
+      "scenarioId": "dongpo-pork-dongpo-pork-op-007-boil-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -751,16 +577,16 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "dongpo-pork-op-012-boil",
+        "targetNodeId": "dongpo-pork-op-007-boil",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-012-boil-short"
+      "scenarioId": "dongpo-pork-dongpo-pork-op-007-boil-short"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -775,16 +601,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "dongpo-pork-op-013-rest",
+        "targetNodeId": "dongpo-pork-op-008-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-013-rest-omit"
+      "scenarioId": "dongpo-pork-dongpo-pork-op-008-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-61aac625a7e41846",
+      "baselineArtifactVersion": "clv1-fc5e08df88ff9828",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -800,12 +626,12 @@
       ],
       "mutation": {
         "scalar": 0.5,
-        "targetNodeId": "dongpo-pork-op-013-rest",
+        "targetNodeId": "dongpo-pork-op-008-rest",
         "type": "duration-too-short"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "recoverable",
-      "scenarioId": "dongpo-pork-dongpo-pork-op-013-rest-short"
+      "scenarioId": "dongpo-pork-dongpo-pork-op-008-rest-short"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

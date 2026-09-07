@@ -39,6 +39,12 @@ export interface GameOperationDefinitionV1 {
   compatibility: GameOperationCompatibility;
   simulationAffecting: boolean;
   allowedParameters: readonly GameOperationParameterKey[];
+  requiredParameterGroups: readonly (readonly GameOperationParameterKey[])[];
+  inputRequirement: "none" | "one-or-more";
+  equipmentRequired: boolean;
+  compatibleEquipmentIds: readonly string[];
+  durationRequirement: "none" | "active" | "wait" | "either";
+  targetStateRequired: boolean;
   legacyCommand?: "CUT" | "ADD" | "SET_HEAT" | "WAIT" | "STIR" | "SEASON" | "PLATE";
 }
 
@@ -276,6 +282,7 @@ export interface GameRecipeV1 {
     method: "deterministic-migration" | "deterministic-source-normalization";
     generatorVersion: string;
     containsGeneratedExpression: false;
+    unresolvedMappings: string[];
   };
 }
 
@@ -291,6 +298,12 @@ export interface GameRightsRegistryV1 {
   evidenceOrigins: Array<{
     evidenceId: string;
     origin: "source-record" | "ai-output";
+  }>;
+  sourceRoles: Array<{
+    sourceId: string;
+    role: "recipe-primary" | "recipe-cross-check" | "nutrition" | "safety";
+    recipeId?: string;
+    workFamilyId?: string;
   }>;
   researchRecords: ResearchRecord[];
   governance: PublishingGovernanceRegistry;
@@ -311,6 +324,21 @@ export interface GameDataManifestV1 {
   minimumAdapterVersion: string;
   recipeCount: number;
   recipes: GameManifestRecipeEntryV1[];
+  rightsSummary: {
+    intendedUse: "game-commercial-ready";
+    artifactCount: number;
+    decisionCount: number;
+    allowCount: number;
+    allowWithObligationsCount: number;
+    sourceCount: number;
+    licenseIds: string[];
+  };
+  reviewSummary: {
+    riskCounts: Record<PublishingRiskLevel, number>;
+    attestationCount: number;
+    samplingBatchCount: number;
+    reviewedRecipeCount: number;
+  };
   ingredientCatalog: { path: string; sha256: string };
   nutritionDataset: {
     path: string;
@@ -322,4 +350,5 @@ export interface GameDataManifestV1 {
   operationCatalog: { path: string; sha256: string; version: typeof gameOperationCatalogVersion };
   rightsRegistry: { path: string; sha256: string; version: typeof gameRightsRegistrySchemaVersion };
   attribution: { path: string; sha256: string };
+  sqlite: { path: string; sha256: string };
 }

@@ -1,14 +1,65 @@
 {
-  "artifactVersion": "clv1-cf6e0d2a12041407",
+  "artifactVersion": "clv1-cc14737dc7e3240d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:korean-bibimbap-home-op-001-wash:duration",
+      "operation:korean-bibimbap-home-op-001-wash:equipment",
+      "operation:korean-bibimbap-home-op-002-slice:duration",
+      "operation:korean-bibimbap-home-op-002-slice:parameters-source",
+      "operation:korean-bibimbap-home-op-002-slice:targets-source",
+      "operation:korean-bibimbap-home-op-005-wash:duration",
+      "operation:korean-bibimbap-home-op-005-wash:equipment",
+      "operation:korean-bibimbap-home-op-007-drain:duration",
+      "operation:korean-bibimbap-home-op-007-drain:equipment",
+      "operation:korean-bibimbap-home-op-008-pan-fry:duration",
+      "operation:korean-bibimbap-home-op-008-pan-fry:parameters",
+      "operation:korean-bibimbap-home-op-008-pan-fry:targets-source",
+      "operation:korean-bibimbap-home-op-009-stir:duration",
+      "operation:korean-bibimbap-home-op-009-stir:inputs",
+      "operation:korean-bibimbap-home-op-009-stir:parameters-source",
+      "operation:korean-bibimbap-home-op-009-stir:targets-source",
+      "operation:korean-bibimbap-home-op-010-pan-fry:duration",
+      "operation:korean-bibimbap-home-op-010-pan-fry:inputs",
+      "operation:korean-bibimbap-home-op-010-pan-fry:parameters",
+      "operation:korean-bibimbap-home-op-010-pan-fry:targets-source",
+      "operation:korean-bibimbap-home-op-011-set-heat:duration",
+      "operation:korean-bibimbap-home-op-011-set-heat:parameters",
+      "operation:korean-bibimbap-home-op-012-stir:duration",
+      "operation:korean-bibimbap-home-op-012-stir:inputs",
+      "operation:korean-bibimbap-home-op-012-stir:parameters-source",
+      "operation:korean-bibimbap-home-op-012-stir:targets-source",
+      "operation:korean-bibimbap-home-op-014-pan-fry:duration",
+      "operation:korean-bibimbap-home-op-014-pan-fry:targets-source",
+      "operation:korean-bibimbap-home-op-016-serve:duration",
+      "operation:korean-bibimbap-home-op-017-mix:duration",
+      "operation:korean-bibimbap-home-op-017-mix:equipment",
+      "operation:korean-bibimbap-home-op-017-mix:parameters-source",
+      "operation:korean-bibimbap-home-op-017-mix:targets-source",
+      "portion:korean-bibimbap-home-portion-01:source-step",
+      "portion:korean-bibimbap-home-portion-06:source-step",
+      "portion:korean-bibimbap-home-portion-08:source-step",
+      "portion:korean-bibimbap-home-portion-09:source-step",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-001-wash-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-002-slice-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-005-wash-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-007-drain-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-008-pan-fry-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-009-stir-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-010-pan-fry-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-011-set-heat-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-012-stir-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-014-pan-fry-hot:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-014-pan-fry-omit:expected-outcome",
+      "scenario:korean-bibimbap-home-korean-bibimbap-home-op-017-mix-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-korean-bibimbap-home",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -247,8 +298,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "korean-bibimbap-home-portion-02",
+          "korean-bibimbap-home-portion-05"
+        ],
         "nodeId": "korean-bibimbap-home-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -266,7 +319,10 @@
           "korean-bibimbap-home-op-001-wash"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "korean-bibimbap-home-portion-02",
+          "korean-bibimbap-home-portion-05"
+        ],
         "nodeId": "korean-bibimbap-home-op-002-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -293,33 +349,11 @@
         "dependsOn": [
           "korean-bibimbap-home-op-002-slice"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-bibimbap-home-portion-01"
-        ],
-        "nodeId": "korean-bibimbap-home-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-bibimbap-home-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 160
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-bibimbap-home-op-003-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-02"
         ],
-        "nodeId": "korean-bibimbap-home-op-004-add",
+        "nodeId": "korean-bibimbap-home-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-bibimbap-home-portion-02-added"
@@ -335,13 +369,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-bibimbap-home-op-004-add"
+          "korean-bibimbap-home-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-05"
         ],
-        "nodeId": "korean-bibimbap-home-op-005-add",
+        "nodeId": "korean-bibimbap-home-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-bibimbap-home-portion-05-added"
@@ -354,80 +388,15 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-bibimbap-home-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-bibimbap-home-portion-06"
-        ],
-        "nodeId": "korean-bibimbap-home-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-bibimbap-home-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 120
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-bibimbap-home-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-bibimbap-home-portion-08"
-        ],
-        "nodeId": "korean-bibimbap-home-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-bibimbap-home-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 7
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-bibimbap-home-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-bibimbap-home-portion-09"
-        ],
-        "nodeId": "korean-bibimbap-home-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-bibimbap-home-portion-09-added"
-        ],
-        "parameters": {
-          "quantityG": 0.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-bibimbap-home-op-008-add"
+          "korean-bibimbap-home-op-004-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "korean-bibimbap-home-op-009-wash",
+        "inputPortionIds": [
+          "korean-bibimbap-home-portion-04"
+        ],
+        "nodeId": "korean-bibimbap-home-op-005-wash",
         "operationType": "wash",
         "outputStateIds": [
           "korean-bibimbap-home-step-2-wash"
@@ -441,13 +410,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-bibimbap-home-op-009-wash"
+          "korean-bibimbap-home-op-005-wash"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-04"
         ],
-        "nodeId": "korean-bibimbap-home-op-010-add",
+        "nodeId": "korean-bibimbap-home-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-bibimbap-home-portion-04-added"
@@ -463,13 +432,12 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-bibimbap-home-op-010-add"
+          "korean-bibimbap-home-op-006-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-04"
         ],
-        "nodeId": "korean-bibimbap-home-op-011-drain",
+        "nodeId": "korean-bibimbap-home-op-007-drain",
         "operationType": "drain",
         "outputStateIds": [
           "korean-bibimbap-home-step-2-drain"
@@ -483,11 +451,43 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-bibimbap-home-op-011-drain"
+          "korean-bibimbap-home-op-007-drain"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "korean-bibimbap-home-portion-04"
+        ],
+        "nodeId": "korean-bibimbap-home-op-008-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "korean-bibimbap-home-step-2-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "korean-bibimbap-home-op-008-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "korean-bibimbap-home-op-012-stir",
+        "nodeId": "korean-bibimbap-home-op-009-stir",
         "operationType": "stir",
         "outputStateIds": [
           "korean-bibimbap-home-step-3-stir"
@@ -510,11 +510,59 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-bibimbap-home-op-012-stir"
+          "korean-bibimbap-home-op-009-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "korean-bibimbap-home-op-013-stir",
+        "nodeId": "korean-bibimbap-home-op-010-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "korean-bibimbap-home-step-3-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "korean-bibimbap-home-op-010-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "korean-bibimbap-home-op-011-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "korean-bibimbap-home-step-4-set-heat"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "korean-bibimbap-home-op-011-set-heat"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "korean-bibimbap-home-op-012-stir",
         "operationType": "stir",
         "outputStateIds": [
           "korean-bibimbap-home-step-4-stir"
@@ -537,13 +585,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-bibimbap-home-op-013-stir"
+          "korean-bibimbap-home-op-012-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-03"
         ],
-        "nodeId": "korean-bibimbap-home-op-014-add",
+        "nodeId": "korean-bibimbap-home-op-013-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-bibimbap-home-portion-03-added"
@@ -559,13 +607,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-bibimbap-home-op-014-add"
+          "korean-bibimbap-home-op-013-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-03"
         ],
-        "nodeId": "korean-bibimbap-home-op-015-pan-fry",
+        "nodeId": "korean-bibimbap-home-op-014-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
           "korean-bibimbap-home-step-5-pan-fry"
@@ -593,13 +641,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-bibimbap-home-op-015-pan-fry"
+          "korean-bibimbap-home-op-014-pan-fry"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-07"
         ],
-        "nodeId": "korean-bibimbap-home-op-016-add",
+        "nodeId": "korean-bibimbap-home-op-015-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-bibimbap-home-portion-07-added"
@@ -615,13 +663,13 @@
         "activeDurationMs": 0,
         "criticality": "completion",
         "dependsOn": [
-          "korean-bibimbap-home-op-016-add"
+          "korean-bibimbap-home-op-015-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-07"
         ],
-        "nodeId": "korean-bibimbap-home-op-017-serve",
+        "nodeId": "korean-bibimbap-home-op-016-serve",
         "operationType": "serve",
         "outputStateIds": [
           "korean-bibimbap-home-step-6-serve"
@@ -635,13 +683,12 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-bibimbap-home-op-017-serve"
+          "korean-bibimbap-home-op-016-serve"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "korean-bibimbap-home-portion-07"
         ],
-        "nodeId": "korean-bibimbap-home-op-018-mix",
+        "nodeId": "korean-bibimbap-home-op-017-mix",
         "operationType": "mix",
         "outputStateIds": [
           "korean-bibimbap-home-step-6-mix"
@@ -664,26 +711,16 @@
   },
   "recipeId": "korean-bibimbap-home",
   "rights": {
-    "artifactIds": [
-      "game-artifact-korean-bibimbap-home-identity",
-      "game-artifact-korean-bibimbap-home-preparation",
-      "game-artifact-korean-bibimbap-home-nutrition",
-      "game-artifact-korean-bibimbap-home-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-korean-bibimbap-home-identity",
-      "game-usage-korean-bibimbap-home-preparation",
-      "game-usage-korean-bibimbap-home-nutrition",
-      "game-usage-korean-bibimbap-home-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -707,7 +744,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -731,7 +768,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -746,16 +783,16 @@
         "missing-wash"
       ],
       "mutation": {
-        "targetNodeId": "korean-bibimbap-home-op-009-wash",
+        "targetNodeId": "korean-bibimbap-home-op-005-wash",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-009-wash-omit"
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-005-wash-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -770,16 +807,122 @@
         "missing-drain"
       ],
       "mutation": {
-        "targetNodeId": "korean-bibimbap-home-op-011-drain",
+        "targetNodeId": "korean-bibimbap-home-op-007-drain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-011-drain-omit"
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-007-drain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "korean-bibimbap-home-op-008-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-008-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "korean-bibimbap-home-op-009-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-009-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "korean-bibimbap-home-op-010-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-010-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "korean-bibimbap-home-op-011-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-011-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -803,31 +946,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
-      "causeCodes": [
-        "operation-omitted:stir"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "structural-integrity",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-stir"
-      ],
-      "mutation": {
-        "targetNodeId": "korean-bibimbap-home-op-013-stir",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-013-stir-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -847,16 +966,16 @@
         "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "korean-bibimbap-home-op-015-pan-fry",
+        "targetNodeId": "korean-bibimbap-home-op-014-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-015-pan-fry-omit"
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-014-pan-fry-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -882,16 +1001,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "korean-bibimbap-home-op-015-pan-fry",
+        "targetNodeId": "korean-bibimbap-home-op-014-pan-fry",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-015-pan-fry-hot"
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-014-pan-fry-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cf6e0d2a12041407",
+      "baselineArtifactVersion": "clv1-cc14737dc7e3240d",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -906,12 +1025,12 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "korean-bibimbap-home-op-018-mix",
+        "targetNodeId": "korean-bibimbap-home-op-017-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-018-mix-omit"
+      "scenarioId": "korean-bibimbap-home-korean-bibimbap-home-op-017-mix-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

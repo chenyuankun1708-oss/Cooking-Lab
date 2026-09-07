@@ -1,14 +1,62 @@
 {
-  "artifactVersion": "clv1-91bc320b6766b7fa",
+  "artifactVersion": "clv1-613d31dbf0f4152f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:hunan-chili-pork-op-001-slice:duration",
+      "operation:hunan-chili-pork-op-001-slice:parameters-source",
+      "operation:hunan-chili-pork-op-001-slice:targets-source",
+      "operation:hunan-chili-pork-op-004-set-heat:duration",
+      "operation:hunan-chili-pork-op-004-set-heat:parameters",
+      "operation:hunan-chili-pork-op-005-stir:duration",
+      "operation:hunan-chili-pork-op-005-stir:inputs",
+      "operation:hunan-chili-pork-op-005-stir:parameters-source",
+      "operation:hunan-chili-pork-op-005-stir:targets-source",
+      "operation:hunan-chili-pork-op-006-stir:duration",
+      "operation:hunan-chili-pork-op-006-stir:inputs",
+      "operation:hunan-chili-pork-op-006-stir:parameters-source",
+      "operation:hunan-chili-pork-op-006-stir:targets-source",
+      "operation:hunan-chili-pork-op-007-pan-fry:duration",
+      "operation:hunan-chili-pork-op-007-pan-fry:inputs",
+      "operation:hunan-chili-pork-op-007-pan-fry:parameters",
+      "operation:hunan-chili-pork-op-007-pan-fry:targets-source",
+      "operation:hunan-chili-pork-op-008-toss:duration",
+      "operation:hunan-chili-pork-op-008-toss:inputs",
+      "operation:hunan-chili-pork-op-008-toss:parameters-source",
+      "operation:hunan-chili-pork-op-008-toss:targets-source",
+      "operation:hunan-chili-pork-op-009-stir:duration",
+      "operation:hunan-chili-pork-op-009-stir:inputs",
+      "operation:hunan-chili-pork-op-009-stir:parameters-source",
+      "operation:hunan-chili-pork-op-009-stir:targets-source",
+      "operation:hunan-chili-pork-op-010-pan-fry:duration",
+      "operation:hunan-chili-pork-op-010-pan-fry:inputs",
+      "operation:hunan-chili-pork-op-010-pan-fry:parameters",
+      "operation:hunan-chili-pork-op-010-pan-fry:targets-source",
+      "operation:hunan-chili-pork-op-011-season:duration",
+      "operation:hunan-chili-pork-op-011-season:inputs",
+      "operation:hunan-chili-pork-op-011-season:parameters",
+      "operation:hunan-chili-pork-op-011-season:targets-source",
+      "portion:hunan-chili-pork-portion-01:source-step",
+      "portion:hunan-chili-pork-portion-03:source-step",
+      "portion:hunan-chili-pork-portion-05:source-step",
+      "portion:hunan-chili-pork-portion-06:source-step",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-001-slice-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-004-set-heat-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-005-stir-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-006-stir-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-007-pan-fry-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-008-toss-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-009-stir-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-010-pan-fry-omit:expected-outcome",
+      "scenario:hunan-chili-pork-hunan-chili-pork-op-011-season-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-hunan-chili-pork",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -182,7 +230,10 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "hunan-chili-pork-portion-02",
+          "hunan-chili-pork-portion-04"
+        ],
         "nodeId": "hunan-chili-pork-op-001-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -209,33 +260,11 @@
         "dependsOn": [
           "hunan-chili-pork-op-001-slice"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "hunan-chili-pork-portion-01"
-        ],
-        "nodeId": "hunan-chili-pork-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "hunan-chili-pork-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 260
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "hunan-chili-pork-op-002-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "hunan-chili-pork-portion-02"
         ],
-        "nodeId": "hunan-chili-pork-op-003-add",
+        "nodeId": "hunan-chili-pork-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "hunan-chili-pork-portion-02-added"
@@ -251,35 +280,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "hunan-chili-pork-op-003-add"
+          "hunan-chili-pork-op-002-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "hunan-chili-pork-portion-03"
-        ],
-        "nodeId": "hunan-chili-pork-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "hunan-chili-pork-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "hunan-chili-pork-op-004-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "hunan-chili-pork-portion-04"
         ],
-        "nodeId": "hunan-chili-pork-op-005-add",
+        "nodeId": "hunan-chili-pork-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "hunan-chili-pork-portion-04-added"
@@ -292,46 +299,20 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 0,
+        "criticality": "quality",
         "dependsOn": [
-          "hunan-chili-pork-op-005-add"
+          "hunan-chili-pork-op-003-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "hunan-chili-pork-portion-05"
-        ],
-        "nodeId": "hunan-chili-pork-op-006-add",
-        "operationType": "add",
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "hunan-chili-pork-op-004-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "hunan-chili-pork-portion-05-added"
+          "hunan-chili-pork-step-2-set-heat"
         ],
-        "parameters": {
-          "quantityG": 6
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "hunan-chili-pork-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "hunan-chili-pork-portion-06"
-        ],
-        "nodeId": "hunan-chili-pork-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "hunan-chili-pork-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 0.8
-        },
-        "sourceStepOrder": 1,
+        "parameters": {},
+        "sourceStepOrder": 2,
         "targetStates": [],
         "waitDurationMs": 0
       },
@@ -339,11 +320,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hunan-chili-pork-op-007-add"
+          "hunan-chili-pork-op-004-set-heat"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "hunan-chili-pork-op-008-stir",
+        "nodeId": "hunan-chili-pork-op-005-stir",
         "operationType": "stir",
         "outputStateIds": [
           "hunan-chili-pork-step-2-stir"
@@ -366,11 +347,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hunan-chili-pork-op-008-stir"
+          "hunan-chili-pork-op-005-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "hunan-chili-pork-op-009-stir",
+        "nodeId": "hunan-chili-pork-op-006-stir",
         "operationType": "stir",
         "outputStateIds": [
           "hunan-chili-pork-step-3-stir"
@@ -393,11 +374,41 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hunan-chili-pork-op-009-stir"
+          "hunan-chili-pork-op-006-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "hunan-chili-pork-op-010-toss",
+        "nodeId": "hunan-chili-pork-op-007-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "hunan-chili-pork-step-3-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "hunan-chili-pork-op-007-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "hunan-chili-pork-op-008-toss",
         "operationType": "toss",
         "outputStateIds": [
           "hunan-chili-pork-step-4-toss"
@@ -420,11 +431,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hunan-chili-pork-op-010-toss"
+          "hunan-chili-pork-op-008-toss"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "hunan-chili-pork-op-011-stir",
+        "nodeId": "hunan-chili-pork-op-009-stir",
         "operationType": "stir",
         "outputStateIds": [
           "hunan-chili-pork-step-4-stir"
@@ -447,11 +458,41 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "hunan-chili-pork-op-011-stir"
+          "hunan-chili-pork-op-009-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "hunan-chili-pork-op-012-season",
+        "nodeId": "hunan-chili-pork-op-010-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "hunan-chili-pork-step-4-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "hunan-chili-pork-op-010-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "hunan-chili-pork-op-011-season",
         "operationType": "season",
         "outputStateIds": [
           "hunan-chili-pork-step-4-season"
@@ -471,7 +512,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "hunan-chili-pork-op-012-season"
+          "hunan-chili-pork-op-011-season"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -482,7 +523,7 @@
           "hunan-chili-pork-portion-05",
           "hunan-chili-pork-portion-06"
         ],
-        "nodeId": "hunan-chili-pork-op-013-serve",
+        "nodeId": "hunan-chili-pork-op-012-serve",
         "operationType": "serve",
         "outputStateIds": [
           "hunan-chili-pork-served"
@@ -496,29 +537,16 @@
   },
   "recipeId": "hunan-chili-pork",
   "rights": {
-    "artifactIds": [
-      "game-artifact-hunan-chili-pork-identity",
-      "game-artifact-hunan-chili-pork-preparation",
-      "game-artifact-hunan-chili-pork-nutrition",
-      "game-artifact-hunan-chili-pork-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "hunan-government-spicy-cuisine",
-      "pingjiang-government-chili-pork-standard"
-    ],
-    "usageDecisionIds": [
-      "game-usage-hunan-chili-pork-identity",
-      "game-usage-hunan-chili-pork-preparation",
-      "game-usage-hunan-chili-pork-nutrition",
-      "game-usage-hunan-chili-pork-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-91bc320b6766b7fa",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -542,7 +570,31 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-91bc320b6766b7fa",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "hunan-chili-pork-op-004-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-004-set-heat-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -557,16 +609,93 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "hunan-chili-pork-op-008-stir",
+        "targetNodeId": "hunan-chili-pork-op-005-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-008-stir-omit"
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-005-stir-omit"
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-91bc320b6766b7fa",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "hunan-chili-pork-op-006-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-006-stir-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "hunan-chili-pork-op-007-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-007-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
+      "causeCodes": [
+        "operation-omitted:toss"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-toss"
+      ],
+      "mutation": {
+        "targetNodeId": "hunan-chili-pork-op-008-toss",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-008-toss-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -590,55 +719,36 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-91bc320b6766b7fa",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
       "causeCodes": [
-        "operation-omitted:toss"
+        "operation-omitted:pan-fry"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "structural-integrity",
+          "dimension": "doneness",
           "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-toss"
-      ],
-      "mutation": {
-        "targetNodeId": "hunan-chili-pork-op-010-toss",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-010-toss-omit"
-    },
-    {
-      "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-91bc320b6766b7fa",
-      "causeCodes": [
-        "operation-omitted:stir"
-      ],
-      "expectedDeltas": [
+        },
         {
           "confidence": "rule-based",
-          "dimension": "structural-integrity",
-          "direction": "decrease"
+          "dimension": "wateriness",
+          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-stir"
+        "missing-pan-fry"
       ],
       "mutation": {
-        "targetNodeId": "hunan-chili-pork-op-011-stir",
+        "targetNodeId": "hunan-chili-pork-op-010-pan-fry",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-011-stir-omit"
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-010-pan-fry-omit"
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-91bc320b6766b7fa",
+      "baselineArtifactVersion": "clv1-613d31dbf0f4152f",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -653,12 +763,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "hunan-chili-pork-op-012-season",
+        "targetNodeId": "hunan-chili-pork-op-011-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-012-season-omit"
+      "scenarioId": "hunan-chili-pork-hunan-chili-pork-op-011-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

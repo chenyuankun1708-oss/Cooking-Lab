@@ -7,10 +7,11 @@
 - M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器正在 `feature/m12-game-recipe-data` 实施。
 - 当前 Web 的 50 项已迁移为独立 `GameRecipeV1` draft；它们保留原有演示营养并明确不能直接获得 `game-commercial-ready` 资格。
 - 已从 USDA FoodData Central 的 Foundation Foods 2026-04 与 SR Legacy 2018-04 官方归档建立 81 条 record-level CC0 子集；每个上游 ZIP 的 SHA-256 进入数据合同，缺失核心营养素会 fail closed，完整上游数据库不进入 repo，build 不访问网络。
-- M13 当前保留 510 条游戏专用的确定性公式候选，连同 50 条 Web 迁移共 560 条 canonical JSON；它们只用于 schema、DAG、营养和 mutation 压力测试，全部仍为 draft，不能代表真实料理或商业可发行内容。
+- canonical source 当前只包含 50 条 Web 迁移 draft；510 条公式组合已从逐料理 source 中移除，只保留为测试 fixture 生成器，不能代表真实料理或商业可发行内容。
+- 50 条迁移数据对无法从 Web 展示模型可靠取得的食材绑定、数量、设备、参数、目标状态和 mutation 结果使用结构化 `unresolvedMappings`，当前没有任何条目可通过改动单一 eligibility 字段获得导出资格。
 - Web 仍恰好公开中英文各 50 项；游戏数据没有进入页面查询、搜索、推荐、sitemap 或客户端 bundle。
 - 首轮独立内容审查已冻结全部公式 family：通用来源不能证明具体配方、部分参数与 mutation 因果缺少逐项依据。M13 将改用逐项明确 Public Domain 的 Library of Congress 原始料理事实，并要求独立料理交叉核对；在真实来源、当前 fingerprint attestations 和 sampling QA 完成前 exportable 数量保持 0。
-- M12 validator 与导出层已针对首轮独立审查完成 fail-closed hardening：精确 runtime schema、actor/run/context 独立、LOW 单一 reviewer 全维度覆盖、真实 sampling digest、风险下限、USDA exact join、完整 content-addressing、安全 staging，以及 Godot JSON ↔ SQLite parity。
+- M12 validator 与导出层已针对首轮独立审查完成 fail-closed hardening：精确 runtime schema、操作输入/输出/设备/参数/目标合同、actor/run/context 独立、LOW 单一 reviewer 全维度覆盖、真实 sampling digest、风险下限、USDA exact join、权利依据与实际 material source coverage、完整 content-addressing、安全 staging，以及 Godot JSON ↔ SQLite parity。
 
 ## 当前阶段
 
@@ -425,4 +426,5 @@ PR #36 已合并 Living Editorial Hero：
 - M8 已停止：不招募参与者、不继续研究准备，也不从 M7 readiness 自动推导研究工作。
 - M10 与 M10.1 已完成并继续作为所有公开内容的强制发布门禁。
 - M11 以当前 50 项产品闭环、内容包容量、视觉升级和治理能力收口；#91/#92 的内容扩充由 Product Director 延期，不是进行中任务。
-- 完成治理收口 PR、当前 50 项 Production smoke、GitHub Issues/Epic 与 Ultragoal ledger 收尾后停止；不启动 M12 或新内容 Goal。
+- 当前执行 M12：完成新 fail-closed 门禁的独立复核，并将 50 条迁移 draft 与 Web 隔离合同收口。
+- 随后执行 M13：从逐项明确 Public Domain 的原始资料确定性抽取、标准化和审查，按 120 → 250 → 500+ 里程碑构建 `game-commercial-ready` 数据，不降低 M10/M10.1 权利标准。

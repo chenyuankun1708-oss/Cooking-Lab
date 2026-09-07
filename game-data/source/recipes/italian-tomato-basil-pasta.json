@@ -1,14 +1,38 @@
 {
-  "artifactVersion": "clv1-16d43028904b0d99",
+  "artifactVersion": "clv1-4aa3dd70fb45f6ea",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:italian-tomato-basil-pasta-op-001-dice:duration",
+      "operation:italian-tomato-basil-pasta-op-001-dice:parameters-source",
+      "operation:italian-tomato-basil-pasta-op-001-dice:targets-source",
+      "operation:italian-tomato-basil-pasta-op-004-fold:duration",
+      "operation:italian-tomato-basil-pasta-op-004-fold:equipment",
+      "operation:italian-tomato-basil-pasta-op-004-fold:inputs",
+      "operation:italian-tomato-basil-pasta-op-004-fold:parameters-source",
+      "operation:italian-tomato-basil-pasta-op-004-fold:targets-source",
+      "operation:italian-tomato-basil-pasta-op-005-mix:duration",
+      "operation:italian-tomato-basil-pasta-op-005-mix:inputs",
+      "operation:italian-tomato-basil-pasta-op-005-mix:parameters-source",
+      "operation:italian-tomato-basil-pasta-op-005-mix:targets-source",
+      "portion:italian-tomato-basil-pasta-portion-01:source-step",
+      "portion:italian-tomato-basil-pasta-portion-03:source-step",
+      "portion:italian-tomato-basil-pasta-portion-05:source-step",
+      "portion:italian-tomato-basil-pasta-portion-06:source-step",
+      "scenario:italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-001-dice-omit:expected-outcome",
+      "scenario:italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-004-fold-omit:expected-outcome",
+      "scenario:italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-005-mix-omit:expected-outcome",
+      "source-step:2:operation",
+      "source-step:3:operation",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-italian-tomato-basil-pasta",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -182,7 +206,10 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "italian-tomato-basil-pasta-portion-02",
+          "italian-tomato-basil-pasta-portion-04"
+        ],
         "nodeId": "italian-tomato-basil-pasta-op-001-dice",
         "operationType": "dice",
         "outputStateIds": [
@@ -209,33 +236,11 @@
         "dependsOn": [
           "italian-tomato-basil-pasta-op-001-dice"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "italian-tomato-basil-pasta-portion-01"
-        ],
-        "nodeId": "italian-tomato-basil-pasta-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 180
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-002-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "italian-tomato-basil-pasta-portion-02"
         ],
-        "nodeId": "italian-tomato-basil-pasta-op-003-add",
+        "nodeId": "italian-tomato-basil-pasta-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "italian-tomato-basil-pasta-portion-02-added"
@@ -251,35 +256,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "italian-tomato-basil-pasta-op-003-add"
+          "italian-tomato-basil-pasta-op-002-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "italian-tomato-basil-pasta-portion-03"
-        ],
-        "nodeId": "italian-tomato-basil-pasta-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-004-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "italian-tomato-basil-pasta-portion-04"
         ],
-        "nodeId": "italian-tomato-basil-pasta-op-005-add",
+        "nodeId": "italian-tomato-basil-pasta-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "italian-tomato-basil-pasta-portion-04-added"
@@ -292,152 +275,13 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "italian-tomato-basil-pasta-portion-05"
-        ],
-        "nodeId": "italian-tomato-basil-pasta-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "italian-tomato-basil-pasta-portion-06"
-        ],
-        "nodeId": "italian-tomato-basil-pasta-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 1.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "italian-tomato-basil-pasta-op-007-add"
+          "italian-tomato-basil-pasta-op-003-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "italian-tomato-basil-pasta-op-008-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-step-2-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-008-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "italian-tomato-basil-pasta-op-009-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-step-3-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35
-        },
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-009-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "italian-tomato-basil-pasta-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "italian-tomato-basil-pasta-step-4-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.6
-        },
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "italian-tomato-basil-pasta-op-010-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "italian-tomato-basil-pasta-op-011-fold",
+        "nodeId": "italian-tomato-basil-pasta-op-004-fold",
         "operationType": "fold",
         "outputStateIds": [
           "italian-tomato-basil-pasta-step-5-fold"
@@ -460,11 +304,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "italian-tomato-basil-pasta-op-011-fold"
+          "italian-tomato-basil-pasta-op-004-fold"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "italian-tomato-basil-pasta-op-012-mix",
+        "nodeId": "italian-tomato-basil-pasta-op-005-mix",
         "operationType": "mix",
         "outputStateIds": [
           "italian-tomato-basil-pasta-step-5-mix"
@@ -487,9 +331,9 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "italian-tomato-basil-pasta-op-012-mix"
+          "italian-tomato-basil-pasta-op-005-mix"
         ],
-        "equipmentId": "colander",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "italian-tomato-basil-pasta-portion-01",
           "italian-tomato-basil-pasta-portion-02",
@@ -498,7 +342,7 @@
           "italian-tomato-basil-pasta-portion-05",
           "italian-tomato-basil-pasta-portion-06"
         ],
-        "nodeId": "italian-tomato-basil-pasta-op-013-serve",
+        "nodeId": "italian-tomato-basil-pasta-op-006-serve",
         "operationType": "serve",
         "outputStateIds": [
           "italian-tomato-basil-pasta-served"
@@ -512,26 +356,16 @@
   },
   "recipeId": "italian-tomato-basil-pasta",
   "rights": {
-    "artifactIds": [
-      "game-artifact-italian-tomato-basil-pasta-identity",
-      "game-artifact-italian-tomato-basil-pasta-preparation",
-      "game-artifact-italian-tomato-basil-pasta-nutrition",
-      "game-artifact-italian-tomato-basil-pasta-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-italian-tomato-basil-pasta-identity",
-      "game-usage-italian-tomato-basil-pasta-preparation",
-      "game-usage-italian-tomato-basil-pasta-nutrition",
-      "game-usage-italian-tomato-basil-pasta-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
+      "baselineArtifactVersion": "clv1-4aa3dd70fb45f6ea",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -555,164 +389,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "italian-tomato-basil-pasta-op-008-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-008-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "italian-tomato-basil-pasta-op-009-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-009-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "italian-tomato-basil-pasta-op-009-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-009-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "italian-tomato-basil-pasta-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-010-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "italian-tomato-basil-pasta-op-010-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-010-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
+      "baselineArtifactVersion": "clv1-4aa3dd70fb45f6ea",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -727,16 +404,16 @@
         "missing-fold"
       ],
       "mutation": {
-        "targetNodeId": "italian-tomato-basil-pasta-op-011-fold",
+        "targetNodeId": "italian-tomato-basil-pasta-op-004-fold",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-011-fold-omit"
+      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-004-fold-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-16d43028904b0d99",
+      "baselineArtifactVersion": "clv1-4aa3dd70fb45f6ea",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -751,12 +428,12 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "italian-tomato-basil-pasta-op-012-mix",
+        "targetNodeId": "italian-tomato-basil-pasta-op-005-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-012-mix-omit"
+      "scenarioId": "italian-tomato-basil-pasta-italian-tomato-basil-pasta-op-005-mix-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

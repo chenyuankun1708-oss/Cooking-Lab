@@ -1,14 +1,35 @@
 {
-  "artifactVersion": "clv1-a6e7680f7f1b25e0",
+  "artifactVersion": "clv1-50e80509efd56aec",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:huevos-rancheros-home-op-001-mince:duration",
+      "operation:huevos-rancheros-home-op-001-mince:parameters-source",
+      "operation:huevos-rancheros-home-op-001-mince:targets-source",
+      "operation:huevos-rancheros-home-op-007-drain:duration",
+      "operation:huevos-rancheros-home-op-007-drain:equipment",
+      "operation:huevos-rancheros-home-op-008-simmer:duration",
+      "operation:huevos-rancheros-home-op-008-simmer:equipment",
+      "operation:huevos-rancheros-home-op-008-simmer:inputs",
+      "operation:huevos-rancheros-home-op-008-simmer:targets-source",
+      "operation:huevos-rancheros-home-op-010-set-heat:duration",
+      "operation:huevos-rancheros-home-op-010-set-heat:parameters",
+      "portion:huevos-rancheros-home-portion-07:source-step",
+      "portion:huevos-rancheros-home-portion-08:source-step",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-001-mince-omit:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-007-drain-omit:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-hot:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-omit:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-010-set-heat-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-huevos-rancheros-home",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -226,7 +247,13 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-01",
+          "huevos-rancheros-home-portion-03",
+          "huevos-rancheros-home-portion-04",
+          "huevos-rancheros-home-portion-05",
+          "huevos-rancheros-home-portion-06"
+        ],
         "nodeId": "huevos-rancheros-home-op-001-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -253,7 +280,7 @@
         "dependsOn": [
           "huevos-rancheros-home-op-001-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-01"
         ],
@@ -275,7 +302,7 @@
         "dependsOn": [
           "huevos-rancheros-home-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-03"
         ],
@@ -297,7 +324,7 @@
         "dependsOn": [
           "huevos-rancheros-home-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-04"
         ],
@@ -319,7 +346,7 @@
         "dependsOn": [
           "huevos-rancheros-home-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-05"
         ],
@@ -341,7 +368,7 @@
         "dependsOn": [
           "huevos-rancheros-home-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-06"
         ],
@@ -358,66 +385,19 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "huevos-rancheros-home-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "huevos-rancheros-home-portion-07"
-        ],
-        "nodeId": "huevos-rancheros-home-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "huevos-rancheros-home-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "huevos-rancheros-home-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "huevos-rancheros-home-portion-08"
-        ],
-        "nodeId": "huevos-rancheros-home-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "huevos-rancheros-home-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 1
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "huevos-rancheros-home-op-008-add"
+          "huevos-rancheros-home-op-006-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-01",
           "huevos-rancheros-home-portion-03",
           "huevos-rancheros-home-portion-04",
           "huevos-rancheros-home-portion-05",
-          "huevos-rancheros-home-portion-06",
-          "huevos-rancheros-home-portion-07",
-          "huevos-rancheros-home-portion-08"
+          "huevos-rancheros-home-portion-06"
         ],
-        "nodeId": "huevos-rancheros-home-op-009-drain",
+        "nodeId": "huevos-rancheros-home-op-007-drain",
         "operationType": "drain",
         "outputStateIds": [
           "huevos-rancheros-home-step-1-drain"
@@ -431,11 +411,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "huevos-rancheros-home-op-009-drain"
+          "huevos-rancheros-home-op-007-drain"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [],
-        "nodeId": "huevos-rancheros-home-op-010-simmer",
+        "nodeId": "huevos-rancheros-home-op-008-simmer",
         "operationType": "simmer",
         "outputStateIds": [
           "huevos-rancheros-home-step-2-simmer"
@@ -455,46 +434,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "huevos-rancheros-home-op-010-simmer"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "huevos-rancheros-home-op-011-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "huevos-rancheros-home-step-3-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "huevos-rancheros-home-op-011-pan-fry"
+          "huevos-rancheros-home-op-008-simmer"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-02"
         ],
-        "nodeId": "huevos-rancheros-home-op-012-add",
+        "nodeId": "huevos-rancheros-home-op-009-add",
         "operationType": "add",
         "outputStateIds": [
           "huevos-rancheros-home-portion-02-added"
@@ -510,39 +459,27 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "huevos-rancheros-home-op-012-add"
+          "huevos-rancheros-home-op-009-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "huevos-rancheros-home-portion-02"
         ],
-        "nodeId": "huevos-rancheros-home-op-013-pan-fry",
-        "operationType": "pan-fry",
+        "nodeId": "huevos-rancheros-home-op-010-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "huevos-rancheros-home-step-4-pan-fry"
+          "huevos-rancheros-home-step-4-set-heat"
         ],
         "parameters": {},
         "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "huevos-rancheros-home-op-013-pan-fry"
+          "huevos-rancheros-home-op-010-set-heat"
         ],
         "equipmentId": "frying-pan",
         "inputPortionIds": [
@@ -555,7 +492,7 @@
           "huevos-rancheros-home-portion-07",
           "huevos-rancheros-home-portion-08"
         ],
-        "nodeId": "huevos-rancheros-home-op-014-serve",
+        "nodeId": "huevos-rancheros-home-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
           "huevos-rancheros-home-served"
@@ -569,29 +506,16 @@
   },
   "recipeId": "huevos-rancheros-home",
   "rights": {
-    "artifactIds": [
-      "game-artifact-huevos-rancheros-home-identity",
-      "game-artifact-huevos-rancheros-home-preparation",
-      "game-artifact-huevos-rancheros-home-nutrition",
-      "game-artifact-huevos-rancheros-home-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "larousse-cocina-huevos-rancheros",
-      "mely-martinez-huevos-rancheros"
-    ],
-    "usageDecisionIds": [
-      "game-usage-huevos-rancheros-home-identity",
-      "game-usage-huevos-rancheros-home-preparation",
-      "game-usage-huevos-rancheros-home-nutrition",
-      "game-usage-huevos-rancheros-home-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a6e7680f7f1b25e0",
+      "baselineArtifactVersion": "clv1-50e80509efd56aec",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -615,7 +539,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a6e7680f7f1b25e0",
+      "baselineArtifactVersion": "clv1-50e80509efd56aec",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -630,16 +554,16 @@
         "missing-drain"
       ],
       "mutation": {
-        "targetNodeId": "huevos-rancheros-home-op-009-drain",
+        "targetNodeId": "huevos-rancheros-home-op-007-drain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-009-drain-omit"
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-007-drain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a6e7680f7f1b25e0",
+      "baselineArtifactVersion": "clv1-50e80509efd56aec",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -659,16 +583,16 @@
         "missing-simmer"
       ],
       "mutation": {
-        "targetNodeId": "huevos-rancheros-home-op-010-simmer",
+        "targetNodeId": "huevos-rancheros-home-op-008-simmer",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-010-simmer-omit"
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a6e7680f7f1b25e0",
+      "baselineArtifactVersion": "clv1-50e80509efd56aec",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -694,70 +618,36 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "huevos-rancheros-home-op-010-simmer",
+        "targetNodeId": "huevos-rancheros-home-op-008-simmer",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-010-simmer-hot"
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a6e7680f7f1b25e0",
+      "baselineArtifactVersion": "clv1-50e80509efd56aec",
       "causeCodes": [
-        "operation-omitted:pan-fry"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-pan-fry"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "huevos-rancheros-home-op-011-pan-fry",
+        "targetNodeId": "huevos-rancheros-home-op-010-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-011-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a6e7680f7f1b25e0",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "huevos-rancheros-home-op-013-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-013-pan-fry-omit"
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-010-set-heat-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

@@ -1,14 +1,32 @@
 {
-  "artifactVersion": "clv1-9863a112601d04bd",
+  "artifactVersion": "clv1-6ef394a62d1c515c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:cantonese-ginger-scallion-fish-op-001-add:equipment",
+      "operation:cantonese-ginger-scallion-fish-op-002-steam:duration",
+      "operation:cantonese-ginger-scallion-fish-op-002-steam:inputs",
+      "operation:cantonese-ginger-scallion-fish-op-002-steam:parameters",
+      "operation:cantonese-ginger-scallion-fish-op-002-steam:targets-source",
+      "operation:cantonese-ginger-scallion-fish-op-003-add:equipment",
+      "operation:cantonese-ginger-scallion-fish-op-004-set-heat:duration",
+      "operation:cantonese-ginger-scallion-fish-op-004-set-heat:parameters",
+      "portion:cantonese-ginger-scallion-fish-portion-02:source-step",
+      "portion:cantonese-ginger-scallion-fish-portion-03:source-step",
+      "portion:cantonese-ginger-scallion-fish-portion-05:source-step",
+      "portion:cantonese-ginger-scallion-fish-portion-06:source-step",
+      "scenario:cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-002-steam-omit:expected-outcome",
+      "scenario:cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-004-set-heat-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:2:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-cantonese-ginger-scallion-fish",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -181,7 +199,6 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "cantonese-ginger-scallion-fish-portion-01"
         ],
@@ -198,170 +215,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 0,
+        "criticality": "quality",
         "dependsOn": [
           "cantonese-ginger-scallion-fish-op-001-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-ginger-scallion-fish-portion-02"
-        ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-ginger-scallion-fish-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-ginger-scallion-fish-portion-03"
-        ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-ginger-scallion-fish-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 20
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-ginger-scallion-fish-portion-05"
-        ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-ginger-scallion-fish-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 4
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-ginger-scallion-fish-portion-06"
-        ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "cantonese-ginger-scallion-fish-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 0.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "cantonese-ginger-scallion-fish-portion-01",
-          "cantonese-ginger-scallion-fish-portion-02",
-          "cantonese-ginger-scallion-fish-portion-03",
-          "cantonese-ginger-scallion-fish-portion-05",
-          "cantonese-ginger-scallion-fish-portion-06"
-        ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-006-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "cantonese-ginger-scallion-fish-step-1-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-006-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "steamer",
         "inputPortionIds": [],
-        "nodeId": "cantonese-ginger-scallion-fish-op-007-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "cantonese-ginger-scallion-fish-step-2-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.6
-        },
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-007-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "cantonese-ginger-scallion-fish-op-008-steam",
+        "nodeId": "cantonese-ginger-scallion-fish-op-002-steam",
         "operationType": "steam",
         "outputStateIds": [
           "cantonese-ginger-scallion-fish-step-3-steam"
@@ -382,13 +243,12 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-008-steam"
+          "cantonese-ginger-scallion-fish-op-002-steam"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
           "cantonese-ginger-scallion-fish-portion-04"
         ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-009-add",
+        "nodeId": "cantonese-ginger-scallion-fish-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "cantonese-ginger-scallion-fish-portion-04-added"
@@ -404,39 +264,27 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-009-add"
+          "cantonese-ginger-scallion-fish-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "steamer",
         "inputPortionIds": [
           "cantonese-ginger-scallion-fish-portion-04"
         ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-010-pan-fry",
-        "operationType": "pan-fry",
+        "nodeId": "cantonese-ginger-scallion-fish-op-004-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "cantonese-ginger-scallion-fish-step-4-pan-fry"
+          "cantonese-ginger-scallion-fish-step-4-set-heat"
         ],
         "parameters": {},
         "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "cantonese-ginger-scallion-fish-op-010-pan-fry"
+          "cantonese-ginger-scallion-fish-op-004-set-heat"
         ],
         "equipmentId": "heatproof-plate",
         "inputPortionIds": [
@@ -447,7 +295,7 @@
           "cantonese-ginger-scallion-fish-portion-05",
           "cantonese-ginger-scallion-fish-portion-06"
         ],
-        "nodeId": "cantonese-ginger-scallion-fish-op-011-serve",
+        "nodeId": "cantonese-ginger-scallion-fish-op-005-serve",
         "operationType": "serve",
         "outputStateIds": [
           "cantonese-ginger-scallion-fish-served"
@@ -461,122 +309,16 @@
   },
   "recipeId": "cantonese-ginger-scallion-fish",
   "rights": {
-    "artifactIds": [
-      "game-artifact-cantonese-ginger-scallion-fish-identity",
-      "game-artifact-cantonese-ginger-scallion-fish-preparation",
-      "game-artifact-cantonese-ginger-scallion-fish-nutrition",
-      "game-artifact-cantonese-ginger-scallion-fish-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "guangdong-cantonese-cuisine-history",
-      "woks-of-life-cantonese-steamed-fish"
-    ],
-    "usageDecisionIds": [
-      "game-usage-cantonese-ginger-scallion-fish-identity",
-      "game-usage-cantonese-ginger-scallion-fish-preparation",
-      "game-usage-cantonese-ginger-scallion-fish-nutrition",
-      "game-usage-cantonese-ginger-scallion-fish-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9863a112601d04bd",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "cantonese-ginger-scallion-fish-op-006-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-006-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9863a112601d04bd",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "cantonese-ginger-scallion-fish-op-007-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-007-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9863a112601d04bd",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "cantonese-ginger-scallion-fish-op-007-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-007-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9863a112601d04bd",
+      "baselineArtifactVersion": "clv1-6ef394a62d1c515c",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -596,41 +338,36 @@
         "missing-steam"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-ginger-scallion-fish-op-008-steam",
+        "targetNodeId": "cantonese-ginger-scallion-fish-op-002-steam",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "terminal",
-      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-008-steam-omit"
+      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-002-steam-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9863a112601d04bd",
+      "baselineArtifactVersion": "clv1-6ef394a62d1c515c",
       "causeCodes": [
-        "operation-omitted:pan-fry"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-pan-fry"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "cantonese-ginger-scallion-fish-op-010-pan-fry",
+        "targetNodeId": "cantonese-ginger-scallion-fish-op-004-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-010-pan-fry-omit"
+      "scenarioId": "cantonese-ginger-scallion-fish-cantonese-ginger-scallion-fish-op-004-set-heat-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

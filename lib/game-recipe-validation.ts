@@ -1,6 +1,7 @@
 import { createContentVersion } from "./content-version";
 import { rightsActions } from "@/types/content-rights";
 import type { ContentArtifact, RightsAssessment } from "@/types/content-rights";
+import type { Source } from "@/types/culinary";
 import type {
   GameIngredientCatalogV1,
   GameNutritionDatasetSubsetV1,
@@ -137,6 +138,9 @@ export function createGameArtifactSetVersion(
     assessments,
     attributions: registry.attributions.filter((entry) => artifactIds.has(entry.artifactId)).sort(byId),
     sources: registry.sources.filter((source) => sourceIds.has(source.id)).sort(byId),
+    sourceRoles: registry.sourceRoles
+      .filter((entry) => sourceIds.has(entry.sourceId) && (!entry.recipeId || recipeIds.has(entry.recipeId)))
+      .sort((left, right) => left.sourceId.localeCompare(right.sourceId) || left.role.localeCompare(right.role)),
     evidence: registry.evidence.filter((evidence) => evidenceIds.has(evidence.id)).sort(byId),
     evidenceOrigins: registry.evidenceOrigins.filter((entry) => evidenceIds.has(entry.evidenceId)).sort((left, right) => left.evidenceId.localeCompare(right.evidenceId)),
     researchRecords: registry.researchRecords
@@ -211,6 +215,17 @@ function validateCatalogs(
   reportDuplicates(context.operations, (entry) => entry.id, "operation-catalog", "operations", report);
   reportDuplicates(context.ingredients.ingredients, (entry) => entry.ingredientId, "ingredient-catalog", "ingredients", report);
   if (context.nutritionDataset) validateNutritionDataset(context.nutritionDataset, context.ingredients, report);
+  for (const operation of context.operations) {
+    if (operation.equipmentRequired && !operation.compatibleEquipmentIds.length) {
+      report("invalid-operation", "operation-catalog", `operations.${operation.id}.compatibleEquipmentIds`, "Equipment-required operations need at least one compatible equipment ID");
+    }
+    for (const group of operation.requiredParameterGroups) {
+      if (!group.length || group.some((key) => !operation.allowedParameters.includes(key))) {
+        report("invalid-operation", "operation-catalog", `operations.${operation.id}.requiredParameterGroups`, "Required parameter groups must be non-empty subsets of allowed parameters");
+      }
+    }
+  }
+  if (context.rightsRegistry) validateRegistryIdUniqueness(context.rightsRegistry, report);
   for (const ingredient of context.ingredients.ingredients) {
     if (ingredient.nutritionSource.kind === "dataset") {
       if (ingredient.nutritionSource.datasetId !== "usda-fooddata-central" || !/^\d+$/.test(ingredient.nutritionSource.fdcId)) {
@@ -229,6 +244,51 @@ function validateCatalogs(
       if (!isNonNegative(ingredient.nutritionPer100g[key])) {
         report("invalid-nutrition", ingredient.ingredientId, `nutritionPer100g.${key}`, "Nutrition values must be non-negative finite numbers");
       }
+    }
+  }
+}
+
+function validateRegistryIdUniqueness(
+  registry: GameRightsRegistryV1,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+) {
+  const collections: Array<[string, readonly { id: string }[]]> = [
+    ["artifacts", registry.artifacts],
+    ["assessments", registry.assessments],
+    ["attributions", registry.attributions],
+    ["decisions", registry.decisions],
+    ["sources", registry.sources],
+    ["evidence", registry.evidence],
+    ["researchRecords", registry.researchRecords],
+    ["attestations", registry.governance.attestations],
+    ["riskClassifications", registry.governance.riskClassifications],
+    ["samplingBatches", registry.governance.samplingBatches],
+  ];
+  const ownerById = new Map<string, string>();
+  for (const [collection, entries] of collections) {
+    for (const entry of entries) {
+      const prior = ownerById.get(entry.id);
+      if (prior) {
+        report("duplicate-id", "rights-registry", collection, `Registry ID ${entry.id} is already used by ${prior}`);
+      } else {
+        ownerById.set(entry.id, collection);
+      }
+    }
+  }
+  const evidenceOriginIds = new Set<string>();
+  for (const entry of registry.evidenceOrigins) {
+    if (evidenceOriginIds.has(entry.evidenceId)) {
+      report("duplicate-id", "rights-registry", "evidenceOrigins", `Duplicate evidence origin for ${entry.evidenceId}`);
+    }
+    evidenceOriginIds.add(entry.evidenceId);
+  }
+  reportDuplicates(registry.sourceRoles, (entry) => `${entry.recipeId ?? "global"}:${entry.sourceId}:${entry.role}`, "rights-registry", "sourceRoles", report);
+  const sourceIds = new Set(registry.sources.map((source) => source.id));
+  for (const entry of registry.sourceRoles) {
+    if (!sourceIds.has(entry.sourceId)) report("missing-reference", "rights-registry", "sourceRoles.sourceId", `Missing source ${entry.sourceId}`);
+    const recipeRole = entry.role === "recipe-primary" || entry.role === "recipe-cross-check";
+    if (recipeRole !== Boolean(entry.workFamilyId?.trim()) || recipeRole !== Boolean(entry.recipeId?.trim())) {
+      report("invalid-rights", "rights-registry", "sourceRoles", "Recipe source roles require recipeId and workFamilyId; non-recipe roles must omit both");
     }
   }
 }
@@ -253,6 +313,12 @@ function evaluateRecipe(
   if (recipe.authoring.containsGeneratedExpression !== false) {
     report("invalid-rights", recipe.recipeId, "authoring.containsGeneratedExpression", "Deterministic game data cannot contain generated expression");
   }
+  if (new Set(recipe.authoring.unresolvedMappings).size !== recipe.authoring.unresolvedMappings.length) {
+    report("invalid-schema", recipe.recipeId, "authoring.unresolvedMappings", "Unresolved mapping codes must be unique");
+  }
+  if (recipe.eligibility === "exportable" && recipe.authoring.unresolvedMappings.length) {
+    report("invalid-graph", recipe.recipeId, "authoring.unresolvedMappings", "Exportable recipes cannot contain unresolved source mappings");
+  }
   if (createGameRecipeArtifactVersion(recipe) !== recipe.artifactVersion) {
     report("stale-artifact-version", recipe.recipeId, "artifactVersion", "Artifact version does not match the canonical recipe payload");
   }
@@ -274,6 +340,7 @@ function evaluateRecipe(
   if (!portionIds.size) report("missing-reference", recipe.recipeId, "ingredientPortions", "Every game recipe requires at least one quantified ingredient portion");
 
   const nodeById = new Map<string, GameRecipeV1["operationGraph"]["nodes"][number]>();
+  const outputStateIds = new Set<string>();
   for (const node of recipe.operationGraph.nodes) {
     if (nodeById.has(node.nodeId)) report("duplicate-id", recipe.recipeId, `operationGraph.${node.nodeId}`, "Operation node IDs must be unique");
     nodeById.set(node.nodeId, node);
@@ -284,6 +351,16 @@ function evaluateRecipe(
     }
     if (!Number.isInteger(node.activeDurationMs) || node.activeDurationMs < 0 || !Number.isInteger(node.waitDurationMs) || node.waitDurationMs < 0) {
       report("invalid-number", recipe.recipeId, `operationGraph.${node.nodeId}.duration`, "Operation durations must be non-negative integer milliseconds");
+    }
+    reportDuplicateStrings(node.dependsOn, recipe.recipeId, `operationGraph.${node.nodeId}.dependsOn`, report);
+    reportDuplicateStrings(node.inputPortionIds, recipe.recipeId, `operationGraph.${node.nodeId}.inputPortionIds`, report);
+    reportDuplicateStrings(node.outputStateIds, recipe.recipeId, `operationGraph.${node.nodeId}.outputStateIds`, report);
+    if (!node.outputStateIds.length || node.outputStateIds.some((stateId) => !stateId.trim())) {
+      report("invalid-graph", recipe.recipeId, `operationGraph.${node.nodeId}.outputStateIds`, "Every operation must declare at least one non-empty output state ID");
+    }
+    for (const stateId of node.outputStateIds) {
+      if (outputStateIds.has(stateId)) report("duplicate-id", recipe.recipeId, `operationGraph.${node.nodeId}.outputStateIds`, `Output state ${stateId} must be unique across the operation graph`);
+      outputStateIds.add(stateId);
     }
     for (const portionId of node.inputPortionIds) {
       if (!portionIds.has(portionId)) report("missing-reference", recipe.recipeId, `operationGraph.${node.nodeId}.inputPortionIds`, `Missing portion ${portionId}`);
@@ -296,6 +373,8 @@ function evaluateRecipe(
       if (value !== undefined && !Number.isFinite(value)) report("invalid-number", recipe.recipeId, `operationGraph.${node.nodeId}.parameters.${key}`, "Operation parameters must be finite");
     }
     validateParameterRanges(recipe.recipeId, node.nodeId, node.parameters, report);
+    validateOperationContract(recipe, node, definition, report);
+    validateTargetStates(recipe, node, report);
   }
   if (!nodeById.size) report("invalid-graph", recipe.recipeId, "operationGraph.nodes", "Every game recipe requires at least one operation node");
   for (const node of nodeById.values()) {
@@ -307,12 +386,119 @@ function evaluateRecipe(
   if (hasCycle(nodeById)) report("invalid-graph", recipe.recipeId, "operationGraph", "Operation graph must be acyclic");
   const referencedPortions = new Set(recipe.operationGraph.nodes.flatMap((node) => node.inputPortionIds));
   for (const portionId of portionIds) {
-    if (!referencedPortions.has(portionId)) report("missing-reference", recipe.recipeId, `ingredientPortions.${portionId}`, "Every ingredient portion must enter at least one operation");
+    if (!referencedPortions.has(portionId)) {
+      const pendingCode = `portion:${portionId}:source-step`;
+      if (recipe.eligibility === "exportable" || !recipe.authoring.unresolvedMappings.includes(pendingCode)) {
+        report("missing-reference", recipe.recipeId, `ingredientPortions.${portionId}`, "Every ingredient portion must enter at least one operation or carry an explicit draft mapping blocker");
+      }
+    }
   }
   validateSimulationProfile(recipe, operationById, report);
   validateNutrition(recipe, ingredientById, context.nutritionDataset, report);
-  validateScenarios(recipe, nodeById, portionIds, ingredientById, report);
+  validateScenarios(recipe, nodeById, portionIds, ingredientById, operationById, report);
+  validateDeclaredRightsReferences(recipe, context, report);
   if (recipe.eligibility === "exportable") validateRightsAndGovernance(recipe, allRecipes, context, report);
+}
+
+function validateOperationContract(
+  recipe: GameRecipeV1,
+  node: GameRecipeV1["operationGraph"]["nodes"][number],
+  definition: GameOperationDefinitionV1,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+) {
+  const check = (suffix: string, valid: boolean, message: string) => {
+    if (valid) return;
+    const blocker = `operation:${node.nodeId}:${suffix}`;
+    if (recipe.eligibility === "draft" && recipe.authoring.unresolvedMappings.includes(blocker)) return;
+    report("invalid-operation", recipe.recipeId, `operationGraph.${node.nodeId}.${suffix}`, message);
+  };
+  check("inputs", definition.inputRequirement === "none" || node.inputPortionIds.length > 0, "Operation requires at least one explicit ingredient input");
+  check(
+    "equipment",
+    !definition.equipmentRequired || Boolean(node.equipmentId && definition.compatibleEquipmentIds.includes(node.equipmentId)),
+    "Operation requires equipment declared compatible by the versioned operation catalog",
+  );
+  check(
+    "parameters",
+    definition.requiredParameterGroups.every((group) => group.some((key) => node.parameters[key] !== undefined)),
+    "Operation is missing a required parameter group",
+  );
+  const durationValid = definition.durationRequirement === "none"
+    || (definition.durationRequirement === "active" && node.activeDurationMs > 0)
+    || (definition.durationRequirement === "wait" && node.waitDurationMs > 0)
+    || (definition.durationRequirement === "either" && node.activeDurationMs + node.waitDurationMs > 0);
+  check("duration", durationValid, `Operation requires ${definition.durationRequirement} duration`);
+  check("targets", !definition.targetStateRequired || node.targetStates.length > 0, "Operation requires at least one bounded target state");
+}
+
+function validateTargetStates(
+  recipe: GameRecipeV1,
+  node: GameRecipeV1["operationGraph"]["nodes"][number],
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+) {
+  const dimensions = new Set<string>();
+  const allowedDimensions = allowedTargetDimensions(node.operationType);
+  for (const target of node.targetStates) {
+    const field = `operationGraph.${node.nodeId}.targetStates.${target.dimension}`;
+    if (dimensions.has(target.dimension)) report("duplicate-id", recipe.recipeId, field, "Target state dimensions must be unique per operation");
+    dimensions.add(target.dimension);
+    if (!allowedDimensions.has(target.dimension)) {
+      report("invalid-operation", recipe.recipeId, field, `Target dimension ${target.dimension} is not meaningful for ${node.operationType}`);
+    }
+    if (target.minimum === undefined && target.maximum === undefined) {
+      report("invalid-operation", recipe.recipeId, field, "Target state requires a minimum or maximum bound");
+      continue;
+    }
+    if (target.minimum !== undefined && (!Number.isFinite(target.minimum) || target.minimum < 0 || target.minimum > 1)) {
+      report("invalid-number", recipe.recipeId, `${field}.minimum`, "Normalized target minimum must be within [0, 1]");
+    }
+    if (target.maximum !== undefined && (!Number.isFinite(target.maximum) || target.maximum < 0 || target.maximum > 1)) {
+      report("invalid-number", recipe.recipeId, `${field}.maximum`, "Normalized target maximum must be within [0, 1]");
+    }
+    if (target.minimum !== undefined && target.maximum !== undefined && target.minimum > target.maximum) {
+      report("invalid-number", recipe.recipeId, field, "Target state minimum cannot exceed maximum");
+    }
+  }
+}
+
+function validateDeclaredRightsReferences(
+  recipe: GameRecipeV1,
+  context: GameRecipeValidationContext,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+) {
+  const declaredIds = [
+    ...recipe.rights.artifactIds,
+    ...recipe.rights.usageDecisionIds,
+    ...recipe.rights.sourceIds,
+    ...recipe.rights.evidenceIds,
+    ...recipe.governance.reviewAttestationIds,
+    ...(recipe.governance.riskClassificationId ? [recipe.governance.riskClassificationId] : []),
+    ...(recipe.governance.samplingBatchId ? [recipe.governance.samplingBatchId] : []),
+  ];
+  if (!declaredIds.length) return;
+  const registry = context.rightsRegistry;
+  if (!registry) {
+    report("missing-reference", recipe.recipeId, "rights", "Declared rights or governance references require the isolated game registry");
+    return;
+  }
+  const checks: Array<[readonly string[], ReadonlySet<string>, string]> = [
+    [recipe.rights.artifactIds, new Set(registry.artifacts.map((entry) => entry.id)), "rights.artifactIds"],
+    [recipe.rights.usageDecisionIds, new Set(registry.decisions.map((entry) => entry.id)), "rights.usageDecisionIds"],
+    [recipe.rights.sourceIds, new Set(registry.sources.map((entry) => entry.id)), "rights.sourceIds"],
+    [recipe.rights.evidenceIds, new Set(registry.evidence.map((entry) => entry.id)), "rights.evidenceIds"],
+    [recipe.governance.reviewAttestationIds, new Set(registry.governance.attestations.map((entry) => entry.id)), "governance.reviewAttestationIds"],
+  ];
+  if (recipe.governance.riskClassificationId) {
+    checks.push([[recipe.governance.riskClassificationId], new Set(registry.governance.riskClassifications.map((entry) => entry.id)), "governance.riskClassificationId"]);
+  }
+  if (recipe.governance.samplingBatchId) {
+    checks.push([[recipe.governance.samplingBatchId], new Set(registry.governance.samplingBatches.map((entry) => entry.id)), "governance.samplingBatchId"]);
+  }
+  for (const [ids, available, field] of checks) {
+    for (const id of ids) {
+      if (!available.has(id)) report("missing-reference", recipe.recipeId, field, `Declared reference ${id} does not resolve`);
+    }
+  }
 }
 
 function validateSimulationProfile(
@@ -348,6 +534,9 @@ function validateNutrition(
     report("invalid-nutrition", recipe.recipeId, "nutritionProfile", "Nutrition servings and per-ingredient provenance must match the recipe");
   }
   const provenanceByIngredient = new Map(recipe.nutritionProfile.provenance.map((entry) => [entry.ingredientId, entry]));
+  if (provenanceByIngredient.size !== recipe.nutritionProfile.provenance.length) {
+    report("invalid-nutrition", recipe.recipeId, "nutritionProfile.provenance", "Nutrition provenance requires exactly one unique record per ingredient");
+  }
   let expectedTotal = zeroNutrition();
   for (const portion of recipe.ingredientPortions) {
     const ingredient = ingredientById.get(portion.ingredientId);
@@ -367,8 +556,14 @@ function validateNutrition(
       || provenance.provider !== "USDA FoodData Central"
       || provenance.datasetVersion !== ingredient.nutritionSource.datasetVersion
       || provenance.upstreamRecordId !== ingredient.nutritionSource.fdcId
+      || provenance.accessedAt !== ingredient.nutritionSource.accessedAt
+      || provenance.ingredientState !== ingredient.defaultState
+      || recipe.ingredientPortions.some((portion) => portion.ingredientId === ingredientId && portion.initialState !== provenance.ingredientState)
+      || provenance.conversionMethod !== "massG / 100 × versioned USDA per-100g record; ingredient-sum-v1; rounded to 6 decimals"
+      || provenance.yieldFactor !== 1
+      || provenance.retentionFactor !== 1
     )) {
-      report("invalid-nutrition", recipe.recipeId, `nutritionProfile.provenance.${ingredientId}`, "Exportable recipes require versioned USDA FoodData Central provenance");
+      report("invalid-nutrition", recipe.recipeId, `nutritionProfile.provenance.${ingredientId}`, "Exportable ingredient-sum-v1 recipes require an exact USDA record/state/date conversion and neutral yield/retention factors");
     }
     if (!isPositive(provenance.yieldFactor) || !isPositive(provenance.retentionFactor) || !isIsoDate(provenance.accessedAt)) {
       report("invalid-nutrition", recipe.recipeId, `nutritionProfile.provenance.${ingredientId}.factors`, "Nutrition provenance requires positive factors and an access date");
@@ -480,6 +675,9 @@ function validateRightsAndGovernance(
     report("invalid-rights", recipe.recipeId, "rights.artifactIds", "Rights artifacts must be exactly identity, preparation, nutrition and simulation");
   }
   const sourceById = new Map(registry.sources.map((source) => [source.id, source]));
+  const recipeSourceRolesById = new Map(registry.sourceRoles
+    .filter((entry) => entry.recipeId === recipe.recipeId)
+    .map((entry) => [entry.sourceId, entry]));
   const evidenceById = new Map(registry.evidence.map((evidence) => [evidence.id, evidence]));
   const evidenceOriginById = new Map(registry.evidenceOrigins.map((entry) => [entry.evidenceId, entry.origin]));
   const assessmentById = new Map(registry.assessments.map((assessment) => [assessment.id, assessment]));
@@ -505,8 +703,15 @@ function validateRightsAndGovernance(
       report("missing-reference", recipe.recipeId, `artifact.${artifact.id}.usageDecisionId`, "Artifact decision must be included by the recipe");
       continue;
     }
+    const artifactAssessment = assessmentById.get(artifact.rightsAssessmentId);
+    if (!artifactAssessment || artifactAssessment.subject.type !== "artifact" || artifactAssessment.subject.id !== artifact.id) {
+      report("invalid-rights", recipe.recipeId, `artifact.${artifact.id}.rightsAssessmentId`, "Artifact rightsAssessmentId must resolve to an assessment of that exact artifact");
+    }
     if (decision.artifactId !== artifact.id || decision.intendedUse !== "game-commercial-ready" || !["allow", "allow-with-obligations"].includes(decision.decision)) {
       report("invalid-rights", recipe.recipeId, `decision.${decision.id}`, "UsageDecision must allow the exact game artifact for commercial use");
+    }
+    if (!decision.reviewer.trim() || !isIsoDate(decision.decidedAt)) {
+      report("invalid-rights", recipe.recipeId, `decision.${decision.id}.review`, "UsageDecision requires an identified reviewer and valid decision date");
     }
     if (!decision.assessmentIds.includes(artifact.rightsAssessmentId)) {
       report("missing-reference", recipe.recipeId, `decision.${decision.id}.assessmentIds`, "UsageDecision must include the artifact assessment");
@@ -515,9 +720,15 @@ function validateRightsAndGovernance(
       if (!recipe.rights.sourceIds.includes(sourceId)) {
         report("missing-reference", recipe.recipeId, `artifact.${artifact.id}.sourceIds`, "Artifact sources must be included to the recipe rights summary");
       }
-      const sourceAssessmentId = `game-rights-source-${sourceId}`;
-      if (!decision.assessmentIds.includes(sourceAssessmentId)) {
-        report("missing-reference", recipe.recipeId, `decision.${decision.id}.assessmentIds`, `Missing source assessment ${sourceAssessmentId}`);
+      const sourceAssessment = registry.assessments.find((assessment) => assessment.subject.type === "source" && assessment.subject.id === sourceId);
+      if (!sourceAssessment || !decision.assessmentIds.includes(sourceAssessment.id)) {
+        report("missing-reference", recipe.recipeId, `decision.${decision.id}.assessmentIds`, `Missing assessment bound to source ${sourceId}`);
+      }
+    }
+    for (const evidenceId of artifact.evidenceIds) {
+      const evidence = evidenceById.get(evidenceId);
+      if (!recipe.rights.evidenceIds.includes(evidenceId) || !evidence || !artifact.sourceIds.includes(evidence.sourceId) || evidenceOriginById.get(evidenceId) !== "source-record") {
+        report("invalid-rights", recipe.recipeId, `artifact.${artifact.id}.evidenceIds`, "Artifact Evidence must be declared by the recipe, resolve to an artifact source and originate from a source record");
       }
     }
     for (const assessmentId of decision.assessmentIds) {
@@ -549,6 +760,27 @@ function validateRightsAndGovernance(
         report("invalid-rights", recipe.recipeId, `attribution.${attribution.id}`, "ShareAlike material is excluded from the core game corpus");
       }
     }
+    for (const sourceId of artifact.sourceIds) {
+      const source = sourceById.get(sourceId);
+      if (source?.rights.status === "open-license" && /^(?:CC-BY-(?:3\.0|4\.0)|OGL-3\.0)$/.test(source.rights.licenseId)) {
+        const openRights = source.rights;
+        const sourceLicenseId = openRights.licenseId;
+        const satisfiesAttribution = artifact.attributionRequirementIds.some((attributionId) => {
+          const attribution = attributionById.get(attributionId);
+          return attribution?.artifactId === artifact.id
+            && attribution.licenseId === sourceLicenseId
+            && attribution.licenseUrl === openRights.licenseUrl
+            && attribution.creator.trim().length > 0
+            && attribution.workTitle.trim().length > 0
+            && attribution.sourceUrl.trim().length > 0
+            && attribution.notice.trim().length > 0
+            && (openRights.adaptationStatus !== "adapted" || Boolean(attribution.modificationNotice?.trim()));
+        });
+        if (!satisfiesAttribution) {
+          report("invalid-rights", recipe.recipeId, `artifact.${artifact.id}.attributionRequirementIds`, `Attributed open-license source ${sourceId} requires complete artifact attribution`);
+        }
+      }
+    }
   }
   if (new Set(recipe.rights.sourceIds).size < 2) {
     report("invalid-rights", recipe.recipeId, "rights.sourceIds", "Exportable recipes require at least two independent sources");
@@ -567,8 +799,21 @@ function validateRightsAndGovernance(
     if (source.rights.status === "open-license" && /(?:^|[- ])(?:nc|nd)(?:$|[- ])/i.test(source.rights.licenseId)) {
       report("invalid-rights", recipe.recipeId, `source.${sourceId}.rights`, "NC and ND licenses block commercial game export");
     }
+    if (source.rights.status === "open-license") {
+      const allowedLicenses = new Set(["CC0-1.0", "CC-BY-3.0", "CC-BY-4.0", "OGL-3.0"]);
+      if (!allowedLicenses.has(source.rights.licenseId)) {
+        report("invalid-rights", recipe.recipeId, `source.${sourceId}.rights.licenseId`, "Open-license sources must use a policy-approved commercial license");
+      }
+      if (source.rights.shareAlikeRequired) {
+        report("invalid-rights", recipe.recipeId, `source.${sourceId}.rights.shareAlikeRequired`, "ShareAlike sources are excluded from the core game corpus");
+      }
+    }
+    const sourceAssessment = registry.assessments.find((assessment) => assessment.subject.type === "source" && assessment.subject.id === sourceId);
+    if (sourceAssessment && !assessmentMatchesSourceRights(sourceAssessment, source)) {
+      report("invalid-rights", recipe.recipeId, `source.${sourceId}.rightsAssessment`, "Source rights and its assessment basis must identify the same rights route and authority");
+    }
   }
-  if (institutions.size < 2) report("invalid-rights", recipe.recipeId, "rights.sourceIds", "Sources must come from at least two independent institutions");
+  void institutions;
   for (const evidenceId of recipe.rights.evidenceIds) {
     const evidence = evidenceById.get(evidenceId);
     if (!evidence || !recipe.rights.sourceIds.includes(evidence.sourceId)) {
@@ -600,7 +845,23 @@ function validateRightsAndGovernance(
       .flatMap((claim) => claim.evidenceIds));
     const acceptedUsesBySource = new Map(researchRecord.sourceDecisions.flatMap((decision) =>
       decision.disposition === "accepted" ? [[decision.sourceId, new Set(decision.uses)] as const] : []));
+    const materialSourceIds = new Set<string>();
+    const materialRoles = new Set<string>();
+    const materialWorkFamilies = new Set<string>();
+    const preparationArtifact = artifacts.find((artifact) => artifact.kind === "preparation");
+    for (const evidenceId of preparationArtifact?.evidenceIds ?? []) {
+      const evidence = evidenceById.get(evidenceId);
+      const sourceRole = evidence ? recipeSourceRolesById.get(evidence.sourceId) : undefined;
+      if (!evidence || evidence.relation !== "supports" || !includedClaimEvidenceIds.has(evidenceId) || !acceptedUsesBySource.get(evidence.sourceId)?.has("preparation") || !sourceRole || !["recipe-primary", "recipe-cross-check"].includes(sourceRole.role)) continue;
+      materialSourceIds.add(evidence.sourceId);
+      materialRoles.add(sourceRole.role);
+      if (sourceRole.workFamilyId) materialWorkFamilies.add(sourceRole.workFamilyId);
+    }
+    if (materialSourceIds.size < 2 || materialWorkFamilies.size < 2 || !materialRoles.has("recipe-primary") || !materialRoles.has("recipe-cross-check")) {
+      report("invalid-rights", recipe.recipeId, "rights.materialSourceCoverage", "Preparation requires included claim-level Evidence from distinct primary and cross-check recipe work families; identity-only, nutrition and safety sources do not count");
+    }
     for (const artifact of artifacts) {
+      if (!["identity", "preparation", "nutrition", "simulation"].includes(artifact.kind)) continue;
       const requiredUse = artifact.kind as "identity" | "preparation" | "nutrition" | "simulation";
       const covered = artifact.evidenceIds.some((evidenceId) => {
         const evidence = evidenceById.get(evidenceId);
@@ -625,17 +886,31 @@ function validateAssessment(
   now: string,
   report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
 ) {
-  if (assessment.subject.type === "artifact" && assessment.subject.id !== artifact.id) {
-    report("invalid-rights", recipeId, `assessment.${assessment.id}.subject`, "Artifact assessment must identify the reviewed artifact");
+  const exactArtifactAssessment = assessment.id === artifact.rightsAssessmentId
+    && assessment.subject.type === "artifact"
+    && assessment.subject.id === artifact.id;
+  const exactSourceAssessment = assessment.subject.type === "source"
+    && artifact.sourceIds.includes(assessment.subject.id);
+  if (!exactArtifactAssessment && !exactSourceAssessment) {
+    report("invalid-rights", recipeId, `assessment.${assessment.id}.subject`, "Assessment must identify the exact artifact or one of its exact sources");
   }
   if (assessment.jurisdictionBaseline.join(",") !== "CN,US,EU,UK" || assessment.applicableTerritories.join(",") !== "CN,US,EU,UK") {
     report("invalid-rights", recipeId, `assessment.${assessment.id}.jurisdictionBaseline`, "Game rights require the CN/US/EU/UK baseline");
+  }
+  if (!assessment.authorityVersion.trim() || !isIsoDate(assessment.accessedAt) || !assessment.reviewer.trim()) {
+    report("invalid-rights", recipeId, `assessment.${assessment.id}.provenance`, "Assessment requires authority version, access date and identified reviewer");
+  }
+  if (!isCompleteAssessmentBasis(assessment.basis)) {
+    report("invalid-rights", recipeId, `assessment.${assessment.id}.basis`, "Assessment basis is incomplete or does not use an HTTPS authority URL");
   }
   if (!isIsoDate(assessment.assessedAt) || !assessment.reviewDueAt || !isIsoDate(assessment.reviewDueAt) || assessment.reviewDueAt < now) {
     report("invalid-rights", recipeId, `assessment.${assessment.id}.review`, "Assessment must be current and have an unexpired review date");
   }
   if (assessment.uncertainty.trim()) report("invalid-rights", recipeId, `assessment.${assessment.id}.uncertainty`, "Unresolved rights uncertainty blocks export");
   for (const action of rightsActions) {
+    if (!assessment.permissions[action].scope.trim()) {
+      report("invalid-rights", recipeId, `assessment.${assessment.id}.permissions.${action}.scope`, "Each permission requires a non-empty scope");
+    }
     if (!["allowed", "allowed-with-obligations"].includes(assessment.permissions[action].status)) {
       report("invalid-rights", recipeId, `assessment.${assessment.id}.permissions.${action}`, "All four game-use permissions must be allowed");
     }
@@ -756,14 +1031,16 @@ export function deriveMinimumGamePublishingRisk(
     assessment.uncertainty.trim()
     || Object.values(assessment.permissions).some((permission) => ["prohibited", "review-required"].includes(permission.status))
     || Object.values(assessment.risks).some((risk) => risk.status === "review-required"));
-  if (unresolvedRights || unresolvedDisagreement || safetyCritical) {
+  const permissionGranted = registry.sources.some((source) => recipe.rights.sourceIds.includes(source.id) && source.rights.status === "permission-granted");
+  if (unresolvedRights || unresolvedDisagreement || safetyCritical || permissionGranted) {
     return {
       level: "high",
-      reasonCodes: [
+      reasonCodes: [...new Set([
         ...(safetyCritical ? ["food-safety-critical-process" as const] : []),
         ...(unresolvedDisagreement ? ["unresolved-reviewer-disagreement" as const] : []),
         ...(unresolvedRights ? ["professional-legal-checkpoint" as const] : []),
-      ],
+        ...(permissionGranted ? ["professional-legal-checkpoint" as const] : []),
+      ])],
     };
   }
   const expressiveAdaptation = artifacts.some((artifact) => ["adaptation", "licensed-copy"].includes(artifact.derivation));
@@ -1005,12 +1282,11 @@ function validateSamplingHistory(
         .filter((itemId) => allRecipes.some((candidate) => candidate.recipeId === itemId && candidate.eligibility === "exportable"))
         .sort();
       const equivalence = batch.equivalenceClasses.find((entry) => entry.key === key);
-      const cleanCurrentBatch = batch.policyVersion === registry.policyVersion
-        && batch.artifactSetVersion === createGameArtifactSetVersion(allRecipes.filter((candidate) => batch.itemIds.includes(candidate.recipeId)), registry, context)
-        && batch.evidenceDigest === createSamplingBatchEvidenceDigest(batch)
-        && isIndependentActors(batch.author, batch.auditor)
-        && !batch.auditorModifiedContent
-        && batch.verdict === "pass"
+      const validationIssues: GameRecipeIssue[] = [];
+      validateSamplingBatch(batch, allRecipes, registry, context, [], (code, recipeId, field, message) => {
+        validationIssues.push({ code, recipeId, field, message });
+      });
+      const cleanCurrentBatch = validationIssues.length === 0
         && !allFindings.some((finding) => finding.severity === "major" || finding.disposition === "unresolved");
       const fullReview = Boolean(cleanCurrentBatch
         && equivalence
@@ -1064,6 +1340,7 @@ function validateScenarios(
   nodeById: ReadonlyMap<string, GameRecipeV1["operationGraph"]["nodes"][number]>,
   portionIds: ReadonlySet<string>,
   ingredientById: ReadonlyMap<string, GameIngredientCatalogV1["ingredients"][number]>,
+  operationById: ReadonlyMap<string, GameOperationDefinitionV1>,
   report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
 ) {
   const scenarioIds = new Set<string>();
@@ -1072,6 +1349,16 @@ function validateScenarios(
     if (scenarioIds.has(scenario.scenarioId)) report("duplicate-id", recipe.recipeId, `scenarios.${scenario.scenarioId}`, "Scenario IDs must be unique");
     scenarioIds.add(scenario.scenarioId);
     if (scenario.baselineArtifactVersion !== recipe.artifactVersion) report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.baselineArtifactVersion`, "Scenario must target the current recipe artifact version");
+    if (scenario.applicableEngine !== recipe.simulationProfile) report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.applicableEngine`, "Scenario engine must match its baseline recipe profile");
+    reportDuplicateStrings(scenario.expectedFaultCodes, recipe.recipeId, `scenarios.${scenario.scenarioId}.expectedFaultCodes`, report);
+    reportDuplicateStrings(scenario.causeCodes, recipe.recipeId, `scenarios.${scenario.scenarioId}.causeCodes`, report);
+    reportDuplicateStrings(scenario.expectedDeltas.map((delta) => delta.dimension), recipe.recipeId, `scenarios.${scenario.scenarioId}.expectedDeltas`, report);
+    if (!scenario.causeCodes.length || scenario.causeCodes.some((code) => !code.trim())) {
+      report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.causeCodes`, "Every scenario requires at least one non-empty causal event code");
+    }
+    if (scenario.expectedFaultCodes.some((code) => !code.trim())) {
+      report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.expectedFaultCodes`, "Expected fault codes must be non-empty");
+    }
     if (scenario.mutation.targetNodeId) {
       if (!nodeById.has(scenario.mutation.targetNodeId)) report("missing-reference", recipe.recipeId, `scenarios.${scenario.scenarioId}.targetNodeId`, "Mutation target node is missing");
       coveredCriticalNodes.add(scenario.mutation.targetNodeId);
@@ -1098,6 +1385,10 @@ function validateScenarios(
       if (!replacementEquipmentId?.trim() || replacementEquipmentId === targetNode?.equipmentId) {
         report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementEquipmentId`, "Wrong-equipment requires a non-empty replacement different from the baseline equipment");
       }
+      const definition = targetNode ? operationById.get(targetNode.operationType) : undefined;
+      if (replacementEquipmentId && definition?.compatibleEquipmentIds.includes(replacementEquipmentId)) {
+        report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementEquipmentId`, "Wrong-equipment replacement must be incompatible with the target operation");
+      }
     }
     if (scenario.mutation.type === "allowed-substitution") {
       const targetPortion = recipe.ingredientPortions.find((portion) => portion.portionId === scenario.mutation.targetPortionId);
@@ -1120,11 +1411,70 @@ function validateScenarios(
     if (["reorder", "duplicate"].includes(scenario.mutation.type) && scenario.nutritionEffect !== "unchanged") {
       report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.nutritionEffect`, "Order-only mutations cannot change nutrition");
     }
+    validateMutationContract(recipe, scenario, nodeById, portionIds, report);
   }
   for (const node of nodeById.values()) {
     if (node.criticality !== "completion" && !coveredCriticalNodes.has(node.nodeId)) {
       report("invalid-scenario", recipe.recipeId, `operationGraph.${node.nodeId}`, "Every quality or safety critical node requires mutation coverage");
     }
+  }
+}
+
+function validateMutationContract(
+  recipe: GameRecipeV1,
+  scenario: GameRecipeV1["scenarios"][number],
+  nodeById: ReadonlyMap<string, GameRecipeV1["operationGraph"]["nodes"][number]>,
+  portionIds: ReadonlySet<string>,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+) {
+  const { mutation } = scenario;
+  const field = `scenarios.${scenario.scenarioId}`;
+  const nodeTypes = new Set(["omit", "reorder", "duplicate", "heat-too-low", "heat-too-high", "duration-too-short", "duration-too-long", "cut-size-too-small", "cut-size-too-large", "low-uniformity", "season-too-early", "season-too-late", "overcrowding", "wrong-equipment", "missing-state-transition"]);
+  const quantityTypes = new Set(["quantity-too-low", "quantity-too-high"]);
+  const targetNode = mutation.targetNodeId ? nodeById.get(mutation.targetNodeId) : undefined;
+  if (nodeTypes.has(mutation.type) && !targetNode) {
+    report("missing-reference", recipe.recipeId, `${field}.targetNodeId`, `${mutation.type} requires an existing target operation`);
+  }
+  if (quantityTypes.has(mutation.type) && (!mutation.targetPortionId || !portionIds.has(mutation.targetPortionId))) {
+    report("missing-reference", recipe.recipeId, `${field}.targetPortionId`, `${mutation.type} requires an existing ingredient portion`);
+  }
+  const lowerScalarTypes = new Set(["quantity-too-low", "heat-too-low", "duration-too-short", "cut-size-too-small", "low-uniformity"]);
+  const upperScalarTypes = new Set(["quantity-too-high", "heat-too-high", "duration-too-long", "cut-size-too-large", "overcrowding"]);
+  if (lowerScalarTypes.has(mutation.type) && !(typeof mutation.scalar === "number" && mutation.scalar >= 0 && mutation.scalar < 1)) {
+    report("invalid-scenario", recipe.recipeId, `${field}.scalar`, `${mutation.type} requires a scalar within [0, 1)`);
+  }
+  if (upperScalarTypes.has(mutation.type) && !(typeof mutation.scalar === "number" && mutation.scalar > 1)) {
+    report("invalid-scenario", recipe.recipeId, `${field}.scalar`, `${mutation.type} requires a scalar greater than 1`);
+  }
+  if (["heat-too-low", "heat-too-high"].includes(mutation.type) && targetNode && targetNode.parameters.heatLevel === undefined && targetNode.parameters.temperatureC === undefined) {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Heat mutation requires a heat- or temperature-controlled operation");
+  }
+  if (["duration-too-short", "duration-too-long"].includes(mutation.type) && targetNode && targetNode.activeDurationMs + targetNode.waitDurationMs <= 0) {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Duration mutation requires a positive baseline duration");
+  }
+  if (["cut-size-too-small", "cut-size-too-large"].includes(mutation.type) && targetNode?.parameters.cutSizeMm === undefined) {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Cut-size mutation requires a cutSizeMm baseline");
+  }
+  if (mutation.type === "low-uniformity" && targetNode?.parameters.uniformity === undefined) {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Uniformity mutation requires a uniformity baseline");
+  }
+  if (["season-too-early", "season-too-late"].includes(mutation.type) && targetNode?.operationType !== "season") {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Season-timing mutation must target a season operation");
+  }
+  if (mutation.type === "overcrowding" && targetNode?.parameters.capacityG === undefined) {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Overcrowding requires a capacityG baseline");
+  }
+  if (mutation.type === "missing-state-transition" && targetNode && !targetNode.outputStateIds.length) {
+    report("invalid-scenario", recipe.recipeId, `${field}.targetNodeId`, "Missing-state mutation requires a baseline output state transition");
+  }
+  if (quantityTypes.has(mutation.type) && scenario.nutritionEffect !== "recalculate-from-quantities") {
+    report("invalid-scenario", recipe.recipeId, `${field}.nutritionEffect`, "Quantity mutations must recalculate nutrition from quantities");
+  }
+  if (![...quantityTypes, "allowed-substitution"].includes(mutation.type) && !["heat-too-low", "heat-too-high"].includes(mutation.type) && scenario.nutritionEffect !== "unchanged") {
+    report("invalid-scenario", recipe.recipeId, `${field}.nutritionEffect`, "Non-quantity mutations cannot change nutrition without an explicit retention model");
+  }
+  if (["heat-too-low", "heat-too-high"].includes(mutation.type) && !["unchanged", "requires-retention-model"].includes(scenario.nutritionEffect)) {
+    report("invalid-scenario", recipe.recipeId, `${field}.nutritionEffect`, "Heat mutations may only remain unchanged or require a retention model");
   }
 }
 
@@ -1139,6 +1489,67 @@ function validateParameterRanges(
   if (parameters.strength !== undefined && (parameters.strength < 0 || parameters.strength > 1)) report("invalid-number", recipeId, `operationGraph.${nodeId}.parameters.strength`, "Strength must be within [0, 1]");
   if (parameters.cutSizeMm !== undefined && (parameters.cutSizeMm < 1 || parameters.cutSizeMm > 100)) report("invalid-number", recipeId, `operationGraph.${nodeId}.parameters.cutSizeMm`, "Cut size must be within [1, 100] mm");
   if (parameters.quantityG !== undefined && !isPositive(parameters.quantityG)) report("invalid-number", recipeId, `operationGraph.${nodeId}.parameters.quantityG`, "Quantity must be positive");
+  if (parameters.capacityG !== undefined && !isPositive(parameters.capacityG)) report("invalid-number", recipeId, `operationGraph.${nodeId}.parameters.capacityG`, "Capacity must be positive");
+  if (parameters.temperatureC !== undefined && (parameters.temperatureC < -273.15 || parameters.temperatureC > 500)) report("invalid-number", recipeId, `operationGraph.${nodeId}.parameters.temperatureC`, "Temperature must be physically valid and within the supported culinary range");
+}
+
+function isCompleteAssessmentBasis(basis: RightsAssessment["basis"]): boolean {
+  switch (basis.kind) {
+    case "first-party": return basis.owner.trim().length > 0;
+    case "public-domain": return basis.basis.trim().length > 0;
+    case "open-license": return basis.licenseId.trim().length > 0 && isHttpsUrl(basis.licenseUrl);
+    case "permission": return basis.permissionReferenceId.trim().length > 0;
+    case "terms": return basis.provider.trim().length > 0 && isHttpsUrl(basis.termsUrl) && (basis.effectiveDate === undefined || isIsoDate(basis.effectiveDate));
+    case "reference-only": return basis.boundary.trim().length > 0;
+  }
+}
+
+function assessmentMatchesSourceRights(assessment: RightsAssessment, source: Source): boolean {
+  switch (source.rights.status) {
+    case "public-domain":
+      return assessment.basis.kind === "public-domain" && assessment.basis.basis === source.rights.basis;
+    case "open-license":
+      return assessment.basis.kind === "open-license"
+        && assessment.basis.licenseId === source.rights.licenseId
+        && assessment.basis.licenseUrl === source.rights.licenseUrl;
+    case "permission-granted":
+      return assessment.basis.kind === "permission";
+    case "reference-only":
+      return assessment.basis.kind === "reference-only";
+    case "unknown":
+      return false;
+  }
+}
+
+function allowedTargetDimensions(operationType: GameRecipeV1["operationGraph"]["nodes"][number]["operationType"]): ReadonlySet<string> {
+  if (["wash", "peel", "slice", "dice", "mince", "crush", "grind", "mix", "whisk", "knead", "fold", "shape", "stir", "toss"].includes(operationType)) return new Set(["structural-integrity"]);
+  if (["marinate", "rest", "proof", "ferment"].includes(operationType)) return new Set(["aroma", "salt", "sweet", "acidity", "umami", "pungency", "structural-integrity"]);
+  if (["set-heat", "boil", "simmer", "steam", "pan-fry", "deep-fry", "bake", "roast", "grill"].includes(operationType)) return new Set(["doneness", "wateriness", "browning", "burn", "aroma", "structural-integrity"]);
+  if (["drain", "rinse", "strain", "blend"].includes(operationType)) return new Set(["wateriness", "structural-integrity"]);
+  if (["brew", "extract", "chill", "freeze"].includes(operationType)) return new Set(["wateriness", "aroma", "bitterness", "structural-integrity"]);
+  if (operationType === "season") return new Set(["salt", "sweet", "acidity", "umami", "pungency", "bitterness", "aroma"]);
+  return new Set();
+}
+
+function isHttpsUrl(value: string): boolean {
+  try {
+    return new URL(value).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function reportDuplicateStrings(
+  values: readonly string[],
+  recipeId: string,
+  field: string,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+) {
+  const seen = new Set<string>();
+  for (const value of values) {
+    if (seen.has(value)) report("duplicate-id", recipeId, field, `Duplicate reference ${value}`);
+    seen.add(value);
+  }
 }
 
 function hasCycle(nodes: ReadonlyMap<string, GameRecipeV1["operationGraph"]["nodes"][number]>): boolean {

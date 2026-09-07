@@ -1,14 +1,40 @@
 {
-  "artifactVersion": "clv1-8c3562a4c791a9eb",
+  "artifactVersion": "clv1-d5ace36deed485e1",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:french-ratatouille-op-001-slice:duration",
+      "operation:french-ratatouille-op-001-slice:parameters-source",
+      "operation:french-ratatouille-op-001-slice:targets-source",
+      "operation:french-ratatouille-op-006-rest:duration",
+      "operation:french-ratatouille-op-007-stir:duration",
+      "operation:french-ratatouille-op-007-stir:inputs",
+      "operation:french-ratatouille-op-007-stir:parameters-source",
+      "operation:french-ratatouille-op-007-stir:targets-source",
+      "operation:french-ratatouille-op-009-season:duration",
+      "operation:french-ratatouille-op-009-season:parameters",
+      "operation:french-ratatouille-op-009-season:targets-source",
+      "operation:french-ratatouille-op-010-mix:duration",
+      "operation:french-ratatouille-op-010-mix:parameters-source",
+      "operation:french-ratatouille-op-010-mix:targets-source",
+      "portion:french-ratatouille-portion-05:source-step",
+      "portion:french-ratatouille-portion-07:source-step",
+      "portion:french-ratatouille-portion-08:source-step",
+      "scenario:french-ratatouille-french-ratatouille-op-001-slice-omit:expected-outcome",
+      "scenario:french-ratatouille-french-ratatouille-op-006-rest-omit:expected-outcome",
+      "scenario:french-ratatouille-french-ratatouille-op-007-stir-omit:expected-outcome",
+      "scenario:french-ratatouille-french-ratatouille-op-009-season-omit:expected-outcome",
+      "scenario:french-ratatouille-french-ratatouille-op-010-mix-omit:expected-outcome",
+      "source-step:2:operation",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-french-ratatouille",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -226,7 +252,12 @@
         "criticality": "quality",
         "dependsOn": [],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "french-ratatouille-portion-01",
+          "french-ratatouille-portion-02",
+          "french-ratatouille-portion-03",
+          "french-ratatouille-portion-04"
+        ],
         "nodeId": "french-ratatouille-op-001-slice",
         "operationType": "slice",
         "outputStateIds": [
@@ -253,7 +284,7 @@
         "dependsOn": [
           "french-ratatouille-op-001-slice"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-01"
         ],
@@ -275,7 +306,7 @@
         "dependsOn": [
           "french-ratatouille-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-02"
         ],
@@ -297,7 +328,7 @@
         "dependsOn": [
           "french-ratatouille-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-03"
         ],
@@ -319,7 +350,7 @@
         "dependsOn": [
           "french-ratatouille-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-04"
         ],
@@ -336,88 +367,19 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "french-ratatouille-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-ratatouille-portion-05"
-        ],
-        "nodeId": "french-ratatouille-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "french-ratatouille-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 12
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "french-ratatouille-op-006-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-ratatouille-portion-07"
-        ],
-        "nodeId": "french-ratatouille-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "french-ratatouille-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "french-ratatouille-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-ratatouille-portion-08"
-        ],
-        "nodeId": "french-ratatouille-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "french-ratatouille-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 1.8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "french-ratatouille-op-008-add"
+          "french-ratatouille-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-01",
           "french-ratatouille-portion-02",
           "french-ratatouille-portion-03",
-          "french-ratatouille-portion-04",
-          "french-ratatouille-portion-05",
-          "french-ratatouille-portion-07",
-          "french-ratatouille-portion-08"
+          "french-ratatouille-portion-04"
         ],
-        "nodeId": "french-ratatouille-op-009-rest",
+        "nodeId": "french-ratatouille-op-006-rest",
         "operationType": "rest",
         "outputStateIds": [
           "french-ratatouille-step-1-rest"
@@ -431,43 +393,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "french-ratatouille-op-009-rest"
+          "french-ratatouille-op-006-rest"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "french-ratatouille-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "french-ratatouille-step-2-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.6
-        },
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "french-ratatouille-op-010-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "french-ratatouille-op-011-stir",
+        "nodeId": "french-ratatouille-op-007-stir",
         "operationType": "stir",
         "outputStateIds": [
           "french-ratatouille-step-3-stir"
@@ -487,48 +417,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "french-ratatouille-op-011-stir"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "french-ratatouille-op-012-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "french-ratatouille-step-4-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35
-        },
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "french-ratatouille-op-012-pan-fry"
+          "french-ratatouille-op-007-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-06"
         ],
-        "nodeId": "french-ratatouille-op-013-add",
+        "nodeId": "french-ratatouille-op-008-add",
         "operationType": "add",
         "outputStateIds": [
           "french-ratatouille-portion-06-added"
@@ -544,13 +442,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "french-ratatouille-op-013-add"
+          "french-ratatouille-op-008-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-06"
         ],
-        "nodeId": "french-ratatouille-op-014-season",
+        "nodeId": "french-ratatouille-op-009-season",
         "operationType": "season",
         "outputStateIds": [
           "french-ratatouille-step-5-season"
@@ -570,13 +468,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "french-ratatouille-op-014-season"
+          "french-ratatouille-op-009-season"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-ratatouille-portion-06"
         ],
-        "nodeId": "french-ratatouille-op-015-mix",
+        "nodeId": "french-ratatouille-op-010-mix",
         "operationType": "mix",
         "outputStateIds": [
           "french-ratatouille-step-5-mix"
@@ -599,7 +497,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "french-ratatouille-op-015-mix"
+          "french-ratatouille-op-010-mix"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -612,7 +510,7 @@
           "french-ratatouille-portion-07",
           "french-ratatouille-portion-08"
         ],
-        "nodeId": "french-ratatouille-op-016-serve",
+        "nodeId": "french-ratatouille-op-011-serve",
         "operationType": "serve",
         "outputStateIds": [
           "french-ratatouille-served"
@@ -626,26 +524,16 @@
   },
   "recipeId": "french-ratatouille",
   "rights": {
-    "artifactIds": [
-      "game-artifact-french-ratatouille-identity",
-      "game-artifact-french-ratatouille-preparation",
-      "game-artifact-french-ratatouille-nutrition",
-      "game-artifact-french-ratatouille-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-french-ratatouille-identity",
-      "game-usage-french-ratatouille-preparation",
-      "game-usage-french-ratatouille-nutrition",
-      "game-usage-french-ratatouille-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
+      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -669,7 +557,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
+      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -684,80 +572,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "french-ratatouille-op-009-rest",
+        "targetNodeId": "french-ratatouille-op-006-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-009-rest-omit"
+      "scenarioId": "french-ratatouille-french-ratatouille-op-006-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "french-ratatouille-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-010-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "french-ratatouille-op-010-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-010-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
+      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -772,80 +596,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "french-ratatouille-op-011-stir",
+        "targetNodeId": "french-ratatouille-op-007-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-011-stir-omit"
+      "scenarioId": "french-ratatouille-french-ratatouille-op-007-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "french-ratatouille-op-012-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-012-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "french-ratatouille-op-012-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-012-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
+      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -860,16 +620,16 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "french-ratatouille-op-014-season",
+        "targetNodeId": "french-ratatouille-op-009-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-014-season-omit"
+      "scenarioId": "french-ratatouille-french-ratatouille-op-009-season-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-8c3562a4c791a9eb",
+      "baselineArtifactVersion": "clv1-d5ace36deed485e1",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -884,12 +644,12 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "french-ratatouille-op-015-mix",
+        "targetNodeId": "french-ratatouille-op-010-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "french-ratatouille-french-ratatouille-op-015-mix-omit"
+      "scenarioId": "french-ratatouille-french-ratatouille-op-010-mix-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

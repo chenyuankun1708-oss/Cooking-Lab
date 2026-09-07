@@ -6,6 +6,7 @@ import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import {
   GameDataSchemaError,
+  parseGameDataManifest,
   parseGameIngredientCatalog,
   parseGameOperationCatalog,
   parseGameRecipe,
@@ -38,13 +39,43 @@ describe("M12 fail-closed runtime schemas", () => {
   it("rejects malformed rights and operation catalog records before semantic audit", () => {
     const registry = structuredClone(canonical.rightsRegistry) as unknown as Record<string, unknown>;
     const governance = registry.governance as Record<string, unknown>;
-    const classifications = governance.riskClassifications as Array<Record<string, unknown>>;
-    classifications[0].level = "mostly-low";
+    governance.riskClassifications = [{
+      id: "hostile-classification",
+      itemId: "hostile-item",
+      artifactSetVersion: "hostile-version",
+      level: "mostly-low",
+      reasonCodes: ["clear-first-party-or-reference-only-rights"],
+      equivalenceClassKeys: ["hostile:key"],
+      policyVersion: "hostile-policy",
+      classifiedAt: "2026-09-08",
+    }];
     expect(() => parseGameRightsRegistry(registry, "rights.json")).toThrow(/rights\.json\.governance\.riskClassifications\[0\]\.level/);
 
     const operations = structuredClone(gameOperationCatalog) as unknown as Array<Record<string, unknown>>;
     operations[0].compatibility = "best-effort";
     expect(() => parseGameOperationCatalog({ version: "cooking-lab-game-operations-v1", operations }, "operations.json")).toThrow(/operations\.json\.operations\[0\]\.compatibility/);
+  });
+
+  it.each([
+    ["absolute path", "/tmp/recipes.json"],
+    ["parent traversal", "godot/../rights.json"],
+    ["portable parent traversal", "godot\\..\\rights.json"],
+  ])("rejects manifest artifact %s", (_label, hostilePath) => {
+    const manifest = {
+      schemaVersion: "cooking-lab-game-manifest-v1",
+      catalogVersion: "fixture",
+      generatorVersion: "fixture",
+      minimumAdapterVersion: "fixture",
+      recipeCount: 1,
+      recipes: [{ recipeId: "fixture", path: hostilePath, sha256: "hash", artifactVersion: "v1", simulationProfile: "data-only" }],
+      ingredientCatalog: { path: "godot/ingredients.json", sha256: "hash" },
+      nutritionDataset: { path: "nutrition-dataset.json", sha256: "hash", schemaVersion: "cooking-lab-usda-subset-v1", provider: "USDA FoodData Central", upstreamArchives: [] },
+      operationCatalog: { path: "godot/operations.json", sha256: "hash", version: "cooking-lab-game-operations-v1" },
+      rightsRegistry: { path: "rights-registry.json", sha256: "hash", version: "cooking-lab-game-rights-v1" },
+      attribution: { path: "attribution.json", sha256: "hash" },
+      sqlite: { path: "game-data.sqlite", sha256: "hash" },
+    };
+    expect(() => parseGameDataManifest(manifest, "manifest.json")).toThrow(/manifest\.json\.recipes\[0\]\.path/);
   });
 
   it("loads files through the schemas and identifies the hostile file path", () => {

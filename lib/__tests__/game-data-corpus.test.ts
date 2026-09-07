@@ -13,21 +13,12 @@ describe("M12-M13 canonical game corpus", () => {
   const migrated = data.recipes.filter((recipe) => recipe.sourceCulinaryItemId);
   const gameOnly = data.recipes.filter((recipe) => !recipe.sourceCulinaryItemId);
 
-  it("keeps the 50-item Web library isolated from 510 game-only recipes", () => {
+  it("keeps the 50-item Web library isolated from the M12 game migration", () => {
     expect(webItems).toHaveLength(50);
     expect(migrated).toHaveLength(50);
-    expect(gameOnly).toHaveLength(510);
-    expect(data.recipes).toHaveLength(560);
-    expect(gameOnly.every((recipe) => getPublishedCulinaryItemBySlug(recipe.slug) === undefined)).toBe(true);
-  });
-
-  it("matches the locked M13 type and formula composition", () => {
-    expect(gameOnly.filter((recipe) => recipe.itemType === "dish")).toHaveLength(260);
-    expect(gameOnly.filter((recipe) => recipe.itemType === "dessert")).toHaveLength(100);
-    expect(gameOnly.filter((recipe) => recipe.itemType === "tea")).toHaveLength(50);
-    expect(gameOnly.filter((recipe) => recipe.itemType === "coffee")).toHaveLength(40);
-    expect(gameOnly.filter((recipe) => recipe.itemType === "non-alcoholic-drink")).toHaveLength(60);
-    expect(gameOnly.filter((recipe) => recipe.itemType === "alcoholic-drink")).toHaveLength(0);
+    expect(gameOnly).toHaveLength(0);
+    expect(data.recipes).toHaveLength(50);
+    expect(migrated.every((recipe) => getPublishedCulinaryItemBySlug(recipe.slug))).toBe(true);
   });
 
   it("passes structural, numerical, DAG, nutrition and mutation validation while remaining draft before review", () => {
@@ -38,39 +29,10 @@ describe("M12-M13 canonical game corpus", () => {
       now: "2026-09-08",
     });
     expect(result.issues).toEqual([]);
-    expect(result.recipeCount).toBe(560);
+    expect(result.recipeCount).toBe(50);
     expect(result.exportableCount).toBe(0);
     expect(result.ready).toBe(false);
-    expect(gameOnly.every((recipe) => recipe.scenarios.length > 0)).toBe(true);
-    expect(gameOnly.every((recipe) => recipe.authoring.containsGeneratedExpression === false)).toBe(true);
-  });
-
-  it("keeps allowed substitutions catalog-backed, non-identical and nutrition-aware", () => {
-    const ingredientIds = new Set(data.ingredients.ingredients.map((ingredient) => ingredient.ingredientId));
-    const substitutions = gameOnly.flatMap((recipe) => recipe.scenarios
-      .filter((scenario) => scenario.mutation.type === "allowed-substitution")
-      .map((scenario) => ({ recipe, scenario })));
-
-    expect(substitutions.length).toBeGreaterThan(0);
-    for (const { recipe, scenario } of substitutions) {
-      const target = recipe.ingredientPortions.find((portion) => portion.portionId === scenario.mutation.targetPortionId);
-      expect(target).toBeDefined();
-      expect(ingredientIds.has(scenario.mutation.replacementIngredientId ?? "")).toBe(true);
-      expect(scenario.mutation.replacementIngredientId).not.toBe(target?.ingredientId);
-      expect(scenario.nutritionEffect).toBe("recalculate-from-quantities");
-    }
-  });
-
-  it("uses ingredient-aware base cooking and root-vegetable preparation", () => {
-    const brownRice = gameOnly.find((recipe) => recipe.recipeId.startsWith("game-bowl-brown-rice-"));
-    const pasta = gameOnly.find((recipe) => recipe.recipeId.startsWith("game-bowl-pasta-dry-"));
-    const potato = gameOnly.find((recipe) => recipe.recipeId.endsWith("-potato"));
-    if (!brownRice || !pasta || !potato) throw new Error("Expected corpus fixtures are missing");
-
-    expect(brownRice.operationGraph.nodes.find((node) => node.operationType === "simmer")?.waitDurationMs).toBe(35 * 60_000);
-    expect(pasta.operationGraph.nodes.find((node) => node.operationType === "boil")?.waitDurationMs).toBe(10 * 60_000);
-    expect(potato.operationGraph.nodes.filter((node) => node.operationType === "boil")).toHaveLength(1);
-    expect(potato.operationGraph.nodes.some((node) => node.operationType === "dice")).toBe(true);
+    expect(migrated.every((recipe) => recipe.authoring.containsGeneratedExpression === false)).toBe(true);
   });
 
   it("stores canonical JSON with deterministic key order and terminal newline", () => {

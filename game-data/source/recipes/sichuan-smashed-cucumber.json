@@ -1,14 +1,41 @@
 {
-  "artifactVersion": "clv1-1d51f2ce6d603b74",
+  "artifactVersion": "clv1-ab380db7ee5484fe",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:sichuan-smashed-cucumber-op-001-wash:duration",
+      "operation:sichuan-smashed-cucumber-op-003-mix:duration",
+      "operation:sichuan-smashed-cucumber-op-003-mix:inputs",
+      "operation:sichuan-smashed-cucumber-op-003-mix:parameters-source",
+      "operation:sichuan-smashed-cucumber-op-003-mix:targets-source",
+      "operation:sichuan-smashed-cucumber-op-004-rest:duration",
+      "operation:sichuan-smashed-cucumber-op-004-rest:inputs",
+      "operation:sichuan-smashed-cucumber-op-005-mince:duration",
+      "operation:sichuan-smashed-cucumber-op-005-mince:parameters-source",
+      "operation:sichuan-smashed-cucumber-op-005-mince:targets-source",
+      "operation:sichuan-smashed-cucumber-op-008-serve:duration",
+      "operation:sichuan-smashed-cucumber-op-008-serve:inputs",
+      "operation:sichuan-smashed-cucumber-op-009-fold:duration",
+      "operation:sichuan-smashed-cucumber-op-009-fold:inputs",
+      "operation:sichuan-smashed-cucumber-op-009-fold:parameters-source",
+      "operation:sichuan-smashed-cucumber-op-009-fold:targets-source",
+      "portion:sichuan-smashed-cucumber-portion-02:source-step",
+      "portion:sichuan-smashed-cucumber-portion-04:source-step",
+      "portion:sichuan-smashed-cucumber-portion-06:source-step",
+      "portion:sichuan-smashed-cucumber-portion-07:source-step",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-001-wash-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-003-mix-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-004-rest-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-005-mince-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-009-fold-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-sichuan-smashed-cucumber",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -203,8 +230,10 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-01"
+        ],
         "nodeId": "sichuan-smashed-cucumber-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -221,7 +250,7 @@
         "dependsOn": [
           "sichuan-smashed-cucumber-op-001-wash"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "sichuan-smashed-cucumber-portion-01"
         ],
@@ -238,102 +267,14 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "sichuan-smashed-cucumber-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "sichuan-smashed-cucumber-portion-02"
-        ],
-        "nodeId": "sichuan-smashed-cucumber-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "sichuan-smashed-cucumber-portion-02-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "sichuan-smashed-cucumber-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "sichuan-smashed-cucumber-portion-04"
-        ],
-        "nodeId": "sichuan-smashed-cucumber-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "sichuan-smashed-cucumber-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 14
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "sichuan-smashed-cucumber-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "sichuan-smashed-cucumber-portion-06"
-        ],
-        "nodeId": "sichuan-smashed-cucumber-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "sichuan-smashed-cucumber-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 3
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "sichuan-smashed-cucumber-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "sichuan-smashed-cucumber-portion-07"
-        ],
-        "nodeId": "sichuan-smashed-cucumber-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "sichuan-smashed-cucumber-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 0.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-006-add"
+          "sichuan-smashed-cucumber-op-002-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "sichuan-smashed-cucumber-op-007-mix",
+        "nodeId": "sichuan-smashed-cucumber-op-003-mix",
         "operationType": "mix",
         "outputStateIds": [
           "sichuan-smashed-cucumber-step-2-mix"
@@ -356,11 +297,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-007-mix"
+          "sichuan-smashed-cucumber-op-003-mix"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "sichuan-smashed-cucumber-op-008-rest",
+        "nodeId": "sichuan-smashed-cucumber-op-004-rest",
         "operationType": "rest",
         "outputStateIds": [
           "sichuan-smashed-cucumber-step-2-rest"
@@ -374,11 +315,14 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-008-rest"
+          "sichuan-smashed-cucumber-op-004-rest"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "sichuan-smashed-cucumber-op-009-mince",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-03",
+          "sichuan-smashed-cucumber-portion-05"
+        ],
+        "nodeId": "sichuan-smashed-cucumber-op-005-mince",
         "operationType": "mince",
         "outputStateIds": [
           "sichuan-smashed-cucumber-step-3-mince"
@@ -402,13 +346,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-009-mince"
+          "sichuan-smashed-cucumber-op-005-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "sichuan-smashed-cucumber-portion-03"
         ],
-        "nodeId": "sichuan-smashed-cucumber-op-010-add",
+        "nodeId": "sichuan-smashed-cucumber-op-006-add",
         "operationType": "add",
         "outputStateIds": [
           "sichuan-smashed-cucumber-portion-03-added"
@@ -424,13 +368,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-010-add"
+          "sichuan-smashed-cucumber-op-006-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "sichuan-smashed-cucumber-portion-05"
         ],
-        "nodeId": "sichuan-smashed-cucumber-op-011-add",
+        "nodeId": "sichuan-smashed-cucumber-op-007-add",
         "operationType": "add",
         "outputStateIds": [
           "sichuan-smashed-cucumber-portion-05-added"
@@ -446,11 +390,11 @@
         "activeDurationMs": 0,
         "criticality": "completion",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-011-add"
+          "sichuan-smashed-cucumber-op-007-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "sichuan-smashed-cucumber-op-012-serve",
+        "nodeId": "sichuan-smashed-cucumber-op-008-serve",
         "operationType": "serve",
         "outputStateIds": [
           "sichuan-smashed-cucumber-step-4-serve"
@@ -464,11 +408,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "sichuan-smashed-cucumber-op-012-serve"
+          "sichuan-smashed-cucumber-op-008-serve"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "sichuan-smashed-cucumber-op-013-fold",
+        "nodeId": "sichuan-smashed-cucumber-op-009-fold",
         "operationType": "fold",
         "outputStateIds": [
           "sichuan-smashed-cucumber-step-4-fold"
@@ -491,26 +435,16 @@
   },
   "recipeId": "sichuan-smashed-cucumber",
   "rights": {
-    "artifactIds": [
-      "game-artifact-sichuan-smashed-cucumber-identity",
-      "game-artifact-sichuan-smashed-cucumber-preparation",
-      "game-artifact-sichuan-smashed-cucumber-nutrition",
-      "game-artifact-sichuan-smashed-cucumber-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-sichuan-smashed-cucumber-identity",
-      "game-usage-sichuan-smashed-cucumber-preparation",
-      "game-usage-sichuan-smashed-cucumber-nutrition",
-      "game-usage-sichuan-smashed-cucumber-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1d51f2ce6d603b74",
+      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -534,7 +468,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1d51f2ce6d603b74",
+      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -549,16 +483,16 @@
         "missing-mix"
       ],
       "mutation": {
-        "targetNodeId": "sichuan-smashed-cucumber-op-007-mix",
+        "targetNodeId": "sichuan-smashed-cucumber-op-003-mix",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-007-mix-omit"
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-003-mix-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1d51f2ce6d603b74",
+      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -573,16 +507,16 @@
         "missing-rest"
       ],
       "mutation": {
-        "targetNodeId": "sichuan-smashed-cucumber-op-008-rest",
+        "targetNodeId": "sichuan-smashed-cucumber-op-004-rest",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-008-rest-omit"
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-004-rest-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1d51f2ce6d603b74",
+      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -597,16 +531,16 @@
         "missing-mince"
       ],
       "mutation": {
-        "targetNodeId": "sichuan-smashed-cucumber-op-009-mince",
+        "targetNodeId": "sichuan-smashed-cucumber-op-005-mince",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-009-mince-omit"
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-005-mince-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1d51f2ce6d603b74",
+      "baselineArtifactVersion": "clv1-ab380db7ee5484fe",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -621,12 +555,12 @@
         "missing-fold"
       ],
       "mutation": {
-        "targetNodeId": "sichuan-smashed-cucumber-op-013-fold",
+        "targetNodeId": "sichuan-smashed-cucumber-op-009-fold",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-013-fold-omit"
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-009-fold-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

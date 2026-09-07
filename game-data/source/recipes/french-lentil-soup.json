@@ -1,14 +1,33 @@
 {
-  "artifactVersion": "clv1-4e4e247914f1eceb",
+  "artifactVersion": "clv1-cb18aebdaeeccde6",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:french-lentil-soup-op-001-wash:duration",
+      "operation:french-lentil-soup-op-001-wash:equipment",
+      "operation:french-lentil-soup-op-002-mince:duration",
+      "operation:french-lentil-soup-op-002-mince:parameters-source",
+      "operation:french-lentil-soup-op-002-mince:targets-source",
+      "operation:french-lentil-soup-op-008-season:duration",
+      "operation:french-lentil-soup-op-008-season:inputs",
+      "operation:french-lentil-soup-op-008-season:parameters",
+      "operation:french-lentil-soup-op-008-season:targets-source",
+      "portion:french-lentil-soup-portion-05:source-step",
+      "portion:french-lentil-soup-portion-07:source-step",
+      "portion:french-lentil-soup-portion-08:source-step",
+      "scenario:french-lentil-soup-french-lentil-soup-op-001-wash-omit:expected-outcome",
+      "scenario:french-lentil-soup-french-lentil-soup-op-002-mince-omit:expected-outcome",
+      "scenario:french-lentil-soup-french-lentil-soup-op-008-season-omit:expected-outcome",
+      "source-step:2:operation",
+      "source-step:3:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-french-lentil-soup",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -225,8 +244,12 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "french-lentil-soup-portion-01",
+          "french-lentil-soup-portion-02",
+          "french-lentil-soup-portion-03",
+          "french-lentil-soup-portion-04"
+        ],
         "nodeId": "french-lentil-soup-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -244,7 +267,12 @@
           "french-lentil-soup-op-001-wash"
         ],
         "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "french-lentil-soup-portion-01",
+          "french-lentil-soup-portion-02",
+          "french-lentil-soup-portion-03",
+          "french-lentil-soup-portion-04"
+        ],
         "nodeId": "french-lentil-soup-op-002-mince",
         "operationType": "mince",
         "outputStateIds": [
@@ -271,7 +299,7 @@
         "dependsOn": [
           "french-lentil-soup-op-002-mince"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-lentil-soup-portion-01"
         ],
@@ -293,7 +321,7 @@
         "dependsOn": [
           "french-lentil-soup-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-lentil-soup-portion-02"
         ],
@@ -315,7 +343,7 @@
         "dependsOn": [
           "french-lentil-soup-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-lentil-soup-portion-03"
         ],
@@ -337,7 +365,7 @@
         "dependsOn": [
           "french-lentil-soup-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-lentil-soup-portion-04"
         ],
@@ -359,109 +387,11 @@
         "dependsOn": [
           "french-lentil-soup-op-006-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-lentil-soup-portion-05"
-        ],
-        "nodeId": "french-lentil-soup-op-007-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "french-lentil-soup-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "french-lentil-soup-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-lentil-soup-portion-07"
-        ],
-        "nodeId": "french-lentil-soup-op-008-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "french-lentil-soup-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "french-lentil-soup-op-008-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-lentil-soup-portion-08"
-        ],
-        "nodeId": "french-lentil-soup-op-009-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "french-lentil-soup-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 2
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "french-lentil-soup-op-009-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "french-lentil-soup-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "french-lentil-soup-step-2-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.6
-        },
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "french-lentil-soup-op-010-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "french-lentil-soup-portion-06"
         ],
-        "nodeId": "french-lentil-soup-op-011-add",
+        "nodeId": "french-lentil-soup-op-007-add",
         "operationType": "add",
         "outputStateIds": [
           "french-lentil-soup-portion-06-added"
@@ -477,45 +407,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "french-lentil-soup-op-011-add"
+          "french-lentil-soup-op-007-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "french-lentil-soup-portion-06"
-        ],
-        "nodeId": "french-lentil-soup-op-012-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "french-lentil-soup-step-3-pan-fry"
-        ],
-        "parameters": {
-          "heatLevel": 0.35
-        },
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "french-lentil-soup-op-012-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "french-lentil-soup-op-013-season",
+        "nodeId": "french-lentil-soup-op-008-season",
         "operationType": "season",
         "outputStateIds": [
           "french-lentil-soup-step-4-season"
@@ -535,7 +431,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "french-lentil-soup-op-013-season"
+          "french-lentil-soup-op-008-season"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -548,7 +444,7 @@
           "french-lentil-soup-portion-07",
           "french-lentil-soup-portion-08"
         ],
-        "nodeId": "french-lentil-soup-op-014-serve",
+        "nodeId": "french-lentil-soup-op-009-serve",
         "operationType": "serve",
         "outputStateIds": [
           "french-lentil-soup-served"
@@ -562,29 +458,16 @@
   },
   "recipeId": "french-lentil-soup",
   "rights": {
-    "artifactIds": [
-      "game-artifact-french-lentil-soup-identity",
-      "game-artifact-french-lentil-soup-preparation",
-      "game-artifact-french-lentil-soup-nutrition",
-      "game-artifact-french-lentil-soup-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "inao-lentille-verte-du-puy",
-      "once-upon-chef-french-lentil-soup"
-    ],
-    "usageDecisionIds": [
-      "game-usage-french-lentil-soup-identity",
-      "game-usage-french-lentil-soup-preparation",
-      "game-usage-french-lentil-soup-nutrition",
-      "game-usage-french-lentil-soup-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
+      "baselineArtifactVersion": "clv1-cb18aebdaeeccde6",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -608,7 +491,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
+      "baselineArtifactVersion": "clv1-cb18aebdaeeccde6",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -632,135 +515,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "french-lentil-soup-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-lentil-soup-french-lentil-soup-op-010-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "french-lentil-soup-op-010-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-lentil-soup-french-lentil-soup-op-010-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "french-lentil-soup-op-012-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-lentil-soup-french-lentil-soup-op-012-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
-      "causeCodes": [
-        "heat-high:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "browning",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "burn",
-          "direction": "increase"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "overcooked-or-burnt"
-      ],
-      "mutation": {
-        "scalar": 1.25,
-        "targetNodeId": "french-lentil-soup-op-012-pan-fry",
-        "type": "heat-too-high"
-      },
-      "nutritionEffect": "requires-retention-model",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "french-lentil-soup-french-lentil-soup-op-012-pan-fry-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-4e4e247914f1eceb",
+      "baselineArtifactVersion": "clv1-cb18aebdaeeccde6",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -775,12 +530,12 @@
         "missing-season"
       ],
       "mutation": {
-        "targetNodeId": "french-lentil-soup-op-013-season",
+        "targetNodeId": "french-lentil-soup-op-008-season",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "french-lentil-soup-french-lentil-soup-op-013-season-omit"
+      "scenarioId": "french-lentil-soup-french-lentil-soup-op-008-season-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

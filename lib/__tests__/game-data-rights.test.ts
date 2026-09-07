@@ -1,15 +1,22 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
+import { createM13DraftCorpus } from "@/game-data/corpus-generator";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import { evaluateGameRecipeCorpus } from "@/lib/game-recipe-validation";
-import type { GameRecipeV1, GameRightsRegistryV1 } from "@/types/game-recipe";
+import type { GameNutritionDatasetSubsetV1, GameRecipeV1, GameRightsRegistryV1 } from "@/types/game-recipe";
 
 describe("game-commercial-ready fail-closed gate", () => {
   const data = loadCanonicalGameData();
-  const sourceRecipe = data.recipes.find((recipe) => !recipe.sourceCulinaryItemId) as GameRecipeV1;
+  const fixture = createM13DraftCorpus(nutritionDataset, {
+    ...data.ingredients,
+    ingredients: data.ingredients.ingredients.filter((ingredient) => ingredient.nutritionSource.kind === "migration-estimate"),
+  });
+  const sourceRecipe = fixture.recipes[0] as GameRecipeV1;
 
   it("does not turn a draft into an export merely by changing eligibility", () => {
-    const result = evaluate([{ ...sourceRecipe, eligibility: "exportable" }], data.rightsRegistry);
+    const result = evaluate([{ ...sourceRecipe, eligibility: "exportable" }], fixture.rightsRegistry);
     expect(result.some((issue) => issue.code === "invalid-governance")).toBe(true);
     expect(result.some((issue) => issue.field.includes("reviewAttestationIds"))).toBe(true);
     expect(result.some((issue) => issue.field.includes("samplingBatchId"))).toBe(true);
@@ -28,26 +35,26 @@ describe("game-commercial-ready fail-closed gate", () => {
         notes: "test",
       } as const,
     ]) {
-      const registry = clone(data.rightsRegistry);
+      const registry = clone(fixture.rightsRegistry);
       registry.sources[0].rights = rights;
       const result = evaluate([{ ...sourceRecipe, eligibility: "exportable" }], registry);
       expect(result.some((issue) => issue.code === "invalid-rights")).toBe(true);
     }
-    const registry = clone(data.rightsRegistry);
+    const registry = clone(fixture.rightsRegistry);
     registry.sources[0].health.status = "rights-changed";
     const result = evaluate([{ ...sourceRecipe, eligibility: "exportable" }], registry);
     expect(result.some((issue) => issue.code === "invalid-rights")).toBe(true);
   });
 
   it("blocks generated expression and AI output used as Evidence", () => {
-    const generatedRegistry = clone(data.rightsRegistry);
+    const generatedRegistry = clone(fixture.rightsRegistry);
     const artifact = generatedRegistry.artifacts.find((entry) => entry.id === sourceRecipe.rights.artifactIds[0]);
     if (!artifact) throw new Error("fixture artifact missing");
     artifact.derivation = "generated";
     expect(evaluate([{ ...sourceRecipe, eligibility: "exportable" }], generatedRegistry)
       .some((issue) => issue.code === "invalid-rights" && issue.field.includes("derivation"))).toBe(true);
 
-    const aiEvidenceRegistry = clone(data.rightsRegistry);
+    const aiEvidenceRegistry = clone(fixture.rightsRegistry);
     const evidenceId = sourceRecipe.rights.evidenceIds[0];
     const origin = aiEvidenceRegistry.evidenceOrigins.find((entry) => entry.evidenceId === evidenceId);
     if (!origin) throw new Error("fixture evidence origin missing");
@@ -57,7 +64,7 @@ describe("game-commercial-ready fail-closed gate", () => {
   });
 
   it("blocks missing attribution obligations and expired assessment review", () => {
-    const registry = clone(data.rightsRegistry);
+    const registry = clone(fixture.rightsRegistry);
     const artifact = registry.artifacts.find((entry) => entry.id === sourceRecipe.rights.artifactIds[0]);
     if (!artifact) throw new Error("fixture artifact missing");
     const assessment = registry.assessments.find((entry) => entry.id === artifact.rightsAssessmentId);
@@ -83,13 +90,13 @@ describe("game-commercial-ready fail-closed gate", () => {
     };
     scenario.nutritionEffect = "unchanged";
 
-    const issues = evaluate([recipe], data.rightsRegistry);
+    const issues = evaluate([recipe], fixture.rightsRegistry);
     expect(issues.some((issue) => issue.code === "invalid-scenario" && issue.field.endsWith("replacementIngredientId"))).toBe(true);
     expect(issues.some((issue) => issue.code === "invalid-scenario" && issue.field.endsWith("nutritionEffect"))).toBe(true);
 
     delete scenario.mutation.targetPortionId;
     scenario.mutation.replacementIngredientId = "missing-ingredient";
-    const missingReferenceIssues = evaluate([recipe], data.rightsRegistry);
+    const missingReferenceIssues = evaluate([recipe], fixture.rightsRegistry);
     expect(missingReferenceIssues.some((issue) => issue.code === "invalid-scenario" && issue.field.endsWith("targetPortionId"))).toBe(true);
     expect(missingReferenceIssues.some((issue) => issue.code === "missing-reference" && issue.field.endsWith("replacementIngredientId"))).toBe(true);
   });
@@ -104,7 +111,15 @@ function evaluate(recipes: GameRecipeV1[], registry: GameRightsRegistryV1) {
   }).issues;
 }
 
-const dataIngredients = loadCanonicalGameData().ingredients;
+const nutritionDataset = JSON.parse(readFileSync(
+  resolve(process.cwd(), "game-data/nutrition/usda-fooddata-central-subset.json"),
+  "utf8",
+)) as GameNutritionDatasetSubsetV1;
+const canonical = loadCanonicalGameData();
+const dataIngredients = createM13DraftCorpus(nutritionDataset, {
+  ...canonical.ingredients,
+  ingredients: canonical.ingredients.ingredients.filter((ingredient) => ingredient.nutritionSource.kind === "migration-estimate"),
+}).ingredients;
 
 function clone<T>(value: T): T {
   return structuredClone(value);

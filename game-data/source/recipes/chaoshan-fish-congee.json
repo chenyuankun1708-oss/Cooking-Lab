@@ -1,14 +1,34 @@
 {
-  "artifactVersion": "clv1-e628c9fed684debf",
+  "artifactVersion": "clv1-e5cb83722411fe37",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:chaoshan-fish-congee-op-001-wash:duration",
+      "operation:chaoshan-fish-congee-op-001-wash:equipment",
+      "operation:chaoshan-fish-congee-op-003-chill:duration",
+      "operation:chaoshan-fish-congee-op-003-chill:equipment",
+      "operation:chaoshan-fish-congee-op-003-chill:parameters",
+      "operation:chaoshan-fish-congee-op-004-boil:duration",
+      "operation:chaoshan-fish-congee-op-004-boil:inputs",
+      "operation:chaoshan-fish-congee-op-004-boil:targets-source",
+      "portion:chaoshan-fish-congee-portion-01:source-step",
+      "portion:chaoshan-fish-congee-portion-03:source-step",
+      "portion:chaoshan-fish-congee-portion-04:source-step",
+      "portion:chaoshan-fish-congee-portion-05:source-step",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-001-wash-omit:expected-outcome",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-003-chill-omit:expected-outcome",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-hot:expected-outcome",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-omit:expected-outcome",
+      "source-step:3:operation",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-chaoshan-fish-congee",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -159,8 +179,9 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
+        "inputPortionIds": [
+          "chaoshan-fish-congee-portion-02"
+        ],
         "nodeId": "chaoshan-fish-congee-op-001-wash",
         "operationType": "wash",
         "outputStateIds": [
@@ -177,33 +198,11 @@
         "dependsOn": [
           "chaoshan-fish-congee-op-001-wash"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "chaoshan-fish-congee-portion-01"
-        ],
-        "nodeId": "chaoshan-fish-congee-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "chaoshan-fish-congee-portion-01-added"
-        ],
-        "parameters": {
-          "quantityG": 150
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "chaoshan-fish-congee-op-002-add"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [
           "chaoshan-fish-congee-portion-02"
         ],
-        "nodeId": "chaoshan-fish-congee-op-003-add",
+        "nodeId": "chaoshan-fish-congee-op-002-add",
         "operationType": "add",
         "outputStateIds": [
           "chaoshan-fish-congee-portion-02-added"
@@ -216,86 +215,15 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "chaoshan-fish-congee-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "chaoshan-fish-congee-portion-03"
-        ],
-        "nodeId": "chaoshan-fish-congee-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "chaoshan-fish-congee-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 10
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "chaoshan-fish-congee-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "chaoshan-fish-congee-portion-04"
-        ],
-        "nodeId": "chaoshan-fish-congee-op-005-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "chaoshan-fish-congee-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 15
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "chaoshan-fish-congee-op-005-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "chaoshan-fish-congee-portion-05"
-        ],
-        "nodeId": "chaoshan-fish-congee-op-006-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "chaoshan-fish-congee-portion-05-added"
-        ],
-        "parameters": {
-          "quantityG": 1.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "chaoshan-fish-congee-op-006-add"
+          "chaoshan-fish-congee-op-002-add"
         ],
-        "equipmentId": "knife",
         "inputPortionIds": [
-          "chaoshan-fish-congee-portion-01",
-          "chaoshan-fish-congee-portion-02",
-          "chaoshan-fish-congee-portion-03",
-          "chaoshan-fish-congee-portion-04",
-          "chaoshan-fish-congee-portion-05"
+          "chaoshan-fish-congee-portion-02"
         ],
-        "nodeId": "chaoshan-fish-congee-op-007-chill",
+        "nodeId": "chaoshan-fish-congee-op-003-chill",
         "operationType": "chill",
         "outputStateIds": [
           "chaoshan-fish-congee-step-1-chill"
@@ -309,11 +237,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "chaoshan-fish-congee-op-007-chill"
+          "chaoshan-fish-congee-op-003-chill"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "saucepan",
         "inputPortionIds": [],
-        "nodeId": "chaoshan-fish-congee-op-008-boil",
+        "nodeId": "chaoshan-fish-congee-op-004-boil",
         "operationType": "boil",
         "outputStateIds": [
           "chaoshan-fish-congee-step-2-boil"
@@ -333,70 +261,10 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "chaoshan-fish-congee-op-008-boil"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "chaoshan-fish-congee-op-009-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "chaoshan-fish-congee-step-3-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 3,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "chaoshan-fish-congee-op-009-pan-fry"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [],
-        "nodeId": "chaoshan-fish-congee-op-010-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "chaoshan-fish-congee-step-4-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 4,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "chaoshan-fish-congee-op-010-pan-fry"
+          "chaoshan-fish-congee-op-004-boil"
         ],
         "equipmentId": "saucepan",
         "inputPortionIds": [
@@ -406,7 +274,7 @@
           "chaoshan-fish-congee-portion-04",
           "chaoshan-fish-congee-portion-05"
         ],
-        "nodeId": "chaoshan-fish-congee-op-011-serve",
+        "nodeId": "chaoshan-fish-congee-op-005-serve",
         "operationType": "serve",
         "outputStateIds": [
           "chaoshan-fish-congee-served"
@@ -420,29 +288,16 @@
   },
   "recipeId": "chaoshan-fish-congee",
   "rights": {
-    "artifactIds": [
-      "game-artifact-chaoshan-fish-congee-identity",
-      "game-artifact-chaoshan-fish-congee-preparation",
-      "game-artifact-chaoshan-fish-congee-nutrition",
-      "game-artifact-chaoshan-fish-congee-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "pamelia-chia-fish-porridge",
-      "singapore-nhb-chinese-cuisine"
-    ],
-    "usageDecisionIds": [
-      "game-usage-chaoshan-fish-congee-identity",
-      "game-usage-chaoshan-fish-congee-preparation",
-      "game-usage-chaoshan-fish-congee-nutrition",
-      "game-usage-chaoshan-fish-congee-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e628c9fed684debf",
+      "baselineArtifactVersion": "clv1-e5cb83722411fe37",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -466,7 +321,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e628c9fed684debf",
+      "baselineArtifactVersion": "clv1-e5cb83722411fe37",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -481,16 +336,16 @@
         "missing-chill"
       ],
       "mutation": {
-        "targetNodeId": "chaoshan-fish-congee-op-007-chill",
+        "targetNodeId": "chaoshan-fish-congee-op-003-chill",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-007-chill-omit"
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-003-chill-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e628c9fed684debf",
+      "baselineArtifactVersion": "clv1-e5cb83722411fe37",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -510,16 +365,16 @@
         "missing-boil"
       ],
       "mutation": {
-        "targetNodeId": "chaoshan-fish-congee-op-008-boil",
+        "targetNodeId": "chaoshan-fish-congee-op-004-boil",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-008-boil-omit"
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e628c9fed684debf",
+      "baselineArtifactVersion": "clv1-e5cb83722411fe37",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -545,70 +400,12 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "chaoshan-fish-congee-op-008-boil",
+        "targetNodeId": "chaoshan-fish-congee-op-004-boil",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-008-boil-hot"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e628c9fed684debf",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "chaoshan-fish-congee-op-009-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-009-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e628c9fed684debf",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "chaoshan-fish-congee-op-010-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-010-pan-fry-omit"
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-hot"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

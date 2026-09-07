@@ -1,14 +1,32 @@
 {
-  "artifactVersion": "clv1-d938d01b5b477390",
+  "artifactVersion": "clv1-f8d412e7577c4bb5",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:espresso-op-001-add:equipment",
+      "operation:espresso-op-002-set-heat:equipment",
+      "operation:espresso-op-002-set-heat:parameters",
+      "operation:espresso-op-003-extract:inputs",
+      "operation:espresso-op-003-extract:parameters",
+      "operation:espresso-op-003-extract:targets-source",
+      "operation:espresso-op-004-stir:equipment",
+      "operation:espresso-op-004-stir:inputs",
+      "operation:espresso-op-004-stir:parameters-source",
+      "operation:espresso-op-004-stir:targets-source",
+      "operation:espresso-op-005-serve:equipment",
+      "portion:espresso-portion-02:source-step",
+      "scenario:espresso-espresso-op-002-set-heat-omit:expected-outcome",
+      "scenario:espresso-espresso-op-003-extract-omit:expected-outcome",
+      "scenario:espresso-espresso-op-003-extract-short:expected-outcome",
+      "scenario:espresso-espresso-op-004-stir-omit:expected-outcome"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-espresso",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -94,7 +112,6 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "espresso-machine",
         "inputPortionIds": [
           "espresso-portion-01"
         ],
@@ -111,23 +128,20 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 120000,
+        "criticality": "quality",
         "dependsOn": [
           "espresso-op-001-add"
         ],
-        "equipmentId": "espresso-machine",
         "inputPortionIds": [
-          "espresso-portion-02"
+          "espresso-portion-01"
         ],
-        "nodeId": "espresso-op-002-add",
-        "operationType": "add",
+        "nodeId": "espresso-op-002-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "espresso-portion-02-added"
+          "espresso-step-1-set-heat"
         ],
-        "parameters": {
-          "quantityG": 40
-        },
+        "parameters": {},
         "sourceStepOrder": 1,
         "targetStates": [],
         "waitDurationMs": 0
@@ -136,43 +150,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "espresso-op-002-add"
-        ],
-        "equipmentId": "espresso-machine",
-        "inputPortionIds": [
-          "espresso-portion-01",
-          "espresso-portion-02"
-        ],
-        "nodeId": "espresso-op-003-extract",
-        "operationType": "extract",
-        "outputStateIds": [
-          "espresso-step-1-extract"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "bitterness",
-            "maximum": 0.7,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "aroma",
-            "minimum": 0.45,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 120000
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "espresso-op-003-extract"
+          "espresso-op-002-set-heat"
         ],
         "equipmentId": "espresso-machine",
         "inputPortionIds": [],
-        "nodeId": "espresso-op-004-extract",
+        "nodeId": "espresso-op-003-extract",
         "operationType": "extract",
         "outputStateIds": [
           "espresso-step-2-extract"
@@ -197,11 +179,10 @@
         "activeDurationMs": 60000,
         "criticality": "quality",
         "dependsOn": [
-          "espresso-op-004-extract"
+          "espresso-op-003-extract"
         ],
-        "equipmentId": "espresso-machine",
         "inputPortionIds": [],
-        "nodeId": "espresso-op-005-stir",
+        "nodeId": "espresso-op-004-stir",
         "operationType": "stir",
         "outputStateIds": [
           "espresso-step-3-stir"
@@ -224,14 +205,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "espresso-op-005-stir"
+          "espresso-op-004-stir"
         ],
-        "equipmentId": "timer",
         "inputPortionIds": [
           "espresso-portion-01",
           "espresso-portion-02"
         ],
-        "nodeId": "espresso-op-006-serve",
+        "nodeId": "espresso-op-005-serve",
         "operationType": "serve",
         "outputStateIds": [
           "espresso-served"
@@ -245,26 +225,40 @@
   },
   "recipeId": "espresso",
   "rights": {
-    "artifactIds": [
-      "game-artifact-espresso-identity",
-      "game-artifact-espresso-preparation",
-      "game-artifact-espresso-nutrition",
-      "game-artifact-espresso-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-espresso-identity",
-      "game-usage-espresso-preparation",
-      "game-usage-espresso-nutrition",
-      "game-usage-espresso-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "espresso-op-002-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "espresso-espresso-op-002-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -293,7 +287,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -323,66 +317,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d938d01b5b477390",
-      "causeCodes": [
-        "operation-omitted:extract"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "unchanged"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-extract"
-      ],
-      "mutation": {
-        "targetNodeId": "espresso-op-004-extract",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "espresso-espresso-op-004-extract-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d938d01b5b477390",
-      "causeCodes": [
-        "duration-short:extract"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "aroma",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "bitterness",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "underprocessed"
-      ],
-      "mutation": {
-        "scalar": 0.5,
-        "targetNodeId": "espresso-op-004-extract",
-        "type": "duration-too-short"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "recoverable",
-      "scenarioId": "espresso-espresso-op-004-extract-short"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d938d01b5b477390",
+      "baselineArtifactVersion": "clv1-f8d412e7577c4bb5",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -397,12 +332,12 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "espresso-op-005-stir",
+        "targetNodeId": "espresso-op-004-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "espresso-espresso-op-005-stir-omit"
+      "scenarioId": "espresso-espresso-op-004-stir-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

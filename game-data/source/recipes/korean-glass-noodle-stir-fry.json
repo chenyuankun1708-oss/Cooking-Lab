@@ -1,14 +1,35 @@
 {
-  "artifactVersion": "clv1-719db88beb1dcd16",
+  "artifactVersion": "clv1-e6b1843ae5349d3c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:korean-glass-noodle-stir-fry-op-002-drain:duration",
+      "operation:korean-glass-noodle-stir-fry-op-006-toss:duration",
+      "operation:korean-glass-noodle-stir-fry-op-006-toss:parameters-source",
+      "operation:korean-glass-noodle-stir-fry-op-006-toss:targets-source",
+      "operation:korean-glass-noodle-stir-fry-op-007-stir:duration",
+      "operation:korean-glass-noodle-stir-fry-op-007-stir:parameters-source",
+      "operation:korean-glass-noodle-stir-fry-op-007-stir:targets-source",
+      "operation:korean-glass-noodle-stir-fry-op-008-pan-fry:duration",
+      "operation:korean-glass-noodle-stir-fry-op-008-pan-fry:parameters",
+      "operation:korean-glass-noodle-stir-fry-op-008-pan-fry:targets-source",
+      "portion:korean-glass-noodle-stir-fry-portion-04:source-step",
+      "portion:korean-glass-noodle-stir-fry-portion-07:source-step",
+      "portion:korean-glass-noodle-stir-fry-portion-08:source-step",
+      "scenario:korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-002-drain-omit:expected-outcome",
+      "scenario:korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-006-toss-omit:expected-outcome",
+      "scenario:korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-007-stir-omit:expected-outcome",
+      "scenario:korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-008-pan-fry-omit:expected-outcome",
+      "source-step:2:operation",
+      "source-step:4:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-korean-glass-noodle-stir-fry",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -225,7 +246,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-01"
         ],
@@ -242,85 +263,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-001-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-04"
-        ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-002-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-glass-noodle-stir-fry-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 160
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-002-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-07"
-        ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-glass-noodle-stir-fry-portion-07-added"
-        ],
-        "parameters": {
-          "quantityG": 7
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-08"
-        ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-glass-noodle-stir-fry-portion-08-added"
-        ],
-        "parameters": {
-          "quantityG": 0.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-004-add"
+          "korean-glass-noodle-stir-fry-op-001-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "colander",
         "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-01",
-          "korean-glass-noodle-stir-fry-portion-04",
-          "korean-glass-noodle-stir-fry-portion-07",
-          "korean-glass-noodle-stir-fry-portion-08"
+          "korean-glass-noodle-stir-fry-portion-01"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-005-drain",
+        "nodeId": "korean-glass-noodle-stir-fry-op-002-drain",
         "operationType": "drain",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-step-1-drain"
@@ -334,13 +286,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-005-drain"
+          "korean-glass-noodle-stir-fry-op-002-drain"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-03"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-006-add",
+        "nodeId": "korean-glass-noodle-stir-fry-op-003-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-portion-03-added"
@@ -356,13 +308,13 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-006-add"
+          "korean-glass-noodle-stir-fry-op-003-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-05"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-007-add",
+        "nodeId": "korean-glass-noodle-stir-fry-op-004-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-portion-05-added"
@@ -375,49 +327,16 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-007-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-03",
-          "korean-glass-noodle-stir-fry-portion-05"
-        ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-008-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "korean-glass-noodle-stir-fry-step-2-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-008-pan-fry"
+          "korean-glass-noodle-stir-fry-op-004-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-02"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-009-add",
+        "nodeId": "korean-glass-noodle-stir-fry-op-005-add",
         "operationType": "add",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-portion-02-added"
@@ -433,13 +352,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-009-add"
+          "korean-glass-noodle-stir-fry-op-005-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-02"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-010-toss",
+        "nodeId": "korean-glass-noodle-stir-fry-op-006-toss",
         "operationType": "toss",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-step-3-toss"
@@ -462,13 +381,13 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-010-toss"
+          "korean-glass-noodle-stir-fry-op-006-toss"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-02"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-011-stir",
+        "nodeId": "korean-glass-noodle-stir-fry-op-007-stir",
         "operationType": "stir",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-step-3-stir"
@@ -488,44 +407,22 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-011-stir"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-06"
-        ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-012-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "korean-glass-noodle-stir-fry-portion-06-added"
-        ],
-        "parameters": {
-          "quantityG": 14
-        },
-        "sourceStepOrder": 4,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-012-add"
+          "korean-glass-noodle-stir-fry-op-007-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
-          "korean-glass-noodle-stir-fry-portion-06"
+          "korean-glass-noodle-stir-fry-portion-02"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-013-pan-fry",
+        "nodeId": "korean-glass-noodle-stir-fry-op-008-pan-fry",
         "operationType": "pan-fry",
         "outputStateIds": [
-          "korean-glass-noodle-stir-fry-step-4-pan-fry"
+          "korean-glass-noodle-stir-fry-step-3-pan-fry"
         ],
         "parameters": {},
-        "sourceStepOrder": 4,
+        "sourceStepOrder": 3,
         "targetStates": [
           {
             "dimension": "browning",
@@ -545,9 +442,31 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "korean-glass-noodle-stir-fry-op-013-pan-fry"
+          "korean-glass-noodle-stir-fry-op-008-pan-fry"
         ],
-        "equipmentId": "colander",
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "korean-glass-noodle-stir-fry-portion-06"
+        ],
+        "nodeId": "korean-glass-noodle-stir-fry-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "korean-glass-noodle-stir-fry-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 14
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "korean-glass-noodle-stir-fry-op-009-add"
+        ],
+        "equipmentId": "frying-pan",
         "inputPortionIds": [
           "korean-glass-noodle-stir-fry-portion-01",
           "korean-glass-noodle-stir-fry-portion-02",
@@ -558,7 +477,7 @@
           "korean-glass-noodle-stir-fry-portion-07",
           "korean-glass-noodle-stir-fry-portion-08"
         ],
-        "nodeId": "korean-glass-noodle-stir-fry-op-014-serve",
+        "nodeId": "korean-glass-noodle-stir-fry-op-010-serve",
         "operationType": "serve",
         "outputStateIds": [
           "korean-glass-noodle-stir-fry-served"
@@ -572,29 +491,16 @@
   },
   "recipeId": "korean-glass-noodle-stir-fry",
   "rights": {
-    "artifactIds": [
-      "game-artifact-korean-glass-noodle-stir-fry-identity",
-      "game-artifact-korean-glass-noodle-stir-fry-preparation",
-      "game-artifact-korean-glass-noodle-stir-fry-nutrition",
-      "game-artifact-korean-glass-noodle-stir-fry-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
-    "sourceIds": [
-      "korean-culture-japchae",
-      "maangchi-japchae"
-    ],
-    "usageDecisionIds": [
-      "game-usage-korean-glass-noodle-stir-fry-identity",
-      "game-usage-korean-glass-noodle-stir-fry-preparation",
-      "game-usage-korean-glass-noodle-stir-fry-nutrition",
-      "game-usage-korean-glass-noodle-stir-fry-simulation"
-    ]
+    "sourceIds": [],
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-719db88beb1dcd16",
+      "baselineArtifactVersion": "clv1-e6b1843ae5349d3c",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -609,16 +515,64 @@
         "missing-drain"
       ],
       "mutation": {
-        "targetNodeId": "korean-glass-noodle-stir-fry-op-005-drain",
+        "targetNodeId": "korean-glass-noodle-stir-fry-op-002-drain",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-005-drain-omit"
+      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-002-drain-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-719db88beb1dcd16",
+      "baselineArtifactVersion": "clv1-e6b1843ae5349d3c",
+      "causeCodes": [
+        "operation-omitted:toss"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-toss"
+      ],
+      "mutation": {
+        "targetNodeId": "korean-glass-noodle-stir-fry-op-006-toss",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-006-toss-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6b1843ae5349d3c",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "korean-glass-noodle-stir-fry-op-007-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-007-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6b1843ae5349d3c",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -644,83 +598,6 @@
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
       "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-008-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-719db88beb1dcd16",
-      "causeCodes": [
-        "operation-omitted:toss"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "structural-integrity",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-toss"
-      ],
-      "mutation": {
-        "targetNodeId": "korean-glass-noodle-stir-fry-op-010-toss",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-010-toss-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-719db88beb1dcd16",
-      "causeCodes": [
-        "operation-omitted:stir"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "structural-integrity",
-          "direction": "decrease"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-stir"
-      ],
-      "mutation": {
-        "targetNodeId": "korean-glass-noodle-stir-fry-op-011-stir",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-011-stir-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-719db88beb1dcd16",
-      "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "korean-glass-noodle-stir-fry-op-013-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "korean-glass-noodle-stir-fry-korean-glass-noodle-stir-fry-op-013-pan-fry-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

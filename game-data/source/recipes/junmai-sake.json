@@ -1,14 +1,19 @@
 {
-  "artifactVersion": "clv1-4d443ee25d78444a",
+  "artifactVersion": "clv1-e4ace37b5f5eeb8a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "portion:junmai-sake-portion-01:identity",
+      "portion:junmai-sake-portion-01:nutrition",
+      "portion:junmai-sake-portion-01:quantity"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-junmai-sake",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -89,21 +94,11 @@
   },
   "recipeId": "junmai-sake",
   "rights": {
-    "artifactIds": [
-      "game-artifact-junmai-sake-identity",
-      "game-artifact-junmai-sake-preparation",
-      "game-artifact-junmai-sake-nutrition",
-      "game-artifact-junmai-sake-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-junmai-sake-identity",
-      "game-usage-junmai-sake-preparation",
-      "game-usage-junmai-sake-nutrition",
-      "game-usage-junmai-sake-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [],
   "schemaVersion": "cooking-lab-game-recipe-v1",

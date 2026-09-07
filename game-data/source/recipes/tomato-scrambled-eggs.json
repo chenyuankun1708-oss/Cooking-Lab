@@ -1,14 +1,37 @@
 {
-  "artifactVersion": "clv1-6b33e05ac5d42866",
+  "artifactVersion": "clv1-2c6ca8242b8f08d4",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
-    "method": "deterministic-migration"
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:tomato-scrambled-eggs-op-003-set-heat:duration",
+      "operation:tomato-scrambled-eggs-op-004-stir:duration",
+      "operation:tomato-scrambled-eggs-op-004-stir:inputs",
+      "operation:tomato-scrambled-eggs-op-004-stir:parameters-source",
+      "operation:tomato-scrambled-eggs-op-004-stir:targets-source",
+      "operation:tomato-scrambled-eggs-op-005-stir:duration",
+      "operation:tomato-scrambled-eggs-op-005-stir:inputs",
+      "operation:tomato-scrambled-eggs-op-005-stir:parameters-source",
+      "operation:tomato-scrambled-eggs-op-005-stir:targets-source",
+      "operation:tomato-scrambled-eggs-op-006-fold:duration",
+      "operation:tomato-scrambled-eggs-op-006-fold:inputs",
+      "operation:tomato-scrambled-eggs-op-006-fold:parameters-source",
+      "operation:tomato-scrambled-eggs-op-006-fold:targets-source",
+      "portion:tomato-scrambled-eggs-portion-03:source-step",
+      "portion:tomato-scrambled-eggs-portion-04:source-step",
+      "scenario:tomato-scrambled-eggs-tomato-scrambled-eggs-op-003-set-heat-hot:expected-outcome",
+      "scenario:tomato-scrambled-eggs-tomato-scrambled-eggs-op-003-set-heat-omit:expected-outcome",
+      "scenario:tomato-scrambled-eggs-tomato-scrambled-eggs-op-004-stir-omit:expected-outcome",
+      "scenario:tomato-scrambled-eggs-tomato-scrambled-eggs-op-005-stir-omit:expected-outcome",
+      "scenario:tomato-scrambled-eggs-tomato-scrambled-eggs-op-006-fold-omit:expected-outcome",
+      "source-step:1:operation"
+    ]
   },
   "eligibility": "draft",
   "governance": {
     "reviewAttestationIds": [],
-    "riskClassificationId": "game-risk-tomato-scrambled-eggs",
+    "riskClassificationId": "",
     "riskLevel": "low"
   },
   "ingredientPortions": [
@@ -137,7 +160,7 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "tomato-scrambled-eggs-portion-01"
         ],
@@ -159,7 +182,7 @@
         "dependsOn": [
           "tomato-scrambled-eggs-op-001-add"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "tomato-scrambled-eggs-portion-02"
         ],
@@ -176,125 +199,34 @@
         "waitDurationMs": 0
       },
       {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
+        "activeDurationMs": 0,
+        "criticality": "quality",
         "dependsOn": [
           "tomato-scrambled-eggs-op-002-add"
         ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "tomato-scrambled-eggs-portion-03"
-        ],
-        "nodeId": "tomato-scrambled-eggs-op-003-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "tomato-scrambled-eggs-portion-03-added"
-        ],
-        "parameters": {
-          "quantityG": 8
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 1000,
-        "criticality": "completion",
-        "dependsOn": [
-          "tomato-scrambled-eggs-op-003-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "tomato-scrambled-eggs-portion-04"
-        ],
-        "nodeId": "tomato-scrambled-eggs-op-004-add",
-        "operationType": "add",
-        "outputStateIds": [
-          "tomato-scrambled-eggs-portion-04-added"
-        ],
-        "parameters": {
-          "quantityG": 1.5
-        },
-        "sourceStepOrder": 1,
-        "targetStates": [],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "tomato-scrambled-eggs-op-004-add"
-        ],
-        "equipmentId": "knife",
-        "inputPortionIds": [
-          "tomato-scrambled-eggs-portion-01",
-          "tomato-scrambled-eggs-portion-02",
-          "tomato-scrambled-eggs-portion-03",
-          "tomato-scrambled-eggs-portion-04"
-        ],
-        "nodeId": "tomato-scrambled-eggs-op-005-pan-fry",
-        "operationType": "pan-fry",
-        "outputStateIds": [
-          "tomato-scrambled-eggs-step-1-pan-fry"
-        ],
-        "parameters": {},
-        "sourceStepOrder": 1,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
-        "waitDurationMs": 0
-      },
-      {
-        "activeDurationMs": 0,
-        "criticality": "quality",
-        "dependsOn": [
-          "tomato-scrambled-eggs-op-005-pan-fry"
-        ],
-        "equipmentId": "knife",
+        "equipmentId": "frying-pan",
         "inputPortionIds": [],
-        "nodeId": "tomato-scrambled-eggs-op-006-pan-fry",
-        "operationType": "pan-fry",
+        "nodeId": "tomato-scrambled-eggs-op-003-set-heat",
+        "operationType": "set-heat",
         "outputStateIds": [
-          "tomato-scrambled-eggs-step-2-pan-fry"
+          "tomato-scrambled-eggs-step-2-set-heat"
         ],
         "parameters": {
           "heatLevel": 0.6
         },
         "sourceStepOrder": 2,
-        "targetStates": [
-          {
-            "dimension": "browning",
-            "maximum": 0.85,
-            "minimum": 0.45,
-            "unit": "normalized"
-          },
-          {
-            "dimension": "burn",
-            "maximum": 0.2,
-            "unit": "normalized"
-          }
-        ],
+        "targetStates": [],
         "waitDurationMs": 0
       },
       {
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "tomato-scrambled-eggs-op-006-pan-fry"
+          "tomato-scrambled-eggs-op-003-set-heat"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "tomato-scrambled-eggs-op-007-stir",
+        "nodeId": "tomato-scrambled-eggs-op-004-stir",
         "operationType": "stir",
         "outputStateIds": [
           "tomato-scrambled-eggs-step-3-stir"
@@ -317,11 +249,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "tomato-scrambled-eggs-op-007-stir"
+          "tomato-scrambled-eggs-op-004-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "tomato-scrambled-eggs-op-008-stir",
+        "nodeId": "tomato-scrambled-eggs-op-005-stir",
         "operationType": "stir",
         "outputStateIds": [
           "tomato-scrambled-eggs-step-4-stir"
@@ -344,11 +276,11 @@
         "activeDurationMs": 0,
         "criticality": "quality",
         "dependsOn": [
-          "tomato-scrambled-eggs-op-008-stir"
+          "tomato-scrambled-eggs-op-005-stir"
         ],
-        "equipmentId": "knife",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [],
-        "nodeId": "tomato-scrambled-eggs-op-009-fold",
+        "nodeId": "tomato-scrambled-eggs-op-006-fold",
         "operationType": "fold",
         "outputStateIds": [
           "tomato-scrambled-eggs-step-4-fold"
@@ -371,16 +303,16 @@
         "activeDurationMs": 1000,
         "criticality": "completion",
         "dependsOn": [
-          "tomato-scrambled-eggs-op-009-fold"
+          "tomato-scrambled-eggs-op-006-fold"
         ],
-        "equipmentId": "frying-pan",
+        "equipmentId": "mixing-bowl",
         "inputPortionIds": [
           "tomato-scrambled-eggs-portion-01",
           "tomato-scrambled-eggs-portion-02",
           "tomato-scrambled-eggs-portion-03",
           "tomato-scrambled-eggs-portion-04"
         ],
-        "nodeId": "tomato-scrambled-eggs-op-010-serve",
+        "nodeId": "tomato-scrambled-eggs-op-007-serve",
         "operationType": "serve",
         "outputStateIds": [
           "tomato-scrambled-eggs-served"
@@ -394,86 +326,42 @@
   },
   "recipeId": "tomato-scrambled-eggs",
   "rights": {
-    "artifactIds": [
-      "game-artifact-tomato-scrambled-eggs-identity",
-      "game-artifact-tomato-scrambled-eggs-preparation",
-      "game-artifact-tomato-scrambled-eggs-nutrition",
-      "game-artifact-tomato-scrambled-eggs-simulation"
-    ],
+    "artifactIds": [],
     "evidenceIds": [],
     "intendedUse": "game-commercial-ready",
     "sourceIds": [],
-    "usageDecisionIds": [
-      "game-usage-tomato-scrambled-eggs-identity",
-      "game-usage-tomato-scrambled-eggs-preparation",
-      "game-usage-tomato-scrambled-eggs-nutrition",
-      "game-usage-tomato-scrambled-eggs-simulation"
-    ]
+    "usageDecisionIds": []
   },
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b33e05ac5d42866",
+      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
       "causeCodes": [
-        "operation-omitted:pan-fry"
+        "operation-omitted:set-heat"
       ],
       "expectedDeltas": [
         {
           "confidence": "rule-based",
-          "dimension": "doneness",
+          "dimension": "structural-integrity",
           "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
         }
       ],
       "expectedFaultCodes": [
-        "missing-pan-fry"
+        "missing-set-heat"
       ],
       "mutation": {
-        "targetNodeId": "tomato-scrambled-eggs-op-005-pan-fry",
+        "targetNodeId": "tomato-scrambled-eggs-op-003-set-heat",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-005-pan-fry-omit"
+      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-003-set-heat-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b33e05ac5d42866",
+      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
       "causeCodes": [
-        "operation-omitted:pan-fry"
-      ],
-      "expectedDeltas": [
-        {
-          "confidence": "rule-based",
-          "dimension": "doneness",
-          "direction": "decrease"
-        },
-        {
-          "confidence": "rule-based",
-          "dimension": "wateriness",
-          "direction": "increase"
-        }
-      ],
-      "expectedFaultCodes": [
-        "missing-pan-fry"
-      ],
-      "mutation": {
-        "targetNodeId": "tomato-scrambled-eggs-op-006-pan-fry",
-        "type": "omit"
-      },
-      "nutritionEffect": "unchanged",
-      "recoverability": "partially-recoverable",
-      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-006-pan-fry-omit"
-    },
-    {
-      "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b33e05ac5d42866",
-      "causeCodes": [
-        "heat-high:pan-fry"
+        "heat-high:set-heat"
       ],
       "expectedDeltas": [
         {
@@ -497,16 +385,16 @@
       ],
       "mutation": {
         "scalar": 1.25,
-        "targetNodeId": "tomato-scrambled-eggs-op-006-pan-fry",
+        "targetNodeId": "tomato-scrambled-eggs-op-003-set-heat",
         "type": "heat-too-high"
       },
       "nutritionEffect": "requires-retention-model",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-006-pan-fry-hot"
+      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-003-set-heat-hot"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b33e05ac5d42866",
+      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -521,16 +409,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "tomato-scrambled-eggs-op-007-stir",
+        "targetNodeId": "tomato-scrambled-eggs-op-004-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-007-stir-omit"
+      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-004-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b33e05ac5d42866",
+      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -545,16 +433,16 @@
         "missing-stir"
       ],
       "mutation": {
-        "targetNodeId": "tomato-scrambled-eggs-op-008-stir",
+        "targetNodeId": "tomato-scrambled-eggs-op-005-stir",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-008-stir-omit"
+      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-005-stir-omit"
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b33e05ac5d42866",
+      "baselineArtifactVersion": "clv1-2c6ca8242b8f08d4",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -569,12 +457,12 @@
         "missing-fold"
       ],
       "mutation": {
-        "targetNodeId": "tomato-scrambled-eggs-op-009-fold",
+        "targetNodeId": "tomato-scrambled-eggs-op-006-fold",
         "type": "omit"
       },
       "nutritionEffect": "unchanged",
       "recoverability": "partially-recoverable",
-      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-009-fold-omit"
+      "scenarioId": "tomato-scrambled-eggs-tomato-scrambled-eggs-op-006-fold-omit"
     }
   ],
   "schemaVersion": "cooking-lab-game-recipe-v1",

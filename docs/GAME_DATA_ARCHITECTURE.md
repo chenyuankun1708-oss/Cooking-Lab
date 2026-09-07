@@ -25,6 +25,8 @@ The generated Godot JSON, SQLite, attribution report, rights summary, manifest a
 
 All masses use grams. Liquids may additionally expose milliliters only when the ingredient catalog contains a density conversion. Piece, teaspoon and tablespoon values cannot enter the game export without a recorded conversion.
 
+Migration from the Web model is deliberately lossy and draft-only. When the source does not explicitly establish ingredient identity, quantity, operation parameter, target state or scenario outcome, the deterministic migration may preserve a placeholder solely to exercise the schema, but must add a stable `unresolvedMappings` blocker. Such a record cannot become exportable until a rights-cleared source-backed replacement is authored and independently reviewed.
+
 ## Cat Kitchen compatibility
 
 The existing serialized command IDs `CUT`, `ADD`, `SET_HEAT`, `WAIT`, `STIR`, `SEASON` and `PLATE` are not changed or renumbered.

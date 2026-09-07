@@ -13,7 +13,6 @@ import type {
   TeaItem,
 } from "@/types/culinary";
 import type { LocalContentPackageV1 } from "@/types/content-bundle";
-import type { ProductProfile } from "@/types/content-rights";
 import type { RecipeImage } from "@/types/image";
 import type { ResearchRecord, ResearchSourceUse, ResearchTemplateId } from "@/types/research";
 import {
@@ -421,7 +420,7 @@ const seeds: readonly Seed[] = [
       kind: "brewing", time: { prepMinutes: 8, processMinutes: 12, totalMinutes: 20, activeMinutes: 20 }, yield: { amount: 2, unit: "serving" },
       inputs: [input("black-tea-leaf", 6), input("drinking-water", 500, "ml"), input("kumquat", 6, "piece"), input("lemon", 0.5, "piece"), input("granulated-sugar", 35), input("ice", 200)], toolIds: ["kettle", "teapot", "fine-strainer", "pitcher"],
       steps: [
-        bilingualStep(1, { instruction: "红茶以 95°C 热水浸泡 3 分钟后完全滤出，趁热加入糖搅溶。", rationale: "及时出汤控制涩度，温热茶汤更容易溶糖。", stateCue: "茶汤清亮琥珀色，入口有茶味但不强涩。" }, { instruction: "Steep black tea in 95°C water for 3 minutes, strain fully, and dissolve sugar while warm.", rationale: "Prompt straining controls astringency; warm tea dissolves sugar efficiently.", stateCue: "The liquor is clear amber with tea structure but no harsh dryness." }, 5),
+        bilingualStep(1, { instruction: "红茶以 95°C 热水浸泡 3 分钟后完全滤出，趁热加入糖搅溶；另留出约 50 毫升甜茶底用于最后校准。", rationale: "及时出汤控制涩度，温热茶汤更容易溶糖；先留出明确份量，最后调整时不需要加入未声明糖浆。", stateCue: "茶汤清亮琥珀色，入口有茶味但不强涩，50 毫升甜茶底已单独留出。" }, { instruction: "Steep black tea in 95°C water for 3 minutes, strain fully, dissolve the sugar while warm, and reserve about 50 ml of the sweetened tea for final adjustment.", rationale: "Prompt straining controls astringency, warm tea dissolves sugar efficiently, and a measured reserve avoids adding an undeclared syrup later.", stateCue: "The liquor is clear amber with tea structure but no harsh dryness, and 50 ml of sweetened tea is set aside." }, 5),
         bilingualStep(2, { instruction: "金桔对半去籽，轻压出汁；茶汤降至温凉后加入金桔汁、柠檬汁和果片。", rationale: "茶汤冷却后加入柑橘可保留清新香气并减少果皮苦味。", stateCue: "柑橘香明亮，果皮没有被压碎成泥。" }, { instruction: "Halve and seed kumquats, press gently, then add kumquat juice, lemon juice, and slices after the tea cools.", rationale: "Adding citrus to cooled tea preserves bright aroma and limits peel bitterness.", stateCue: "Citrus aroma is vivid and the peel is not crushed to pulp." }, 7),
         bilingualStep(3, { instruction: "装冰分杯，倒入调好的茶并品尝；酸度过尖时只补少量第一步已调好的甜茶底。", rationale: "低温会改变甜酸感受，保留少量甜茶底最后校准，比加入未声明糖浆更可控。", stateCue: "冷饮酸甜清楚，茶味仍可辨。" }, { instruction: "Divide over ice, taste, and add only a little of the sweetened tea base reserved from step one if the acidity is too sharp.", rationale: "Cold temperature changes sweetness perception; reserving a little sweetened tea for final adjustment is more controlled than adding an undeclared syrup.", stateCue: "Sweetness and acidity are clear while tea remains perceptible." }, 3),
       ],
@@ -966,53 +965,11 @@ export const batchANonDishProfileBoundaries = Object.freeze({
   },
 });
 
-export const batchANonDishProductProfiles: readonly ProductProfile[] = Object.freeze([
-  {
-    id: "darjeeling-first-flush-regional-profile-2026-09-v1",
-    culinaryItemId: "darjeeling-first-flush-profile",
-    brandName: "None — non-brand regional profile",
-    producerName: "Multiple producers; no producer represented",
-    region: "Darjeeling, India",
-    vintageBatchOrModel: batchANonDishProfileBoundaries["darjeeling-first-flush-profile"].version,
-    verifiedAt: batchANonDishProfileBoundaries["darjeeling-first-flush-profile"].verifiedAt,
-    sourceIds: ["m11-darjeeling-first-flush-profile-source-1", "m11-darjeeling-first-flush-profile-source-2"],
-    independentEditorialCopy: true,
-    usesUnlicensedBrandArtwork: false,
-    impliesEndorsement: false,
-    affiliateSales: false,
-    rightsAssessmentId: "rights-darjeeling-first-flush-regional-profile-2026-09-v1-product-profile",
-  },
-  {
-    id: "ethiopia-yirgacheffe-washed-regional-profile-2026-09-v1",
-    culinaryItemId: "ethiopia-yirgacheffe-washed-profile",
-    brandName: "None — non-brand regional profile",
-    producerName: "Multiple producers; no producer represented",
-    region: "Yirgacheffe, southern Ethiopia",
-    vintageBatchOrModel: batchANonDishProfileBoundaries["ethiopia-yirgacheffe-washed-profile"].version,
-    verifiedAt: batchANonDishProfileBoundaries["ethiopia-yirgacheffe-washed-profile"].verifiedAt,
-    sourceIds: ["m11-ethiopia-yirgacheffe-washed-profile-source-1", "m11-ethiopia-yirgacheffe-washed-profile-source-2", "m11-ethiopia-yirgacheffe-washed-profile-source-3"],
-    independentEditorialCopy: true,
-    usesUnlicensedBrandArtwork: false,
-    impliesEndorsement: false,
-    affiliateSales: false,
-    rightsAssessmentId: "rights-ethiopia-yirgacheffe-washed-regional-profile-2026-09-v1-product-profile",
-  },
-  {
-    id: "rioja-reserva-regional-profile-2026-09-v1",
-    culinaryItemId: "rioja-reserva-profile",
-    brandName: "None — non-brand regional profile",
-    producerName: "Multiple producers; no producer represented",
-    region: "DOCa Rioja, Spain",
-    vintageBatchOrModel: batchANonDishProfileBoundaries["rioja-reserva-profile"].version,
-    verifiedAt: batchANonDishProfileBoundaries["rioja-reserva-profile"].verifiedAt,
-    sourceIds: ["m11-rioja-reserva-profile-source-1", "m11-rioja-reserva-profile-source-2"],
-    independentEditorialCopy: true,
-    usesUnlicensedBrandArtwork: false,
-    impliesEndorsement: false,
-    affiliateSales: false,
-    rightsAssessmentId: "rights-rioja-reserva-regional-profile-2026-09-v1-product-profile",
-  },
-]);
+// These are regional/category profiles, not specific branded products or SKUs.
+// They deliberately do not create ProductProfile records. M11's specific-product
+// target remains unmet until a real brand, producer, model/vintage or batch, and
+// corresponding rights review are available without placeholder values.
+export const batchANonDishProductProfiles: readonly ProductProfile[] = Object.freeze([]);
 
 const productProfileIdsByItemId = new Map<string, string[]>();
 for (const profile of batchANonDishProductProfiles) {
@@ -1027,3 +984,4 @@ export const batchANonDishPackages: readonly LocalContentPackageV1[] = Object.fr
     productProfileIds: productProfileIdsByItemId.get(item.id) ?? [],
   })),
 );
+import type { ProductProfile } from "@/types/content-rights";

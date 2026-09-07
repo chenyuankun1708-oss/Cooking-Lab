@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "@/data/content-rights";
+import { createContentRightsRegistry, createM10TextArtifactDerivations, m10AuditedCulinaryItemIds } from "@/data/content-rights";
 import { culinaryImages } from "@/data/culinary/images";
 import { culinaryEvidence } from "@/data/culinary/evidence";
 import { culinarySources } from "@/data/culinary/sources";
@@ -44,6 +44,7 @@ const m10ContentRightsRegistry = createContentRightsRegistry({
   researchRecords: m9RecipeResearchRecords,
   restaurantRequirements: [],
   restaurants: [],
+  textArtifactDerivations: createM10TextArtifactDerivations(m10Items, culinaryStories, m9RecipeResearchRecords),
 });
 const m10ContentLocalizationVersions = createPublishingLocalizationVersions(m10ContentPackages, ingredients);
 const m10Context: PublishingGovernanceContext = {
@@ -75,6 +76,7 @@ const contentRightsRegistry = createContentRightsRegistry({
   researchRecords: m9RecipeResearchRecords,
   restaurantRequirements: [],
   restaurants: [],
+  textArtifactDerivations: createM10TextArtifactDerivations(items, culinaryStories, m9RecipeResearchRecords),
 });
 const contentImageAssetVersions = createImageAssetVersions(allImages);
 const contentLocalizationVersions = createPublishingLocalizationVersions(publishedLocalContentPackages, ingredients);
@@ -312,6 +314,7 @@ describe("risk-based publishing governance", () => {
         model: "test-model",
         modelVersion: "test-model-v1",
         generatedAt: "2026-09-06",
+        serviceChain: [{ serviceId: "test-provider", provider: "test-provider", role: "model-provider", termsAssessmentId: "test-ai-terms" }],
         termsAssessmentIds: ["test-ai-terms"],
         promptTemplateId: "test-prompt",
         promptTemplateVersion: "test-prompt-v1",
@@ -443,6 +446,7 @@ describe("risk-based publishing governance", () => {
       model: "test-model",
       modelVersion: "test-model-v2",
       generatedAt: "2026-09-06",
+      serviceChain: [{ serviceId: "test-provider", provider: "test-provider", role: "model-provider", termsAssessmentId: "test-ai-terms" }],
       termsAssessmentIds: ["test-ai-terms"],
       promptTemplateId: "test-prompt",
       promptTemplateVersion: "test-prompt-v2",
@@ -551,6 +555,12 @@ describe("risk-based publishing governance", () => {
         model: "test-model",
         modelVersion: "test-model-v1",
         generatedAt: "2026-09-06",
+        serviceChain: [{
+          serviceId: "test-ai-service",
+          provider: "test-provider",
+          role: "model-provider" as const,
+          termsAssessmentId: termsAssessment.id,
+        }],
         termsAssessmentIds: [termsAssessment.id] as [string, ...string[]],
         promptTemplateId: "test-prompt",
         promptTemplateVersion: "test-prompt-v1",

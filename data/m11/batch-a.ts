@@ -24,6 +24,7 @@ export {
   m11BatchAAiInputs,
   m11BatchAAiServiceAssessments,
   m11BatchAGeneratedArtifactIds,
+  m11BatchATextArtifactDerivations,
 } from "./ai-provenance";
 
 export const m11BatchAItems = Object.freeze([...batchADishItems, ...batchANonDishItems]);

@@ -18,7 +18,7 @@ import { hasCompleteNativeCulinaryTranslation, hasCompleteStandaloneCulinaryTran
 import { hasCompleteRecipeTranslation } from "./localization/public-recipes";
 import { hasReviewedEnglishIngredientLabel } from "./localization/ingredients";
 import type { SupportedLocale } from "@/types/localization";
-import { createContentRightsRegistry, m10AuditedCulinaryItemIds } from "./content-rights";
+import { createContentRightsRegistry, createM10TextArtifactDerivations, m10AuditedCulinaryItemIds } from "./content-rights";
 import { assertContentRightsReady, createContentRightsAuditReport, evaluateContentRightsRegistry, getContentRightsEvaluationDate } from "@/lib/content-rights";
 import { m9RecipeResearchRecords, m9RecipeResearchSources } from "./research/m9-recipe-research";
 import { assertContentBundleManifestReady } from "@/lib/content-bundle";
@@ -88,6 +88,7 @@ export const contentRightsRegistry = createContentRightsRegistry({
   })),
   restaurants: m11BatchARestaurantIdentities,
   productProfiles: m11BatchAProductProfiles,
+  textArtifactDerivations: createM10TextArtifactDerivations(candidates, contentStories, contentResearchRecords),
   preciseSourceUseItemIds: m11BatchAItemIds,
 });
 const contentRightsContext = {

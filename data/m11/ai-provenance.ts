@@ -16,14 +16,24 @@ import { m11BatchAItemIds } from "./portfolio";
  * chain were recorded. Marking the outputs as generated makes that missing
  * provenance fail closed instead of relabelling the text as factual synthesis.
  */
-export const m11BatchAGeneratedArtifactIds = Object.freeze([
+export const m11BatchATextArtifactDerivations = Object.freeze([
   ...m11BatchAItemIds.flatMap((itemId) => [
-    `${itemId}-identity`,
-    `${itemId}-preparation`,
+    { artifactId: `${itemId}-identity`, derivation: "generated" as const },
+    { artifactId: `${itemId}-preparation`, derivation: "generated" as const },
   ]),
-  ...[...batchADishStories, ...batchANonDishStories].map((story) => `${story.id}-story`),
-  ...batchANonDishProductProfiles.map((profile) => `${profile.id}-product-profile`),
+  ...[...batchADishStories, ...batchANonDishStories].map((story) => ({
+    artifactId: `${story.id}-story`,
+    derivation: "generated" as const,
+  })),
+  ...batchANonDishProductProfiles.map((profile) => ({
+    artifactId: `${profile.id}-product-profile`,
+    derivation: "generated" as const,
+  })),
 ]);
+
+export const m11BatchAGeneratedArtifactIds = Object.freeze(
+  m11BatchATextArtifactDerivations.map((declaration) => declaration.artifactId),
+);
 
 /**
  * These arrays intentionally remain empty. Reconstructing author/run/context,

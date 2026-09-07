@@ -9,6 +9,7 @@ import { rightsActions } from "@/types/content-rights";
 import type { Ingredient } from "@/types/ingredient";
 import type { RecipeImage } from "@/types/image";
 import type { ResearchRecord } from "@/types/research";
+import { createContentVersion } from "./content-version";
 
 export const contentRightsIssueCodes = [
   "duplicate-id",
@@ -310,6 +311,17 @@ function validateAi(
     if (!input.version.trim() || !isContentHash(input.contentHash)) {
       report("ai-review-incomplete", input.id, "version", "AI input requires a deterministic version and content hash");
     }
+    const expectedContentHash = createContentVersion({
+      kind: input.kind,
+      sourceIds: [...input.sourceIds].sort(),
+      evidenceIds: [...input.evidenceIds].sort(),
+      researchRecordIds: [...input.researchRecordIds].sort(),
+      rightsAssessmentIds: [...input.rightsAssessmentIds].sort(),
+      containsThirdPartyExpression: input.containsThirdPartyExpression,
+    });
+    if (input.contentHash !== expectedContentHash) {
+      report("ai-review-incomplete", input.id, "contentHash", "AI input hash must match the canonical structured input payload");
+    }
     if (input.containsThirdPartyExpression !== false) {
       report("ai-input-rights-unknown", input.id, "containsThirdPartyExpression", "AI input bundles cannot contain copied third-party expression");
     }
@@ -375,15 +387,27 @@ function validateAi(
     if (!record.reviewAttestationIds.length || record.similarityReview !== "passed" || record.trademarkReview === "required") {
       report("ai-review-incomplete", artifact.id, "ai.review", "Risk-based review attestations, similarity review, and trademark review must be present before Production");
     }
-    const termsAssessments = record.termsAssessmentIds.map((id) => assessments.get(id));
-    const termsAllowed = termsAssessments.length > 0 && termsAssessments.every((assessment) =>
-      assessment?.subject.type === "ai-service"
-      && assessment.basis.kind === "terms"
-      && !["prohibited", "review-required"].includes(assessment.permissions.transform.status)
-      && !["prohibited", "review-required"].includes(assessment.permissions.publish.status)
-      && !["prohibited", "review-required"].includes(assessment.permissions.commercialize.status));
-    if (!termsAllowed) {
-      report("ai-input-rights-unknown", artifact.id, "ai.termsAssessmentIds", "Every provider or gateway in the AI service chain requires a dated assessment allowing transformation, publication, and commercial use");
+    const chainAssessmentIds = record.serviceChain.map((entry) => entry.termsAssessmentId);
+    const chainIdsUnique = new Set(record.serviceChain.map((entry) => entry.serviceId)).size === record.serviceChain.length;
+    const assessmentIdsUnique = new Set(chainAssessmentIds).size === chainAssessmentIds.length;
+    const exactTermsSet = sameStringSet(record.termsAssessmentIds, chainAssessmentIds);
+    const modelProviders = record.serviceChain.filter((entry) => entry.role === "model-provider");
+    const serviceChainAllowed = record.serviceChain.length > 0
+      && chainIdsUnique
+      && assessmentIdsUnique
+      && exactTermsSet
+      && modelProviders.length === 1
+      && modelProviders[0].provider === record.provider
+      && record.serviceChain.every((entry) => {
+        const assessment = assessments.get(entry.termsAssessmentId);
+        return assessment?.subject.type === "ai-service"
+          && assessment.subject.id === entry.serviceId
+          && assessment.basis.kind === "terms"
+          && assessment.basis.provider === entry.provider
+          && rightsActions.every((action) => !["prohibited", "review-required"].includes(assessment.permissions[action].status));
+      });
+    if (!serviceChainAllowed) {
+      report("ai-input-rights-unknown", artifact.id, "ai.serviceChain", "The explicit gateway/model-provider chain must map one-to-one to dated assessments allowing storage, transformation, publication, and commercial use");
     }
     const inputs = record.inputArtifactIds.map((inputId) => inputsById.get(inputId));
     if (inputs.some((input) => !input)) {
@@ -393,6 +417,14 @@ function validateAi(
     const inputEvidence = new Set(inputs.flatMap((input) => input?.evidenceIds ?? []));
     if (artifact.sourceIds.some((sourceId) => !inputSources.has(sourceId)) || artifact.evidenceIds.some((evidenceId) => !inputEvidence.has(evidenceId))) {
       report("ai-input-rights-unknown", artifact.id, "ai.inputArtifactIds", "Generated output provenance must be contained in its versioned AI input bundles");
+    }
+    const decision = registry.decisions.find((entry) => entry.id === artifact.usageDecisionId);
+    const requiredAiAssessmentIds = new Set([
+      ...chainAssessmentIds,
+      ...inputs.flatMap((input) => input?.rightsAssessmentIds ?? []),
+    ]);
+    if (!decision || [...requiredAiAssessmentIds].some((assessmentId) => !decision.assessmentIds.includes(assessmentId))) {
+      report("ai-input-rights-unknown", artifact.id, "usageDecision.assessmentIds", "UsageDecision must close over every AI input, Source, gateway, and model-provider assessment");
     }
     for (const inputId of record.inputArtifactIds) {
       if (!inputsById.has(inputId)) report("missing-reference", artifact.id, "ai.inputArtifactIds", `Missing AI input artifact ${inputId}`);

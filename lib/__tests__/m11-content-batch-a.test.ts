@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { publishedLocalContentPackages } from "@/data/content-packages";
+import { m11BatchAPublicationCandidateManifest } from "@/data/content-bundle-manifest";
 import { createContentRightsRegistry } from "@/data/content-rights";
 import { ingredients } from "@/data/ingredients";
 import {
@@ -11,6 +12,7 @@ import {
   m11BatchAAiServiceAssessments,
   m11BatchAEvidence,
   m11BatchAGeneratedArtifactIds,
+  m11BatchATextArtifactDerivations,
   m11BatchAImages,
   m11BatchAItems,
   m11BatchAProductProfiles,
@@ -28,6 +30,7 @@ import {
 } from "@/data/m11/batch-a-publication";
 import { m11BatchAItemIds, m11PortfolioTarget, m11RequiredItemIds, m11RestaurantReconstructionItemIds } from "@/data/m11/portfolio";
 import { evaluateContentRightsRegistry } from "@/lib/content-rights";
+import { validateContentBundleManifest } from "@/lib/content-bundle";
 import { evaluateCulinaryItemPublishingEligibility } from "@/lib/culinary-publishing";
 import { deriveMinimumPublishingRisk } from "@/lib/publishing-governance";
 import { validateResearchRegistry } from "@/lib/research-validation";
@@ -50,7 +53,7 @@ const publishingContext = {
 const rightsPreflightItems = m11BatchAPublishedItems;
 const rightsPreflightStories = m11BatchAPublishedStories;
 
-const rightsRegistry = createContentRightsRegistry({
+const rightsRegistryInput = {
   items: rightsPreflightItems,
   auditedItemIds: m11BatchAItemIds,
   images: m11BatchAImages,
@@ -68,9 +71,10 @@ const rightsRegistry = createContentRightsRegistry({
   aiInputs: m11BatchAAiInputs,
   ai: m11BatchAAiGenerationRecords,
   aiAssessments: m11BatchAAiServiceAssessments,
-  generatedArtifactIds: m11BatchAGeneratedArtifactIds,
+  textArtifactDerivations: m11BatchATextArtifactDerivations,
   preciseSourceUseItemIds: m11BatchAItemIds,
-});
+} as const;
+const rightsRegistry = createContentRightsRegistry(rightsRegistryInput);
 
 describe("M11 content Batch A candidate boundary", () => {
   it("keeps authored candidates staged and publishes the exact 35-item projection atomically", () => {
@@ -134,25 +138,35 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(rightsRegistry.decisions.filter((decision) => decision.decision === "block")).toHaveLength(
       m11BatchAGeneratedArtifactIds.length,
     );
-    expect(m11BatchAGeneratedArtifactIds).toHaveLength(108);
+    expect(m11BatchAGeneratedArtifactIds).toHaveLength(105);
     expect(rightsRegistry.aiInputs).toEqual([]);
     expect(rightsRegistry.ai).toEqual([]);
     expect(rightsRegistry.artifacts.filter((artifact) => artifact.kind === "image").every((artifact) => (
       artifact.derivation !== "generated"
       && !m11BatchAGeneratedArtifactIds.includes(artifact.id)
     ))).toBe(true);
-    expect(rightsRegistry.restaurants).toHaveLength(8);
-    expect(rightsRegistry.productProfiles).toHaveLength(3);
+    expect(rightsRegistry.restaurants).toHaveLength(5);
+    expect(rightsRegistry.productProfiles).toHaveLength(0);
 
     for (const profile of m11BatchAProductProfiles) {
       const contentPackage = m11BatchAContentPackages.find((entry) => entry.itemId === profile.culinaryItemId)!;
       expect(contentPackage.manifestEntry.usageDecisionIds).toContain(`usage-${profile.id}-product-profile`);
     }
 
-    for (const itemId of [...m11BatchARestaurantIdentities, ...m11BatchAProductProfiles].map((entry) => entry.culinaryItemId)) {
+    for (const itemId of m11BatchARestaurantIdentities.map((entry) => entry.culinaryItemId)) {
       const item = rightsPreflightItems.find((entry) => entry.id === itemId)!;
       expect(deriveMinimumPublishingRisk(item, rightsRegistry).level, itemId).toBe("medium");
     }
+
+    expect(m11BatchAProductProfiles).toEqual([]);
+  });
+
+  it("cannot silently relabel a generated artifact by omitting its authoring declaration", () => {
+    const [removed, ...remaining] = m11BatchATextArtifactDerivations;
+    expect(() => createContentRightsRegistry({
+      ...rightsRegistryInput,
+      textArtifactDerivations: remaining,
+    })).toThrow(`Missing text artifact derivation declaration: ${removed.artifactId}`);
   });
 
   it("uses only non-video research evidence", () => {
@@ -165,6 +179,17 @@ describe("M11 content Batch A candidate boundary", () => {
       locator.kind !== "url" || !/(?:discoverhongkong\.com\/eng\/explore\/dining\.html|ncausa\.org\/About-Coffee\/How-to-Brew-Coffee|riojawine\.com\/en\/$)/i.test(locator.url)
     )))).toBe(true);
     expect(m11BatchAEvidence.every((record) => record.locators.every((locator) => locator.kind !== "timestamp"))).toBe(true);
+  });
+
+  it("does not use placeholder regional categories as specific product profiles", () => {
+    for (const itemId of [
+      "darjeeling-first-flush-profile",
+      "ethiopia-yirgacheffe-washed-profile",
+      "rioja-reserva-profile",
+    ]) {
+      const contentPackage = m11BatchAContentPackages.find((entry) => entry.itemId === itemId)!;
+      expect(contentPackage.manifestEntry.usageDecisionIds.some((id) => id.includes("product-profile"))).toBe(false);
+    }
   });
 
   it("uses two culinary sources for repaired preparations and keeps safety sources narrowly scoped", () => {
@@ -217,6 +242,26 @@ describe("M11 content Batch A candidate boundary", () => {
     expect(publishedLocalContentPackages).toHaveLength(50);
     expect(publishingGovernanceAuditReport).toContain("Status: PASS");
     expect(publishingGovernanceAuditReport).toContain("Published items audited: 50");
+  });
+
+  it("keeps the committed 85-item candidate manifest current with only explicit AI blocks", async () => {
+    const production = await import("@/data/published-culinary-items");
+    const combinedItems = [...production.getPublishedCulinaryItems(), ...rightsPreflightItems];
+    const combinedRegistry = {
+      ...production.contentRightsRegistry,
+      artifacts: [...production.contentRightsRegistry.artifacts, ...rightsRegistry.artifacts],
+      decisions: [...production.contentRightsRegistry.decisions, ...rightsRegistry.decisions],
+      productProfiles: [...production.contentRightsRegistry.productProfiles, ...rightsRegistry.productProfiles],
+    };
+    const issues = validateContentBundleManifest(
+      m11BatchAPublicationCandidateManifest,
+      combinedItems,
+      combinedRegistry,
+    );
+
+    expect(m11BatchAPublicationCandidateManifest.entries).toHaveLength(85);
+    expect(new Set(issues.map((issue) => issue.code))).toEqual(new Set(["blocked-usage-decision"]));
+    expect(issues).toHaveLength(m11BatchAGeneratedArtifactIds.length);
   });
 
   it("publishes item-specific culinary stories rather than governance boilerplate", () => {

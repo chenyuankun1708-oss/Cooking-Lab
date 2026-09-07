@@ -172,6 +172,13 @@ export interface AiInputArtifact {
   containsThirdPartyExpression: false;
 }
 
+export interface AiServiceChainEntry {
+  serviceId: string;
+  provider: string;
+  role: "gateway" | "model-provider";
+  termsAssessmentId: string;
+}
+
 export interface AiGenerationRecord {
   id: string;
   artifactId: string;
@@ -181,6 +188,7 @@ export interface AiGenerationRecord {
   model: string;
   modelVersion: string;
   generatedAt: string;
+  serviceChain: [AiServiceChainEntry, ...AiServiceChainEntry[]];
   termsAssessmentIds: [string, ...string[]];
   promptTemplateId: string;
   promptTemplateVersion: string;

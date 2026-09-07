@@ -41,13 +41,7 @@ export const m11RequiredItemIds = Object.freeze([
   "kumquat-lemon-tea",
 ] as const);
 
-export const m11ProductProfileItemIds = Object.freeze([
-  "darjeeling-first-flush-profile", "assam-second-flush-profile", "uji-gyokuro-profile", "wuyi-rock-tea-profile",
-  "ethiopia-yirgacheffe-washed-profile", "kenya-aa-washed-profile", "colombia-huila-washed-profile", "panama-geisha-washed-profile",
-  "rioja-reserva-profile", "chianti-classico-riserva-profile", "mosel-riesling-kabinett-profile", "barossa-shiraz-profile",
-] as const);
-
 export const m11RestaurantReconstructionItemIds = Object.freeze([
   "lemon-chicken-breast", "broccoli-chicken", "pepper-beef-stir-fry", "shrimp-scrambled-eggs",
-  "pan-fried-tofu", "cold-shredded-chicken", "vietnamese-lemongrass-chicken", "mexican-chicken-fajitas",
+  "mexican-chicken-fajitas",
 ] as const);

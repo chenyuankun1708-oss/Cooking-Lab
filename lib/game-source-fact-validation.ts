@@ -25,6 +25,14 @@ export function createGameSourceFactHash(value: unknown): string {
   return sha256(stableJson(value));
 }
 
+export function createGameCrossCheckAssertionHash(
+  assertion: GameSourceFactBundleV1["crossCheckAssertions"][number],
+): string {
+  const payload = { ...assertion } as Partial<typeof assertion>;
+  delete payload.factSha256;
+  return createGameSourceFactHash(payload);
+}
+
 export function evaluateGameSourceFactBundle(
   bundle: GameSourceFactBundleV1,
   registry: GameNormalizationRegistryV1,
@@ -59,6 +67,28 @@ export function evaluateGameSourceFactBundle(
     }
     if (new Set(assertion.sharedOperationTerms).size !== assertion.sharedOperationTerms.length || assertion.sharedOperationTerms.some((term) => !term.trim())) {
       report("ambiguous-fact", `${field}.sharedOperationTerms`, "Shared operation terms must be unique and non-empty");
+    }
+    if (!assertion.normalizedTitle.trim()
+      || !uniqueNonEmpty(assertion.ingredientTerms)
+      || !uniqueNonEmpty(assertion.operationTerms)
+      || !uniqueSha256(assertion.sourceLineSha256s)) {
+      report("ambiguous-fact", field, "Cross-check assertions require structured title, ingredient, operation and source-line facts");
+    }
+    if (assertion.factSha256 !== createGameCrossCheckAssertionHash(assertion)) {
+      report("stale-version", `${field}.factSha256`, "Cross-check fact hash does not match its structured facts");
+    }
+    const primaryIngredientTerms = ingredientTerms(bundle.ingredientFacts.map((fact) => fact.phrase));
+    const primaryOperationTerms = new Set(bundle.methodFacts.map((fact) => fact.operationToken));
+    const expectedIngredientTerms = intersection(primaryIngredientTerms, new Set(assertion.ingredientTerms));
+    const expectedOperationTerms = intersection(primaryOperationTerms, new Set(assertion.operationTerms));
+    if (!sameStringSet(new Set(assertion.sharedIngredientTerms), new Set(expectedIngredientTerms))) {
+      report("ambiguous-fact", `${field}.sharedIngredientTerms`, "Shared ingredient terms must be recomputable from primary and cross-check facts");
+    }
+    if (!sameStringSet(new Set(assertion.sharedOperationTerms), new Set(expectedOperationTerms))) {
+      report("ambiguous-fact", `${field}.sharedOperationTerms`, "Shared operation terms must be recomputable from primary and cross-check facts");
+    }
+    if (assertion.matchBasis === "exact-title" && assertion.normalizedTitle !== normalizeTitle(bundle.title)) {
+      report("ambiguous-fact", `${field}.normalizedTitle`, "Exact-title cross-checks must retain the same normalized title as the primary source");
     }
   }
 
@@ -95,6 +125,7 @@ export function evaluateGameSourceFactBundle(
       temperatureC: fact.temperatureC ?? null,
       qualitativeHeatToken: fact.qualitativeHeatToken ?? null,
       equipmentToken: fact.equipmentToken ?? null,
+      parameterValues: fact.parameterValues ?? null,
       sourceLineSha256: fact.sourceLineSha256,
     });
     if (fact.factSha256 !== expectedHash) report("stale-version", `${field}.factSha256`, "Method fact hash does not match its structured source fact");
@@ -119,6 +150,34 @@ export function evaluateGameSourceFactBundle(
     }
   }
   return issues.sort((left, right) => `${left.field}:${left.code}`.localeCompare(`${right.field}:${right.code}`));
+}
+
+function uniqueNonEmpty(values: readonly string[]): boolean {
+  return values.length > 0 && new Set(values).size === values.length && values.every((value) => value.trim().length > 0);
+}
+
+function uniqueSha256(values: readonly string[]): boolean {
+  return uniqueNonEmpty(values) && values.every(sha256Value);
+}
+
+function ingredientTerms(phrases: readonly string[]): Set<string> {
+  const ignored = new Set(["and", "fresh", "ground", "large", "small", "sliced", "the", "with"]);
+  return new Set(phrases.flatMap((phrase) => phrase.split(/\s+/))
+    .filter((token) => token.length > 2 && !ignored.has(token)));
+}
+
+function intersection(left: ReadonlySet<string>, right: ReadonlySet<string>): string[] {
+  return [...left].filter((value) => right.has(value)).sort();
+}
+
+function normalizeTitle(value: string): string {
+  return value.trim().replace(/[.\s]+$/g, "").replace(/\s+/g, " ")
+    .toLowerCase()
+    .replace(/\b(?:no|number)\.?\s*\d+\b/g, "")
+    .replace(/\s*[—-]\s*\d+$/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
 }
 
 function validatePrimaryFactLocator(

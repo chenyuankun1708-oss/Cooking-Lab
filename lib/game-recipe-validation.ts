@@ -6,6 +6,7 @@ import type {
   GameIngredientCatalogV1,
   GameNutritionDatasetSubsetV1,
   GameOperationDefinitionV1,
+  GameOperationParameterKey,
   GameRecipeV1,
   GameRightsRegistryV1,
 } from "@/types/game-recipe";
@@ -18,12 +19,20 @@ import type {
   ReviewDimension,
   SamplingQaBatch,
 } from "@/types/publishing-governance";
-import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
+import type {
+  GameMethodSourceFactV1,
+  GameNormalizationRegistryV1,
+  GameNormalizationTraceV1,
+  GameSourceFactBundleV1,
+} from "@/types/game-source-facts";
+import type { ResearchSourceUse } from "@/types/research";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
+import type { LocSourceCacheManifestV1 } from "./loc-source-cache";
 import { evaluateGameSourceFactBundle } from "./game-source-fact-validation";
 import { createLocSourceRegistrySliceVersion } from "./loc-source-registry-version";
 import { createSamplingBatchEvidenceDigest } from "./publishing-governance";
 import { validateResearchRegistry } from "./research-validation";
+import { stableJson } from "./stable-json";
 
 export const gameRecipeIssueCodes = [
   "duplicate-id",
@@ -56,6 +65,7 @@ export interface GameRecipeValidationContext {
   normalizationRegistry?: GameNormalizationRegistryV1;
   sourceFactBundles?: readonly GameSourceFactBundleV1[];
   locSourceRegistry?: LocSourceRegistryV1;
+  locSourceCacheManifest?: LocSourceCacheManifestV1;
   now: string;
 }
 
@@ -111,7 +121,7 @@ export function createGameRecipeArtifactVersion(recipe: GameRecipeV1): string {
 export function createGameArtifactSetVersion(
   recipes: readonly GameRecipeV1[],
   registry: GameRightsRegistryV1,
-  support?: Pick<GameRecipeValidationContext, "operations" | "ingredients" | "nutritionDataset" | "normalizationRegistry" | "sourceFactBundles" | "locSourceRegistry">,
+  support?: Pick<GameRecipeValidationContext, "operations" | "ingredients" | "nutritionDataset" | "normalizationRegistry" | "sourceFactBundles" | "locSourceRegistry" | "locSourceCacheManifest">,
 ): string {
   const recipeIds = new Set(recipes.map((recipe) => recipe.recipeId));
   const artifacts = registry.artifacts
@@ -185,6 +195,7 @@ export function createGameArtifactSetVersion(
             .filter((document) => locSourceDocumentIds.has(document.documentId))
             .sort((left, right) => left.documentId.localeCompare(right.documentId)),
         } : null,
+        locSourceCacheManifest: support.locSourceCacheManifest ?? null,
         sourceFactBundles: usedSourceFactBundles,
       } : {}),
     } : {
@@ -287,18 +298,26 @@ function validateCatalogs(
       continue;
     }
     if (!record.ingredientId) {
-      const expected = record.unit === "g" ? ["si:g:v1", 1] as const : record.unit === "kg" ? ["si:kg:v1", 1_000] as const : undefined;
+      const expected = record.unit === "g" ? ["si:g:v1", 1] as const
+        : record.unit === "kg" ? ["si:kg:v1", 1_000] as const
+          : record.unit === "lb" ? ["avoirdupois:lb:v1", 453.59237] as const
+            : record.unit === "oz" ? ["avoirdupois:oz:v1", 28.349523125] as const
+              : undefined;
       if (!expected || record.recordId !== expected[0] || record.gramsPerUnit !== expected[1]) {
-        report("invalid-schema", "ingredient-catalog", `conversionRecords.${record.recordId}`, "Only the exact versioned SI gram and kilogram records may be global");
+        report("invalid-schema", "ingredient-catalog", `conversionRecords.${record.recordId}`, "Only exact versioned gram, kilogram, avoirdupois pound and ounce records may be global");
       }
       continue;
     }
     const ingredient = ingredientById.get(record.ingredientId);
     const expectedWeight = record.unit === "ml"
       ? ingredient?.densityGPerMl ?? ingredient?.unitWeightsG.ml
+      : record.unit === "l"
+        ? ingredient?.densityGPerMl === undefined ? ingredient?.unitWeightsG.l : ingredient.densityGPerMl * 1_000
       : record.unit === "g" || record.unit === "kg"
         ? undefined
-        : ingredient?.unitWeightsG[record.unit];
+        : record.unit === "lb" || record.unit === "oz"
+          ? undefined
+          : ingredient?.unitWeightsG[record.unit];
     const key = `${record.ingredientId}:${record.unit}`;
     if (conversionKeys.has(key)) report("duplicate-id", "ingredient-catalog", `conversionRecords.${record.recordId}`, "An ingredient may declare only one conversion per unit");
     conversionKeys.add(key);
@@ -533,6 +552,18 @@ function validateNormalizationTrace(
   if (trace.sourceCacheVersion !== bundle.sourceCacheVersion || trace.sourceCompilerVersion !== bundle.compilerVersion) {
     report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceCacheVersion", "Source cache or compiler version is stale");
   }
+  const cacheManifest = context.locSourceCacheManifest;
+  if (!cacheManifest || cacheManifest.cacheVersion !== bundle.sourceCacheVersion || cacheManifest.sourceAccessedAt !== context.locSourceRegistry?.accessedAt) {
+    report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceCacheVersion", "Source-normalized recipes require the exact verified LOC cache manifest");
+  } else {
+    const cachedDocumentById = new Map(cacheManifest.documents.map((document) => [document.documentId, document]));
+    for (const locator of [bundle.primarySource, ...bundle.crossCheckSources]) {
+      const cachedDocument = cachedDocumentById.get(locator.sourceDocumentId);
+      if (!cachedDocument || cachedDocument.derivativeSha256 !== locator.derivativeSha256) {
+        report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceCacheVersion", `LOC cache manifest does not contain the exact derivative for ${locator.sourceDocumentId}`);
+      }
+    }
+  }
   if (trace.normalizationPolicyVersion !== registry.policyVersion) {
     report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.normalizationPolicyVersion", "Normalization policy version is stale");
   }
@@ -553,7 +584,6 @@ function validateNormalizationTrace(
   const heatDescriptors = new Map(registry.heatDescriptors.map((entry) => [entry.descriptorId, entry]));
   const targetRules = new Map(registry.targetStateRules.map((entry) => [entry.ruleId, entry]));
   const mutationRules = new Map(registry.mutationRules.map((entry) => [entry.ruleId, entry]));
-  const evidenceIds = new Set(context.rightsRegistry?.evidence.map((entry) => entry.id) ?? []);
 
   reportBindingCoverage("ingredientBindings", trace.ingredientBindings.map((binding) => binding.ingredientFactId), ingredientFacts.keys(), recipe, report);
   reportBindingCoverage("ingredientBindings", trace.ingredientBindings.map((binding) => binding.portionId), portions.keys(), recipe, report);
@@ -630,10 +660,11 @@ function validateNormalizationTrace(
         report("invalid-schema", recipe.recipeId, `${field}.durationBindings`, "Source-exact duration must not claim independent calibration Evidence");
       }
       if (durationBinding.basis === "independently-calibrated"
-        && (!durationBinding.provenanceEvidenceId || !evidenceIds.has(durationBinding.provenanceEvidenceId))) {
+        && (!durationBinding.provenanceEvidenceId || !validRuleEvidence(recipe, durationBinding.provenanceEvidenceId, ["preparation", "simulation"], context))) {
         report("missing-reference", recipe.recipeId, `${field}.durationBindings`, "Calibrated duration requires existing independent Evidence");
       }
     }
+    validateParameterBindings(recipe, node, fact, binding, portions, context, field, report);
     const equipmentRule = binding.equipmentRuleId ? equipmentRules.get(binding.equipmentRuleId) : undefined;
     if (fact.equipmentToken || node.equipmentId || binding.equipmentRuleId) {
       if (!equipmentRule || equipmentRule.equipmentToken !== fact.equipmentToken || equipmentRule.equipmentId !== node.equipmentId) {
@@ -658,7 +689,8 @@ function validateNormalizationTrace(
       if (heatControl?.kind !== "exact-temperature"
         || heatControl.sourceFactId !== fact.factId
         || heatControl.temperatureC !== fact.temperatureC
-        || node.parameters.temperatureC !== fact.temperatureC) {
+        || node.parameters.temperatureC !== fact.temperatureC
+        || node.parameters.heatLevel !== undefined) {
         report("invalid-schema", recipe.recipeId, `${field}.heatDescriptorId`, "Exact source temperature must equal the canonical temperature and source-bound heat control");
       }
     } else if (node.parameters.temperatureC !== undefined || node.parameters.heatLevel !== undefined) {
@@ -667,7 +699,7 @@ function validateNormalizationTrace(
         || heatControl.sourceFactId !== fact.factId
         || heatControl.parameter !== parameter
         || heatControl.value !== node.parameters[parameter]
-        || !evidenceIds.has(heatControl.calibrationEvidenceId)) {
+        || !validRuleEvidence(recipe, heatControl.calibrationEvidenceId, ["preparation", "simulation"], context)) {
         report("missing-reference", recipe.recipeId, `${field}.heatDescriptorId`, "Numeric heat not present in the source requires a matching independent calibration Evidence record");
       }
     } else if (heatControl) {
@@ -705,7 +737,7 @@ function validateNormalizationTrace(
     }
     const expectedDeltas = scenario.expectedDeltas.map((delta) => `${delta.dimension}:${delta.direction}`);
     const ruleDeltas = rule.expectedDeltas.map((delta) => `${delta.dimension}:${delta.direction}`);
-    if (rule.mutationType !== scenario.mutation.type
+    if (stableJson(rule.mutationSelector) !== stableJson(scenario.mutation)
       || !sameStringSet(ruleDeltas, expectedDeltas)
       || !sameStringSet(rule.expectedFaultCodes, scenario.expectedFaultCodes)
       || !sameStringSet(rule.causeCodes, scenario.causeCodes)
@@ -724,17 +756,94 @@ function validateNormalizationTrace(
       || requiredApplicabilityFacts.some((id) => !binding.applicabilityFactIds.includes(id))) {
       report("missing-reference", recipe.recipeId, `${field}.applicabilityFactIds`, "Scenario requires existing source facts that establish rule applicability");
     }
-    for (const evidenceId of rule.provenanceEvidenceIds) if (!evidenceIds.has(evidenceId)) {
+    for (const evidenceId of rule.provenanceEvidenceIds) if (!validRuleEvidence(recipe, evidenceId, ["simulation"], context)) {
       report("missing-reference", recipe.recipeId, `${field}.mutationRuleId`, `Mutation rule provenance Evidence ${evidenceId} is missing`);
     }
   }
   for (const binding of trace.methodBindings) for (const ruleId of binding.targetStateRuleIds) {
     const rule = targetRules.get(ruleId);
-    if (rule) for (const evidenceId of rule.provenanceEvidenceIds) if (!evidenceIds.has(evidenceId)) {
+    if (rule) for (const evidenceId of rule.provenanceEvidenceIds) if (!validRuleEvidence(recipe, evidenceId, ["simulation"], context)) {
       report("missing-reference", recipe.recipeId, `authoring.normalizationTrace.methodBindings.${binding.nodeId}.targetStateRuleIds`, `Target rule provenance Evidence ${evidenceId} is missing`);
     }
   }
   validateSourceFactRightsJoin(recipe, bundle, context, report);
+}
+
+function validateParameterBindings(
+  recipe: GameRecipeV1,
+  node: GameRecipeV1["operationGraph"]["nodes"][number],
+  fact: GameMethodSourceFactV1,
+  binding: GameNormalizationTraceV1["methodBindings"][number],
+  portions: ReadonlyMap<string, GameRecipeV1["ingredientPortions"][number]>,
+  context: GameRecipeValidationContext,
+  field: string,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+): void {
+  const nonHeatParameters = (Object.keys(node.parameters) as GameOperationParameterKey[])
+    .filter((parameter) => parameter !== "temperatureC" && parameter !== "heatLevel");
+  const boundParameters = binding.parameterBindings.map((entry) => entry.parameter);
+  if (!sameStringSet(boundParameters, nonHeatParameters)) {
+    report("invalid-schema", recipe.recipeId, `${field}.parameterBindings`, "Parameter bindings must exactly cover every non-heat canonical parameter");
+  }
+  for (const parameterBinding of binding.parameterBindings) {
+    const parameterField = `${field}.parameterBindings.${parameterBinding.parameter}`;
+    const value = node.parameters[parameterBinding.parameter];
+    if (value === undefined || parameterBinding.parameter === "temperatureC" || parameterBinding.parameter === "heatLevel") {
+      report("invalid-schema", recipe.recipeId, parameterField, "Parameter binding must identify one present non-heat canonical parameter");
+      continue;
+    }
+    if (parameterBinding.basis === "source-exact") {
+      if (fact.parameterValues?.[parameterBinding.parameter] !== value
+        || parameterBinding.provenanceEvidenceId
+        || parameterBinding.ingredientPortionIds?.length) {
+        report("invalid-number", recipe.recipeId, parameterField, "Source-exact parameter binding must equal the structured method fact without extra calibration claims");
+      }
+      continue;
+    }
+    if (parameterBinding.basis === "ingredient-quantity") {
+      const portionIds = parameterBinding.ingredientPortionIds ?? [];
+      const boundPortions = portionIds.map((portionId) => portions.get(portionId));
+      if (parameterBinding.parameter !== "quantityG"
+        || parameterBinding.provenanceEvidenceId
+        || !portionIds.length
+        || new Set(portionIds).size !== portionIds.length
+        || boundPortions.some((portion) => !portion)
+        || portionIds.some((portionId) => !node.inputPortionIds.includes(portionId))
+        || Math.abs(boundPortions.reduce((total, portion) => total + (portion?.massG ?? 0), 0) - value) > 0.011) {
+        report("invalid-number", recipe.recipeId, parameterField, "Ingredient-quantity parameter binding must exactly sum declared input portion masses into quantityG");
+      }
+      continue;
+    }
+    if (parameterBinding.ingredientPortionIds?.length
+      || !parameterBinding.provenanceEvidenceId
+      || !validRuleEvidence(recipe, parameterBinding.provenanceEvidenceId, ["preparation", "simulation"], context)) {
+      report("missing-reference", recipe.recipeId, parameterField, "Independently calibrated parameters require current preparation and simulation Evidence");
+    }
+  }
+}
+
+function validRuleEvidence(
+  recipe: GameRecipeV1,
+  evidenceId: string,
+  requiredUses: readonly ResearchSourceUse[],
+  context: GameRecipeValidationContext,
+): boolean {
+  const rights = context.rightsRegistry;
+  if (!rights || !recipe.rights.evidenceIds.includes(evidenceId)) return false;
+  const evidence = rights.evidence.find((entry) => entry.id === evidenceId);
+  if (!evidence
+    || evidence.relation !== "supports"
+    || !recipe.rights.sourceIds.includes(evidence.sourceId)
+    || rights.evidenceOrigins.find((entry) => entry.evidenceId === evidenceId)?.origin !== "source-record") {
+    return false;
+  }
+  const record = rights.researchRecords.find((entry) => entry.subject.type === "game-recipe" && entry.subject.id === recipe.recipeId);
+  if (!record || record.status !== "closed" || record.unresolvedQuestions.length) return false;
+  const included = record.claims.some((claim) => claim.disposition === "include" && claim.evidenceIds.includes(evidenceId));
+  const sourceDecision = record.sourceDecisions.find((decision) => decision.disposition === "accepted" && decision.sourceId === evidence.sourceId);
+  return included
+    && sourceDecision?.disposition === "accepted"
+    && requiredUses.every((use) => sourceDecision.uses.includes(use));
 }
 
 function reportBindingCoverage(

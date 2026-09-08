@@ -18,6 +18,7 @@ import {
 import { parseGameNormalizationRegistry, parseGameSourceFactBundle } from "@/lib/game-source-fact-runtime-schema";
 import { parseLocSourceRegistry } from "@/lib/loc-recipe-ingestion";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
+import { parseLocSourceCacheManifest, type LocSourceCacheManifestV1 } from "@/lib/loc-source-cache";
 
 export const gameDataSourceRoot = "game-data/source";
 
@@ -29,6 +30,7 @@ export interface CanonicalGameData {
   normalizationRegistry?: GameNormalizationRegistryV1;
   sourceFactBundles: GameSourceFactBundleV1[];
   locSourceRegistry: LocSourceRegistryV1;
+  locSourceCacheManifest?: LocSourceCacheManifestV1;
 }
 
 export function loadCanonicalGameData(root = process.cwd()): CanonicalGameData {
@@ -40,10 +42,12 @@ export function loadCanonicalGameData(root = process.cwd()): CanonicalGameData {
     .map((name) => readJson(resolve(recipeRoot, name), parseGameRecipe));
   const normalizationPath = resolve(root, "game-data/normalization/registry.json");
   const sourceFactRoot = resolve(root, "game-data/source-facts/recipes");
+  const sourceCacheManifestPath = resolve(root, "game-data/source-facts/loc-cache-manifest.json");
   const hasNormalization = existsSync(normalizationPath);
   const hasSourceFacts = existsSync(sourceFactRoot);
-  if (hasNormalization !== hasSourceFacts) {
-    throw new GameDataSchemaError("game-data/normalization", "normalization registry and source-fact recipes must be committed together");
+  const hasSourceCacheManifest = existsSync(sourceCacheManifestPath);
+  if (new Set([hasNormalization, hasSourceFacts, hasSourceCacheManifest]).size !== 1) {
+    throw new GameDataSchemaError("game-data/normalization", "normalization registry, source-fact recipes and LOC cache manifest must be committed together");
   }
   const normalizationRegistry = hasNormalization
     ? readJson(normalizationPath, parseGameNormalizationRegistry)
@@ -65,6 +69,9 @@ export function loadCanonicalGameData(root = process.cwd()): CanonicalGameData {
     normalizationRegistry,
     sourceFactBundles,
     locSourceRegistry: readJson(resolve(root, "game-data/source-research/loc-sources.json"), parseLocSourceRegistry),
+    locSourceCacheManifest: hasSourceCacheManifest
+      ? readJson(sourceCacheManifestPath, parseLocSourceCacheManifest)
+      : undefined,
   };
 }
 

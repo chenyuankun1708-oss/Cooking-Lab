@@ -14,6 +14,7 @@ import type {
 } from "@/types/game-recipe";
 import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
+import type { LocSourceCacheManifestV1 } from "./loc-source-cache";
 import { compileCatKitchenGoal1Recipe } from "./cat-kitchen-goal1-compiler";
 import {
   parseGameDataManifest,
@@ -40,6 +41,7 @@ export interface GameDataBuildInput {
   normalizationRegistry?: GameNormalizationRegistryV1;
   sourceFactBundles?: readonly GameSourceFactBundleV1[];
   locSourceRegistry?: LocSourceRegistryV1;
+  locSourceCacheManifest?: LocSourceCacheManifestV1;
   now: string;
 }
 
@@ -64,6 +66,7 @@ export function buildGameData(
     normalizationRegistry: input.normalizationRegistry,
     sourceFactBundles: input.sourceFactBundles,
     locSourceRegistry: input.locSourceRegistry,
+    locSourceCacheManifest: input.locSourceCacheManifest,
     now: input.now,
   });
   if (canonicalAudit.issues.length) {
@@ -83,6 +86,7 @@ export function buildGameData(
     normalizationRegistry: input.normalizationRegistry,
     sourceFactBundles: input.sourceFactBundles,
     locSourceRegistry: input.locSourceRegistry,
+    locSourceCacheManifest: input.locSourceCacheManifest,
     now: input.now,
   });
   for (const recipe of exportable) {

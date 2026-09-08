@@ -13,6 +13,7 @@ const result = buildGameData({
   normalizationRegistry: data.normalizationRegistry,
   sourceFactBundles: data.sourceFactBundles,
   locSourceRegistry: data.locSourceRegistry,
+  locSourceCacheManifest: data.locSourceCacheManifest,
   now: getContentRightsEvaluationDate(),
 });
 process.stdout.write(`Built ${result.manifest.recipeCount} game recipes at ${result.outputDirectory}.\n`);

@@ -1,7 +1,9 @@
 import type {
   GameIngredientState,
-  GameMutationType,
   GameOperationId,
+  GameOperationParameterKey,
+  GameOperationParametersV1,
+  GameRecipeMutationV1,
   GameSimulationProfile,
   GameTargetDimension,
 } from "./game-recipe";
@@ -46,6 +48,7 @@ export interface GameMethodSourceFactV1 {
   temperatureC?: number;
   qualitativeHeatToken?: string;
   equipmentToken?: string;
+  parameterValues?: Partial<GameOperationParametersV1>;
   sourceLineSha256: string;
   factSha256: string;
 }
@@ -67,8 +70,13 @@ export interface GameSourceFactBundleV1 {
     startLine: number;
     endLine: number;
     matchBasis: "exact-title" | "related-title-and-facts";
+    normalizedTitle: string;
+    ingredientTerms: string[];
+    operationTerms: string[];
+    sourceLineSha256s: string[];
     sharedIngredientTerms: string[];
     sharedOperationTerms: string[];
+    factSha256: string;
   }>;
   ingredientFacts: GameIngredientSourceFactV1[];
   methodFacts: GameMethodSourceFactV1[];
@@ -113,7 +121,7 @@ export interface GameNormalizationRegistryV1 {
     ruleId: string;
     version: string;
     operationId: GameOperationId;
-    mutationType: GameMutationType;
+    mutationSelector: GameRecipeMutationV1;
     expectedDeltas: Array<{
       dimension: GameTargetDimension;
       direction: "increase" | "decrease" | "unchanged";
@@ -149,6 +157,12 @@ export interface GameNormalizationTraceV1 {
     durationBindings: Array<{
       target: "activeDurationMs" | "waitDurationMs";
       basis: "source-exact" | "independently-calibrated";
+      provenanceEvidenceId?: string;
+    }>;
+    parameterBindings: Array<{
+      parameter: GameOperationParameterKey;
+      basis: "source-exact" | "ingredient-quantity" | "independently-calibrated";
+      ingredientPortionIds?: string[];
       provenanceEvidenceId?: string;
     }>;
     targetStateRuleIds: string[];

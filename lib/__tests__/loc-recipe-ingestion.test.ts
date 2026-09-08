@@ -212,6 +212,60 @@ describe("LOC candidate ingestion", () => {
     });
   });
 
+  it("blocks merged quantities, state-only fragments and trailing OCR hyphens from normalization", () => {
+    for (const phrase of ["milk 2 eggs", "boiling", "baking pow-", "cream or milk", "flour (sifted four times)"]) {
+      const { directory, registry } = createFixture();
+      const bookAPath = resolve(directory, "book-a.text.json");
+      const malformed = JSON.stringify({
+        "12": { fulltext: `APPLE PIE.\n1 cup flour\n2 cups ${phrase}\nMix, then bake for 40 minutes in the oven.` },
+      });
+      writeFileSync(bookAPath, malformed);
+      registry.documents[0].ocr.sha256 = sha256(malformed);
+
+      const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+      expect(result.candidates.find((candidate) => candidate.primarySource.documentId === "loc-book-a")).toMatchObject({
+        extractionQuality: {
+          status: "needs-resolution",
+          flags: expect.arrayContaining(["ambiguous-ingredient-phrase"]),
+        },
+      });
+    }
+  });
+
+  it("filters detected historical brand ingredients before normalization", () => {
+    const { directory, registry } = createFixture();
+    const bookAPath = resolve(directory, "book-a.text.json");
+    const branded = JSON.stringify({
+      "12": { fulltext: "CARAMEL SAUCE.\n1 cup Karo syrup\n2 cups sugar\nMix and boil for 10 minutes." },
+    });
+    writeFileSync(bookAPath, branded);
+    registry.documents[0].ocr.sha256 = sha256(branded);
+
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+    expect(result.rejectedHighRisk).toContainEqual(expect.objectContaining({
+      normalizedTitle: "caramel sauce",
+      reasonCodes: expect.arrayContaining(["brand-or-restaurant"]),
+    }));
+  });
+
+  it("keeps OCR-damaged headings visible but blocks them from normalization", () => {
+    const { directory, registry } = createFixture();
+    const bookAPath = resolve(directory, "book-a.text.json");
+    const damagedTitle = JSON.stringify({
+      "12": { fulltext: "APPLE PIE |\n1 cup flour\n2 cups apples\nMix, then bake for 40 minutes in the oven." },
+    });
+    writeFileSync(bookAPath, damagedTitle);
+    registry.documents[0].ocr.sha256 = sha256(damagedTitle);
+
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+    expect(result.candidates.find((candidate) => candidate.primarySource.documentId === "loc-book-a")).toMatchObject({
+      extractionQuality: {
+        status: "needs-resolution",
+        flags: expect.arrayContaining(["ambiguous-title"]),
+      },
+    });
+  });
+
   it("requires matching recipes to come from independent work families", () => {
     const { directory, registry } = createFixture({ includeIndependentMatch: false });
     const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });

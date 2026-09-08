@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import {
+  createGameCrossCheckAssertionHash,
   createGameSourceFactBundleVersion,
   evaluateGameSourceFactBundle,
 } from "@/lib/game-source-fact-validation";
@@ -108,6 +109,20 @@ describe("LOC source fact bundles", () => {
       field: "crossCheckAssertions",
     }));
   });
+
+  it("recomputes shared terms from hashed cross-check facts instead of trusting author claims", () => {
+    const bundle = createLocSourceFactBundle(candidateFixture(), sourceVersions);
+    const assertion = bundle.crossCheckAssertions[0];
+    assertion.ingredientTerms = ["invented-one", "invented-two"];
+    assertion.sharedIngredientTerms = ["invented-one", "invented-two"];
+    assertion.factSha256 = createGameCrossCheckAssertionHash(assertion);
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+
+    expect(evaluateGameSourceFactBundle(bundle, registry)).toContainEqual(expect.objectContaining({
+      code: "ambiguous-fact",
+      field: "crossCheckAssertions.0.sharedIngredientTerms",
+    }));
+  });
 });
 
 function candidateFixture(): LocRecipeCandidateV1 {
@@ -142,21 +157,38 @@ function candidateFixture(): LocRecipeCandidateV1 {
       endLine: 6,
       matchBasis: "exact-title",
       titleTokenJaccard: 1,
+      normalizedTitle: "apple pie",
+      ingredientTerms: ["apple", "flour"],
+      operationTerms: ["bake"],
+      sourceLineSha256s: [sha256("cross-check fact line")],
       sharedIngredientTerms: ["apple", "flour"],
       sharedOperationTerms: ["bake"],
     }],
     extractedFacts: {
-      ingredients: [{
-        quantity: 1.25,
-        quantityNumerator: 5,
-        quantityDenominator: 4,
-        rawQuantityToken: "1 1/4",
-        unit: "cup",
-        ingredient: "flour",
-        pageId: "12",
-        line: 13,
-        lineSha256: sha256("1 1/4 cups flour"),
-      }],
+      ingredients: [
+        {
+          quantity: 1.25,
+          quantityNumerator: 5,
+          quantityDenominator: 4,
+          rawQuantityToken: "1 1/4",
+          unit: "cup",
+          ingredient: "flour",
+          pageId: "12",
+          line: 13,
+          lineSha256: sha256("1 1/4 cups flour"),
+        },
+        {
+          quantity: 2,
+          quantityNumerator: 2,
+          quantityDenominator: 1,
+          rawQuantityToken: "2",
+          unit: "cup",
+          ingredient: "apple",
+          pageId: "12",
+          line: 14,
+          lineSha256: sha256("2 cups apple"),
+        },
+      ],
       operationTerms: ["bake"],
       durations: [{ minutes: 40, numerator: 40, denominator: 1, rawToken: "40 minutes", pageId: "12", line: 15 }],
       methodFacts: [{

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import {
+  createGameCrossCheckAssertionHash,
   createGameSourceFactBundleVersion,
   createGameSourceFactHash,
 } from "@/lib/game-source-fact-validation";
@@ -13,11 +14,17 @@ import {
 import type { GameRecipeV1, GameRightsRegistryV1 } from "@/types/game-recipe";
 import { locPublicDomainStatement, type LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 import { createLocSourceRegistrySliceVersion } from "@/lib/loc-source-registry-version";
+import {
+  createLocSourceCacheVersion,
+  locSourceCacheSchemaVersion,
+  type LocSourceCacheManifestV1,
+} from "@/lib/loc-source-cache";
 
 export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistry?: GameRightsRegistryV1): {
   normalizationRegistry: GameNormalizationRegistryV1;
   sourceFactBundles: GameSourceFactBundleV1[];
   locSourceRegistry: LocSourceRegistryV1;
+  locSourceCacheManifest: LocSourceCacheManifestV1;
 } {
   const ingredientFacts = recipe.ingredientPortions.map((portion, index) => {
     const locator = locatorFor(index + 10);
@@ -69,6 +76,7 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
         temperatureC: null,
         qualitativeHeatToken: null,
         equipmentToken: value.equipmentToken ?? null,
+        parameterValues: null,
         sourceLineSha256: value.sourceLineSha256,
       }),
     };
@@ -102,14 +110,20 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
       startLine: 2,
       endLine: 2,
       matchBasis: "exact-title",
-      sharedIngredientTerms: ["rice", "tofu"],
+      normalizedTitle: recipe.recipeId.replaceAll("-", " "),
+      ingredientTerms: recipe.ingredientPortions.map((portion) => portion.ingredientId),
+      operationTerms: [recipe.operationGraph.nodes[0].operationType],
+      sourceLineSha256s: [sha256("fixture-cross-check-line")],
+      sharedIngredientTerms: recipe.ingredientPortions.map((portion) => portion.ingredientId),
       sharedOperationTerms: [recipe.operationGraph.nodes[0].operationType],
+      factSha256: "",
     }],
     ingredientFacts,
     methodFacts,
     riskFlags: [],
     status: "normalization-ready",
   };
+  draft.crossCheckAssertions[0].factSha256 = createGameCrossCheckAssertionHash(draft.crossCheckAssertions[0]);
   const bundle = { ...draft, bundleVersion: createGameSourceFactBundleVersion(draft) };
   recipe.operationGraph.nodes.forEach((node, index) => {
     const parameter = node.parameters.temperatureC !== undefined ? "temperatureC"
@@ -161,7 +175,7 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
         ruleId: `fixture-mutation-rule-${String(index + 1).padStart(2, "0")}`,
         version: "fixture-v1",
         operationId: node.operationType,
-        mutationType: scenario.mutation.type,
+        mutationSelector: structuredClone(scenario.mutation),
         expectedDeltas: scenario.expectedDeltas.map(({ dimension, direction }) => ({ dimension, direction })),
         expectedFaultCodes: [...scenario.expectedFaultCodes],
         causeCodes: [...scenario.causeCodes],
@@ -203,6 +217,13 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
           ...(node.activeDurationMs > 0 ? { provenanceEvidenceId: recipe.rights.evidenceIds[0] } : {}),
         }] : []),
       ],
+      parameterBindings: (Object.keys(node.parameters) as Array<keyof typeof node.parameters>)
+        .filter((parameter) => parameter !== "temperatureC" && parameter !== "heatLevel")
+        .map((parameter) => ({
+          parameter,
+          basis: "independently-calibrated" as const,
+          provenanceEvidenceId: recipe.rights.evidenceIds[0],
+        })),
       targetStateRuleIds: normalizationRegistry.targetStateRules
         .filter((rule) => rule.ruleId.startsWith(`fixture-target-rule-${String(index + 1).padStart(2, "0")}-`))
         .map((rule) => rule.ruleId),
@@ -229,7 +250,27 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
       if (source) source.locators.push({ kind: "url", url: `https://www.loc.gov/item/${index === 0 ? "100" : "200"}/`, accessedAt: "2026-09-08" });
     });
   }
-  return { normalizationRegistry, sourceFactBundles: [bundle], locSourceRegistry };
+  const cacheManifestDraft = {
+    schemaVersion: locSourceCacheSchemaVersion,
+    sourceAccessedAt: locSourceRegistry.accessedAt,
+    documents: locSourceRegistry.documents.map((document) => ({
+      documentId: document.documentId,
+      itemJsonPath: `${document.documentId}/item.json`,
+      itemJsonSha256: sha256(`item:${document.documentId}`),
+      derivativePath: `${document.documentId}/source.text.json`,
+      derivativeSha256: document.ocr.sha256,
+      pageCount: 1,
+    })),
+  };
+  const locSourceCacheManifest: LocSourceCacheManifestV1 = {
+    ...cacheManifestDraft,
+    cacheVersion: createLocSourceCacheVersion(cacheManifestDraft),
+  };
+  bundle.sourceCacheVersion = locSourceCacheManifest.cacheVersion;
+  bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+  recipe.authoring.normalizationTrace.sourceCacheVersion = bundle.sourceCacheVersion;
+  recipe.authoring.normalizationTrace.sourceFactBundleVersion = bundle.bundleVersion;
+  return { normalizationRegistry, sourceFactBundles: [bundle], locSourceRegistry, locSourceCacheManifest };
 }
 
 function fixtureLocDocument(suffix: "a" | "b", itemId: string, workFamilyId: string) {

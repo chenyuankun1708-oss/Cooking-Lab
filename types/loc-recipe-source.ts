@@ -49,6 +49,7 @@ export type LocHighRiskReason =
   | "wild-game";
 
 export type LocExtractionQualityFlag =
+  | "ambiguous-title"
   | "ambiguous-ingredient-phrase"
   | "duplicate-ingredient-fact"
   | "implausible-source-quantity"
@@ -88,6 +89,10 @@ export interface LocSourceLocatorV1 {
 export interface LocCrossCheckV1 extends LocSourceLocatorV1 {
   matchBasis: "exact-title" | "related-title-and-facts";
   titleTokenJaccard: number;
+  normalizedTitle: string;
+  ingredientTerms: string[];
+  operationTerms: string[];
+  sourceLineSha256s: string[];
   sharedIngredientTerms: string[];
   sharedOperationTerms: string[];
 }

@@ -24,6 +24,10 @@ export type GameSimulationProfile = (typeof gameSimulationProfiles)[number];
 export type GameOperationCompatibility = "supported-now" | "macro-supported" | "requires-engine-v2" | "presentation-only";
 export type GameRecipeEligibility = "draft" | "exportable";
 export type GameIngredientState = "raw" | "dry" | "liquid" | "cooked" | "prepared" | "ready-to-serve";
+export const gameSourceQuantityUnits = [
+  "g", "kg", "ml", "l", "piece", "tbsp", "tsp", "cup", "lb", "oz", "pint", "quart", "gallon",
+] as const;
+export type GameSourceQuantityUnit = (typeof gameSourceQuantityUnits)[number];
 
 export const gameOperationIds = [
   "wash", "peel", "slice", "dice", "mince", "crush", "grind",
@@ -80,7 +84,7 @@ export interface GameIngredientPortionV1 {
   initialState: GameIngredientState;
   sourceQuantity: {
     amount: number;
-    unit: "g" | "kg" | "ml" | "piece" | "tbsp" | "tsp";
+    unit: GameSourceQuantityUnit;
     conversionRecordId: string;
   };
   massG: number;
@@ -192,7 +196,7 @@ export interface GameIngredientDefinitionV1 {
   sourceIngredientId?: string;
   defaultState: GameIngredientState;
   densityGPerMl?: number;
-  unitWeightsG: Partial<Record<"piece" | "tbsp" | "tsp" | "ml", number>>;
+  unitWeightsG: Partial<Record<Exclude<GameSourceQuantityUnit, "g" | "kg" | "lb" | "oz">, number>>;
   nutritionPer100g: Nutrition;
   nutritionProvenanceId: string;
   nutritionSource:
@@ -220,7 +224,7 @@ export interface GameIngredientDefinitionV1 {
 
 export interface GameUnitConversionRecordV1 {
   recordId: string;
-  unit: "g" | "kg" | "ml" | "piece" | "tbsp" | "tsp";
+  unit: GameSourceQuantityUnit;
   gramsPerUnit: number;
   ingredientId?: string;
   basis: string;

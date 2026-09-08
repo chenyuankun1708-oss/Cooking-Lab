@@ -68,6 +68,15 @@ const methodFactSchema = exactObject({
   temperatureC: numberValue,
   qualitativeHeatToken: stringValue,
   equipmentToken: stringValue,
+  parameterValues: exactObject({}, {
+    cutSizeMm: numberValue,
+    uniformity: numberValue,
+    heatLevel: numberValue,
+    temperatureC: numberValue,
+    strength: numberValue,
+    quantityG: numberValue,
+    capacityG: numberValue,
+  }),
 });
 
 const targetDimensions = [
@@ -93,8 +102,13 @@ export function parseGameSourceFactBundle(value: unknown, path = "GameSourceFact
       startLine: integerValue,
       endLine: integerValue,
       matchBasis: enumValue(["exact-title", "related-title-and-facts"]),
+      normalizedTitle: stringValue,
+      ingredientTerms: arrayOf(stringValue),
+      operationTerms: arrayOf(stringValue),
+      sourceLineSha256s: arrayOf(stringValue),
       sharedIngredientTerms: arrayOf(stringValue),
       sharedOperationTerms: arrayOf(stringValue),
+      factSha256: stringValue,
     })),
     ingredientFacts: arrayOf(ingredientFactSchema),
     methodFacts: arrayOf(methodFactSchema),
@@ -144,7 +158,16 @@ export function parseGameNormalizationRegistry(value: unknown, path = "GameNorma
       ruleId: stringValue,
       version: stringValue,
       operationId: enumValue(gameOperationIds),
-      mutationType: enumValue(gameMutationTypes),
+      mutationSelector: exactObject({
+        type: enumValue(gameMutationTypes),
+      }, {
+        targetNodeId: stringValue,
+        destinationBeforeNodeId: stringValue,
+        targetPortionId: stringValue,
+        scalar: numberValue,
+        replacementIngredientId: stringValue,
+        replacementEquipmentId: stringValue,
+      }),
       expectedDeltas: arrayOf(exactObject({
         dimension: enumValue(targetDimensions),
         direction: enumValue(["increase", "decrease", "unchanged"]),

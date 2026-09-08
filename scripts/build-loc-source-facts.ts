@@ -66,11 +66,13 @@ try {
     compilerVersion: locSourceFactCompilerVersion,
     sourceRegistryCatalogVersion: createContentVersion(registry),
     sourceCacheVersion: cache.manifest.cacheVersion,
+    sourceCacheManifestSha256: sha256(stableJson(cache.manifest)),
     sourceDocumentCount: cache.manifest.documents.length,
     discoveryCandidateCount: candidates.candidateCount,
     sourceFactBundleCount: bundles.length,
     entries,
   } as const;
+  writeFileSync(resolve(staging, "loc-cache-manifest.json"), stableJson(cache.manifest), { flag: "wx" });
   writeFileSync(resolve(staging, "manifest.json"), stableJson(manifest), { flag: "wx" });
   if (existsSync(outputRoot)) rmSync(outputRoot, { recursive: true });
   renameSync(staging, outputRoot);

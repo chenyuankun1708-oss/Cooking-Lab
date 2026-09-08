@@ -175,8 +175,106 @@ describe("M12 game governance hostile cases", () => {
     expect(audit(durationMismatch).issues.some((issue) => issue.message.includes("Source duration must equal"))).toBe(true);
 
     const scenarioMismatch = readyFixture();
-    scenarioMismatch.context.normalizationRegistry.mutationRules[0].expectedFaultCodes = ["invented-fault"];
+    scenarioMismatch.context.normalizationRegistry.mutationRules[0].mutationSelector.scalar = 0.123;
     expect(audit(scenarioMismatch).issues.some((issue) => issue.message.includes("exactly equal the canonical scenario result"))).toBe(true);
+  });
+
+  it("anchors source facts to the exact verified cache manifest", () => {
+    const missing = readyFixture();
+    delete (missing.context as Partial<typeof missing.context>).locSourceCacheManifest;
+    expect(audit(missing).issues.some((issue) => issue.message.includes("exact verified LOC cache manifest"))).toBe(true);
+
+    const derivativeChanged = readyFixture();
+    derivativeChanged.context.locSourceCacheManifest.documents[0].derivativeSha256 = "f".repeat(64);
+    expect(audit(derivativeChanged).issues.some((issue) => issue.message.includes("exact derivative"))).toBe(true);
+  });
+
+  it("requires scoped supporting Evidence for normalization rules and calibrations", () => {
+    const unrelated = readyFixture();
+    const foreignEvidence = structuredClone(unrelated.registry.evidence[0]);
+    foreignEvidence.id = "foreign-normalization-evidence";
+    foreignEvidence.relation = "context";
+    unrelated.registry.evidence.push(foreignEvidence);
+    unrelated.registry.evidenceOrigins.push({ evidenceId: foreignEvidence.id, origin: "source-record" });
+    unrelated.context.normalizationRegistry.targetStateRules[0].provenanceEvidenceIds = [foreignEvidence.id];
+    expect(audit(unrelated).issues.some((issue) => issue.message.includes("Target rule provenance Evidence"))).toBe(true);
+
+    const wrongUse = readyFixture();
+    const evidenceId = wrongUse.context.normalizationRegistry.mutationRules[0].provenanceEvidenceIds[0];
+    const evidence = wrongUse.registry.evidence.find((entry) => entry.id === evidenceId)!;
+    const decision = wrongUse.registry.researchRecords[0].sourceDecisions.find((entry) => entry.disposition === "accepted" && entry.sourceId === evidence.sourceId)!;
+    if (decision.disposition === "accepted") decision.uses = decision.uses.filter((use) => use !== "simulation") as typeof decision.uses;
+    expect(audit(wrongUse).issues.some((issue) => issue.message.includes("Mutation rule provenance Evidence"))).toBe(true);
+  });
+
+  it("requires complete provenance for every non-heat operation parameter", () => {
+    const missing = readyFixture();
+    const binding = missing.recipe.authoring.normalizationTrace!.methodBindings.find((entry) => entry.parameterBindings.length)!;
+    binding.parameterBindings = [];
+    expect(audit(missing).issues.some((issue) => issue.message.includes("exactly cover every non-heat"))).toBe(true);
+
+    const staleCalibration = readyFixture();
+    const parameterBinding = staleCalibration.recipe.authoring.normalizationTrace!.methodBindings
+      .flatMap((entry) => entry.parameterBindings)
+      .find((entry) => entry.basis === "independently-calibrated")!;
+    parameterBinding.provenanceEvidenceId = "unrelated-evidence";
+    expect(audit(staleCalibration).issues.some((issue) => issue.message.includes("Independently calibrated parameters"))).toBe(true);
+  });
+
+  it("does not allow an exact source temperature to carry an unproven heat level", () => {
+    const fixture = readyFixture();
+    const methodBinding = fixture.recipe.authoring.normalizationTrace!.methodBindings[0];
+    const fact = fixture.context.sourceFactBundles[0].methodFacts.find((entry) => entry.factId === methodBinding.methodFactId)!;
+    const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.nodeId === methodBinding.nodeId)!;
+    fact.temperatureC = 180;
+    fact.factSha256 = createGameSourceFactHash({
+      locator: fact.locator,
+      order: fact.order,
+      operationToken: fact.operationToken,
+      ingredientFactIds: fact.ingredientFactIds,
+      durationMinutes: fact.durationMinutes ?? null,
+      temperatureC: fact.temperatureC,
+      qualitativeHeatToken: fact.qualitativeHeatToken ?? null,
+      equipmentToken: fact.equipmentToken ?? null,
+      parameterValues: fact.parameterValues ?? null,
+      sourceLineSha256: fact.sourceLineSha256,
+    });
+    node.parameters.temperatureC = 180;
+    node.parameters.heatLevel = 0.5;
+    node.heatControl = { kind: "exact-temperature", temperatureC: 180, sourceFactId: fact.factId };
+    const bundle = fixture.context.sourceFactBundles[0];
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+    fixture.recipe.authoring.normalizationTrace!.sourceFactBundleVersion = bundle.bundleVersion;
+    expect(audit(fixture).issues.some((issue) => issue.message.includes("Exact source temperature"))).toBe(true);
+  });
+
+  it("supports historical source units through explicit conversion records", () => {
+    const fixture = readyFixture();
+    const portion = fixture.recipe.ingredientPortions[0];
+    const ingredient = fixture.context.ingredients.ingredients.find((entry) => entry.ingredientId === portion.ingredientId)!;
+    ingredient.unitWeightsG.cup = portion.massG;
+    const recordId = `${portion.ingredientId}:cup:fixture-v1`;
+    fixture.context.ingredients.conversionRecords.push({
+      recordId,
+      unit: "cup",
+      gramsPerUnit: portion.massG,
+      ingredientId: portion.ingredientId,
+      basis: "Fixture exact cup conversion.",
+      provenanceId: "fixture-cup-conversion",
+    });
+    portion.sourceQuantity = { amount: 1, unit: "cup", conversionRecordId: recordId };
+    const trace = fixture.recipe.authoring.normalizationTrace!;
+    const ingredientBinding = trace.ingredientBindings.find((entry) => entry.portionId === portion.portionId)!;
+    ingredientBinding.conversionRecordId = recordId;
+    const fact = fixture.context.sourceFactBundles[0].ingredientFacts.find((entry) => entry.factId === ingredientBinding.ingredientFactId)!;
+    fact.quantity = { numerator: 1, denominator: 1, rawToken: "1 cup", unitToken: "cup" };
+    fact.factSha256 = createGameSourceFactHash({ locator: fact.locator, phrase: fact.phrase, stateToken: fact.stateToken ?? null, quantity: fact.quantity, sourceLineSha256: fact.sourceLineSha256 });
+    const bundle = fixture.context.sourceFactBundles[0];
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+    trace.sourceFactBundleVersion = bundle.bundleVersion;
+    fixture.recipe.artifactVersion = createGameRecipeArtifactVersion(fixture.recipe);
+    fixture.recipe.scenarios.forEach((scenario) => { scenario.baselineArtifactVersion = fixture.recipe.artifactVersion; });
+    expect(audit(fixture).issues.filter((issue) => issue.field.includes("sourceQuantity") || issue.field.includes("conversionRecords"))).toEqual([]);
   });
 
   it("never turns qualitative historical heat into fabricated numeric heat", () => {

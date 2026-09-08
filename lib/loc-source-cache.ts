@@ -55,7 +55,7 @@ export function loadLatestLocSourceCache(
   assertInside(cacheRoot, cacheDirectory, "LOC cache directory");
   const manifestBytes = readFileSync(resolve(cacheDirectory, "manifest.json"));
   if (sha256(manifestBytes) !== pointer.manifestSha256) throw new Error("LOC cache manifest hash does not match latest pointer");
-  const manifest = parseCacheManifest(parseJson(manifestBytes, "LOC cache manifest"));
+  const manifest = parseLocSourceCacheManifest(parseJson(manifestBytes, "LOC cache manifest"));
   if (!manifest.cacheVersion.startsWith(pointer.cacheDirectory.slice("cache-".length))) {
     throw new Error("LOC cache directory does not match manifest version");
   }
@@ -131,11 +131,11 @@ export async function fetchLocSourceCache(
       });
     }
 
-    const cacheVersion = sha256(stableJson({
+    const cacheVersion = createLocSourceCacheVersion({
       schemaVersion: locSourceCacheSchemaVersion,
       sourceAccessedAt: registry.accessedAt,
       documents: records,
-    }));
+    });
     const manifest: LocSourceCacheManifestV1 = {
       schemaVersion: locSourceCacheSchemaVersion,
       cacheVersion,
@@ -250,7 +250,7 @@ function mismatch(document: LocSourceDocumentV1, field: string, expected: unknow
   throw new Error(`LOC item ${field} mismatch for ${document.documentId}: expected ${JSON.stringify(expected)}, received ${JSON.stringify(actual)}`);
 }
 
-function parseCacheManifest(value: unknown): LocSourceCacheManifestV1 {
+export function parseLocSourceCacheManifest(value: unknown): LocSourceCacheManifestV1 {
   const root = asRecord(value, "LOC cache manifest");
   if (root.schemaVersion !== locSourceCacheSchemaVersion
     || typeof root.cacheVersion !== "string"
@@ -278,12 +278,26 @@ function parseCacheManifest(value: unknown): LocSourceCacheManifestV1 {
   if (new Set(documents.map((entry) => entry.documentId)).size !== documents.length) {
     throw new Error("LOC cache manifest has duplicate document IDs");
   }
-  return {
+  const manifest = {
     schemaVersion: locSourceCacheSchemaVersion,
     cacheVersion: root.cacheVersion,
     sourceAccessedAt: root.sourceAccessedAt,
     documents,
   } as LocSourceCacheManifestV1;
+  if (manifest.cacheVersion !== createLocSourceCacheVersion(manifest)) {
+    throw new Error("LOC cache manifest version does not match its document metadata");
+  }
+  return manifest;
+}
+
+export function createLocSourceCacheVersion(
+  manifest: Omit<LocSourceCacheManifestV1, "cacheVersion"> | LocSourceCacheManifestV1,
+): string {
+  return sha256(stableJson({
+    schemaVersion: manifest.schemaVersion,
+    sourceAccessedAt: manifest.sourceAccessedAt,
+    documents: manifest.documents,
+  }));
 }
 
 function assertInside(root: string, path: string, label: string): void {

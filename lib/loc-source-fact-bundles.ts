@@ -1,4 +1,5 @@
 import {
+  createGameCrossCheckAssertionHash,
   createGameSourceFactBundleVersion,
   createGameSourceFactHash,
 } from "./game-source-fact-validation";
@@ -81,6 +82,7 @@ export function createLocSourceFactBundle(
         temperatureC: null,
         qualitativeHeatToken: value.qualitativeHeatToken ?? null,
         equipmentToken: value.equipmentToken ?? null,
+        parameterValues: null,
         sourceLineSha256: value.sourceLineSha256,
       }),
     };
@@ -101,13 +103,7 @@ export function createLocSourceFactBundle(
     primarySource: toFactLocator(candidate.primarySource),
     crossCheckSources: candidate.crossChecks.map((source) => toFactLocator(source)),
     crossCheckAssertions: candidate.crossChecks.map((source) => ({
-      sourceDocumentId: source.documentId,
-      pageId: source.pageId,
-      startLine: source.startLine,
-      endLine: source.endLine,
-      matchBasis: source.matchBasis,
-      sharedIngredientTerms: source.sharedIngredientTerms,
-      sharedOperationTerms: source.sharedOperationTerms,
+      ...crossCheckAssertion(source),
     })),
     ingredientFacts,
     methodFacts,
@@ -118,6 +114,27 @@ export function createLocSourceFactBundle(
     status: "draft",
   };
   return { ...draft, bundleVersion: createGameSourceFactBundleVersion(draft) };
+}
+
+function crossCheckAssertion(source: LocCrossCheckV1): GameSourceFactBundleV1["crossCheckAssertions"][number] {
+  const value = {
+    sourceDocumentId: source.documentId,
+    pageId: source.pageId,
+    startLine: source.startLine,
+    endLine: source.endLine,
+    matchBasis: source.matchBasis,
+    normalizedTitle: source.normalizedTitle,
+    ingredientTerms: [...source.ingredientTerms].sort(),
+    operationTerms: [...source.operationTerms].sort(),
+    sourceLineSha256s: [...source.sourceLineSha256s].sort(),
+    sharedIngredientTerms: [...source.sharedIngredientTerms].sort(),
+    sharedOperationTerms: [...source.sharedOperationTerms].sort(),
+    factSha256: "",
+  };
+  return {
+    ...value,
+    factSha256: createGameCrossCheckAssertionHash(value),
+  };
 }
 
 function toFactLocator(source: LocSourceLocatorV1 | LocCrossCheckV1, startLine = source.startLine, endLine = source.endLine): GameFactLocatorV1 {

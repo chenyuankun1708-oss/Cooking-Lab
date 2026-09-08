@@ -12,6 +12,7 @@ const result = evaluateGameRecipeCorpus(data.recipes, {
   normalizationRegistry: data.normalizationRegistry,
   sourceFactBundles: data.sourceFactBundles,
   locSourceRegistry: data.locSourceRegistry,
+  locSourceCacheManifest: data.locSourceCacheManifest,
   now: getContentRightsEvaluationDate(),
 });
 const minimumArgument = process.argv.find((argument) => argument.startsWith("--minimum-exportable="));

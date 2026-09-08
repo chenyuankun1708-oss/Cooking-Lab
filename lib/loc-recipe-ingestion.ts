@@ -83,7 +83,7 @@ const operationPatterns = [
 
 const highRiskPatterns: ReadonlyArray<[LocHighRiskReason, RegExp]> = [
   ["alcohol", /\b(?:ale|beer|brandy|champagne|cocktail|gin|liqueur|rum|sherry|whisky|whiskey|wine)\b/i],
-  ["brand-or-restaurant", /\b(?:brand(?:ed)?|restaurant|hotel|café|cafe|company|proprietary)\b/i],
+  ["brand-or-restaurant", /\b(?:brand(?:ed)?|calumet|company|hotel|karo|knox(?:'s|’s)?|proprietary|restaurant|wingold|café|cafe)\b/i],
   ["dangerous-process", /\b(?:lye|pressure[- ]?can|water[- ]?bath can|botulism)\b/i],
   ["fermentation-or-preservation", /\b(?:bottl(?:e|ed|es|ing)|cann(?:ed|ing)|catsup|chutney|conserve|cur(?:e|ed|es|ing)|ferment(?:ed|ing|ation)?|jams?|jell(?:y|ies)|ketchup|marmalade|pickl(?:e|ed|es|ing)|preserv(?:e|ed|es|ing|ation)|salt[- ]?cur(?:e|ed|ing))\b/i],
   ["medical-or-health-claim", /\b(?:convalescent|cure for|dyspepsia|fever|invalid|medicinal|remedy|sickroom)\b/i],
@@ -468,6 +468,7 @@ function toCandidate(primary: RecipeBlock, normalizedTitle: string, crossChecks:
 
 function assessExtractionQuality(block: RecipeBlock, crossChecks: readonly RecipeBlock[]): LocExtractionQualityFlag[] {
   const flags = new Set<LocExtractionQualityFlag>();
+  if (/[|~]/.test(block.title)) flags.add("ambiguous-title");
   const factKeys = new Set<string>();
   const maximumByUnit: Readonly<Record<string, number>> = {
     cup: 8, tbsp: 32, tsp: 48, lb: 15, oz: 64, pint: 8, quart: 4, gallon: 1,
@@ -475,9 +476,14 @@ function assessExtractionQuality(block: RecipeBlock, crossChecks: readonly Recip
   };
   for (const fact of block.ingredients) {
     const phrase = fact.ingredient.trim();
+    const phraseWords = phrase.split(/\s+/);
     if (phrase.length < 2
       || /^(?:c|cold|dtsp|of|tsp|tbsp)$/i.test(phrase)
-      || /[+|_{}]/.test(phrase)
+      || /^(?:and\b|any kind\b|baking$|boiling$|grated$|melted$|whipped$)/i.test(phrase)
+      || phraseWords.length > 5
+      || /\d|[%+|_{}()]|-$/.test(phrase)
+      || /\b(?:add|added|and|each|get|may|note|or|person|pinch|serve|them|well|in the|in which)\b/i.test(phrase)
+      || /\b(?:es|ies|i c)\b$/i.test(phrase)
       || /\b(?:bake|boil|cook|hours?|minutes?|steam|stir)\b/i.test(phrase)) {
       flags.add("ambiguous-ingredient-phrase");
     }
@@ -509,12 +515,22 @@ function assessExtractionQuality(block: RecipeBlock, crossChecks: readonly Recip
 function toCrossCheck(primary: RecipeBlock, crossCheck: RecipeBlock): LocCrossCheckV1 {
   const primaryIngredients = ingredientTokens(primary.ingredients);
   const crossCheckIngredients = ingredientTokens(crossCheck.ingredients);
+  const ingredientTerms = [...crossCheckIngredients].sort();
+  const operationTerms = [...new Set(crossCheck.operationTerms)].sort();
+  const sourceLineSha256s = [...new Set([
+    ...crossCheck.ingredients.map((fact) => fact.lineSha256),
+    ...crossCheck.methodFacts.map((fact) => fact.lineSha256),
+  ])].sort();
   return {
     ...toLocator(crossCheck),
     matchBasis: primary.normalizedTitle === crossCheck.normalizedTitle ? "exact-title" : "related-title-and-facts",
     titleTokenJaccard: round(jaccard(titleTokens(primary.normalizedTitle), titleTokens(crossCheck.normalizedTitle))),
+    normalizedTitle: crossCheck.normalizedTitle,
+    ingredientTerms,
+    operationTerms,
+    sourceLineSha256s,
     sharedIngredientTerms: intersectionValues(primaryIngredients, crossCheckIngredients),
-    sharedOperationTerms: intersectionValues(new Set(primary.operationTerms), new Set(crossCheck.operationTerms)),
+    sharedOperationTerms: intersectionValues(new Set(primary.operationTerms), new Set(operationTerms)),
   };
 }
 

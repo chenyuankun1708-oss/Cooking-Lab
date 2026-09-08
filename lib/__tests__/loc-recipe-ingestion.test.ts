@@ -22,8 +22,8 @@ describe("LOC source registry", () => {
     const input = JSON.parse(readFileSync(resolve(process.cwd(), "game-data/source-research/loc-sources.json"), "utf8"));
     const registry = parseLocSourceRegistry(input);
 
-    expect(registry.documents).toHaveLength(97);
-    expect(new Set(registry.documents.map((document) => document.workFamilyId)).size).toBe(93);
+    expect(registry.documents).toHaveLength(152);
+    expect(new Set(registry.documents.map((document) => document.workFamilyId)).size).toBe(144);
     expect(registry.documents.every((document) => document.ocr.derivativeUrl.startsWith("https://tile.loc.gov/"))).toBe(true);
 
     const familiesByContributor = new Map<string, Set<string>>();
@@ -123,6 +123,23 @@ describe("LOC candidate ingestion", () => {
       expect.objectContaining({ normalizedTitle: "pickled peaches", reasonCodes: ["fermentation-or-preservation"] }),
     ]));
   });
+
+  it.each(["APPLE CHUTNEY", "CURRANT CATSUP", "GRAPE CONSERVE", "TOMATO MARMALADE", "PLUM JAM"])(
+    "treats historical preserve category %s as high risk",
+    (title) => {
+      const { directory, registry } = createFixture();
+      const bookAPath = resolve(directory, "book-a.text.json");
+      const preserved = JSON.stringify({
+        "12": { fulltext: `${title}.\n1 cup fruit\n2 cups sugar\nMix and boil 10 minutes.` },
+      });
+      writeFileSync(bookAPath, preserved);
+      registry.documents[0].ocr.sha256 = sha256(preserved);
+
+      const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+      expect(result.candidates).toEqual([]);
+      expect(result.rejectedHighRisk[0]?.reasonCodes).toContain("fermentation-or-preservation");
+    },
+  );
 
   it("keeps fuzzy matches for discovery but blocks them from normalization", () => {
     const { directory, registry } = createFixture({ relatedMatchOnly: true });

@@ -85,7 +85,7 @@ const highRiskPatterns: ReadonlyArray<[LocHighRiskReason, RegExp]> = [
   ["alcohol", /\b(?:ale|beer|brandy|champagne|cocktail|gin|liqueur|rum|sherry|whisky|whiskey|wine)\b/i],
   ["brand-or-restaurant", /\b(?:brand(?:ed)?|restaurant|hotel|café|cafe|company|proprietary)\b/i],
   ["dangerous-process", /\b(?:lye|pressure[- ]?can|water[- ]?bath can|botulism)\b/i],
-  ["fermentation-or-preservation", /\b(?:bottl(?:e|ed|es|ing)|cann(?:ed|ing)|cur(?:e|ed|es|ing)|ferment(?:ed|ing|ation)?|pickl(?:e|ed|es|ing)|preserv(?:e|ed|es|ing|ation)|salt[- ]?cur(?:e|ed|ing))\b/i],
+  ["fermentation-or-preservation", /\b(?:bottl(?:e|ed|es|ing)|cann(?:ed|ing)|catsup|chutney|conserve|cur(?:e|ed|es|ing)|ferment(?:ed|ing|ation)?|jams?|ketchup|marmalade|pickl(?:e|ed|es|ing)|preserv(?:e|ed|es|ing|ation)|salt[- ]?cur(?:e|ed|ing))\b/i],
   ["medical-or-health-claim", /\b(?:convalescent|cure for|dyspepsia|fever|invalid|medicinal|remedy|sickroom)\b/i],
   ["raw-animal-product", /\b(?:raw (?:beef|egg|fish|meat|pork|poultry)|uncooked (?:egg|fish|meat))\b/i],
   ["wild-game", /\b(?:bear|deer|game bird|opossum|partridge|pigeon|rabbit|squirrel|venison|wild duck)\b/i],
@@ -381,11 +381,12 @@ function extractDurationFacts(lines: string[], pageId: string, firstLine: number
       const amount = parseRationalAmount(match[1]);
       if (amount === null || amount.value <= 0) continue;
       const multiplier = /hour|hr/i.test(match[2]) ? 60 : 1;
+      const minutes = rationalAmount(amount.numerator * multiplier, amount.denominator, `${amount.rawToken} ${match[2].toLowerCase()}`);
       durations.push({
-        minutes: amount.value * multiplier,
-        numerator: amount.numerator * multiplier,
-        denominator: amount.denominator,
-        rawToken: `${amount.rawToken} ${match[2].toLowerCase()}`,
+        minutes: minutes.value,
+        numerator: minutes.numerator,
+        denominator: minutes.denominator,
+        rawToken: minutes.rawToken,
         pageId,
         line: firstLine + index,
       });

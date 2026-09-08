@@ -10,6 +10,9 @@ const result = buildGameData({
   nutritionDataset: data.nutritionDataset,
   operations: gameOperationCatalog,
   rightsRegistry: data.rightsRegistry,
+  normalizationRegistry: data.normalizationRegistry,
+  sourceFactBundles: data.sourceFactBundles,
+  locSourceRegistry: data.locSourceRegistry,
   now: getContentRightsEvaluationDate(),
 });
 process.stdout.write(`Built ${result.manifest.recipeCount} game recipes at ${result.outputDirectory}.\n`);

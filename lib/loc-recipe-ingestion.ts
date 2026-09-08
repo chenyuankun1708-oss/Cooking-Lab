@@ -85,7 +85,7 @@ const highRiskPatterns: ReadonlyArray<[LocHighRiskReason, RegExp]> = [
   ["alcohol", /\b(?:ale|beer|brandy|champagne|cocktail|gin|liqueur|rum|sherry|whisky|whiskey|wine)\b/i],
   ["brand-or-restaurant", /\b(?:brand(?:ed)?|restaurant|hotel|café|cafe|company|proprietary)\b/i],
   ["dangerous-process", /\b(?:lye|pressure[- ]?can|water[- ]?bath can|botulism)\b/i],
-  ["fermentation-or-preservation", /\b(?:bottl(?:e|ed|es|ing)|cann(?:ed|ing)|catsup|chutney|conserve|cur(?:e|ed|es|ing)|ferment(?:ed|ing|ation)?|jams?|ketchup|marmalade|pickl(?:e|ed|es|ing)|preserv(?:e|ed|es|ing|ation)|salt[- ]?cur(?:e|ed|ing))\b/i],
+  ["fermentation-or-preservation", /\b(?:bottl(?:e|ed|es|ing)|cann(?:ed|ing)|catsup|chutney|conserve|cur(?:e|ed|es|ing)|ferment(?:ed|ing|ation)?|jams?|jell(?:y|ies)|ketchup|marmalade|pickl(?:e|ed|es|ing)|preserv(?:e|ed|es|ing|ation)|salt[- ]?cur(?:e|ed|ing))\b/i],
   ["medical-or-health-claim", /\b(?:convalescent|cure for|dyspepsia|fever|invalid|medicinal|remedy|sickroom)\b/i],
   ["raw-animal-product", /\b(?:raw (?:beef|egg|fish|meat|pork|poultry)|uncooked (?:egg|fish|meat))\b/i],
   ["wild-game", /\b(?:bear|deer|game bird|opossum|partridge|pigeon|rabbit|squirrel|venison|wild duck)\b/i],
@@ -403,14 +403,17 @@ function extractMethodFacts(lines: string[], pageId: string, firstLine: number):
   const facts: LocMethodFactV1[] = [];
   let order = 0;
   lines.forEach((line, index) => {
-    const operations = operationPatterns.filter(([, pattern]) => pattern.test(line)).map(([operation]) => operation);
+    const operations = operationPatterns.flatMap(([operation, pattern], taxonomyIndex) => {
+      const match = line.match(pattern);
+      return match ? [{ operation, sourceIndex: match.index ?? 0, taxonomyIndex }] : [];
+    }).sort((left, right) => left.sourceIndex - right.sourceIndex || left.taxonomyIndex - right.taxonomyIndex);
     if (!operations.length) return;
     const durations = extractDurationFacts([line], pageId, firstLine + index);
     const heat = line.match(/\b(?:very\s+)?(?:slow|low|moderate|medium|quick|hot|high)\s+(?:fire|heat|oven)\b/i)?.[0]
       .toLowerCase().replace(/\s+/g, "-");
     const equipment = line.match(/\b(?:baking dish|frying pan|mixing bowl|saucepan|skillet|steamer|kettle|oven|pan|pot|bowl)\b/i)?.[0]
       .toLowerCase().replace(/\s+/g, "-");
-    for (const operation of operations) {
+    for (const { operation } of operations) {
       order += 1;
       facts.push({
         factId: `method-${pageId}-${firstLine + index}-${String(order).padStart(2, "0")}`,

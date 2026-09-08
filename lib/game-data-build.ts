@@ -13,6 +13,7 @@ import type {
   GameRightsRegistryV1,
 } from "@/types/game-recipe";
 import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
+import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 import { compileCatKitchenGoal1Recipe } from "./cat-kitchen-goal1-compiler";
 import {
   parseGameDataManifest,
@@ -27,6 +28,8 @@ import {
 } from "./game-data-runtime-schema";
 import { assertGameRecipeCorpusReady, evaluateGameRecipeCorpus } from "./game-recipe-validation";
 import { stableJson } from "./stable-json";
+import { parseGameNormalizationRegistry, parseGameSourceFactBundle } from "./game-source-fact-runtime-schema";
+import { parseLocSourceRegistry } from "./loc-recipe-ingestion";
 
 export interface GameDataBuildInput {
   recipes: readonly GameRecipeV1[];
@@ -36,6 +39,7 @@ export interface GameDataBuildInput {
   rightsRegistry: GameRightsRegistryV1;
   normalizationRegistry?: GameNormalizationRegistryV1;
   sourceFactBundles?: readonly GameSourceFactBundleV1[];
+  locSourceRegistry?: LocSourceRegistryV1;
   now: string;
 }
 
@@ -50,7 +54,7 @@ export function buildGameData(
   input: GameDataBuildInput,
   outputDirectory = resolve(process.cwd(), ".local/game-data"),
 ): GameDataBuildResult {
-  const targetDirectory = assertSafeOutputDirectory(outputDirectory);
+  const targetDirectory = assertSafeGameDataOutputDirectory(outputDirectory);
   assertRuntimeBuildInput(input);
   const canonicalAudit = evaluateGameRecipeCorpus(input.recipes, {
     operations: input.operations,
@@ -59,6 +63,7 @@ export function buildGameData(
     rightsRegistry: input.rightsRegistry,
     normalizationRegistry: input.normalizationRegistry,
     sourceFactBundles: input.sourceFactBundles,
+    locSourceRegistry: input.locSourceRegistry,
     now: input.now,
   });
   if (canonicalAudit.issues.length) {
@@ -77,6 +82,7 @@ export function buildGameData(
     rightsRegistry: input.rightsRegistry,
     normalizationRegistry: input.normalizationRegistry,
     sourceFactBundles: input.sourceFactBundles,
+    locSourceRegistry: input.locSourceRegistry,
     now: input.now,
   });
   for (const recipe of exportable) {
@@ -510,6 +516,9 @@ function assertRuntimeBuildInput(input: GameDataBuildInput) {
   parseGameNutritionDataset(input.nutritionDataset, "build.nutritionDataset");
   parseGameOperationCatalog({ version: "cooking-lab-game-operations-v1", operations: input.operations }, "build.operations");
   parseGameRightsRegistry(input.rightsRegistry, "build.rightsRegistry");
+  if (input.normalizationRegistry) parseGameNormalizationRegistry(input.normalizationRegistry, "build.normalizationRegistry");
+  input.sourceFactBundles?.forEach((bundle, index) => parseGameSourceFactBundle(bundle, `build.sourceFactBundles[${index}]`));
+  if (input.locSourceRegistry) parseLocSourceRegistry(input.locSourceRegistry);
 }
 
 function verifyExportParity(
@@ -731,7 +740,7 @@ function usedAssessmentIds(registry: GameRightsRegistryV1, artifactIds: Readonly
   ]);
 }
 
-function assertSafeOutputDirectory(outputDirectory: string): string {
+export function assertSafeGameDataOutputDirectory(outputDirectory: string): string {
   const target = resolve(outputDirectory);
   const projectGeneratedRoot = resolve(process.cwd(), ".local");
   const temporaryRoot = realpathSync(tmpdir());

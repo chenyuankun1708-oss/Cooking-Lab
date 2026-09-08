@@ -31,6 +31,7 @@ GitHub tracking：M12 Epic `#100`（Issues `#101-#105`），M13 Epic `#106`（Is
 - 当前 Web 50 项已迁移为 draft，不继承 Web rights/review，也不把演示营养表示为 USDA 数据。
 - M13 按 120 → 250 → 500+ 容量门禁扩充；最终核心库改为逐项明确 Public Domain 的 Library of Congress recipe facts + 独立 recipe cross-check + record-level USDA CC0 营养，不恢复视频路线，不导入第三方受保护表达。
 - 510 条公式候选已从 canonical source 移除，只作为运行时测试 fixture 保留。首轮独立审查已冻结全部公式 family；它们不会通过补标签的方式晋升，完成来源型重建、当前 fingerprint 的独立 review 与风险等价类 sampling QA 前，exportable 数量为 0。
+- 当前来源层已核验 152 本 LOC 公版文献并确定性生成 192 个严格、仍为 draft 的 source-fact bundles；逐字段 normalization proof、LOC registry/cache/compiler join、定性火力和完整 mutation 输出均已进入 fail-closed 合同。下一阶段把这些事实编译为 canonical drafts，而不是将 draft 直接改标为 exportable。
 - Web 继续公开中英文各 50 项；游戏内容不会自动晋升到 Web。
 
 完整合同见 `docs/GAME_DATA_ARCHITECTURE.md` 与 `docs/GAME_PUBLISHING_GOVERNANCE.md`。

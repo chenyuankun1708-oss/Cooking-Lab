@@ -19,7 +19,8 @@ export const gameManifestSchemaVersion = "cooking-lab-game-manifest-v1" as const
 export const gameOperationCatalogVersion = "cooking-lab-game-operations-v1" as const;
 export const gameRightsRegistrySchemaVersion = "cooking-lab-game-rights-v1" as const;
 
-export type GameSimulationProfile = "cat-kitchen-goal1-v1" | "requires-cat-kitchen-v2" | "data-only";
+export const gameSimulationProfiles = ["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"] as const;
+export type GameSimulationProfile = (typeof gameSimulationProfiles)[number];
 export type GameOperationCompatibility = "supported-now" | "macro-supported" | "requires-engine-v2" | "presentation-only";
 export type GameRecipeEligibility = "draft" | "exportable";
 export type GameIngredientState = "raw" | "dry" | "liquid" | "cooked" | "prepared" | "ready-to-serve";
@@ -67,6 +68,11 @@ export interface GameOperationParametersV1 {
   quantityG?: number;
   capacityG?: number;
 }
+
+export type GameHeatControlV1 =
+  | { kind: "exact-temperature"; temperatureC: number; sourceFactId: string }
+  | { kind: "qualitative"; descriptorId: string; sourceFactId: string }
+  | { kind: "independently-calibrated"; parameter: "temperatureC" | "heatLevel"; value: number; sourceFactId: string; calibrationEvidenceId: string };
 
 export interface GameIngredientPortionV1 {
   portionId: string;
@@ -116,30 +122,19 @@ export interface GameOperationNodeV1 {
   activeDurationMs: number;
   waitDurationMs: number;
   parameters: GameOperationParametersV1;
+  heatControl?: GameHeatControlV1;
   targetStates: GameTargetStateV1[];
   criticality: "quality" | "completion" | "safety";
   sourceStepOrder?: number;
 }
 
-export type GameMutationType =
-  | "omit"
-  | "reorder"
-  | "duplicate"
-  | "quantity-too-low"
-  | "quantity-too-high"
-  | "heat-too-low"
-  | "heat-too-high"
-  | "duration-too-short"
-  | "duration-too-long"
-  | "cut-size-too-small"
-  | "cut-size-too-large"
-  | "low-uniformity"
-  | "season-too-early"
-  | "season-too-late"
-  | "overcrowding"
-  | "wrong-equipment"
-  | "missing-state-transition"
-  | "allowed-substitution";
+export const gameMutationTypes = [
+  "omit", "reorder", "duplicate", "quantity-too-low", "quantity-too-high", "heat-too-low", "heat-too-high",
+  "duration-too-short", "duration-too-long", "cut-size-too-small", "cut-size-too-large", "low-uniformity",
+  "season-too-early", "season-too-late", "overcrowding", "wrong-equipment", "missing-state-transition",
+  "allowed-substitution",
+] as const;
+export type GameMutationType = (typeof gameMutationTypes)[number];
 
 export interface GameRecipeMutationV1 {
   type: GameMutationType;

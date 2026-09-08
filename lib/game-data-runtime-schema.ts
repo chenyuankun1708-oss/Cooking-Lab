@@ -506,6 +506,17 @@ const operationNodeSchema = exactObject({
 }, {
   equipmentId: stringValue,
   sourceStepOrder: integerValue,
+  heatControl: discriminatedObject("kind", {
+    "exact-temperature": exactObject({ kind: literal("exact-temperature"), temperatureC: numberValue, sourceFactId: stringValue }),
+    qualitative: exactObject({ kind: literal("qualitative"), descriptorId: stringValue, sourceFactId: stringValue }),
+    "independently-calibrated": exactObject({
+      kind: literal("independently-calibrated"),
+      parameter: enumValue(["temperatureC", "heatLevel"]),
+      value: numberValue,
+      sourceFactId: stringValue,
+      calibrationEvidenceId: stringValue,
+    }),
+  }),
 });
 
 const nutritionProvenanceSchema = exactObject({
@@ -615,13 +626,36 @@ const gameRecipeSchema = exactObject({
     normalizationTrace: exactObject({
       sourceFactBundleId: stringValue,
       sourceFactBundleVersion: stringValue,
+      sourceRegistryVersion: stringValue,
+      sourceCacheVersion: stringValue,
+      sourceCompilerVersion: stringValue,
       normalizationPolicyVersion: stringValue,
-      ingredientResolutionIds: arrayOf(stringValue),
-      operationRuleIds: arrayOf(stringValue),
-      equipmentRuleIds: arrayOf(stringValue),
-      heatDescriptorIds: arrayOf(stringValue),
-      targetStateRuleIds: arrayOf(stringValue),
-      mutationRuleIds: arrayOf(stringValue),
+      ingredientBindings: arrayOf(exactObject({
+        ingredientFactId: stringValue,
+        portionId: stringValue,
+        resolutionId: stringValue,
+        conversionRecordId: stringValue,
+      })),
+      methodBindings: arrayOf(exactObject({
+        methodFactId: stringValue,
+        nodeId: stringValue,
+        operationRuleId: stringValue,
+        durationBindings: arrayOf(exactObject({
+          target: enumValue(["activeDurationMs", "waitDurationMs"]),
+          basis: enumValue(["source-exact", "independently-calibrated"]),
+        }, {
+          provenanceEvidenceId: stringValue,
+        })),
+        targetStateRuleIds: arrayOf(stringValue),
+      }, {
+        equipmentRuleId: stringValue,
+        heatDescriptorId: stringValue,
+      })),
+      scenarioBindings: arrayOf(exactObject({
+        scenarioId: stringValue,
+        mutationRuleId: stringValue,
+        applicabilityFactIds: arrayOf(stringValue),
+      })),
     }),
   }),
 }, {

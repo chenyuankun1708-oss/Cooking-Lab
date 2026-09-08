@@ -31,7 +31,7 @@ Agent review is never represented as human approval, culinary field testing or l
 
 ## Sampling QA
 
-Sampling covers risk-equivalence classes rather than a fixed percentage. Classes include content type, source recipe/formula variant, operation signature, mutation family, ingredient state, source institution/domain/rights route, nutrition dataset and transform, image applicability and authoring path. A major finding freezes the affected class and moves it to 100% re-review; two consecutive clean batches are required before returning to ordinary sampling.
+Sampling covers risk-equivalence classes rather than a fixed percentage. Classes include content type, risk level/reason, source work family/domain/institution/rights route, source cache/compiler, normalization policy and individual transform rules, operation signature, mutation family, ingredient state, nutrition dataset and transform, image applicability and authoring path. A major finding freezes the affected class and moves it to 100% re-review; two consecutive clean batches are required before returning to ordinary sampling.
 
 Metrics retained per batch are escape count, reviewer disagreement, rework count and provenance/license novelty. These metrics determine future sampling strength.
 
@@ -50,3 +50,5 @@ The M13 release corpus must instead be reconstructed recipe by recipe from Libra
 `game-data:loc-fetch` revalidates item metadata, item-level rights text and the official full-text derivative before writing a content-addressed cache below `.local/`. `game-data:loc-candidates` consumes that exact cache through its verified manifest; it does not copy OCR into Git. Candidate output is discovery evidence only and always carries blockers for normalization, operation graph, nutrition, rights decision and independent review.
 
 Normalization eligibility is stricter than discovery. The primary extraction must be unambiguous, and at least one different conservative work family must use the same normalized recipe identity while sharing at least two material ingredient terms and one operation. Related-title/fuzzy matches remain discovery-only. Inflected preservation processes such as canned, bottled, cured, fermented and pickled are HIGH-risk exclusions, not normalization candidates.
+
+Publication does not accept a bag of rule IDs as provenance. The normalization trace must prove the exact source fact and rule for every canonical portion, operation, duration, heat control, target state and scenario. The source registry/cache/compiler versions and every source-fact bundle are fingerprinted. A quantity, step order, qualitative heat token, mutation outcome or supporting source change invalidates prior review and sampling evidence.

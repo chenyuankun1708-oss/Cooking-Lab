@@ -10,11 +10,14 @@ import {
   type GameSourceFactBundleV1,
   type RationalQuantityV1,
 } from "@/types/game-source-facts";
-import type { GameRecipeV1 } from "@/types/game-recipe";
+import type { GameRecipeV1, GameRightsRegistryV1 } from "@/types/game-recipe";
+import { locPublicDomainStatement, type LocSourceRegistryV1 } from "@/types/loc-recipe-source";
+import { createLocSourceRegistrySliceVersion } from "@/lib/loc-source-registry-version";
 
-export function attachTestNormalizationTrace(recipe: GameRecipeV1): {
+export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistry?: GameRightsRegistryV1): {
   normalizationRegistry: GameNormalizationRegistryV1;
   sourceFactBundles: GameSourceFactBundleV1[];
+  locSourceRegistry: LocSourceRegistryV1;
 } {
   const ingredientFacts = recipe.ingredientPortions.map((portion, index) => {
     const locator = locatorFor(index + 10);
@@ -40,9 +43,10 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1): {
     };
   });
   const ingredientFactIdByPortion = new Map(recipe.ingredientPortions.map((portion, index) => [portion.portionId, ingredientFacts[index].factId]));
+  recipe.operationGraph.nodes.forEach((node, index) => { node.sourceStepOrder = index + 1; });
   const methodFacts = recipe.operationGraph.nodes.map((node, index) => {
     const locator = locatorFor(index + 100);
-    const durationMs = node.activeDurationMs + node.waitDurationMs;
+    const durationMs = node.activeDurationMs || node.waitDurationMs;
     const value = {
       factId: `fixture-method-${String(index + 1).padStart(2, "0")}`,
       locator,
@@ -62,26 +66,65 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1): {
         operationToken: value.operationToken,
         ingredientFactIds: value.ingredientFactIds,
         durationMinutes: value.durationMinutes ?? null,
+        temperatureC: null,
         qualitativeHeatToken: null,
         equipmentToken: value.equipmentToken ?? null,
         sourceLineSha256: value.sourceLineSha256,
       }),
     };
   });
+  const locSourceRegistry: LocSourceRegistryV1 = {
+    schemaVersion: "cooking-lab-loc-source-registry-v1",
+    provider: "Library of Congress",
+    collectionUrl: "https://www.loc.gov/collections/selected-digitized-books/",
+    rightsStatement: locPublicDomainStatement,
+    rightsStatementUrl: "https://www.loc.gov/collections/selected-digitized-books/about-this-collection/rights-and-access/",
+    accessedAt: "2026-09-08",
+    documents: [
+      fixtureLocDocument("a", "100", "fixture-family-a"),
+      fixtureLocDocument("b", "200", "fixture-family-b"),
+    ],
+  };
   const draft: GameSourceFactBundleV1 = {
     schemaVersion: gameSourceFactBundleSchemaVersion,
     bundleId: `fixture-source-facts-${recipe.recipeId}`,
     bundleVersion: "",
+    sourceRegistryVersion: createLocSourceRegistrySliceVersion(locSourceRegistry, ["fixture-book-a", "fixture-book-b"]),
+    sourceCacheVersion: sha256("fixture-cache"),
+    compilerVersion: "fixture-compiler-v1",
     candidateId: `fixture-candidate-${recipe.recipeId}`,
     title: recipe.recipeId,
-    primarySource: locatorFor(1),
+    primarySource: { ...locatorFor(1), endLine: 999 },
     crossCheckSources: [{ ...locatorFor(2), sourceDocumentId: "fixture-book-b", workFamilyId: "fixture-family-b", itemUrl: "https://www.loc.gov/item/200/" }],
+    crossCheckAssertions: [{
+      sourceDocumentId: "fixture-book-b",
+      pageId: "1",
+      startLine: 2,
+      endLine: 2,
+      matchBasis: "exact-title",
+      sharedIngredientTerms: ["rice", "tofu"],
+      sharedOperationTerms: [recipe.operationGraph.nodes[0].operationType],
+    }],
     ingredientFacts,
     methodFacts,
     riskFlags: [],
     status: "normalization-ready",
   };
   const bundle = { ...draft, bundleVersion: createGameSourceFactBundleVersion(draft) };
+  recipe.operationGraph.nodes.forEach((node, index) => {
+    const parameter = node.parameters.temperatureC !== undefined ? "temperatureC"
+      : node.parameters.heatLevel !== undefined ? "heatLevel"
+        : undefined;
+    if (parameter) {
+      node.heatControl = {
+        kind: "independently-calibrated",
+        parameter,
+        value: node.parameters[parameter]!,
+        sourceFactId: methodFacts[index].factId,
+        calibrationEvidenceId: recipe.rights.evidenceIds[0],
+      };
+    }
+  });
   const normalizationRegistry: GameNormalizationRegistryV1 = {
     schemaVersion: gameNormalizationRegistrySchemaVersion,
     policyVersion: "fixture-normalization-v1",
@@ -110,33 +153,103 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1): {
       dimension: target.dimension,
       ...(target.minimum !== undefined ? { minimum: target.minimum } : {}),
       ...(target.maximum !== undefined ? { maximum: target.maximum } : {}),
+      provenanceEvidenceIds: [recipe.rights.evidenceIds[0]],
     }))),
     mutationRules: recipe.scenarios.map((scenario, index) => {
       const node = recipe.operationGraph.nodes.find((entry) => entry.nodeId === scenario.mutation.targetNodeId) ?? recipe.operationGraph.nodes[0];
-      const delta = scenario.expectedDeltas[0];
       return {
         ruleId: `fixture-mutation-rule-${String(index + 1).padStart(2, "0")}`,
         version: "fixture-v1",
         operationId: node.operationType,
         mutationType: scenario.mutation.type,
-        direction: delta?.direction ?? "unchanged",
-        targetDimension: delta?.dimension ?? "structural-integrity",
-        provenanceSourceIds: ["fixture-source"],
+        expectedDeltas: scenario.expectedDeltas.map(({ dimension, direction }) => ({ dimension, direction })),
+        expectedFaultCodes: [...scenario.expectedFaultCodes],
+        causeCodes: [...scenario.causeCodes],
+        recoverability: scenario.recoverability,
+        nutritionEffect: scenario.nutritionEffect,
+        applicableEngine: scenario.applicableEngine,
+        provenanceEvidenceIds: [recipe.rights.evidenceIds[0]],
       };
     }),
   };
   recipe.authoring.normalizationTrace = {
     sourceFactBundleId: bundle.bundleId,
     sourceFactBundleVersion: bundle.bundleVersion,
+    sourceRegistryVersion: bundle.sourceRegistryVersion,
+    sourceCacheVersion: bundle.sourceCacheVersion,
+    sourceCompilerVersion: bundle.compilerVersion,
     normalizationPolicyVersion: normalizationRegistry.policyVersion,
-    ingredientResolutionIds: normalizationRegistry.ingredientAliases.map((entry) => entry.resolutionId),
-    operationRuleIds: normalizationRegistry.operationRules.map((entry) => entry.ruleId),
-    equipmentRuleIds: normalizationRegistry.equipmentRules.map((entry) => entry.ruleId),
-    heatDescriptorIds: [],
-    targetStateRuleIds: normalizationRegistry.targetStateRules.map((entry) => entry.ruleId),
-    mutationRuleIds: normalizationRegistry.mutationRules.map((entry) => entry.ruleId),
+    ingredientBindings: recipe.ingredientPortions.map((portion, index) => ({
+      ingredientFactId: ingredientFacts[index].factId,
+      portionId: portion.portionId,
+      resolutionId: normalizationRegistry.ingredientAliases[index].resolutionId,
+      conversionRecordId: portion.sourceQuantity.conversionRecordId,
+    })),
+    methodBindings: recipe.operationGraph.nodes.map((node, index) => ({
+      methodFactId: methodFacts[index].factId,
+      nodeId: node.nodeId,
+      operationRuleId: normalizationRegistry.operationRules[index].ruleId,
+      ...(node.equipmentId ? {
+        equipmentRuleId: normalizationRegistry.equipmentRules.find((rule) => rule.equipmentId === node.equipmentId)!.ruleId,
+      } : {}),
+      durationBindings: [
+        ...(node.activeDurationMs > 0 ? [{
+          target: "activeDurationMs" as const,
+          basis: "source-exact" as const,
+        }] : []),
+        ...(node.waitDurationMs > 0 ? [{
+          target: "waitDurationMs" as const,
+          basis: node.activeDurationMs > 0 ? "independently-calibrated" as const : "source-exact" as const,
+          ...(node.activeDurationMs > 0 ? { provenanceEvidenceId: recipe.rights.evidenceIds[0] } : {}),
+        }] : []),
+      ],
+      targetStateRuleIds: normalizationRegistry.targetStateRules
+        .filter((rule) => rule.ruleId.startsWith(`fixture-target-rule-${String(index + 1).padStart(2, "0")}-`))
+        .map((rule) => rule.ruleId),
+    })),
+    scenarioBindings: recipe.scenarios.map((scenario, index) => ({
+      scenarioId: scenario.scenarioId,
+      mutationRuleId: normalizationRegistry.mutationRules[index].ruleId,
+      applicabilityFactIds: [
+        ...(scenario.mutation.targetNodeId
+          ? [methodFacts[recipe.operationGraph.nodes.findIndex((node) => node.nodeId === scenario.mutation.targetNodeId)].factId]
+          : []),
+        ...(scenario.mutation.destinationBeforeNodeId
+          ? [methodFacts[recipe.operationGraph.nodes.findIndex((node) => node.nodeId === scenario.mutation.destinationBeforeNodeId)].factId]
+          : []),
+        ...(scenario.mutation.targetPortionId
+          ? [ingredientFacts[recipe.ingredientPortions.findIndex((portion) => portion.portionId === scenario.mutation.targetPortionId)].factId]
+          : []),
+      ],
+    })),
   };
-  return { normalizationRegistry, sourceFactBundles: [bundle] };
+  if (rightsRegistry) {
+    recipe.rights.sourceIds.slice(0, 2).forEach((sourceId, index) => {
+      const source = rightsRegistry.sources.find((entry) => entry.id === sourceId);
+      if (source) source.locators.push({ kind: "url", url: `https://www.loc.gov/item/${index === 0 ? "100" : "200"}/`, accessedAt: "2026-09-08" });
+    });
+  }
+  return { normalizationRegistry, sourceFactBundles: [bundle], locSourceRegistry };
+}
+
+function fixtureLocDocument(suffix: "a" | "b", itemId: string, workFamilyId: string) {
+  return {
+    documentId: `fixture-book-${suffix}`,
+    itemId,
+    itemUrl: `https://www.loc.gov/item/${itemId}/`,
+    title: `Fixture book ${suffix}`,
+    creators: [`Fixture creator ${suffix}`],
+    publicationYear: 1900,
+    workFamilyId,
+    rightsStatement: locPublicDomainStatement,
+    rightsStatementUrl: `https://www.loc.gov/item/${itemId}/`,
+    ocr: {
+      derivativeUrl: `https://tile.loc.gov/storage-services/public/fixture-${suffix}.text.json`,
+      fileName: `fixture-${suffix}.text.json`,
+      sha256: sha256("fixture-derivative"),
+      format: "loc-page-text-json" as const,
+    },
+  };
 }
 
 function locatorFor(line: number) {

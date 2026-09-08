@@ -1,4 +1,10 @@
-import type { GameIngredientState, GameOperationId, GameTargetDimension } from "./game-recipe";
+import type {
+  GameIngredientState,
+  GameMutationType,
+  GameOperationId,
+  GameSimulationProfile,
+  GameTargetDimension,
+} from "./game-recipe";
 
 export const gameSourceFactBundleSchemaVersion = "cooking-lab-game-source-facts-v1" as const;
 export const gameNormalizationRegistrySchemaVersion = "cooking-lab-game-normalization-v1" as const;
@@ -37,6 +43,7 @@ export interface GameMethodSourceFactV1 {
   operationToken: string;
   ingredientFactIds: string[];
   durationMinutes?: RationalQuantityV1;
+  temperatureC?: number;
   qualitativeHeatToken?: string;
   equipmentToken?: string;
   sourceLineSha256: string;
@@ -47,10 +54,22 @@ export interface GameSourceFactBundleV1 {
   schemaVersion: typeof gameSourceFactBundleSchemaVersion;
   bundleId: string;
   bundleVersion: string;
+  sourceRegistryVersion: string;
+  sourceCacheVersion: string;
+  compilerVersion: string;
   candidateId: string;
   title: string;
   primarySource: GameFactLocatorV1;
   crossCheckSources: GameFactLocatorV1[];
+  crossCheckAssertions: Array<{
+    sourceDocumentId: string;
+    pageId: string;
+    startLine: number;
+    endLine: number;
+    matchBasis: "exact-title" | "related-title-and-facts";
+    sharedIngredientTerms: string[];
+    sharedOperationTerms: string[];
+  }>;
   ingredientFacts: GameIngredientSourceFactV1[];
   methodFacts: GameMethodSourceFactV1[];
   riskFlags: string[];
@@ -88,26 +107,55 @@ export interface GameNormalizationRegistryV1 {
     dimension: GameTargetDimension;
     minimum?: number;
     maximum?: number;
+    provenanceEvidenceIds: string[];
   }>;
   mutationRules: Array<{
     ruleId: string;
     version: string;
     operationId: GameOperationId;
-    mutationType: string;
-    direction: "increase" | "decrease" | "unchanged";
-    targetDimension: GameTargetDimension;
-    provenanceSourceIds: string[];
+    mutationType: GameMutationType;
+    expectedDeltas: Array<{
+      dimension: GameTargetDimension;
+      direction: "increase" | "decrease" | "unchanged";
+    }>;
+    expectedFaultCodes: string[];
+    causeCodes: string[];
+    recoverability: "recoverable" | "partially-recoverable" | "terminal";
+    nutritionEffect: "unchanged" | "recalculate-from-quantities" | "requires-retention-model";
+    applicableEngine: GameSimulationProfile;
+    provenanceEvidenceIds: string[];
   }>;
 }
 
 export interface GameNormalizationTraceV1 {
   sourceFactBundleId: string;
   sourceFactBundleVersion: string;
+  sourceRegistryVersion: string;
+  sourceCacheVersion: string;
+  sourceCompilerVersion: string;
   normalizationPolicyVersion: string;
-  ingredientResolutionIds: string[];
-  operationRuleIds: string[];
-  equipmentRuleIds: string[];
-  heatDescriptorIds: string[];
-  targetStateRuleIds: string[];
-  mutationRuleIds: string[];
+  ingredientBindings: Array<{
+    ingredientFactId: string;
+    portionId: string;
+    resolutionId: string;
+    conversionRecordId: string;
+  }>;
+  methodBindings: Array<{
+    methodFactId: string;
+    nodeId: string;
+    operationRuleId: string;
+    equipmentRuleId?: string;
+    heatDescriptorId?: string;
+    durationBindings: Array<{
+      target: "activeDurationMs" | "waitDurationMs";
+      basis: "source-exact" | "independently-calibrated";
+      provenanceEvidenceId?: string;
+    }>;
+    targetStateRuleIds: string[];
+  }>;
+  scenarioBindings: Array<{
+    scenarioId: string;
+    mutationRuleId: string;
+    applicabilityFactIds: string[];
+  }>;
 }

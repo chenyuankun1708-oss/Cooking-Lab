@@ -28,13 +28,15 @@ The generated Godot JSON, SQLite, attribution report, rights summary, manifest a
 ## Versioned contracts
 
 - `GameRecipeV1` records stable IDs, quantified portions, a dependency graph, USDA-derived nutrition, simulation scenarios and export eligibility.
-- `SourceFactBundleV1` preserves reduced rational quantities, narrow ingredient facts, ordered method facts, LOC page/line locators and source-line hashes without committing OCR prose.
-- `GameNormalizationTraceV1` binds every source-normalized recipe to its current fact bundle and the exact reusable resolution/rule IDs used to compile it.
+- `SourceFactBundleV1` preserves reduced rational quantities, narrow ingredient facts, source-position-ordered method facts, exact LOC page/line locators, source-line hashes and the content-addressed source registry/cache/compiler versions without committing OCR prose.
+- `GameNormalizationTraceV1` is a field-level proof graph: every source ingredient maps to one portion and conversion record; every method fact maps to one operation, equipment, duration/heat basis and target-state rules; every scenario maps to a provenance-backed mutation rule whose complete deterministic output equals the canonical scenario.
 - `GameOperationDefinitionV1` distinguishes `supported-now`, `macro-supported`, `requires-engine-v2` and `presentation-only`.
 - `GameRecipeScenarioV1` mutates a baseline without modifying it and records directional sensory changes, fault causes, recoverability and nutrition impact.
 - `GameDataManifestV1` hashes every exported recipe and every supporting catalog, rights, attribution and nutrition artifact, including upstream USDA archive identifiers and SHA-256 values.
 
 All masses use grams. Every source quantity must join an immutable conversion record by ID, unit and factor. The catalog carries exact global SI records for grams and kilograms; milliliters, pieces, teaspoons and tablespoons require an ingredient-specific record whose factor matches the versioned density or unit weight. A fabricated, missing or mismatched record blocks export. The same conversion records are emitted to Godot JSON and the SQLite `unit_conversions` table.
+
+Source-normalized publication also exact-joins every primary and cross-check locator to the committed LOC registry, its work family, item URL and derivative hash. Historical qualitative heat is never converted into a fabricated numeric temperature: it remains a source-bound qualitative control and requires the Cat Kitchen v2 profile. Independently calibrated numeric heat or duration requires a current Evidence record.
 
 Migration from the Web model is deliberately lossy and draft-only. When the source does not explicitly establish ingredient identity, quantity, operation parameter, target state or scenario outcome, the deterministic migration may preserve a placeholder solely to exercise the schema, but must add a stable `unresolvedMappings` blocker. Such a record cannot become exportable until a rights-cleared source-backed replacement is authored and independently reviewed.
 

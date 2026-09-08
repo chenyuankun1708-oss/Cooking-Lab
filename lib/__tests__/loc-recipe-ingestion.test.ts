@@ -124,7 +124,7 @@ describe("LOC candidate ingestion", () => {
     ]));
   });
 
-  it.each(["APPLE CHUTNEY", "CURRANT CATSUP", "GRAPE CONSERVE", "TOMATO MARMALADE", "PLUM JAM"])(
+  it.each(["APPLE CHUTNEY", "CURRANT CATSUP", "GRAPE CONSERVE", "TOMATO MARMALADE", "PLUM JAM", "CRANBERRY JELLY"])(
     "treats historical preserve category %s as high risk",
     (title) => {
       const { directory, registry } = createFixture();
@@ -140,6 +140,42 @@ describe("LOC candidate ingestion", () => {
       expect(result.rejectedHighRisk[0]?.reasonCodes).toContain("fermentation-or-preservation");
     },
   );
+
+  it("orders multiple operations by their source-text position", () => {
+    const { directory, registry } = createFixture();
+    const bookAPath = resolve(directory, "book-a.text.json");
+    const ordered = JSON.stringify({
+      "12": { fulltext: "APPLE PIE.\n1 cup flour\n2 cups apples\nStir, then bake 40 minutes." },
+    });
+    writeFileSync(bookAPath, ordered);
+    registry.documents[0].ocr.sha256 = sha256(ordered);
+
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+    const candidate = result.candidates.find((entry) => entry.normalizedTitle === "apple pie");
+    expect(candidate?.extractedFacts.methodFacts.map((fact) => fact.operation)).toEqual(["stir", "bake"]);
+    expect(candidate?.extractedFacts.methodFacts.every((fact) => fact.durationMinutes === undefined)).toBe(true);
+  });
+
+  it("reduces fractional-hour durations after converting them to minutes", () => {
+    const { directory, registry } = createFixture();
+    const bookAPath = resolve(directory, "book-a.text.json");
+    const bookBPath = resolve(directory, "book-b.text.json");
+    const fractional = JSON.stringify({
+      "12": { fulltext: "APPLE PIE.\n1 cup flour\n2 cups apples\nBake 1 1/2 hours in a moderate oven." },
+    });
+    const independentCheck = JSON.stringify({
+      "3": { fulltext: "Apple Pie.\n1 cup flour\n3 cups apples\nBake for 35 minutes in the oven." },
+    });
+    writeFileSync(bookAPath, fractional);
+    writeFileSync(bookBPath, independentCheck);
+    registry.documents[0].ocr.sha256 = sha256(fractional);
+    registry.documents[1].ocr.sha256 = sha256(independentCheck);
+
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+    const bake = result.candidates.find((entry) => entry.normalizedTitle === "apple pie")?.extractedFacts.methodFacts[0];
+    expect(bake?.durationMinutes).toBe(90);
+    expect(bake?.durationRational).toEqual({ numerator: 90, denominator: 1, rawToken: "1 1/2 hours" });
+  });
 
   it("keeps fuzzy matches for discovery but blocks them from normalization", () => {
     const { directory, registry } = createFixture({ relatedMatchOnly: true });

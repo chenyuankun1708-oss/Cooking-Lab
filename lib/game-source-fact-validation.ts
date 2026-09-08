@@ -34,12 +34,32 @@ export function evaluateGameSourceFactBundle(
   validateRegistry(registry, report);
   if (bundle.schemaVersion !== gameSourceFactBundleSchemaVersion) report("invalid-schema", "schemaVersion", "Unsupported source fact bundle schema");
   if (!identifier(bundle.bundleId) || !identifier(bundle.candidateId) || !bundle.title.trim()) report("invalid-schema", "identity", "Bundle requires stable IDs and a title");
+  if (!/^clv1-[a-f0-9]{16}$/.test(bundle.sourceRegistryVersion)
+    || !sha256Value(bundle.sourceCacheVersion)
+    || !bundle.compilerVersion.trim()) {
+    report("invalid-source", "sourceRegistryVersion", "Bundle requires content-addressed source registry, cache and compiler versions");
+  }
   if (bundle.bundleVersion !== createGameSourceFactBundleVersion(bundle)) report("stale-version", "bundleVersion", "Bundle version does not match its current facts");
   validateLocator(bundle.primarySource, "primarySource", report);
   if (!bundle.crossCheckSources.length) report("missing-reference", "crossCheckSources", "At least one independent recipe cross-check is required");
   for (const [index, locator] of bundle.crossCheckSources.entries()) {
     validateLocator(locator, `crossCheckSources.${index}`, report);
     if (locator.workFamilyId === bundle.primarySource.workFamilyId) report("invalid-source", `crossCheckSources.${index}.workFamilyId`, "Cross-check must use a different work family");
+  }
+  const crossCheckKeys = uniqueValues(bundle.crossCheckSources.map(crossCheckKey), "crossCheckSources", report);
+  const assertionKeys = uniqueValues(bundle.crossCheckAssertions.map(crossCheckKey), "crossCheckAssertions", report);
+  if (!sameStringSet(crossCheckKeys, assertionKeys)) {
+    report("missing-reference", "crossCheckAssertions", "Cross-check assertions must exactly cover the declared cross-check sources");
+  }
+  for (const [index, assertion] of bundle.crossCheckAssertions.entries()) {
+    const field = `crossCheckAssertions.${index}`;
+    if (!crossCheckKeys.has(crossCheckKey(assertion))) report("missing-reference", `${field}.sourceDocumentId`, "Cross-check assertion must reference a declared source segment");
+    if (new Set(assertion.sharedIngredientTerms).size !== assertion.sharedIngredientTerms.length || assertion.sharedIngredientTerms.some((term) => !term.trim())) {
+      report("ambiguous-fact", `${field}.sharedIngredientTerms`, "Shared ingredient terms must be unique and non-empty");
+    }
+    if (new Set(assertion.sharedOperationTerms).size !== assertion.sharedOperationTerms.length || assertion.sharedOperationTerms.some((term) => !term.trim())) {
+      report("ambiguous-fact", `${field}.sharedOperationTerms`, "Shared operation terms must be unique and non-empty");
+    }
   }
 
   const ingredientIds = uniqueIds(bundle.ingredientFacts.map((fact) => fact.factId), "ingredientFacts", report);
@@ -49,6 +69,7 @@ export function evaluateGameSourceFactBundle(
   for (const [index, fact] of bundle.ingredientFacts.entries()) {
     const field = `ingredientFacts.${index}`;
     validateLocator(fact.locator, `${field}.locator`, report);
+    validatePrimaryFactLocator(fact.locator, bundle.primarySource, `${field}.locator`, report);
     validateRational(fact.quantity, `${field}.quantity`, report);
     if (!fact.phrase.trim() || !sha256Value(fact.factSha256)) report("invalid-schema", field, "Ingredient fact requires a phrase and SHA-256");
     if (!sha256Value(fact.sourceLineSha256)) report("invalid-source", `${field}.sourceLineSha256`, "Ingredient fact requires a source-line SHA-256");
@@ -60,6 +81,7 @@ export function evaluateGameSourceFactBundle(
   for (const [index, fact] of bundle.methodFacts.entries()) {
     const field = `methodFacts.${index}`;
     validateLocator(fact.locator, `${field}.locator`, report);
+    validatePrimaryFactLocator(fact.locator, bundle.primarySource, `${field}.locator`, report);
     if (!fact.operationToken.trim() || !sha256Value(fact.factSha256)) report("invalid-schema", field, "Method fact requires an operation token and SHA-256");
     for (const factId of fact.ingredientFactIds) if (!ingredientIds.has(factId)) report("missing-reference", `${field}.ingredientFactIds`, `Missing ingredient fact ${factId}`);
     if (fact.durationMinutes) validateRational(fact.durationMinutes, `${field}.durationMinutes`, report);
@@ -70,6 +92,7 @@ export function evaluateGameSourceFactBundle(
       operationToken: fact.operationToken,
       ingredientFactIds: fact.ingredientFactIds,
       durationMinutes: fact.durationMinutes ?? null,
+      temperatureC: fact.temperatureC ?? null,
       qualitativeHeatToken: fact.qualitativeHeatToken ?? null,
       equipmentToken: fact.equipmentToken ?? null,
       sourceLineSha256: fact.sourceLineSha256,
@@ -78,6 +101,9 @@ export function evaluateGameSourceFactBundle(
   }
   if (bundle.status === "normalization-ready") {
     if (bundle.riskFlags.length) report("ambiguous-fact", "riskFlags", "Normalization-ready bundles cannot retain risk flags");
+    if (!bundle.crossCheckAssertions.some((assertion) => assertion.matchBasis === "exact-title" && assertion.sharedIngredientTerms.length >= 2 && assertion.sharedOperationTerms.length >= 1)) {
+      report("ambiguous-fact", "crossCheckAssertions", "Normalization-ready bundles require an exact-title cross-check with at least two shared ingredient terms and one shared operation");
+    }
     const aliases = new Set(registry.ingredientAliases.map((entry) => `${entry.phrase}\0${entry.stateToken ?? ""}`));
     for (const fact of bundle.ingredientFacts) {
       if (!aliases.has(`${fact.phrase}\0${fact.stateToken ?? ""}`)) report("missing-reference", `ingredientFacts.${fact.factId}`, "Ingredient fact has no exact alias resolution");
@@ -93,6 +119,23 @@ export function evaluateGameSourceFactBundle(
     }
   }
   return issues.sort((left, right) => `${left.field}:${left.code}`.localeCompare(`${right.field}:${right.code}`));
+}
+
+function validatePrimaryFactLocator(
+  locator: GameFactLocatorV1,
+  primary: GameFactLocatorV1,
+  field: string,
+  report: (code: GameSourceFactIssue["code"], field: string, message: string) => void,
+): void {
+  if (locator.sourceDocumentId !== primary.sourceDocumentId
+    || locator.workFamilyId !== primary.workFamilyId
+    || locator.itemUrl !== primary.itemUrl
+    || locator.derivativeSha256 !== primary.derivativeSha256
+    || locator.pageId !== primary.pageId
+    || locator.startLine < primary.startLine
+    || locator.endLine > primary.endLine) {
+    report("invalid-source", field, "Fact locator must remain inside the declared primary recipe source block");
+  }
 }
 
 function validateRegistry(
@@ -112,10 +155,41 @@ function validateRegistry(
   for (const [index, rule] of registry.targetStateRules.entries()) {
     if (rule.minimum === undefined && rule.maximum === undefined) report("invalid-schema", `targetStateRules.${index}`, "Target rule needs a bound");
     if (rule.minimum !== undefined && rule.maximum !== undefined && rule.minimum > rule.maximum) report("invalid-schema", `targetStateRules.${index}`, "Target rule minimum exceeds maximum");
+    if (!rule.provenanceEvidenceIds.length) report("missing-reference", `targetStateRules.${index}.provenanceEvidenceIds`, "Target rules require provenance Evidence IDs");
   }
   for (const [index, rule] of registry.mutationRules.entries()) {
-    if (!rule.version.trim() || !rule.provenanceSourceIds.length) report("missing-reference", `mutationRules.${index}`, "Mutation rules require a version and provenance sources");
+    if (!rule.version.trim() || !rule.provenanceEvidenceIds.length) report("missing-reference", `mutationRules.${index}`, "Mutation rules require a version and provenance Evidence IDs");
+    if (!rule.expectedDeltas.length) report("invalid-schema", `mutationRules.${index}.expectedDeltas`, "Mutation rules require at least one directional outcome");
+    if (new Set(rule.expectedDeltas.map((delta) => delta.dimension)).size !== rule.expectedDeltas.length) {
+      report("duplicate-id", `mutationRules.${index}.expectedDeltas`, "Mutation rule outcome dimensions must be unique");
+    }
+    if (!rule.expectedFaultCodes.length || !rule.causeCodes.length) {
+      report("invalid-schema", `mutationRules.${index}`, "Mutation rules require explicit fault and cause codes");
+    }
   }
+}
+
+function sameStringSet(left: ReadonlySet<string>, right: ReadonlySet<string>): boolean {
+  if (left.size !== right.size) return false;
+  for (const value of left) if (!right.has(value)) return false;
+  return true;
+}
+
+function crossCheckKey(value: { sourceDocumentId: string; pageId: string; startLine: number; endLine: number }): string {
+  return `${value.sourceDocumentId}:${value.pageId}:${value.startLine}:${value.endLine}`;
+}
+
+function uniqueValues(
+  values: readonly string[],
+  field: string,
+  report: (code: GameSourceFactIssue["code"], field: string, message: string) => void,
+): Set<string> {
+  const result = new Set<string>();
+  for (const value of values) {
+    if (result.has(value)) report("duplicate-id", field, `Duplicate value ${value}`);
+    result.add(value);
+  }
+  return result;
 }
 
 function validateLocator(

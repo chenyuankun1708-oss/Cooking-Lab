@@ -5,11 +5,12 @@ import {
   evaluateGameSourceFactBundle,
 } from "@/lib/game-source-fact-validation";
 import { createLocSourceFactBundle } from "@/lib/loc-source-fact-bundles";
+import { parseGameNormalizationRegistry, parseGameSourceFactBundle } from "@/lib/game-source-fact-runtime-schema";
 import {
   gameNormalizationRegistrySchemaVersion,
   type GameNormalizationRegistryV1,
 } from "@/types/game-source-facts";
-import type { LocRecipeCandidateV1 } from "@/types/loc-recipe-source";
+import { locPublicDomainStatement, type LocRecipeCandidateV1, type LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 
 const registry: GameNormalizationRegistryV1 = {
   schemaVersion: gameNormalizationRegistrySchemaVersion,
@@ -21,10 +22,11 @@ const registry: GameNormalizationRegistryV1 = {
   targetStateRules: [],
   mutationRules: [],
 };
+const sourceVersions = { sourceRegistry: sourceRegistryFixture(), sourceCacheVersion: sha256("cache") } as const;
 
 describe("LOC source fact bundles", () => {
   it("preserves exact rational quantities, ordered method facts and source-line hashes", () => {
-    const bundle = createLocSourceFactBundle(candidateFixture());
+    const bundle = createLocSourceFactBundle(candidateFixture(), sourceVersions);
 
     expect(bundle.status).toBe("draft");
     expect(bundle.ingredientFacts[0]).toMatchObject({
@@ -45,7 +47,7 @@ describe("LOC source fact bundles", () => {
   });
 
   it("invalidates stale facts, non-independent cross-checks and noncanonical rationals", () => {
-    const bundle = createLocSourceFactBundle(candidateFixture());
+    const bundle = createLocSourceFactBundle(candidateFixture(), sourceVersions);
     bundle.ingredientFacts[0].quantity = { ...bundle.ingredientFacts[0].quantity, numerator: 10, denominator: 8 };
     bundle.crossCheckSources[0].workFamilyId = bundle.primarySource.workFamilyId;
     bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
@@ -59,7 +61,7 @@ describe("LOC source fact bundles", () => {
   });
 
   it("fails closed when a bundle claims normalization readiness without exact rules or bindings", () => {
-    const bundle = createLocSourceFactBundle(candidateFixture());
+    const bundle = createLocSourceFactBundle(candidateFixture(), sourceVersions);
     bundle.status = "normalization-ready";
     bundle.riskFlags = [];
     bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
@@ -71,6 +73,40 @@ describe("LOC source fact bundles", () => {
     ]));
     expect(issues.some((issue) => issue.message.includes("explicit ingredient inputs"))).toBe(true);
     expect(issues.some((issue) => issue.message.includes("no normalization rule"))).toBe(true);
+  });
+
+  it("rejects malformed source-fact and normalization JSON before semantic validation", () => {
+    const bundle = createLocSourceFactBundle(candidateFixture(), sourceVersions);
+    expect(parseGameSourceFactBundle(bundle)).toEqual(bundle);
+    expect(parseGameNormalizationRegistry(registry)).toEqual(registry);
+    expect(() => parseGameSourceFactBundle({ ...bundle, unexpected: true })).toThrow(/unexpected property/);
+    expect(() => parseGameNormalizationRegistry({ ...registry, operationRules: [{ ruleId: "x", operationToken: "x", operationId: "teleport" }] }))
+      .toThrow(/expected one of/);
+  });
+
+  it("preserves related cross-checks for discovery but requires exact assertion coverage for normalization", () => {
+    const candidate = candidateFixture();
+    candidate.crossChecks[0].matchBasis = "related-title-and-facts";
+    const bundle = createLocSourceFactBundle(candidate, sourceVersions);
+
+    expect(bundle.crossCheckAssertions[0].matchBasis).toBe("related-title-and-facts");
+    expect(evaluateGameSourceFactBundle(bundle, registry)).toEqual([]);
+
+    bundle.status = "normalization-ready";
+    bundle.riskFlags = [];
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+    expect(evaluateGameSourceFactBundle(bundle, registry)).toContainEqual(expect.objectContaining({
+      code: "ambiguous-fact",
+      field: "crossCheckAssertions",
+    }));
+
+    const missingAssertion = createLocSourceFactBundle(candidateFixture(), sourceVersions);
+    missingAssertion.crossCheckAssertions = [];
+    missingAssertion.bundleVersion = createGameSourceFactBundleVersion(missingAssertion);
+    expect(evaluateGameSourceFactBundle(missingAssertion, registry)).toContainEqual(expect.objectContaining({
+      code: "missing-reference",
+      field: "crossCheckAssertions",
+    }));
   });
 });
 
@@ -144,6 +180,53 @@ function candidateFixture(): LocRecipeCandidateV1 {
       "nutrition-provenance-required",
       "rights-decision-required",
       "independent-review-required",
+    ],
+  };
+}
+
+function sourceRegistryFixture(): LocSourceRegistryV1 {
+  return {
+    schemaVersion: "cooking-lab-loc-source-registry-v1",
+    provider: "Library of Congress",
+    collectionUrl: "https://www.loc.gov/collections/selected-digitized-books/",
+    rightsStatement: locPublicDomainStatement,
+    rightsStatementUrl: "https://www.loc.gov/collections/selected-digitized-books/about-this-collection/rights-and-access/",
+    accessedAt: "2026-09-08",
+    documents: [
+      {
+        documentId: "loc-book-a",
+        itemId: "100",
+        itemUrl: "https://www.loc.gov/item/100/",
+        title: "Fixture book a",
+        creators: ["Fixture creator a"],
+        publicationYear: 1900,
+        workFamilyId: "compiler-a",
+        rightsStatement: locPublicDomainStatement,
+        rightsStatementUrl: "https://www.loc.gov/item/100/",
+        ocr: {
+          derivativeUrl: "https://tile.loc.gov/storage-services/public/a.text.json",
+          fileName: "a.text.json",
+          sha256: sha256("book-a"),
+          format: "loc-page-text-json",
+        },
+      },
+      {
+        documentId: "loc-book-b",
+        itemId: "200",
+        itemUrl: "https://www.loc.gov/item/200/",
+        title: "Fixture book b",
+        creators: ["Fixture creator b"],
+        publicationYear: 1900,
+        workFamilyId: "compiler-b",
+        rightsStatement: locPublicDomainStatement,
+        rightsStatementUrl: "https://www.loc.gov/item/200/",
+        ocr: {
+          derivativeUrl: "https://tile.loc.gov/storage-services/public/b.text.json",
+          fileName: "b.text.json",
+          sha256: sha256("book-b"),
+          format: "loc-page-text-json",
+        },
+      },
     ],
   };
 }

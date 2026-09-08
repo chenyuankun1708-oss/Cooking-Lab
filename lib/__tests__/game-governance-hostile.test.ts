@@ -12,6 +12,7 @@ import {
   deriveMinimumGamePublishingRisk,
   evaluateGameRecipeCorpus,
 } from "@/lib/game-recipe-validation";
+import { createGameSourceFactBundleVersion, createGameSourceFactHash } from "@/lib/game-source-fact-validation";
 import { createSamplingBatchEvidenceDigest } from "@/lib/publishing-governance";
 import type {
   GameNutritionDatasetSubsetV1,
@@ -114,10 +115,84 @@ describe("M12 game governance hostile cases", () => {
     operationChanged.operations = operationChanged.operations.map((operation, index) => index === 0 ? { ...operation, simulationAffecting: !operation.simulationAffecting } : operation);
     const sourceRoleChanged = structuredClone(fixture.registry);
     sourceRoleChanged.sourceRoles[0].workFamilyId = "different-work-family";
+    const normalizationChanged = structuredClone(fixture.context);
+    normalizationChanged.normalizationRegistry.policyVersion = "fixture-normalization-v2";
+    const sourceFactChanged = structuredClone(fixture.context);
+    sourceFactChanged.sourceFactBundles[0].compilerVersion = "fixture-compiler-v2";
     expect(createGameArtifactSetVersion([fixture.recipe], originChanged, fixture.context)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], policyChanged, fixture.context)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, operationChanged)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], sourceRoleChanged, fixture.context)).not.toBe(base);
+    expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, normalizationChanged)).not.toBe(base);
+    expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, sourceFactChanged)).not.toBe(base);
+  });
+
+  it("rejects normalization bindings that do not produce the canonical recipe", () => {
+    const ingredientMismatch = readyFixture();
+    const ingredientBindings = ingredientMismatch.recipe.authoring.normalizationTrace!.ingredientBindings;
+    ingredientBindings[0].portionId = ingredientBindings[1].portionId;
+    expect(audit(ingredientMismatch).issues).toContainEqual(expect.objectContaining({
+      code: "invalid-schema",
+      field: "authoring.normalizationTrace.ingredientBindings",
+    }));
+
+    const operationMismatch = readyFixture();
+    operationMismatch.context.normalizationRegistry.operationRules[0].operationId = "serve";
+    expect(audit(operationMismatch).issues.some((issue) => issue.message.includes("exactly connect the source token"))).toBe(true);
+
+    const sourceMismatch = readyFixture();
+    sourceMismatch.context.sourceFactBundles[0].crossCheckAssertions[0].sharedIngredientTerms = [];
+    expect(audit(sourceMismatch).issues.some((issue) => issue.message.includes("exact-title cross-check"))).toBe(true);
+  });
+
+  it("joins source registry, quantities, durations and scenario outcomes exactly", () => {
+    const registryMismatch = readyFixture();
+    registryMismatch.context.locSourceRegistry.documents[0].ocr.sha256 = "f".repeat(64);
+    expect(audit(registryMismatch).issues.some((issue) => issue.field.includes("sourceRegistryVersion"))).toBe(true);
+
+    const quantityMismatch = readyFixture();
+    const quantityBundle = quantityMismatch.context.sourceFactBundles[0];
+    const quantityFact = quantityBundle.ingredientFacts[0];
+    quantityFact.quantity = { ...quantityFact.quantity, numerator: quantityFact.quantity.numerator + quantityFact.quantity.denominator };
+    quantityFact.factSha256 = createGameSourceFactHash({
+      locator: quantityFact.locator,
+      phrase: quantityFact.phrase,
+      stateToken: quantityFact.stateToken ?? null,
+      quantity: quantityFact.quantity,
+      sourceLineSha256: quantityFact.sourceLineSha256,
+    });
+    quantityBundle.bundleVersion = createGameSourceFactBundleVersion(quantityBundle);
+    quantityMismatch.recipe.authoring.normalizationTrace!.sourceFactBundleVersion = quantityBundle.bundleVersion;
+    expect(audit(quantityMismatch).issues.some((issue) => issue.message.includes("rational quantity and unit"))).toBe(true);
+
+    const durationMismatch = readyFixture();
+    const durationBinding = durationMismatch.recipe.authoring.normalizationTrace!.methodBindings
+      .find((binding) => binding.durationBindings.some((entry) => entry.basis === "source-exact"));
+    if (!durationBinding) throw new Error("duration fixture binding missing");
+    const durationNode = durationMismatch.recipe.operationGraph.nodes.find((node) => node.nodeId === durationBinding.nodeId)!;
+    const target = durationBinding.durationBindings.find((entry) => entry.basis === "source-exact")!.target;
+    durationNode[target] += 60_000;
+    expect(audit(durationMismatch).issues.some((issue) => issue.message.includes("Source duration must equal"))).toBe(true);
+
+    const scenarioMismatch = readyFixture();
+    scenarioMismatch.context.normalizationRegistry.mutationRules[0].expectedFaultCodes = ["invented-fault"];
+    expect(audit(scenarioMismatch).issues.some((issue) => issue.message.includes("exactly equal the canonical scenario result"))).toBe(true);
+  });
+
+  it("never turns qualitative historical heat into fabricated numeric heat", () => {
+    const fixture = readyFixture();
+    const methodFact = fixture.context.sourceFactBundles[0].methodFacts.find((fact) => {
+      const binding = fixture.recipe.authoring.normalizationTrace!.methodBindings.find((entry) => entry.methodFactId === fact.factId);
+      const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.nodeId === binding?.nodeId);
+      return node?.parameters.heatLevel !== undefined || node?.parameters.temperatureC !== undefined;
+    });
+    if (!methodFact) throw new Error("heating method fact missing");
+    methodFact.qualitativeHeatToken = "moderate-heat";
+    fixture.context.normalizationRegistry.heatDescriptors.push({ descriptorId: "moderate-heat", sourceToken: "moderate-heat", kind: "qualitative" });
+    const binding = fixture.recipe.authoring.normalizationTrace!.methodBindings.find((entry) => entry.methodFactId === methodFact.factId)!;
+    binding.heatDescriptorId = "moderate-heat";
+
+    expect(audit(fixture).issues.some((issue) => issue.message.includes("must remain qualitative"))).toBe(true);
   });
 
   it("rejects a USDA subset that no longer exactly matches the ingredient catalog", () => {
@@ -476,7 +551,7 @@ describe("M12 game governance hostile cases", () => {
 function readyFixture() {
   const recipe = structuredClone(generatedFixtureSource.recipes[0]) as GameRecipeV1;
   const registry = structuredClone(generatedFixtureSource.rightsRegistry) as GameRightsRegistryV1;
-  const normalization = attachTestNormalizationTrace(recipe);
+  const normalization = attachTestNormalizationTrace(recipe, registry);
   const context = {
     operations: structuredClone(gameOperationCatalog),
     ingredients: structuredClone(generatedFixtureSource.ingredients),
@@ -487,8 +562,8 @@ function readyFixture() {
   };
   recipe.eligibility = "exportable";
   registry.sourceRoles = [
-    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "hostile-fixture-primary" },
-    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "hostile-fixture-cross-check" },
+    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "fixture-family-a" },
+    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "fixture-family-b" },
   ];
   for (const scenario of recipe.scenarios) {
     if (scenario.mutation.type === "reorder" && scenario.mutation.targetNodeId) {
@@ -560,7 +635,7 @@ function readyFixture() {
     sampledItemIds: [recipe.recipeId] as [string],
   })) as unknown as SamplingQaBatch["equivalenceClasses"];
   const noveltyKeys = classification.equivalenceClassKeys.filter((key) =>
-    ["source-domain:", "source-institution:", "source-rights:", "nutrition:", "authoring:"].some((prefix) => key.startsWith(prefix)));
+    noveltyPrefixes.some((prefix) => key.startsWith(prefix)));
   const sampling: SamplingQaBatch = {
     id: "hostile-sampling",
     batchId: "hostile-review",
@@ -608,3 +683,9 @@ function claim(use: string, evidenceId: string) {
 function audit(fixture: ReturnType<typeof readyFixture>) {
   return evaluateGameRecipeCorpus([fixture.recipe], fixture.context);
 }
+
+const noveltyPrefixes = [
+  "source-domain:", "source-institution:", "source-rights:", "source-work-family:", "source-cache:", "source-compiler:",
+  "nutrition:", "authoring:", "normalization-policy:", "ingredient-resolution:", "operation-rule:", "equipment-rule:",
+  "heat-descriptor:", "target-state-rule:", "mutation-rule:", "risk-level:", "risk-reason:",
+];

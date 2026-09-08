@@ -25,7 +25,7 @@ describe("M12 deterministic game exports", () => {
     };
     const recipe = structuredClone(generated.recipes[0]) as GameRecipeV1;
     const registry = structuredClone(generated.rightsRegistry);
-    const normalization = attachTestNormalizationTrace(recipe);
+    const normalization = attachTestNormalizationTrace(recipe, registry);
     promoteFixture(recipe, registry, fixtureIngredients, source.nutritionDataset, gameOperationCatalog, normalization);
     const rootA = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-a-")), "output");
     const rootB = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-b-")), "output");
@@ -199,8 +199,8 @@ function promoteFixture(
   const samplingId = "fixture-sampling";
   recipe.eligibility = "exportable";
   registry.sourceRoles = [
-    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "fixture-primary" },
-    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "fixture-cross-check" },
+    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "fixture-family-a" },
+    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "fixture-family-b" },
   ];
   recipe.governance.reviewAttestationIds = attestationIds;
   recipe.governance.samplingBatchId = samplingId;
@@ -287,7 +287,11 @@ function promoteFixture(
 }
 
 function isProvenanceLicenseNoveltyKey(key: string) {
-  return ["source-domain:", "source-institution:", "source-rights:", "nutrition:", "authoring:"].some((prefix) => key.startsWith(prefix));
+  return [
+    "source-domain:", "source-institution:", "source-rights:", "source-work-family:", "source-cache:", "source-compiler:",
+    "nutrition:", "authoring:", "normalization-policy:", "ingredient-resolution:", "operation-rule:", "equipment-rule:",
+    "heat-descriptor:", "target-state-rule:", "mutation-rule:", "risk-level:", "risk-reason:",
+  ].some((prefix) => key.startsWith(prefix));
 }
 
 function fileMap(root: string): Record<string, string> {

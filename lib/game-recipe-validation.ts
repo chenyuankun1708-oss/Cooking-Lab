@@ -19,7 +19,9 @@ import type {
   SamplingQaBatch,
 } from "@/types/publishing-governance";
 import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
+import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 import { evaluateGameSourceFactBundle } from "./game-source-fact-validation";
+import { createLocSourceRegistrySliceVersion } from "./loc-source-registry-version";
 import { createSamplingBatchEvidenceDigest } from "./publishing-governance";
 import { validateResearchRegistry } from "./research-validation";
 
@@ -53,6 +55,7 @@ export interface GameRecipeValidationContext {
   rightsRegistry?: GameRightsRegistryV1;
   normalizationRegistry?: GameNormalizationRegistryV1;
   sourceFactBundles?: readonly GameSourceFactBundleV1[];
+  locSourceRegistry?: LocSourceRegistryV1;
   now: string;
 }
 
@@ -108,7 +111,7 @@ export function createGameRecipeArtifactVersion(recipe: GameRecipeV1): string {
 export function createGameArtifactSetVersion(
   recipes: readonly GameRecipeV1[],
   registry: GameRightsRegistryV1,
-  support?: Pick<GameRecipeValidationContext, "operations" | "ingredients" | "nutritionDataset" | "normalizationRegistry" | "sourceFactBundles">,
+  support?: Pick<GameRecipeValidationContext, "operations" | "ingredients" | "nutritionDataset" | "normalizationRegistry" | "sourceFactBundles" | "locSourceRegistry">,
 ): string {
   const recipeIds = new Set(recipes.map((recipe) => recipe.recipeId));
   const artifacts = registry.artifacts
@@ -132,6 +135,14 @@ export function createGameArtifactSetVersion(
   const ingredientIds = new Set(recipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.ingredientId)));
   const conversionRecordIds = new Set(recipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.sourceQuantity.conversionRecordId)));
   const upstreamRecordIds = new Set(recipes.flatMap((recipe) => recipe.nutritionProfile.provenance.map((entry) => entry.upstreamRecordId)));
+  const usedSourceFactBundleIds = new Set(recipes.flatMap((recipe) => recipe.authoring.normalizationTrace?.sourceFactBundleId ?? []));
+  const usedSourceFactBundles = [...(support?.sourceFactBundles ?? [])]
+    .filter((bundle) => usedSourceFactBundleIds.has(bundle.bundleId))
+    .sort((left, right) => left.bundleId.localeCompare(right.bundleId));
+  const locSourceDocumentIds = new Set(usedSourceFactBundles.flatMap((bundle) => [
+    bundle.primarySource.sourceDocumentId,
+    ...bundle.crossCheckSources.map((source) => source.sourceDocumentId),
+  ]));
   return createContentVersion({
     policyVersion: registry.policyVersion,
     governancePolicyVersion: registry.governance.policyVersion,
@@ -166,9 +177,15 @@ export function createGameArtifactSetVersion(
       } : null,
       ...(recipes.some((recipe) => recipe.authoring.method === "deterministic-source-normalization") ? {
         normalizationRegistry: support.normalizationRegistry ?? null,
-        sourceFactBundles: [...(support.sourceFactBundles ?? [])]
-          .filter((bundle) => recipes.some((recipe) => recipe.authoring.normalizationTrace?.sourceFactBundleId === bundle.bundleId))
-          .sort((left, right) => left.bundleId.localeCompare(right.bundleId)),
+        locSourceRegistry: support.locSourceRegistry ? {
+          schemaVersion: support.locSourceRegistry.schemaVersion,
+          provider: support.locSourceRegistry.provider,
+          rightsStatement: support.locSourceRegistry.rightsStatement,
+          documents: support.locSourceRegistry.documents
+            .filter((document) => locSourceDocumentIds.has(document.documentId))
+            .sort((left, right) => left.documentId.localeCompare(right.documentId)),
+        } : null,
+        sourceFactBundles: usedSourceFactBundles,
       } : {}),
     } : {
       operationTypes: [...new Set(recipes.flatMap((recipe) => recipe.operationGraph.nodes.map((node) => node.operationType)))].sort(),
@@ -497,6 +514,25 @@ function validateNormalizationTrace(
   if (trace.sourceFactBundleVersion !== bundle.bundleVersion) {
     report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceFactBundleVersion", "Source fact bundle version is stale");
   }
+  let currentSourceRegistryVersion: string | undefined;
+  if (context.locSourceRegistry) {
+    try {
+      currentSourceRegistryVersion = createLocSourceRegistrySliceVersion(context.locSourceRegistry, [
+        bundle.primarySource.sourceDocumentId,
+        ...bundle.crossCheckSources.map((source) => source.sourceDocumentId),
+      ]);
+    } catch {
+      currentSourceRegistryVersion = undefined;
+    }
+  }
+  if (!currentSourceRegistryVersion
+    || trace.sourceRegistryVersion !== bundle.sourceRegistryVersion
+    || trace.sourceRegistryVersion !== currentSourceRegistryVersion) {
+    report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceRegistryVersion", "Source registry version is missing or stale");
+  }
+  if (trace.sourceCacheVersion !== bundle.sourceCacheVersion || trace.sourceCompilerVersion !== bundle.compilerVersion) {
+    report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceCacheVersion", "Source cache or compiler version is stale");
+  }
   if (trace.normalizationPolicyVersion !== registry.policyVersion) {
     report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.normalizationPolicyVersion", "Normalization policy version is stale");
   }
@@ -506,21 +542,253 @@ function validateNormalizationTrace(
   if (bundle.status !== "normalization-ready") {
     report("invalid-schema", recipe.recipeId, "authoring.normalizationTrace.sourceFactBundleId", "Source-normalized recipes require a normalization-ready fact bundle");
   }
-  const checks: Array<[keyof typeof trace, readonly string[], Set<string>]> = [
-    ["ingredientResolutionIds", trace.ingredientResolutionIds, new Set(registry.ingredientAliases.map((entry) => entry.resolutionId))],
-    ["operationRuleIds", trace.operationRuleIds, new Set(registry.operationRules.map((entry) => entry.ruleId))],
-    ["equipmentRuleIds", trace.equipmentRuleIds, new Set(registry.equipmentRules.map((entry) => entry.ruleId))],
-    ["heatDescriptorIds", trace.heatDescriptorIds, new Set(registry.heatDescriptors.map((entry) => entry.descriptorId))],
-    ["targetStateRuleIds", trace.targetStateRuleIds, new Set(registry.targetStateRules.map((entry) => entry.ruleId))],
-    ["mutationRuleIds", trace.mutationRuleIds, new Set(registry.mutationRules.map((entry) => entry.ruleId))],
-  ];
-  for (const [field, ids, knownIds] of checks) {
-    if (new Set(ids).size !== ids.length) report("duplicate-id", recipe.recipeId, `authoring.normalizationTrace.${field}`, "Normalization trace IDs must be unique");
-    for (const id of ids) if (!knownIds.has(id)) report("missing-reference", recipe.recipeId, `authoring.normalizationTrace.${field}`, `Unknown normalization rule ${id}`);
+  const ingredientFacts = new Map(bundle.ingredientFacts.map((fact) => [fact.factId, fact]));
+  const methodFacts = new Map(bundle.methodFacts.map((fact) => [fact.factId, fact]));
+  const portions = new Map(recipe.ingredientPortions.map((portion) => [portion.portionId, portion]));
+  const nodes = new Map(recipe.operationGraph.nodes.map((node) => [node.nodeId, node]));
+  const scenarios = new Map(recipe.scenarios.map((scenario) => [scenario.scenarioId, scenario]));
+  const aliases = new Map(registry.ingredientAliases.map((entry) => [entry.resolutionId, entry]));
+  const operationRules = new Map(registry.operationRules.map((entry) => [entry.ruleId, entry]));
+  const equipmentRules = new Map(registry.equipmentRules.map((entry) => [entry.ruleId, entry]));
+  const heatDescriptors = new Map(registry.heatDescriptors.map((entry) => [entry.descriptorId, entry]));
+  const targetRules = new Map(registry.targetStateRules.map((entry) => [entry.ruleId, entry]));
+  const mutationRules = new Map(registry.mutationRules.map((entry) => [entry.ruleId, entry]));
+  const evidenceIds = new Set(context.rightsRegistry?.evidence.map((entry) => entry.id) ?? []);
+
+  reportBindingCoverage("ingredientBindings", trace.ingredientBindings.map((binding) => binding.ingredientFactId), ingredientFacts.keys(), recipe, report);
+  reportBindingCoverage("ingredientBindings", trace.ingredientBindings.map((binding) => binding.portionId), portions.keys(), recipe, report);
+  const ingredientBindingByPortion = new Map(trace.ingredientBindings.map((binding) => [binding.portionId, binding]));
+  const methodBindingByNode = new Map(trace.methodBindings.map((binding) => [binding.nodeId, binding]));
+  for (const binding of trace.ingredientBindings) {
+    const field = `authoring.normalizationTrace.ingredientBindings.${binding.portionId}`;
+    const fact = ingredientFacts.get(binding.ingredientFactId);
+    const portion = portions.get(binding.portionId);
+    const alias = aliases.get(binding.resolutionId);
+    if (!fact) report("missing-reference", recipe.recipeId, `${field}.ingredientFactId`, `Missing ingredient fact ${binding.ingredientFactId}`);
+    if (!portion) report("missing-reference", recipe.recipeId, `${field}.portionId`, `Missing portion ${binding.portionId}`);
+    if (!alias) report("missing-reference", recipe.recipeId, `${field}.resolutionId`, `Missing ingredient resolution ${binding.resolutionId}`);
+    if (fact && alias && (fact.phrase !== alias.phrase || (fact.stateToken ?? "") !== (alias.stateToken ?? ""))) {
+      report("invalid-schema", recipe.recipeId, field, "Ingredient resolution does not exactly match the source fact phrase and state");
+    }
+    if (portion && alias && (portion.ingredientId !== alias.ingredientId || portion.initialState !== alias.ingredientState)) {
+      report("invalid-schema", recipe.recipeId, field, "Ingredient resolution does not produce the bound canonical portion");
+    }
+    const sourceAmount = fact ? fact.quantity.numerator / fact.quantity.denominator : undefined;
+    if (fact && portion && (portion.sourceQuantity.amount !== sourceAmount || portion.sourceQuantity.unit !== fact.quantity.unitToken)) {
+      report("invalid-number", recipe.recipeId, `${field}.ingredientFactId`, "Source fact rational quantity and unit must exactly equal the canonical portion source quantity");
+    }
+    if (portion && (binding.conversionRecordId !== portion.sourceQuantity.conversionRecordId)) {
+      report("invalid-schema", recipe.recipeId, `${field}.conversionRecordId`, "Normalization binding must identify the portion's exact conversion record");
+    }
   }
-  if (!trace.ingredientResolutionIds.length || !trace.operationRuleIds.length || !trace.targetStateRuleIds.length || !trace.mutationRuleIds.length) {
-    report("missing-reference", recipe.recipeId, "authoring.normalizationTrace", "Normalization trace must cover ingredients, operations, target states and mutations");
+
+  reportBindingCoverage("methodBindings", trace.methodBindings.map((binding) => binding.methodFactId), methodFacts.keys(), recipe, report);
+  reportBindingCoverage("methodBindings", trace.methodBindings.map((binding) => binding.nodeId), nodes.keys(), recipe, report);
+  for (const binding of trace.methodBindings) {
+    const field = `authoring.normalizationTrace.methodBindings.${binding.nodeId}`;
+    const fact = methodFacts.get(binding.methodFactId);
+    const node = nodes.get(binding.nodeId);
+    const operationRule = operationRules.get(binding.operationRuleId);
+    if (!fact || !node || !operationRule) {
+      if (!fact) report("missing-reference", recipe.recipeId, `${field}.methodFactId`, `Missing method fact ${binding.methodFactId}`);
+      if (!node) report("missing-reference", recipe.recipeId, `${field}.nodeId`, `Missing operation node ${binding.nodeId}`);
+      if (!operationRule) report("missing-reference", recipe.recipeId, `${field}.operationRuleId`, `Missing operation rule ${binding.operationRuleId}`);
+      continue;
+    }
+    if (operationRule.operationToken !== fact.operationToken || operationRule.operationId !== node.operationType) {
+      report("invalid-schema", recipe.recipeId, field, "Operation rule must exactly connect the source token to the canonical operation node");
+    }
+    if (node.sourceStepOrder !== fact.order) {
+      report("invalid-schema", recipe.recipeId, `${field}.methodFactId`, "Canonical source step order must equal the ordered method fact");
+    }
+    const expectedFactInputs = node.inputPortionIds.map((portionId) => ingredientBindingByPortion.get(portionId)?.ingredientFactId).filter((id): id is string => Boolean(id));
+    if (!sameStringSet(expectedFactInputs, fact.ingredientFactIds)) {
+      report("invalid-schema", recipe.recipeId, `${field}.methodFactId`, "Method fact ingredient inputs do not match the bound canonical node inputs");
+    }
+    const durationTargets = [
+      ...(node.activeDurationMs > 0 ? ["activeDurationMs" as const] : []),
+      ...(node.waitDurationMs > 0 ? ["waitDurationMs" as const] : []),
+    ];
+    if (!sameStringSet(binding.durationBindings.map((entry) => entry.target), durationTargets)) {
+      report("invalid-schema", recipe.recipeId, `${field}.durationBindings`, "Duration bindings must exactly cover every non-zero canonical duration field");
+    }
+    const exactDurationBindings = binding.durationBindings.filter((entry) => entry.basis === "source-exact");
+    if (fact.durationMinutes) {
+      if (exactDurationBindings.length !== 1) {
+        report("invalid-schema", recipe.recipeId, `${field}.durationBindings`, "A source duration must bind exactly one canonical duration field");
+      } else {
+        const expectedMilliseconds = fact.durationMinutes.numerator / fact.durationMinutes.denominator * 60_000;
+        if (node[exactDurationBindings[0].target] !== expectedMilliseconds) {
+          report("invalid-number", recipe.recipeId, `${field}.durationBindings`, "Source duration must equal the bound canonical duration without rounding or inference");
+        }
+      }
+    } else if (exactDurationBindings.length) {
+      report("missing-reference", recipe.recipeId, `${field}.durationBindings`, "Source-exact duration binding requires a duration source fact");
+    }
+    for (const durationBinding of binding.durationBindings) {
+      if (durationBinding.basis === "source-exact" && durationBinding.provenanceEvidenceId) {
+        report("invalid-schema", recipe.recipeId, `${field}.durationBindings`, "Source-exact duration must not claim independent calibration Evidence");
+      }
+      if (durationBinding.basis === "independently-calibrated"
+        && (!durationBinding.provenanceEvidenceId || !evidenceIds.has(durationBinding.provenanceEvidenceId))) {
+        report("missing-reference", recipe.recipeId, `${field}.durationBindings`, "Calibrated duration requires existing independent Evidence");
+      }
+    }
+    const equipmentRule = binding.equipmentRuleId ? equipmentRules.get(binding.equipmentRuleId) : undefined;
+    if (fact.equipmentToken || node.equipmentId || binding.equipmentRuleId) {
+      if (!equipmentRule || equipmentRule.equipmentToken !== fact.equipmentToken || equipmentRule.equipmentId !== node.equipmentId) {
+        report("invalid-schema", recipe.recipeId, `${field}.equipmentRuleId`, "Equipment rule must exactly connect the source token to canonical equipment");
+      }
+    }
+    const heatDescriptor = binding.heatDescriptorId ? heatDescriptors.get(binding.heatDescriptorId) : undefined;
+    if (fact.qualitativeHeatToken && (!heatDescriptor || heatDescriptor.sourceToken !== fact.qualitativeHeatToken)) {
+      report("invalid-schema", recipe.recipeId, `${field}.heatDescriptorId`, "Qualitative source heat requires an exact descriptor binding");
+    }
+    const heatControl = node.heatControl;
+    if (fact.qualitativeHeatToken) {
+      if (heatControl?.kind !== "qualitative"
+        || heatControl.sourceFactId !== fact.factId
+        || heatControl.descriptorId !== binding.heatDescriptorId
+        || node.parameters.temperatureC !== undefined
+        || node.parameters.heatLevel !== undefined
+        || recipe.simulationProfile !== "requires-cat-kitchen-v2") {
+        report("invalid-schema", recipe.recipeId, `${field}.heatDescriptorId`, "Qualitative historical heat must remain qualitative, source-bound and engine-v2-only");
+      }
+    } else if (fact.temperatureC !== undefined) {
+      if (heatControl?.kind !== "exact-temperature"
+        || heatControl.sourceFactId !== fact.factId
+        || heatControl.temperatureC !== fact.temperatureC
+        || node.parameters.temperatureC !== fact.temperatureC) {
+        report("invalid-schema", recipe.recipeId, `${field}.heatDescriptorId`, "Exact source temperature must equal the canonical temperature and source-bound heat control");
+      }
+    } else if (node.parameters.temperatureC !== undefined || node.parameters.heatLevel !== undefined) {
+      const parameter = node.parameters.temperatureC !== undefined ? "temperatureC" : "heatLevel";
+      if (heatControl?.kind !== "independently-calibrated"
+        || heatControl.sourceFactId !== fact.factId
+        || heatControl.parameter !== parameter
+        || heatControl.value !== node.parameters[parameter]
+        || !evidenceIds.has(heatControl.calibrationEvidenceId)) {
+        report("missing-reference", recipe.recipeId, `${field}.heatDescriptorId`, "Numeric heat not present in the source requires a matching independent calibration Evidence record");
+      }
+    } else if (heatControl) {
+      report("invalid-schema", recipe.recipeId, `${field}.heatDescriptorId`, "Heat control cannot be declared without a source heat fact or numeric canonical heat parameter");
+    }
+    const boundTargetRules = binding.targetStateRuleIds.map((id) => targetRules.get(id));
+    if (boundTargetRules.some((rule) => !rule) || boundTargetRules.length !== node.targetStates.length) {
+      report("missing-reference", recipe.recipeId, `${field}.targetStateRuleIds`, "Every canonical target state requires one current target rule");
+    } else {
+      for (const target of node.targetStates) {
+        if (!boundTargetRules.some((rule) => rule?.operationId === node.operationType
+          && rule.dimension === target.dimension
+          && rule.minimum === target.minimum
+          && rule.maximum === target.maximum)) {
+          report("invalid-schema", recipe.recipeId, `${field}.targetStateRuleIds`, "Target rule output does not equal the canonical target state");
+        }
+      }
+    }
   }
+
+  reportBindingCoverage("scenarioBindings", trace.scenarioBindings.map((binding) => binding.scenarioId), scenarios.keys(), recipe, report);
+  const allFactIds = new Set([...ingredientFacts.keys(), ...methodFacts.keys()]);
+  for (const binding of trace.scenarioBindings) {
+    const field = `authoring.normalizationTrace.scenarioBindings.${binding.scenarioId}`;
+    const scenario = scenarios.get(binding.scenarioId);
+    const rule = mutationRules.get(binding.mutationRuleId);
+    if (!scenario || !rule) {
+      if (!scenario) report("missing-reference", recipe.recipeId, `${field}.scenarioId`, `Missing scenario ${binding.scenarioId}`);
+      if (!rule) report("missing-reference", recipe.recipeId, `${field}.mutationRuleId`, `Missing mutation rule ${binding.mutationRuleId}`);
+      continue;
+    }
+    const targetNode = scenario.mutation.targetNodeId ? nodes.get(scenario.mutation.targetNodeId) : undefined;
+    if (targetNode && rule.operationId !== targetNode.operationType) {
+      report("invalid-schema", recipe.recipeId, field, "Mutation rule operation does not match the canonical target node");
+    }
+    const expectedDeltas = scenario.expectedDeltas.map((delta) => `${delta.dimension}:${delta.direction}`);
+    const ruleDeltas = rule.expectedDeltas.map((delta) => `${delta.dimension}:${delta.direction}`);
+    if (rule.mutationType !== scenario.mutation.type
+      || !sameStringSet(ruleDeltas, expectedDeltas)
+      || !sameStringSet(rule.expectedFaultCodes, scenario.expectedFaultCodes)
+      || !sameStringSet(rule.causeCodes, scenario.causeCodes)
+      || rule.recoverability !== scenario.recoverability
+      || rule.nutritionEffect !== scenario.nutritionEffect
+      || rule.applicableEngine !== scenario.applicableEngine) {
+      report("invalid-schema", recipe.recipeId, field, "Mutation rule output does not exactly equal the canonical scenario result");
+    }
+    const requiredApplicabilityFacts = [
+      ...(scenario.mutation.targetNodeId ? [methodBindingByNode.get(scenario.mutation.targetNodeId)?.methodFactId] : []),
+      ...(scenario.mutation.destinationBeforeNodeId ? [methodBindingByNode.get(scenario.mutation.destinationBeforeNodeId)?.methodFactId] : []),
+      ...(scenario.mutation.targetPortionId ? [ingredientBindingByPortion.get(scenario.mutation.targetPortionId)?.ingredientFactId] : []),
+    ].filter((id): id is string => Boolean(id));
+    if (!binding.applicabilityFactIds.length
+      || binding.applicabilityFactIds.some((id) => !allFactIds.has(id))
+      || requiredApplicabilityFacts.some((id) => !binding.applicabilityFactIds.includes(id))) {
+      report("missing-reference", recipe.recipeId, `${field}.applicabilityFactIds`, "Scenario requires existing source facts that establish rule applicability");
+    }
+    for (const evidenceId of rule.provenanceEvidenceIds) if (!evidenceIds.has(evidenceId)) {
+      report("missing-reference", recipe.recipeId, `${field}.mutationRuleId`, `Mutation rule provenance Evidence ${evidenceId} is missing`);
+    }
+  }
+  for (const binding of trace.methodBindings) for (const ruleId of binding.targetStateRuleIds) {
+    const rule = targetRules.get(ruleId);
+    if (rule) for (const evidenceId of rule.provenanceEvidenceIds) if (!evidenceIds.has(evidenceId)) {
+      report("missing-reference", recipe.recipeId, `authoring.normalizationTrace.methodBindings.${binding.nodeId}.targetStateRuleIds`, `Target rule provenance Evidence ${evidenceId} is missing`);
+    }
+  }
+  validateSourceFactRightsJoin(recipe, bundle, context, report);
+}
+
+function reportBindingCoverage(
+  field: string,
+  actualIds: readonly string[],
+  expectedIds: Iterable<string>,
+  recipe: GameRecipeV1,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+): void {
+  const expected = [...expectedIds];
+  if (new Set(actualIds).size !== actualIds.length || !sameStringSet(actualIds, expected)) {
+    report("invalid-schema", recipe.recipeId, `authoring.normalizationTrace.${field}`, "Normalization bindings must cover every source and canonical target exactly once");
+  }
+}
+
+function validateSourceFactRightsJoin(
+  recipe: GameRecipeV1,
+  bundle: GameSourceFactBundleV1,
+  context: GameRecipeValidationContext,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+): void {
+  const rights = context.rightsRegistry;
+  if (!rights) return;
+  const locRegistry = context.locSourceRegistry;
+  if (!locRegistry) {
+    report("missing-reference", recipe.recipeId, "authoring.normalizationTrace.sourceRegistryVersion", "Source-normalized export requires the committed LOC source registry");
+    return;
+  }
+  const locDocumentById = new Map(locRegistry.documents.map((document) => [document.documentId, document]));
+  const sourceById = new Map(rights.sources.map((source) => [source.id, source]));
+  const roles = rights.sourceRoles.filter((role) => role.recipeId === recipe.recipeId && recipe.rights.sourceIds.includes(role.sourceId));
+  const locators = [bundle.primarySource, ...bundle.crossCheckSources];
+  for (const [index, locator] of locators.entries()) {
+    const requiredRole = index === 0 ? "recipe-primary" : "recipe-cross-check";
+    const matchingRoles = roles.filter((role) => role.role === requiredRole && role.workFamilyId === locator.workFamilyId);
+    const matchingRole = matchingRoles.length === 1 ? matchingRoles[0] : undefined;
+    const source = matchingRole ? sourceById.get(matchingRole.sourceId) : undefined;
+    const hasItemUrl = source?.locators.some((entry) => entry.kind === "url" && entry.url === locator.itemUrl);
+    const document = locDocumentById.get(locator.sourceDocumentId);
+    const exactRegistryMatch = document
+      && document.workFamilyId === locator.workFamilyId
+      && document.itemUrl === locator.itemUrl
+      && document.ocr.sha256 === locator.derivativeSha256;
+    if (!matchingRole || !source || !hasItemUrl || !exactRegistryMatch) {
+      report("missing-reference", recipe.recipeId, "authoring.normalizationTrace.sourceFactBundleId", `Source fact ${requiredRole} must join the recipe rights source, work family and exact LOC item URL`);
+    }
+  }
+}
+
+function sameStringSet(left: readonly string[], right: readonly string[]): boolean {
+  if (left.length !== right.length) return false;
+  if (new Set(left).size !== left.length) return false;
+  const rightValues = new Set(right);
+  return rightValues.size === right.length && left.every((value) => rightValues.has(value));
 }
 
 function validateOperationContract(
@@ -543,7 +811,8 @@ function validateOperationContract(
   );
   check(
     "parameters",
-    definition.requiredParameterGroups.every((group) => group.some((key) => node.parameters[key] !== undefined)),
+    definition.requiredParameterGroups.every((group) => group.some((key) => node.parameters[key] !== undefined)
+      || (node.heatControl?.kind === "qualitative" && group.every((key) => key === "heatLevel" || key === "temperatureC"))),
     "Operation is missing a required parameter group",
   );
   const durationValid = definition.durationRequirement === "none"
@@ -1198,8 +1467,14 @@ export function deriveGameEquivalenceClassKeys(
     && [...ingredientIds].some((id) => /milk|yogurt/.test(id));
   const highWaterFruit = [...ingredientIds].some((id) => /watermelon|strawberry|orange/.test(id));
   const trace = recipe.authoring.normalizationTrace;
+  const classification = registry.governance.riskClassifications.find((entry) => entry.itemId === recipe.recipeId);
+  const workFamilies = registry.sourceRoles
+    .filter((entry) => entry.recipeId === recipe.recipeId && entry.workFamilyId)
+    .map((entry) => entry.workFamilyId!);
   return [...new Set([
     `content-type:${recipe.itemType}`,
+    `risk-level:${recipe.governance.riskLevel}`,
+    ...(classification?.reasonCodes ?? []).map((reason) => `risk-reason:${reason}`),
     `authoring:${recipe.authoring.method}:${recipe.authoring.generatorVersion}`,
     `ingredient-state-set:${[...new Set(ingredientStates)].sort().join("+")}`,
     `acid-dairy:${acidAndDairy ? "present" : "absent"}`,
@@ -1211,14 +1486,17 @@ export function deriveGameEquivalenceClassKeys(
     ...mutationTypes.map((mutation) => `mutation:${mutation}`),
     ...(trace ? [
       `normalization-policy:${trace.normalizationPolicyVersion}`,
-      ...trace.ingredientResolutionIds.map((id) => `ingredient-resolution:${id}`),
-      ...trace.operationRuleIds.map((id) => `operation-rule:${id}`),
-      ...trace.equipmentRuleIds.map((id) => `equipment-rule:${id}`),
-      ...trace.heatDescriptorIds.map((id) => `heat-descriptor:${id}`),
-      ...trace.targetStateRuleIds.map((id) => `target-state-rule:${id}`),
-      ...trace.mutationRuleIds.map((id) => `mutation-rule:${id}`),
+      `source-cache:${trace.sourceCacheVersion}`,
+      `source-compiler:${trace.sourceCompilerVersion}`,
+      ...trace.ingredientBindings.map((binding) => `ingredient-resolution:${binding.resolutionId}`),
+      ...trace.methodBindings.map((binding) => `operation-rule:${binding.operationRuleId}`),
+      ...trace.methodBindings.flatMap((binding) => binding.equipmentRuleId ? [`equipment-rule:${binding.equipmentRuleId}`] : []),
+      ...trace.methodBindings.flatMap((binding) => binding.heatDescriptorId ? [`heat-descriptor:${binding.heatDescriptorId}`] : []),
+      ...trace.methodBindings.flatMap((binding) => binding.targetStateRuleIds.map((id) => `target-state-rule:${id}`)),
+      ...trace.scenarioBindings.map((binding) => `mutation-rule:${binding.mutationRuleId}`),
     ] : ["normalization-trace:not-applicable"]),
     ...sources.map((source) => `source-institution:${source.publisherOrInstitution.trim().toLowerCase()}`),
+    ...workFamilies.map((family) => `source-work-family:${family}`),
     ...sources.map((source) => `source-rights:${source.rights.status}:${"licenseId" in source.rights ? source.rights.licenseId : "reference-only"}`),
     ...domains.map((domain) => `source-domain:${domain}`),
   ])].sort();
@@ -1358,7 +1636,11 @@ function validateSamplingHistory(
   const relevantKeys = new Set(registry.governance.riskClassifications.find((entry) => entry.itemId === recipe.recipeId)?.equivalenceClassKeys ?? []);
   const states = new Map<string, { frozen: boolean; cleanFullReviews: number }>();
   const observedNoveltyKeys = new Set<string>();
-  const noveltyPrefixes = ["source-domain:", "source-institution:", "source-rights:", "nutrition:", "authoring:"];
+  const noveltyPrefixes = [
+    "source-domain:", "source-institution:", "source-rights:", "source-work-family:", "source-cache:", "source-compiler:",
+    "nutrition:", "authoring:", "normalization-policy:", "ingredient-resolution:", "operation-rule:", "equipment-rule:",
+    "heat-descriptor:", "target-state-rule:", "mutation-rule:", "risk-level:", "risk-reason:",
+  ];
   const auditorRuns = new Set<string>();
   const auditorContexts = new Set<string>();
   const evidenceReferences = new Set<string>();

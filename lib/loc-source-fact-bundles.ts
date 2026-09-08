@@ -12,11 +12,16 @@ import type {
   LocCrossCheckV1,
   LocRecipeCandidateV1,
   LocSourceLocatorV1,
+  LocSourceRegistryV1,
 } from "@/types/loc-recipe-source";
+import { createLocSourceRegistrySliceVersion } from "./loc-source-registry-version";
 
 export const locSourceFactCompilerVersion = "m13-loc-source-facts-v1" as const;
 
-export function createLocSourceFactBundle(candidate: LocRecipeCandidateV1): GameSourceFactBundleV1 {
+export function createLocSourceFactBundle(
+  candidate: LocRecipeCandidateV1,
+  input: { sourceRegistry: LocSourceRegistryV1; sourceCacheVersion: string; compilerVersion?: string },
+): GameSourceFactBundleV1 {
   const ingredientFacts = candidate.extractedFacts.ingredients.map((fact, index) => {
     const locator = toFactLocator(candidate.primarySource, fact.line, fact.line);
     const quantity: RationalQuantityV1 = {
@@ -73,6 +78,7 @@ export function createLocSourceFactBundle(candidate: LocRecipeCandidateV1): Game
         operationToken: value.operationToken,
         ingredientFactIds: value.ingredientFactIds,
         durationMinutes: value.durationMinutes ?? null,
+        temperatureC: null,
         qualitativeHeatToken: value.qualitativeHeatToken ?? null,
         equipmentToken: value.equipmentToken ?? null,
         sourceLineSha256: value.sourceLineSha256,
@@ -84,10 +90,25 @@ export function createLocSourceFactBundle(candidate: LocRecipeCandidateV1): Game
     schemaVersion: gameSourceFactBundleSchemaVersion,
     bundleId: `source-facts-${candidate.candidateId}`,
     bundleVersion: "",
+    sourceRegistryVersion: createLocSourceRegistrySliceVersion(input.sourceRegistry, [
+      candidate.primarySource.documentId,
+      ...candidate.crossChecks.map((source) => source.documentId),
+    ]),
+    sourceCacheVersion: input.sourceCacheVersion,
+    compilerVersion: input.compilerVersion ?? locSourceFactCompilerVersion,
     candidateId: candidate.candidateId,
     title: candidate.title,
     primarySource: toFactLocator(candidate.primarySource),
     crossCheckSources: candidate.crossChecks.map((source) => toFactLocator(source)),
+    crossCheckAssertions: candidate.crossChecks.map((source) => ({
+      sourceDocumentId: source.documentId,
+      pageId: source.pageId,
+      startLine: source.startLine,
+      endLine: source.endLine,
+      matchBasis: source.matchBasis,
+      sharedIngredientTerms: source.sharedIngredientTerms,
+      sharedOperationTerms: source.sharedOperationTerms,
+    })),
     ingredientFacts,
     methodFacts,
     riskFlags: [

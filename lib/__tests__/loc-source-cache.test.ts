@@ -52,6 +52,7 @@ describe("LOC source cache", () => {
 
     expect(Object.keys(loaded.ocrFilesByDocumentId).sort()).toEqual(["loc-book-a", "loc-book-b"]);
     expect(candidates.candidateCount).toBe(1);
+    expect(candidates.normalizationEligibleCount).toBe(1);
     expect(candidates.candidates[0].normalizedTitle).toBe("apple pie");
   });
 

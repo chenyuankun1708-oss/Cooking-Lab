@@ -26,6 +26,7 @@ process.stdout.write([
   "# LOC recipe candidate ingestion",
   `Source documents: ${batch.sourceDocumentCount}`,
   `Cross-checked draft candidates: ${batch.candidateCount}`,
+  `Extraction-usable candidates: ${batch.normalizationEligibleCount}`,
   `High-risk blocks filtered: ${batch.rejectedHighRisk.length}`,
   `Output: ${outputPath}`,
   "All candidates remain draft-research-only and are not export eligible.",

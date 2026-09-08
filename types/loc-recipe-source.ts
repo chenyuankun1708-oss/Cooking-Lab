@@ -32,6 +32,7 @@ export interface LocSourceRegistryV1 {
 
 export type LocCandidateBlocker =
   | "candidate-only-not-canonical"
+  | "source-extraction-resolution-required"
   | "ingredient-normalization-required"
   | "operation-graph-required"
   | "nutrition-provenance-required"
@@ -46,6 +47,12 @@ export type LocHighRiskReason =
   | "medical-or-health-claim"
   | "raw-animal-product"
   | "wild-game";
+
+export type LocExtractionQualityFlag =
+  | "ambiguous-ingredient-phrase"
+  | "duplicate-ingredient-fact"
+  | "implausible-source-quantity"
+  | "conflicting-source-duration";
 
 export interface LocSourceLocatorV1 {
   documentId: string;
@@ -94,6 +101,10 @@ export interface LocRecipeCandidateV1 {
     operationTerms: string[];
     durations: LocDurationFactV1[];
   };
+  extractionQuality: {
+    status: "usable" | "needs-resolution";
+    flags: LocExtractionQualityFlag[];
+  };
   blockers: LocCandidateBlocker[];
 }
 
@@ -110,6 +121,7 @@ export interface LocCandidateBatchV1 {
   sourceRegistrySchemaVersion: typeof locSourceRegistrySchemaVersion;
   sourceDocumentCount: number;
   candidateCount: number;
+  normalizationEligibleCount: number;
   candidates: LocRecipeCandidateV1[];
   rejectedHighRisk: LocRejectedBlockV1[];
 }

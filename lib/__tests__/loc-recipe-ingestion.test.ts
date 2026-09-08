@@ -66,17 +66,19 @@ describe("LOC candidate ingestion", () => {
     const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
 
     expect(result.candidateCount).toBe(1);
+    expect(result.normalizationEligibleCount).toBe(1);
     expect(result.candidates[0]).toMatchObject({
       normalizedTitle: "apple pie",
       status: "draft-research-only",
       exportEligible: false,
+      extractionQuality: { status: "usable", flags: [] },
       primarySource: { pageId: "12", segmentId: expect.stringMatching(/^page-12-lines-/) },
     });
     expect(result.candidates[0].crossChecks).toEqual([
       expect.objectContaining({ documentId: "loc-book-b", pageId: "3", workFamilyId: "work-b" }),
     ]);
     expect(result.candidates[0].extractedFacts.ingredients).toEqual(expect.arrayContaining([
-      expect.objectContaining({ ingredient: "flour", pageId: "12", quantity: 1, unit: "cup" }),
+      expect.objectContaining({ ingredient: "flour", pageId: "12", quantity: 1.25, unit: "cup" }),
       expect.objectContaining({ ingredient: "apples", pageId: "12", quantity: 2, unit: "cup" }),
     ]));
     expect(result.candidates[0].extractedFacts.durations).toEqual([
@@ -94,6 +96,26 @@ describe("LOC candidate ingestion", () => {
       expect.objectContaining({ normalizedTitle: "wine sauce", reasonCodes: expect.arrayContaining(["alcohol"]) }),
     ]));
     expect(result.candidates.some((candidate) => candidate.normalizedTitle === "wine sauce")).toBe(false);
+  });
+
+  it("keeps ambiguous OCR visible but blocks it from deterministic normalization", () => {
+    const { directory, registry } = createFixture();
+    const bookAPath = resolve(directory, "book-a.text.json");
+    const ambiguous = JSON.stringify({
+      "12": { fulltext: "APPLE PIE.\n14 cups flour\n2 cups of\nMix ingredients and bake 40 minutes." },
+    });
+    writeFileSync(bookAPath, ambiguous);
+    registry.documents[0].ocr.sha256 = sha256(ambiguous);
+
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+    expect(result.normalizationEligibleCount).toBe(0);
+    expect(result.candidates[0]).toMatchObject({
+      extractionQuality: {
+        status: "needs-resolution",
+        flags: expect.arrayContaining(["ambiguous-ingredient-phrase", "implausible-source-quantity"]),
+      },
+      blockers: expect.arrayContaining(["source-extraction-resolution-required"]),
+    });
   });
 
   it("requires matching recipes to come from independent work families", () => {
@@ -139,7 +161,7 @@ function createFixture(options: { includeIndependentMatch?: boolean } = {}) {
     "12": {
       fulltext: [
         "APPLE PIE.",
-        "1 cup flour",
+        "1¼ cups flour",
         "2 cups apples",
         "Mix ingredients and bake 40 minutes.",
         "",

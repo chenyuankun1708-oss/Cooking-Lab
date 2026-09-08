@@ -8,6 +8,7 @@ import {
   type LocCandidateBatchV1,
   type LocCrossCheckV1,
   type LocDurationFactV1,
+  type LocExtractionQualityFlag,
   type LocHighRiskReason,
   type LocIngredientFactV1,
   type LocRecipeCandidateV1,
@@ -200,6 +201,7 @@ export function ingestLocRecipeSources(
     sourceRegistrySchemaVersion: locSourceRegistrySchemaVersion,
     sourceDocumentCount: registry.documents.length,
     candidateCount: candidates.length,
+    normalizationEligibleCount: candidates.filter((candidate) => candidate.extractionQuality.status === "usable").length,
     candidates,
     rejectedHighRisk,
   };
@@ -376,6 +378,7 @@ function extractDurationFacts(lines: string[], pageId: string, firstLine: number
 
 function toCandidate(primary: RecipeBlock, normalizedTitle: string, crossChecks: RecipeBlock[]): LocRecipeCandidateV1 {
   const identity = `${primary.document.documentId}:${primary.pageId}:${primary.startLine}:${normalizedTitle}`;
+  const qualityFlags = assessExtractionQuality(primary);
   return {
     candidateId: `loc-candidate-${createHash("sha256").update(identity).digest("hex").slice(0, 20)}`,
     title: primary.title,
@@ -389,8 +392,49 @@ function toCandidate(primary: RecipeBlock, normalizedTitle: string, crossChecks:
       operationTerms: primary.operationTerms,
       durations: primary.durations,
     },
-    blockers: [...candidateBlockers],
+    extractionQuality: {
+      status: qualityFlags.length ? "needs-resolution" : "usable",
+      flags: qualityFlags,
+    },
+    blockers: [
+      ...(qualityFlags.length ? ["source-extraction-resolution-required" as const] : []),
+      ...candidateBlockers,
+    ],
   };
+}
+
+function assessExtractionQuality(block: RecipeBlock): LocExtractionQualityFlag[] {
+  const flags = new Set<LocExtractionQualityFlag>();
+  const factKeys = new Set<string>();
+  const maximumByUnit: Readonly<Record<string, number>> = {
+    cup: 8, tbsp: 32, tsp: 48, lb: 15, oz: 64, pint: 8, quart: 4, gallon: 1,
+    g: 5_000, kg: 5, ml: 5_000, l: 5,
+  };
+  for (const fact of block.ingredients) {
+    const phrase = fact.ingredient.trim();
+    if (phrase.length < 2
+      || /^(?:c|cold|dtsp|of|tsp|tbsp)$/i.test(phrase)
+      || /[+|_{}]/.test(phrase)
+      || /\b(?:bake|boil|cook|hours?|minutes?|steam|stir)\b/i.test(phrase)) {
+      flags.add("ambiguous-ingredient-phrase");
+    }
+    const maximum = maximumByUnit[fact.unit];
+    if (maximum === undefined || fact.quantity > maximum) flags.add("implausible-source-quantity");
+    const key = `${fact.pageId}:${fact.line}:${fact.quantity}:${fact.unit}:${phrase}`;
+    if (factKeys.has(key)) flags.add("duplicate-ingredient-fact");
+    factKeys.add(key);
+  }
+  const durationsByLine = new Map<string, number[]>();
+  for (const duration of block.durations) {
+    const key = `${duration.pageId}:${duration.line}`;
+    const values = durationsByLine.get(key) ?? [];
+    values.push(duration.minutes);
+    durationsByLine.set(key, values);
+  }
+  if ([...durationsByLine.values()].some((values) => new Set(values).size > 1)) {
+    flags.add("conflicting-source-duration");
+  }
+  return [...flags].sort();
 }
 
 function toCrossCheck(primary: RecipeBlock, crossCheck: RecipeBlock): LocCrossCheckV1 {
@@ -492,7 +536,17 @@ function compareRejectedBlocks(left: LocRejectedBlockV1, right: LocRejectedBlock
 }
 
 function normalizeOcr(input: string): string {
-  return input.normalize("NFKC").replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+  const fractions: Readonly<Record<string, string>> = {
+    "¼": "1/4", "½": "1/2", "¾": "3/4", "⅓": "1/3", "⅔": "2/3",
+    "⅛": "1/8", "⅜": "3/8", "⅝": "5/8", "⅞": "7/8",
+  };
+  return input
+    .replace(/(\d)([¼½¾⅓⅔⅛⅜⅝⅞])/g, (_match, whole: string, fraction: string) => `${whole} ${fractions[fraction]}`)
+    .replace(/[¼½¾⅓⅔⅛⅜⅝⅞]/g, (fraction) => fractions[fraction])
+    .normalize("NFKC")
+    .replaceAll("⁄", "/")
+    .replaceAll("\r\n", "\n")
+    .replaceAll("\r", "\n");
 }
 
 function cleanHeading(value: string): string {

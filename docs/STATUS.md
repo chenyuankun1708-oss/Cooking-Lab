@@ -4,7 +4,7 @@
 
 ## M12–M13 当前状态
 
-- M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器正在 `feature/m12-game-recipe-data` 实施。
+- M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器已在 `aa5e9c2` 完成并通过独立审查；G001 已收口，M13 正在执行。
 - 当前 Web 的 50 项已迁移为独立 `GameRecipeV1` draft；它们保留原有演示营养并明确不能直接获得 `game-commercial-ready` 资格。
 - 已从 USDA FoodData Central 的 Foundation Foods 2026-04 与 SR Legacy 2018-04 官方归档建立 81 条 record-level CC0 子集；每个上游 ZIP 的 SHA-256 进入数据合同，缺失核心营养素会 fail closed，完整上游数据库不进入 repo，build 不访问网络。
 - canonical source 当前只包含 50 条 Web 迁移 draft；510 条公式组合已从逐料理 source 中移除，只保留为测试 fixture 生成器，不能代表真实料理或商业可发行内容。
@@ -12,6 +12,8 @@
 - Web 仍恰好公开中英文各 50 项；游戏数据没有进入页面查询、搜索、推荐、sitemap 或客户端 bundle。
 - 首轮独立内容审查已冻结全部公式 family：通用来源不能证明具体配方、部分参数与 mutation 因果缺少逐项依据。M13 将改用逐项明确 Public Domain 的 Library of Congress 原始料理事实，并要求独立料理交叉核对；在真实来源、当前 fingerprint attestations 和 sampling QA 完成前 exportable 数量保持 0。
 - M12 validator 与导出层已针对首轮独立审查完成 fail-closed hardening：精确 runtime schema、操作输入/输出/设备/参数/目标合同、actor/run/context 独立、LOW 单一 reviewer 全维度覆盖、真实 sampling digest、风险下限、USDA exact join、权利依据与实际 material source coverage、完整 content-addressing、安全 staging，以及 Godot JSON ↔ SQLite parity。
+- 量化单位现在通过版本化 conversion record 做 ID、单位、食材作用域和因子的精确 join；Godot JSON 与 SQLite `unit_conversions` 同源。错误设备 mutation 只能引用操作目录中存在但与目标操作不兼容的设备。
+- M13 已接入 14 个逐项核验的 LOC 公有领域文献及内容寻址本地缓存。当前严格筛选得到 51 个跨独立作品族核对的研究候选、过滤 135 个高风险块；全部仍为 `draft-research-only`，不是 canonical 或 commercial-ready。下一步是扩展独立文献覆盖并进行逐料理规范化。
 
 ## 当前阶段
 

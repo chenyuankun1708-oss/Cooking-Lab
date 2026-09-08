@@ -4,6 +4,7 @@
 
 ## M12–M13 当前状态
 
+- 2026-09-08 Product Director 要求暂停继续增加菜谱，先人工审核当前网页效果。M13 当前分支只保存已完成的来源发现、source-fact 与 fail-closed 门禁工作；不继续 canonical compilation、120/250/500 批次或 Production 发布，Web 继续保持现有 50 项。
 - M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器已在 `aa5e9c2` 完成并通过独立审查；G001 已收口，M13 正在执行。
 - 当前 Web 的 50 项已迁移为独立 `GameRecipeV1` draft；它们保留原有演示营养并明确不能直接获得 `game-commercial-ready` 资格。
 - 已从 USDA FoodData Central 的 Foundation Foods 2026-04 与 SR Legacy 2018-04 官方归档建立 81 条 record-level CC0 子集；每个上游 ZIP 的 SHA-256 进入数据合同，缺失核心营养素会 fail closed，完整上游数据库不进入 repo，build 不访问网络。
@@ -15,7 +16,8 @@
 - 量化单位现在通过版本化 conversion record 做 ID、单位、食材作用域和因子的精确 join；Godot JSON 与 SQLite `unit_conversions` 同源。错误设备 mutation 只能引用操作目录中存在但与目标操作不兼容的设备。
 - M13 已将逐项核验的 LOC 公有领域文献扩至 152 本（152 个唯一 item、152 个唯一 derivative、144 个保守作品族），内容寻址缓存保持在 `.local/`。修复保存/腌制词形、历史品牌、合并数量、状态残片与 OCR 断词漏检并禁止 fuzzy title match 获得规范化资格后，当前 importer 产生 1,793 个 cross-checked discovery draft、98 个严格 extraction-usable 候选并过滤 2,270 个高风险块；全部仍不是 canonical 或 commercial-ready。
 - 已新增 `SourceFactBundleV1`、有理数量、逐行 SHA、原文位置顺序 method facts、版本化 normalization registry/trace 合同和 fail-closed validator。`game-data:loc-source-facts` 可从已核验缓存确定性生成 98 个本地 draft source-fact bundle；连续重建的 source-fact manifest SHA-256 为 `933fd731b86e7822b5f42e9f72527766aafde367f06ba84d7870f30b0755230a`，绑定的 LOC cache manifest SHA-256 为 `e906ead5cfc54a6725b1f078c4f85a22fdf7f9201bb0c76ed3c80cdaa5c0d250`。
-- `GameRecipeV1` 的 source-normalized export 现在必须逐字段绑定当前 LOC registry、精确 cache manifest、source-fact bundle、历史单位换算、操作/设备/时长/火力、全部非热参数、目标状态、作用域正确的 Evidence 及完整 mutation selector/output。Cross-check shared terms 必须由带行 hash 的结构化事实重算；历史定性火力保持定性并强制 engine-v2，数值推断必须有独立 Evidence。所有支撑输入进入 artifact-set fingerprint 与 sampling novelty。下一步是完成新的独立复核；通过后再建立实际 ingredient/operation/equipment/heat/target/mutation registries，将严格候选编译为 canonical draft。
+- `GameRecipeV1` 的 source-normalized export 现在必须逐字段绑定当前 LOC registry、精确 cache manifest、source-fact bundle、历史单位换算、操作/设备/时长/火力、全部非热参数、目标状态、作用域正确的 Evidence 及完整 mutation selector/output。Cross-check shared terms 必须由带行 hash 的结构化事实重算；历史定性火力保持定性并强制 engine-v2，数值推断必须有独立 Evidence。所有支撑输入进入 artifact-set fingerprint 与 sampling novelty。
+- 对 `fe13d51` 的新一轮独立架构复核仍为 `BLOCK`：cross-check facts 尚未从 canonical audit 可读取的真实 OCR 内容重新验证；independently calibrated heat 仍需禁止第二个未证明热参数；direct build API 还应 runtime-parse cache manifest。独立 code-reviewer 重跑因本地 NewAPI quota 403 未完成，不能记为 PASS。以上缺口只阻止 future canonical compilation；当前 50 个 Web 条目与 0 个 exportable 游戏条目的 fail-closed 状态保持正确。后续恢复 M13 时从这些 finding 继续，不重新解释或绕过。
 
 ## 当前阶段
 

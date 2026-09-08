@@ -11,6 +11,7 @@ import {
   type LocExtractionQualityFlag,
   type LocHighRiskReason,
   type LocIngredientFactV1,
+  type LocMethodFactV1,
   type LocRecipeCandidateV1,
   type LocRejectedBlockV1,
   type LocSourceDocumentV1,
@@ -84,7 +85,7 @@ const highRiskPatterns: ReadonlyArray<[LocHighRiskReason, RegExp]> = [
   ["alcohol", /\b(?:ale|beer|brandy|champagne|cocktail|gin|liqueur|rum|sherry|whisky|whiskey|wine)\b/i],
   ["brand-or-restaurant", /\b(?:brand(?:ed)?|restaurant|hotel|café|cafe|company|proprietary)\b/i],
   ["dangerous-process", /\b(?:lye|pressure[- ]?can|water[- ]?bath can|botulism)\b/i],
-  ["fermentation-or-preservation", /\b(?:bottle|canning|cure|ferment|pickle|preserv(?:e|ing)|salt[- ]?cure)\b/i],
+  ["fermentation-or-preservation", /\b(?:bottl(?:e|ed|es|ing)|cann(?:ed|ing)|cur(?:e|ed|es|ing)|ferment(?:ed|ing|ation)?|pickl(?:e|ed|es|ing)|preserv(?:e|ed|es|ing|ation)|salt[- ]?cur(?:e|ed|ing))\b/i],
   ["medical-or-health-claim", /\b(?:convalescent|cure for|dyspepsia|fever|invalid|medicinal|remedy|sickroom)\b/i],
   ["raw-animal-product", /\b(?:raw (?:beef|egg|fish|meat|pork|poultry)|uncooked (?:egg|fish|meat))\b/i],
   ["wild-game", /\b(?:bear|deer|game bird|opossum|partridge|pigeon|rabbit|squirrel|venison|wild duck)\b/i],
@@ -101,6 +102,7 @@ type RecipeBlock = {
   ingredients: LocIngredientFactV1[];
   operationTerms: string[];
   durations: LocDurationFactV1[];
+  methodFacts: LocMethodFactV1[];
   riskReasons: LocHighRiskReason[];
 };
 
@@ -312,6 +314,7 @@ function extractRecipeBlocks(document: LocSourceDocumentV1, pageId: string, inpu
     const normalizedTitle = normalizeRecipeTitle(heading.line);
     if (!normalizedTitle || normalizedTitle.length < 3) continue;
     const sourceText = `${heading.line}\n${body}`;
+    const methodFacts = extractMethodFacts(bodyLines, pageId, heading.index + 2);
     blocks.push({
       document,
       pageId,
@@ -321,8 +324,9 @@ function extractRecipeBlocks(document: LocSourceDocumentV1, pageId: string, inpu
       endLine: endExclusive,
       body,
       ingredients: extractIngredientFacts(bodyLines, pageId, heading.index + 2),
-      operationTerms: operationPatterns.filter(([, pattern]) => pattern.test(sourceText)).map(([operation]) => operation),
+      operationTerms: [...new Set(methodFacts.map((fact) => fact.operation))],
       durations: extractDurationFacts(bodyLines, pageId, heading.index + 2),
+      methodFacts,
       riskReasons: highRiskPatterns.filter(([, pattern]) => pattern.test(sourceText)).map(([reason]) => reason),
     });
   }
@@ -351,9 +355,19 @@ function extractIngredientFacts(lines: string[], pageId: string, firstLine: numb
       const subjectStart = (match.index ?? 0) + match[0].length;
       const subjectEnd = matches[matchIndex + 1]?.index ?? line.length;
       const ingredient = normalizeIngredientPhrase(line.slice(subjectStart, subjectEnd));
-      const quantity = parseAmount(match[1]);
-      if (!ingredient || quantity === null || quantity <= 0) return;
-      facts.push({ quantity, unit: normalizeUnit(match[2]), ingredient, pageId, line: firstLine + index });
+      const quantity = parseRationalAmount(match[1]);
+      if (!ingredient || quantity === null || quantity.value <= 0) return;
+      facts.push({
+        quantity: quantity.value,
+        quantityNumerator: quantity.numerator,
+        quantityDenominator: quantity.denominator,
+        rawQuantityToken: quantity.rawToken,
+        unit: normalizeUnit(match[2]),
+        ingredient,
+        pageId,
+        line: firstLine + index,
+        lineSha256: createHash("sha256").update(line.trim()).digest("hex"),
+      });
     });
   });
   return facts;
@@ -364,21 +378,65 @@ function extractDurationFacts(lines: string[], pageId: string, firstLine: number
   lines.forEach((line, index) => {
     durationPattern.lastIndex = 0;
     for (const match of line.matchAll(durationPattern)) {
-      const amount = parseAmount(match[1]);
-      if (amount === null || amount <= 0) continue;
-      durations.push({ minutes: /hour|hr/i.test(match[2]) ? amount * 60 : amount, pageId, line: firstLine + index });
+      const amount = parseRationalAmount(match[1]);
+      if (amount === null || amount.value <= 0) continue;
+      const multiplier = /hour|hr/i.test(match[2]) ? 60 : 1;
+      durations.push({
+        minutes: amount.value * multiplier,
+        numerator: amount.numerator * multiplier,
+        denominator: amount.denominator,
+        rawToken: `${amount.rawToken} ${match[2].toLowerCase()}`,
+        pageId,
+        line: firstLine + index,
+      });
     }
     const normalized = line.toLowerCase();
-    if (/\bhalf an hour\b/.test(normalized)) durations.push({ minutes: 30, pageId, line: firstLine + index });
-    if (/\b(?:three[- ]quarters|three quarters) of an hour\b/.test(normalized)) durations.push({ minutes: 45, pageId, line: firstLine + index });
-    if (/\b(?:a quarter|one quarter) of an hour\b/.test(normalized)) durations.push({ minutes: 15, pageId, line: firstLine + index });
+    if (/\bhalf an hour\b/.test(normalized)) durations.push({ minutes: 30, numerator: 30, denominator: 1, rawToken: "half an hour", pageId, line: firstLine + index });
+    if (/\b(?:three[- ]quarters|three quarters) of an hour\b/.test(normalized)) durations.push({ minutes: 45, numerator: 45, denominator: 1, rawToken: "three quarters of an hour", pageId, line: firstLine + index });
+    if (/\b(?:a quarter|one quarter) of an hour\b/.test(normalized)) durations.push({ minutes: 15, numerator: 15, denominator: 1, rawToken: "a quarter of an hour", pageId, line: firstLine + index });
   });
   return durations;
 }
 
+function extractMethodFacts(lines: string[], pageId: string, firstLine: number): LocMethodFactV1[] {
+  const facts: LocMethodFactV1[] = [];
+  let order = 0;
+  lines.forEach((line, index) => {
+    const operations = operationPatterns.filter(([, pattern]) => pattern.test(line)).map(([operation]) => operation);
+    if (!operations.length) return;
+    const durations = extractDurationFacts([line], pageId, firstLine + index);
+    const heat = line.match(/\b(?:very\s+)?(?:slow|low|moderate|medium|quick|hot|high)\s+(?:fire|heat|oven)\b/i)?.[0]
+      .toLowerCase().replace(/\s+/g, "-");
+    const equipment = line.match(/\b(?:baking dish|frying pan|mixing bowl|saucepan|skillet|steamer|kettle|oven|pan|pot|bowl)\b/i)?.[0]
+      .toLowerCase().replace(/\s+/g, "-");
+    for (const operation of operations) {
+      order += 1;
+      facts.push({
+        factId: `method-${pageId}-${firstLine + index}-${String(order).padStart(2, "0")}`,
+        pageId,
+        line: firstLine + index,
+        order,
+        operation,
+        lineSha256: createHash("sha256").update(line.trim()).digest("hex"),
+        ...(operations.length === 1 && durations.length === 1 ? {
+          durationMinutes: durations[0].minutes,
+          durationRational: {
+            numerator: durations[0].numerator,
+            denominator: durations[0].denominator,
+            rawToken: durations[0].rawToken,
+          },
+        } : {}),
+        ...(heat ? { qualitativeHeatToken: heat } : {}),
+        ...(equipment ? { equipmentToken: equipment } : {}),
+      });
+    }
+  });
+  return facts;
+}
+
 function toCandidate(primary: RecipeBlock, normalizedTitle: string, crossChecks: RecipeBlock[]): LocRecipeCandidateV1 {
   const identity = `${primary.document.documentId}:${primary.pageId}:${primary.startLine}:${normalizedTitle}`;
-  const qualityFlags = assessExtractionQuality(primary);
+  const qualityFlags = assessExtractionQuality(primary, crossChecks);
   return {
     candidateId: `loc-candidate-${createHash("sha256").update(identity).digest("hex").slice(0, 20)}`,
     title: primary.title,
@@ -391,6 +449,7 @@ function toCandidate(primary: RecipeBlock, normalizedTitle: string, crossChecks:
       ingredients: primary.ingredients,
       operationTerms: primary.operationTerms,
       durations: primary.durations,
+      methodFacts: primary.methodFacts,
     },
     extractionQuality: {
       status: qualityFlags.length ? "needs-resolution" : "usable",
@@ -403,7 +462,7 @@ function toCandidate(primary: RecipeBlock, normalizedTitle: string, crossChecks:
   };
 }
 
-function assessExtractionQuality(block: RecipeBlock): LocExtractionQualityFlag[] {
+function assessExtractionQuality(block: RecipeBlock, crossChecks: readonly RecipeBlock[]): LocExtractionQualityFlag[] {
   const flags = new Set<LocExtractionQualityFlag>();
   const factKeys = new Set<string>();
   const maximumByUnit: Readonly<Record<string, number>> = {
@@ -434,6 +493,12 @@ function assessExtractionQuality(block: RecipeBlock): LocExtractionQualityFlag[]
   if ([...durationsByLine.values()].some((values) => new Set(values).size > 1)) {
     flags.add("conflicting-source-duration");
   }
+  const primaryIngredientTerms = ingredientTokens(block.ingredients);
+  const strongIdentityCrossCheck = crossChecks.some((crossCheck) =>
+    crossCheck.normalizedTitle === block.normalizedTitle
+    && intersectionSize(primaryIngredientTerms, ingredientTokens(crossCheck.ingredients)) >= 2
+    && intersectionSize(new Set(block.operationTerms), new Set(crossCheck.operationTerms)) >= 1);
+  if (!strongIdentityCrossCheck) flags.add("no-strong-identity-cross-check");
   return [...flags].sort();
 }
 
@@ -574,21 +639,52 @@ function normalizeIngredientPhrase(value: string): string {
     .slice(0, 64);
 }
 
-function parseAmount(value: string): number | null {
+function parseRationalAmount(value: string): { value: number; numerator: number; denominator: number; rawToken: string } | null {
   const normalized = value.toLowerCase().trim();
-  if (quantityWords[normalized] !== undefined) return quantityWords[normalized];
+  if (quantityWords[normalized] !== undefined) {
+    return rationalAmount(quantityWords[normalized], 1, normalized);
+  }
   if (/^\d+\s+\d+\/\d+$/.test(normalized)) {
     const [whole, fraction] = normalized.split(/\s+/);
-    return Number(whole) + parseFraction(fraction);
+    const [fractionNumerator, denominator] = fraction.split("/").map(Number);
+    if (denominator <= 0) return null;
+    const numerator = Number(whole) * denominator + fractionNumerator;
+    return rationalAmount(numerator, denominator, normalized);
   }
-  if (/^\d+\/\d+$/.test(normalized)) return parseFraction(normalized);
+  if (/^\d+\/\d+$/.test(normalized)) {
+    const [numerator, denominator] = normalized.split("/").map(Number);
+    if (denominator <= 0) return null;
+    return rationalAmount(numerator, denominator, normalized);
+  }
+  if (/^\d+\.\d+$/.test(normalized)) {
+    const [, fraction = ""] = normalized.split(".");
+    const denominator = 10 ** fraction.length;
+    const numerator = Math.round(Number(normalized) * denominator);
+    return rationalAmount(numerator, denominator, normalized);
+  }
   const number = Number(normalized);
-  return Number.isFinite(number) ? number : null;
+  return Number.isFinite(number) && Number.isInteger(number)
+    ? rationalAmount(number, 1, normalized)
+    : null;
 }
 
-function parseFraction(value: string): number {
-  const [numerator, denominator] = value.split("/").map(Number);
-  return denominator > 0 ? numerator / denominator : Number.NaN;
+function rationalAmount(numerator: number, denominator: number, rawToken: string) {
+  const divisor = greatestCommonDivisor(numerator, denominator);
+  const reducedNumerator = numerator / divisor;
+  const reducedDenominator = denominator / divisor;
+  return {
+    value: reducedNumerator / reducedDenominator,
+    numerator: reducedNumerator,
+    denominator: reducedDenominator,
+    rawToken,
+  };
+}
+
+function greatestCommonDivisor(left: number, right: number): number {
+  let a = Math.abs(left);
+  let b = Math.abs(right);
+  while (b !== 0) [a, b] = [b, a % b];
+  return a || 1;
 }
 
 function normalizeUnit(value: string): string {

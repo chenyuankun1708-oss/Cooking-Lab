@@ -18,6 +18,8 @@ import type {
   ReviewDimension,
   SamplingQaBatch,
 } from "@/types/publishing-governance";
+import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
+import { evaluateGameSourceFactBundle } from "./game-source-fact-validation";
 import { createSamplingBatchEvidenceDigest } from "./publishing-governance";
 import { validateResearchRegistry } from "./research-validation";
 
@@ -49,6 +51,8 @@ export interface GameRecipeValidationContext {
   ingredients: GameIngredientCatalogV1;
   nutritionDataset?: GameNutritionDatasetSubsetV1;
   rightsRegistry?: GameRightsRegistryV1;
+  normalizationRegistry?: GameNormalizationRegistryV1;
+  sourceFactBundles?: readonly GameSourceFactBundleV1[];
   now: string;
 }
 
@@ -104,7 +108,7 @@ export function createGameRecipeArtifactVersion(recipe: GameRecipeV1): string {
 export function createGameArtifactSetVersion(
   recipes: readonly GameRecipeV1[],
   registry: GameRightsRegistryV1,
-  support?: Pick<GameRecipeValidationContext, "operations" | "ingredients" | "nutritionDataset">,
+  support?: Pick<GameRecipeValidationContext, "operations" | "ingredients" | "nutritionDataset" | "normalizationRegistry" | "sourceFactBundles">,
 ): string {
   const recipeIds = new Set(recipes.map((recipe) => recipe.recipeId));
   const artifacts = registry.artifacts
@@ -160,6 +164,12 @@ export function createGameArtifactSetVersion(
           .filter((record) => upstreamRecordIds.has(record.fdcId))
           .sort((left, right) => left.ingredientId.localeCompare(right.ingredientId)),
       } : null,
+      ...(recipes.some((recipe) => recipe.authoring.method === "deterministic-source-normalization") ? {
+        normalizationRegistry: support.normalizationRegistry ?? null,
+        sourceFactBundles: [...(support.sourceFactBundles ?? [])]
+          .filter((bundle) => recipes.some((recipe) => recipe.authoring.normalizationTrace?.sourceFactBundleId === bundle.bundleId))
+          .sort((left, right) => left.bundleId.localeCompare(right.bundleId)),
+      } : {}),
     } : {
       operationTypes: [...new Set(recipes.flatMap((recipe) => recipe.operationGraph.nodes.map((node) => node.operationType)))].sort(),
       nutritionDatasetVersions: [...new Set(recipes.flatMap((recipe) => recipe.nutritionProfile.provenance.map((entry) => `${entry.provider}:${entry.datasetVersion}`)))].sort(),
@@ -347,6 +357,7 @@ function evaluateRecipe(
   if (recipe.authoring.containsGeneratedExpression !== false) {
     report("invalid-rights", recipe.recipeId, "authoring.containsGeneratedExpression", "Deterministic game data cannot contain generated expression");
   }
+  validateNormalizationTrace(recipe, context, report);
   if (new Set(recipe.authoring.unresolvedMappings).size !== recipe.authoring.unresolvedMappings.length) {
     report("invalid-schema", recipe.recipeId, "authoring.unresolvedMappings", "Unresolved mapping codes must be unique");
   }
@@ -455,6 +466,61 @@ function evaluateRecipe(
   validateScenarios(recipe, nodeById, portionIds, ingredientById, operationById, report);
   validateDeclaredRightsReferences(recipe, context, report);
   if (recipe.eligibility === "exportable") validateRightsAndGovernance(recipe, allRecipes, context, report);
+}
+
+function validateNormalizationTrace(
+  recipe: GameRecipeV1,
+  context: GameRecipeValidationContext,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+): void {
+  const trace = recipe.authoring.normalizationTrace;
+  if (recipe.authoring.method === "deterministic-migration") {
+    if (trace) report("invalid-schema", recipe.recipeId, "authoring.normalizationTrace", "Migrated Web drafts must not claim source normalization trace");
+    return;
+  }
+  if (!trace) {
+    if (recipe.eligibility === "exportable") {
+      report("missing-reference", recipe.recipeId, "authoring.normalizationTrace", "Exportable source-normalized recipes require a complete normalization trace");
+    }
+    return;
+  }
+  const registry = context.normalizationRegistry;
+  const bundle = context.sourceFactBundles?.find((entry) => entry.bundleId === trace.sourceFactBundleId);
+  if (!registry) {
+    report("missing-reference", recipe.recipeId, "authoring.normalizationTrace.normalizationPolicyVersion", "Normalization registry is missing from validation context");
+    return;
+  }
+  if (!bundle) {
+    report("missing-reference", recipe.recipeId, "authoring.normalizationTrace.sourceFactBundleId", `Missing source fact bundle ${trace.sourceFactBundleId}`);
+    return;
+  }
+  if (trace.sourceFactBundleVersion !== bundle.bundleVersion) {
+    report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.sourceFactBundleVersion", "Source fact bundle version is stale");
+  }
+  if (trace.normalizationPolicyVersion !== registry.policyVersion) {
+    report("stale-artifact-version", recipe.recipeId, "authoring.normalizationTrace.normalizationPolicyVersion", "Normalization policy version is stale");
+  }
+  for (const issue of evaluateGameSourceFactBundle(bundle, registry)) {
+    report("invalid-schema", recipe.recipeId, `sourceFactBundle.${issue.field}`, `${issue.code}: ${issue.message}`);
+  }
+  if (bundle.status !== "normalization-ready") {
+    report("invalid-schema", recipe.recipeId, "authoring.normalizationTrace.sourceFactBundleId", "Source-normalized recipes require a normalization-ready fact bundle");
+  }
+  const checks: Array<[keyof typeof trace, readonly string[], Set<string>]> = [
+    ["ingredientResolutionIds", trace.ingredientResolutionIds, new Set(registry.ingredientAliases.map((entry) => entry.resolutionId))],
+    ["operationRuleIds", trace.operationRuleIds, new Set(registry.operationRules.map((entry) => entry.ruleId))],
+    ["equipmentRuleIds", trace.equipmentRuleIds, new Set(registry.equipmentRules.map((entry) => entry.ruleId))],
+    ["heatDescriptorIds", trace.heatDescriptorIds, new Set(registry.heatDescriptors.map((entry) => entry.descriptorId))],
+    ["targetStateRuleIds", trace.targetStateRuleIds, new Set(registry.targetStateRules.map((entry) => entry.ruleId))],
+    ["mutationRuleIds", trace.mutationRuleIds, new Set(registry.mutationRules.map((entry) => entry.ruleId))],
+  ];
+  for (const [field, ids, knownIds] of checks) {
+    if (new Set(ids).size !== ids.length) report("duplicate-id", recipe.recipeId, `authoring.normalizationTrace.${field}`, "Normalization trace IDs must be unique");
+    for (const id of ids) if (!knownIds.has(id)) report("missing-reference", recipe.recipeId, `authoring.normalizationTrace.${field}`, `Unknown normalization rule ${id}`);
+  }
+  if (!trace.ingredientResolutionIds.length || !trace.operationRuleIds.length || !trace.targetStateRuleIds.length || !trace.mutationRuleIds.length) {
+    report("missing-reference", recipe.recipeId, "authoring.normalizationTrace", "Normalization trace must cover ingredients, operations, target states and mutations");
+  }
 }
 
 function validateOperationContract(
@@ -1125,25 +1191,16 @@ export function deriveGameEquivalenceClassKeys(
   }));
   const nutritionVersions = recipe.nutritionProfile.provenance.map((entry) => `${entry.provider}:${entry.datasetVersion}`);
   const operationTypes = recipe.operationGraph.nodes.map((node) => node.operationType);
-  const operationSignature = recipe.operationGraph.nodes.map((node) => node.operationType).join(">");
   const mutationTypes = recipe.scenarios.map((scenario) => scenario.mutation.type);
   const ingredientStates = recipe.ingredientPortions.map((portion) => portion.initialState);
   const ingredientIds = new Set(recipe.ingredientPortions.map((portion) => portion.ingredientId));
   const acidAndDairy = [...ingredientIds].some((id) => /lemon|orange|pineapple|strawberry|raspberry/.test(id))
     && [...ingredientIds].some((id) => /milk|yogurt/.test(id));
   const highWaterFruit = [...ingredientIds].some((id) => /watermelon|strawberry|orange/.test(id));
-  const family = recipe.recipeId.startsWith("game-bowl-") ? "grain-bowl"
-    : recipe.recipeId.startsWith("game-dessert-") ? "dessert"
-      : recipe.recipeId.startsWith("game-tea-") ? "tea"
-        : recipe.recipeId.startsWith("game-coffee-") ? "coffee"
-          : recipe.recipeId.startsWith("game-drink-") ? "fruit-drink"
-            : "migrated-web-item";
+  const trace = recipe.authoring.normalizationTrace;
   return [...new Set([
     `content-type:${recipe.itemType}`,
-    `formula:${family}`,
-    `formula-variant:${deriveFormulaVariant(recipe)}`,
     `authoring:${recipe.authoring.method}:${recipe.authoring.generatorVersion}`,
-    `operation-signature:${operationSignature}`,
     `ingredient-state-set:${[...new Set(ingredientStates)].sort().join("+")}`,
     `acid-dairy:${acidAndDairy ? "present" : "absent"}`,
     `high-water-fruit:${highWaterFruit ? "present" : "absent"}`,
@@ -1152,26 +1209,19 @@ export function deriveGameEquivalenceClassKeys(
     ...nutritionVersions.map((version) => `nutrition:${version}`),
     ...operationTypes.map((operation) => `operation:${operation}`),
     ...mutationTypes.map((mutation) => `mutation:${mutation}`),
+    ...(trace ? [
+      `normalization-policy:${trace.normalizationPolicyVersion}`,
+      ...trace.ingredientResolutionIds.map((id) => `ingredient-resolution:${id}`),
+      ...trace.operationRuleIds.map((id) => `operation-rule:${id}`),
+      ...trace.equipmentRuleIds.map((id) => `equipment-rule:${id}`),
+      ...trace.heatDescriptorIds.map((id) => `heat-descriptor:${id}`),
+      ...trace.targetStateRuleIds.map((id) => `target-state-rule:${id}`),
+      ...trace.mutationRuleIds.map((id) => `mutation-rule:${id}`),
+    ] : ["normalization-trace:not-applicable"]),
     ...sources.map((source) => `source-institution:${source.publisherOrInstitution.trim().toLowerCase()}`),
     ...sources.map((source) => `source-rights:${source.rights.status}:${"licenseId" in source.rights ? source.rights.licenseId : "reference-only"}`),
     ...domains.map((domain) => `source-domain:${domain}`),
   ])].sort();
-}
-
-function deriveFormulaVariant(recipe: GameRecipeV1): string {
-  if (recipe.recipeId.startsWith("game-dessert-")) {
-    return ["almond-oat-bake", "walnut-oat-bake", "almond-yogurt-cup", "walnut-yogurt-cup", "almond-coconut-pudding", "walnut-coconut-pudding", "almond-fruit-crumble", "walnut-fruit-crumble", "honey-cinnamon-bake", "vanilla-yogurt-chill"]
-      .find((variant) => recipe.recipeId.endsWith(`-${variant}`)) ?? "dessert-other";
-  }
-  if (recipe.recipeId.startsWith("game-tea-") || recipe.recipeId.startsWith("game-coffee-")) {
-    return recipe.recipeId.endsWith("-hot") ? "hot" : recipe.recipeId.endsWith("-cold") ? "cold" : recipe.recipeId.endsWith("-milk") ? "milk" : "beverage-other";
-  }
-  if (recipe.recipeId.startsWith("game-drink-")) return recipe.recipeId.endsWith("-blended") ? "blended" : "infused";
-  if (recipe.recipeId.startsWith("game-bowl-")) {
-    const base = ["brown-rice", "white-rice", "pasta-dry", "rice-noodle-dry"].find((candidate) => recipe.recipeId.startsWith(`game-bowl-${candidate}-`));
-    return base ?? "grain-bowl-other";
-  }
-  return "migrated-web-item";
 }
 
 function validateRiskClassification(

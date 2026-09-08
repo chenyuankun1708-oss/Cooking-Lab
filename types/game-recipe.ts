@@ -12,6 +12,7 @@ import type {
   PublishingRiskLevel,
 } from "./publishing-governance";
 import type { ResearchRecord } from "./research";
+import type { GameNormalizationTraceV1 } from "./game-source-facts";
 
 export const gameRecipeSchemaVersion = "cooking-lab-game-recipe-v1" as const;
 export const gameManifestSchemaVersion = "cooking-lab-game-manifest-v1" as const;
@@ -299,6 +300,7 @@ export interface GameRecipeV1 {
     generatorVersion: string;
     containsGeneratedExpression: false;
     unresolvedMappings: string[];
+    normalizationTrace?: GameNormalizationTraceV1;
   };
 }
 

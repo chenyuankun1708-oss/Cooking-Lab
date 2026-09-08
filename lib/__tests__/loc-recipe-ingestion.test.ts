@@ -22,9 +22,19 @@ describe("LOC source registry", () => {
     const input = JSON.parse(readFileSync(resolve(process.cwd(), "game-data/source-research/loc-sources.json"), "utf8"));
     const registry = parseLocSourceRegistry(input);
 
-    expect(registry.documents).toHaveLength(14);
-    expect(new Set(registry.documents.map((document) => document.workFamilyId)).size).toBe(14);
+    expect(registry.documents).toHaveLength(97);
+    expect(new Set(registry.documents.map((document) => document.workFamilyId)).size).toBe(93);
     expect(registry.documents.every((document) => document.ocr.derivativeUrl.startsWith("https://tile.loc.gov/"))).toBe(true);
+
+    const familiesByContributor = new Map<string, Set<string>>();
+    for (const document of registry.documents) {
+      const contributor = document.creators[0]?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      if (!contributor) continue;
+      const families = familiesByContributor.get(contributor) ?? new Set<string>();
+      families.add(document.workFamilyId);
+      familiesByContributor.set(contributor, families);
+    }
+    expect([...familiesByContributor.values()].every((families) => families.size === 1)).toBe(true);
   });
 
   it("fails closed on non-official URLs, altered rights text, and unpaged OCR files", () => {
@@ -98,6 +108,37 @@ describe("LOC candidate ingestion", () => {
     expect(result.candidates.some((candidate) => candidate.normalizedTitle === "wine sauce")).toBe(false);
   });
 
+  it("filters inflected preservation terms before normalization", () => {
+    const { directory, registry } = createFixture();
+    const bookAPath = resolve(directory, "book-a.text.json");
+    const preserved = JSON.stringify({
+      "12": { fulltext: "PICKLED PEACHES.\n1 cup peaches\n2 cups sugar\nMix and boil 10 minutes, then bottle the pickled fruit." },
+    });
+    writeFileSync(bookAPath, preserved);
+    registry.documents[0].ocr.sha256 = sha256(preserved);
+
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+    expect(result.candidates).toEqual([]);
+    expect(result.rejectedHighRisk).toEqual(expect.arrayContaining([
+      expect.objectContaining({ normalizedTitle: "pickled peaches", reasonCodes: ["fermentation-or-preservation"] }),
+    ]));
+  });
+
+  it("keeps fuzzy matches for discovery but blocks them from normalization", () => {
+    const { directory, registry } = createFixture({ relatedMatchOnly: true });
+    const result = ingestLocRecipeSources(registry, { ocrDirectory: directory });
+
+    expect(result.candidateCount).toBe(2);
+    expect(result.normalizationEligibleCount).toBe(0);
+    expect(result.candidates.find((candidate) => candidate.normalizedTitle === "apple pie")).toMatchObject({
+      crossChecks: [expect.objectContaining({ matchBasis: "related-title-and-facts" })],
+      extractionQuality: {
+        status: "needs-resolution",
+        flags: expect.arrayContaining(["no-strong-identity-cross-check"]),
+      },
+    });
+  });
+
   it("keeps ambiguous OCR visible but blocks it from deterministic normalization", () => {
     const { directory, registry } = createFixture();
     const bookAPath = resolve(directory, "book-a.text.json");
@@ -155,7 +196,7 @@ describe("LOC candidate ingestion", () => {
   });
 });
 
-function createFixture(options: { includeIndependentMatch?: boolean } = {}) {
+function createFixture(options: { includeIndependentMatch?: boolean; relatedMatchOnly?: boolean } = {}) {
   const directory = createTemporaryDirectory();
   const bookA = JSON.stringify({
     "12": {
@@ -176,7 +217,9 @@ function createFixture(options: { includeIndependentMatch?: boolean } = {}) {
     "3": {
       fulltext: options.includeIndependentMatch === false
         ? "PEAR TART.\n1 cup flour\n2 cups pears\nMix and bake 35 minutes."
-        : "Apple Pie.\n1 cup flour\n3 cups apples\nMix and bake 35 minutes.",
+        : options.relatedMatchOnly
+          ? "APPLE FRUIT PIE.\n1 cup flour\n3 cups apples\nMix and bake 35 minutes."
+          : "Apple Pie.\n1 cup flour\n3 cups apples\nMix and bake 35 minutes.",
     },
   });
   writeFileSync(resolve(directory, "book-a.text.json"), bookA);

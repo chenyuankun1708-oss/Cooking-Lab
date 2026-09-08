@@ -14,11 +14,22 @@ Canonical source lives in:
 - `game-data/operations.json`: versioned semantic operation catalog.
 - `game-data/nutrition/usda-fooddata-central-subset.json`: record-level USDA subset actually used by the corpus.
 
+LOC discovery material uses a separate, narrower compilation boundary:
+
+- `game-data/source-research/loc-sources.json`: item-level verified source registry; no OCR body is committed.
+- `.local/game-data/source-cache/loc/`: content-addressed item metadata and OCR derivatives.
+- `.local/game-data/source-facts/loc/`: deterministic draft `SourceFactBundleV1` output.
+- future `game-data/normalization/`: versioned ingredient, operation, equipment, qualitative heat, target-state and mutation rules.
+
+The required path is `verified cache → discovery candidate → SourceFactBundleV1 → normalization trace → GameRecipeV1`. Fuzzy title matching may retain a discovery candidate, but it cannot establish recipe identity or normalization readiness.
+
 The generated Godot JSON, SQLite, attribution report, rights summary, manifest and audit report live under gitignored `.local/game-data/`. They are build products, never source of truth and never part of the Next.js deployment.
 
 ## Versioned contracts
 
 - `GameRecipeV1` records stable IDs, quantified portions, a dependency graph, USDA-derived nutrition, simulation scenarios and export eligibility.
+- `SourceFactBundleV1` preserves reduced rational quantities, narrow ingredient facts, ordered method facts, LOC page/line locators and source-line hashes without committing OCR prose.
+- `GameNormalizationTraceV1` binds every source-normalized recipe to its current fact bundle and the exact reusable resolution/rule IDs used to compile it.
 - `GameOperationDefinitionV1` distinguishes `supported-now`, `macro-supported`, `requires-engine-v2` and `presentation-only`.
 - `GameRecipeScenarioV1` mutates a baseline without modifying it and records directional sensory changes, fault causes, recoverability and nutrition impact.
 - `GameDataManifestV1` hashes every exported recipe and every supporting catalog, rights, attribution and nutrition artifact, including upstream USDA archive identifiers and SHA-256 values.

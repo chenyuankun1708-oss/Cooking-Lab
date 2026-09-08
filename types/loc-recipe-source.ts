@@ -52,7 +52,25 @@ export type LocExtractionQualityFlag =
   | "ambiguous-ingredient-phrase"
   | "duplicate-ingredient-fact"
   | "implausible-source-quantity"
-  | "conflicting-source-duration";
+  | "conflicting-source-duration"
+  | "no-strong-identity-cross-check";
+
+export interface LocMethodFactV1 {
+  factId: string;
+  pageId: string;
+  line: number;
+  order: number;
+  operation: string;
+  lineSha256: string;
+  durationMinutes?: number;
+  durationRational?: {
+    numerator: number;
+    denominator: number;
+    rawToken: string;
+  };
+  qualitativeHeatToken?: string;
+  equipmentToken?: string;
+}
 
 export interface LocSourceLocatorV1 {
   documentId: string;
@@ -76,14 +94,21 @@ export interface LocCrossCheckV1 extends LocSourceLocatorV1 {
 
 export interface LocIngredientFactV1 {
   quantity: number;
+  quantityNumerator: number;
+  quantityDenominator: number;
+  rawQuantityToken: string;
   unit: string;
   ingredient: string;
   pageId: string;
   line: number;
+  lineSha256: string;
 }
 
 export interface LocDurationFactV1 {
   minutes: number;
+  numerator: number;
+  denominator: number;
+  rawToken: string;
   pageId: string;
   line: number;
 }
@@ -100,6 +125,7 @@ export interface LocRecipeCandidateV1 {
     ingredients: LocIngredientFactV1[];
     operationTerms: string[];
     durations: LocDurationFactV1[];
+    methodFacts: LocMethodFactV1[];
   };
   extractionQuality: {
     status: "usable" | "needs-resolution";

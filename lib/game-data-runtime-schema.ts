@@ -611,6 +611,18 @@ const gameRecipeSchema = exactObject({
     generatorVersion: stringValue,
     containsGeneratedExpression: literal(false),
     unresolvedMappings: arrayOf(stringValue),
+  }, {
+    normalizationTrace: exactObject({
+      sourceFactBundleId: stringValue,
+      sourceFactBundleVersion: stringValue,
+      normalizationPolicyVersion: stringValue,
+      ingredientResolutionIds: arrayOf(stringValue),
+      operationRuleIds: arrayOf(stringValue),
+      equipmentRuleIds: arrayOf(stringValue),
+      heatDescriptorIds: arrayOf(stringValue),
+      targetStateRuleIds: arrayOf(stringValue),
+      mutationRuleIds: arrayOf(stringValue),
+    }),
   }),
 }, {
   sourceCulinaryItemId: stringValue,

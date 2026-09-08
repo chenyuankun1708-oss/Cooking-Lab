@@ -13,7 +13,9 @@
 - 首轮独立内容审查已冻结全部公式 family：通用来源不能证明具体配方、部分参数与 mutation 因果缺少逐项依据。M13 将改用逐项明确 Public Domain 的 Library of Congress 原始料理事实，并要求独立料理交叉核对；在真实来源、当前 fingerprint attestations 和 sampling QA 完成前 exportable 数量保持 0。
 - M12 validator 与导出层已针对首轮独立审查完成 fail-closed hardening：精确 runtime schema、操作输入/输出/设备/参数/目标合同、actor/run/context 独立、LOW 单一 reviewer 全维度覆盖、真实 sampling digest、风险下限、USDA exact join、权利依据与实际 material source coverage、完整 content-addressing、安全 staging，以及 Godot JSON ↔ SQLite parity。
 - 量化单位现在通过版本化 conversion record 做 ID、单位、食材作用域和因子的精确 join；Godot JSON 与 SQLite `unit_conversions` 同源。错误设备 mutation 只能引用操作目录中存在但与目标操作不兼容的设备。
-- M13 已接入 14 个逐项核验的 LOC 公有领域文献及内容寻址本地缓存。当前严格筛选得到 51 个跨独立作品族核对的研究候选、过滤 135 个高风险块；全部仍为 `draft-research-only`，不是 canonical 或 commercial-ready。下一步是扩展独立文献覆盖并进行逐料理规范化。
+- M13 已将逐项核验的 LOC 公有领域文献扩至 97 本（97 个唯一 item、97 个唯一 derivative、93 个保守作品族），内容寻址缓存保持在 `.local/`。修复保存/腌制词形漏检并禁止 fuzzy title match 获得规范化资格后，当前 importer 产生 1,228 个 discovery draft、116 个严格 extraction-usable 候选并过滤 1,263 个高风险块；全部仍不是 canonical 或 commercial-ready。
+- 已新增 `SourceFactBundleV1`、有理数量、逐行 SHA、顺序 method facts、版本化 normalization registry/trace 合同和 fail-closed validator。`game-data:loc-source-facts` 可从已核验缓存确定性生成 116 个本地 draft source-fact bundle；连续两次 manifest SHA-256 均为 `7e830da8397aa633afe9ce1beb6bf1a29b0f3308a4f37881ed1030bf3ed93422`。
+- `GameRecipeV1` 的 source-normalized export 现在必须绑定当前 source-fact bundle 与 normalization trace；registry/bundle 变化进入 artifact-set fingerprint。下一步是建立可复用 ingredient/operation/equipment/heat/target/mutation registries，将严格候选编译为 canonical draft，再完成逐项 rights、独立审查与 sampling。
 
 ## 当前阶段
 

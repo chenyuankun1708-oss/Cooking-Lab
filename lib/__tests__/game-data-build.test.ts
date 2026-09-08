@@ -6,9 +6,10 @@ import { DatabaseSync } from "node:sqlite";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { createM13DraftFixture } from "@/game-data/corpus-generator";
+import { attachTestNormalizationTrace } from "@/lib/__tests__/game-normalization-fixture";
 import { buildGameData, createGameDataCatalogVersion } from "@/lib/game-data-build";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
-import { createGameArtifactSetVersion, deriveGameEquivalenceClassKeys } from "@/lib/game-recipe-validation";
+import { createGameArtifactSetVersion, createGameRecipeArtifactVersion, deriveGameEquivalenceClassKeys } from "@/lib/game-recipe-validation";
 import { createSamplingBatchEvidenceDigest } from "@/lib/publishing-governance";
 import { stableJson } from "@/lib/stable-json";
 import type { GameIngredientCatalogV1, GameNutritionDatasetSubsetV1, GameOperationDefinitionV1, GameRecipeV1, GameRightsRegistryV1 } from "@/types/game-recipe";
@@ -24,7 +25,8 @@ describe("M12 deterministic game exports", () => {
     };
     const recipe = structuredClone(generated.recipes[0]) as GameRecipeV1;
     const registry = structuredClone(generated.rightsRegistry);
-    promoteFixture(recipe, registry, fixtureIngredients, source.nutritionDataset, gameOperationCatalog);
+    const normalization = attachTestNormalizationTrace(recipe);
+    promoteFixture(recipe, registry, fixtureIngredients, source.nutritionDataset, gameOperationCatalog, normalization);
     const rootA = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-a-")), "output");
     const rootB = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-b-")), "output");
     const buildA = buildGameData({
@@ -33,6 +35,7 @@ describe("M12 deterministic game exports", () => {
       nutritionDataset: source.nutritionDataset,
       operations: gameOperationCatalog,
       rightsRegistry: registry,
+      ...normalization,
       now: "2026-09-08",
     }, rootA);
     buildGameData({
@@ -41,6 +44,7 @@ describe("M12 deterministic game exports", () => {
       nutritionDataset: source.nutritionDataset,
       operations: gameOperationCatalog,
       rightsRegistry: registry,
+      ...normalization,
       now: "2026-09-08",
     }, rootB);
 
@@ -188,6 +192,7 @@ function promoteFixture(
   ingredients: GameIngredientCatalogV1,
   nutritionDataset: GameNutritionDatasetSubsetV1,
   operations: readonly GameOperationDefinitionV1[],
+  normalization: ReturnType<typeof attachTestNormalizationTrace>,
 ) {
   const dimensions: ReviewDimension[] = ["rights-license", "provenance", "factual-culinary", "editorial", "visual-image"];
   const attestationIds = dimensions.map((dimension) => `fixture-attestation-${dimension}`);
@@ -214,7 +219,11 @@ function promoteFixture(
   const classification = registry.governance.riskClassifications.find((entry) => entry.itemId === recipe.recipeId);
   if (!classification) throw new Error("fixture risk classification missing");
   classification.equivalenceClassKeys = deriveGameEquivalenceClassKeys(recipe, registry) as [string, ...string[]];
-  const support = { ingredients, nutritionDataset, operations };
+  recipe.artifactVersion = createGameRecipeArtifactVersion(recipe);
+  recipe.scenarios.forEach((scenario) => { scenario.baselineArtifactVersion = recipe.artifactVersion; });
+  registry.artifacts.filter((artifact) => artifact.subject.type === "game-recipe" && artifact.subject.id === recipe.recipeId)
+    .forEach((artifact) => { artifact.version = recipe.artifactVersion; });
+  const support = { ingredients, nutritionDataset, operations, ...normalization };
   const artifactSetVersion = createGameArtifactSetVersion([recipe], registry, support);
   classification.artifactSetVersion = artifactSetVersion;
   registry.governance.attestations = dimensions.map((dimension, index) => ({

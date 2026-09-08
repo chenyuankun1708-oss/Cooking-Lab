@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { createM13DraftFixture } from "@/game-data/corpus-generator";
+import { attachTestNormalizationTrace } from "@/lib/__tests__/game-normalization-fixture";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import {
   createGameArtifactSetVersion,
@@ -475,11 +476,13 @@ describe("M12 game governance hostile cases", () => {
 function readyFixture() {
   const recipe = structuredClone(generatedFixtureSource.recipes[0]) as GameRecipeV1;
   const registry = structuredClone(generatedFixtureSource.rightsRegistry) as GameRightsRegistryV1;
+  const normalization = attachTestNormalizationTrace(recipe);
   const context = {
     operations: structuredClone(gameOperationCatalog),
     ingredients: structuredClone(generatedFixtureSource.ingredients),
     nutritionDataset: structuredClone(nutritionDataset),
     rightsRegistry: registry,
+    ...normalization,
     now: "2026-09-08",
   };
   recipe.eligibility = "exportable";

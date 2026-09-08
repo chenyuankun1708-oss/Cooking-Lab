@@ -12,6 +12,7 @@ import type {
   GameRecipeV1,
   GameRightsRegistryV1,
 } from "@/types/game-recipe";
+import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
 import { compileCatKitchenGoal1Recipe } from "./cat-kitchen-goal1-compiler";
 import {
   parseGameDataManifest,
@@ -33,6 +34,8 @@ export interface GameDataBuildInput {
   nutritionDataset: GameNutritionDatasetSubsetV1;
   operations: readonly GameOperationDefinitionV1[];
   rightsRegistry: GameRightsRegistryV1;
+  normalizationRegistry?: GameNormalizationRegistryV1;
+  sourceFactBundles?: readonly GameSourceFactBundleV1[];
   now: string;
 }
 
@@ -54,6 +57,8 @@ export function buildGameData(
     ingredients: input.ingredients,
     nutritionDataset: input.nutritionDataset,
     rightsRegistry: input.rightsRegistry,
+    normalizationRegistry: input.normalizationRegistry,
+    sourceFactBundles: input.sourceFactBundles,
     now: input.now,
   });
   if (canonicalAudit.issues.length) {
@@ -70,6 +75,8 @@ export function buildGameData(
     ingredients: input.ingredients,
     nutritionDataset: input.nutritionDataset,
     rightsRegistry: input.rightsRegistry,
+    normalizationRegistry: input.normalizationRegistry,
+    sourceFactBundles: input.sourceFactBundles,
     now: input.now,
   });
   for (const recipe of exportable) {

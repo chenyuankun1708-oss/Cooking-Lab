@@ -1,0 +1,1083 @@
+{
+  "artifactVersion": "clv1-b8dc82d5c72a88f8",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:thai-green-papaya-salad-op-001-peel:duration",
+      "operation:thai-green-papaya-salad-op-002-slice:duration",
+      "operation:thai-green-papaya-salad-op-002-slice:parameters-source",
+      "operation:thai-green-papaya-salad-op-002-slice:targets-source",
+      "operation:thai-green-papaya-salad-op-003-dice:duration",
+      "operation:thai-green-papaya-salad-op-003-dice:parameters-source",
+      "operation:thai-green-papaya-salad-op-003-dice:targets-source",
+      "operation:thai-green-papaya-salad-op-004-crush:duration",
+      "operation:thai-green-papaya-salad-op-004-crush:parameters-source",
+      "operation:thai-green-papaya-salad-op-009-mince:duration",
+      "operation:thai-green-papaya-salad-op-009-mince:parameters-source",
+      "operation:thai-green-papaya-salad-op-009-mince:targets-source",
+      "operation:thai-green-papaya-salad-op-013-serve:duration",
+      "operation:thai-green-papaya-salad-op-013-serve:inputs",
+      "operation:thai-green-papaya-salad-op-014-season:duration",
+      "operation:thai-green-papaya-salad-op-014-season:inputs",
+      "operation:thai-green-papaya-salad-op-014-season:parameters",
+      "operation:thai-green-papaya-salad-op-014-season:targets-source",
+      "operation:thai-green-papaya-salad-op-015-fold:duration",
+      "operation:thai-green-papaya-salad-op-015-fold:inputs",
+      "operation:thai-green-papaya-salad-op-015-fold:parameters-source",
+      "operation:thai-green-papaya-salad-op-015-fold:targets-source",
+      "operation:thai-green-papaya-salad-op-016-rest:duration",
+      "operation:thai-green-papaya-salad-op-016-rest:inputs",
+      "operation:thai-green-papaya-salad-op-017-fold:duration",
+      "operation:thai-green-papaya-salad-op-017-fold:inputs",
+      "operation:thai-green-papaya-salad-op-017-fold:parameters-source",
+      "operation:thai-green-papaya-salad-op-017-fold:targets-source",
+      "operation:thai-green-papaya-salad-op-018-season:duration",
+      "operation:thai-green-papaya-salad-op-018-season:inputs",
+      "operation:thai-green-papaya-salad-op-018-season:parameters",
+      "operation:thai-green-papaya-salad-op-018-season:targets-source",
+      "operation:thai-green-papaya-salad-op-019-serve:duration",
+      "operation:thai-green-papaya-salad-op-019-serve:inputs",
+      "operation:thai-green-papaya-salad-op-020-garnish:duration",
+      "operation:thai-green-papaya-salad-op-020-garnish:equipment",
+      "operation:thai-green-papaya-salad-op-020-garnish:inputs",
+      "portion:thai-green-papaya-salad-portion-06:source-step",
+      "portion:thai-green-papaya-salad-portion-09:source-step",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-001-peel-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-002-slice-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-003-dice-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-004-crush-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-009-mince-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-014-season-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-015-fold-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-016-rest-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-017-fold-omit:expected-outcome",
+      "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-018-season-omit:expected-outcome"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "green-papaya",
+      "initialState": "raw",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-green-papaya",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-01",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "carrot",
+      "initialState": "raw",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-02",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tomato",
+      "initialState": "raw",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-03",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 70,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-04",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lime:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-05",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-06",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "fish-sauce",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fish-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-07",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "roasted-peanut",
+      "initialState": "cooked",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-roasted-peanut",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-08",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 0.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "thai-green-papaya-salad-portion-09",
+      "sourceQuantity": {
+        "amount": 0.2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 142.34,
+      "carbs": 23.106667,
+      "fat": 5.31,
+      "fiber": 5.186,
+      "protein": 4.367333,
+      "saturatedFat": 0.692667,
+      "sodium": 366.42,
+      "sugar": 11.324
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "green-papaya",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-green-papaya",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "green-papaya",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "carrot",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-carrot",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "carrot",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tomato",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tomato",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fish-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fish-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fish-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "roasted-peanut",
+        "ingredientState": "cooked",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-roasted-peanut",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "roasted-peanut",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 427.02,
+      "carbs": 69.32,
+      "fat": 15.93,
+      "fiber": 15.558,
+      "protein": 13.102,
+      "saturatedFat": 2.078,
+      "sodium": 1099.26,
+      "sugar": 33.972
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-01",
+          "thai-green-papaya-salad-portion-02",
+          "thai-green-papaya-salad-portion-03",
+          "thai-green-papaya-salad-portion-08"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-001-peel",
+        "operationType": "peel",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-1-peel"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-001-peel"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-01",
+          "thai-green-papaya-salad-portion-02",
+          "thai-green-papaya-salad-portion-03",
+          "thai-green-papaya-salad-portion-08"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-002-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-002-slice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-01",
+          "thai-green-papaya-salad-portion-02",
+          "thai-green-papaya-salad-portion-03",
+          "thai-green-papaya-salad-portion-08"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-003-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-1-dice"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-003-dice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-01",
+          "thai-green-papaya-salad-portion-02",
+          "thai-green-papaya-salad-portion-03",
+          "thai-green-papaya-salad-portion-08"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-004-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-1-crush"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-004-crush"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-01"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 400
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-005-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-02"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-006-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-03"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 120
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-007-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-08"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-08-added"
+        ],
+        "parameters": {
+          "quantityG": 30
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-008-add"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-04",
+          "thai-green-papaya-salad-portion-05",
+          "thai-green-papaya-salad-portion-07"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-009-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-2-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-009-mince"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-04"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 70
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-010-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-05"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-011-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 10
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-011-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "thai-green-papaya-salad-portion-07"
+        ],
+        "nodeId": "thai-green-papaya-salad-op-012-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "thai-green-papaya-salad-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 12
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-012-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-013-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-3-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-013-serve"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-014-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-3-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-014-season"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-015-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-3-fold"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-015-fold"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-016-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-4-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-016-rest"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-017-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-4-fold"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-017-fold"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-018-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-4-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-018-season"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-019-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-4-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "thai-green-papaya-salad-op-019-serve"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "thai-green-papaya-salad-op-020-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "thai-green-papaya-salad-step-4-garnish"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "thai-green-papaya-salad",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:peel"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-peel"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-001-peel",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-001-peel-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-002-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-002-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-003-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-003-dice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-004-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-004-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-009-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-009-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-014-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-014-season-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-015-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-015-fold-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-016-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-016-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-017-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-017-fold-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "thai-green-papaya-salad-op-018-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "thai-green-papaya-salad-thai-green-papaya-salad-op-018-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "thai-green-papaya-salad",
+  "sourceCulinaryItemId": "thai-green-papaya-salad",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

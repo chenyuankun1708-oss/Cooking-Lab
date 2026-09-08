@@ -1,0 +1,328 @@
+{
+  "artifactVersion": "clv1-d30f9b47f00f9e03",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:lapsang-souchong-op-001-add:equipment",
+      "operation:lapsang-souchong-op-002-boil:parameters",
+      "operation:lapsang-souchong-op-002-boil:targets-source",
+      "operation:lapsang-souchong-op-003-rest:equipment",
+      "operation:lapsang-souchong-op-003-rest:inputs",
+      "operation:lapsang-souchong-op-004-serve:inputs",
+      "portion:lapsang-souchong-portion-01:source-step",
+      "scenario:lapsang-souchong-lapsang-souchong-op-002-boil-omit:expected-outcome",
+      "scenario:lapsang-souchong-lapsang-souchong-op-002-boil-short:expected-outcome",
+      "scenario:lapsang-souchong-lapsang-souchong-op-003-rest-omit:expected-outcome",
+      "scenario:lapsang-souchong-lapsang-souchong-op-003-rest-short:expected-outcome"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lapsang-souchong-tea-leaf",
+      "initialState": "dry",
+      "massG": 4,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lapsang-souchong-tea-leaf",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lapsang-souchong-portion-01",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lapsang-souchong-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
+      "volumeMl": 300
+    }
+  ],
+  "itemType": "tea",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 6,
+      "carbs": 1,
+      "fat": 0.1,
+      "fiber": 0.4,
+      "protein": 0.4,
+      "saturatedFat": 0.02,
+      "sodium": 0.1,
+      "sugar": 0
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lapsang-souchong-tea-leaf",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lapsang-souchong-tea-leaf",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lapsang-souchong-tea-leaf",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 12,
+      "carbs": 2,
+      "fat": 0.2,
+      "fiber": 0.8,
+      "protein": 0.8,
+      "saturatedFat": 0.04,
+      "sodium": 0.2,
+      "sugar": 0
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "inputPortionIds": [
+          "lapsang-souchong-portion-02"
+        ],
+        "nodeId": "lapsang-souchong-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lapsang-souchong-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 300
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lapsang-souchong-op-001-add"
+        ],
+        "equipmentId": "kettle",
+        "inputPortionIds": [
+          "lapsang-souchong-portion-02"
+        ],
+        "nodeId": "lapsang-souchong-op-002-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "lapsang-souchong-step-1-boil"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 120000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lapsang-souchong-op-002-boil"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "lapsang-souchong-op-003-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "lapsang-souchong-step-2-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 180000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lapsang-souchong-op-003-rest"
+        ],
+        "equipmentId": "teapot",
+        "inputPortionIds": [],
+        "nodeId": "lapsang-souchong-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lapsang-souchong-step-3-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "lapsang-souchong",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "lapsang-souchong-op-002-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-002-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "causeCodes": [
+        "duration-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "lapsang-souchong-op-002-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-002-boil-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "lapsang-souchong-op-003-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-003-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "lapsang-souchong-op-003-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "lapsang-souchong-lapsang-souchong-op-003-rest-short"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "lapsang-souchong",
+  "sourceCulinaryItemId": "lapsang-souchong",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

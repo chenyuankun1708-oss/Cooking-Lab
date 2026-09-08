@@ -16,6 +16,8 @@ const useLabels: Readonly<Record<ResearchSourceUse, Readonly<Record<SupportedLoc
   safety: { "zh-CN": "食品安全", en: "Food safety" },
   culture: { "zh-CN": "文化语境", en: "Cultural context" },
   award: { "zh-CN": "奖项", en: "Award" },
+  nutrition: { "zh-CN": "营养", en: "Nutrition" },
+  simulation: { "zh-CN": "仿真", en: "Simulation" },
 };
 
 export function listConsumerResearchSources(

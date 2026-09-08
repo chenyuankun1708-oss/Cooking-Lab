@@ -8,6 +8,7 @@ export const contentArtifactKinds = [
   "cost",
   "image",
   "product-profile",
+  "simulation",
 ] as const;
 export type ContentArtifactKind = (typeof contentArtifactKinds)[number];
 
@@ -78,6 +79,7 @@ export interface AttributionRequirement {
 
 export type ContentSubject =
   | { type: "culinary-item"; id: string }
+  | { type: "game-recipe"; id: string }
   | { type: "story"; id: string }
   | { type: "image"; id: string }
   | { type: "ingredient-data"; id: string }
@@ -100,7 +102,7 @@ export interface UsageDecision {
   id: string;
   artifactId: string;
   assessmentIds: [string, ...string[]];
-  intendedUse: "production-commercial-ready";
+  intendedUse: "production-commercial-ready" | "game-commercial-ready";
   decision: "allow" | "allow-with-obligations" | "block";
   conditions: string[];
   decidedAt: string;

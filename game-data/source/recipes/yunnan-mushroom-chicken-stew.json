@@ -1,0 +1,360 @@
+{
+  "artifactVersion": "clv1-bc3858253e2cf29c",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:yunnan-mushroom-chicken-stew-op-002-set-heat:duration",
+      "operation:yunnan-mushroom-chicken-stew-op-002-set-heat:parameters",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:duration",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:inputs",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:parameters",
+      "operation:yunnan-mushroom-chicken-stew-op-003-season:targets-source",
+      "portion:yunnan-mushroom-chicken-stew-portion-01:source-step",
+      "portion:yunnan-mushroom-chicken-stew-portion-03:source-step",
+      "portion:yunnan-mushroom-chicken-stew-portion-04:source-step",
+      "portion:yunnan-mushroom-chicken-stew-portion-05:source-step",
+      "scenario:yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-002-set-heat-omit:expected-outcome",
+      "scenario:yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-003-season-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:2:operation",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "chicken-thigh",
+      "initialState": "raw",
+      "massG": 360,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+      "optional": false,
+      "phase": "main",
+      "portionId": "yunnan-mushroom-chicken-stew-portion-01",
+      "sourceQuantity": {
+        "amount": 360,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "mushroom",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+      "optional": false,
+      "phase": "main",
+      "portionId": "yunnan-mushroom-chicken-stew-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 12,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "yunnan-mushroom-chicken-stew-portion-03",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "scallion",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "yunnan-mushroom-chicken-stew-portion-04",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "yunnan-mushroom-chicken-stew-portion-05",
+      "sourceQuantity": {
+        "amount": 1.8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 200.8,
+      "carbs": 4.377,
+      "fat": 8.742,
+      "fiber": 1.21,
+      "protein": 26.062,
+      "saturatedFat": 2.268,
+      "sodium": 326.12,
+      "sugar": 2.183
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "chicken-thigh",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "chicken-thigh",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mushroom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mushroom",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scallion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scallion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 602.4,
+      "carbs": 13.131,
+      "fat": 26.226,
+      "fiber": 3.63,
+      "protein": 78.186,
+      "saturatedFat": 6.804,
+      "sodium": 978.36,
+      "sugar": 6.549
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "yunnan-mushroom-chicken-stew-portion-02"
+        ],
+        "nodeId": "yunnan-mushroom-chicken-stew-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "yunnan-mushroom-chicken-stew-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 300
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "yunnan-mushroom-chicken-stew-op-001-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "yunnan-mushroom-chicken-stew-op-002-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "yunnan-mushroom-chicken-stew-step-4-set-heat"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "yunnan-mushroom-chicken-stew-op-002-set-heat"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "yunnan-mushroom-chicken-stew-op-003-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "yunnan-mushroom-chicken-stew-step-4-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "yunnan-mushroom-chicken-stew-op-003-season"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "yunnan-mushroom-chicken-stew-portion-01",
+          "yunnan-mushroom-chicken-stew-portion-02",
+          "yunnan-mushroom-chicken-stew-portion-03",
+          "yunnan-mushroom-chicken-stew-portion-04",
+          "yunnan-mushroom-chicken-stew-portion-05"
+        ],
+        "nodeId": "yunnan-mushroom-chicken-stew-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "yunnan-mushroom-chicken-stew-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "yunnan-mushroom-chicken-stew",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-bc3858253e2cf29c",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "yunnan-mushroom-chicken-stew-op-002-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-002-set-heat-omit"
+    },
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-bc3858253e2cf29c",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "yunnan-mushroom-chicken-stew-op-003-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "yunnan-mushroom-chicken-stew-yunnan-mushroom-chicken-stew-op-003-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "cat-kitchen-goal1-v1",
+  "slug": "yunnan-mushroom-chicken-stew",
+  "sourceCulinaryItemId": "yunnan-mushroom-chicken-stew",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

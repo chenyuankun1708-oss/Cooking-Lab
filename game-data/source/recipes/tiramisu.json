@@ -1,0 +1,807 @@
+{
+  "artifactVersion": "clv1-f0231b6bd412367d",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:tiramisu-op-002-stir:parameters-source",
+      "operation:tiramisu-op-002-stir:targets-source",
+      "operation:tiramisu-op-003-whisk:parameters-source",
+      "operation:tiramisu-op-003-whisk:targets-source",
+      "operation:tiramisu-op-004-mix:inputs",
+      "operation:tiramisu-op-004-mix:parameters-source",
+      "operation:tiramisu-op-004-mix:targets-source",
+      "operation:tiramisu-op-005-whisk:inputs",
+      "operation:tiramisu-op-005-whisk:parameters-source",
+      "operation:tiramisu-op-005-whisk:targets-source",
+      "operation:tiramisu-op-008-extract:equipment",
+      "operation:tiramisu-op-008-extract:parameters",
+      "operation:tiramisu-op-008-extract:targets-source",
+      "operation:tiramisu-op-011-chill:parameters",
+      "portion:tiramisu-portion-01:source-step",
+      "portion:tiramisu-portion-03:source-step",
+      "portion:tiramisu-portion-05:source-step",
+      "scenario:tiramisu-tiramisu-op-002-stir-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-003-whisk-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-004-mix-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-005-whisk-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-007-rest-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-007-rest-short:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-008-extract-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-008-extract-short:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-011-chill-omit:expected-outcome",
+      "scenario:tiramisu-tiramisu-op-011-chill-short:expected-outcome",
+      "source-step:4:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tiramisu-portion-01",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tiramisu-portion-02",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "mascarpone",
+      "initialState": "raw",
+      "massG": 500,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mascarpone",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tiramisu-portion-03",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ladyfinger-biscuit",
+      "initialState": "raw",
+      "massG": 240,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ladyfinger-biscuit",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tiramisu-portion-04",
+      "sourceQuantity": {
+        "amount": 240,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brewed-espresso",
+      "initialState": "cooked",
+      "massG": 250,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brewed-espresso",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tiramisu-portion-05",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "brewed-espresso:ml:weight-v1",
+        "unit": "ml"
+      },
+      "volumeMl": 250
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cocoa-powder",
+      "initialState": "dry",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cocoa-powder",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tiramisu-portion-06",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 16.6,
+      "calories": 455.425,
+      "carbs": 34.948125,
+      "fat": 32.300625,
+      "fiber": 1.29375,
+      "protein": 8.63625,
+      "saturatedFat": 19.789375,
+      "sodium": 89.39375,
+      "sugar": 19.80875
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mascarpone",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mascarpone",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mascarpone",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ladyfinger-biscuit",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ladyfinger-biscuit",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ladyfinger-biscuit",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brewed-espresso",
+        "ingredientState": "cooked",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brewed-espresso",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brewed-espresso",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cocoa-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cocoa-powder",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cocoa-powder",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 8,
+    "total": {
+      "addedSugar": 132.8,
+      "calories": 3643.4,
+      "carbs": 279.585,
+      "fat": 258.405,
+      "fiber": 10.35,
+      "protein": 69.09,
+      "saturatedFat": 158.315,
+      "sodium": 715.15,
+      "sugar": 158.47
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "heatproof-bowl",
+        "inputPortionIds": [
+          "tiramisu-portion-02"
+        ],
+        "nodeId": "tiramisu-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tiramisu-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-001-add"
+        ],
+        "equipmentId": "heatproof-bowl",
+        "inputPortionIds": [
+          "tiramisu-portion-02"
+        ],
+        "nodeId": "tiramisu-op-002-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "tiramisu-step-1-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-002-stir"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "tiramisu-portion-02"
+        ],
+        "nodeId": "tiramisu-op-003-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "tiramisu-step-1-whisk"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 240000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-003-whisk"
+        ],
+        "equipmentId": "heatproof-bowl",
+        "inputPortionIds": [],
+        "nodeId": "tiramisu-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "tiramisu-step-2-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 240000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-004-mix"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [],
+        "nodeId": "tiramisu-op-005-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "tiramisu-step-2-whisk"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tiramisu-op-005-whisk"
+        ],
+        "equipmentId": "heatproof-bowl",
+        "inputPortionIds": [
+          "tiramisu-portion-04"
+        ],
+        "nodeId": "tiramisu-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tiramisu-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 240
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-006-add"
+        ],
+        "equipmentId": "heatproof-bowl",
+        "inputPortionIds": [
+          "tiramisu-portion-04"
+        ],
+        "nodeId": "tiramisu-op-007-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "tiramisu-step-3-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 140000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-007-rest"
+        ],
+        "inputPortionIds": [
+          "tiramisu-portion-04"
+        ],
+        "nodeId": "tiramisu-op-008-extract",
+        "operationType": "extract",
+        "outputStateIds": [
+          "tiramisu-step-3-extract"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "bitterness",
+            "maximum": 0.7,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "aroma",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 140000
+      },
+      {
+        "activeDurationMs": 140000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tiramisu-op-008-extract"
+        ],
+        "equipmentId": "square-dish",
+        "inputPortionIds": [
+          "tiramisu-portion-04"
+        ],
+        "nodeId": "tiramisu-op-009-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "tiramisu-step-3-assemble"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tiramisu-op-009-assemble"
+        ],
+        "equipmentId": "heatproof-bowl",
+        "inputPortionIds": [
+          "tiramisu-portion-06"
+        ],
+        "nodeId": "tiramisu-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tiramisu-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "tiramisu-op-010-add"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "tiramisu-portion-06"
+        ],
+        "nodeId": "tiramisu-op-011-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "tiramisu-step-5-chill"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 10800000
+      },
+      {
+        "activeDurationMs": 10800000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tiramisu-op-011-chill"
+        ],
+        "equipmentId": "square-dish",
+        "inputPortionIds": [
+          "tiramisu-portion-06"
+        ],
+        "nodeId": "tiramisu-op-012-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "tiramisu-step-5-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "tiramisu",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-002-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-002-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-003-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-003-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-005-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-005-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-007-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-007-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "tiramisu-op-007-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-007-rest-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:extract"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "bitterness",
+          "direction": "unchanged"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-extract"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-008-extract",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-008-extract-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "duration-short:extract"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "aroma",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "bitterness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "tiramisu-op-008-extract",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-008-extract-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "tiramisu-op-011-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-011-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "causeCodes": [
+        "duration-short:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "tiramisu-op-011-chill",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "tiramisu-tiramisu-op-011-chill-short"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 8,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "tiramisu",
+  "sourceCulinaryItemId": "tiramisu",
+  "yield": {
+    "amount": 8,
+    "unit": "serving"
+  }
+}

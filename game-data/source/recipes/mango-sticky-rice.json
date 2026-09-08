@@ -1,0 +1,1289 @@
+{
+  "artifactVersion": "clv1-067a5f59bad27257",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:mango-sticky-rice-op-005-drain:equipment",
+      "operation:mango-sticky-rice-op-006-drain:equipment",
+      "operation:mango-sticky-rice-op-006-drain:inputs",
+      "operation:mango-sticky-rice-op-007-steam:inputs",
+      "operation:mango-sticky-rice-op-007-steam:parameters",
+      "operation:mango-sticky-rice-op-007-steam:targets-source",
+      "operation:mango-sticky-rice-op-010-simmer:targets-source",
+      "operation:mango-sticky-rice-op-012-boil:targets-source",
+      "operation:mango-sticky-rice-op-013-mix:inputs",
+      "operation:mango-sticky-rice-op-013-mix:parameters-source",
+      "operation:mango-sticky-rice-op-013-mix:targets-source",
+      "operation:mango-sticky-rice-op-014-rest:inputs",
+      "operation:mango-sticky-rice-op-015-stir:inputs",
+      "operation:mango-sticky-rice-op-015-stir:parameters-source",
+      "operation:mango-sticky-rice-op-015-stir:targets-source",
+      "operation:mango-sticky-rice-op-016-peel:equipment",
+      "operation:mango-sticky-rice-op-017-slice:equipment",
+      "operation:mango-sticky-rice-op-017-slice:parameters-source",
+      "operation:mango-sticky-rice-op-017-slice:targets-source",
+      "portion:mango-sticky-rice-portion-05:source-step",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-001-wash-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-004-rest-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-004-rest-short:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-005-drain-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-006-drain-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-007-steam-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-007-steam-short:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-010-simmer-hot:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-010-simmer-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-010-simmer-short:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-011-set-heat-hot:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-011-set-heat-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-012-boil-hot:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-012-boil-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-012-boil-short:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-013-mix-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-014-rest-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-014-rest-short:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-015-stir-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-016-peel-omit:expected-outcome",
+      "scenario:mango-sticky-rice-mango-sticky-rice-op-017-slice-omit:expected-outcome"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "glutinous-rice",
+      "initialState": "dry",
+      "massG": 250,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-glutinous-rice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-sticky-rice-portion-01",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "mango",
+      "initialState": "raw",
+      "massG": 600,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-sticky-rice-portion-02",
+      "sourceQuantity": {
+        "amount": 600,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "coconut-milk",
+      "initialState": "liquid",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-sticky-rice-portion-03",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "coconut-milk:ml:weight-v1",
+        "unit": "ml"
+      },
+      "volumeMl": 400
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-sticky-rice-portion-04",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-sticky-rice-portion-05",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 800,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-sticky-rice-portion-06",
+      "sourceQuantity": {
+        "amount": 800,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
+      "volumeMl": 800
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15,
+      "calories": 578.25,
+      "carbs": 91.3625,
+      "fat": 21.975,
+      "fiber": 4.15,
+      "protein": 7.45,
+      "saturatedFat": 18.2125,
+      "sodium": 217.375,
+      "sugar": 37.2125
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "glutinous-rice",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-glutinous-rice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "glutinous-rice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mango",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mango",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "coconut-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "coconut-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 60,
+      "calories": 2313,
+      "carbs": 365.45,
+      "fat": 87.9,
+      "fiber": 16.6,
+      "protein": 29.8,
+      "saturatedFat": 72.85,
+      "sodium": 869.5,
+      "sugar": 148.85
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 4800000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-01",
+          "mango-sticky-rice-portion-06"
+        ],
+        "nodeId": "mango-sticky-rice-op-001-wash",
+        "operationType": "wash",
+        "outputStateIds": [
+          "mango-sticky-rice-step-1-wash"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-sticky-rice-op-001-wash"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-01"
+        ],
+        "nodeId": "mango-sticky-rice-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mango-sticky-rice-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 250
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-sticky-rice-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-06"
+        ],
+        "nodeId": "mango-sticky-rice-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mango-sticky-rice-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 800
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-003-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-01",
+          "mango-sticky-rice-portion-06"
+        ],
+        "nodeId": "mango-sticky-rice-op-004-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "mango-sticky-rice-step-1-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 4800000
+      },
+      {
+        "activeDurationMs": 4800000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-004-rest"
+        ],
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-01",
+          "mango-sticky-rice-portion-06"
+        ],
+        "nodeId": "mango-sticky-rice-op-005-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "mango-sticky-rice-step-1-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 750000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-005-drain"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "mango-sticky-rice-op-006-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "mango-sticky-rice-step-2-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-006-drain"
+        ],
+        "equipmentId": "steamer",
+        "inputPortionIds": [],
+        "nodeId": "mango-sticky-rice-op-007-steam",
+        "operationType": "steam",
+        "outputStateIds": [
+          "mango-sticky-rice-step-2-steam"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 750000
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-sticky-rice-op-007-steam"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-03"
+        ],
+        "nodeId": "mango-sticky-rice-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mango-sticky-rice-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 400
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-sticky-rice-op-008-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-04"
+        ],
+        "nodeId": "mango-sticky-rice-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mango-sticky-rice-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-009-add"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-03",
+          "mango-sticky-rice-portion-04"
+        ],
+        "nodeId": "mango-sticky-rice-op-010-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "mango-sticky-rice-step-3-simmer"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 100000
+      },
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-010-simmer"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-03",
+          "mango-sticky-rice-portion-04"
+        ],
+        "nodeId": "mango-sticky-rice-op-011-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "mango-sticky-rice-step-3-set-heat"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-011-set-heat"
+        ],
+        "equipmentId": "small-saucepan",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-03",
+          "mango-sticky-rice-portion-04"
+        ],
+        "nodeId": "mango-sticky-rice-op-012-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "mango-sticky-rice-step-3-boil"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 100000
+      },
+      {
+        "activeDurationMs": 400000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-012-boil"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "mango-sticky-rice-op-013-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "mango-sticky-rice-step-4-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-013-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "mango-sticky-rice-op-014-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "mango-sticky-rice-step-4-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 400000
+      },
+      {
+        "activeDurationMs": 400000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-014-rest"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "mango-sticky-rice-op-015-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "mango-sticky-rice-step-4-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-015-stir"
+        ],
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-02"
+        ],
+        "nodeId": "mango-sticky-rice-op-016-peel",
+        "operationType": "peel",
+        "outputStateIds": [
+          "mango-sticky-rice-step-5-peel"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 100000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-sticky-rice-op-016-peel"
+        ],
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-02"
+        ],
+        "nodeId": "mango-sticky-rice-op-017-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "mango-sticky-rice-step-5-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-sticky-rice-op-017-slice"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-02"
+        ],
+        "nodeId": "mango-sticky-rice-op-018-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "mango-sticky-rice-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 600
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 100000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-sticky-rice-op-018-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-sticky-rice-portion-02"
+        ],
+        "nodeId": "mango-sticky-rice-op-019-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "mango-sticky-rice-step-5-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "mango-sticky-rice",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:wash"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-wash"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-001-wash",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-001-wash-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-004-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-004-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "mango-sticky-rice-op-004-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-004-rest-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-005-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-005-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-006-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-006-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-steam"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-007-steam",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "terminal",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-007-steam-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "duration-short:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "mango-sticky-rice-op-007-steam",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-007-steam-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-010-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-010-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "duration-short:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "mango-sticky-rice-op-010-simmer",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-010-simmer-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "heat-high:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "mango-sticky-rice-op-010-simmer",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-010-simmer-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-011-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-011-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "mango-sticky-rice-op-011-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-011-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-012-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-012-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "duration-short:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "mango-sticky-rice-op-012-boil",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-012-boil-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "heat-high:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "mango-sticky-rice-op-012-boil",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-012-boil-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-013-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-013-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-014-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-014-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "mango-sticky-rice-op-014-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-014-rest-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-015-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-015-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:peel"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-peel"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-016-peel",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-016-peel-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-sticky-rice-op-017-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-sticky-rice-mango-sticky-rice-op-017-slice-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "mango-sticky-rice",
+  "sourceCulinaryItemId": "mango-sticky-rice",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

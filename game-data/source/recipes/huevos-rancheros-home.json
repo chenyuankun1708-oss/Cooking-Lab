@@ -1,0 +1,710 @@
+{
+  "artifactVersion": "clv1-45409d77ae2dcf5a",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:huevos-rancheros-home-op-001-mince:duration",
+      "operation:huevos-rancheros-home-op-001-mince:parameters-source",
+      "operation:huevos-rancheros-home-op-001-mince:targets-source",
+      "operation:huevos-rancheros-home-op-007-drain:duration",
+      "operation:huevos-rancheros-home-op-007-drain:equipment",
+      "operation:huevos-rancheros-home-op-008-simmer:duration",
+      "operation:huevos-rancheros-home-op-008-simmer:equipment",
+      "operation:huevos-rancheros-home-op-008-simmer:inputs",
+      "operation:huevos-rancheros-home-op-008-simmer:targets-source",
+      "operation:huevos-rancheros-home-op-010-set-heat:duration",
+      "operation:huevos-rancheros-home-op-010-set-heat:parameters",
+      "portion:huevos-rancheros-home-portion-07:source-step",
+      "portion:huevos-rancheros-home-portion-08:source-step",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-001-mince-omit:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-007-drain-omit:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-hot:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-omit:expected-outcome",
+      "scenario:huevos-rancheros-home-huevos-rancheros-home-op-010-set-heat-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-01",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "corn-tortilla",
+      "initialState": "raw",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-corn-tortilla",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-02",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "corn-tortilla:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooked-black-bean",
+      "initialState": "cooked",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-black-bean",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-03",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tomato",
+      "initialState": "raw",
+      "massG": 260,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-04",
+      "sourceQuantity": {
+        "amount": 260,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-05",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-06",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-07",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "huevos-rancheros-home-portion-08",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 331.4,
+      "carbs": 48.102,
+      "fat": 9.556,
+      "fiber": 10.43,
+      "protein": 15.856,
+      "saturatedFat": 2.19,
+      "sodium": 303.46,
+      "sugar": 6.222
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "corn-tortilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-corn-tortilla",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "corn-tortilla",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooked-black-bean",
+        "ingredientState": "cooked",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooked-black-bean",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooked-black-bean",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tomato",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tomato",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 662.8,
+      "carbs": 96.204,
+      "fat": 19.112,
+      "fiber": 20.86,
+      "protein": 31.712,
+      "saturatedFat": 4.38,
+      "sodium": 606.92,
+      "sugar": 12.444
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-01",
+          "huevos-rancheros-home-portion-03",
+          "huevos-rancheros-home-portion-04",
+          "huevos-rancheros-home-portion-05",
+          "huevos-rancheros-home-portion-06"
+        ],
+        "nodeId": "huevos-rancheros-home-op-001-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "huevos-rancheros-home-step-1-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-001-mince"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-01"
+        ],
+        "nodeId": "huevos-rancheros-home-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "huevos-rancheros-home-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-002-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-03"
+        ],
+        "nodeId": "huevos-rancheros-home-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "huevos-rancheros-home-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-003-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-04"
+        ],
+        "nodeId": "huevos-rancheros-home-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "huevos-rancheros-home-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 260
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-004-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-05"
+        ],
+        "nodeId": "huevos-rancheros-home-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "huevos-rancheros-home-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-005-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-06"
+        ],
+        "nodeId": "huevos-rancheros-home-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "huevos-rancheros-home-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 8
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "huevos-rancheros-home-op-006-add"
+        ],
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-01",
+          "huevos-rancheros-home-portion-03",
+          "huevos-rancheros-home-portion-04",
+          "huevos-rancheros-home-portion-05",
+          "huevos-rancheros-home-portion-06"
+        ],
+        "nodeId": "huevos-rancheros-home-op-007-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "huevos-rancheros-home-step-1-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "huevos-rancheros-home-op-007-drain"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "huevos-rancheros-home-op-008-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "huevos-rancheros-home-step-2-simmer"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-008-simmer"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-02"
+        ],
+        "nodeId": "huevos-rancheros-home-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "huevos-rancheros-home-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 120
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "huevos-rancheros-home-op-009-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-02"
+        ],
+        "nodeId": "huevos-rancheros-home-op-010-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "huevos-rancheros-home-step-4-set-heat"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "huevos-rancheros-home-op-010-set-heat"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "huevos-rancheros-home-portion-01",
+          "huevos-rancheros-home-portion-02",
+          "huevos-rancheros-home-portion-03",
+          "huevos-rancheros-home-portion-04",
+          "huevos-rancheros-home-portion-05",
+          "huevos-rancheros-home-portion-06",
+          "huevos-rancheros-home-portion-07",
+          "huevos-rancheros-home-portion-08"
+        ],
+        "nodeId": "huevos-rancheros-home-op-011-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "huevos-rancheros-home-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "huevos-rancheros-home",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "huevos-rancheros-home-op-001-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-001-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "huevos-rancheros-home-op-007-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-007-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "huevos-rancheros-home-op-008-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "causeCodes": [
+        "heat-high:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "huevos-rancheros-home-op-008-simmer",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-008-simmer-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "huevos-rancheros-home-op-010-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "huevos-rancheros-home-huevos-rancheros-home-op-010-set-heat-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "huevos-rancheros-home",
+  "sourceCulinaryItemId": "huevos-rancheros-home",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

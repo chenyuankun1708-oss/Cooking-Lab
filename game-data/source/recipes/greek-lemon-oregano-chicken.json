@@ -1,0 +1,561 @@
+{
+  "artifactVersion": "clv1-05ef01fecbab8046",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:greek-lemon-oregano-chicken-op-001-add:equipment",
+      "operation:greek-lemon-oregano-chicken-op-002-add:equipment",
+      "operation:greek-lemon-oregano-chicken-op-003-add:equipment",
+      "operation:greek-lemon-oregano-chicken-op-004-set-heat:duration",
+      "operation:greek-lemon-oregano-chicken-op-004-set-heat:parameters",
+      "operation:greek-lemon-oregano-chicken-op-005-set-heat:duration",
+      "operation:greek-lemon-oregano-chicken-op-006-rest:duration",
+      "operation:greek-lemon-oregano-chicken-op-006-rest:equipment",
+      "operation:greek-lemon-oregano-chicken-op-006-rest:inputs",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:duration",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:equipment",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:inputs",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:parameters-source",
+      "operation:greek-lemon-oregano-chicken-op-007-stir:targets-source",
+      "portion:greek-lemon-oregano-chicken-portion-04:source-step",
+      "portion:greek-lemon-oregano-chicken-portion-05:source-step",
+      "portion:greek-lemon-oregano-chicken-portion-06:source-step",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-004-set-heat-omit:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-hot:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-omit:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-006-rest-omit:expected-outcome",
+      "scenario:greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-007-stir-omit:expected-outcome",
+      "source-step:1:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "chicken-thigh",
+      "initialState": "raw",
+      "massG": 340,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-lemon-oregano-chicken-portion-01",
+      "sourceQuantity": {
+        "amount": 340,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 45,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-lemon-oregano-chicken-portion-02",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "lemon:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "oregano",
+      "initialState": "raw",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oregano",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-lemon-oregano-chicken-portion-03",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-lemon-oregano-chicken-portion-04",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 6,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-lemon-oregano-chicken-portion-05",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-lemon-oregano-chicken-portion-06",
+      "sourceQuantity": {
+        "amount": 1.2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 289.48,
+      "carbs": 4.4515,
+      "fat": 15.052,
+      "fiber": 1.3515,
+      "protein": 32.9385,
+      "saturatedFat": 3.508,
+      "sodium": 356.305,
+      "sugar": 0.664
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "chicken-thigh",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "chicken-thigh",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "oregano",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oregano",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "oregano",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 578.96,
+      "carbs": 8.903,
+      "fat": 30.104,
+      "fiber": 2.703,
+      "protein": 65.877,
+      "saturatedFat": 7.016,
+      "sodium": 712.61,
+      "sugar": 1.328
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "inputPortionIds": [
+          "greek-lemon-oregano-chicken-portion-01"
+        ],
+        "nodeId": "greek-lemon-oregano-chicken-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 340
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-001-add"
+        ],
+        "inputPortionIds": [
+          "greek-lemon-oregano-chicken-portion-02"
+        ],
+        "nodeId": "greek-lemon-oregano-chicken-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 45
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-002-add"
+        ],
+        "inputPortionIds": [
+          "greek-lemon-oregano-chicken-portion-03"
+        ],
+        "nodeId": "greek-lemon-oregano-chicken-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 3
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-003-add"
+        ],
+        "equipmentId": "grill-pan",
+        "inputPortionIds": [],
+        "nodeId": "greek-lemon-oregano-chicken-op-004-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-step-2-set-heat"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-004-set-heat"
+        ],
+        "equipmentId": "grill-pan",
+        "inputPortionIds": [],
+        "nodeId": "greek-lemon-oregano-chicken-op-005-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-step-3-set-heat"
+        ],
+        "parameters": {
+          "heatLevel": 0.35,
+          "temperatureC": 74
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-005-set-heat"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "greek-lemon-oregano-chicken-op-006-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-step-4-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-006-rest"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "greek-lemon-oregano-chicken-op-007-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-step-4-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-lemon-oregano-chicken-op-007-stir"
+        ],
+        "equipmentId": "grill-pan",
+        "inputPortionIds": [
+          "greek-lemon-oregano-chicken-portion-01",
+          "greek-lemon-oregano-chicken-portion-02",
+          "greek-lemon-oregano-chicken-portion-03",
+          "greek-lemon-oregano-chicken-portion-04",
+          "greek-lemon-oregano-chicken-portion-05",
+          "greek-lemon-oregano-chicken-portion-06"
+        ],
+        "nodeId": "greek-lemon-oregano-chicken-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "greek-lemon-oregano-chicken-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "greek-lemon-oregano-chicken",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-lemon-oregano-chicken-op-004-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-004-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-lemon-oregano-chicken-op-005-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "greek-lemon-oregano-chicken-op-005-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-005-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-lemon-oregano-chicken-op-006-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-006-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-lemon-oregano-chicken-op-007-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-lemon-oregano-chicken-greek-lemon-oregano-chicken-op-007-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "greek-lemon-oregano-chicken",
+  "sourceCulinaryItemId": "greek-lemon-oregano-chicken",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

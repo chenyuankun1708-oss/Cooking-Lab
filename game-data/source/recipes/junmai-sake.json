@@ -1,0 +1,120 @@
+{
+  "artifactVersion": "clv1-0ef58472df2de726",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "portion:junmai-sake-portion-01:conversion",
+      "portion:junmai-sake-portion-01:identity",
+      "portion:junmai-sake-portion-01:nutrition",
+      "portion:junmai-sake-portion-01:quantity"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "junmai-sake-generic",
+      "initialState": "ready-to-serve",
+      "massG": 100,
+      "nutritionProvenanceId": "pending:junmai-sake-generic",
+      "optional": false,
+      "phase": "service",
+      "portionId": "junmai-sake-portion-01",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "unresolved-serving-guidance-quantity",
+        "unit": "g"
+      },
+      "volumeMl": 100
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 0,
+      "carbs": 0,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0,
+      "sugar": 0
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "pending",
+        "datasetVersion": "pending",
+        "ingredientId": "junmai-sake-generic",
+        "ingredientState": "ready-to-serve",
+        "nutritionProvenanceId": "pending:junmai-sake-generic",
+        "provider": "pending",
+        "retentionFactor": 1,
+        "upstreamRecordId": "pending:junmai-sake-generic",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 0,
+      "calories": 0,
+      "carbs": 0,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0,
+      "sugar": 0
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 180000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "sake-cup",
+        "inputPortionIds": [
+          "junmai-sake-portion-01"
+        ],
+        "nodeId": "junmai-sake-op-001-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "junmai-sake-served"
+        ],
+        "parameters": {},
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "junmai-sake",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "data-only",
+  "slug": "junmai-sake",
+  "sourceCulinaryItemId": "junmai-sake",
+  "yield": {
+    "amount": 1,
+    "unit": "serving"
+  }
+}

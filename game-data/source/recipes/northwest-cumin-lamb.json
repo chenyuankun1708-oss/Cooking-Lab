@@ -1,0 +1,807 @@
+{
+  "artifactVersion": "clv1-c1df5a83bce67b14",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:northwest-cumin-lamb-op-001-slice:duration",
+      "operation:northwest-cumin-lamb-op-001-slice:parameters-source",
+      "operation:northwest-cumin-lamb-op-001-slice:targets-source",
+      "operation:northwest-cumin-lamb-op-002-crush:duration",
+      "operation:northwest-cumin-lamb-op-002-crush:parameters-source",
+      "operation:northwest-cumin-lamb-op-007-set-heat:duration",
+      "operation:northwest-cumin-lamb-op-007-set-heat:parameters",
+      "operation:northwest-cumin-lamb-op-008-pan-fry:duration",
+      "operation:northwest-cumin-lamb-op-008-pan-fry:inputs",
+      "operation:northwest-cumin-lamb-op-008-pan-fry:parameters",
+      "operation:northwest-cumin-lamb-op-008-pan-fry:targets-source",
+      "operation:northwest-cumin-lamb-op-009-toss:duration",
+      "operation:northwest-cumin-lamb-op-009-toss:inputs",
+      "operation:northwest-cumin-lamb-op-009-toss:parameters-source",
+      "operation:northwest-cumin-lamb-op-009-toss:targets-source",
+      "operation:northwest-cumin-lamb-op-010-stir:duration",
+      "operation:northwest-cumin-lamb-op-010-stir:inputs",
+      "operation:northwest-cumin-lamb-op-010-stir:parameters-source",
+      "operation:northwest-cumin-lamb-op-010-stir:targets-source",
+      "operation:northwest-cumin-lamb-op-011-stir:duration",
+      "operation:northwest-cumin-lamb-op-011-stir:inputs",
+      "operation:northwest-cumin-lamb-op-011-stir:parameters-source",
+      "operation:northwest-cumin-lamb-op-011-stir:targets-source",
+      "operation:northwest-cumin-lamb-op-012-pan-fry:duration",
+      "operation:northwest-cumin-lamb-op-012-pan-fry:inputs",
+      "operation:northwest-cumin-lamb-op-012-pan-fry:parameters",
+      "operation:northwest-cumin-lamb-op-012-pan-fry:targets-source",
+      "portion:northwest-cumin-lamb-portion-05:source-step",
+      "portion:northwest-cumin-lamb-portion-06:source-step",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-001-slice-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-002-crush-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-007-set-heat-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-008-pan-fry-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-009-toss-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-010-stir-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-011-stir-omit:expected-outcome",
+      "scenario:northwest-cumin-lamb-northwest-cumin-lamb-op-012-pan-fry-omit:expected-outcome",
+      "source-step:4:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lamb",
+      "initialState": "raw",
+      "massG": 280,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lamb",
+      "optional": false,
+      "phase": "main",
+      "portionId": "northwest-cumin-lamb-portion-01",
+      "sourceQuantity": {
+        "amount": 280,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 160,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "northwest-cumin-lamb-portion-02",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cumin",
+      "initialState": "raw",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+      "optional": false,
+      "phase": "main",
+      "portionId": "northwest-cumin-lamb-portion-03",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "northwest-cumin-lamb-portion-04",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 6,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "northwest-cumin-lamb-portion-05",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "northwest-cumin-lamb-portion-06",
+      "sourceQuantity": {
+        "amount": 1.2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 336.895,
+      "carbs": 9.205,
+      "fat": 20.4675,
+      "fiber": 1.735,
+      "protein": 29.4675,
+      "saturatedFat": 7.4575,
+      "sodium": 341.875,
+      "sugar": 3.815
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lamb",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lamb",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lamb",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cumin",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cumin",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 673.79,
+      "carbs": 18.41,
+      "fat": 40.935,
+      "fiber": 3.47,
+      "protein": 58.935,
+      "saturatedFat": 14.915,
+      "sodium": 683.75,
+      "sugar": 7.63
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-01",
+          "northwest-cumin-lamb-portion-02",
+          "northwest-cumin-lamb-portion-03",
+          "northwest-cumin-lamb-portion-04"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-001-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-001-slice"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-01",
+          "northwest-cumin-lamb-portion-02",
+          "northwest-cumin-lamb-portion-03",
+          "northwest-cumin-lamb-portion-04"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-002-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-1-crush"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-002-crush"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-01"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "northwest-cumin-lamb-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 280
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-003-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-02"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "northwest-cumin-lamb-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 160
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-004-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-03"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "northwest-cumin-lamb-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-005-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-04"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "northwest-cumin-lamb-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-006-add"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "northwest-cumin-lamb-op-007-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-2-set-heat"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-007-set-heat"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "northwest-cumin-lamb-op-008-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-2-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-008-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "northwest-cumin-lamb-op-009-toss",
+        "operationType": "toss",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-2-toss"
+        ],
+        "parameters": {
+          "strength": 0.95
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-009-toss"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "northwest-cumin-lamb-op-010-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-2-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-010-stir"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "northwest-cumin-lamb-op-011-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-3-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-011-stir"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [],
+        "nodeId": "northwest-cumin-lamb-op-012-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "northwest-cumin-lamb-step-3-pan-fry"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "northwest-cumin-lamb-op-012-pan-fry"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "northwest-cumin-lamb-portion-01",
+          "northwest-cumin-lamb-portion-02",
+          "northwest-cumin-lamb-portion-03",
+          "northwest-cumin-lamb-portion-04",
+          "northwest-cumin-lamb-portion-05",
+          "northwest-cumin-lamb-portion-06"
+        ],
+        "nodeId": "northwest-cumin-lamb-op-013-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "northwest-cumin-lamb-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "northwest-cumin-lamb",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-001-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-001-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-002-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-002-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-007-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-007-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-008-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-008-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:toss"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-toss"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-009-toss",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-009-toss-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-010-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-010-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-011-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-011-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "northwest-cumin-lamb-op-012-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "northwest-cumin-lamb-northwest-cumin-lamb-op-012-pan-fry-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "northwest-cumin-lamb",
+  "sourceCulinaryItemId": "northwest-cumin-lamb",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

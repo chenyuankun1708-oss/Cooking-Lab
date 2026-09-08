@@ -1,0 +1,598 @@
+{
+  "artifactVersion": "clv1-3ff1004b3a2cf502",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:japanese-miso-tofu-soup-op-003-set-heat:duration",
+      "operation:japanese-miso-tofu-soup-op-004-simmer:duration",
+      "operation:japanese-miso-tofu-soup-op-004-simmer:inputs",
+      "operation:japanese-miso-tofu-soup-op-004-simmer:targets-source",
+      "operation:japanese-miso-tofu-soup-op-005-mix:duration",
+      "operation:japanese-miso-tofu-soup-op-005-mix:inputs",
+      "operation:japanese-miso-tofu-soup-op-005-mix:parameters-source",
+      "operation:japanese-miso-tofu-soup-op-005-mix:targets-source",
+      "operation:japanese-miso-tofu-soup-op-006-season:duration",
+      "operation:japanese-miso-tofu-soup-op-006-season:inputs",
+      "operation:japanese-miso-tofu-soup-op-006-season:parameters",
+      "operation:japanese-miso-tofu-soup-op-006-season:targets-source",
+      "operation:japanese-miso-tofu-soup-op-007-boil:duration",
+      "operation:japanese-miso-tofu-soup-op-007-boil:inputs",
+      "operation:japanese-miso-tofu-soup-op-007-boil:parameters",
+      "operation:japanese-miso-tofu-soup-op-007-boil:targets-source",
+      "portion:japanese-miso-tofu-soup-portion-02:source-step",
+      "portion:japanese-miso-tofu-soup-portion-04:source-step",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-003-set-heat-hot:expected-outcome",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-003-set-heat-omit:expected-outcome",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-004-simmer-hot:expected-outcome",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-004-simmer-omit:expected-outcome",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-005-mix-omit:expected-outcome",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-006-season-omit:expected-outcome",
+      "scenario:japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-007-boil-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tofu",
+      "initialState": "raw",
+      "massG": 260,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tofu",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-tofu-soup-portion-01",
+      "sourceQuantity": {
+        "amount": 260,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "mushroom",
+      "initialState": "raw",
+      "massG": 160,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-tofu-soup-portion-02",
+      "sourceQuantity": {
+        "amount": 160,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "miso",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-miso",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-tofu-soup-portion-03",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "scallion",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "japanese-miso-tofu-soup-portion-04",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 111.233333,
+      "carbs": 6.458333,
+      "fat": 5.103333,
+      "fiber": 1.596667,
+      "protein": 11.61,
+      "saturatedFat": 0.846667,
+      "sodium": 382.133333,
+      "sugar": 2.215
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tofu",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tofu",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tofu",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mushroom",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mushroom",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mushroom",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "miso",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-miso",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "miso",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scallion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scallion",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 333.7,
+      "carbs": 19.375,
+      "fat": 15.31,
+      "fiber": 4.79,
+      "protein": 34.83,
+      "saturatedFat": 2.54,
+      "sodium": 1146.4,
+      "sugar": 6.645
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "japanese-miso-tofu-soup-portion-01"
+        ],
+        "nodeId": "japanese-miso-tofu-soup-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 260
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-001-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "japanese-miso-tofu-soup-portion-03"
+        ],
+        "nodeId": "japanese-miso-tofu-soup-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 30
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-002-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-tofu-soup-op-003-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-step-2-set-heat"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-003-set-heat"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-tofu-soup-op-004-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-step-2-simmer"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-004-simmer"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-tofu-soup-op-005-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-step-4-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-005-mix"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-tofu-soup-op-006-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-step-4-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-006-season"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "japanese-miso-tofu-soup-op-007-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-step-4-boil"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "japanese-miso-tofu-soup-op-007-boil"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "japanese-miso-tofu-soup-portion-01",
+          "japanese-miso-tofu-soup-portion-02",
+          "japanese-miso-tofu-soup-portion-03",
+          "japanese-miso-tofu-soup-portion-04"
+        ],
+        "nodeId": "japanese-miso-tofu-soup-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "japanese-miso-tofu-soup-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "japanese-miso-tofu-soup",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-tofu-soup-op-003-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-003-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "japanese-miso-tofu-soup-op-003-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-003-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-tofu-soup-op-004-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-004-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "heat-high:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "japanese-miso-tofu-soup-op-004-simmer",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-004-simmer-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-tofu-soup-op-005-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-005-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-tofu-soup-op-006-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-006-season-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "japanese-miso-tofu-soup-op-007-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "japanese-miso-tofu-soup-japanese-miso-tofu-soup-op-007-boil-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "japanese-miso-tofu-soup",
+  "sourceCulinaryItemId": "japanese-miso-tofu-soup",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

@@ -1,0 +1,1024 @@
+{
+  "artifactVersion": "clv1-dd053bbe58b91bd4",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:apple-crumble-op-005-bake:targets-source",
+      "operation:apple-crumble-op-007-mix:parameters-source",
+      "operation:apple-crumble-op-007-mix:targets-source",
+      "operation:apple-crumble-op-011-mix:parameters-source",
+      "operation:apple-crumble-op-011-mix:targets-source",
+      "operation:apple-crumble-op-012-shape:targets-source",
+      "operation:apple-crumble-op-013-bake:inputs",
+      "operation:apple-crumble-op-013-bake:parameters",
+      "operation:apple-crumble-op-013-bake:targets-source",
+      "operation:apple-crumble-op-014-rest:inputs",
+      "operation:apple-crumble-op-015-serve:inputs",
+      "portion:apple-crumble-portion-08:source-step",
+      "scenario:apple-crumble-apple-crumble-op-005-bake-hot:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-005-bake-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-005-bake-short:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-006-set-heat-hot:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-006-set-heat-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-007-mix-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-011-mix-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-012-shape-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-013-bake-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-013-bake-short:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-014-rest-omit:expected-outcome",
+      "scenario:apple-crumble-apple-crumble-op-014-rest-short:expected-outcome"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "apple",
+      "initialState": "raw",
+      "massG": 720,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-apple",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-01",
+      "sourceQuantity": {
+        "amount": 720,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-02",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "oats",
+      "initialState": "raw",
+      "massG": 50,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oats",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-03",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-04",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-05",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cinnamon",
+      "initialState": "raw",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-06",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 90,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-07",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "lemon:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "apple-crumble-portion-08",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 13.333333,
+      "calories": 345.201667,
+      "carbs": 52.611667,
+      "fat": 14.549333,
+      "fiber": 4.946667,
+      "protein": 3.855,
+      "saturatedFat": 8.708167,
+      "sodium": 69.783333,
+      "sugar": 26.359333
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "apple",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-apple",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "apple",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "oats",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-oats",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "oats",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cinnamon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cinnamon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 6,
+    "total": {
+      "addedSugar": 80,
+      "calories": 2071.21,
+      "carbs": 315.67,
+      "fat": 87.296,
+      "fiber": 29.68,
+      "protein": 23.13,
+      "saturatedFat": 52.249,
+      "sodium": 418.7,
+      "sugar": 158.156
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-01"
+        ],
+        "nodeId": "apple-crumble-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 720
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-001-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-05"
+        ],
+        "nodeId": "apple-crumble-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-06"
+        ],
+        "nodeId": "apple-crumble-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 3
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-003-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-07"
+        ],
+        "nodeId": "apple-crumble-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 90
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-004-add"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "apple-crumble-portion-01",
+          "apple-crumble-portion-05",
+          "apple-crumble-portion-06",
+          "apple-crumble-portion-07"
+        ],
+        "nodeId": "apple-crumble-op-005-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "apple-crumble-step-1-bake"
+        ],
+        "parameters": {
+          "temperatureC": 190
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 160000
+      },
+      {
+        "activeDurationMs": 160000,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-005-bake"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "apple-crumble-portion-01",
+          "apple-crumble-portion-05",
+          "apple-crumble-portion-06",
+          "apple-crumble-portion-07"
+        ],
+        "nodeId": "apple-crumble-op-006-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "apple-crumble-step-1-set-heat"
+        ],
+        "parameters": {
+          "temperatureC": 190
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 160000,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-006-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-01",
+          "apple-crumble-portion-05",
+          "apple-crumble-portion-06",
+          "apple-crumble-portion-07"
+        ],
+        "nodeId": "apple-crumble-op-007-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "apple-crumble-step-1-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-007-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-02"
+        ],
+        "nodeId": "apple-crumble-op-008-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 120
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-008-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-03"
+        ],
+        "nodeId": "apple-crumble-op-009-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 50
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-009-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-04"
+        ],
+        "nodeId": "apple-crumble-op-010-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "apple-crumble-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 210000,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-010-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "apple-crumble-portion-02",
+          "apple-crumble-portion-03",
+          "apple-crumble-portion-04"
+        ],
+        "nodeId": "apple-crumble-op-011-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "apple-crumble-step-2-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 210000,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-011-mix"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "apple-crumble-portion-02",
+          "apple-crumble-portion-03",
+          "apple-crumble-portion-04"
+        ],
+        "nodeId": "apple-crumble-op-012-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "apple-crumble-step-2-shape"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-012-shape"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [],
+        "nodeId": "apple-crumble-op-013-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "apple-crumble-step-3-bake"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 2400000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "apple-crumble-op-013-bake"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "apple-crumble-op-014-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "apple-crumble-step-4-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "completion",
+        "dependsOn": [
+          "apple-crumble-op-014-rest"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [],
+        "nodeId": "apple-crumble-op-015-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "apple-crumble-step-4-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "apple-crumble",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-005-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "terminal",
+      "scenarioId": "apple-crumble-apple-crumble-op-005-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "duration-short:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "apple-crumble-op-005-bake",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-005-bake-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "heat-high:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "apple-crumble-op-005-bake",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-005-bake-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-006-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-006-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "heat-high:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "apple-crumble-op-006-set-heat",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-006-set-heat-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-007-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-007-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-011-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-011-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-012-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-012-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-013-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "terminal",
+      "scenarioId": "apple-crumble-apple-crumble-op-013-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "duration-short:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "apple-crumble-op-013-bake",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-013-bake-short"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "apple-crumble-op-014-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-014-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "causeCodes": [
+        "duration-short:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "underprocessed"
+      ],
+      "mutation": {
+        "scalar": 0.5,
+        "targetNodeId": "apple-crumble-op-014-rest",
+        "type": "duration-too-short"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "recoverable",
+      "scenarioId": "apple-crumble-apple-crumble-op-014-rest-short"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 6,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "apple-crumble",
+  "sourceCulinaryItemId": "apple-crumble",
+  "yield": {
+    "amount": 6,
+    "unit": "serving"
+  }
+}

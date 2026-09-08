@@ -1,0 +1,624 @@
+{
+  "artifactVersion": "clv1-02ccf74d22aad1c9",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:singapore-chicken-rice-home-op-001-wash:duration",
+      "operation:singapore-chicken-rice-home-op-001-wash:equipment",
+      "operation:singapore-chicken-rice-home-op-002-slice:duration",
+      "operation:singapore-chicken-rice-home-op-002-slice:parameters-source",
+      "operation:singapore-chicken-rice-home-op-002-slice:targets-source",
+      "operation:singapore-chicken-rice-home-op-003-add:equipment",
+      "operation:singapore-chicken-rice-home-op-004-drain:duration",
+      "operation:singapore-chicken-rice-home-op-004-drain:equipment",
+      "operation:singapore-chicken-rice-home-op-005-chill:duration",
+      "operation:singapore-chicken-rice-home-op-005-chill:equipment",
+      "operation:singapore-chicken-rice-home-op-005-chill:parameters",
+      "operation:singapore-chicken-rice-home-op-006-mix:duration",
+      "operation:singapore-chicken-rice-home-op-006-mix:equipment",
+      "operation:singapore-chicken-rice-home-op-006-mix:inputs",
+      "operation:singapore-chicken-rice-home-op-006-mix:parameters-source",
+      "operation:singapore-chicken-rice-home-op-006-mix:targets-source",
+      "operation:singapore-chicken-rice-home-op-007-dice:duration",
+      "operation:singapore-chicken-rice-home-op-007-dice:inputs",
+      "operation:singapore-chicken-rice-home-op-007-dice:parameters-source",
+      "operation:singapore-chicken-rice-home-op-007-dice:targets-source",
+      "operation:singapore-chicken-rice-home-op-008-serve:duration",
+      "operation:singapore-chicken-rice-home-op-008-serve:inputs",
+      "portion:singapore-chicken-rice-home-portion-01:source-step",
+      "portion:singapore-chicken-rice-home-portion-02:source-step",
+      "portion:singapore-chicken-rice-home-portion-03:source-step",
+      "portion:singapore-chicken-rice-home-portion-04:source-step",
+      "portion:singapore-chicken-rice-home-portion-06:source-step",
+      "portion:singapore-chicken-rice-home-portion-07:source-step",
+      "scenario:singapore-chicken-rice-home-singapore-chicken-rice-home-op-001-wash-omit:expected-outcome",
+      "scenario:singapore-chicken-rice-home-singapore-chicken-rice-home-op-002-slice-omit:expected-outcome",
+      "scenario:singapore-chicken-rice-home-singapore-chicken-rice-home-op-004-drain-omit:expected-outcome",
+      "scenario:singapore-chicken-rice-home-singapore-chicken-rice-home-op-005-chill-omit:expected-outcome",
+      "scenario:singapore-chicken-rice-home-singapore-chicken-rice-home-op-006-mix-omit:expected-outcome",
+      "scenario:singapore-chicken-rice-home-singapore-chicken-rice-home-op-007-dice-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "rice",
+      "initialState": "raw",
+      "massG": 210,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-01",
+      "sourceQuantity": {
+        "amount": 210,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "chicken-thigh",
+      "initialState": "raw",
+      "massG": 330,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-02",
+      "sourceQuantity": {
+        "amount": 330,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-03",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "scallion",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-04",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cucumber",
+      "initialState": "raw",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-05",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-06",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "singapore-chicken-rice-home-portion-07",
+      "sourceQuantity": {
+        "amount": 1.3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 431.566667,
+      "carbs": 57.576667,
+      "fat": 10.04,
+      "fiber": 1.063333,
+      "protein": 26.71,
+      "saturatedFat": 2.363333,
+      "sodium": 251.616667,
+      "sugar": 1.328333
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "rice",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "rice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "chicken-thigh",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "chicken-thigh",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scallion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scallion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cucumber",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cucumber",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 1294.7,
+      "carbs": 172.73,
+      "fat": 30.12,
+      "fiber": 3.19,
+      "protein": 80.13,
+      "saturatedFat": 7.09,
+      "sodium": 754.85,
+      "sugar": 3.985
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "inputPortionIds": [
+          "singapore-chicken-rice-home-portion-05"
+        ],
+        "nodeId": "singapore-chicken-rice-home-op-001-wash",
+        "operationType": "wash",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-1-wash"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-001-wash"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "singapore-chicken-rice-home-portion-05"
+        ],
+        "nodeId": "singapore-chicken-rice-home-op-002-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-1-slice"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-002-slice"
+        ],
+        "inputPortionIds": [
+          "singapore-chicken-rice-home-portion-05"
+        ],
+        "nodeId": "singapore-chicken-rice-home-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 180
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-003-add"
+        ],
+        "inputPortionIds": [
+          "singapore-chicken-rice-home-portion-05"
+        ],
+        "nodeId": "singapore-chicken-rice-home-op-004-drain",
+        "operationType": "drain",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-1-drain"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-004-drain"
+        ],
+        "inputPortionIds": [
+          "singapore-chicken-rice-home-portion-05"
+        ],
+        "nodeId": "singapore-chicken-rice-home-op-005-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-1-chill"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-005-chill"
+        ],
+        "inputPortionIds": [],
+        "nodeId": "singapore-chicken-rice-home-op-006-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-2-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-006-mix"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [],
+        "nodeId": "singapore-chicken-rice-home-op-007-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-4-dice"
+        ],
+        "parameters": {
+          "cutSizeMm": 12,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "singapore-chicken-rice-home-op-007-dice"
+        ],
+        "equipmentId": "rice-cooker",
+        "inputPortionIds": [],
+        "nodeId": "singapore-chicken-rice-home-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "singapore-chicken-rice-home-step-4-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "singapore-chicken-rice-home",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "causeCodes": [
+        "operation-omitted:wash"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-wash"
+      ],
+      "mutation": {
+        "targetNodeId": "singapore-chicken-rice-home-op-001-wash",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "singapore-chicken-rice-home-singapore-chicken-rice-home-op-001-wash-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "singapore-chicken-rice-home-op-002-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "singapore-chicken-rice-home-singapore-chicken-rice-home-op-002-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "causeCodes": [
+        "operation-omitted:drain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-drain"
+      ],
+      "mutation": {
+        "targetNodeId": "singapore-chicken-rice-home-op-004-drain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "singapore-chicken-rice-home-singapore-chicken-rice-home-op-004-drain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "singapore-chicken-rice-home-op-005-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "singapore-chicken-rice-home-singapore-chicken-rice-home-op-005-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "singapore-chicken-rice-home-op-006-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "singapore-chicken-rice-home-singapore-chicken-rice-home-op-006-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "singapore-chicken-rice-home-op-007-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "singapore-chicken-rice-home-singapore-chicken-rice-home-op-007-dice-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "singapore-chicken-rice-home",
+  "sourceCulinaryItemId": "singapore-chicken-rice-home",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

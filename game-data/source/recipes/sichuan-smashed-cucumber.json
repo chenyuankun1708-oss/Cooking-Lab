@@ -1,0 +1,617 @@
+{
+  "artifactVersion": "clv1-5cce6afd92a0b200",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:sichuan-smashed-cucumber-op-001-wash:duration",
+      "operation:sichuan-smashed-cucumber-op-003-mix:duration",
+      "operation:sichuan-smashed-cucumber-op-003-mix:inputs",
+      "operation:sichuan-smashed-cucumber-op-003-mix:parameters-source",
+      "operation:sichuan-smashed-cucumber-op-003-mix:targets-source",
+      "operation:sichuan-smashed-cucumber-op-004-rest:duration",
+      "operation:sichuan-smashed-cucumber-op-004-rest:inputs",
+      "operation:sichuan-smashed-cucumber-op-005-mince:duration",
+      "operation:sichuan-smashed-cucumber-op-005-mince:parameters-source",
+      "operation:sichuan-smashed-cucumber-op-005-mince:targets-source",
+      "operation:sichuan-smashed-cucumber-op-008-serve:duration",
+      "operation:sichuan-smashed-cucumber-op-008-serve:inputs",
+      "operation:sichuan-smashed-cucumber-op-009-fold:duration",
+      "operation:sichuan-smashed-cucumber-op-009-fold:inputs",
+      "operation:sichuan-smashed-cucumber-op-009-fold:parameters-source",
+      "operation:sichuan-smashed-cucumber-op-009-fold:targets-source",
+      "portion:sichuan-smashed-cucumber-portion-02:source-step",
+      "portion:sichuan-smashed-cucumber-portion-04:source-step",
+      "portion:sichuan-smashed-cucumber-portion-06:source-step",
+      "portion:sichuan-smashed-cucumber-portion-07:source-step",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-001-wash-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-003-mix-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-004-rest-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-005-mince-omit:expected-outcome",
+      "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-009-fold-omit:expected-outcome"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cucumber",
+      "initialState": "raw",
+      "massG": 320,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-01",
+      "sourceQuantity": {
+        "amount": 320,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-02",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "fresh-chili",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-03",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "vinegar",
+      "initialState": "liquid",
+      "massG": 14,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-04",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "soy-sauce",
+      "initialState": "liquid",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-05",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-06",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 0.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sichuan-smashed-cucumber-portion-07",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 49.69,
+      "carbs": 8.005,
+      "fat": 1.725,
+      "fiber": 0.997,
+      "protein": 1.84,
+      "saturatedFat": 0.219,
+      "sodium": 322.73,
+      "sugar": 3.026
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cucumber",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cucumber",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cucumber",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "fresh-chili",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-fresh-chili",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "fresh-chili",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "vinegar",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "vinegar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "soy-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "soy-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 0,
+      "calories": 99.38,
+      "carbs": 16.01,
+      "fat": 3.45,
+      "fiber": 1.994,
+      "protein": 3.68,
+      "saturatedFat": 0.438,
+      "sodium": 645.46,
+      "sugar": 6.052
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-01"
+        ],
+        "nodeId": "sichuan-smashed-cucumber-op-001-wash",
+        "operationType": "wash",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-step-1-wash"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-001-wash"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-01"
+        ],
+        "nodeId": "sichuan-smashed-cucumber-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 320
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "sichuan-smashed-cucumber-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-step-2-mix"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-003-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "sichuan-smashed-cucumber-op-004-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-step-2-rest"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-004-rest"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-03",
+          "sichuan-smashed-cucumber-portion-05"
+        ],
+        "nodeId": "sichuan-smashed-cucumber-op-005-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-step-3-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-005-mince"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-03"
+        ],
+        "nodeId": "sichuan-smashed-cucumber-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 8
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-006-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "sichuan-smashed-cucumber-portion-05"
+        ],
+        "nodeId": "sichuan-smashed-cucumber-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 8
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "completion",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-007-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "sichuan-smashed-cucumber-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-step-4-serve"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "sichuan-smashed-cucumber-op-008-serve"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [],
+        "nodeId": "sichuan-smashed-cucumber-op-009-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "sichuan-smashed-cucumber-step-4-fold"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "sichuan-smashed-cucumber",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "causeCodes": [
+        "operation-omitted:wash"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-wash"
+      ],
+      "mutation": {
+        "targetNodeId": "sichuan-smashed-cucumber-op-001-wash",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-001-wash-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "sichuan-smashed-cucumber-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "sichuan-smashed-cucumber-op-004-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-004-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "sichuan-smashed-cucumber-op-005-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-005-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "sichuan-smashed-cucumber-op-009-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-009-fold-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "sichuan-smashed-cucumber",
+  "sourceCulinaryItemId": "sichuan-smashed-cucumber",
+  "yield": {
+    "amount": 2,
+    "unit": "serving"
+  }
+}

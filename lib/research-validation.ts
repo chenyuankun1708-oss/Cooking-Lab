@@ -102,7 +102,7 @@ function validateResearchRecord(
 
   if (!isSlug(record.id)) report("id", "ResearchRecord ID 必须使用 kebab-case");
   if (!record.subject || !researchSubjectTypes.includes(record.subject.type)) {
-    report("subject.type", "ResearchRecord subject 必须是 culinary-item 或 story");
+    report("subject.type", "ResearchRecord subject 必须是 culinary-item、story 或 game-recipe");
   }
   if (!record.subject || !isSlug(record.subject.id)) {
     report("subject.id", "ResearchRecord subject ID 必须使用 kebab-case");

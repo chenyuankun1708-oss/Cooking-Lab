@@ -1,0 +1,331 @@
+{
+  "artifactVersion": "clv1-150581bf504ce3e9",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:vietnamese-iced-coffee-op-004-stir:equipment",
+      "operation:vietnamese-iced-coffee-op-004-stir:parameters-source",
+      "operation:vietnamese-iced-coffee-op-004-stir:targets-source",
+      "portion:vietnamese-iced-coffee-portion-02:source-step",
+      "scenario:vietnamese-iced-coffee-vietnamese-iced-coffee-op-004-stir-omit:expected-outcome",
+      "source-step:1:operation",
+      "source-step:2:operation",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ground-coffee",
+      "initialState": "raw",
+      "massG": 25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ground-coffee",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-iced-coffee-portion-01",
+      "sourceQuantity": {
+        "amount": 25,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-iced-coffee-portion-02",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      },
+      "volumeMl": 100
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "sweetened-condensed-milk",
+      "initialState": "liquid",
+      "massG": 45,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-iced-coffee-portion-03",
+      "sourceQuantity": {
+        "amount": 45,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "vietnamese-iced-coffee-portion-04",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "coffee",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 19.8,
+      "calories": 232.7,
+      "carbs": 37.98,
+      "fat": 7.415,
+      "fiber": 7,
+      "protein": 7.055,
+      "saturatedFat": 3.725,
+      "sodium": 60.15,
+      "sugar": 24.48
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ground-coffee",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ground-coffee",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ground-coffee",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sweetened-condensed-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sweetened-condensed-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 19.8,
+      "calories": 232.7,
+      "carbs": 37.98,
+      "fat": 7.415,
+      "fiber": 7,
+      "protein": 7.055,
+      "saturatedFat": 3.725,
+      "sodium": 60.15,
+      "sugar": 24.48
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "vietnamese-iced-coffee-portion-01"
+        ],
+        "nodeId": "vietnamese-iced-coffee-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-iced-coffee-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 25
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-iced-coffee-op-001-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "vietnamese-iced-coffee-portion-03"
+        ],
+        "nodeId": "vietnamese-iced-coffee-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-iced-coffee-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 45
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-iced-coffee-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "vietnamese-iced-coffee-portion-04"
+        ],
+        "nodeId": "vietnamese-iced-coffee-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "vietnamese-iced-coffee-portion-04-added"
+        ],
+        "parameters": {
+          "quantityG": 150
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "vietnamese-iced-coffee-op-003-add"
+        ],
+        "inputPortionIds": [
+          "vietnamese-iced-coffee-portion-04"
+        ],
+        "nodeId": "vietnamese-iced-coffee-op-004-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "vietnamese-iced-coffee-step-4-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "vietnamese-iced-coffee-op-004-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "vietnamese-iced-coffee-portion-01",
+          "vietnamese-iced-coffee-portion-02",
+          "vietnamese-iced-coffee-portion-03",
+          "vietnamese-iced-coffee-portion-04"
+        ],
+        "nodeId": "vietnamese-iced-coffee-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "vietnamese-iced-coffee-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "vietnamese-iced-coffee",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "cat-kitchen-goal1-v1",
+      "baselineArtifactVersion": "clv1-150581bf504ce3e9",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "vietnamese-iced-coffee-op-004-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "vietnamese-iced-coffee-vietnamese-iced-coffee-op-004-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "cat-kitchen-goal1-v1",
+  "slug": "vietnamese-iced-coffee",
+  "sourceCulinaryItemId": "vietnamese-iced-coffee",
+  "yield": {
+    "amount": 1,
+    "unit": "serving"
+  }
+}

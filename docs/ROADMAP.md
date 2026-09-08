@@ -1,6 +1,6 @@
 # Roadmap
 
-最近更新：2026-09-07
+最近更新：2026-09-08
 
 ## 当前发布状态
 
@@ -22,6 +22,18 @@
 - M9 Unified Culinary Experience & Content Expansion: completed
 - M10 Commercial-ready Content Rights / Provenance / Attribution Gate: completed
 - M11 From Decision to Table: completed under revised 50-item closeout scope
+
+## 当前阶段：M12–M13 游戏料理数据库与 500+ 可发行库
+
+GitHub tracking：M12 Epic `#100`（Issues `#101-#105`），M13 Epic `#106`（Issues `#107-#112`）。
+
+- M12 建立与 Web 完全隔离的逐料理 JSON、量化食材、原子操作 DAG、营养 provenance、错误 mutation、`game-commercial-ready` 门禁和确定性 Godot/SQLite 导出。
+- 当前 Web 50 项已迁移为 draft，不继承 Web rights/review，也不把演示营养表示为 USDA 数据。
+- M13 按 120 → 250 → 500+ 容量门禁扩充；最终核心库改为逐项明确 Public Domain 的 Library of Congress recipe facts + 独立 recipe cross-check + record-level USDA CC0 营养，不恢复视频路线，不导入第三方受保护表达。
+- 510 条公式候选已从 canonical source 移除，只作为运行时测试 fixture 保留。首轮独立审查已冻结全部公式 family；它们不会通过补标签的方式晋升，完成来源型重建、当前 fingerprint 的独立 review 与风险等价类 sampling QA 前，exportable 数量为 0。
+- Web 继续公开中英文各 50 项；游戏内容不会自动晋升到 Web。
+
+完整合同见 `docs/GAME_DATA_ARCHITECTURE.md` 与 `docs/GAME_PUBLISHING_GOVERNANCE.md`。
 
 ## 已完成：M11 从决定到上桌
 

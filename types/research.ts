@@ -28,7 +28,7 @@ export type SourceRejectionReason = (typeof sourceRejectionReasons)[number];
 export type CatalogReuseDecision = "allowed" | "prohibited" | "item-specific-review";
 export type CatalogObligation = "required" | "not-required" | "item-specific-review";
 
-export const researchSubjectTypes = ["culinary-item", "story"] as const;
+export const researchSubjectTypes = ["culinary-item", "story", "game-recipe"] as const;
 export type ResearchSubjectType = (typeof researchSubjectTypes)[number];
 
 export interface ResearchSubject {
@@ -36,7 +36,7 @@ export interface ResearchSubject {
   id: string;
 }
 
-export const researchSourceUses = ["identity", "preparation", "safety", "culture", "award"] as const;
+export const researchSourceUses = ["identity", "preparation", "safety", "culture", "award", "nutrition", "simulation"] as const;
 export type ResearchSourceUse = (typeof researchSourceUses)[number];
 
 export interface SourceCatalogEntry {

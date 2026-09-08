@@ -1,0 +1,786 @@
+{
+  "artifactVersion": "clv1-12fbed5f0956767e",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:indian-masoor-dal-op-001-wash:duration",
+      "operation:indian-masoor-dal-op-001-wash:equipment",
+      "operation:indian-masoor-dal-op-002-mince:duration",
+      "operation:indian-masoor-dal-op-002-mince:parameters-source",
+      "operation:indian-masoor-dal-op-002-mince:targets-source",
+      "operation:indian-masoor-dal-op-008-stir:duration",
+      "operation:indian-masoor-dal-op-008-stir:parameters-source",
+      "operation:indian-masoor-dal-op-008-stir:targets-source",
+      "operation:indian-masoor-dal-op-009-pan-fry:duration",
+      "operation:indian-masoor-dal-op-009-pan-fry:targets-source",
+      "operation:indian-masoor-dal-op-010-season:duration",
+      "operation:indian-masoor-dal-op-010-season:inputs",
+      "operation:indian-masoor-dal-op-010-season:parameters",
+      "operation:indian-masoor-dal-op-010-season:targets-source",
+      "portion:indian-masoor-dal-portion-04:source-step",
+      "portion:indian-masoor-dal-portion-05:source-step",
+      "portion:indian-masoor-dal-portion-08:source-step",
+      "portion:indian-masoor-dal-portion-09:source-step",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-001-wash-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-002-mince-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-008-stir-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-hot:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-omit:expected-outcome",
+      "scenario:indian-masoor-dal-indian-masoor-dal-op-010-season-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "dry-lentil",
+      "initialState": "dry",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-lentil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-01",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tomato",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-02",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "onion",
+      "initialState": "raw",
+      "massG": 130,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-03",
+      "sourceQuantity": {
+        "amount": 130,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-04",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-05",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "turmeric",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-turmeric",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-06",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cumin",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-07",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-08",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "indian-masoor-dal-portion-09",
+      "sourceQuantity": {
+        "amount": 1.8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 222.71,
+      "carbs": 39.476,
+      "fat": 2.143,
+      "fiber": 7.071,
+      "protein": 13.675,
+      "saturatedFat": 0.299,
+      "sodium": 186.625,
+      "sugar": 4.41
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dry-lentil",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-lentil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dry-lentil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tomato",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tomato",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "onion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-onion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "onion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "turmeric",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-turmeric",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "turmeric",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cumin",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cumin",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cumin",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 0,
+      "calories": 890.84,
+      "carbs": 157.904,
+      "fat": 8.572,
+      "fiber": 28.284,
+      "protein": 54.7,
+      "saturatedFat": 1.196,
+      "sodium": 746.5,
+      "sugar": 17.64
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-01",
+          "indian-masoor-dal-portion-02",
+          "indian-masoor-dal-portion-03"
+        ],
+        "nodeId": "indian-masoor-dal-op-001-wash",
+        "operationType": "wash",
+        "outputStateIds": [
+          "indian-masoor-dal-step-1-wash"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "indian-masoor-dal-op-001-wash"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-01",
+          "indian-masoor-dal-portion-02",
+          "indian-masoor-dal-portion-03"
+        ],
+        "nodeId": "indian-masoor-dal-op-002-mince",
+        "operationType": "mince",
+        "outputStateIds": [
+          "indian-masoor-dal-step-1-mince"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.75
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "indian-masoor-dal-op-002-mince"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-01"
+        ],
+        "nodeId": "indian-masoor-dal-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "indian-masoor-dal-portion-01-added"
+        ],
+        "parameters": {
+          "quantityG": 200
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "indian-masoor-dal-op-003-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-02"
+        ],
+        "nodeId": "indian-masoor-dal-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "indian-masoor-dal-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 300
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "indian-masoor-dal-op-004-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-03"
+        ],
+        "nodeId": "indian-masoor-dal-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "indian-masoor-dal-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 130
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "indian-masoor-dal-op-005-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-06"
+        ],
+        "nodeId": "indian-masoor-dal-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "indian-masoor-dal-portion-06-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "indian-masoor-dal-op-006-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-07"
+        ],
+        "nodeId": "indian-masoor-dal-op-007-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "indian-masoor-dal-portion-07-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "indian-masoor-dal-op-007-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-06",
+          "indian-masoor-dal-portion-07"
+        ],
+        "nodeId": "indian-masoor-dal-op-008-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "indian-masoor-dal-step-2-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "indian-masoor-dal-op-008-stir"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-06",
+          "indian-masoor-dal-portion-07"
+        ],
+        "nodeId": "indian-masoor-dal-op-009-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "indian-masoor-dal-step-2-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.35
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "indian-masoor-dal-op-009-pan-fry"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "indian-masoor-dal-op-010-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "indian-masoor-dal-step-4-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "indian-masoor-dal-op-010-season"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "indian-masoor-dal-portion-01",
+          "indian-masoor-dal-portion-02",
+          "indian-masoor-dal-portion-03",
+          "indian-masoor-dal-portion-04",
+          "indian-masoor-dal-portion-05",
+          "indian-masoor-dal-portion-06",
+          "indian-masoor-dal-portion-07",
+          "indian-masoor-dal-portion-08",
+          "indian-masoor-dal-portion-09"
+        ],
+        "nodeId": "indian-masoor-dal-op-011-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "indian-masoor-dal-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "indian-masoor-dal",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "causeCodes": [
+        "operation-omitted:wash"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-wash"
+      ],
+      "mutation": {
+        "targetNodeId": "indian-masoor-dal-op-001-wash",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-001-wash-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "causeCodes": [
+        "operation-omitted:mince"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mince"
+      ],
+      "mutation": {
+        "targetNodeId": "indian-masoor-dal-op-002-mince",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-002-mince-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "indian-masoor-dal-op-008-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-008-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "indian-masoor-dal-op-009-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "indian-masoor-dal-op-009-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-009-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "indian-masoor-dal-op-010-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "indian-masoor-dal-indian-masoor-dal-op-010-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "indian-masoor-dal",
+  "sourceCulinaryItemId": "indian-masoor-dal",
+  "yield": {
+    "amount": 4,
+    "unit": "serving"
+  }
+}

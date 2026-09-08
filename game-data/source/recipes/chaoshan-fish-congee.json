@@ -1,0 +1,450 @@
+{
+  "artifactVersion": "clv1-ee4c9e50a72fdc49",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:chaoshan-fish-congee-op-001-wash:duration",
+      "operation:chaoshan-fish-congee-op-001-wash:equipment",
+      "operation:chaoshan-fish-congee-op-003-chill:duration",
+      "operation:chaoshan-fish-congee-op-003-chill:equipment",
+      "operation:chaoshan-fish-congee-op-003-chill:parameters",
+      "operation:chaoshan-fish-congee-op-004-boil:duration",
+      "operation:chaoshan-fish-congee-op-004-boil:inputs",
+      "operation:chaoshan-fish-congee-op-004-boil:targets-source",
+      "portion:chaoshan-fish-congee-portion-01:source-step",
+      "portion:chaoshan-fish-congee-portion-03:source-step",
+      "portion:chaoshan-fish-congee-portion-04:source-step",
+      "portion:chaoshan-fish-congee-portion-05:source-step",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-001-wash-omit:expected-outcome",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-003-chill-omit:expected-outcome",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-hot:expected-outcome",
+      "scenario:chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-omit:expected-outcome",
+      "source-step:3:operation",
+      "source-step:4:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "rice",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chaoshan-fish-congee-portion-01",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "white-fish",
+      "initialState": "raw",
+      "massG": 260,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-fish",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chaoshan-fish-congee-portion-02",
+      "sourceQuantity": {
+        "amount": 260,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chaoshan-fish-congee-portion-03",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "scallion",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chaoshan-fish-congee-portion-04",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chaoshan-fish-congee-portion-05",
+      "sourceQuantity": {
+        "amount": 1.5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 268.266667,
+      "carbs": 39.558333,
+      "fat": 1.736667,
+      "fiber": 0.546667,
+      "protein": 22.916667,
+      "saturatedFat": 0.453333,
+      "sodium": 255.066667,
+      "sugar": 0.221667
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "rice",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-rice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "rice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "white-fish",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-fish",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "white-fish",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scallion",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scallion",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scallion",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 804.8,
+      "carbs": 118.675,
+      "fat": 5.21,
+      "fiber": 1.64,
+      "protein": 68.75,
+      "saturatedFat": 1.36,
+      "sodium": 765.2,
+      "sugar": 0.665
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "inputPortionIds": [
+          "chaoshan-fish-congee-portion-02"
+        ],
+        "nodeId": "chaoshan-fish-congee-op-001-wash",
+        "operationType": "wash",
+        "outputStateIds": [
+          "chaoshan-fish-congee-step-1-wash"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chaoshan-fish-congee-op-001-wash"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "chaoshan-fish-congee-portion-02"
+        ],
+        "nodeId": "chaoshan-fish-congee-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "chaoshan-fish-congee-portion-02-added"
+        ],
+        "parameters": {
+          "quantityG": 260
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "chaoshan-fish-congee-op-002-add"
+        ],
+        "inputPortionIds": [
+          "chaoshan-fish-congee-portion-02"
+        ],
+        "nodeId": "chaoshan-fish-congee-op-003-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "chaoshan-fish-congee-step-1-chill"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "chaoshan-fish-congee-op-003-chill"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "chaoshan-fish-congee-op-004-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "chaoshan-fish-congee-step-2-boil"
+        ],
+        "parameters": {
+          "heatLevel": 0.85
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 1,
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chaoshan-fish-congee-op-004-boil"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "chaoshan-fish-congee-portion-01",
+          "chaoshan-fish-congee-portion-02",
+          "chaoshan-fish-congee-portion-03",
+          "chaoshan-fish-congee-portion-04",
+          "chaoshan-fish-congee-portion-05"
+        ],
+        "nodeId": "chaoshan-fish-congee-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "chaoshan-fish-congee-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "chaoshan-fish-congee",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "causeCodes": [
+        "operation-omitted:wash"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-wash"
+      ],
+      "mutation": {
+        "targetNodeId": "chaoshan-fish-congee-op-001-wash",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-001-wash-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "chaoshan-fish-congee-op-003-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-003-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "chaoshan-fish-congee-op-004-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "causeCodes": [
+        "heat-high:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "chaoshan-fish-congee-op-004-boil",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chaoshan-fish-congee-chaoshan-fish-congee-op-004-boil-hot"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "chaoshan-fish-congee",
+  "sourceCulinaryItemId": "chaoshan-fish-congee",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

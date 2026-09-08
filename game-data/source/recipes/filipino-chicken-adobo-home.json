@@ -1,0 +1,600 @@
+{
+  "artifactVersion": "clv1-6ef53a64922a8d89",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m12-current-50-v1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": [
+      "operation:filipino-chicken-adobo-home-op-001-crush:duration",
+      "operation:filipino-chicken-adobo-home-op-001-crush:parameters-source",
+      "operation:filipino-chicken-adobo-home-op-003-pan-fry:duration",
+      "operation:filipino-chicken-adobo-home-op-003-pan-fry:inputs",
+      "operation:filipino-chicken-adobo-home-op-003-pan-fry:targets-source",
+      "operation:filipino-chicken-adobo-home-op-005-stir:duration",
+      "operation:filipino-chicken-adobo-home-op-005-stir:inputs",
+      "operation:filipino-chicken-adobo-home-op-005-stir:parameters-source",
+      "operation:filipino-chicken-adobo-home-op-005-stir:targets-source",
+      "operation:filipino-chicken-adobo-home-op-006-season:duration",
+      "operation:filipino-chicken-adobo-home-op-006-season:inputs",
+      "operation:filipino-chicken-adobo-home-op-006-season:parameters",
+      "operation:filipino-chicken-adobo-home-op-006-season:targets-source",
+      "portion:filipino-chicken-adobo-home-portion-01:source-step",
+      "portion:filipino-chicken-adobo-home-portion-02:source-step",
+      "portion:filipino-chicken-adobo-home-portion-04:source-step",
+      "portion:filipino-chicken-adobo-home-portion-06:source-step",
+      "portion:filipino-chicken-adobo-home-portion-07:source-step",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-001-crush-omit:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-hot:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-omit:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-005-stir-omit:expected-outcome",
+      "scenario:filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-006-season-omit:expected-outcome",
+      "source-step:3:operation"
+    ]
+  },
+  "eligibility": "draft",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "chicken-thigh",
+      "initialState": "raw",
+      "massG": 450,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-01",
+      "sourceQuantity": {
+        "amount": 450,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "vinegar",
+      "initialState": "liquid",
+      "massG": 35,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-02",
+      "sourceQuantity": {
+        "amount": 35,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "soy-sauce",
+      "initialState": "liquid",
+      "massG": 22,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-03",
+      "sourceQuantity": {
+        "amount": 22,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "garlic",
+      "initialState": "raw",
+      "massG": 14,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-04",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "black-pepper",
+      "initialState": "raw",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-pepper",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-05",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cooking-oil",
+      "initialState": "liquid",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-06",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 0.3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "filipino-chicken-adobo-home-portion-07",
+      "sourceQuantity": {
+        "amount": 0.3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 246.846667,
+      "carbs": 2.400667,
+      "fat": 12.256,
+      "fiber": 0.323333,
+      "protein": 29.462,
+      "saturatedFat": 2.954667,
+      "sodium": 548.63,
+      "sugar": 0.126667
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "chicken-thigh",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-chicken-thigh",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "chicken-thigh",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "vinegar",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vinegar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "vinegar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "soy-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "soy-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "garlic",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-garlic",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "garlic",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "black-pepper",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-pepper",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "black-pepper",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cooking-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cooking-oil",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cooking-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-07",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 3,
+    "total": {
+      "addedSugar": 0,
+      "calories": 740.54,
+      "carbs": 7.202,
+      "fat": 36.768,
+      "fiber": 0.97,
+      "protein": 88.386,
+      "saturatedFat": 8.864,
+      "sodium": 1645.89,
+      "sugar": 0.38
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "filipino-chicken-adobo-home-portion-03"
+        ],
+        "nodeId": "filipino-chicken-adobo-home-op-001-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-step-1-crush"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "filipino-chicken-adobo-home-op-001-crush"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "filipino-chicken-adobo-home-portion-03"
+        ],
+        "nodeId": "filipino-chicken-adobo-home-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-portion-03-added"
+        ],
+        "parameters": {
+          "quantityG": 22
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "filipino-chicken-adobo-home-op-002-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "filipino-chicken-adobo-home-op-003-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-step-2-pan-fry"
+        ],
+        "parameters": {
+          "heatLevel": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.45,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "burn",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "filipino-chicken-adobo-home-op-003-pan-fry"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "filipino-chicken-adobo-home-portion-05"
+        ],
+        "nodeId": "filipino-chicken-adobo-home-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-portion-05-added"
+        ],
+        "parameters": {
+          "quantityG": 2
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "filipino-chicken-adobo-home-op-004-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "filipino-chicken-adobo-home-op-005-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-step-4-stir"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.95,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "filipino-chicken-adobo-home-op-005-stir"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [],
+        "nodeId": "filipino-chicken-adobo-home-op-006-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-step-4-season"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "maximum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 1000,
+        "criticality": "completion",
+        "dependsOn": [
+          "filipino-chicken-adobo-home-op-006-season"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "filipino-chicken-adobo-home-portion-01",
+          "filipino-chicken-adobo-home-portion-02",
+          "filipino-chicken-adobo-home-portion-03",
+          "filipino-chicken-adobo-home-portion-04",
+          "filipino-chicken-adobo-home-portion-05",
+          "filipino-chicken-adobo-home-portion-06",
+          "filipino-chicken-adobo-home-portion-07"
+        ],
+        "nodeId": "filipino-chicken-adobo-home-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "filipino-chicken-adobo-home-served"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "filipino-chicken-adobo-home",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "filipino-chicken-adobo-home-op-001-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-001-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "doneness",
+          "direction": "decrease"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "increase"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "filipino-chicken-adobo-home-op-003-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "causeCodes": [
+        "heat-high:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "browning",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "burn",
+          "direction": "increase"
+        },
+        {
+          "confidence": "rule-based",
+          "dimension": "wateriness",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "overcooked-or-burnt"
+      ],
+      "mutation": {
+        "scalar": 1.25,
+        "targetNodeId": "filipino-chicken-adobo-home-op-003-pan-fry",
+        "type": "heat-too-high"
+      },
+      "nutritionEffect": "requires-retention-model",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-003-pan-fry-hot"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "filipino-chicken-adobo-home-op-005-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-005-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "salt",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "filipino-chicken-adobo-home-op-006-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "filipino-chicken-adobo-home-filipino-chicken-adobo-home-op-006-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 3,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "filipino-chicken-adobo-home",
+  "sourceCulinaryItemId": "filipino-chicken-adobo-home",
+  "yield": {
+    "amount": 3,
+    "unit": "serving"
+  }
+}

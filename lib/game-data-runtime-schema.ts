@@ -768,6 +768,15 @@ export function parseGameIngredientCatalog(value: unknown, path = "GameIngredien
     schemaVersion: literal("cooking-lab-game-ingredients-v1"),
     catalogVersion: stringValue,
     ingredients: arrayOf(ingredientDefinitionSchema),
+    conversionRecords: arrayOf(exactObject({
+      recordId: stringValue,
+      unit: enumValue(["g", "kg", "ml", "piece", "tbsp", "tsp"]),
+      gramsPerUnit: numberValue,
+      basis: stringValue,
+      provenanceId: stringValue,
+    }, {
+      ingredientId: stringValue,
+    })),
   })(value, path);
   return value as GameIngredientCatalogV1;
 }

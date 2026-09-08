@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
-import { createM13DraftCorpus } from "@/game-data/corpus-generator";
+import { createM13DraftFixture } from "@/game-data/corpus-generator";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import {
   createGameArtifactSetVersion,
@@ -26,7 +26,7 @@ const nutritionDataset = JSON.parse(readFileSync(
   "utf8",
 )) as GameNutritionDatasetSubsetV1;
 const canonicalFixtureSource = loadCanonicalGameData();
-const generatedFixtureSource = createM13DraftCorpus(nutritionDataset, {
+const generatedFixtureSource = createM13DraftFixture(nutritionDataset, {
   ...canonicalFixtureSource.ingredients,
   ingredients: canonicalFixtureSource.ingredients.ingredients.filter((ingredient) => ingredient.nutritionSource.kind === "migration-estimate"),
 });
@@ -144,6 +144,31 @@ describe("M12 game governance hostile cases", () => {
     equipmentScenario.mutation.type = "wrong-equipment";
     delete equipmentScenario.mutation.replacementEquipmentId;
     expect(audit(wrongEquipment).issues.some((issue) => issue.field.endsWith("replacementEquipmentId"))).toBe(true);
+
+    const unknownEquipment = readyFixture();
+    const unknownEquipmentScenario = unknownEquipment.recipe.scenarios[0];
+    unknownEquipmentScenario.mutation.type = "wrong-equipment";
+    unknownEquipmentScenario.mutation.replacementEquipmentId = "invented-tool";
+    expect(audit(unknownEquipment).issues).toContainEqual(expect.objectContaining({
+      code: "missing-reference",
+      field: expect.stringMatching(/replacementEquipmentId$/),
+    }));
+  });
+
+  it("requires source quantities to join an exact versioned conversion record", () => {
+    const fixture = readyFixture();
+    fixture.recipe.ingredientPortions[0].sourceQuantity.conversionRecordId = "invented-conversion";
+    expect(audit(fixture).issues).toContainEqual(expect.objectContaining({
+      code: "missing-reference",
+      field: expect.stringMatching(/conversionRecordId$/),
+    }));
+
+    const mismatched = readyFixture();
+    mismatched.recipe.ingredientPortions[0].sourceQuantity.conversionRecordId = "si:kg:v1";
+    expect(audit(mismatched).issues).toContainEqual(expect.objectContaining({
+      code: "invalid-number",
+      field: expect.stringMatching(/sourceQuantity$/),
+    }));
   });
 
   it("enforces operation inputs, compatible equipment, required parameters, duration and targets", () => {
@@ -466,7 +491,7 @@ function readyFixture() {
     if (scenario.mutation.type === "reorder" && scenario.mutation.targetNodeId) {
       scenario.mutation.destinationBeforeNodeId = recipe.operationGraph.nodes.find((node) => node.nodeId !== scenario.mutation.targetNodeId)?.nodeId;
     }
-    if (scenario.mutation.type === "wrong-equipment") scenario.mutation.replacementEquipmentId = "deliberately-incompatible-test-tool";
+    if (scenario.mutation.type === "wrong-equipment") scenario.mutation.replacementEquipmentId = "espresso-machine";
     if (scenario.mutation.type === "allowed-substitution" && scenario.mutation.targetPortionId) {
       const target = recipe.ingredientPortions.find((portion) => portion.portionId === scenario.mutation.targetPortionId);
       scenario.mutation.replacementIngredientId = generatedFixtureSource.ingredients.ingredients.find((ingredient) => ingredient.ingredientId !== target?.ingredientId)?.ingredientId;

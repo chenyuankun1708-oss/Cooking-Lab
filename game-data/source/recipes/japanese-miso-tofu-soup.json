@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-2550c11f15fa0da8",
+  "artifactVersion": "clv1-3ff1004b3a2cf502",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -52,7 +52,7 @@
       "portionId": "japanese-miso-tofu-soup-portion-01",
       "sourceQuantity": {
         "amount": 260,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -67,7 +67,7 @@
       "portionId": "japanese-miso-tofu-soup-portion-02",
       "sourceQuantity": {
         "amount": 160,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -82,7 +82,7 @@
       "portionId": "japanese-miso-tofu-soup-portion-03",
       "sourceQuantity": {
         "amount": 30,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -97,7 +97,7 @@
       "portionId": "japanese-miso-tofu-soup-portion-04",
       "sourceQuantity": {
         "amount": 15,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -387,7 +387,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -411,7 +411,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -446,7 +446,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -475,7 +475,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -510,7 +510,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -534,7 +534,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -558,7 +558,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-2550c11f15fa0da8",
+      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
       "causeCodes": [
         "operation-omitted:boil"
       ],

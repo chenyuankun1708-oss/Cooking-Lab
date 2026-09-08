@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6b042b0f213e90bb",
+  "artifactVersion": "clv1-067a5f59bad27257",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -66,7 +66,7 @@
       "portionId": "mango-sticky-rice-portion-01",
       "sourceQuantity": {
         "amount": 250,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -81,7 +81,7 @@
       "portionId": "mango-sticky-rice-portion-02",
       "sourceQuantity": {
         "amount": 600,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -112,7 +112,7 @@
       "portionId": "mango-sticky-rice-portion-04",
       "sourceQuantity": {
         "amount": 60,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -127,7 +127,7 @@
       "portionId": "mango-sticky-rice-portion-05",
       "sourceQuantity": {
         "amount": 2,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -706,7 +706,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -730,7 +730,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -754,7 +754,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -779,7 +779,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -803,7 +803,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -827,7 +827,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -856,7 +856,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "duration-short:steam"
       ],
@@ -886,7 +886,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -915,7 +915,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -945,7 +945,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -980,7 +980,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -1004,7 +1004,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -1039,7 +1039,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -1068,7 +1068,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -1098,7 +1098,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -1133,7 +1133,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -1157,7 +1157,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -1181,7 +1181,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -1206,7 +1206,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -1230,7 +1230,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:peel"
       ],
@@ -1254,7 +1254,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b042b0f213e90bb",
+      "baselineArtifactVersion": "clv1-067a5f59bad27257",
       "causeCodes": [
         "operation-omitted:slice"
       ],

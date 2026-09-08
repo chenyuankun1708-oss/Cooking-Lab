@@ -126,6 +126,7 @@ export function createGameArtifactSetVersion(
     ...recipes.flatMap((recipe) => recipe.rights.evidenceIds),
   ]);
   const ingredientIds = new Set(recipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.ingredientId)));
+  const conversionRecordIds = new Set(recipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.sourceQuantity.conversionRecordId)));
   const upstreamRecordIds = new Set(recipes.flatMap((recipe) => recipe.nutritionProfile.provenance.map((entry) => entry.upstreamRecordId)));
   return createContentVersion({
     policyVersion: registry.policyVersion,
@@ -150,6 +151,9 @@ export function createGameArtifactSetVersion(
       operations: [...support.operations].sort(byId),
       ingredientCatalogVersion: support.ingredients.catalogVersion,
       ingredients: support.ingredients.ingredients.filter((ingredient) => ingredientIds.has(ingredient.ingredientId)).sort((left, right) => left.ingredientId.localeCompare(right.ingredientId)),
+      conversionRecords: support.ingredients.conversionRecords
+        .filter((record) => conversionRecordIds.has(record.recordId))
+        .sort((left, right) => left.recordId.localeCompare(right.recordId)),
       nutritionDataset: support.nutritionDataset ? {
         ...support.nutritionDataset,
         records: support.nutritionDataset.records
@@ -174,6 +178,7 @@ export function evaluateGameRecipeCorpus(
   validateCatalogs(context, report);
   const operationById = new Map(context.operations.map((operation) => [operation.id, operation]));
   const ingredientById = new Map(context.ingredients.ingredients.map((ingredient) => [ingredient.ingredientId, ingredient]));
+  const conversionById = new Map(context.ingredients.conversionRecords.map((record) => [record.recordId, record]));
   const recipeIds = new Set<string>();
   const slugs = new Set<string>();
   for (const recipe of recipes) {
@@ -181,7 +186,7 @@ export function evaluateGameRecipeCorpus(
     if (slugs.has(recipe.slug)) report("duplicate-id", recipe.recipeId, "slug", "Recipe slug must be unique");
     recipeIds.add(recipe.recipeId);
     slugs.add(recipe.slug);
-    evaluateRecipe(recipe, recipes, operationById, ingredientById, context, report);
+    evaluateRecipe(recipe, recipes, operationById, ingredientById, conversionById, context, report);
   }
   return {
     ready: issues.length === 0 && recipes.length > 0 && recipes.every((recipe) => recipe.eligibility === "exportable"),
@@ -214,6 +219,7 @@ function validateCatalogs(
   }
   reportDuplicates(context.operations, (entry) => entry.id, "operation-catalog", "operations", report);
   reportDuplicates(context.ingredients.ingredients, (entry) => entry.ingredientId, "ingredient-catalog", "ingredients", report);
+  reportDuplicates(context.ingredients.conversionRecords, (entry) => entry.recordId, "ingredient-catalog", "conversionRecords", report);
   if (context.nutritionDataset) validateNutritionDataset(context.nutritionDataset, context.ingredients, report);
   for (const operation of context.operations) {
     if (operation.equipmentRequired && !operation.compatibleEquipmentIds.length) {
@@ -244,6 +250,33 @@ function validateCatalogs(
       if (!isNonNegative(ingredient.nutritionPer100g[key])) {
         report("invalid-nutrition", ingredient.ingredientId, `nutritionPer100g.${key}`, "Nutrition values must be non-negative finite numbers");
       }
+    }
+  }
+  const ingredientById = new Map(context.ingredients.ingredients.map((ingredient) => [ingredient.ingredientId, ingredient]));
+  const conversionKeys = new Set<string>();
+  for (const record of context.ingredients.conversionRecords) {
+    if (!record.recordId.trim() || !isPositive(record.gramsPerUnit) || !record.basis.trim() || !record.provenanceId.trim()) {
+      report("invalid-number", "ingredient-catalog", `conversionRecords.${record.recordId}`, "Unit conversion records require an ID, positive factor, basis and provenance");
+      continue;
+    }
+    if (!record.ingredientId) {
+      const expected = record.unit === "g" ? ["si:g:v1", 1] as const : record.unit === "kg" ? ["si:kg:v1", 1_000] as const : undefined;
+      if (!expected || record.recordId !== expected[0] || record.gramsPerUnit !== expected[1]) {
+        report("invalid-schema", "ingredient-catalog", `conversionRecords.${record.recordId}`, "Only the exact versioned SI gram and kilogram records may be global");
+      }
+      continue;
+    }
+    const ingredient = ingredientById.get(record.ingredientId);
+    const expectedWeight = record.unit === "ml"
+      ? ingredient?.densityGPerMl ?? ingredient?.unitWeightsG.ml
+      : record.unit === "g" || record.unit === "kg"
+        ? undefined
+        : ingredient?.unitWeightsG[record.unit];
+    const key = `${record.ingredientId}:${record.unit}`;
+    if (conversionKeys.has(key)) report("duplicate-id", "ingredient-catalog", `conversionRecords.${record.recordId}`, "An ingredient may declare only one conversion per unit");
+    conversionKeys.add(key);
+    if (!ingredient || expectedWeight === undefined || Math.abs(expectedWeight - record.gramsPerUnit) > 0.000001) {
+      report("invalid-number", "ingredient-catalog", `conversionRecords.${record.recordId}`, "Ingredient conversion must exactly match its versioned ingredient weight or density");
     }
   }
 }
@@ -298,6 +331,7 @@ function evaluateRecipe(
   allRecipes: readonly GameRecipeV1[],
   operationById: ReadonlyMap<string, GameOperationDefinitionV1>,
   ingredientById: ReadonlyMap<string, GameIngredientCatalogV1["ingredients"][number]>,
+  conversionById: ReadonlyMap<string, GameIngredientCatalogV1["conversionRecords"][number]>,
   context: GameRecipeValidationContext,
   report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
 ) {
@@ -339,6 +373,11 @@ function evaluateRecipe(
     if (!isPositive(portion.sourceQuantity.amount) || !portion.sourceQuantity.conversionRecordId.trim()) {
       report("invalid-number", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity`, "Source quantity requires a positive amount and explicit conversion record");
     }
+    const conversion = conversionById.get(portion.sourceQuantity.conversionRecordId);
+    const conversionBlocker = `portion:${portion.portionId}:conversion`;
+    if (!conversion && (recipe.eligibility === "exportable" || !recipe.authoring.unresolvedMappings.includes(conversionBlocker))) {
+      report("missing-reference", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity.conversionRecordId`, "Source quantity must reference a versioned conversion record");
+    }
     reportDuplicateStrings(portion.allowedSubstitutionIngredientIds, recipe.recipeId, `ingredientPortions.${portion.portionId}.allowedSubstitutionIngredientIds`, report);
     for (const replacementId of portion.allowedSubstitutionIngredientIds) {
       if (replacementId === portion.ingredientId || !ingredientById.has(replacementId)) {
@@ -346,7 +385,7 @@ function evaluateRecipe(
       }
     }
     if (recipe.eligibility === "exportable" && ingredient) {
-      const expectedMass = sourceQuantityMassG(portion.sourceQuantity, ingredient);
+      const expectedMass = sourceQuantityMassG(portion.sourceQuantity, portion.ingredientId, conversion);
       if (expectedMass === null || Math.abs(expectedMass - portion.massG) > 0.011) {
         report("invalid-number", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity`, "Canonical mass must match the recorded unit conversion");
       }
@@ -1363,6 +1402,7 @@ function validateScenarios(
 ) {
   const scenarioIds = new Set<string>();
   const coveredCriticalNodes = new Set<string>();
+  const knownEquipmentIds = new Set([...operationById.values()].flatMap((operation) => operation.compatibleEquipmentIds));
   for (const scenario of recipe.scenarios) {
     if (scenarioIds.has(scenario.scenarioId)) report("duplicate-id", recipe.recipeId, `scenarios.${scenario.scenarioId}`, "Scenario IDs must be unique");
     scenarioIds.add(scenario.scenarioId);
@@ -1402,6 +1442,9 @@ function validateScenarios(
       }
       if (!replacementEquipmentId?.trim() || replacementEquipmentId === targetNode?.equipmentId) {
         report("invalid-scenario", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementEquipmentId`, "Wrong-equipment requires a non-empty replacement different from the baseline equipment");
+      }
+      if (replacementEquipmentId && !knownEquipmentIds.has(replacementEquipmentId)) {
+        report("missing-reference", recipe.recipeId, `scenarios.${scenario.scenarioId}.replacementEquipmentId`, "Wrong-equipment replacement must identify equipment from the versioned operation catalog");
       }
       const definition = targetNode ? operationById.get(targetNode.operationType) : undefined;
       if (replacementEquipmentId && definition?.compatibleEquipmentIds.includes(replacementEquipmentId)) {
@@ -1579,12 +1622,11 @@ function assessmentMatchesSourceRights(assessment: RightsAssessment, source: Sou
 
 function sourceQuantityMassG(
   quantity: GameRecipeV1["ingredientPortions"][number]["sourceQuantity"],
-  ingredient: GameIngredientCatalogV1["ingredients"][number],
+  ingredientId: string,
+  record: GameIngredientCatalogV1["conversionRecords"][number] | undefined,
 ): number | null {
-  if (quantity.unit === "g") return quantity.amount;
-  if (quantity.unit === "kg") return quantity.amount * 1_000;
-  const weight = quantity.unit === "ml" ? ingredient.densityGPerMl ?? ingredient.unitWeightsG.ml : ingredient.unitWeightsG[quantity.unit];
-  return weight === undefined ? null : quantity.amount * weight;
+  if (!record || record.unit !== quantity.unit || (record.ingredientId && record.ingredientId !== ingredientId)) return null;
+  return quantity.amount * record.gramsPerUnit;
 }
 
 function allowedTargetDimensions(operationType: GameRecipeV1["operationGraph"]["nodes"][number]["operationType"]): ReadonlySet<string> {

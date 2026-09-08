@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-a725f0ae1a388af4",
+  "artifactVersion": "clv1-c62c755e192e926c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -76,7 +76,7 @@
       "portionId": "tomato-scrambled-eggs-portion-03",
       "sourceQuantity": {
         "amount": 8,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -91,7 +91,7 @@
       "portionId": "tomato-scrambled-eggs-portion-04",
       "sourceQuantity": {
         "amount": 1.5,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -359,7 +359,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
+      "baselineArtifactVersion": "clv1-c62c755e192e926c",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -383,7 +383,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
+      "baselineArtifactVersion": "clv1-c62c755e192e926c",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -418,7 +418,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
+      "baselineArtifactVersion": "clv1-c62c755e192e926c",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -442,7 +442,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
+      "baselineArtifactVersion": "clv1-c62c755e192e926c",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -466,7 +466,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a725f0ae1a388af4",
+      "baselineArtifactVersion": "clv1-c62c755e192e926c",
       "causeCodes": [
         "operation-omitted:fold"
       ],

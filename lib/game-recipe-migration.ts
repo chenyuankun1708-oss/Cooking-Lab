@@ -69,6 +69,30 @@ export function createMigrationIngredientCatalog(
     schemaVersion: "cooking-lab-game-ingredients-v1",
     catalogVersion: currentGameRecipeMigrationVersion,
     ingredients: definitions.sort((left, right) => left.ingredientId.localeCompare(right.ingredientId)),
+    conversionRecords: [
+      {
+        recordId: "si:g:v1",
+        unit: "g" as const,
+        gramsPerUnit: 1,
+        basis: "SI gram identity conversion.",
+        provenanceId: "si-unit-definition-v1",
+      },
+      {
+        recordId: "si:kg:v1",
+        unit: "kg" as const,
+        gramsPerUnit: 1_000,
+        basis: "SI kilogram to gram conversion.",
+        provenanceId: "si-unit-definition-v1",
+      },
+      ...definitions.flatMap((ingredient) => Object.entries(ingredient.unitWeightsG).map(([unit, gramsPerUnit]) => ({
+        recordId: `${ingredient.ingredientId}:${unit}:weight-v1`,
+        ingredientId: ingredient.ingredientId,
+        unit: unit as "piece" | "tbsp" | "tsp" | "ml",
+        gramsPerUnit: gramsPerUnit!,
+        basis: "Cooking Lab ingredient-specific approximate unit weight; migration input only.",
+        provenanceId: ingredient.nutritionProvenanceId,
+      }))),
+    ].sort((left, right) => left.recordId.localeCompare(right.recordId)),
   };
 }
 
@@ -138,6 +162,9 @@ export function migratePublishedItemToGameRecipe(
   const { nodes, unresolvedMappings: graphMappings } = createOperationGraph(item, portions, ingredientById);
   const unresolvedMappings = [
     ...graphMappings,
+    ...portions
+      .filter((portion) => portion.sourceQuantity.conversionRecordId === "unresolved-serving-guidance-quantity")
+      .map((portion) => `portion:${portion.portionId}:conversion`),
     ...(!("inputs" in item.preparation)
       ? portions.flatMap((portion) => [
           `portion:${portion.portionId}:identity`,
@@ -219,7 +246,7 @@ function createPortions(
       sourceQuantity: {
         amount: input.amount,
         unit: input.unit,
-        conversionRecordId: input.unit === "g" ? "canonical-grams-v1" : input.unit === "kg" ? "kilograms-to-grams-v1" : `${input.ingredientId}:${input.unit}:weight-v1`,
+        conversionRecordId: input.unit === "g" ? "si:g:v1" : input.unit === "kg" ? "si:kg:v1" : `${input.ingredientId}:${input.unit}:weight-v1`,
       },
       massG: round(toGrams(input.amount, input.unit, ingredient)),
       ...(input.unit === "ml" ? { volumeMl: round(input.amount) } : {}),

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-1c42e2372be263df",
+  "artifactVersion": "clv1-3f962c0b77171353",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -46,7 +46,7 @@
       "portionId": "tomyum-kung-portion-01",
       "sourceQuantity": {
         "amount": 400,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -61,7 +61,7 @@
       "portionId": "tomyum-kung-portion-02",
       "sourceQuantity": {
         "amount": 200,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -76,7 +76,7 @@
       "portionId": "tomyum-kung-portion-03",
       "sourceQuantity": {
         "amount": 30,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -91,7 +91,7 @@
       "portionId": "tomyum-kung-portion-04",
       "sourceQuantity": {
         "amount": 20,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -106,7 +106,7 @@
       "portionId": "tomyum-kung-portion-05",
       "sourceQuantity": {
         "amount": 5,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -121,7 +121,7 @@
       "portionId": "tomyum-kung-portion-06",
       "sourceQuantity": {
         "amount": 15,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -136,7 +136,7 @@
       "portionId": "tomyum-kung-portion-07",
       "sourceQuantity": {
         "amount": 35,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -166,7 +166,7 @@
       "portionId": "tomyum-kung-portion-09",
       "sourceQuantity": {
         "amount": 10,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -692,7 +692,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -716,7 +716,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -740,7 +740,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -764,7 +764,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -793,7 +793,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -823,7 +823,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -858,7 +858,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -887,7 +887,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -917,7 +917,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1c42e2372be263df",
+      "baselineArtifactVersion": "clv1-3f962c0b77171353",
       "causeCodes": [
         "heat-high:simmer"
       ],

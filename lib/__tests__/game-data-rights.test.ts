@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { createM13DraftCorpus } from "@/game-data/corpus-generator";
+import { createM13DraftFixture } from "@/game-data/corpus-generator";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import { evaluateGameRecipeCorpus } from "@/lib/game-recipe-validation";
@@ -9,7 +9,7 @@ import type { GameNutritionDatasetSubsetV1, GameRecipeV1, GameRightsRegistryV1 }
 
 describe("game-commercial-ready fail-closed gate", () => {
   const data = loadCanonicalGameData();
-  const fixture = createM13DraftCorpus(nutritionDataset, {
+  const fixture = createM13DraftFixture(nutritionDataset, {
     ...data.ingredients,
     ingredients: data.ingredients.ingredients.filter((ingredient) => ingredient.nutritionSource.kind === "migration-estimate"),
   });
@@ -116,7 +116,7 @@ const nutritionDataset = JSON.parse(readFileSync(
   "utf8",
 )) as GameNutritionDatasetSubsetV1;
 const canonical = loadCanonicalGameData();
-const dataIngredients = createM13DraftCorpus(nutritionDataset, {
+const dataIngredients = createM13DraftFixture(nutritionDataset, {
   ...canonical.ingredients,
   ingredients: canonical.ingredients.ingredients.filter((ingredient) => ingredient.nutritionSource.kind === "migration-estimate"),
 }).ingredients;

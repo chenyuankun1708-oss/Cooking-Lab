@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-9b0009b976e50e93",
+  "artifactVersion": "clv1-448ef3cd3da7c925",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -40,7 +40,7 @@
       "portionId": "salted-lassi-portion-01",
       "sourceQuantity": {
         "amount": 400,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -71,7 +71,7 @@
       "portionId": "salted-lassi-portion-03",
       "sourceQuantity": {
         "amount": 100,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -86,7 +86,7 @@
       "portionId": "salted-lassi-portion-04",
       "sourceQuantity": {
         "amount": 2,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -101,7 +101,7 @@
       "portionId": "salted-lassi-portion-05",
       "sourceQuantity": {
         "amount": 2,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -384,7 +384,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9b0009b976e50e93",
+      "baselineArtifactVersion": "clv1-448ef3cd3da7c925",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -408,7 +408,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9b0009b976e50e93",
+      "baselineArtifactVersion": "clv1-448ef3cd3da7c925",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -432,7 +432,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-9b0009b976e50e93",
+      "baselineArtifactVersion": "clv1-448ef3cd3da7c925",
       "causeCodes": [
         "operation-omitted:whisk"
       ],

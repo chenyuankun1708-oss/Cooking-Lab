@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-76b9affe8620d83a",
+  "artifactVersion": "clv1-60477e0e17210746",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -46,7 +46,7 @@
       "portionId": "dongpo-pork-portion-01",
       "sourceQuantity": {
         "amount": 800,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -61,7 +61,7 @@
       "portionId": "dongpo-pork-portion-02",
       "sourceQuantity": {
         "amount": 35,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -92,7 +92,7 @@
       "portionId": "dongpo-pork-portion-04",
       "sourceQuantity": {
         "amount": 60,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -107,7 +107,7 @@
       "portionId": "dongpo-pork-portion-05",
       "sourceQuantity": {
         "amount": 20,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -122,7 +122,7 @@
       "portionId": "dongpo-pork-portion-06",
       "sourceQuantity": {
         "amount": 30,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -153,7 +153,7 @@
       "portionId": "dongpo-pork-portion-08",
       "sourceQuantity": {
         "amount": 2,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -522,7 +522,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
+      "baselineArtifactVersion": "clv1-60477e0e17210746",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -546,7 +546,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
+      "baselineArtifactVersion": "clv1-60477e0e17210746",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -575,7 +575,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
+      "baselineArtifactVersion": "clv1-60477e0e17210746",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -604,7 +604,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
+      "baselineArtifactVersion": "clv1-60477e0e17210746",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -634,7 +634,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
+      "baselineArtifactVersion": "clv1-60477e0e17210746",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -658,7 +658,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-76b9affe8620d83a",
+      "baselineArtifactVersion": "clv1-60477e0e17210746",
       "causeCodes": [
         "duration-short:rest"
       ],

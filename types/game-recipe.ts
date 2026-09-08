@@ -222,10 +222,20 @@ export interface GameIngredientDefinitionV1 {
   };
 }
 
+export interface GameUnitConversionRecordV1 {
+  recordId: string;
+  unit: "g" | "kg" | "ml" | "piece" | "tbsp" | "tsp";
+  gramsPerUnit: number;
+  ingredientId?: string;
+  basis: string;
+  provenanceId: string;
+}
+
 export interface GameIngredientCatalogV1 {
   schemaVersion: "cooking-lab-game-ingredients-v1";
   catalogVersion: string;
   ingredients: GameIngredientDefinitionV1[];
+  conversionRecords: GameUnitConversionRecordV1[];
 }
 
 export interface GameNutritionDatasetRecordV1 {

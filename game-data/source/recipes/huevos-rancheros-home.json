@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-52dda3a1164b8e5f",
+  "artifactVersion": "clv1-45409d77ae2dcf5a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -74,7 +74,7 @@
       "portionId": "huevos-rancheros-home-portion-03",
       "sourceQuantity": {
         "amount": 100,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -89,7 +89,7 @@
       "portionId": "huevos-rancheros-home-portion-04",
       "sourceQuantity": {
         "amount": 260,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -104,7 +104,7 @@
       "portionId": "huevos-rancheros-home-portion-05",
       "sourceQuantity": {
         "amount": 80,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -119,7 +119,7 @@
       "portionId": "huevos-rancheros-home-portion-06",
       "sourceQuantity": {
         "amount": 8,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -134,7 +134,7 @@
       "portionId": "huevos-rancheros-home-portion-07",
       "sourceQuantity": {
         "amount": 5,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -149,7 +149,7 @@
       "portionId": "huevos-rancheros-home-portion-08",
       "sourceQuantity": {
         "amount": 1,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -563,7 +563,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -587,7 +587,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -611,7 +611,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -640,7 +640,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -675,7 +675,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-52dda3a1164b8e5f",
+      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

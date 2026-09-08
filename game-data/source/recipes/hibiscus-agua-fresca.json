@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-af179bdab61c1cb3",
+  "artifactVersion": "clv1-139fdc5d23248aff",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -45,7 +45,7 @@
       "portionId": "hibiscus-agua-fresca-portion-01",
       "sourceQuantity": {
         "amount": 25,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -76,7 +76,7 @@
       "portionId": "hibiscus-agua-fresca-portion-03",
       "sourceQuantity": {
         "amount": 60,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -106,7 +106,7 @@
       "portionId": "hibiscus-agua-fresca-portion-05",
       "sourceQuantity": {
         "amount": 300,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -473,7 +473,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -502,7 +502,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -532,7 +532,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -561,7 +561,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -591,7 +591,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -615,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -640,7 +640,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "operation-omitted:strain"
       ],
@@ -664,7 +664,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -688,7 +688,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -712,7 +712,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-af179bdab61c1cb3",
+      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
       "causeCodes": [
         "duration-short:chill"
       ],

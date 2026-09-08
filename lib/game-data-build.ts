@@ -79,11 +79,15 @@ export function buildGameData(
   }
 
   const usedIngredientIds = new Set(exportable.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.ingredientId)));
+  const usedConversionRecordIds = new Set(exportable.flatMap((recipe) => recipe.ingredientPortions.map((portion) => portion.sourceQuantity.conversionRecordId)));
   const exportIngredients: GameIngredientCatalogV1 = {
     ...input.ingredients,
     ingredients: input.ingredients.ingredients
       .filter((ingredient) => usedIngredientIds.has(ingredient.ingredientId))
       .sort((left, right) => left.ingredientId.localeCompare(right.ingredientId)),
+    conversionRecords: input.ingredients.conversionRecords
+      .filter((record) => usedConversionRecordIds.has(record.recordId))
+      .sort((left, right) => left.recordId.localeCompare(right.recordId)),
   };
   const exportNutritionDataset = createExportNutritionDataset(input.nutritionDataset, usedIngredientIds);
   const usedArtifactIds = new Set(exportable.flatMap((recipe) => recipe.rights.artifactIds));
@@ -302,6 +306,7 @@ function writeSqlite(
     PRAGMA user_version = 1;
     CREATE TABLE recipes (recipe_id TEXT PRIMARY KEY, artifact_version TEXT NOT NULL, item_type TEXT NOT NULL, simulation_profile TEXT NOT NULL, servings REAL NOT NULL, yield_amount REAL NOT NULL, yield_unit TEXT NOT NULL, recipe_json TEXT NOT NULL);
     CREATE TABLE ingredients (ingredient_id TEXT PRIMARY KEY, default_state TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, nutrition_json TEXT NOT NULL, source_json TEXT NOT NULL, definition_json TEXT NOT NULL);
+    CREATE TABLE unit_conversions (record_id TEXT PRIMARY KEY, ingredient_id TEXT, unit TEXT NOT NULL, grams_per_unit REAL NOT NULL, basis TEXT NOT NULL, provenance_id TEXT NOT NULL);
     CREATE TABLE recipe_ingredients (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, ingredient_id TEXT NOT NULL, initial_state TEXT NOT NULL, source_amount REAL NOT NULL, source_unit TEXT NOT NULL, conversion_record_id TEXT NOT NULL, mass_g REAL NOT NULL, volume_ml REAL, optional INTEGER NOT NULL, phase TEXT NOT NULL, nutrition_provenance_id TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id));
     CREATE TABLE ingredient_substitutions (recipe_id TEXT NOT NULL, portion_id TEXT NOT NULL, replacement_ingredient_id TEXT NOT NULL, PRIMARY KEY (recipe_id, portion_id, replacement_ingredient_id));
     CREATE TABLE operations (recipe_id TEXT NOT NULL, node_id TEXT NOT NULL, operation_type TEXT NOT NULL, equipment_id TEXT, active_duration_ms INTEGER NOT NULL, wait_duration_ms INTEGER NOT NULL, parameters_json TEXT NOT NULL, criticality TEXT NOT NULL, source_step_order INTEGER, PRIMARY KEY (recipe_id, node_id));
@@ -319,6 +324,7 @@ function writeSqlite(
   try {
     const insertRecipe = database.prepare("INSERT INTO recipes VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     const insertIngredient = database.prepare("INSERT INTO ingredients VALUES (?, ?, ?, ?, ?, ?)");
+    const insertConversion = database.prepare("INSERT INTO unit_conversions VALUES (?, ?, ?, ?, ?, ?)");
     const insertPortion = database.prepare("INSERT INTO recipe_ingredients VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     const insertSubstitution = database.prepare("INSERT INTO ingredient_substitutions VALUES (?, ?, ?)");
     const insertOperation = database.prepare("INSERT INTO operations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -341,6 +347,9 @@ function writeSqlite(
         compactJson(ingredient.nutritionSource),
         compactJson(ingredient),
       );
+    }
+    for (const record of ingredients.conversionRecords) {
+      insertConversion.run(record.recordId, record.ingredientId ?? null, record.unit, record.gramsPerUnit, record.basis, record.provenanceId);
     }
     const sourceIds = new Set(recipes.flatMap((recipe) => recipe.rights.sourceIds));
     for (const source of rightsRegistry.sources.filter((entry) => sourceIds.has(entry.id)).sort(byId)) {
@@ -548,6 +557,14 @@ function verifyExportParity(
       nutrition_json: compactJson(ingredient.nutritionPer100g),
       source_json: compactJson(ingredient.nutritionSource),
       definition_json: compactJson(ingredient),
+    })));
+    assertSqliteRows(database, "unit_conversions", "SELECT record_id, ingredient_id, unit, grams_per_unit, basis, provenance_id FROM unit_conversions ORDER BY record_id", parsedIngredients.conversionRecords.map((record) => ({
+      record_id: record.recordId,
+      ingredient_id: record.ingredientId ?? null,
+      unit: record.unit,
+      grams_per_unit: record.gramsPerUnit,
+      basis: record.basis,
+      provenance_id: record.provenanceId,
     })));
     assertSqliteRows(database, "recipe_ingredients", "SELECT recipe_id, portion_id, ingredient_id, initial_state, source_amount, source_unit, conversion_record_id, mass_g, volume_ml, optional, phase, nutrition_provenance_id FROM recipe_ingredients ORDER BY recipe_id, portion_id", sortedRows(parsedRecipes.flatMap((recipe) => recipe.ingredientPortions.map((portion) => ({
       recipe_id: recipe.recipeId,

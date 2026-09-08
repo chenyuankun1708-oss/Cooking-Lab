@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-5f6cf48b0cba7b40",
+  "artifactVersion": "clv1-ee4c9e50a72fdc49",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -43,7 +43,7 @@
       "portionId": "chaoshan-fish-congee-portion-01",
       "sourceQuantity": {
         "amount": 150,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -58,7 +58,7 @@
       "portionId": "chaoshan-fish-congee-portion-02",
       "sourceQuantity": {
         "amount": 260,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -73,7 +73,7 @@
       "portionId": "chaoshan-fish-congee-portion-03",
       "sourceQuantity": {
         "amount": 10,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -88,7 +88,7 @@
       "portionId": "chaoshan-fish-congee-portion-04",
       "sourceQuantity": {
         "amount": 15,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -103,7 +103,7 @@
       "portionId": "chaoshan-fish-congee-portion-05",
       "sourceQuantity": {
         "amount": 1.5,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -327,7 +327,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5f6cf48b0cba7b40",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -351,7 +351,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5f6cf48b0cba7b40",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -375,7 +375,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5f6cf48b0cba7b40",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -404,7 +404,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5f6cf48b0cba7b40",
+      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
       "causeCodes": [
         "heat-high:boil"
       ],

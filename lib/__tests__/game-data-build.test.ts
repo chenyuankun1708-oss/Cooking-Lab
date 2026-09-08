@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
-import { createM13DraftCorpus } from "@/game-data/corpus-generator";
+import { createM13DraftFixture } from "@/game-data/corpus-generator";
 import { buildGameData, createGameDataCatalogVersion } from "@/lib/game-data-build";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import { createGameArtifactSetVersion, deriveGameEquivalenceClassKeys } from "@/lib/game-recipe-validation";
@@ -17,7 +17,7 @@ import type { ReviewDimension } from "@/types/publishing-governance";
 describe("M12 deterministic game exports", () => {
   it("builds byte-stable Godot JSON, SQLite, rights and attribution from one canonical source", () => {
     const source = loadCanonicalGameData();
-    const generated = createM13DraftCorpus(source.nutritionDataset, source.ingredients);
+    const generated = createM13DraftFixture(source.nutritionDataset, source.ingredients);
     const fixtureIngredients = {
       ...generated.ingredients,
       ingredients: [...new Map(generated.ingredients.ingredients.map((ingredient) => [ingredient.ingredientId, ingredient])).values()],
@@ -62,6 +62,7 @@ describe("M12 deterministic game exports", () => {
     expect(fileMap(rootA)).toEqual(fileMap(rootB));
     const database = new DatabaseSync(buildA.sqlitePath, { readOnly: true });
     expect(database.prepare("SELECT COUNT(*) AS count FROM recipes").get()).toEqual({ count: 1 });
+    expect(database.prepare("SELECT COUNT(*) AS count FROM unit_conversions").get()).toEqual({ count: new Set(recipe.ingredientPortions.map((portion) => portion.sourceQuantity.conversionRecordId)).size });
     expect(database.prepare("SELECT COUNT(*) AS count FROM recipe_ingredients").get()).toEqual({ count: recipe.ingredientPortions.length });
     expect(database.prepare("SELECT COUNT(*) AS count FROM ingredient_substitutions").get()).toEqual({ count: recipe.ingredientPortions.reduce((sum, portion) => sum + portion.allowedSubstitutionIngredientIds.length, 0) });
     expect(database.prepare("SELECT COUNT(*) AS count FROM operations").get()).toEqual({ count: recipe.operationGraph.nodes.length });
@@ -108,7 +109,7 @@ describe("M12 deterministic game exports", () => {
       })),
     );
     database.close();
-  }, 40_000);
+  });
 
   it("content-addresses recipe and every supporting artifact hash", () => {
     const recipes = [{

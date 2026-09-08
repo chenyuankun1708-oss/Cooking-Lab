@@ -173,6 +173,26 @@ export function createM13DraftCorpus(
   return { recipes, ingredients, rightsRegistry };
 }
 
+/** Builds one draft-only formula for validator/export tests. */
+export function createM13DraftFixture(
+  subset: GameNutritionDatasetSubsetV1,
+  migrationIngredients: GameIngredientCatalogV1,
+): GeneratedM13Corpus {
+  const ingredients = createGameIngredientCatalogFromUsdaSubset(subset, migrationIngredients);
+  const ingredientById = new Map(ingredients.ingredients.map((ingredient) => [ingredient.ingredientId, ingredient]));
+  const recipe = createRecipe({
+    sequence: 1,
+    recipeId: "game-bowl-white-rice-tofu-tomato",
+    itemType: "dish",
+    family: "grain-bowl",
+    servings: 4,
+    portions: dishPortions("usda-white-rice", "usda-tofu", "usda-tomato"),
+    nodes: dishNodes,
+    ingredientById,
+  });
+  return { recipes: [recipe], ingredients, rightsRegistry: createRightsRegistry([recipe], ingredients, subset) };
+}
+
 export function createGameIngredientCatalogFromUsdaSubset(
   subset: GameNutritionDatasetSubsetV1,
   migrationIngredients: GameIngredientCatalogV1,
@@ -197,10 +217,27 @@ export function createGameIngredientCatalogFromUsdaSubset(
       },
     };
   });
+  const ingredients = [...new Map(
+    [...migrationIngredients.ingredients, ...usdaIngredients]
+      .map((ingredient) => [ingredient.ingredientId, ingredient] as const),
+  ).values()].sort((left, right) => left.ingredientId.localeCompare(right.ingredientId));
+  const usdaConversionRecords = usdaIngredients.flatMap((ingredient) => Object.entries(ingredient.unitWeightsG).map(([unit, gramsPerUnit]) => ({
+    recordId: `${ingredient.ingredientId}:${unit}:weight-v1`,
+    ingredientId: ingredient.ingredientId,
+    unit: unit as "piece" | "tbsp" | "tsp" | "ml",
+    gramsPerUnit: gramsPerUnit!,
+    basis: "Ingredient-specific conversion derived from the versioned Cooking Lab USDA normalization record.",
+    provenanceId: ingredient.nutritionProvenanceId,
+  })));
+  const conversionRecords = [...new Map(
+    [...migrationIngredients.conversionRecords, ...usdaConversionRecords]
+      .map((record) => [record.recordId, record] as const),
+  ).values()].sort((left, right) => left.recordId.localeCompare(right.recordId));
   return {
     schemaVersion: "cooking-lab-game-ingredients-v1",
-    catalogVersion: createContentVersion({ migration: migrationIngredients.catalogVersion, usda: subset.records }),
-    ingredients: [...migrationIngredients.ingredients, ...usdaIngredients].sort((left, right) => left.ingredientId.localeCompare(right.ingredientId)),
+    catalogVersion: createContentVersion({ migration: migrationIngredients.catalogVersion, usda: subset.records, conversionRecords }),
+    ingredients,
+    conversionRecords,
   };
 }
 
@@ -224,7 +261,7 @@ function createRecipe(input: {
       portionId: `${input.recipeId}-portion-${String(index + 1).padStart(2, "0")}`,
       ingredientId: portion.ingredientId,
       initialState: ingredient.defaultState,
-      sourceQuantity: { amount: portion.massG, unit: "g", conversionRecordId: "canonical-grams-v1" },
+      sourceQuantity: { amount: portion.massG, unit: "g", conversionRecordId: "si:g:v1" },
       massG: portion.massG,
       ...(density ? { volumeMl: round(portion.massG / density) } : {}),
       optional: portion.optional ?? false,

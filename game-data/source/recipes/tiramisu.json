@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c51ce137a9b70588",
+  "artifactVersion": "clv1-f0231b6bd412367d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -68,7 +68,7 @@
       "portionId": "tiramisu-portion-02",
       "sourceQuantity": {
         "amount": 80,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -83,7 +83,7 @@
       "portionId": "tiramisu-portion-03",
       "sourceQuantity": {
         "amount": 500,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -98,7 +98,7 @@
       "portionId": "tiramisu-portion-04",
       "sourceQuantity": {
         "amount": 240,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     },
@@ -129,7 +129,7 @@
       "portionId": "tiramisu-portion-06",
       "sourceQuantity": {
         "amount": 15,
-        "conversionRecordId": "canonical-grams-v1",
+        "conversionRecordId": "si:g:v1",
         "unit": "g"
       }
     }
@@ -543,7 +543,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -567,7 +567,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -591,7 +591,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -615,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -639,7 +639,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -663,7 +663,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -688,7 +688,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -717,7 +717,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -747,7 +747,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -771,7 +771,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c51ce137a9b70588",
+      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
       "causeCodes": [
         "duration-short:chill"
       ],

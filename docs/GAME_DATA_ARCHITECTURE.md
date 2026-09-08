@@ -23,7 +23,7 @@ The generated Godot JSON, SQLite, attribution report, rights summary, manifest a
 - `GameRecipeScenarioV1` mutates a baseline without modifying it and records directional sensory changes, fault causes, recoverability and nutrition impact.
 - `GameDataManifestV1` hashes every exported recipe and every supporting catalog, rights, attribution and nutrition artifact, including upstream USDA archive identifiers and SHA-256 values.
 
-All masses use grams. Liquids may additionally expose milliliters only when the ingredient catalog contains a density conversion. Piece, teaspoon and tablespoon values cannot enter the game export without a recorded conversion.
+All masses use grams. Every source quantity must join an immutable conversion record by ID, unit and factor. The catalog carries exact global SI records for grams and kilograms; milliliters, pieces, teaspoons and tablespoons require an ingredient-specific record whose factor matches the versioned density or unit weight. A fabricated, missing or mismatched record blocks export. The same conversion records are emitted to Godot JSON and the SQLite `unit_conversions` table.
 
 Migration from the Web model is deliberately lossy and draft-only. When the source does not explicitly establish ingredient identity, quantity, operation parameter, target state or scenario outcome, the deterministic migration may preserve a placeholder solely to exercise the schema, but must add a stable `unresolvedMappings` blocker. Such a record cannot become exportable until a rights-cleared source-backed replacement is authored and independently reviewed.
 

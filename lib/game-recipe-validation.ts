@@ -694,8 +694,11 @@ function validateNormalizationTrace(
         report("invalid-schema", recipe.recipeId, `${field}.heatDescriptorId`, "Exact source temperature must equal the canonical temperature and source-bound heat control");
       }
     } else if (node.parameters.temperatureC !== undefined || node.parameters.heatLevel !== undefined) {
-      const parameter = node.parameters.temperatureC !== undefined ? "temperatureC" : "heatLevel";
-      if (heatControl?.kind !== "independently-calibrated"
+      const heatParameters = (["temperatureC", "heatLevel"] as const)
+        .filter((parameter) => node.parameters[parameter] !== undefined);
+      const parameter = heatParameters[0];
+      if (heatParameters.length !== 1
+        || heatControl?.kind !== "independently-calibrated"
         || heatControl.sourceFactId !== fact.factId
         || heatControl.parameter !== parameter
         || heatControl.value !== node.parameters[parameter]

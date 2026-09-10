@@ -17,7 +17,7 @@ import type {
 } from "@/types/loc-recipe-source";
 import { createLocSourceRegistrySliceVersion } from "./loc-source-registry-version";
 
-export const locSourceFactCompilerVersion = "m13-loc-source-facts-v1" as const;
+export const locSourceFactCompilerVersion = "m13-loc-source-facts-v2" as const;
 
 export function createLocSourceFactBundle(
   candidate: LocRecipeCandidateV1,
@@ -126,6 +126,7 @@ function crossCheckAssertion(source: LocCrossCheckV1): GameSourceFactBundleV1["c
     normalizedTitle: source.normalizedTitle,
     ingredientTerms: [...source.ingredientTerms].sort(),
     operationTerms: [...source.operationTerms].sort(),
+    sourceLines: source.sourceLines.map((line) => ({ ...line })),
     sourceLineSha256s: [...source.sourceLineSha256s].sort(),
     sharedIngredientTerms: [...source.sharedIngredientTerms].sort(),
     sharedOperationTerms: [...source.sharedOperationTerms].sort(),

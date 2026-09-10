@@ -105,6 +105,11 @@ export function parseGameSourceFactBundle(value: unknown, path = "GameSourceFact
       normalizedTitle: stringValue,
       ingredientTerms: arrayOf(stringValue),
       operationTerms: arrayOf(stringValue),
+      sourceLines: arrayOf(exactObject({
+        line: integerValue,
+        text: stringValue,
+        sha256: stringValue,
+      })),
       sourceLineSha256s: arrayOf(stringValue),
       sharedIngredientTerms: arrayOf(stringValue),
       sharedOperationTerms: arrayOf(stringValue),

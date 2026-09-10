@@ -184,6 +184,20 @@ describe("M12 deterministic game exports", () => {
       now: "2026-09-08",
     }, output)).toThrow("Game data gate blocked export: no exportable recipes");
   });
+
+  it("runtime-parses a cache manifest supplied through the direct build API", () => {
+    const source = loadCanonicalGameData();
+    const output = resolve(mkdtempSync(resolve(realpathSync(tmpdir()), "cooking-lab-game-manifest-")), "output");
+    expect(() => buildGameData({
+      recipes: source.recipes,
+      ingredients: source.ingredients,
+      nutritionDataset: source.nutritionDataset,
+      operations: gameOperationCatalog,
+      rightsRegistry: source.rightsRegistry,
+      locSourceCacheManifest: { cacheVersion: "forged" } as never,
+      now: "2026-09-08",
+    }, output)).toThrow("LOC cache manifest is malformed");
+  });
 });
 
 function promoteFixture(

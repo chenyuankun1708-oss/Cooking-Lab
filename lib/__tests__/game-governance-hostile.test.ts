@@ -248,6 +248,16 @@ describe("M12 game governance hostile cases", () => {
     expect(audit(fixture).issues.some((issue) => issue.message.includes("Exact source temperature"))).toBe(true);
   });
 
+  it("does not allow an independent calibration to prove two heat parameters", () => {
+    const fixture = readyFixture();
+    const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.heatControl?.kind === "independently-calibrated")!;
+    expect(node).toBeDefined();
+    if (node.heatControl?.kind !== "independently-calibrated") throw new Error("fixture heat control missing");
+    const secondParameter = node.heatControl.parameter === "temperatureC" ? "heatLevel" : "temperatureC";
+    node.parameters[secondParameter] = secondParameter === "temperatureC" ? 180 : 0.5;
+    expect(audit(fixture).issues.some((issue) => issue.message.includes("Numeric heat not present in the source"))).toBe(true);
+  });
+
   it("supports historical source units through explicit conversion records", () => {
     const fixture = readyFixture();
     const portion = fixture.recipe.ingredientPortions[0];

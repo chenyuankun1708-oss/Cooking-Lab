@@ -14,7 +14,7 @@ import type {
 } from "@/types/game-recipe";
 import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
-import type { LocSourceCacheManifestV1 } from "./loc-source-cache";
+import { parseLocSourceCacheManifest, type LocSourceCacheManifestV1 } from "./loc-source-cache";
 import { compileCatKitchenGoal1Recipe } from "./cat-kitchen-goal1-compiler";
 import {
   parseGameDataManifest,
@@ -523,6 +523,7 @@ function assertRuntimeBuildInput(input: GameDataBuildInput) {
   if (input.normalizationRegistry) parseGameNormalizationRegistry(input.normalizationRegistry, "build.normalizationRegistry");
   input.sourceFactBundles?.forEach((bundle, index) => parseGameSourceFactBundle(bundle, `build.sourceFactBundles[${index}]`));
   if (input.locSourceRegistry) parseLocSourceRegistry(input.locSourceRegistry);
+  if (input.locSourceCacheManifest) parseLocSourceCacheManifest(input.locSourceCacheManifest);
 }
 
 function verifyExportParity(

@@ -93,6 +93,17 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
       fixtureLocDocument("b", "200", "fixture-family-b"),
     ],
   };
+  const crossCheckOperation = recipe.operationGraph.nodes.find((node) => [
+    "wash", "peel", "slice", "dice", "mince", "grind", "mix", "whisk", "knead", "fold", "shape", "rest", "add",
+    "boil", "simmer", "steam", "pan-fry", "bake", "roast", "grill", "stir", "drain", "strain", "blend", "chill",
+    "freeze", "assemble", "serve",
+  ].includes(node.operationType))?.operationType ?? "mix";
+  const crossCheckTexts = [
+    recipe.recipeId.replaceAll("-", " "),
+    ...recipe.ingredientPortions.map((portion) => `1 cup ${portion.ingredientId}`),
+    `${crossCheckOperation === "pan-fry" ? "Fry" : crossCheckOperation} for 5 minutes.`,
+  ];
+  const crossCheckLines = crossCheckTexts.map((text, index) => ({ line: index + 2, text, sha256: sha256(text) }));
   const draft: GameSourceFactBundleV1 = {
     schemaVersion: gameSourceFactBundleSchemaVersion,
     bundleId: `fixture-source-facts-${recipe.recipeId}`,
@@ -103,19 +114,20 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
     candidateId: `fixture-candidate-${recipe.recipeId}`,
     title: recipe.recipeId,
     primarySource: { ...locatorFor(1), endLine: 999 },
-    crossCheckSources: [{ ...locatorFor(2), sourceDocumentId: "fixture-book-b", workFamilyId: "fixture-family-b", itemUrl: "https://www.loc.gov/item/200/" }],
+    crossCheckSources: [{ ...locatorFor(2), endLine: crossCheckLines.at(-1)!.line, sourceDocumentId: "fixture-book-b", workFamilyId: "fixture-family-b", itemUrl: "https://www.loc.gov/item/200/" }],
     crossCheckAssertions: [{
       sourceDocumentId: "fixture-book-b",
       pageId: "1",
       startLine: 2,
-      endLine: 2,
+      endLine: crossCheckLines.at(-1)!.line,
       matchBasis: "exact-title",
       normalizedTitle: recipe.recipeId.replaceAll("-", " "),
       ingredientTerms: recipe.ingredientPortions.map((portion) => portion.ingredientId),
-      operationTerms: [recipe.operationGraph.nodes[0].operationType],
-      sourceLineSha256s: [sha256("fixture-cross-check-line")],
+      operationTerms: [crossCheckOperation],
+      sourceLines: crossCheckLines,
+      sourceLineSha256s: crossCheckLines.slice(1).map((line) => line.sha256).sort(),
       sharedIngredientTerms: recipe.ingredientPortions.map((portion) => portion.ingredientId),
-      sharedOperationTerms: [recipe.operationGraph.nodes[0].operationType],
+      sharedOperationTerms: [crossCheckOperation],
       factSha256: "",
     }],
     ingredientFacts,
@@ -126,6 +138,9 @@ export function attachTestNormalizationTrace(recipe: GameRecipeV1, rightsRegistr
   draft.crossCheckAssertions[0].factSha256 = createGameCrossCheckAssertionHash(draft.crossCheckAssertions[0]);
   const bundle = { ...draft, bundleVersion: createGameSourceFactBundleVersion(draft) };
   recipe.operationGraph.nodes.forEach((node, index) => {
+    if (node.parameters.temperatureC !== undefined && node.parameters.heatLevel !== undefined) {
+      delete node.parameters.heatLevel;
+    }
     const parameter = node.parameters.temperatureC !== undefined ? "temperatureC"
       : node.parameters.heatLevel !== undefined ? "heatLevel"
         : undefined;

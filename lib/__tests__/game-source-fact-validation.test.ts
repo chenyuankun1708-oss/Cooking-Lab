@@ -123,6 +123,20 @@ describe("LOC source fact bundles", () => {
       field: "crossCheckAssertions.0.sharedIngredientTerms",
     }));
   });
+
+  it("re-derives cross-check facts from locator-anchored OCR lines", () => {
+    const bundle = createLocSourceFactBundle(candidateFixture(), sourceVersions);
+    const assertion = bundle.crossCheckAssertions[0];
+    assertion.sourceLines[1].text = "1 cup invented";
+    assertion.sourceLines[1].sha256 = sha256(assertion.sourceLines[1].text);
+    assertion.factSha256 = createGameCrossCheckAssertionHash(assertion);
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+
+    expect(evaluateGameSourceFactBundle(bundle, registry)).toContainEqual(expect.objectContaining({
+      code: "ambiguous-fact",
+      field: "crossCheckAssertions.0.ingredientTerms",
+    }));
+  });
 });
 
 function candidateFixture(): LocRecipeCandidateV1 {
@@ -160,7 +174,13 @@ function candidateFixture(): LocRecipeCandidateV1 {
       normalizedTitle: "apple pie",
       ingredientTerms: ["apple", "flour"],
       operationTerms: ["bake"],
-      sourceLineSha256s: [sha256("cross-check fact line")],
+      sourceLines: [
+        { line: 3, text: "Apple Pie", sha256: sha256("Apple Pie") },
+        { line: 4, text: "1 cup apple", sha256: sha256("1 cup apple") },
+        { line: 5, text: "1 cup flour", sha256: sha256("1 cup flour") },
+        { line: 6, text: "Bake for 20 minutes.", sha256: sha256("Bake for 20 minutes.") },
+      ],
+      sourceLineSha256s: [sha256("1 cup apple"), sha256("1 cup flour"), sha256("Bake for 20 minutes.")].sort(),
       sharedIngredientTerms: ["apple", "flour"],
       sharedOperationTerms: ["bake"],
     }],

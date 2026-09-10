@@ -73,6 +73,11 @@ export interface GameSourceFactBundleV1 {
     normalizedTitle: string;
     ingredientTerms: string[];
     operationTerms: string[];
+    sourceLines: Array<{
+      line: number;
+      text: string;
+      sha256: string;
+    }>;
     sourceLineSha256s: string[];
     sharedIngredientTerms: string[];
     sharedOperationTerms: string[];

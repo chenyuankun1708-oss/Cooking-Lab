@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { stableJson } from "./stable-json";
+import { deriveLocCrossCheckFacts } from "./loc-recipe-ingestion";
 import {
   gameNormalizationRegistrySchemaVersion,
   gameSourceFactBundleSchemaVersion,
@@ -73,6 +74,28 @@ export function evaluateGameSourceFactBundle(
       || !uniqueNonEmpty(assertion.operationTerms)
       || !uniqueSha256(assertion.sourceLineSha256s)) {
       report("ambiguous-fact", field, "Cross-check assertions require structured title, ingredient, operation and source-line facts");
+    }
+    const sourceLinesAreAnchored = assertion.sourceLines.length === assertion.endLine - assertion.startLine + 1
+      && assertion.sourceLines.every((sourceLine, lineIndex) =>
+        sourceLine.line === assertion.startLine + lineIndex
+        && sha256Value(sourceLine.sha256)
+        && sourceLine.sha256 === sha256(sourceLine.text.trim()));
+    if (!sourceLinesAreAnchored) {
+      report("invalid-source", `${field}.sourceLines`, "Cross-check OCR lines must exactly cover the locator and match their content hashes");
+    } else {
+      const derived = deriveLocCrossCheckFacts(assertion.sourceLines, assertion.pageId);
+      if (derived.normalizedTitle !== assertion.normalizedTitle) {
+        report("ambiguous-fact", `${field}.normalizedTitle`, "Cross-check title must be re-derived from the retained OCR lines");
+      }
+      if (!sameStringSet(new Set(derived.ingredientTerms), new Set(assertion.ingredientTerms))) {
+        report("ambiguous-fact", `${field}.ingredientTerms`, "Cross-check ingredient terms must be re-derived from the retained OCR lines");
+      }
+      if (!sameStringSet(new Set(derived.operationTerms), new Set(assertion.operationTerms))) {
+        report("ambiguous-fact", `${field}.operationTerms`, "Cross-check operation terms must be re-derived from the retained OCR lines");
+      }
+      if (!sameStringSet(new Set(derived.sourceLineSha256s), new Set(assertion.sourceLineSha256s))) {
+        report("invalid-source", `${field}.sourceLineSha256s`, "Cross-check fact-line hashes must be re-derived from the retained OCR lines");
+      }
     }
     if (assertion.factSha256 !== createGameCrossCheckAssertionHash(assertion)) {
       report("stale-version", `${field}.factSha256`, "Cross-check fact hash does not match its structured facts");

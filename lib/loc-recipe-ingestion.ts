@@ -19,7 +19,7 @@ import {
   type LocSourceRegistryV1,
 } from "@/types/loc-recipe-source";
 
-export const locRecipeImporterVersion = "m13-loc-importer-v1" as const;
+export const locRecipeImporterVersion = "m13-loc-importer-v2" as const;
 
 const candidateBlockers = [
   "candidate-only-not-canonical",
@@ -98,6 +98,7 @@ type RecipeBlock = {
   normalizedTitle: string;
   startLine: number;
   endLine: number;
+  sourceLines: Array<{ line: number; text: string; sha256: string }>;
   body: string;
   ingredients: LocIngredientFactV1[];
   operationTerms: string[];
@@ -322,6 +323,11 @@ function extractRecipeBlocks(document: LocSourceDocumentV1, pageId: string, inpu
       normalizedTitle,
       startLine: heading.index + 1,
       endLine: endExclusive,
+      sourceLines: lines.slice(heading.index, endExclusive).map((text, index) => ({
+        line: heading.index + index + 1,
+        text,
+        sha256: createHash("sha256").update(text.trim()).digest("hex"),
+      })),
       body,
       ingredients: extractIngredientFacts(bodyLines, pageId, heading.index + 2),
       operationTerms: [...new Set(methodFacts.map((fact) => fact.operation))],
@@ -528,9 +534,31 @@ function toCrossCheck(primary: RecipeBlock, crossCheck: RecipeBlock): LocCrossCh
     normalizedTitle: crossCheck.normalizedTitle,
     ingredientTerms,
     operationTerms,
+    sourceLines: crossCheck.sourceLines,
     sourceLineSha256s,
     sharedIngredientTerms: intersectionValues(primaryIngredients, crossCheckIngredients),
     sharedOperationTerms: intersectionValues(new Set(primary.operationTerms), new Set(operationTerms)),
+  };
+}
+
+export function deriveLocCrossCheckFacts(
+  sourceLines: readonly { line: number; text: string; sha256: string }[],
+  pageId: string,
+): { normalizedTitle: string; ingredientTerms: string[]; operationTerms: string[]; sourceLineSha256s: string[] } {
+  if (sourceLines.length === 0) {
+    return { normalizedTitle: "", ingredientTerms: [], operationTerms: [], sourceLineSha256s: [] };
+  }
+  const bodyLines = sourceLines.slice(1).map((sourceLine) => sourceLine.text);
+  const ingredients = extractIngredientFacts(bodyLines, pageId, sourceLines[0].line + 1);
+  const methodFacts = extractMethodFacts(bodyLines, pageId, sourceLines[0].line + 1);
+  return {
+    normalizedTitle: normalizeRecipeTitle(sourceLines[0].text),
+    ingredientTerms: [...ingredientTokens(ingredients)].sort(),
+    operationTerms: [...new Set(methodFacts.map((fact) => fact.operation))].sort(),
+    sourceLineSha256s: [...new Set([
+      ...ingredients.map((fact) => fact.lineSha256),
+      ...methodFacts.map((fact) => fact.lineSha256),
+    ])].sort(),
   };
 }
 

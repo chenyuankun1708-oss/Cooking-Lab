@@ -1,10 +1,11 @@
 # Status
 
-最近更新：2026-09-08
+最近更新：2026-09-10
 
 ## M12–M13 当前状态
 
-- M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器正在 `feature/m12-game-recipe-data` 实施。
+- 2026-09-10 用户明确要求继续完成未完成 milestones，M13 已从此前的产品审核暂停点恢复。当前先关闭独立架构复核阻塞，再继续 canonical compilation、120/250/500 批次与最终发布门禁；Web 在新批次正式过审前仍保持现有 50 项。
+- M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器已在 `aa5e9c2` 完成并通过独立审查；G001 已收口，M13 正在执行。
 - 当前 Web 的 50 项已迁移为独立 `GameRecipeV1` draft；它们保留原有演示营养并明确不能直接获得 `game-commercial-ready` 资格。
 - 已从 USDA FoodData Central 的 Foundation Foods 2026-04 与 SR Legacy 2018-04 官方归档建立 81 条 record-level CC0 子集；每个上游 ZIP 的 SHA-256 进入数据合同，缺失核心营养素会 fail closed，完整上游数据库不进入 repo，build 不访问网络。
 - canonical source 当前只包含 50 条 Web 迁移 draft；510 条公式组合已从逐料理 source 中移除，只保留为测试 fixture 生成器，不能代表真实料理或商业可发行内容。
@@ -12,6 +13,11 @@
 - Web 仍恰好公开中英文各 50 项；游戏数据没有进入页面查询、搜索、推荐、sitemap 或客户端 bundle。
 - 首轮独立内容审查已冻结全部公式 family：通用来源不能证明具体配方、部分参数与 mutation 因果缺少逐项依据。M13 将改用逐项明确 Public Domain 的 Library of Congress 原始料理事实，并要求独立料理交叉核对；在真实来源、当前 fingerprint attestations 和 sampling QA 完成前 exportable 数量保持 0。
 - M12 validator 与导出层已针对首轮独立审查完成 fail-closed hardening：精确 runtime schema、操作输入/输出/设备/参数/目标合同、actor/run/context 独立、LOW 单一 reviewer 全维度覆盖、真实 sampling digest、风险下限、USDA exact join、权利依据与实际 material source coverage、完整 content-addressing、安全 staging，以及 Godot JSON ↔ SQLite parity。
+- 量化单位现在通过版本化 conversion record 做 ID、单位、食材作用域和因子的精确 join；Godot JSON 与 SQLite `unit_conversions` 同源。错误设备 mutation 只能引用操作目录中存在但与目标操作不兼容的设备。
+- M13 已将逐项核验的 LOC 公有领域文献扩至 152 本（152 个唯一 item、152 个唯一 derivative、144 个保守作品族），内容寻址缓存保持在 `.local/`。修复保存/腌制词形、历史品牌、合并数量、状态残片与 OCR 断词漏检并禁止 fuzzy title match 获得规范化资格后，当前 importer 产生 1,793 个 cross-checked discovery draft、98 个严格 extraction-usable 候选并过滤 2,270 个高风险块；全部仍不是 canonical 或 commercial-ready。
+- 已新增 `SourceFactBundleV1`、有理数量、逐行 SHA、原文位置顺序 method facts、版本化 normalization registry/trace 合同和 fail-closed validator。`game-data:loc-source-facts` 可从已核验缓存确定性生成 98 个本地 draft source-fact bundle；连续重建的 source-fact manifest SHA-256 为 `933fd731b86e7822b5f42e9f72527766aafde367f06ba84d7870f30b0755230a`，绑定的 LOC cache manifest SHA-256 为 `e906ead5cfc54a6725b1f078c4f85a22fdf7f9201bb0c76ed3c80cdaa5c0d250`。
+- `GameRecipeV1` 的 source-normalized export 现在必须逐字段绑定当前 LOC registry、精确 cache manifest、source-fact bundle、历史单位换算、操作/设备/时长/火力、全部非热参数、目标状态、作用域正确的 Evidence 及完整 mutation selector/output。Cross-check shared terms 必须由带行 hash 的结构化事实重算；历史定性火力保持定性并强制 engine-v2，数值推断必须有独立 Evidence。所有支撑输入进入 artifact-set fingerprint 与 sampling novelty。
+- `fe13d51` 独立架构复核提出的三项代码阻塞已于 2026-09-10 修复：cross-check assertion 现在保留带绝对行号与 SHA-256 的有界 Public Domain OCR 片段，canonical validator 会从片段重新提取标题、食材、操作与事实行哈希；无来源热力事实时只允许一个带独立 Evidence 的数值热参数；direct build API 会 runtime-parse LOC cache manifest。定向类型检查与 43 项相关测试通过；Windows symlink 防护测试因当前账户无创建符号链接权限在进入业务代码前报 `EPERM`，仍需在 CI/具备权限环境复核。独立 code-reviewer 仍需在可用额度下重新给出 PASS，不能以本次自检替代。
 
 ## 当前阶段
 

@@ -19,6 +19,7 @@ import {
   gameOperationIds,
   gameRecipeSchemaVersion,
   gameRightsRegistrySchemaVersion,
+  gameSourceQuantityUnits,
   type GameDataManifestV1,
   type GameIngredientCatalogV1,
   type GameNutritionDatasetSubsetV1,
@@ -458,6 +459,11 @@ const ingredientDefinitionSchema = exactObject({
     tbsp: numberValue,
     tsp: numberValue,
     ml: numberValue,
+    l: numberValue,
+    cup: numberValue,
+    pint: numberValue,
+    quart: numberValue,
+    gallon: numberValue,
   }),
   nutritionPer100g: nutritionSchema,
   nutritionProvenanceId: stringValue,
@@ -506,6 +512,17 @@ const operationNodeSchema = exactObject({
 }, {
   equipmentId: stringValue,
   sourceStepOrder: integerValue,
+  heatControl: discriminatedObject("kind", {
+    "exact-temperature": exactObject({ kind: literal("exact-temperature"), temperatureC: numberValue, sourceFactId: stringValue }),
+    qualitative: exactObject({ kind: literal("qualitative"), descriptorId: stringValue, sourceFactId: stringValue }),
+    "independently-calibrated": exactObject({
+      kind: literal("independently-calibrated"),
+      parameter: enumValue(["temperatureC", "heatLevel"]),
+      value: numberValue,
+      sourceFactId: stringValue,
+      calibrationEvidenceId: stringValue,
+    }),
+  }),
 });
 
 const nutritionProvenanceSchema = exactObject({
@@ -559,7 +576,7 @@ const gameIngredientPortionSchema = exactObject({
   initialState: enumValue(["raw", "dry", "liquid", "cooked", "prepared", "ready-to-serve"]),
   sourceQuantity: exactObject({
     amount: numberValue,
-    unit: enumValue(["g", "kg", "ml", "piece", "tbsp", "tsp"]),
+    unit: enumValue(gameSourceQuantityUnits),
     conversionRecordId: stringValue,
   }),
   massG: numberValue,
@@ -611,6 +628,48 @@ const gameRecipeSchema = exactObject({
     generatorVersion: stringValue,
     containsGeneratedExpression: literal(false),
     unresolvedMappings: arrayOf(stringValue),
+  }, {
+    normalizationTrace: exactObject({
+      sourceFactBundleId: stringValue,
+      sourceFactBundleVersion: stringValue,
+      sourceRegistryVersion: stringValue,
+      sourceCacheVersion: stringValue,
+      sourceCompilerVersion: stringValue,
+      normalizationPolicyVersion: stringValue,
+      ingredientBindings: arrayOf(exactObject({
+        ingredientFactId: stringValue,
+        portionId: stringValue,
+        resolutionId: stringValue,
+        conversionRecordId: stringValue,
+      })),
+      methodBindings: arrayOf(exactObject({
+        methodFactId: stringValue,
+        nodeId: stringValue,
+        operationRuleId: stringValue,
+        durationBindings: arrayOf(exactObject({
+          target: enumValue(["activeDurationMs", "waitDurationMs"]),
+          basis: enumValue(["source-exact", "independently-calibrated"]),
+        }, {
+          provenanceEvidenceId: stringValue,
+        })),
+        parameterBindings: arrayOf(exactObject({
+          parameter: enumValue(["cutSizeMm", "uniformity", "heatLevel", "temperatureC", "strength", "quantityG", "capacityG"]),
+          basis: enumValue(["source-exact", "ingredient-quantity", "independently-calibrated"]),
+        }, {
+          ingredientPortionIds: arrayOf(stringValue),
+          provenanceEvidenceId: stringValue,
+        })),
+        targetStateRuleIds: arrayOf(stringValue),
+      }, {
+        equipmentRuleId: stringValue,
+        heatDescriptorId: stringValue,
+      })),
+      scenarioBindings: arrayOf(exactObject({
+        scenarioId: stringValue,
+        mutationRuleId: stringValue,
+        applicabilityFactIds: arrayOf(stringValue),
+      })),
+    }),
   }),
 }, {
   sourceCulinaryItemId: stringValue,
@@ -770,7 +829,7 @@ export function parseGameIngredientCatalog(value: unknown, path = "GameIngredien
     ingredients: arrayOf(ingredientDefinitionSchema),
     conversionRecords: arrayOf(exactObject({
       recordId: stringValue,
-      unit: enumValue(["g", "kg", "ml", "piece", "tbsp", "tsp"]),
+      unit: enumValue(gameSourceQuantityUnits),
       gramsPerUnit: numberValue,
       basis: stringValue,
       provenanceId: stringValue,

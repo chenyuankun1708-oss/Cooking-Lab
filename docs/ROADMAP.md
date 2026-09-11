@@ -1,6 +1,6 @@
 # Roadmap
 
-最近更新：2026-09-08
+最近更新：2026-09-11
 
 ## 当前发布状态
 
@@ -23,17 +23,17 @@
 - M10 Commercial-ready Content Rights / Provenance / Attribution Gate: completed
 - M11 From Decision to Table: completed under revised 50-item closeout scope
 
-## 当前阶段：M12–M13 游戏料理数据库与 500+ 可发行库
+## 当前阶段：M13 菜谱数据库优先（含烘焙/调酒/甜品）
 
 GitHub tracking：M12 Epic `#100`（Issues `#101-#105`），M13 Epic `#106`（Issues `#107-#112`）。
 
-- M12 建立与 Web 完全隔离的逐料理 JSON、量化食材、原子操作 DAG、营养 provenance、错误 mutation、`game-commercial-ready` 门禁和确定性 Godot/SQLite 导出。
-- 当前 Web 50 项已迁移为 draft，不继承 Web rights/review，也不把演示营养表示为 USDA 数据。
-- M13 按 120 → 250 → 500+ 容量门禁扩充；最终核心库改为逐项明确 Public Domain 的 Library of Congress recipe facts + 独立 recipe cross-check + record-level USDA CC0 营养，不恢复视频路线，不导入第三方受保护表达。
-- 510 条公式候选已从 canonical source 移除，只作为运行时测试 fixture 保留。首轮独立审查已冻结全部公式 family；它们不会通过补标签的方式晋升，完成来源型重建、当前 fingerprint 的独立 review 与风险等价类 sampling QA 前，exportable 数量为 0。
-- 当前来源层已核验 152 本 LOC 公版文献并确定性生成 98 个严格、仍为 draft 的 source-fact bundles；逐字段 normalization proof、精确 LOC registry/cache manifest/compiler join、历史单位换算、cross-check 事实重算、非热参数、作用域 Evidence、定性火力和完整 mutation selector/output 均已进入 fail-closed 合同。下一阶段先完成独立复核，再把这些事实编译为 canonical drafts，而不是将 draft 直接改标为 exportable。
-- Product Director 已于 2026-09-08 暂停继续增加菜谱，先人工审核当前网页效果。M13 的 120 → 250 → 500+ 内容批次保持未发布；恢复前必须先解决 `fe13d51` 独立架构复核留下的 provenance/heat/runtime-parse finding 并取得新的独立 PASS。
-- Web 继续公开中英文各 50 项；游戏内容不会自动晋升到 Web。
+- **2026-09-11 Product Director 决策：M13 从"权利安全 500+ 可导出游戏语料"改造为"菜谱数据库优先"。** 500 目标重新定义为数据库条目数（`--minimum-database`），而非 exportable 数量；网页/游戏发布仍走现有 fail-closed 权利门禁。
+- M12 建立与 Web 完全隔离的逐料理 JSON、量化食材、原子操作 DAG、营养 provenance、错误 mutation、`game-commercial-ready` 门禁和确定性 Godot/SQLite 导出，已完成并通过独立审查。
+- 当前 50 项已通过 `RecipeDatabaseExtensionV1` 扩展块回填为 `database-entry` 条目：复用 Web taxonomy（菜系/技巧/饮食标签/mealRole/servingContext）+ 品类标签（baking/bartending/dessert）+ FlavorProfile 味道 + 分级图片（published/internal/missing）+ 来源标记（web-migrated/loc-public-domain/web-curated/ai-assisted/original）。
+- 数据库条目允许字段留空（火候缺失、无味道、无图片均合法入库，只用结构校验）；exportable 层保持全部现有 fail-closed 规则。
+- 调料/食材通过 portion `role`（main/seasoning/garnish/optional）显式标记；操作目录新增 `remove`（移出锅/容器）。
+- 来源策略宽松化：网络菜谱（web-curated）与 AI 辅助内容（ai-assisted）可入库，但必须携带用途限制说明，且永不自动晋升为 exportable。
+- 后续批次（120 → 250 → 500+）以数据库条目数为门禁，品类须覆盖烘焙、调酒、甜品；Web 继续公开中英文各 50 项。
 
 完整合同见 `docs/GAME_DATA_ARCHITECTURE.md` 与 `docs/GAME_PUBLISHING_GOVERNANCE.md`。
 

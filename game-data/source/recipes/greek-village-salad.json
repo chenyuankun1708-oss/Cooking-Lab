@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c920e7ce64a42dfe",
+  "artifactVersion": "clv1-8953edb0e2b635a6",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -26,7 +26,53 @@
       "scenario:greek-village-salad-greek-village-salad-op-008-season-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "herbal",
+        "fruity"
+      ],
+      "characterIds": [
+        "light",
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sour": 2,
+        "sweet": 1,
+        "umami": 1
+      },
+      "textureIds": [
+        "crisp",
+        "creamy",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "greek-village-salad-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "greek"
+      ],
+      "mealRoleIds": [
+        "side",
+        "starter"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -42,6 +88,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 500,
         "conversionRecordId": "si:g:v1",
@@ -57,6 +104,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -72,6 +120,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -87,6 +136,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "si:g:v1",
@@ -102,6 +152,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -117,6 +168,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "si:g:v1",
@@ -132,6 +184,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 35,
         "conversionRecordId": "si:g:v1",
@@ -147,6 +200,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -162,6 +216,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-09",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -177,6 +232,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-village-salad-portion-10",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "si:g:v1",
@@ -589,7 +645,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c920e7ce64a42dfe",
+      "baselineArtifactVersion": "clv1-8953edb0e2b635a6",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -613,7 +669,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c920e7ce64a42dfe",
+      "baselineArtifactVersion": "clv1-8953edb0e2b635a6",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -637,7 +693,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c920e7ce64a42dfe",
+      "baselineArtifactVersion": "clv1-8953edb0e2b635a6",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -661,7 +717,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c920e7ce64a42dfe",
+      "baselineArtifactVersion": "clv1-8953edb0e2b635a6",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -686,7 +742,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c920e7ce64a42dfe",
+      "baselineArtifactVersion": "clv1-8953edb0e2b635a6",
       "causeCodes": [
         "operation-omitted:season"
       ],

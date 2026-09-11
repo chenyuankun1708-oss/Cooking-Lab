@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c1df5a83bce67b14",
+  "artifactVersion": "clv1-6102612b7d05f390",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -45,7 +45,52 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "spiced",
+        "roasted"
+      ],
+      "characterIds": [
+        "appetizing",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 2,
+        "spicy": 2,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "northwest-cumin-lamb-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "northwestern-chinese"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stir-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -61,6 +106,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "northwest-cumin-lamb-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 280,
         "conversionRecordId": "si:g:v1",
@@ -76,6 +122,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "northwest-cumin-lamb-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 160,
         "conversionRecordId": "si:g:v1",
@@ -91,6 +138,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "northwest-cumin-lamb-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -106,6 +154,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "northwest-cumin-lamb-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -121,6 +170,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "northwest-cumin-lamb-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 6,
         "conversionRecordId": "si:g:v1",
@@ -136,6 +186,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "northwest-cumin-lamb-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.2,
         "conversionRecordId": "si:g:v1",
@@ -594,7 +645,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -618,7 +669,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -642,7 +693,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -666,7 +717,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -695,7 +746,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -719,7 +770,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -743,7 +794,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -767,7 +818,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c1df5a83bce67b14",
+      "baselineArtifactVersion": "clv1-6102612b7d05f390",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],

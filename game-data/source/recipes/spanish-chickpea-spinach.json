@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6bb0095e61b34779",
+  "artifactVersion": "clv1-a1dc4240965721ff",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -34,7 +34,55 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "spiced",
+        "garlicky"
+      ],
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 1,
+        "umami": 2
+      },
+      "textureIds": [
+        "soft",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "spanish-chickpea-spinach-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "spanish"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stew"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -50,6 +98,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -65,6 +114,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -80,6 +130,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 250,
         "conversionRecordId": "si:g:v1",
@@ -95,6 +146,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -110,6 +162,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "si:g:v1",
@@ -125,6 +178,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 6,
         "conversionRecordId": "si:g:v1",
@@ -140,6 +194,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-chickpea-spinach-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.5,
         "conversionRecordId": "si:g:v1",
@@ -562,7 +617,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -586,7 +641,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -610,7 +665,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -634,7 +689,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -658,7 +713,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -687,7 +742,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -722,7 +777,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -751,7 +806,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6bb0095e61b34779",
+      "baselineArtifactVersion": "clv1-a1dc4240965721ff",
       "causeCodes": [
         "heat-high:simmer"
       ],

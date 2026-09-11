@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-169d4687b403a727",
+  "artifactVersion": "clv1-9d700b171f14b9f2",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -51,7 +51,52 @@
       "scenario:thai-basil-chicken-thai-basil-chicken-op-013-pan-fry-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "herbal",
+        "peppery"
+      ],
+      "characterIds": [
+        "appetizing",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 2,
+        "spicy": 3,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "thai-basil-chicken-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "thai"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stir-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -67,6 +112,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 280,
         "conversionRecordId": "si:g:v1",
@@ -82,6 +128,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 25,
         "conversionRecordId": "si:g:v1",
@@ -97,6 +144,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -112,6 +160,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -127,6 +176,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -142,6 +192,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 7,
         "conversionRecordId": "si:g:v1",
@@ -157,6 +208,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-basil-chicken-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.5,
         "conversionRecordId": "si:g:v1",
@@ -666,7 +718,7 @@
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -690,7 +742,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -714,7 +766,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -738,7 +790,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -762,7 +814,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -786,7 +838,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -815,7 +867,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -850,7 +902,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -874,7 +926,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -898,7 +950,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-169d4687b403a727",
+      "baselineArtifactVersion": "clv1-9d700b171f14b9f2",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],

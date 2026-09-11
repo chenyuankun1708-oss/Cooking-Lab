@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-813157f92cdf75f3",
+  "artifactVersion": "clv1-96475a2986cec5bc",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -49,7 +49,52 @@
       "scenario:malaysian-turmeric-chicken-malaysian-turmeric-chicken-op-012-pan-fry-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "spiced",
+        "gingery"
+      ],
+      "characterIds": [
+        "warming",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 1,
+        "spicy": 1,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "malaysian-turmeric-chicken-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "malaysian"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stir-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -65,6 +110,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 360,
         "conversionRecordId": "si:g:v1",
@@ -80,6 +126,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-02",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "si:g:v1",
@@ -95,6 +142,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -110,6 +158,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -125,6 +174,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "si:g:v1",
@@ -140,6 +190,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 220,
         "conversionRecordId": "si:g:v1",
@@ -155,6 +206,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-07",
+      "role": "main",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "si:g:v1",
@@ -170,6 +222,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-08",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -185,6 +238,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-09",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -200,6 +254,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "malaysian-turmeric-chicken-portion-10",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.5,
         "conversionRecordId": "si:g:v1",
@@ -729,7 +784,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -753,7 +808,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -777,7 +832,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -801,7 +856,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -825,7 +880,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -849,7 +904,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -873,7 +928,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -902,7 +957,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -931,7 +986,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-813157f92cdf75f3",
+      "baselineArtifactVersion": "clv1-96475a2986cec5bc",
       "causeCodes": [
         "heat-high:pan-fry"
       ],

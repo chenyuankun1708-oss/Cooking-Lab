@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c2b9f29db99b5abb",
+  "artifactVersion": "clv1-ecdd08c0f81cd6ce",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -33,7 +33,53 @@
       "scenario:korean-tofu-stew-home-korean-tofu-stew-home-op-009-season-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fermented",
+        "garlicky"
+      ],
+      "characterIds": [
+        "appetizing",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sour": 1,
+        "spicy": 3,
+        "umami": 4
+      },
+      "textureIds": [
+        "brothy",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "korean-tofu-stew-home-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "korean"
+      ],
+      "mealRoleIds": [
+        "soup"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stew"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -49,6 +95,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 360,
         "conversionRecordId": "si:g:v1",
@@ -64,6 +111,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -79,6 +127,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 260,
         "conversionRecordId": "si:g:v1",
@@ -94,6 +143,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "egg:piece:weight-v1",
@@ -109,6 +159,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 22,
         "conversionRecordId": "si:g:v1",
@@ -124,6 +175,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -139,6 +191,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-07",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -154,6 +207,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "korean-tofu-stew-home-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.5,
         "conversionRecordId": "si:g:v1",
@@ -567,7 +621,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c2b9f29db99b5abb",
+      "baselineArtifactVersion": "clv1-ecdd08c0f81cd6ce",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -591,7 +645,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c2b9f29db99b5abb",
+      "baselineArtifactVersion": "clv1-ecdd08c0f81cd6ce",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -615,7 +669,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c2b9f29db99b5abb",
+      "baselineArtifactVersion": "clv1-ecdd08c0f81cd6ce",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -639,7 +693,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c2b9f29db99b5abb",
+      "baselineArtifactVersion": "clv1-ecdd08c0f81cd6ce",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -668,7 +722,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c2b9f29db99b5abb",
+      "baselineArtifactVersion": "clv1-ecdd08c0f81cd6ce",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -703,7 +757,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c2b9f29db99b5abb",
+      "baselineArtifactVersion": "clv1-ecdd08c0f81cd6ce",
       "causeCodes": [
         "operation-omitted:season"
       ],

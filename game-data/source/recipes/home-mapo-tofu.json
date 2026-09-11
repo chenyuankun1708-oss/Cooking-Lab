@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-98afb1f333d05588",
+  "artifactVersion": "clv1-e4efc0636393ef20",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -45,7 +45,52 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fermented",
+        "garlicky"
+      ],
+      "characterIds": [
+        "appetizing",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 3,
+        "spicy": 2,
+        "umami": 4
+      },
+      "textureIds": [
+        "silky",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "home-mapo-tofu-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "sichuan"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "braise"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -61,6 +106,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 420,
         "conversionRecordId": "si:g:v1",
@@ -76,6 +122,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 120,
         "conversionRecordId": "si:g:v1",
@@ -91,6 +138,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 18,
         "conversionRecordId": "si:g:v1",
@@ -106,6 +154,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -121,6 +170,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -136,6 +186,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -151,6 +202,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "home-mapo-tofu-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.6,
         "conversionRecordId": "si:g:v1",
@@ -568,7 +620,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -597,7 +649,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -621,7 +673,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -645,7 +697,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -669,7 +721,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -704,7 +756,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -733,7 +785,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -768,7 +820,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -792,7 +844,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -821,7 +873,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -856,7 +908,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-98afb1f333d05588",
+      "baselineArtifactVersion": "clv1-e4efc0636393ef20",
       "causeCodes": [
         "operation-omitted:season"
       ],

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-b298fead86907d93",
+  "artifactVersion": "clv1-a0fe153facdf01ff",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -23,7 +23,50 @@
       "source-step:2:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery"
+      ],
+      "characterIds": [
+        "light",
+        "clean-tasting"
+      ],
+      "tastes": {
+        "salty": 2,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "cantonese-ginger-scallion-fish-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "cantonese"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "steam"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -39,6 +82,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-ginger-scallion-fish-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 320,
         "conversionRecordId": "si:g:v1",
@@ -54,6 +98,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-ginger-scallion-fish-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -69,6 +114,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-ginger-scallion-fish-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 20,
         "conversionRecordId": "si:g:v1",
@@ -84,6 +130,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-ginger-scallion-fish-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -99,6 +146,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-ginger-scallion-fish-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 4,
         "conversionRecordId": "si:g:v1",
@@ -114,6 +162,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-ginger-scallion-fish-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.8,
         "conversionRecordId": "si:g:v1",
@@ -354,7 +403,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b298fead86907d93",
+      "baselineArtifactVersion": "clv1-a0fe153facdf01ff",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -383,7 +432,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b298fead86907d93",
+      "baselineArtifactVersion": "clv1-a0fe153facdf01ff",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

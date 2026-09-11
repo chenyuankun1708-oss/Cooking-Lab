@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-12fbed5f0956767e",
+  "artifactVersion": "clv1-30e5d01709a21de7",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -32,7 +32,56 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "spiced",
+        "gingery"
+      ],
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 1,
+        "spicy": 1,
+        "umami": 2
+      },
+      "textureIds": [
+        "creamy",
+        "brothy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "indian-masoor-dal-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "indian"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "soup"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -48,6 +97,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 200,
         "conversionRecordId": "si:g:v1",
@@ -63,6 +113,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -78,6 +129,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 130,
         "conversionRecordId": "si:g:v1",
@@ -93,6 +145,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -108,6 +161,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -123,6 +177,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -138,6 +193,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -153,6 +209,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -168,6 +225,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indian-masoor-dal-portion-09",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.8,
         "conversionRecordId": "si:g:v1",
@@ -615,7 +673,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "baselineArtifactVersion": "clv1-30e5d01709a21de7",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -639,7 +697,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "baselineArtifactVersion": "clv1-30e5d01709a21de7",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -663,7 +721,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "baselineArtifactVersion": "clv1-30e5d01709a21de7",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -687,7 +745,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "baselineArtifactVersion": "clv1-30e5d01709a21de7",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -716,7 +774,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "baselineArtifactVersion": "clv1-30e5d01709a21de7",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -751,7 +809,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-12fbed5f0956767e",
+      "baselineArtifactVersion": "clv1-30e5d01709a21de7",
       "causeCodes": [
         "operation-omitted:season"
       ],

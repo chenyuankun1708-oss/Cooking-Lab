@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-176787e15631e8b3",
+  "artifactVersion": "clv1-eb42a47b1baf9725",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -35,7 +35,54 @@
       "scenario:spanish-potato-omelet-spanish-potato-omelet-op-009-rest-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted"
+      ],
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sweet": 1,
+        "umami": 2
+      },
+      "textureIds": [
+        "soft",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "spanish-potato-omelet-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "spanish"
+      ],
+      "dietaryTagIds": [
+        "vegetarian"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "pan-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -51,6 +98,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-potato-omelet-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 420,
         "conversionRecordId": "si:g:v1",
@@ -66,6 +114,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-potato-omelet-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "egg:piece:weight-v1",
@@ -81,6 +130,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-potato-omelet-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 160,
         "conversionRecordId": "si:g:v1",
@@ -96,6 +146,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-potato-omelet-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -111,6 +162,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "spanish-potato-omelet-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.8,
         "conversionRecordId": "si:g:v1",
@@ -469,7 +521,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -493,7 +545,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -517,7 +569,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -541,7 +593,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -565,7 +617,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -594,7 +646,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -629,7 +681,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-176787e15631e8b3",
+      "baselineArtifactVersion": "clv1-eb42a47b1baf9725",
       "causeCodes": [
         "operation-omitted:rest"
       ],

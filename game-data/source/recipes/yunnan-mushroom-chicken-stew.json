@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-bc3858253e2cf29c",
+  "artifactVersion": "clv1-d73e80317299341c",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -22,7 +22,50 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery"
+      ],
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 1,
+        "umami": 4
+      },
+      "textureIds": [
+        "brothy",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "yunnan-mushroom-chicken-stew-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stew"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -38,6 +81,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "yunnan-mushroom-chicken-stew-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 360,
         "conversionRecordId": "si:g:v1",
@@ -53,6 +97,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "yunnan-mushroom-chicken-stew-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -68,6 +113,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "yunnan-mushroom-chicken-stew-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -83,6 +129,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "yunnan-mushroom-chicken-stew-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -98,6 +145,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "yunnan-mushroom-chicken-stew-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.8,
         "conversionRecordId": "si:g:v1",
@@ -301,7 +349,7 @@
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bc3858253e2cf29c",
+      "baselineArtifactVersion": "clv1-d73e80317299341c",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -325,7 +373,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bc3858253e2cf29c",
+      "baselineArtifactVersion": "clv1-d73e80317299341c",
       "causeCodes": [
         "operation-omitted:season"
       ],

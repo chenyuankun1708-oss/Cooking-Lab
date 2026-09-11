@@ -107,3 +107,17 @@ Issue #52 没有扩展 `DecisionContext` 字段。Journey source 是 URL applica
 `PreparationTime.activeMinutes` 表示主动操作时间，必须介于 prep 与 total contract 允许的范围内。整餐 nutrition/cost 使用 `complete / partial / unavailable`，unknown/not-applicable 不等于 zero。Pairing identity、Flavor/taxonomy ID、meal role 与 serving context 均保持 locale-independent；显示标签由 adapter 解析。完整 contract 见 `types/pairing.ts` 与 `docs/PAIRING.md`。
 
 M7 Issue #53 增加两种且仅两种 whole-meal constraint outcome：`estimated-elapsed-time` 与 `available-tools`。每个启用的条件返回 `satisfied / exceeded`；时间 outcome 同时记录展示用 estimate 与 limit，工具 outcome 记录稳定排序的 available、required 与 exact missing IDs。`MealCompositionResult.emptyReason` 区分 pairing quality 不足与 constraints exceeded，`relaxationOptions` 只包含单独移除后能产生合格结果的条件。Recipe-only 营养、预算、油盐糖字段不进入这些类型。
+
+## Recipe Database Extension（2026-09-11 M13 revised scope）
+
+`GameRecipeV1` 新增可选 `database` 扩展块（`types/game-recipe-database.ts`），把 game-data 层同时作为菜谱数据库使用：
+
+- `tags`：categoryTags（baking/bartending/dessert）+ Web taxonomy 引用（cuisineIds/techniqueIds/dietaryTagIds/mealRoleIds/servingContextIds）。
+- `flavor`：直接复用 Web `FlavorProfile`（`types/flavor.ts`），无味道数据时缺省。
+- `images`：分级图片引用——`published`（关联 Web `RecipeImage.id`，走权利链）/ `internal`（仅数据库，必须带 licenseNote）/ `missing`（合法空值）。
+- `sourceType` + `sourceNotes`：来源分类（web-migrated/loc-public-domain/web-curated/ai-assisted/original）；web-curated 与 ai-assisted 必须带用途限制说明。
+- 食材 portion 新增 `role`（main/seasoning/garnish/optional）；食材目录带 role 提示。
+- eligibility 分层：`database-entry`（结构校验）与 `game-exportable`（全套 fail-closed 门禁），legacy `draft`/`exportable` 值分别等价于两层。
+- 字段留空合法：火候、味道、图片缺失不产生 blocker——数据库优先语义。
+
+回填管线：`scripts/migrate-database-extension.ts`（从 Web 层 flavor/taxonomy/hero 图回填 50 条）；审计：`game-data:audit --minimum-database=N`。

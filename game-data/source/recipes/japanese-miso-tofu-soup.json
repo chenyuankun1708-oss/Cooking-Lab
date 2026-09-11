@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-3ff1004b3a2cf502",
+  "artifactVersion": "clv1-6c14eb627d963fd9",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -34,7 +34,53 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fermented"
+      ],
+      "characterIds": [
+        "light",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 2,
+        "umami": 4
+      },
+      "textureIds": [
+        "brothy",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "japanese-miso-tofu-soup-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "japanese"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "soup"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -50,6 +96,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-tofu-soup-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 260,
         "conversionRecordId": "si:g:v1",
@@ -65,6 +112,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-tofu-soup-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 160,
         "conversionRecordId": "si:g:v1",
@@ -80,6 +128,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-tofu-soup-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 30,
         "conversionRecordId": "si:g:v1",
@@ -95,6 +144,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-tofu-soup-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -387,7 +437,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -411,7 +461,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -446,7 +496,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -475,7 +525,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -510,7 +560,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -534,7 +584,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -558,7 +608,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-3ff1004b3a2cf502",
+      "baselineArtifactVersion": "clv1-6c14eb627d963fd9",
       "causeCodes": [
         "operation-omitted:boil"
       ],

@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-f00349edeb8482cd",
+  "artifactVersion": "clv1-a4866b048fb2a715",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -11,7 +11,48 @@
       "portion:fino-sherry-portion-01:quantity"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fermented",
+        "toasty"
+      ],
+      "characterIds": [
+        "light",
+        "clean-tasting"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "salty": 1,
+        "sour": 1
+      },
+      "textureIds": []
+    },
+    "images": [
+      {
+        "imageId": "fino-sherry-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "spanish"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif",
+        "dinner"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -27,6 +68,7 @@
       "optional": false,
       "phase": "service",
       "portionId": "fino-sherry-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "unresolved-serving-guidance-quantity",

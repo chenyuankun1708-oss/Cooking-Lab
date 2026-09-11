@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-15fee5ae1f845801",
+  "artifactVersion": "clv1-4d0c9b3a8b7cc68a",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -38,7 +38,57 @@
       "scenario:indonesian-chili-eggplant-indonesian-chili-eggplant-op-009-simmer-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "tomato-rich",
+        "garlicky"
+      ],
+      "characterIds": [
+        "appetizing",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 2,
+        "spicy": 3,
+        "umami": 2
+      },
+      "textureIds": [
+        "soft",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "indonesian-chili-eggplant-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "indonesian"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "braise",
+        "pan-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -54,6 +104,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indonesian-chili-eggplant-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 450,
         "conversionRecordId": "si:g:v1",
@@ -69,6 +120,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indonesian-chili-eggplant-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -84,6 +136,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indonesian-chili-eggplant-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 20,
         "conversionRecordId": "si:g:v1",
@@ -99,6 +152,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indonesian-chili-eggplant-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -114,6 +168,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indonesian-chili-eggplant-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 9,
         "conversionRecordId": "si:g:v1",
@@ -129,6 +184,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "indonesian-chili-eggplant-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.2,
         "conversionRecordId": "si:g:v1",
@@ -513,7 +569,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -537,7 +593,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -561,7 +617,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -590,7 +646,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -625,7 +681,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -654,7 +710,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -689,7 +745,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -713,7 +769,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -742,7 +798,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-15fee5ae1f845801",
+      "baselineArtifactVersion": "clv1-4d0c9b3a8b7cc68a",
       "causeCodes": [
         "heat-high:simmer"
       ],

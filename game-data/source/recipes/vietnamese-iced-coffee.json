@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-150581bf504ce3e9",
+  "artifactVersion": "clv1-48cb59377003a5a5",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -15,7 +15,48 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "toasty"
+      ],
+      "characterIds": [
+        "refreshing"
+      ],
+      "tastes": {
+        "bitter": 3,
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "vietnamese-iced-coffee-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "vietnamese"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "afternoon-tea",
+        "breakfast"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -31,6 +72,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-iced-coffee-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 25,
         "conversionRecordId": "si:g:v1",
@@ -46,6 +88,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-iced-coffee-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -62,6 +105,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-iced-coffee-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 45,
         "conversionRecordId": "si:g:v1",
@@ -77,6 +121,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-iced-coffee-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -296,7 +341,7 @@
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-150581bf504ce3e9",
+      "baselineArtifactVersion": "clv1-48cb59377003a5a5",
       "causeCodes": [
         "operation-omitted:stir"
       ],

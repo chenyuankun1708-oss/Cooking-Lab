@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-05ef01fecbab8046",
+  "artifactVersion": "clv1-8c25268c3c984f54",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -30,7 +30,52 @@
       "source-step:1:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy",
+        "herbal"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 3,
+        "umami": 2
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "greek-lemon-oregano-chicken-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "greek"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "grill"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -46,6 +91,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-lemon-oregano-chicken-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 340,
         "conversionRecordId": "si:g:v1",
@@ -61,6 +107,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-lemon-oregano-chicken-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 0.5,
         "conversionRecordId": "lemon:piece:weight-v1",
@@ -76,6 +123,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-lemon-oregano-chicken-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "si:g:v1",
@@ -91,6 +139,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-lemon-oregano-chicken-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -106,6 +155,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-lemon-oregano-chicken-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 6,
         "conversionRecordId": "si:g:v1",
@@ -121,6 +171,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "greek-lemon-oregano-chicken-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.2,
         "conversionRecordId": "si:g:v1",
@@ -419,7 +470,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "baselineArtifactVersion": "clv1-8c25268c3c984f54",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -443,7 +494,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "baselineArtifactVersion": "clv1-8c25268c3c984f54",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -467,7 +518,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "baselineArtifactVersion": "clv1-8c25268c3c984f54",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -502,7 +553,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "baselineArtifactVersion": "clv1-8c25268c3c984f54",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -526,7 +577,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-05ef01fecbab8046",
+      "baselineArtifactVersion": "clv1-8c25268c3c984f54",
       "causeCodes": [
         "operation-omitted:stir"
       ],

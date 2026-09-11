@@ -28,6 +28,14 @@ import {
   type GameRightsRegistryV1,
 } from "@/types/game-recipe";
 import {
+  databaseCategoryTags,
+  databaseEligibilityValues,
+  databaseImageStatuses,
+  databaseSourceTypes,
+  portionRoleValues,
+  recipeDatabaseExtensionVersion,
+} from "@/types/game-recipe-database";
+import {
   publishingRiskReasonCodes,
   reviewDimensions,
 } from "@/types/publishing-governance";
@@ -92,6 +100,21 @@ function enumValue(values: readonly string[]): Validator {
     }
   };
 }
+
+function recordValue(item: Validator): Validator {
+  return (value, path) => {
+    if (!value || typeof value !== "object" || Array.isArray(value)) fail(path, "expected record");
+    for (const [key, entry] of Object.entries(value as Record<string, unknown>)) {
+      item(entry, `${path}.${key}`);
+    }
+  };
+}
+
+const tasteIntensityValue: Validator = (value, path) => {
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 0 || value > 4) {
+    fail(path, "expected taste intensity 0-4");
+  }
+};
 
 function arrayOf(item: Validator, minimum = 0): Validator {
   return (value, path) => {
@@ -471,6 +494,7 @@ const ingredientDefinitionSchema = exactObject({
 }, {
   sourceIngredientId: stringValue,
   densityGPerMl: numberValue,
+  role: enumValue(portionRoleValues),
   simulationProfile: exactObject({
     waterFraction: numberValue,
     fatFraction: numberValue,
@@ -586,6 +610,38 @@ const gameIngredientPortionSchema = exactObject({
   nutritionProvenanceId: stringValue,
 }, {
   volumeMl: numberValue,
+  role: enumValue(portionRoleValues),
+});
+
+const flavorProfileSchema = exactObject({
+  tastes: recordValue(tasteIntensityValue),
+}, {
+  aromaIds: arrayOf(stringValue),
+  textureIds: arrayOf(stringValue),
+  characterIds: arrayOf(stringValue),
+});
+
+const recipeDatabaseExtensionSchema = exactObject({
+  extensionVersion: literal(recipeDatabaseExtensionVersion),
+  sourceType: enumValue(databaseSourceTypes),
+  tags: exactObject({
+    categoryTags: arrayOf(enumValue(databaseCategoryTags)),
+  }, {
+    cuisineIds: arrayOf(stringValue),
+    techniqueIds: arrayOf(stringValue),
+    dietaryTagIds: arrayOf(stringValue),
+    mealRoleIds: arrayOf(stringValue),
+    servingContextIds: arrayOf(stringValue),
+  }),
+  images: arrayOf(exactObject({
+    status: enumValue(databaseImageStatuses),
+  }, {
+    imageId: stringValue,
+    licenseNote: stringValue,
+  })),
+}, {
+  flavor: flavorProfileSchema,
+  sourceNotes: stringValue,
 });
 
 const gameRecipeSchema = exactObject({
@@ -594,7 +650,7 @@ const gameRecipeSchema = exactObject({
   recipeId: stringValue,
   slug: stringValue,
   itemType: enumValue(culinaryItemTypes),
-  eligibility: enumValue(["draft", "exportable"]),
+  eligibility: enumValue(databaseEligibilityValues),
   simulationProfile: enumValue(["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"]),
   servings: numberValue,
   yield: exactObject({ amount: numberValue, unit: enumValue(["serving", "piece", "ml", "g"]) }),
@@ -673,6 +729,7 @@ const gameRecipeSchema = exactObject({
   }),
 }, {
   sourceCulinaryItemId: stringValue,
+  database: recipeDatabaseExtensionSchema,
 });
 
 const godotGameRecipeSchema = exactObject({

@@ -1,0 +1,547 @@
+{
+  "artifactVersion": "clv1-8daf1d1d94274a0f",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity",
+        "floral"
+      ],
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "sweet": 2
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "italian"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "peach",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-peach",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bellini-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "prosecco",
+      "initialState": "liquid",
+      "massG": 118.8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-prosecco",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bellini-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "prosecco:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bellini-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 3.56,
+      "calories": 134.04,
+      "carbs": 13.06,
+      "fat": 0.3,
+      "fiber": 1.5,
+      "protein": 0.9,
+      "saturatedFat": 0,
+      "sodium": 11.88,
+      "sugar": 11.96
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "peach",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-peach",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "peach",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "prosecco",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-prosecco",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "prosecco",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 3.56,
+      "calories": 134.04,
+      "carbs": 13.06,
+      "fat": 0.3,
+      "fiber": 1.5,
+      "protein": 0.9,
+      "saturatedFat": 0,
+      "sodium": 11.88,
+      "sugar": 11.96
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "bellini-portion-01"
+        ],
+        "nodeId": "bellini-op-001-peel",
+        "operationType": "peel",
+        "outputStateIds": [
+          "bellini-op-001-peel-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bellini-op-001-peel"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "bellini-portion-01"
+        ],
+        "nodeId": "bellini-op-002-blend",
+        "operationType": "blend",
+        "outputStateIds": [
+          "bellini-op-002-blend-done"
+        ],
+        "parameters": {
+          "strength": 0.7
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.15,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "bellini-op-002-blend"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bellini-portion-01"
+        ],
+        "nodeId": "bellini-op-003-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "bellini-op-003-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bellini-op-003-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bellini-portion-03"
+        ],
+        "nodeId": "bellini-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "bellini-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 40
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bellini-op-004-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bellini-portion-01"
+        ],
+        "nodeId": "bellini-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "bellini-op-005-add-done"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bellini-op-005-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bellini-portion-02"
+        ],
+        "nodeId": "bellini-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "bellini-op-006-add-done"
+        ],
+        "parameters": {
+          "quantityG": 119
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bellini-op-006-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "bellini-portion-01"
+        ],
+        "nodeId": "bellini-op-007-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "bellini-op-007-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.25
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "bellini-op-007-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bellini-portion-01"
+        ],
+        "nodeId": "bellini-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "bellini-op-008-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "bellini",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:peel"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-peel"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-001-peel",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-001-peel-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:blend"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-blend"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-002-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-002-blend-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-003-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-003-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-005-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-005-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-006-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-006-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8daf1d1d94274a0f",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "bellini-op-007-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bellini-bellini-op-007-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "bellini",
+  "yield": {
+    "amount": 150,
+    "unit": "ml"
+  }
+}

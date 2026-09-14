@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-5cce6afd92a0b200",
+  "artifactVersion": "clv1-544b60b4fcdd4458",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -32,7 +32,55 @@
       "scenario:sichuan-smashed-cucumber-sichuan-smashed-cucumber-op-009-fold-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "garlicky",
+        "peppery"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sour": 3,
+        "spicy": 2,
+        "umami": 1
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "sichuan-smashed-cucumber-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "sichuan"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "starter"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "cold-mix"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -48,6 +96,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 320,
         "conversionRecordId": "si:g:v1",
@@ -63,6 +112,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -78,6 +128,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -93,6 +144,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 14,
         "conversionRecordId": "si:g:v1",
@@ -108,6 +160,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -123,6 +176,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "si:g:v1",
@@ -138,6 +192,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "sichuan-smashed-cucumber-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.5,
         "conversionRecordId": "si:g:v1",
@@ -486,7 +541,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "baselineArtifactVersion": "clv1-544b60b4fcdd4458",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -510,7 +565,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "baselineArtifactVersion": "clv1-544b60b4fcdd4458",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -534,7 +589,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "baselineArtifactVersion": "clv1-544b60b4fcdd4458",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -558,7 +613,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "baselineArtifactVersion": "clv1-544b60b4fcdd4458",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -582,7 +637,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-5cce6afd92a0b200",
+      "baselineArtifactVersion": "clv1-544b60b4fcdd4458",
       "causeCodes": [
         "operation-omitted:fold"
       ],

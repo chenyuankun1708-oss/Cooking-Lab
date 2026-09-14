@@ -1,0 +1,534 @@
+{
+  "artifactVersion": "clv1-8f8a8fc42788d20d",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "floral"
+      ],
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "silky",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "thai"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "coconut-milk",
+      "initialState": "liquid",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "coconut-jelly-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "coconut-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "coconut-jelly-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "gelatin-powder",
+      "initialState": "dry",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gelatin-powder",
+      "optional": false,
+      "phase": "main",
+      "portionId": "coconut-jelly-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "coconut-jelly-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 10,
+      "calories": 179.71,
+      "carbs": 11.88,
+      "fat": 14,
+      "fiber": 0,
+      "protein": 3.46,
+      "saturatedFat": 12,
+      "sodium": 11.93,
+      "sugar": 11.07
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "coconut-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "coconut-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "gelatin-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gelatin-powder",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "gelatin-powder",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 6,
+    "total": {
+      "addedSugar": 60,
+      "calories": 1078.25,
+      "carbs": 71.31,
+      "fat": 84,
+      "fiber": 0,
+      "protein": 20.75,
+      "saturatedFat": 72,
+      "sodium": 71.55,
+      "sugar": 66.4
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "coconut-jelly-portion-02",
+          "coconut-jelly-portion-04"
+        ],
+        "nodeId": "coconut-jelly-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "coconut-jelly-op-001-add-done"
+        ],
+        "parameters": {
+          "quantityG": 260
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "coconut-jelly-op-001-add"
+        ],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "scald",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "coconut-jelly-op-002-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "coconut-jelly-op-002-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 80
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "coconut-jelly-op-002-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "coconut-jelly-portion-03"
+        ],
+        "nodeId": "coconut-jelly-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "coconut-jelly-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 15
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "coconut-jelly-op-003-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "coconut-jelly-portion-01"
+        ],
+        "nodeId": "coconut-jelly-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "coconut-jelly-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "coconut-jelly-op-004-mix"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "coconut-jelly-portion-01"
+        ],
+        "nodeId": "coconut-jelly-op-005-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "coconut-jelly-op-005-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "coconut-jelly-op-005-strain"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "coconut-jelly-portion-01"
+        ],
+        "nodeId": "coconut-jelly-op-006-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "coconut-jelly-op-006-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.85,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 14400000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "coconut-jelly-op-006-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "coconut-jelly-portion-01"
+        ],
+        "nodeId": "coconut-jelly-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "coconut-jelly-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "coconut-jelly",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f8a8fc42788d20d",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "coconut-jelly-op-001-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "coconut-jelly-coconut-jelly-op-001-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f8a8fc42788d20d",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "coconut-jelly-op-002-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "coconut-jelly-coconut-jelly-op-002-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f8a8fc42788d20d",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "coconut-jelly-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "coconut-jelly-coconut-jelly-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f8a8fc42788d20d",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "coconut-jelly-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "coconut-jelly-coconut-jelly-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f8a8fc42788d20d",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "coconut-jelly-op-005-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "coconut-jelly-coconut-jelly-op-005-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8f8a8fc42788d20d",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "coconut-jelly-op-006-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "coconut-jelly-coconut-jelly-op-006-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 6,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "coconut-jelly",
+  "yield": {
+    "amount": 6,
+    "unit": "piece"
+  }
+}

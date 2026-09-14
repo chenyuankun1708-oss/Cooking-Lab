@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-d30f9b47f00f9e03",
+  "artifactVersion": "clv1-cbb314025db3c7a3",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -18,7 +18,50 @@
       "scenario:lapsang-souchong-lapsang-souchong-op-003-rest-short:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "smoky",
+        "fruity",
+        "toasty"
+      ],
+      "characterIds": [
+        "warming",
+        "clean-tasting"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sweet": 1
+      },
+      "textureIds": [
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "lapsang-souchong-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -34,6 +77,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lapsang-souchong-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 4,
         "conversionRecordId": "si:g:v1",
@@ -49,6 +93,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lapsang-souchong-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -209,7 +254,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "baselineArtifactVersion": "clv1-cbb314025db3c7a3",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -238,7 +283,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "baselineArtifactVersion": "clv1-cbb314025db3c7a3",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -268,7 +313,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "baselineArtifactVersion": "clv1-cbb314025db3c7a3",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -292,7 +337,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-d30f9b47f00f9e03",
+      "baselineArtifactVersion": "clv1-cbb314025db3c7a3",
       "causeCodes": [
         "duration-short:rest"
       ],

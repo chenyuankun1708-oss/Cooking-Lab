@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-79b3ba2559a4d6d1",
+  "artifactVersion": "clv1-86ae2e24b1e490ba",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -28,7 +28,51 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fermented",
+        "roasted"
+      ],
+      "characterIds": [
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 3,
+        "sweet": 1,
+        "umami": 4
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "japanese-miso-salmon-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "japanese"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "pan-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -44,6 +88,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-salmon-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 320,
         "conversionRecordId": "si:g:v1",
@@ -59,6 +104,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-salmon-portion-02",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 18,
         "conversionRecordId": "si:g:v1",
@@ -74,6 +120,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-salmon-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -89,6 +136,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-salmon-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 4,
         "conversionRecordId": "si:g:v1",
@@ -104,6 +152,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-miso-salmon-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.2,
         "conversionRecordId": "si:g:v1",
@@ -398,7 +447,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -422,7 +471,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -446,7 +495,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -470,7 +519,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -505,7 +554,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -534,7 +583,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -569,7 +618,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-79b3ba2559a4d6d1",
+      "baselineArtifactVersion": "clv1-86ae2e24b1e490ba",
       "causeCodes": [
         "operation-omitted:rest"
       ],

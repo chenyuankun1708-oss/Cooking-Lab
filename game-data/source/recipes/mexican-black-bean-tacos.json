@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-a2d0aee70665bc4c",
+  "artifactVersion": "clv1-03b9e67ea20b5ff1",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -32,7 +32,55 @@
       "scenario:mexican-black-bean-tacos-mexican-black-bean-tacos-op-013-set-heat-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy",
+        "spiced"
+      ],
+      "characterIds": [
+        "refreshing",
+        "hearty"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 3,
+        "umami": 2
+      },
+      "textureIds": [
+        "crisp",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "mexican-black-bean-tacos-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "mexican"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "staple"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stir-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -48,6 +96,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -63,6 +112,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 6,
         "conversionRecordId": "corn-tortilla:piece:weight-v1",
@@ -78,6 +128,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -93,6 +144,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 160,
         "conversionRecordId": "si:g:v1",
@@ -108,6 +160,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 160,
         "conversionRecordId": "si:g:v1",
@@ -123,6 +176,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -138,6 +192,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-07",
+      "role": "main",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "si:g:v1",
@@ -153,6 +208,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-08",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "lime:piece:weight-v1",
@@ -168,6 +224,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-09",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -183,6 +240,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-10",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -198,6 +256,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mexican-black-bean-tacos-portion-11",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.2,
         "conversionRecordId": "si:g:v1",
@@ -751,7 +810,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -775,7 +834,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -799,7 +858,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -828,7 +887,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -863,7 +922,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -892,7 +951,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -927,7 +986,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-a2d0aee70665bc4c",
+      "baselineArtifactVersion": "clv1-03b9e67ea20b5ff1",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

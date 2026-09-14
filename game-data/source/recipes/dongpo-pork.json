@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-60477e0e17210746",
+  "artifactVersion": "clv1-e9e0b405c3c40c49",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -28,7 +28,49 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "gingery"
+      ],
+      "characterIds": [
+        "hearty",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 3,
+        "sweet": 2,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "dongpo-pork-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "zhejiang"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -44,6 +86,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 800,
         "conversionRecordId": "si:g:v1",
@@ -59,6 +102,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-02",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 35,
         "conversionRecordId": "si:g:v1",
@@ -74,6 +118,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "shaoxing-wine:ml:weight-v1",
@@ -90,6 +135,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 60,
         "conversionRecordId": "si:g:v1",
@@ -105,6 +151,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 20,
         "conversionRecordId": "si:g:v1",
@@ -120,6 +167,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 30,
         "conversionRecordId": "si:g:v1",
@@ -135,6 +183,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-07",
+      "role": "main",
       "sourceQuantity": {
         "amount": 700,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -151,6 +200,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "dongpo-pork-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -522,7 +572,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-60477e0e17210746",
+      "baselineArtifactVersion": "clv1-e9e0b405c3c40c49",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -546,7 +596,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-60477e0e17210746",
+      "baselineArtifactVersion": "clv1-e9e0b405c3c40c49",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -575,7 +625,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-60477e0e17210746",
+      "baselineArtifactVersion": "clv1-e9e0b405c3c40c49",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -604,7 +654,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-60477e0e17210746",
+      "baselineArtifactVersion": "clv1-e9e0b405c3c40c49",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -634,7 +684,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-60477e0e17210746",
+      "baselineArtifactVersion": "clv1-e9e0b405c3c40c49",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -658,7 +708,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-60477e0e17210746",
+      "baselineArtifactVersion": "clv1-e9e0b405c3c40c49",
       "causeCodes": [
         "duration-short:rest"
       ],

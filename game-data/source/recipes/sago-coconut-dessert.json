@@ -1,0 +1,587 @@
+{
+  "artifactVersion": "clv1-6506e62f7888dfb5",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "floral",
+        "fruity"
+      ],
+      "characterIds": [
+        "refreshing",
+        "comforting"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "chewy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "thai"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "sago-pearls",
+      "initialState": "dry",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sago-pearls",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sago-coconut-dessert-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "coconut-milk",
+      "initialState": "liquid",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sago-coconut-dessert-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "coconut-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sago-coconut-dessert-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "mango",
+      "initialState": "raw",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
+      "optional": false,
+      "phase": "main",
+      "portionId": "sago-coconut-dessert-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15,
+      "calories": 358,
+      "carbs": 42.9,
+      "fat": 21.2,
+      "fiber": 0.84,
+      "protein": 2.44,
+      "saturatedFat": 18.05,
+      "sodium": 16.1,
+      "sugar": 23.45
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sago-pearls",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sago-pearls",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sago-pearls",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "coconut-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "coconut-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mango",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mango",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 60,
+      "calories": 1432,
+      "carbs": 171.6,
+      "fat": 84.8,
+      "fiber": 3.36,
+      "protein": 9.76,
+      "saturatedFat": 72.2,
+      "sodium": 64.4,
+      "sugar": 93.8
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-01"
+        ],
+        "nodeId": "sago-coconut-dessert-op-001-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-001-boil-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1200000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "sago-coconut-dessert-op-001-boil"
+        ],
+        "equipmentId": "colander",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-01"
+        ],
+        "nodeId": "sago-coconut-dessert-op-002-rinse",
+        "operationType": "rinse",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-002-rinse-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "sago-coconut-dessert-op-002-rinse"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-02",
+          "sago-coconut-dessert-portion-03"
+        ],
+        "nodeId": "sago-coconut-dessert-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-003-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "sago-coconut-dessert-op-003-mix"
+        ],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "scald",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "sago-coconut-dessert-op-004-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-004-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 80
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "sago-coconut-dessert-op-004-set-heat"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-04"
+        ],
+        "nodeId": "sago-coconut-dessert-op-005-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-005-dice-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 15,
+          "uniformity": 0.7
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "sago-coconut-dessert-op-005-dice"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-01",
+          "sago-coconut-dessert-portion-04"
+        ],
+        "nodeId": "sago-coconut-dessert-op-006-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-006-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "sago-coconut-dessert-op-006-assemble"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-01"
+        ],
+        "nodeId": "sago-coconut-dessert-op-007-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-007-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "sago-coconut-dessert-op-007-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "sago-coconut-dessert-portion-01"
+        ],
+        "nodeId": "sago-coconut-dessert-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "sago-coconut-dessert-op-008-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "sago-coconut-dessert",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-001-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-001-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:rinse"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rinse"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-002-rinse",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-002-rinse-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-004-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-004-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-005-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-005-dice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-006-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-006-assemble-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6506e62f7888dfb5",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "sago-coconut-dessert-op-007-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "sago-coconut-dessert-sago-coconut-dessert-op-007-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "sago-coconut-dessert",
+  "yield": {
+    "amount": 600,
+    "unit": "ml"
+  }
+}

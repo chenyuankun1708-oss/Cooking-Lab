@@ -1,0 +1,731 @@
+{
+  "artifactVersion": "clv1-9eb736e2734157c2",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-a-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity"
+      ],
+      "characterIds": [
+        "refreshing",
+        "comforting"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "soft",
+        "creamy",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch A pilot; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-baking-powder",
+      "initialState": "dry",
+      "massG": 7.5,
+      "nutritionProvenanceId": "usda-fdc:172803:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 1.5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "tsp"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 1.2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 0.25,
+        "conversionRecordId": "salt:tsp:weight-v1",
+        "unit": "tsp"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "heavy-cream",
+      "initialState": "liquid",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "heavy-cream:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "strawberry",
+      "initialState": "raw",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-strawberry",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "powdered-sugar",
+      "initialState": "dry",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-powdered-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "strawberry-shortcake-portion-07",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 19.99,
+      "calories": 392.96,
+      "carbs": 52.31,
+      "fat": 18.53,
+      "fiber": 2.24,
+      "protein": 4.95,
+      "saturatedFat": 11.57,
+      "sodium": 212.43,
+      "sugar": 24.76
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-baking-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172803:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-baking-powder",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "heavy-cream",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "heavy-cream",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "strawberry",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-strawberry",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "strawberry",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "powdered-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-powdered-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "powdered-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 6,
+    "total": {
+      "addedSugar": 119.96,
+      "calories": 2357.78,
+      "carbs": 313.84,
+      "fat": 111.2,
+      "fiber": 13.42,
+      "protein": 29.7,
+      "saturatedFat": 69.4,
+      "sodium": 1274.6,
+      "sugar": 148.56
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-01",
+          "strawberry-shortcake-portion-03",
+          "strawberry-shortcake-portion-04"
+        ],
+        "nodeId": "strawberry-shortcake-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "strawberry-shortcake-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "strawberry-shortcake-op-001-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-02"
+        ],
+        "nodeId": "strawberry-shortcake-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "strawberry-shortcake-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "strawberry-shortcake-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-01"
+        ],
+        "nodeId": "strawberry-shortcake-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "strawberry-shortcake-op-003-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "strawberry-shortcake-op-003-mix"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-01"
+        ],
+        "nodeId": "strawberry-shortcake-op-004-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "strawberry-shortcake-op-004-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 200
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.7,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "strawberry-shortcake-op-004-bake"
+        ],
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-01"
+        ],
+        "nodeId": "strawberry-shortcake-op-005-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "strawberry-shortcake-op-005-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "strawberry-shortcake-op-005-remove"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-06"
+        ],
+        "nodeId": "strawberry-shortcake-op-006-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "strawberry-shortcake-op-006-slice-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 8,
+          "uniformity": 0.8
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "strawberry-shortcake-op-006-slice"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-05",
+          "strawberry-shortcake-portion-07"
+        ],
+        "nodeId": "strawberry-shortcake-op-007-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "strawberry-shortcake-op-007-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.65
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "strawberry-shortcake-op-007-whisk"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-01"
+        ],
+        "nodeId": "strawberry-shortcake-op-008-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "strawberry-shortcake-op-008-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "completion",
+        "dependsOn": [
+          "strawberry-shortcake-op-008-assemble"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-07"
+        ],
+        "nodeId": "strawberry-shortcake-op-009-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "strawberry-shortcake-op-009-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "strawberry-shortcake-op-009-garnish"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "strawberry-shortcake-portion-01"
+        ],
+        "nodeId": "strawberry-shortcake-op-010-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "strawberry-shortcake-op-010-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 10,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "strawberry-shortcake",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-004-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-004-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-006-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-006-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-007-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-007-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-9eb736e2734157c2",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "strawberry-shortcake-op-008-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "strawberry-shortcake-strawberry-shortcake-op-008-assemble-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 6,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "strawberry-shortcake",
+  "yield": {
+    "amount": 6,
+    "unit": "piece"
+  }
+}

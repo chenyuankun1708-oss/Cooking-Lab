@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-ee4c9e50a72fdc49",
+  "artifactVersion": "clv1-e33f02ee7bb851bf",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -25,7 +25,51 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery"
+      ],
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 1,
+        "umami": 3
+      },
+      "textureIds": [
+        "brothy",
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "chaoshan-fish-congee-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "staple"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "poach",
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -41,6 +85,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "chaoshan-fish-congee-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -56,6 +101,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "chaoshan-fish-congee-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 260,
         "conversionRecordId": "si:g:v1",
@@ -71,6 +117,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "chaoshan-fish-congee-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -86,6 +133,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "chaoshan-fish-congee-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -101,6 +149,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "chaoshan-fish-congee-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.5,
         "conversionRecordId": "si:g:v1",
@@ -327,7 +376,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "baselineArtifactVersion": "clv1-e33f02ee7bb851bf",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -351,7 +400,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "baselineArtifactVersion": "clv1-e33f02ee7bb851bf",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -375,7 +424,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "baselineArtifactVersion": "clv1-e33f02ee7bb851bf",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -404,7 +453,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-ee4c9e50a72fdc49",
+      "baselineArtifactVersion": "clv1-e33f02ee7bb851bf",
       "causeCodes": [
         "heat-high:boil"
       ],

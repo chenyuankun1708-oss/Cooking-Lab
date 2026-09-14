@@ -1,0 +1,527 @@
+{
+  "artifactVersion": "clv1-a1022d53614e87fe",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "spiced"
+      ],
+      "characterIds": [
+        "warming",
+        "comforting"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 1
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "bourbon-80",
+      "initialState": "liquid",
+      "massG": 56.4,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bourbon-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "bourbon-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "simple-syrup",
+      "initialState": "liquid",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "orange-bitters",
+      "initialState": "liquid",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-bitters",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-orange",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-portion-04",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 7.24,
+      "calories": 165.52,
+      "carbs": 8.42,
+      "fat": 0.02,
+      "fiber": 0.2,
+      "protein": 0.09,
+      "saturatedFat": 0,
+      "sodium": 2.56,
+      "sugar": 8.1
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "bourbon-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bourbon-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "bourbon-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "simple-syrup",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "simple-syrup",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "orange-bitters",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-bitters",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "orange-bitters",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-orange",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-orange",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 7.24,
+      "calories": 165.52,
+      "carbs": 8.42,
+      "fat": 0.02,
+      "fiber": 0.2,
+      "protein": 0.09,
+      "saturatedFat": 0,
+      "sodium": 2.56,
+      "sugar": 8.1
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-portion-01"
+        ],
+        "nodeId": "old-fashioned-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "old-fashioned-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "old-fashioned-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-portion-02",
+          "old-fashioned-portion-03"
+        ],
+        "nodeId": "old-fashioned-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "old-fashioned-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 9
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "old-fashioned-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-portion-05"
+        ],
+        "nodeId": "old-fashioned-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "old-fashioned-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "old-fashioned-op-003-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-portion-01"
+        ],
+        "nodeId": "old-fashioned-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "old-fashioned-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 56
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "old-fashioned-op-004-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "old-fashioned-portion-01"
+        ],
+        "nodeId": "old-fashioned-op-005-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "old-fashioned-op-005-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.5,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "old-fashioned-op-005-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-portion-04"
+        ],
+        "nodeId": "old-fashioned-op-006-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "old-fashioned-op-006-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "old-fashioned-op-006-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-portion-01"
+        ],
+        "nodeId": "old-fashioned-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "old-fashioned-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "old-fashioned",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a1022d53614e87fe",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-old-fashioned-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a1022d53614e87fe",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-old-fashioned-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a1022d53614e87fe",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-old-fashioned-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a1022d53614e87fe",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-old-fashioned-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a1022d53614e87fe",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-op-005-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-old-fashioned-op-005-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "old-fashioned",
+  "yield": {
+    "amount": 90,
+    "unit": "ml"
+  }
+}

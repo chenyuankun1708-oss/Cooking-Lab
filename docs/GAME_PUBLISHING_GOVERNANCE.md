@@ -1,6 +1,12 @@
 # Game data publishing governance
 
-Status: M12 policy v1
+Status: M13 revised scope — recipe database first
+
+## Database entries vs exportable entries
+
+`database-entry` records are stored in the recipe database under structural validation only (unique ids, referential integrity, source classification). Missing heat, flavor or images are legal empty values. This layer exists so the corpus can grow quickly under the 2026-09-11 Product Director decision (recipe database first, 500 target redefined as database entries).
+
+Nothing in this layer is publishable. `game-exportable` (alias `exportable`) remains bound to every rule in this document: the four artifacts, rights assessments, sampling QA and the fail-closed blockers. Loosely sourced entries (`web-curated`, `ai-assisted`) must carry usage-limitation `sourceNotes` and can never auto-promote; promotion always requires the full source-backed rebuild, review and sampling path.
 
 ## Separate publication target
 
@@ -31,7 +37,7 @@ Agent review is never represented as human approval, culinary field testing or l
 
 ## Sampling QA
 
-Sampling covers risk-equivalence classes rather than a fixed percentage. Classes include content type, source recipe/formula variant, operation signature, mutation family, ingredient state, source institution/domain/rights route, nutrition dataset and transform, image applicability and authoring path. A major finding freezes the affected class and moves it to 100% re-review; two consecutive clean batches are required before returning to ordinary sampling.
+Sampling covers risk-equivalence classes rather than a fixed percentage. Classes include content type, risk level/reason, source work family/domain/institution/rights route, source cache/compiler, normalization policy and individual transform rules, operation signature, mutation family, ingredient state, nutrition dataset and transform, image applicability and authoring path. A major finding freezes the affected class and moves it to 100% re-review; two consecutive clean batches are required before returning to ordinary sampling.
 
 Metrics retained per batch are escape count, reviewer disagreement, rework count and provenance/license novelty. These metrics determine future sampling strength.
 
@@ -46,3 +52,9 @@ The full USDA database is not committed or redistributed and the build makes no 
 The deterministic formula corpus is a draft-only stress fixture. It cannot be promoted by attaching generic safety and nutrition sources because those sources do not establish a particular recipe identity, ratio, time, temperature or mutation outcome.
 
 The M13 release corpus must instead be reconstructed recipe by recipe from Library of Congress items whose own rights statements explicitly identify the scanned book as public domain and free to use/reuse. Structured facts retain the item URL, OCR locator and source hash; the full OCR is not committed. A second independently rights-cleared recipe source must cross-check the title, core ingredients and material method facts. USDA nutrition is not that second recipe source. Historical recipes with ambiguous quantities, unsafe preservation/fermentation, medical claims, brand dependence or non-deterministic heat/time are excluded rather than relaxed.
+
+`game-data:loc-fetch` revalidates item metadata, item-level rights text and the official full-text derivative before writing a content-addressed cache below `.local/`. `game-data:loc-candidates` consumes that exact cache through its verified manifest; it does not copy OCR into Git. Candidate output is discovery evidence only and always carries blockers for normalization, operation graph, nutrition, rights decision and independent review.
+
+Normalization eligibility is stricter than discovery. The primary extraction must be unambiguous, and at least one different conservative work family must use the same normalized recipe identity while sharing at least two material ingredient terms and one operation. Related-title/fuzzy matches remain discovery-only. Inflected preservation processes such as canned, bottled, cured, fermented and pickled are HIGH-risk exclusions, not normalization candidates.
+
+Publication does not accept a bag of rule IDs as provenance. The normalization trace must prove the exact source fact and rule for every canonical portion, operation, duration, heat control, target state and scenario. The source registry/cache/compiler versions and every source-fact bundle are fingerprinted. A quantity, step order, qualitative heat token, mutation outcome or supporting source change invalidates prior review and sampling evidence.

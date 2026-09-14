@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-02ccf74d22aad1c9",
+  "artifactVersion": "clv1-4cd835e9cf6be888",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -42,7 +42,50 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery"
+      ],
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "salty": 1,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "singapore-chicken-rice-home-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "singaporean"
+      ],
+      "mealRoleIds": [
+        "staple"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "rice-cook"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -58,6 +101,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 210,
         "conversionRecordId": "si:g:v1",
@@ -73,6 +117,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 330,
         "conversionRecordId": "si:g:v1",
@@ -88,6 +133,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -103,6 +149,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 20,
         "conversionRecordId": "si:g:v1",
@@ -118,6 +165,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -133,6 +181,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -148,6 +197,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "singapore-chicken-rice-home-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.3,
         "conversionRecordId": "si:g:v1",
@@ -469,7 +519,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "baselineArtifactVersion": "clv1-4cd835e9cf6be888",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -493,7 +543,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "baselineArtifactVersion": "clv1-4cd835e9cf6be888",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -517,7 +567,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "baselineArtifactVersion": "clv1-4cd835e9cf6be888",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -541,7 +591,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "baselineArtifactVersion": "clv1-4cd835e9cf6be888",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -565,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "baselineArtifactVersion": "clv1-4cd835e9cf6be888",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -589,7 +639,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-02ccf74d22aad1c9",
+      "baselineArtifactVersion": "clv1-4cd835e9cf6be888",
       "causeCodes": [
         "operation-omitted:dice"
       ],

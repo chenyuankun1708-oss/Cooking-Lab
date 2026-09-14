@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { gameOperationCatalog } from "@/game-data/operation-catalog";
 import { createM13DraftFixture } from "@/game-data/corpus-generator";
+import { attachTestNormalizationTrace } from "@/lib/__tests__/game-normalization-fixture";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
 import {
   createGameArtifactSetVersion,
@@ -11,6 +12,7 @@ import {
   deriveMinimumGamePublishingRisk,
   evaluateGameRecipeCorpus,
 } from "@/lib/game-recipe-validation";
+import { createGameSourceFactBundleVersion, createGameSourceFactHash } from "@/lib/game-source-fact-validation";
 import { createSamplingBatchEvidenceDigest } from "@/lib/publishing-governance";
 import type {
   GameNutritionDatasetSubsetV1,
@@ -113,10 +115,192 @@ describe("M12 game governance hostile cases", () => {
     operationChanged.operations = operationChanged.operations.map((operation, index) => index === 0 ? { ...operation, simulationAffecting: !operation.simulationAffecting } : operation);
     const sourceRoleChanged = structuredClone(fixture.registry);
     sourceRoleChanged.sourceRoles[0].workFamilyId = "different-work-family";
+    const normalizationChanged = structuredClone(fixture.context);
+    normalizationChanged.normalizationRegistry.policyVersion = "fixture-normalization-v2";
+    const sourceFactChanged = structuredClone(fixture.context);
+    sourceFactChanged.sourceFactBundles[0].compilerVersion = "fixture-compiler-v2";
     expect(createGameArtifactSetVersion([fixture.recipe], originChanged, fixture.context)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], policyChanged, fixture.context)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, operationChanged)).not.toBe(base);
     expect(createGameArtifactSetVersion([fixture.recipe], sourceRoleChanged, fixture.context)).not.toBe(base);
+    expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, normalizationChanged)).not.toBe(base);
+    expect(createGameArtifactSetVersion([fixture.recipe], fixture.registry, sourceFactChanged)).not.toBe(base);
+  });
+
+  it("rejects normalization bindings that do not produce the canonical recipe", () => {
+    const ingredientMismatch = readyFixture();
+    const ingredientBindings = ingredientMismatch.recipe.authoring.normalizationTrace!.ingredientBindings;
+    ingredientBindings[0].portionId = ingredientBindings[1].portionId;
+    expect(audit(ingredientMismatch).issues).toContainEqual(expect.objectContaining({
+      code: "invalid-schema",
+      field: "authoring.normalizationTrace.ingredientBindings",
+    }));
+
+    const operationMismatch = readyFixture();
+    operationMismatch.context.normalizationRegistry.operationRules[0].operationId = "serve";
+    expect(audit(operationMismatch).issues.some((issue) => issue.message.includes("exactly connect the source token"))).toBe(true);
+
+    const sourceMismatch = readyFixture();
+    sourceMismatch.context.sourceFactBundles[0].crossCheckAssertions[0].sharedIngredientTerms = [];
+    expect(audit(sourceMismatch).issues.some((issue) => issue.message.includes("exact-title cross-check"))).toBe(true);
+  });
+
+  it("joins source registry, quantities, durations and scenario outcomes exactly", () => {
+    const registryMismatch = readyFixture();
+    registryMismatch.context.locSourceRegistry.documents[0].ocr.sha256 = "f".repeat(64);
+    expect(audit(registryMismatch).issues.some((issue) => issue.field.includes("sourceRegistryVersion"))).toBe(true);
+
+    const quantityMismatch = readyFixture();
+    const quantityBundle = quantityMismatch.context.sourceFactBundles[0];
+    const quantityFact = quantityBundle.ingredientFacts[0];
+    quantityFact.quantity = { ...quantityFact.quantity, numerator: quantityFact.quantity.numerator + quantityFact.quantity.denominator };
+    quantityFact.factSha256 = createGameSourceFactHash({
+      locator: quantityFact.locator,
+      phrase: quantityFact.phrase,
+      stateToken: quantityFact.stateToken ?? null,
+      quantity: quantityFact.quantity,
+      sourceLineSha256: quantityFact.sourceLineSha256,
+    });
+    quantityBundle.bundleVersion = createGameSourceFactBundleVersion(quantityBundle);
+    quantityMismatch.recipe.authoring.normalizationTrace!.sourceFactBundleVersion = quantityBundle.bundleVersion;
+    expect(audit(quantityMismatch).issues.some((issue) => issue.message.includes("rational quantity and unit"))).toBe(true);
+
+    const durationMismatch = readyFixture();
+    const durationBinding = durationMismatch.recipe.authoring.normalizationTrace!.methodBindings
+      .find((binding) => binding.durationBindings.some((entry) => entry.basis === "source-exact"));
+    if (!durationBinding) throw new Error("duration fixture binding missing");
+    const durationNode = durationMismatch.recipe.operationGraph.nodes.find((node) => node.nodeId === durationBinding.nodeId)!;
+    const target = durationBinding.durationBindings.find((entry) => entry.basis === "source-exact")!.target;
+    durationNode[target] += 60_000;
+    expect(audit(durationMismatch).issues.some((issue) => issue.message.includes("Source duration must equal"))).toBe(true);
+
+    const scenarioMismatch = readyFixture();
+    scenarioMismatch.context.normalizationRegistry.mutationRules[0].mutationSelector.scalar = 0.123;
+    expect(audit(scenarioMismatch).issues.some((issue) => issue.message.includes("exactly equal the canonical scenario result"))).toBe(true);
+  });
+
+  it("anchors source facts to the exact verified cache manifest", () => {
+    const missing = readyFixture();
+    delete (missing.context as Partial<typeof missing.context>).locSourceCacheManifest;
+    expect(audit(missing).issues.some((issue) => issue.message.includes("exact verified LOC cache manifest"))).toBe(true);
+
+    const derivativeChanged = readyFixture();
+    derivativeChanged.context.locSourceCacheManifest.documents[0].derivativeSha256 = "f".repeat(64);
+    expect(audit(derivativeChanged).issues.some((issue) => issue.message.includes("exact derivative"))).toBe(true);
+  });
+
+  it("requires scoped supporting Evidence for normalization rules and calibrations", () => {
+    const unrelated = readyFixture();
+    const foreignEvidence = structuredClone(unrelated.registry.evidence[0]);
+    foreignEvidence.id = "foreign-normalization-evidence";
+    foreignEvidence.relation = "context";
+    unrelated.registry.evidence.push(foreignEvidence);
+    unrelated.registry.evidenceOrigins.push({ evidenceId: foreignEvidence.id, origin: "source-record" });
+    unrelated.context.normalizationRegistry.targetStateRules[0].provenanceEvidenceIds = [foreignEvidence.id];
+    expect(audit(unrelated).issues.some((issue) => issue.message.includes("Target rule provenance Evidence"))).toBe(true);
+
+    const wrongUse = readyFixture();
+    const evidenceId = wrongUse.context.normalizationRegistry.mutationRules[0].provenanceEvidenceIds[0];
+    const evidence = wrongUse.registry.evidence.find((entry) => entry.id === evidenceId)!;
+    const decision = wrongUse.registry.researchRecords[0].sourceDecisions.find((entry) => entry.disposition === "accepted" && entry.sourceId === evidence.sourceId)!;
+    if (decision.disposition === "accepted") decision.uses = decision.uses.filter((use) => use !== "simulation") as typeof decision.uses;
+    expect(audit(wrongUse).issues.some((issue) => issue.message.includes("Mutation rule provenance Evidence"))).toBe(true);
+  });
+
+  it("requires complete provenance for every non-heat operation parameter", () => {
+    const missing = readyFixture();
+    const binding = missing.recipe.authoring.normalizationTrace!.methodBindings.find((entry) => entry.parameterBindings.length)!;
+    binding.parameterBindings = [];
+    expect(audit(missing).issues.some((issue) => issue.message.includes("exactly cover every non-heat"))).toBe(true);
+
+    const staleCalibration = readyFixture();
+    const parameterBinding = staleCalibration.recipe.authoring.normalizationTrace!.methodBindings
+      .flatMap((entry) => entry.parameterBindings)
+      .find((entry) => entry.basis === "independently-calibrated")!;
+    parameterBinding.provenanceEvidenceId = "unrelated-evidence";
+    expect(audit(staleCalibration).issues.some((issue) => issue.message.includes("Independently calibrated parameters"))).toBe(true);
+  });
+
+  it("does not allow an exact source temperature to carry an unproven heat level", () => {
+    const fixture = readyFixture();
+    const methodBinding = fixture.recipe.authoring.normalizationTrace!.methodBindings[0];
+    const fact = fixture.context.sourceFactBundles[0].methodFacts.find((entry) => entry.factId === methodBinding.methodFactId)!;
+    const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.nodeId === methodBinding.nodeId)!;
+    fact.temperatureC = 180;
+    fact.factSha256 = createGameSourceFactHash({
+      locator: fact.locator,
+      order: fact.order,
+      operationToken: fact.operationToken,
+      ingredientFactIds: fact.ingredientFactIds,
+      durationMinutes: fact.durationMinutes ?? null,
+      temperatureC: fact.temperatureC,
+      qualitativeHeatToken: fact.qualitativeHeatToken ?? null,
+      equipmentToken: fact.equipmentToken ?? null,
+      parameterValues: fact.parameterValues ?? null,
+      sourceLineSha256: fact.sourceLineSha256,
+    });
+    node.parameters.temperatureC = 180;
+    node.parameters.heatLevel = 0.5;
+    node.heatControl = { kind: "exact-temperature", temperatureC: 180, sourceFactId: fact.factId };
+    const bundle = fixture.context.sourceFactBundles[0];
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+    fixture.recipe.authoring.normalizationTrace!.sourceFactBundleVersion = bundle.bundleVersion;
+    expect(audit(fixture).issues.some((issue) => issue.message.includes("Exact source temperature"))).toBe(true);
+  });
+
+  it("does not allow an independent calibration to prove two heat parameters", () => {
+    const fixture = readyFixture();
+    const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.heatControl?.kind === "independently-calibrated")!;
+    expect(node).toBeDefined();
+    if (node.heatControl?.kind !== "independently-calibrated") throw new Error("fixture heat control missing");
+    const secondParameter = node.heatControl.parameter === "temperatureC" ? "heatLevel" : "temperatureC";
+    node.parameters[secondParameter] = secondParameter === "temperatureC" ? 180 : 0.5;
+    expect(audit(fixture).issues.some((issue) => issue.message.includes("Numeric heat not present in the source"))).toBe(true);
+  });
+
+  it("supports historical source units through explicit conversion records", () => {
+    const fixture = readyFixture();
+    const portion = fixture.recipe.ingredientPortions[0];
+    const ingredient = fixture.context.ingredients.ingredients.find((entry) => entry.ingredientId === portion.ingredientId)!;
+    ingredient.unitWeightsG.cup = portion.massG;
+    const recordId = `${portion.ingredientId}:cup:fixture-v1`;
+    fixture.context.ingredients.conversionRecords.push({
+      recordId,
+      unit: "cup",
+      gramsPerUnit: portion.massG,
+      ingredientId: portion.ingredientId,
+      basis: "Fixture exact cup conversion.",
+      provenanceId: "fixture-cup-conversion",
+    });
+    portion.sourceQuantity = { amount: 1, unit: "cup", conversionRecordId: recordId };
+    const trace = fixture.recipe.authoring.normalizationTrace!;
+    const ingredientBinding = trace.ingredientBindings.find((entry) => entry.portionId === portion.portionId)!;
+    ingredientBinding.conversionRecordId = recordId;
+    const fact = fixture.context.sourceFactBundles[0].ingredientFacts.find((entry) => entry.factId === ingredientBinding.ingredientFactId)!;
+    fact.quantity = { numerator: 1, denominator: 1, rawToken: "1 cup", unitToken: "cup" };
+    fact.factSha256 = createGameSourceFactHash({ locator: fact.locator, phrase: fact.phrase, stateToken: fact.stateToken ?? null, quantity: fact.quantity, sourceLineSha256: fact.sourceLineSha256 });
+    const bundle = fixture.context.sourceFactBundles[0];
+    bundle.bundleVersion = createGameSourceFactBundleVersion(bundle);
+    trace.sourceFactBundleVersion = bundle.bundleVersion;
+    fixture.recipe.artifactVersion = createGameRecipeArtifactVersion(fixture.recipe);
+    fixture.recipe.scenarios.forEach((scenario) => { scenario.baselineArtifactVersion = fixture.recipe.artifactVersion; });
+    expect(audit(fixture).issues.filter((issue) => issue.field.includes("sourceQuantity") || issue.field.includes("conversionRecords"))).toEqual([]);
+  });
+
+  it("never turns qualitative historical heat into fabricated numeric heat", () => {
+    const fixture = readyFixture();
+    const methodFact = fixture.context.sourceFactBundles[0].methodFacts.find((fact) => {
+      const binding = fixture.recipe.authoring.normalizationTrace!.methodBindings.find((entry) => entry.methodFactId === fact.factId);
+      const node = fixture.recipe.operationGraph.nodes.find((entry) => entry.nodeId === binding?.nodeId);
+      return node?.parameters.heatLevel !== undefined || node?.parameters.temperatureC !== undefined;
+    });
+    if (!methodFact) throw new Error("heating method fact missing");
+    methodFact.qualitativeHeatToken = "moderate-heat";
+    fixture.context.normalizationRegistry.heatDescriptors.push({ descriptorId: "moderate-heat", sourceToken: "moderate-heat", kind: "qualitative" });
+    const binding = fixture.recipe.authoring.normalizationTrace!.methodBindings.find((entry) => entry.methodFactId === methodFact.factId)!;
+    binding.heatDescriptorId = "moderate-heat";
+
+    expect(audit(fixture).issues.some((issue) => issue.message.includes("must remain qualitative"))).toBe(true);
   });
 
   it("rejects a USDA subset that no longer exactly matches the ingredient catalog", () => {
@@ -475,17 +659,19 @@ describe("M12 game governance hostile cases", () => {
 function readyFixture() {
   const recipe = structuredClone(generatedFixtureSource.recipes[0]) as GameRecipeV1;
   const registry = structuredClone(generatedFixtureSource.rightsRegistry) as GameRightsRegistryV1;
+  const normalization = attachTestNormalizationTrace(recipe, registry);
   const context = {
     operations: structuredClone(gameOperationCatalog),
     ingredients: structuredClone(generatedFixtureSource.ingredients),
     nutritionDataset: structuredClone(nutritionDataset),
     rightsRegistry: registry,
+    ...normalization,
     now: "2026-09-08",
   };
   recipe.eligibility = "exportable";
   registry.sourceRoles = [
-    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "hostile-fixture-primary" },
-    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "hostile-fixture-cross-check" },
+    { sourceId: recipe.rights.sourceIds[0], role: "recipe-primary", recipeId: recipe.recipeId, workFamilyId: "fixture-family-a" },
+    { sourceId: recipe.rights.sourceIds[1], role: "recipe-cross-check", recipeId: recipe.recipeId, workFamilyId: "fixture-family-b" },
   ];
   for (const scenario of recipe.scenarios) {
     if (scenario.mutation.type === "reorder" && scenario.mutation.targetNodeId) {
@@ -557,7 +743,7 @@ function readyFixture() {
     sampledItemIds: [recipe.recipeId] as [string],
   })) as unknown as SamplingQaBatch["equivalenceClasses"];
   const noveltyKeys = classification.equivalenceClassKeys.filter((key) =>
-    ["source-domain:", "source-institution:", "source-rights:", "nutrition:", "authoring:"].some((prefix) => key.startsWith(prefix)));
+    noveltyPrefixes.some((prefix) => key.startsWith(prefix)));
   const sampling: SamplingQaBatch = {
     id: "hostile-sampling",
     batchId: "hostile-review",
@@ -605,3 +791,9 @@ function claim(use: string, evidenceId: string) {
 function audit(fixture: ReturnType<typeof readyFixture>) {
   return evaluateGameRecipeCorpus([fixture.recipe], fixture.context);
 }
+
+const noveltyPrefixes = [
+  "source-domain:", "source-institution:", "source-rights:", "source-work-family:", "source-cache:", "source-compiler:",
+  "nutrition:", "authoring:", "normalization-policy:", "ingredient-resolution:", "operation-rule:", "equipment-rule:",
+  "heat-descriptor:", "target-state-rule:", "mutation-rule:", "risk-level:", "risk-reason:",
+];

@@ -1,0 +1,528 @@
+{
+  "artifactVersion": "clv1-8ea1953113721c15",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery"
+      ],
+      "characterIds": [
+        "warming",
+        "comforting"
+      ],
+      "tastes": {
+        "spicy": 1,
+        "sweet": 2
+      },
+      "textureIds": [
+        "silky",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "milk",
+      "initialState": "liquid",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "ginger-milk-curd-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": false,
+      "phase": "main",
+      "portionId": "ginger-milk-curd-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "ginger-milk-curd-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 10,
+      "calories": 174,
+      "carbs": 22.27,
+      "fat": 6.72,
+      "fiber": 0.3,
+      "protein": 6.67,
+      "saturatedFat": 3.83,
+      "sodium": 87.95,
+      "sugar": 19.86
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 20,
+      "calories": 348,
+      "carbs": 44.54,
+      "fat": 13.44,
+      "fiber": 0.6,
+      "protein": 13.34,
+      "saturatedFat": 7.66,
+      "sodium": 175.9,
+      "sugar": 39.71
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-02"
+        ],
+        "nodeId": "ginger-milk-curd-op-001-grind",
+        "operationType": "grind",
+        "outputStateIds": [
+          "ginger-milk-curd-op-001-grind-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 1,
+          "uniformity": 0.6
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "ginger-milk-curd-op-001-grind"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-02"
+        ],
+        "nodeId": "ginger-milk-curd-op-002-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "ginger-milk-curd-op-002-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "ginger-milk-curd-op-002-strain"
+        ],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "scald",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "ginger-milk-curd-op-003-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "ginger-milk-curd-op-003-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 70
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "ginger-milk-curd-op-003-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-03"
+        ],
+        "nodeId": "ginger-milk-curd-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "ginger-milk-curd-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 20
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "ginger-milk-curd-op-004-add"
+        ],
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-01"
+        ],
+        "nodeId": "ginger-milk-curd-op-005-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "ginger-milk-curd-op-005-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "ginger-milk-curd-op-005-remove"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-02"
+        ],
+        "nodeId": "ginger-milk-curd-op-006-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "ginger-milk-curd-op-006-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "ginger-milk-curd-op-006-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-01"
+        ],
+        "nodeId": "ginger-milk-curd-op-007-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "ginger-milk-curd-op-007-rest-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "ginger-milk-curd-op-007-rest"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "ginger-milk-curd-portion-01"
+        ],
+        "nodeId": "ginger-milk-curd-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "ginger-milk-curd-op-008-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "ginger-milk-curd",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8ea1953113721c15",
+      "causeCodes": [
+        "operation-omitted:grind"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-grind"
+      ],
+      "mutation": {
+        "targetNodeId": "ginger-milk-curd-op-001-grind",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "ginger-milk-curd-ginger-milk-curd-op-001-grind-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8ea1953113721c15",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "ginger-milk-curd-op-002-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "ginger-milk-curd-ginger-milk-curd-op-002-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8ea1953113721c15",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "ginger-milk-curd-op-003-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "ginger-milk-curd-ginger-milk-curd-op-003-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8ea1953113721c15",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "ginger-milk-curd-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "ginger-milk-curd-ginger-milk-curd-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8ea1953113721c15",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "ginger-milk-curd-op-006-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "ginger-milk-curd-ginger-milk-curd-op-006-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-8ea1953113721c15",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "ginger-milk-curd-op-007-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "ginger-milk-curd-ginger-milk-curd-op-007-rest-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "ginger-milk-curd",
+  "yield": {
+    "amount": 2,
+    "unit": "piece"
+  }
+}

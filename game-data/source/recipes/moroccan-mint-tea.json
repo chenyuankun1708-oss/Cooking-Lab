@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-cdf4e20fa4cd393c",
+  "artifactVersion": "clv1-44d5d6d6c5b2f155",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -25,7 +25,47 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "herbal",
+        "floral"
+      ],
+      "characterIds": [
+        "refreshing",
+        "warming"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sweet": 3
+      },
+      "textureIds": []
+    },
+    "images": [
+      {
+        "imageId": "moroccan-mint-tea-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "moroccan"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "afternoon-tea",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -41,6 +81,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "moroccan-mint-tea-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 6,
         "conversionRecordId": "si:g:v1",
@@ -56,6 +97,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "moroccan-mint-tea-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 25,
         "conversionRecordId": "si:g:v1",
@@ -71,6 +113,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "moroccan-mint-tea-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 50,
         "conversionRecordId": "si:g:v1",
@@ -86,6 +129,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "moroccan-mint-tea-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 750,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -326,7 +370,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cdf4e20fa4cd393c",
+      "baselineArtifactVersion": "clv1-44d5d6d6c5b2f155",
       "causeCodes": [
         "operation-omitted:rinse"
       ],
@@ -350,7 +394,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cdf4e20fa4cd393c",
+      "baselineArtifactVersion": "clv1-44d5d6d6c5b2f155",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -374,7 +418,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cdf4e20fa4cd393c",
+      "baselineArtifactVersion": "clv1-44d5d6d6c5b2f155",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -403,7 +447,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cdf4e20fa4cd393c",
+      "baselineArtifactVersion": "clv1-44d5d6d6c5b2f155",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -433,7 +477,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cdf4e20fa4cd393c",
+      "baselineArtifactVersion": "clv1-44d5d6d6c5b2f155",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -457,7 +501,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-cdf4e20fa4cd393c",
+      "baselineArtifactVersion": "clv1-44d5d6d6c5b2f155",
       "causeCodes": [
         "duration-short:rest"
       ],

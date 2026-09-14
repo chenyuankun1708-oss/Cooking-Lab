@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-f5a7433ebae4a305",
+  "artifactVersion": "clv1-39e8405f907ffe0b",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -29,7 +29,52 @@
       "scenario:longjing-green-tea-longjing-green-tea-op-007-rest-short:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "floral",
+        "toasty"
+      ],
+      "characterIds": [
+        "light",
+        "clean-tasting",
+        "refreshing"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sweet": 1,
+        "umami": 1
+      },
+      "textureIds": [
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "longjing-green-tea-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "chinese",
+        "zhejiang"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -45,6 +90,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "longjing-green-tea-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 4,
         "conversionRecordId": "si:g:v1",
@@ -60,6 +106,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "longjing-green-tea-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -325,7 +372,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -354,7 +401,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -384,7 +431,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -419,7 +466,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -443,7 +490,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -468,7 +515,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -497,7 +544,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -527,7 +574,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -556,7 +603,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -586,7 +633,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -610,7 +657,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f5a7433ebae4a305",
+      "baselineArtifactVersion": "clv1-39e8405f907ffe0b",
       "causeCodes": [
         "duration-short:rest"
       ],

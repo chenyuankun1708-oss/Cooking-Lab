@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-45409d77ae2dcf5a",
+  "artifactVersion": "clv1-2f5aa0e219a51e7f",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -26,7 +26,53 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "tomato-rich",
+        "peppery"
+      ],
+      "characterIds": [
+        "appetizing",
+        "hearty"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 2,
+        "spicy": 2,
+        "umami": 2
+      },
+      "textureIds": [
+        "soft",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "huevos-rancheros-home-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "mexican"
+      ],
+      "mealRoleIds": [
+        "staple"
+      ],
+      "servingContextIds": [
+        "breakfast"
+      ],
+      "techniqueIds": [
+        "pan-fry",
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -42,6 +88,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "egg:piece:weight-v1",
@@ -57,6 +104,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 4,
         "conversionRecordId": "corn-tortilla:piece:weight-v1",
@@ -72,6 +120,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "si:g:v1",
@@ -87,6 +136,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 260,
         "conversionRecordId": "si:g:v1",
@@ -102,6 +152,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "si:g:v1",
@@ -117,6 +168,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -132,6 +184,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -147,6 +200,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "huevos-rancheros-home-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "si:g:v1",
@@ -563,7 +617,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "baselineArtifactVersion": "clv1-2f5aa0e219a51e7f",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -587,7 +641,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "baselineArtifactVersion": "clv1-2f5aa0e219a51e7f",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -611,7 +665,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "baselineArtifactVersion": "clv1-2f5aa0e219a51e7f",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -640,7 +694,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "baselineArtifactVersion": "clv1-2f5aa0e219a51e7f",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -675,7 +729,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-45409d77ae2dcf5a",
+      "baselineArtifactVersion": "clv1-2f5aa0e219a51e7f",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],

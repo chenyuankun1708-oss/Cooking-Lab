@@ -1,0 +1,835 @@
+{
+  "artifactVersion": "clv1-e437dd8cadcdf304",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting",
+        "light"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sweet": 2
+      },
+      "textureIds": [
+        "crisp",
+        "chewy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "italian"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "afternoon-tea",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "almond-flour",
+      "initialState": "dry",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-almond-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-baking-powder",
+      "initialState": "dry",
+      "massG": 8,
+      "nutritionProvenanceId": "usda-fdc:172803:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-06",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "walnut",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-walnut",
+      "optional": false,
+      "phase": "main",
+      "portionId": "almond-biscotti-portion-07",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 6.67,
+      "calories": 125.8,
+      "carbs": 15.51,
+      "fat": 6.04,
+      "fiber": 0.86,
+      "protein": 2.89,
+      "saturatedFat": 1.53,
+      "sodium": 36.09,
+      "sugar": 6.95
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "almond-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-almond-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "almond-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-baking-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172803:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-baking-powder",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "walnut",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-walnut",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "walnut",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 30,
+    "total": {
+      "addedSugar": 200,
+      "calories": 3773.94,
+      "carbs": 465.43,
+      "fat": 181.31,
+      "fiber": 25.72,
+      "protein": 86.74,
+      "saturatedFat": 45.99,
+      "sodium": 1082.6,
+      "sugar": 208.56
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "almond-biscotti-portion-03",
+          "almond-biscotti-portion-04"
+        ],
+        "nodeId": "almond-biscotti-op-001-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "almond-biscotti-op-001-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-001-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01",
+          "almond-biscotti-portion-02",
+          "almond-biscotti-portion-05",
+          "almond-biscotti-portion-06"
+        ],
+        "nodeId": "almond-biscotti-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "almond-biscotti-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 468
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "almond-biscotti-op-003-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-003-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "almond-biscotti-portion-07"
+        ],
+        "nodeId": "almond-biscotti-op-004-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "almond-biscotti-op-004-fold-done"
+        ],
+        "parameters": {
+          "strength": 0.2
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-004-fold"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-005-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "almond-biscotti-op-005-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-005-shape"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-006-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "almond-biscotti-op-006-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 170
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1500000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "almond-biscotti-op-006-bake"
+        ],
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-007-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "almond-biscotti-op-007-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-007-remove"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-008-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "almond-biscotti-op-008-rest-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-008-rest"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-009-slice",
+        "operationType": "slice",
+        "outputStateIds": [
+          "almond-biscotti-op-009-slice-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 10,
+          "uniformity": 0.85
+        },
+        "sourceStepOrder": 9,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "almond-biscotti-op-009-slice"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-010-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "almond-biscotti-op-010-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 150
+        },
+        "sourceStepOrder": 10,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.75,
+            "minimum": 0.5,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1200000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "almond-biscotti-op-010-bake"
+        ],
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-011-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "almond-biscotti-op-011-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 11,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "almond-biscotti-op-011-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "almond-biscotti-portion-01"
+        ],
+        "nodeId": "almond-biscotti-op-012-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "almond-biscotti-op-012-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 12,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "almond-biscotti",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-001-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-001-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-004-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-004-fold-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-005-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-005-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-006-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-006-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-008-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-008-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:slice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-slice"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-009-slice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-009-slice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e437dd8cadcdf304",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "almond-biscotti-op-010-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "almond-biscotti-almond-biscotti-op-010-bake-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 30,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "almond-biscotti",
+  "yield": {
+    "amount": 30,
+    "unit": "piece"
+  }
+}

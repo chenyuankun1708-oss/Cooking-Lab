@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-f0231b6bd412367d",
+  "artifactVersion": "clv1-4b4af393a71c1537",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -35,7 +35,49 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "tiramisu-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "italian"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -51,6 +93,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "egg:piece:weight-v1",
@@ -66,6 +109,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-02",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "si:g:v1",
@@ -81,6 +125,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 500,
         "conversionRecordId": "si:g:v1",
@@ -96,6 +141,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 240,
         "conversionRecordId": "si:g:v1",
@@ -111,6 +157,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 250,
         "conversionRecordId": "brewed-espresso:ml:weight-v1",
@@ -127,6 +174,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tiramisu-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -543,7 +591,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -567,7 +615,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -591,7 +639,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -615,7 +663,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -639,7 +687,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -663,7 +711,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -688,7 +736,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -717,7 +765,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -747,7 +795,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -771,7 +819,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-f0231b6bd412367d",
+      "baselineArtifactVersion": "clv1-4b4af393a71c1537",
       "causeCodes": [
         "duration-short:chill"
       ],

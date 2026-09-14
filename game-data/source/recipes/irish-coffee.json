@@ -1,0 +1,535 @@
+{
+  "artifactVersion": "clv1-7646e502f2765e73",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted"
+      ],
+      "characterIds": [
+        "warming",
+        "comforting"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 2
+      },
+      "textureIds": [
+        "creamy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "british"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "irish-cream-34",
+      "initialState": "liquid",
+      "massG": 47.25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-irish-cream-34",
+      "optional": false,
+      "phase": "main",
+      "portionId": "irish-coffee-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 45,
+        "conversionRecordId": "irish-cream-34:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brewed-espresso",
+      "initialState": "liquid",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brewed-espresso",
+      "optional": false,
+      "phase": "main",
+      "portionId": "irish-coffee-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "brewed-espresso:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brown-sugar",
+      "initialState": "dry",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "irish-coffee-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "heavy-cream",
+      "initialState": "liquid",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+      "optional": false,
+      "phase": "main",
+      "portionId": "irish-coffee-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "heavy-cream:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 17.73,
+      "calories": 304.34,
+      "carbs": 21,
+      "fat": 19.84,
+      "fiber": 0,
+      "protein": 2.57,
+      "saturatedFat": 12.63,
+      "sodium": 38.5,
+      "sugar": 18.85
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "irish-cream-34",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-irish-cream-34",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "irish-cream-34",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brewed-espresso",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brewed-espresso",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brewed-espresso",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brown-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brown-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "heavy-cream",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "heavy-cream",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 17.73,
+      "calories": 304.34,
+      "carbs": 21,
+      "fat": 19.84,
+      "fiber": 0,
+      "protein": 2.57,
+      "saturatedFat": 12.63,
+      "sodium": 38.5,
+      "sugar": 18.85
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "kettle",
+        "heatControl": {
+          "descriptorId": "brew-hot",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "irish-coffee-op-001-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "irish-coffee-op-001-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 95
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "irish-coffee-op-001-set-heat"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "irish-coffee-portion-02",
+          "irish-coffee-portion-03"
+        ],
+        "nodeId": "irish-coffee-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "irish-coffee-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 130
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "irish-coffee-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "irish-coffee-portion-01"
+        ],
+        "nodeId": "irish-coffee-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "irish-coffee-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 47
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "irish-coffee-op-003-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "irish-coffee-portion-01"
+        ],
+        "nodeId": "irish-coffee-op-004-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "irish-coffee-op-004-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "irish-coffee-op-004-stir"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "irish-coffee-portion-04"
+        ],
+        "nodeId": "irish-coffee-op-005-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "irish-coffee-op-005-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "irish-coffee-op-005-whisk"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "irish-coffee-portion-04"
+        ],
+        "nodeId": "irish-coffee-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "irish-coffee-op-006-add-done"
+        ],
+        "parameters": {
+          "quantityG": 40
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "irish-coffee-op-006-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "irish-coffee-portion-01"
+        ],
+        "nodeId": "irish-coffee-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "irish-coffee-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "irish-coffee",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7646e502f2765e73",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "irish-coffee-op-001-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "irish-coffee-irish-coffee-op-001-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7646e502f2765e73",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "irish-coffee-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "irish-coffee-irish-coffee-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7646e502f2765e73",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "irish-coffee-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "irish-coffee-irish-coffee-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7646e502f2765e73",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "irish-coffee-op-004-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "irish-coffee-irish-coffee-op-004-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7646e502f2765e73",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "irish-coffee-op-005-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "irish-coffee-irish-coffee-op-005-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7646e502f2765e73",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "irish-coffee-op-006-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "irish-coffee-irish-coffee-op-006-add-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "irish-coffee",
+  "yield": {
+    "amount": 240,
+    "unit": "ml"
+  }
+}

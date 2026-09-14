@@ -1,0 +1,700 @@
+{
+  "artifactVersion": "clv1-3709e5ade3bfcc85",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-a-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch A pilot; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "french"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "heavy-cream",
+      "initialState": "liquid",
+      "massG": 480,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+      "optional": false,
+      "phase": "main",
+      "portionId": "creme-brulee-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 480,
+        "conversionRecordId": "heavy-cream:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "prepared",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "creme-brulee-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "creme-brulee-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-vanilla",
+      "initialState": "raw",
+      "massG": 8.4,
+      "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "creme-brulee-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 8.4,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brown-sugar",
+      "initialState": "dry",
+      "massG": 24,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "creme-brulee-portion-05",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 24,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 25.82,
+      "calories": 552.6,
+      "carbs": 29.69,
+      "fat": 45.58,
+      "fiber": 0,
+      "protein": 5.67,
+      "saturatedFat": 28.38,
+      "sodium": 37.37,
+      "sugar": 29.54
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "heavy-cream",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "heavy-cream",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-vanilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-vanilla",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brown-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brown-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 103.28,
+      "calories": 2210.39,
+      "carbs": 118.74,
+      "fat": 182.31,
+      "fiber": 0,
+      "protein": 22.69,
+      "saturatedFat": 113.5,
+      "sodium": 149.48,
+      "sugar": 118.18
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "scald",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "creme-brulee-op-001-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "creme-brulee-op-001-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-001-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "creme-brulee-portion-01",
+          "creme-brulee-portion-04"
+        ],
+        "nodeId": "creme-brulee-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "creme-brulee-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 488
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-002-add"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "creme-brulee-portion-02",
+          "creme-brulee-portion-03"
+        ],
+        "nodeId": "creme-brulee-op-003-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "creme-brulee-op-003-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-003-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "creme-brulee-portion-01"
+        ],
+        "nodeId": "creme-brulee-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "creme-brulee-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-004-mix"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "creme-brulee-portion-01"
+        ],
+        "nodeId": "creme-brulee-op-005-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "creme-brulee-op-005-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 150
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 0.95,
+            "minimum": 0.9,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 2400000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "creme-brulee-op-005-bake"
+        ],
+        "inputPortionIds": [
+          "creme-brulee-portion-01"
+        ],
+        "nodeId": "creme-brulee-op-006-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "creme-brulee-op-006-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-006-remove"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "creme-brulee-portion-01"
+        ],
+        "nodeId": "creme-brulee-op-007-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "creme-brulee-op-007-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 10800000
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-007-chill"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "creme-brulee-portion-05"
+        ],
+        "nodeId": "creme-brulee-op-008-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "creme-brulee-op-008-season-done"
+        ],
+        "parameters": {
+          "quantityG": 24
+        },
+        "sourceStepOrder": 8,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "creme-brulee-op-008-season"
+        ],
+        "equipmentId": "grill-pan",
+        "heatControl": {
+          "descriptorId": "torch-caramelize",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "creme-brulee-op-009-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "creme-brulee-op-009-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 500
+        },
+        "sourceStepOrder": 9,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.85,
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "completion",
+        "dependsOn": [
+          "creme-brulee-op-009-set-heat"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "creme-brulee-portion-01"
+        ],
+        "nodeId": "creme-brulee-op-010-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "creme-brulee-op-010-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 10,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "creme-brulee",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-001-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-001-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-003-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-003-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-005-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-005-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-007-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-007-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-008-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-008-season-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3709e5ade3bfcc85",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "creme-brulee-op-009-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "creme-brulee-creme-brulee-op-009-set-heat-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "creme-brulee",
+  "yield": {
+    "amount": 4,
+    "unit": "piece"
+  }
+}

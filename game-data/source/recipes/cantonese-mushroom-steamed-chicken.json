@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-792d2715105e57e3",
+  "artifactVersion": "clv1-8673534bb32fb2c8",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -31,7 +31,50 @@
       "source-step:2:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery"
+      ],
+      "characterIds": [
+        "comforting",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 2,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "cantonese-mushroom-steamed-chicken-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "cantonese"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "steam"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -47,6 +90,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-mushroom-steamed-chicken-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 320,
         "conversionRecordId": "si:g:v1",
@@ -62,6 +106,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-mushroom-steamed-chicken-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 140,
         "conversionRecordId": "si:g:v1",
@@ -77,6 +122,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-mushroom-steamed-chicken-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -92,6 +138,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-mushroom-steamed-chicken-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -107,6 +154,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-mushroom-steamed-chicken-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -122,6 +170,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "cantonese-mushroom-steamed-chicken-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.8,
         "conversionRecordId": "si:g:v1",
@@ -442,7 +491,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-792d2715105e57e3",
+      "baselineArtifactVersion": "clv1-8673534bb32fb2c8",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -466,7 +515,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-792d2715105e57e3",
+      "baselineArtifactVersion": "clv1-8673534bb32fb2c8",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -490,7 +539,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-792d2715105e57e3",
+      "baselineArtifactVersion": "clv1-8673534bb32fb2c8",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -519,7 +568,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-792d2715105e57e3",
+      "baselineArtifactVersion": "clv1-8673534bb32fb2c8",
       "causeCodes": [
         "heat-high:steam"
       ],
@@ -554,7 +603,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-792d2715105e57e3",
+      "baselineArtifactVersion": "clv1-8673534bb32fb2c8",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -578,7 +627,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-792d2715105e57e3",
+      "baselineArtifactVersion": "clv1-8673534bb32fb2c8",
       "causeCodes": [
         "operation-omitted:stir"
       ],

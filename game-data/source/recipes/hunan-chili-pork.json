@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-bca0523c5ab899d3",
+  "artifactVersion": "clv1-a0019e25aca373ec",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -53,7 +53,52 @@
       "scenario:hunan-chili-pork-hunan-chili-pork-op-011-season-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "peppery",
+        "garlicky"
+      ],
+      "characterIds": [
+        "appetizing",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 2,
+        "spicy": 3,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "hunan-chili-pork-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "hunan"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stir-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -69,6 +114,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hunan-chili-pork-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 260,
         "conversionRecordId": "si:g:v1",
@@ -84,6 +130,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hunan-chili-pork-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -99,6 +146,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hunan-chili-pork-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -114,6 +162,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hunan-chili-pork-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -129,6 +178,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hunan-chili-pork-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 6,
         "conversionRecordId": "si:g:v1",
@@ -144,6 +194,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hunan-chili-pork-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.8,
         "conversionRecordId": "si:g:v1",
@@ -582,7 +633,7 @@
   "scenarios": [
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -606,7 +657,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -630,7 +681,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -654,7 +705,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -678,7 +729,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -707,7 +758,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:toss"
       ],
@@ -731,7 +782,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -755,7 +806,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -784,7 +835,7 @@
     },
     {
       "applicableEngine": "cat-kitchen-goal1-v1",
-      "baselineArtifactVersion": "clv1-bca0523c5ab899d3",
+      "baselineArtifactVersion": "clv1-a0019e25aca373ec",
       "causeCodes": [
         "operation-omitted:season"
       ],

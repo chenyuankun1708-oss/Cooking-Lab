@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-e07a740feabed7f5",
+  "artifactVersion": "clv1-1d7ca5dd560f9749",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -18,7 +18,48 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "comforting",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sweet": 1,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "japanese-oyakodon-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "japanese"
+      ],
+      "mealRoleIds": [
+        "staple"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -34,6 +75,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-oyakodon-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 160,
         "conversionRecordId": "si:g:v1",
@@ -49,6 +91,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-oyakodon-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 220,
         "conversionRecordId": "si:g:v1",
@@ -64,6 +107,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-oyakodon-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "egg:piece:weight-v1",
@@ -79,6 +123,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-oyakodon-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 120,
         "conversionRecordId": "si:g:v1",
@@ -94,6 +139,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-oyakodon-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -109,6 +155,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "japanese-oyakodon-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.4,
         "conversionRecordId": "si:g:v1",
@@ -356,7 +403,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e07a740feabed7f5",
+      "baselineArtifactVersion": "clv1-1d7ca5dd560f9749",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -385,7 +432,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-e07a740feabed7f5",
+      "baselineArtifactVersion": "clv1-1d7ca5dd560f9749",
       "causeCodes": [
         "heat-high:simmer"
       ],

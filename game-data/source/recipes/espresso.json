@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-1eeecad1d9165eda",
+  "artifactVersion": "clv1-35bea30ca575f61d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -23,7 +23,49 @@
       "scenario:espresso-espresso-op-004-stir-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "fruity"
+      ],
+      "characterIds": [
+        "clean-tasting"
+      ],
+      "tastes": {
+        "bitter": 3,
+        "sour": 2,
+        "sweet": 1
+      },
+      "textureIds": [
+        "creamy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "espresso-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "italian"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "breakfast"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -39,6 +81,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "espresso-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 18,
         "conversionRecordId": "si:g:v1",
@@ -54,6 +97,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "espresso-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 40,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -246,7 +290,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1eeecad1d9165eda",
+      "baselineArtifactVersion": "clv1-35bea30ca575f61d",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -270,7 +314,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1eeecad1d9165eda",
+      "baselineArtifactVersion": "clv1-35bea30ca575f61d",
       "causeCodes": [
         "operation-omitted:extract"
       ],
@@ -299,7 +343,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1eeecad1d9165eda",
+      "baselineArtifactVersion": "clv1-35bea30ca575f61d",
       "causeCodes": [
         "duration-short:extract"
       ],
@@ -329,7 +373,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-1eeecad1d9165eda",
+      "baselineArtifactVersion": "clv1-35bea30ca575f61d",
       "causeCodes": [
         "operation-omitted:stir"
       ],

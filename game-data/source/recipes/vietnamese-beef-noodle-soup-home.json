@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6b1366bbc54088ec",
+  "artifactVersion": "clv1-a8ba097fce37d208",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -22,7 +22,54 @@
       "source-step:5:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "gingery",
+        "herbal"
+      ],
+      "characterIds": [
+        "refreshing",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 1,
+        "umami": 3
+      },
+      "textureIds": [
+        "brothy",
+        "chewy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "vietnamese-beef-noodle-soup-home-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "vietnamese"
+      ],
+      "mealRoleIds": [
+        "staple"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "boil",
+        "poach",
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -38,6 +85,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 210,
         "conversionRecordId": "si:g:v1",
@@ -53,6 +101,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 260,
         "conversionRecordId": "si:g:v1",
@@ -68,6 +117,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -83,6 +133,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 18,
         "conversionRecordId": "si:g:v1",
@@ -98,6 +149,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -113,6 +165,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 20,
         "conversionRecordId": "si:g:v1",
@@ -128,6 +181,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-07",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "lime:piece:weight-v1",
@@ -143,6 +197,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "vietnamese-beef-noodle-soup-home-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.8,
         "conversionRecordId": "si:g:v1",
@@ -506,7 +561,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b1366bbc54088ec",
+      "baselineArtifactVersion": "clv1-a8ba097fce37d208",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -535,7 +590,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b1366bbc54088ec",
+      "baselineArtifactVersion": "clv1-a8ba097fce37d208",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -559,7 +614,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6b1366bbc54088ec",
+      "baselineArtifactVersion": "clv1-a8ba097fce37d208",
       "causeCodes": [
         "operation-omitted:crush"
       ],

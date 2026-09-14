@@ -12,16 +12,27 @@ import type {
   PublishingRiskLevel,
 } from "./publishing-governance";
 import type { ResearchRecord } from "./research";
+import type { GameNormalizationTraceV1 } from "./game-source-facts";
+import type { PortionRole, RecipeDatabaseExtensionV1 } from "./game-recipe-database";
 
 export const gameRecipeSchemaVersion = "cooking-lab-game-recipe-v1" as const;
 export const gameManifestSchemaVersion = "cooking-lab-game-manifest-v1" as const;
 export const gameOperationCatalogVersion = "cooking-lab-game-operations-v1" as const;
 export const gameRightsRegistrySchemaVersion = "cooking-lab-game-rights-v1" as const;
 
-export type GameSimulationProfile = "cat-kitchen-goal1-v1" | "requires-cat-kitchen-v2" | "data-only";
+export const gameSimulationProfiles = ["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"] as const;
+export type GameSimulationProfile = (typeof gameSimulationProfiles)[number];
 export type GameOperationCompatibility = "supported-now" | "macro-supported" | "requires-engine-v2" | "presentation-only";
-export type GameRecipeEligibility = "draft" | "exportable";
+export type GameRecipeEligibility =
+  | "draft"
+  | "exportable"
+  | "database-entry"
+  | "game-exportable";
 export type GameIngredientState = "raw" | "dry" | "liquid" | "cooked" | "prepared" | "ready-to-serve";
+export const gameSourceQuantityUnits = [
+  "g", "kg", "ml", "l", "piece", "tbsp", "tsp", "cup", "lb", "oz", "pint", "quart", "gallon",
+] as const;
+export type GameSourceQuantityUnit = (typeof gameSourceQuantityUnits)[number];
 
 export const gameOperationIds = [
   "wash", "peel", "slice", "dice", "mince", "crush", "grind",
@@ -30,6 +41,7 @@ export const gameOperationIds = [
   "set-heat", "boil", "simmer", "steam", "pan-fry", "deep-fry", "bake", "roast", "grill",
   "stir", "toss", "season", "drain", "rinse", "strain", "blend",
   "brew", "extract", "chill", "freeze", "assemble", "garnish", "serve",
+  "remove",
 ] as const;
 export type GameOperationId = (typeof gameOperationIds)[number];
 
@@ -67,19 +79,26 @@ export interface GameOperationParametersV1 {
   capacityG?: number;
 }
 
+export type GameHeatControlV1 =
+  | { kind: "exact-temperature"; temperatureC: number; sourceFactId: string }
+  | { kind: "qualitative"; descriptorId: string; sourceFactId: string }
+  | { kind: "independently-calibrated"; parameter: "temperatureC" | "heatLevel"; value: number; sourceFactId: string; calibrationEvidenceId: string };
+
 export interface GameIngredientPortionV1 {
   portionId: string;
   ingredientId: string;
   initialState: GameIngredientState;
   sourceQuantity: {
     amount: number;
-    unit: "g" | "kg" | "ml" | "piece" | "tbsp" | "tsp";
+    unit: GameSourceQuantityUnit;
     conversionRecordId: string;
   };
   massG: number;
   volumeMl?: number;
   optional: boolean;
   phase: string;
+  /** Database extension: explicit seasoning/garnish marking. Optional and backward compatible. */
+  role?: PortionRole;
   allowedSubstitutionIngredientIds: string[];
   nutritionProvenanceId: string;
 }
@@ -115,30 +134,19 @@ export interface GameOperationNodeV1 {
   activeDurationMs: number;
   waitDurationMs: number;
   parameters: GameOperationParametersV1;
+  heatControl?: GameHeatControlV1;
   targetStates: GameTargetStateV1[];
   criticality: "quality" | "completion" | "safety";
   sourceStepOrder?: number;
 }
 
-export type GameMutationType =
-  | "omit"
-  | "reorder"
-  | "duplicate"
-  | "quantity-too-low"
-  | "quantity-too-high"
-  | "heat-too-low"
-  | "heat-too-high"
-  | "duration-too-short"
-  | "duration-too-long"
-  | "cut-size-too-small"
-  | "cut-size-too-large"
-  | "low-uniformity"
-  | "season-too-early"
-  | "season-too-late"
-  | "overcrowding"
-  | "wrong-equipment"
-  | "missing-state-transition"
-  | "allowed-substitution";
+export const gameMutationTypes = [
+  "omit", "reorder", "duplicate", "quantity-too-low", "quantity-too-high", "heat-too-low", "heat-too-high",
+  "duration-too-short", "duration-too-long", "cut-size-too-small", "cut-size-too-large", "low-uniformity",
+  "season-too-early", "season-too-late", "overcrowding", "wrong-equipment", "missing-state-transition",
+  "allowed-substitution",
+] as const;
+export type GameMutationType = (typeof gameMutationTypes)[number];
 
 export interface GameRecipeMutationV1 {
   type: GameMutationType;
@@ -196,7 +204,9 @@ export interface GameIngredientDefinitionV1 {
   sourceIngredientId?: string;
   defaultState: GameIngredientState;
   densityGPerMl?: number;
-  unitWeightsG: Partial<Record<"piece" | "tbsp" | "tsp" | "ml", number>>;
+  /** Database extension: catalog-level role hint (main/seasoning/garnish/optional). */
+  role?: PortionRole;
+  unitWeightsG: Partial<Record<Exclude<GameSourceQuantityUnit, "g" | "kg" | "lb" | "oz">, number>>;
   nutritionPer100g: Nutrition;
   nutritionProvenanceId: string;
   nutritionSource:
@@ -224,7 +234,7 @@ export interface GameIngredientDefinitionV1 {
 
 export interface GameUnitConversionRecordV1 {
   recordId: string;
-  unit: "g" | "kg" | "ml" | "piece" | "tbsp" | "tsp";
+  unit: GameSourceQuantityUnit;
   gramsPerUnit: number;
   ingredientId?: string;
   basis: string;
@@ -299,7 +309,10 @@ export interface GameRecipeV1 {
     generatorVersion: string;
     containsGeneratedExpression: false;
     unresolvedMappings: string[];
+    normalizationTrace?: GameNormalizationTraceV1;
   };
+  /** Database-first extension (M13 revised scope). Optional so legacy v1 records stay valid. */
+  database?: RecipeDatabaseExtensionV1;
 }
 
 export interface GameRightsRegistryV1 {

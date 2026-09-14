@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-6ef53a64922a8d89",
+  "artifactVersion": "clv1-61dc7abb291239d2",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -31,7 +31,52 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "garlicky",
+        "peppery"
+      ],
+      "characterIds": [
+        "appetizing",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 3,
+        "sour": 3,
+        "umami": 3
+      },
+      "textureIds": [
+        "tender",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "filipino-chicken-adobo-home-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "filipino"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "braise"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -47,6 +92,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 450,
         "conversionRecordId": "si:g:v1",
@@ -62,6 +108,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-02",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 35,
         "conversionRecordId": "si:g:v1",
@@ -77,6 +124,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 22,
         "conversionRecordId": "si:g:v1",
@@ -92,6 +140,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 14,
         "conversionRecordId": "si:g:v1",
@@ -107,6 +156,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -122,6 +172,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -137,6 +188,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "filipino-chicken-adobo-home-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.3,
         "conversionRecordId": "si:g:v1",
@@ -453,7 +505,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "baselineArtifactVersion": "clv1-61dc7abb291239d2",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -477,7 +529,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "baselineArtifactVersion": "clv1-61dc7abb291239d2",
       "causeCodes": [
         "operation-omitted:pan-fry"
       ],
@@ -506,7 +558,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "baselineArtifactVersion": "clv1-61dc7abb291239d2",
       "causeCodes": [
         "heat-high:pan-fry"
       ],
@@ -541,7 +593,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "baselineArtifactVersion": "clv1-61dc7abb291239d2",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -565,7 +617,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-6ef53a64922a8d89",
+      "baselineArtifactVersion": "clv1-61dc7abb291239d2",
       "causeCodes": [
         "operation-omitted:season"
       ],

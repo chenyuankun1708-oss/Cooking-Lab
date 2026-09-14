@@ -25,7 +25,7 @@ function refreshArtifactVersion(recipe: GameRecipeV1): GameRecipeV1 {
 describe("M13 revised scope: recipe database entries", () => {
   const data = loadCanonicalGameData();
 
-  it("keeps the 70-item corpus structurally valid after the eligibility extension", () => {
+  it("keeps the 120-item corpus structurally valid after the eligibility extension", () => {
     const result = evaluateGameRecipeCorpus(data.recipes, {
       operations: gameOperationCatalog,
       ingredients: data.ingredients,
@@ -33,8 +33,8 @@ describe("M13 revised scope: recipe database entries", () => {
       now: "2026-09-11",
     });
     expect(result.issues).toEqual([]);
-    expect(result.recipeCount).toBe(70);
-    expect(result.databaseEntryCount).toBe(70);
+    expect(result.recipeCount).toBe(120);
+    expect(result.databaseEntryCount).toBe(120);
     expect(result.exportableCount).toBe(0);
   });
 
@@ -161,6 +161,66 @@ describe("M13 revised scope: recipe database entries", () => {
     });
     expect(result.issues).toHaveLength(1);
     expect(result.issues[0].field).toBe("database.images");
+  });
+
+  it("rejects unknown taxonomy cuisine references", () => {
+    const recipe = structuredClone(data.recipes[0]) as GameRecipeV1;
+    recipe.eligibility = "database-entry";
+    recipe.database = databaseExtension({
+      tags: { categoryTags: [], cuisineIds: ["cuban" as never] },
+    });
+    const withVersion = refreshArtifactVersion(recipe);
+    const result = evaluateGameRecipeCorpus([withVersion], {
+      operations: gameOperationCatalog,
+      ingredients: data.ingredients,
+      rightsRegistry: data.rightsRegistry,
+      now: "2026-09-14",
+    });
+    expect(result.issues).toHaveLength(1);
+    expect(result.issues[0]).toMatchObject({
+      code: "invalid-database-extension",
+      field: "database.tags.cuisineIds",
+    });
+  });
+
+  it("rejects unknown serving context references", () => {
+    const recipe = structuredClone(data.recipes[0]) as GameRecipeV1;
+    recipe.eligibility = "database-entry";
+    recipe.database = databaseExtension({
+      tags: { categoryTags: [], servingContextIds: ["afternoon" as never] },
+    });
+    const withVersion = refreshArtifactVersion(recipe);
+    const result = evaluateGameRecipeCorpus([withVersion], {
+      operations: gameOperationCatalog,
+      ingredients: data.ingredients,
+      rightsRegistry: data.rightsRegistry,
+      now: "2026-09-14",
+    });
+    expect(result.issues).toHaveLength(1);
+    expect(result.issues[0]).toMatchObject({
+      code: "invalid-database-extension",
+      field: "database.tags.servingContextIds",
+    });
+  });
+
+  it("rejects unknown flavor character references", () => {
+    const recipe = structuredClone(data.recipes[0]) as GameRecipeV1;
+    recipe.eligibility = "database-entry";
+    recipe.database = databaseExtension({
+      flavor: { tastes: { sweet: 2 }, characterIds: ["rich" as never] },
+    });
+    const withVersion = refreshArtifactVersion(recipe);
+    const result = evaluateGameRecipeCorpus([withVersion], {
+      operations: gameOperationCatalog,
+      ingredients: data.ingredients,
+      rightsRegistry: data.rightsRegistry,
+      now: "2026-09-14",
+    });
+    expect(result.issues).toHaveLength(1);
+    expect(result.issues[0]).toMatchObject({
+      code: "invalid-database-extension",
+      field: "database.flavor.characterIds",
+    });
   });
 
   it("keeps the game export gate closed for database entries", () => {

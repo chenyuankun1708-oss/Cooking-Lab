@@ -13,11 +13,11 @@ describe("M12-M13 canonical game corpus", () => {
   const migrated = data.recipes.filter((recipe) => recipe.sourceCulinaryItemId);
   const gameOnly = data.recipes.filter((recipe) => !recipe.sourceCulinaryItemId);
 
-  it("keeps the 50-item Web library isolated from the game migration and batch A database entries", () => {
+  it("keeps the 50-item Web library isolated from the game migration and batch A+B database entries", () => {
     expect(webItems).toHaveLength(50);
     expect(migrated).toHaveLength(50);
-    expect(gameOnly).toHaveLength(20); // batch A pilot: 20 knowledge-base database entries
-    expect(data.recipes).toHaveLength(70);
+    expect(gameOnly).toHaveLength(70); // batch A + B: 70 knowledge-base database entries
+    expect(data.recipes).toHaveLength(120);
     expect(migrated.every((recipe) => getPublishedCulinaryItemBySlug(recipe.slug))).toBe(true);
     expect(gameOnly.every((recipe) => recipe.eligibility === "database-entry")).toBe(true);
     expect(gameOnly.every((recipe) => recipe.database?.sourceType === "ai-assisted")).toBe(true);
@@ -31,8 +31,8 @@ describe("M12-M13 canonical game corpus", () => {
       now: "2026-09-08",
     });
     expect(result.issues).toEqual([]);
-    expect(result.recipeCount).toBe(70);
-    expect(result.databaseEntryCount).toBe(70);
+    expect(result.recipeCount).toBe(120);
+    expect(result.databaseEntryCount).toBe(120);
     expect(result.exportableCount).toBe(0);
     expect(result.ready).toBe(false);
     expect(migrated.every((recipe) => recipe.authoring.containsGeneratedExpression === false)).toBe(true);

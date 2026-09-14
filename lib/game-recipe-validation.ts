@@ -29,6 +29,10 @@ import type { ResearchSourceUse } from "@/types/research";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 import type { LocSourceCacheManifestV1 } from "./loc-source-cache";
 import type { RecipeDatabaseExtensionV1 } from "@/types/game-recipe-database";
+import { cuisines } from "@/data/taxonomy";
+import { servingContexts } from "@/data/culinary/taxonomy";
+import { mealRoleIds } from "@/types/culinary";
+import { aromaIds as flavorAromaIds, flavorCharacterIds, tasteIds, textureIds as flavorTextureIds } from "@/types/flavor";
 import {
   databaseCategoryTags,
   databaseImageStatuses,
@@ -287,6 +291,50 @@ export function validateDatabaseExtension(
   for (const tag of extension.tags.categoryTags) {
     if (!(databaseCategoryTags as readonly string[]).includes(tag)) {
       report("invalid-database-extension", recipe.recipeId, "database.tags.categoryTags", `Unknown database category tag ${tag}`);
+    }
+  }
+  const knownCuisineIds = new Set(Object.keys(cuisines));
+  for (const cuisineId of extension.tags.cuisineIds ?? []) {
+    if (!knownCuisineIds.has(cuisineId)) {
+      report("invalid-database-extension", recipe.recipeId, "database.tags.cuisineIds", `Unknown taxonomy cuisine ${cuisineId}`);
+    }
+  }
+  const knownServingContextIds = new Set(Object.keys(servingContexts));
+  for (const contextId of extension.tags.servingContextIds ?? []) {
+    if (!knownServingContextIds.has(contextId)) {
+      report("invalid-database-extension", recipe.recipeId, "database.tags.servingContextIds", `Unknown serving context ${contextId}`);
+    }
+  }
+  const knownMealRoleIds = new Set<string>(mealRoleIds);
+  for (const roleId of extension.tags.mealRoleIds ?? []) {
+    if (!knownMealRoleIds.has(roleId)) {
+      report("invalid-database-extension", recipe.recipeId, "database.tags.mealRoleIds", `Unknown meal role ${roleId}`);
+    }
+  }
+  if (extension.flavor) {
+    const knownTasteIds = new Set<string>(tasteIds);
+    for (const tasteId of Object.keys(extension.flavor.tastes)) {
+      if (!knownTasteIds.has(tasteId)) {
+        report("invalid-database-extension", recipe.recipeId, "database.flavor.tastes", `Unknown taste ${tasteId}`);
+      }
+    }
+    const knownAromaIds = new Set<string>(flavorAromaIds);
+    for (const aromaId of extension.flavor.aromaIds ?? []) {
+      if (!knownAromaIds.has(aromaId)) {
+        report("invalid-database-extension", recipe.recipeId, "database.flavor.aromaIds", `Unknown aroma ${aromaId}`);
+      }
+    }
+    const knownTextureIds = new Set<string>(flavorTextureIds);
+    for (const textureId of extension.flavor.textureIds ?? []) {
+      if (!knownTextureIds.has(textureId)) {
+        report("invalid-database-extension", recipe.recipeId, "database.flavor.textureIds", `Unknown texture ${textureId}`);
+      }
+    }
+    const knownCharacterIds = new Set<string>(flavorCharacterIds);
+    for (const characterId of extension.flavor.characterIds ?? []) {
+      if (!knownCharacterIds.has(characterId)) {
+        report("invalid-database-extension", recipe.recipeId, "database.flavor.characterIds", `Unknown flavor character ${characterId}`);
+      }
     }
   }
   const knownSourceTypes = databaseSourceTypes as readonly string[];

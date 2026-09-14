@@ -28,6 +28,16 @@ import type {
 import type { ResearchSourceUse } from "@/types/research";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 import type { LocSourceCacheManifestV1 } from "./loc-source-cache";
+import type { RecipeDatabaseExtensionV1 } from "@/types/game-recipe-database";
+import {
+  databaseCategoryTags,
+  databaseImageStatuses,
+  databaseSourceTypes,
+  databaseSourceTypesRequiringNotes,
+  isDatabaseEntryEligibility,
+  isGameExportEligibility,
+  portionRoleValues,
+} from "@/types/game-recipe-database";
 import { evaluateGameSourceFactBundle } from "./game-source-fact-validation";
 import { createLocSourceRegistrySliceVersion } from "./loc-source-registry-version";
 import { createSamplingBatchEvidenceDigest } from "./publishing-governance";
@@ -46,6 +56,7 @@ export const gameRecipeIssueCodes = [
   "invalid-governance",
   "invalid-scenario",
   "stale-artifact-version",
+  "invalid-database-extension",
 ] as const;
 
 export type GameRecipeIssueCode = (typeof gameRecipeIssueCodes)[number];
@@ -73,6 +84,8 @@ export interface GameRecipeAuditResult {
   ready: boolean;
   recipeCount: number;
   exportableCount: number;
+  /** M13 revised scope: entries stored in the recipe database (database-entry + game-exportable layers). */
+  databaseEntryCount: number;
   issues: GameRecipeIssue[];
 }
 
@@ -224,12 +237,14 @@ export function evaluateGameRecipeCorpus(
     if (slugs.has(recipe.slug)) report("duplicate-id", recipe.recipeId, "slug", "Recipe slug must be unique");
     recipeIds.add(recipe.recipeId);
     slugs.add(recipe.slug);
+    validateDatabaseExtension(recipe, report);
     evaluateRecipe(recipe, recipes, operationById, ingredientById, conversionById, context, report);
   }
   return {
-    ready: issues.length === 0 && recipes.length > 0 && recipes.every((recipe) => recipe.eligibility === "exportable"),
+    ready: issues.length === 0 && recipes.length > 0 && recipes.every((recipe) => isGameExportEligibility(recipe.eligibility)),
     recipeCount: recipes.length,
-    exportableCount: recipes.filter((recipe) => recipe.eligibility === "exportable").length,
+    exportableCount: recipes.filter((recipe) => isGameExportEligibility(recipe.eligibility)).length,
+    databaseEntryCount: recipes.filter((recipe) => recipe.database !== undefined || isDatabaseEntryEligibility(recipe.eligibility) || isGameExportEligibility(recipe.eligibility)).length,
     issues: issues.sort((left, right) => `${left.recipeId}:${left.code}:${left.field}`.localeCompare(`${right.recipeId}:${right.code}:${right.field}`)),
   };
 }
@@ -243,6 +258,55 @@ export function assertGameRecipeCorpusReady(
   const issueText = result.issues.map((issue) => `${issue.code}:${issue.recipeId}:${issue.field}`).join("; ");
   const draftText = result.exportableCount === result.recipeCount ? "" : `; drafts:${result.recipeCount - result.exportableCount}`;
   throw new Error(`Game data gate blocked export: ${issueText}${draftText}`);
+}
+
+/**
+ * M13 revised scope: recipe-database-first validation.
+ *
+ * Database entries (eligibility `draft` / `database-entry`) carry the optional
+ * `database` extension block. The block itself is structurally validated here:
+ * unknown source types, category tags or image statuses are issues, and
+ * web-curated / ai-assisted entries must carry usage-limitation notes.
+ * Missing heat / flavor / images stay legal empty values by design.
+ */
+export function validateDatabaseExtension(
+  recipe: GameRecipeV1,
+  report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
+): void {
+  for (const portion of recipe.ingredientPortions) {
+    if (portion.role !== undefined && !portionRoleValues.includes(portion.role)) {
+      report("invalid-database-extension", recipe.recipeId, `ingredientPortions.${portion.portionId}.role`, `Unknown portion role ${portion.role}`);
+    }
+  }
+  const extension: RecipeDatabaseExtensionV1 | undefined = recipe.database;
+  if (!extension) return;
+  if (extension.extensionVersion !== "cooking-lab-recipe-database-v1") {
+    report("invalid-database-extension", recipe.recipeId, "database.extensionVersion", "Unsupported recipe database extension version");
+    return;
+  }
+  for (const tag of extension.tags.categoryTags) {
+    if (!(databaseCategoryTags as readonly string[]).includes(tag)) {
+      report("invalid-database-extension", recipe.recipeId, "database.tags.categoryTags", `Unknown database category tag ${tag}`);
+    }
+  }
+  const knownSourceTypes = databaseSourceTypes as readonly string[];
+  if (!knownSourceTypes.includes(extension.sourceType)) {
+    report("invalid-database-extension", recipe.recipeId, "database.sourceType", `Unknown database source type ${extension.sourceType}`);
+  } else if ((databaseSourceTypesRequiringNotes as readonly string[]).includes(extension.sourceType) && !(extension.sourceNotes ?? "").trim()) {
+    report("invalid-database-extension", recipe.recipeId, "database.sourceNotes", `Database source type ${extension.sourceType} requires usage-limitation notes`);
+  }
+  const knownImageStatuses = databaseImageStatuses as readonly string[];
+  for (const image of extension.images) {
+    if (!knownImageStatuses.includes(image.status)) {
+      report("invalid-database-extension", recipe.recipeId, "database.images", `Unknown database image status ${image.status}`);
+    }
+    if (image.status === "published" && !image.imageId?.trim()) {
+      report("invalid-database-extension", recipe.recipeId, "database.images", "Published database images must reference a Web image id");
+    }
+    if (image.status === "internal" && !(image.licenseNote ?? "").trim()) {
+      report("invalid-database-extension", recipe.recipeId, "database.images", "Internal database images require a license note explaining why they cannot go on the Web");
+    }
+  }
 }
 
 function validateCatalogs(
@@ -397,7 +461,7 @@ function evaluateRecipe(
   if (new Set(recipe.authoring.unresolvedMappings).size !== recipe.authoring.unresolvedMappings.length) {
     report("invalid-schema", recipe.recipeId, "authoring.unresolvedMappings", "Unresolved mapping codes must be unique");
   }
-  if (recipe.eligibility === "exportable" && recipe.authoring.unresolvedMappings.length) {
+  if (isGameExportEligibility(recipe.eligibility) && recipe.authoring.unresolvedMappings.length) {
     report("invalid-graph", recipe.recipeId, "authoring.unresolvedMappings", "Exportable recipes cannot contain unresolved source mappings");
   }
   if (createGameRecipeArtifactVersion(recipe) !== recipe.artifactVersion) {
@@ -422,7 +486,7 @@ function evaluateRecipe(
     }
     const conversion = conversionById.get(portion.sourceQuantity.conversionRecordId);
     const conversionBlocker = `portion:${portion.portionId}:conversion`;
-    if (!conversion && (recipe.eligibility === "exportable" || !recipe.authoring.unresolvedMappings.includes(conversionBlocker))) {
+    if (!conversion && (isGameExportEligibility(recipe.eligibility) || !recipe.authoring.unresolvedMappings.includes(conversionBlocker))) {
       report("missing-reference", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity.conversionRecordId`, "Source quantity must reference a versioned conversion record");
     }
     reportDuplicateStrings(portion.allowedSubstitutionIngredientIds, recipe.recipeId, `ingredientPortions.${portion.portionId}.allowedSubstitutionIngredientIds`, report);
@@ -431,7 +495,7 @@ function evaluateRecipe(
         report("missing-reference", recipe.recipeId, `ingredientPortions.${portion.portionId}.allowedSubstitutionIngredientIds`, "Allowed substitutions must identify a different catalog ingredient");
       }
     }
-    if (recipe.eligibility === "exportable" && ingredient) {
+    if (isGameExportEligibility(recipe.eligibility) && ingredient) {
       const expectedMass = sourceQuantityMassG(portion.sourceQuantity, portion.ingredientId, conversion);
       if (expectedMass === null || Math.abs(expectedMass - portion.massG) > 0.011) {
         report("invalid-number", recipe.recipeId, `ingredientPortions.${portion.portionId}.sourceQuantity`, "Canonical mass must match the recorded unit conversion");
@@ -492,7 +556,7 @@ function evaluateRecipe(
   for (const portionId of portionIds) {
     if (!referencedPortions.has(portionId)) {
       const pendingCode = `portion:${portionId}:source-step`;
-      if (recipe.eligibility === "exportable" || !recipe.authoring.unresolvedMappings.includes(pendingCode)) {
+      if (isGameExportEligibility(recipe.eligibility) || !recipe.authoring.unresolvedMappings.includes(pendingCode)) {
         report("missing-reference", recipe.recipeId, `ingredientPortions.${portionId}`, "Every ingredient portion must enter at least one operation or carry an explicit draft mapping blocker");
       }
     }
@@ -501,7 +565,7 @@ function evaluateRecipe(
   validateNutrition(recipe, ingredientById, context.nutritionDataset, report);
   validateScenarios(recipe, nodeById, portionIds, ingredientById, operationById, report);
   validateDeclaredRightsReferences(recipe, context, report);
-  if (recipe.eligibility === "exportable") validateRightsAndGovernance(recipe, allRecipes, context, report);
+  if (isGameExportEligibility(recipe.eligibility)) validateRightsAndGovernance(recipe, allRecipes, context, report);
 }
 
 function validateNormalizationTrace(
@@ -515,7 +579,7 @@ function validateNormalizationTrace(
     return;
   }
   if (!trace) {
-    if (recipe.eligibility === "exportable") {
+    if (isGameExportEligibility(recipe.eligibility)) {
       report("missing-reference", recipe.recipeId, "authoring.normalizationTrace", "Exportable source-normalized recipes require a complete normalization trace");
     }
     return;
@@ -912,7 +976,7 @@ function validateOperationContract(
   const check = (suffix: string, valid: boolean, message: string) => {
     if (valid) return;
     const blocker = `operation:${node.nodeId}:${suffix}`;
-    if (recipe.eligibility === "draft" && recipe.authoring.unresolvedMappings.includes(blocker)) return;
+    if (isDatabaseEntryEligibility(recipe.eligibility) && recipe.authoring.unresolvedMappings.includes(blocker)) return;
     report("invalid-operation", recipe.recipeId, `operationGraph.${node.nodeId}.${suffix}`, message);
   };
   check("inputs", definition.inputRequirement === "none" || node.inputPortionIds.length > 0, "Operation requires at least one explicit ingredient input");
@@ -1030,7 +1094,7 @@ function validateNutrition(
   nutritionDataset: GameNutritionDatasetSubsetV1 | undefined,
   report: (code: GameRecipeIssueCode, recipeId: string, field: string, message: string) => void,
 ) {
-  if (recipe.eligibility === "exportable" && !nutritionDataset) {
+  if (isGameExportEligibility(recipe.eligibility) && !nutritionDataset) {
     report("invalid-nutrition", recipe.recipeId, "nutritionDataset", "Exportable recipes require the versioned USDA subset used by the ingredient catalog");
   }
   const uniqueIngredientIds = [...new Set(recipe.ingredientPortions.map((portion) => portion.ingredientId))];
@@ -1055,7 +1119,7 @@ function validateNutrition(
     ) {
       report("invalid-nutrition", recipe.recipeId, `nutritionProfile.provenance.${ingredientId}`, "Recipe nutrition provenance must match the ingredient catalog");
     }
-    if (recipe.eligibility === "exportable" && (
+    if (isGameExportEligibility(recipe.eligibility) && (
       ingredient.nutritionSource.kind !== "dataset"
       || provenance.provider !== "USDA FoodData Central"
       || provenance.datasetVersion !== ingredient.nutritionSource.datasetVersion
@@ -1665,7 +1729,7 @@ function validateSamplingBatch(
     && completeActor(batch.auditor)
     && batch.artifactSetVersion === currentVersion
     && batch.evidenceDigest === createSamplingBatchEvidenceDigest(batch);
-  if (!complete || batchRecipes.length !== new Set(batch.itemIds).size || batchRecipes.some((recipe) => recipe.eligibility !== "exportable")) {
+  if (!complete || batchRecipes.length !== new Set(batch.itemIds).size || batchRecipes.some((recipe) => !isGameExportEligibility(recipe.eligibility))) {
     report("invalid-governance", batch.id, "sampling", "Sampling QA identity, policy, commit, evidence digest, population and artifact fingerprint must be current");
   }
   const primaryReviewers = registry.governance.attestations.filter((attestation) =>
@@ -1780,7 +1844,7 @@ function validateSamplingHistory(
       const population = registry.governance.riskClassifications
         .filter((classification) => classification.equivalenceClassKeys.includes(key))
         .map((classification) => classification.itemId)
-        .filter((itemId) => allRecipes.some((candidate) => candidate.recipeId === itemId && candidate.eligibility === "exportable"))
+        .filter((itemId) => allRecipes.some((candidate) => candidate.recipeId === itemId && isGameExportEligibility(candidate.eligibility)))
         .sort();
       const equivalence = batch.equivalenceClasses.find((entry) => entry.key === key);
       const validationIssues: GameRecipeIssue[] = [];

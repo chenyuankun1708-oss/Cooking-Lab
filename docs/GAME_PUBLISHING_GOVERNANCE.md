@@ -1,6 +1,12 @@
 # Game data publishing governance
 
-Status: M12 policy v1
+Status: M13 revised scope — recipe database first
+
+## Database entries vs exportable entries
+
+`database-entry` records are stored in the recipe database under structural validation only (unique ids, referential integrity, source classification). Missing heat, flavor or images are legal empty values. This layer exists so the corpus can grow quickly under the 2026-09-11 Product Director decision (recipe database first, 500 target redefined as database entries).
+
+Nothing in this layer is publishable. `game-exportable` (alias `exportable`) remains bound to every rule in this document: the four artifacts, rights assessments, sampling QA and the fail-closed blockers. Loosely sourced entries (`web-curated`, `ai-assisted`) must carry usage-limitation `sourceNotes` and can never auto-promote; promotion always requires the full source-backed rebuild, review and sampling path.
 
 ## Separate publication target
 

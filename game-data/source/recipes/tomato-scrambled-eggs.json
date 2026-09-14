@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-c62c755e192e926c",
+  "artifactVersion": "clv1-70310557b16414c3",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -28,7 +28,55 @@
       "source-step:1:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "tomato-rich"
+      ],
+      "characterIds": [
+        "comforting",
+        "rice-friendly"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 2,
+        "sweet": 2,
+        "umami": 2
+      },
+      "textureIds": [
+        "tender",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "tomato-scrambled-eggs-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "dietaryTagIds": [
+        "vegetarian"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stir-fry"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -44,6 +92,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tomato-scrambled-eggs-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "egg:piece:weight-v1",
@@ -59,6 +108,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tomato-scrambled-eggs-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "tomato:piece:weight-v1",
@@ -74,6 +124,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tomato-scrambled-eggs-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -89,6 +140,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "tomato-scrambled-eggs-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.5,
         "conversionRecordId": "si:g:v1",
@@ -359,7 +411,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c62c755e192e926c",
+      "baselineArtifactVersion": "clv1-70310557b16414c3",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -383,7 +435,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c62c755e192e926c",
+      "baselineArtifactVersion": "clv1-70310557b16414c3",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -418,7 +470,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c62c755e192e926c",
+      "baselineArtifactVersion": "clv1-70310557b16414c3",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -442,7 +494,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c62c755e192e926c",
+      "baselineArtifactVersion": "clv1-70310557b16414c3",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -466,7 +518,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-c62c755e192e926c",
+      "baselineArtifactVersion": "clv1-70310557b16414c3",
       "causeCodes": [
         "operation-omitted:fold"
       ],

@@ -13,6 +13,7 @@ import type {
 } from "./publishing-governance";
 import type { ResearchRecord } from "./research";
 import type { GameNormalizationTraceV1 } from "./game-source-facts";
+import type { PortionRole, RecipeDatabaseExtensionV1 } from "./game-recipe-database";
 
 export const gameRecipeSchemaVersion = "cooking-lab-game-recipe-v1" as const;
 export const gameManifestSchemaVersion = "cooking-lab-game-manifest-v1" as const;
@@ -22,7 +23,11 @@ export const gameRightsRegistrySchemaVersion = "cooking-lab-game-rights-v1" as c
 export const gameSimulationProfiles = ["cat-kitchen-goal1-v1", "requires-cat-kitchen-v2", "data-only"] as const;
 export type GameSimulationProfile = (typeof gameSimulationProfiles)[number];
 export type GameOperationCompatibility = "supported-now" | "macro-supported" | "requires-engine-v2" | "presentation-only";
-export type GameRecipeEligibility = "draft" | "exportable";
+export type GameRecipeEligibility =
+  | "draft"
+  | "exportable"
+  | "database-entry"
+  | "game-exportable";
 export type GameIngredientState = "raw" | "dry" | "liquid" | "cooked" | "prepared" | "ready-to-serve";
 export const gameSourceQuantityUnits = [
   "g", "kg", "ml", "l", "piece", "tbsp", "tsp", "cup", "lb", "oz", "pint", "quart", "gallon",
@@ -36,6 +41,7 @@ export const gameOperationIds = [
   "set-heat", "boil", "simmer", "steam", "pan-fry", "deep-fry", "bake", "roast", "grill",
   "stir", "toss", "season", "drain", "rinse", "strain", "blend",
   "brew", "extract", "chill", "freeze", "assemble", "garnish", "serve",
+  "remove",
 ] as const;
 export type GameOperationId = (typeof gameOperationIds)[number];
 
@@ -91,6 +97,8 @@ export interface GameIngredientPortionV1 {
   volumeMl?: number;
   optional: boolean;
   phase: string;
+  /** Database extension: explicit seasoning/garnish marking. Optional and backward compatible. */
+  role?: PortionRole;
   allowedSubstitutionIngredientIds: string[];
   nutritionProvenanceId: string;
 }
@@ -301,6 +309,8 @@ export interface GameRecipeV1 {
     unresolvedMappings: string[];
     normalizationTrace?: GameNormalizationTraceV1;
   };
+  /** Database-first extension (M13 revised scope). Optional so legacy v1 records stay valid. */
+  database?: RecipeDatabaseExtensionV1;
 }
 
 export interface GameRightsRegistryV1 {

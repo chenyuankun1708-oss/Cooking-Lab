@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-dd053bbe58b91bd4",
+  "artifactVersion": "clv1-9f2320bae882db05",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -31,7 +31,53 @@
       "scenario:apple-crumble-apple-crumble-op-014-rest-short:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity",
+        "spiced",
+        "toasty"
+      ],
+      "characterIds": [
+        "warming",
+        "comforting"
+      ],
+      "tastes": {
+        "sour": 1,
+        "sweet": 3
+      },
+      "textureIds": [
+        "crisp",
+        "soft",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "apple-crumble-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "british"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -47,6 +93,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 720,
         "conversionRecordId": "si:g:v1",
@@ -62,6 +109,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 120,
         "conversionRecordId": "si:g:v1",
@@ -77,6 +125,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 50,
         "conversionRecordId": "si:g:v1",
@@ -92,6 +141,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 100,
         "conversionRecordId": "si:g:v1",
@@ -107,6 +157,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "si:g:v1",
@@ -122,6 +173,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 3,
         "conversionRecordId": "si:g:v1",
@@ -137,6 +189,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-07",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "lemon:piece:weight-v1",
@@ -152,6 +205,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "apple-crumble-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "si:g:v1",
@@ -680,7 +734,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:bake"
       ],
@@ -709,7 +763,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "duration-short:bake"
       ],
@@ -739,7 +793,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "heat-high:bake"
       ],
@@ -774,7 +828,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -798,7 +852,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -833,7 +887,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -857,7 +911,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -881,7 +935,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:shape"
       ],
@@ -905,7 +959,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:bake"
       ],
@@ -934,7 +988,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "duration-short:bake"
       ],
@@ -964,7 +1018,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -988,7 +1042,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-dd053bbe58b91bd4",
+      "baselineArtifactVersion": "clv1-9f2320bae882db05",
       "causeCodes": [
         "duration-short:rest"
       ],

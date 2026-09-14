@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-139fdc5d23248aff",
+  "artifactVersion": "clv1-ecb0d36de24f2931",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -27,7 +27,49 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "floral",
+        "fruity",
+        "citrusy"
+      ],
+      "characterIds": [
+        "light",
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "sour": 3,
+        "sweet": 2
+      },
+      "textureIds": []
+    },
+    "images": [
+      {
+        "imageId": "hibiscus-agua-fresca-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "mexican"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "lunch",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -43,6 +85,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hibiscus-agua-fresca-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 25,
         "conversionRecordId": "si:g:v1",
@@ -58,6 +101,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hibiscus-agua-fresca-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1000,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -74,6 +118,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hibiscus-agua-fresca-portion-03",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 60,
         "conversionRecordId": "si:g:v1",
@@ -89,6 +134,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hibiscus-agua-fresca-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "lime:piece:weight-v1",
@@ -104,6 +150,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "hibiscus-agua-fresca-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -473,7 +520,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -502,7 +549,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -532,7 +579,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "operation-omitted:brew"
       ],
@@ -561,7 +608,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "duration-short:brew"
       ],
@@ -591,7 +638,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -615,7 +662,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -640,7 +687,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "operation-omitted:strain"
       ],
@@ -664,7 +711,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -688,7 +735,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "operation-omitted:chill"
       ],
@@ -712,7 +759,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-139fdc5d23248aff",
+      "baselineArtifactVersion": "clv1-ecb0d36de24f2931",
       "causeCodes": [
         "duration-short:chill"
       ],

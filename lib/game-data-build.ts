@@ -12,6 +12,7 @@ import type {
   GameRecipeV1,
   GameRightsRegistryV1,
 } from "@/types/game-recipe";
+import { isGameExportEligibility } from "@/types/game-recipe-database";
 import type { GameNormalizationRegistryV1, GameSourceFactBundleV1 } from "@/types/game-source-facts";
 import type { LocSourceRegistryV1 } from "@/types/loc-recipe-source";
 import { parseLocSourceCacheManifest, type LocSourceCacheManifestV1 } from "./loc-source-cache";
@@ -73,7 +74,7 @@ export function buildGameData(
     throw new Error(`Game canonical data is invalid: ${canonicalAudit.issues.map((issue) => `${issue.code}:${issue.recipeId}:${issue.field}`).join("; ")}`);
   }
   const exportable = input.recipes
-    .filter((recipe) => recipe.eligibility === "exportable")
+    .filter((recipe) => isGameExportEligibility(recipe.eligibility))
     .sort((left, right) => left.recipeId.localeCompare(right.recipeId));
   if (exportable.length === 0) {
     throw new Error("Game data gate blocked export: no exportable recipes");

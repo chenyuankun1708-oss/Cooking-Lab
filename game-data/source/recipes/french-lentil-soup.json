@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-0e1fd019c59c780a",
+  "artifactVersion": "clv1-15ef209d3d7617ae",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -24,7 +24,56 @@
       "source-step:3:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "herbal",
+        "garlicky"
+      ],
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 1,
+        "sweet": 1,
+        "umami": 2
+      },
+      "textureIds": [
+        "brothy",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "french-lentil-soup-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "french"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "soup"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "simmer"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -40,6 +89,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -55,6 +105,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 180,
         "conversionRecordId": "si:g:v1",
@@ -70,6 +121,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -85,6 +137,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 250,
         "conversionRecordId": "si:g:v1",
@@ -100,6 +153,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -115,6 +169,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -130,6 +185,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -145,6 +201,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-lentil-soup-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -515,7 +572,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0e1fd019c59c780a",
+      "baselineArtifactVersion": "clv1-15ef209d3d7617ae",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -539,7 +596,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0e1fd019c59c780a",
+      "baselineArtifactVersion": "clv1-15ef209d3d7617ae",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -563,7 +620,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-0e1fd019c59c780a",
+      "baselineArtifactVersion": "clv1-15ef209d3d7617ae",
       "causeCodes": [
         "operation-omitted:season"
       ],

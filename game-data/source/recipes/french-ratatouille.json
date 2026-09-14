@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-90129ea180bc21d9",
+  "artifactVersion": "clv1-846aa6203ff11b34",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -31,7 +31,55 @@
       "source-step:4:operation"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "tomato-rich",
+        "herbal"
+      ],
+      "characterIds": [
+        "comforting"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 2,
+        "sweet": 2,
+        "umami": 2
+      },
+      "textureIds": [
+        "soft",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "french-ratatouille-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "french"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "main"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "stew"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -47,6 +95,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 450,
         "conversionRecordId": "si:g:v1",
@@ -62,6 +111,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -77,6 +127,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 300,
         "conversionRecordId": "si:g:v1",
@@ -92,6 +143,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 150,
         "conversionRecordId": "si:g:v1",
@@ -107,6 +159,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -122,6 +175,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 15,
         "conversionRecordId": "si:g:v1",
@@ -137,6 +191,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -152,6 +207,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "french-ratatouille-portion-08",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.8,
         "conversionRecordId": "si:g:v1",
@@ -581,7 +637,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-90129ea180bc21d9",
+      "baselineArtifactVersion": "clv1-846aa6203ff11b34",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -605,7 +661,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-90129ea180bc21d9",
+      "baselineArtifactVersion": "clv1-846aa6203ff11b34",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -629,7 +685,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-90129ea180bc21d9",
+      "baselineArtifactVersion": "clv1-846aa6203ff11b34",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -653,7 +709,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-90129ea180bc21d9",
+      "baselineArtifactVersion": "clv1-846aa6203ff11b34",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -677,7 +733,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-90129ea180bc21d9",
+      "baselineArtifactVersion": "clv1-846aa6203ff11b34",
       "causeCodes": [
         "operation-omitted:mix"
       ],

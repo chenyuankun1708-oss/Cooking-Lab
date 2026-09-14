@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-233b5654f18fc446",
+  "artifactVersion": "clv1-3f2cc3a27af34dbd",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -45,7 +45,54 @@
       "scenario:lebanese-hummus-plate-lebanese-hummus-plate-op-013-season-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy",
+        "garlicky"
+      ],
+      "characterIds": [
+        "refreshing",
+        "comforting"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sour": 3,
+        "umami": 2
+      },
+      "textureIds": [
+        "creamy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "lebanese-hummus-plate-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "lebanese"
+      ],
+      "dietaryTagIds": [
+        "vegan"
+      ],
+      "mealRoleIds": [
+        "starter"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "cold-mix"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -61,6 +108,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 220,
         "conversionRecordId": "si:g:v1",
@@ -76,6 +124,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-02",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 45,
         "conversionRecordId": "si:g:v1",
@@ -91,6 +140,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "lemon:piece:weight-v1",
@@ -106,6 +156,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -121,6 +172,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "si:g:v1",
@@ -136,6 +188,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-06",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 5,
         "conversionRecordId": "si:g:v1",
@@ -151,6 +204,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "lebanese-hummus-plate-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 1.2,
         "conversionRecordId": "si:g:v1",
@@ -631,7 +685,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -655,7 +709,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -679,7 +733,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:blend"
       ],
@@ -703,7 +757,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -727,7 +781,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -751,7 +805,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -775,7 +829,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:whisk"
       ],
@@ -799,7 +853,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-233b5654f18fc446",
+      "baselineArtifactVersion": "clv1-3f2cc3a27af34dbd",
       "causeCodes": [
         "operation-omitted:season"
       ],

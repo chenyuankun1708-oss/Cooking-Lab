@@ -300,3 +300,15 @@ taxonomy: {
 Issue #40 只增加首批 native CulinaryItem 实际需要的最小节点：UK、Morocco、Zhejiang、Fujian、Andalusia，以及 British、Moroccan、Zhejiang cuisine。更细的 dessert/tea/coffee/drink 形态保存在独立 `culinaryForms` registry；它们不回写或扩散成 Recipe legacy fields。
 
 当真实内容需要新的 country、region、cuisine、form 或 serving context 时，先增加稳定 registry node 和 label，再允许 item 引用。不要从 UI 文案反向制造 taxonomy ID，也不要为了覆盖未来所有料理一次性建立全球 ontology。
+
+## Recipe database category tags（2026-09-11 M13 revised scope）
+
+M13 改造为菜谱数据库优先后，game-data 层的 `RecipeDatabaseExtensionV1.tags` 复用本 taxonomy 的注册表：
+
+- `categoryTags`：`baking` / `bartending` / `dessert`（数据库新品类维度，可多选，如烘烤甜品同时带 `baking` 和 `dessert`）。
+- `cuisineIds` → `data/taxonomy.ts` cuisines 注册表（同一 machine value，如 `italian`、`zhejiang`）。
+- `techniqueIds` → techniques 注册表（如 `bake`）；操作图中的 `bake`/`roast` 操作节点也用于 `baking` 品类判定。
+- `dietaryTagIds` → dietary tags 注册表（`vegan` / `vegetarian`）。
+- `mealRoleIds` / `servingContextIds` → CulinaryItem pairing 词汇（`starter/main/side/staple/soup/dessert/drink` 与 `afternoon-tea/aperitif/after-meal/...`）。
+
+数据库条目不要求标签完备；不适用的维度保持空数组或缺省。Web 端 taxonomy 注册表仍是这些 machine value 的唯一 source of truth，数据库层只做引用不做复制。

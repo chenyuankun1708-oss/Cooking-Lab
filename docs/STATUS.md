@@ -1,9 +1,14 @@
 # Status
 
-最近更新：2026-09-10
+最近更新：2026-09-11
 
 ## M12–M13 当前状态
 
+- 2026-09-11 Product Director 决策：**M13 改造为菜谱数据库优先**。以 GameRecipeV1 为基底新增 `RecipeDatabaseExtensionV1`（标签/味道/分级图片/来源标记）+ 分层 eligibility（`database-entry` / `game-exportable`），字段留空合法入库（火候缺失、无图、无味道均不阻断），游戏导出门禁原样保留。500 目标重定义为数据库条目数（`game-data:audit --minimum-database=`）。
+- 已回填 50 条现有菜谱为 `database-entry`：categoryTags（baking/bartending/dessert，apple-crumble = baking+dessert、饮品 = bartending）、Web 端 FlavorProfile、34+16 张 hero 图（published）、portion role（35 种调料食材标记 seasoning）、来源 `web-migrated`；火候空值按设计保留。
+- 操作目录新增 `remove`（移出锅/容器）；食材目录 176 条全部带 role 提示。
+- 新增 `scripts/migrate-database-extension.ts` 回填管线与 `lib/__tests__/game-recipe-database.test.ts`（9 项测试：留空合法性、品类标签、role、来源说明义务、图片分级、导入门禁保持关闭）。
+- 来源策略宽松化：web-curated / ai-assisted 条目必须携带 sourceNotes 用途限制说明，且永不自动晋升 exportable。
 - 2026-09-10 用户明确要求继续完成未完成 milestones，M13 已从此前的产品审核暂停点恢复。当前先关闭独立架构复核阻塞，再继续 canonical compilation、120/250/500 批次与最终发布门禁；Web 在新批次正式过审前仍保持现有 50 项。
 - M12 游戏数据合同、操作 taxonomy、量化迁移、错误 mutation、独立游戏权利门禁和确定性 Godot/SQLite 导出器已在 `aa5e9c2` 完成并通过独立审查；G001 已收口，M13 正在执行。
 - 当前 Web 的 50 项已迁移为独立 `GameRecipeV1` draft；它们保留原有演示营养并明确不能直接获得 `game-commercial-ready` 资格。

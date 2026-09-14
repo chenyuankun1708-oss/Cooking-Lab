@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-067a5f59bad27257",
+  "artifactVersion": "clv1-c6d742b004f7addf",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -48,7 +48,50 @@
       "scenario:mango-sticky-rice-mango-sticky-rice-op-017-slice-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity",
+        "floral"
+      ],
+      "characterIds": [
+        "comforting"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sweet": 3
+      },
+      "textureIds": [
+        "soft",
+        "creamy",
+        "juicy"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "mango-sticky-rice-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "thai"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -64,6 +107,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 250,
         "conversionRecordId": "si:g:v1",
@@ -79,6 +123,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 600,
         "conversionRecordId": "si:g:v1",
@@ -94,6 +139,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 400,
         "conversionRecordId": "coconut-milk:ml:weight-v1",
@@ -110,6 +156,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-04",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 60,
         "conversionRecordId": "si:g:v1",
@@ -125,6 +172,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-05",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 2,
         "conversionRecordId": "si:g:v1",
@@ -140,6 +188,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "mango-sticky-rice-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 800,
         "conversionRecordId": "drinking-water:ml:weight-v1",
@@ -706,7 +755,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:wash"
       ],
@@ -730,7 +779,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -754,7 +803,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -779,7 +828,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -803,7 +852,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:drain"
       ],
@@ -827,7 +876,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:steam"
       ],
@@ -856,7 +905,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "duration-short:steam"
       ],
@@ -886,7 +935,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:simmer"
       ],
@@ -915,7 +964,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "duration-short:simmer"
       ],
@@ -945,7 +994,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "heat-high:simmer"
       ],
@@ -980,7 +1029,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:set-heat"
       ],
@@ -1004,7 +1053,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "heat-high:set-heat"
       ],
@@ -1039,7 +1088,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:boil"
       ],
@@ -1068,7 +1117,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "duration-short:boil"
       ],
@@ -1098,7 +1147,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "heat-high:boil"
       ],
@@ -1133,7 +1182,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:mix"
       ],
@@ -1157,7 +1206,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -1181,7 +1230,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "duration-short:rest"
       ],
@@ -1206,7 +1255,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:stir"
       ],
@@ -1230,7 +1279,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:peel"
       ],
@@ -1254,7 +1303,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-067a5f59bad27257",
+      "baselineArtifactVersion": "clv1-c6d742b004f7addf",
       "causeCodes": [
         "operation-omitted:slice"
       ],

@@ -1,6 +1,21 @@
 # Game recipe data architecture
 
-Status: M12 contract v1
+Status: M13 revised scope — recipe database first
+
+## Recipe database extension
+
+M13 (revised 2026-09-11) redefines the corpus as a recipe database first. `GameRecipeV1` carries an optional `database` block (`RecipeDatabaseExtensionV1`, `types/game-recipe-database.ts`):
+
+- **Eligibility layers**: `database-entry` (structural checks only) and `game-exportable` (full fail-closed gate). Legacy `draft` / `exportable` values remain valid as their respective layer aliases.
+- **Tags**: category tags (`baking`, `bartending`, `dessert`) plus Web taxonomy machine values (cuisines, techniques, dietary tags, meal roles, serving contexts). Inapplicable fields stay empty by design.
+- **Flavor**: reuses the Web `FlavorProfile` (tastes / aroma / texture / character).
+- **Images**: graded `published` (Web hero with rights chain) / `internal` (database-only, requires license note) / `missing` (empty is legal).
+- **Source classification**: `web-migrated`, `loc-public-domain`, `web-curated`, `ai-assisted`, `original`. Web/game publishing gates apply on top; `web-curated` and `ai-assisted` entries must carry usage-limitation notes and never auto-promote to exportable.
+- **Portion roles**: `main` / `seasoning` / `garnish` / `optional` on each ingredient portion; the ingredient catalog carries role hints.
+- **Missing fields are legal** in database entries: absent heat control, flavor or images never become blockers. The fail-closed export gate is unchanged for `game-exportable`.
+- **New operation**: `remove` (family `separation`) models taking food out of the pot/container.
+
+Commands: `game-data:audit` reports database entries and enforces `--minimum-database=N` (the M13 capacity gate); `--minimum-exportable=` remains the game export gate. `scripts/migrate-database-extension.ts` backfills the extension block from Web-side data.
 
 ## Boundary
 

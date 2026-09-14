@@ -1,5 +1,5 @@
 {
-  "artifactVersion": "clv1-b8dc82d5c72a88f8",
+  "artifactVersion": "clv1-f717be8e8cc0079d",
   "authoring": {
     "containsGeneratedExpression": false,
     "generatorVersion": "m12-current-50-v1",
@@ -56,7 +56,52 @@
       "scenario:thai-green-papaya-salad-thai-green-papaya-salad-op-018-season-omit:expected-outcome"
     ]
   },
-  "eligibility": "draft",
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy",
+        "garlicky"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sour": 4,
+        "spicy": 3,
+        "sweet": 1
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "imageId": "thai-green-papaya-salad-hero",
+        "status": "published"
+      }
+    ],
+    "sourceType": "web-migrated",
+    "tags": {
+      "categoryTags": [],
+      "cuisineIds": [
+        "thai"
+      ],
+      "mealRoleIds": [
+        "starter"
+      ],
+      "servingContextIds": [
+        "dinner",
+        "lunch"
+      ],
+      "techniqueIds": [
+        "cold-mix"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
   "governance": {
     "reviewAttestationIds": [],
     "riskClassificationId": "",
@@ -72,6 +117,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-01",
+      "role": "main",
       "sourceQuantity": {
         "amount": 400,
         "conversionRecordId": "si:g:v1",
@@ -87,6 +133,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-02",
+      "role": "main",
       "sourceQuantity": {
         "amount": 80,
         "conversionRecordId": "si:g:v1",
@@ -102,6 +149,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-03",
+      "role": "main",
       "sourceQuantity": {
         "amount": 120,
         "conversionRecordId": "si:g:v1",
@@ -117,6 +165,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-04",
+      "role": "main",
       "sourceQuantity": {
         "amount": 1,
         "conversionRecordId": "lime:piece:weight-v1",
@@ -132,6 +181,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-05",
+      "role": "main",
       "sourceQuantity": {
         "amount": 10,
         "conversionRecordId": "si:g:v1",
@@ -147,6 +197,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-06",
+      "role": "main",
       "sourceQuantity": {
         "amount": 8,
         "conversionRecordId": "si:g:v1",
@@ -162,6 +213,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-07",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 12,
         "conversionRecordId": "si:g:v1",
@@ -177,6 +229,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-08",
+      "role": "main",
       "sourceQuantity": {
         "amount": 30,
         "conversionRecordId": "si:g:v1",
@@ -192,6 +245,7 @@
       "optional": false,
       "phase": "main",
       "portionId": "thai-green-papaya-salad-portion-09",
+      "role": "seasoning",
       "sourceQuantity": {
         "amount": 0.2,
         "conversionRecordId": "si:g:v1",
@@ -832,7 +886,7 @@
   "scenarios": [
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:peel"
       ],
@@ -856,7 +910,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:slice"
       ],
@@ -880,7 +934,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:dice"
       ],
@@ -904,7 +958,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:crush"
       ],
@@ -928,7 +982,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:mince"
       ],
@@ -952,7 +1006,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:season"
       ],
@@ -976,7 +1030,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -1000,7 +1054,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:rest"
       ],
@@ -1024,7 +1078,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:fold"
       ],
@@ -1048,7 +1102,7 @@
     },
     {
       "applicableEngine": "requires-cat-kitchen-v2",
-      "baselineArtifactVersion": "clv1-b8dc82d5c72a88f8",
+      "baselineArtifactVersion": "clv1-f717be8e8cc0079d",
       "causeCodes": [
         "operation-omitted:season"
       ],

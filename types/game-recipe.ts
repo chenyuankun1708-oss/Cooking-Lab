@@ -204,6 +204,8 @@ export interface GameIngredientDefinitionV1 {
   sourceIngredientId?: string;
   defaultState: GameIngredientState;
   densityGPerMl?: number;
+  /** Database extension: catalog-level role hint (main/seasoning/garnish/optional). */
+  role?: PortionRole;
   unitWeightsG: Partial<Record<Exclude<GameSourceQuantityUnit, "g" | "kg" | "lb" | "oz">, number>>;
   nutritionPer100g: Nutrition;
   nutritionProvenanceId: string;

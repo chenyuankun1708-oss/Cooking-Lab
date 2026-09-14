@@ -1,0 +1,577 @@
+{
+  "artifactVersion": "clv1-073e7f469104a123",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "light",
+        "comforting"
+      ],
+      "tastes": {
+        "sweet": 2
+      },
+      "textureIds": [
+        "silky",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "cantonese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "milk",
+      "initialState": "liquid",
+      "massG": 500,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hong-kong-milk-pudding-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "prepared",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hong-kong-milk-pudding-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hong-kong-milk-pudding-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 10,
+      "calories": 152,
+      "carbs": 16.18,
+      "fat": 6.5,
+      "fiber": 0,
+      "protein": 7.15,
+      "saturatedFat": 3.15,
+      "sodium": 89.25,
+      "sugar": 16.1
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 40,
+      "calories": 608,
+      "carbs": 64.7,
+      "fat": 26,
+      "fiber": 0,
+      "protein": 28.6,
+      "saturatedFat": 12.6,
+      "sodium": 357,
+      "sugar": 64.4
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "scald",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "hong-kong-milk-pudding-op-001-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-001-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 70
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-001-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-03"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 40
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-002-add"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-02"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-003-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-003-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-003-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-01"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-004-mix"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-01"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-005-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-005-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-005-strain"
+        ],
+        "equipmentId": "steamer",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-01"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-006-steam",
+        "operationType": "steam",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-006-steam-done"
+        ],
+        "parameters": {
+          "temperatureC": 85
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-006-steam"
+        ],
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-01"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-007-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-007-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-007-remove"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-01"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-008-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-008-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "hong-kong-milk-pudding-op-008-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "hong-kong-milk-pudding-portion-01"
+        ],
+        "nodeId": "hong-kong-milk-pudding-op-009-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "hong-kong-milk-pudding-op-009-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "hong-kong-milk-pudding",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-001-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-001-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-003-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-003-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-005-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-005-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-steam"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-006-steam",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-006-steam-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-073e7f469104a123",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "hong-kong-milk-pudding-op-008-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hong-kong-milk-pudding-hong-kong-milk-pudding-op-008-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "hong-kong-milk-pudding",
+  "yield": {
+    "amount": 4,
+    "unit": "piece"
+  }
+}

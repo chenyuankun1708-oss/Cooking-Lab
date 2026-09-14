@@ -1,0 +1,561 @@
+{
+  "artifactVersion": "clv1-7d7ec563c7592d01",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "comforting",
+        "clean-tasting"
+      ],
+      "tastes": {
+        "sweet": 2
+      },
+      "textureIds": [
+        "brothy",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert",
+        "soup"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lotus-seed",
+      "initialState": "dry",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lotus-seed",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lotus-seed-goji-soup-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "dried-longan",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dried-longan",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lotus-seed-goji-soup-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "goji-berry",
+      "initialState": "dry",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-goji-berry",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lotus-seed-goji-soup-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lotus-seed-goji-soup-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 1000,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lotus-seed-goji-soup-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 1000,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 10,
+      "calories": 164.69,
+      "carbs": 35.99,
+      "fat": 0.57,
+      "fiber": 3.04,
+      "protein": 5.29,
+      "saturatedFat": 0.08,
+      "sodium": 12.93,
+      "sugar": 18.19
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lotus-seed",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lotus-seed",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lotus-seed",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dried-longan",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dried-longan",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dried-longan",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "goji-berry",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-goji-berry",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "goji-berry",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 40,
+      "calories": 658.75,
+      "carbs": 143.95,
+      "fat": 2.26,
+      "fiber": 12.15,
+      "protein": 21.15,
+      "saturatedFat": 0.3,
+      "sodium": 51.7,
+      "sugar": 72.75
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "colander",
+        "inputPortionIds": [
+          "lotus-seed-goji-soup-portion-01",
+          "lotus-seed-goji-soup-portion-02",
+          "lotus-seed-goji-soup-portion-03"
+        ],
+        "nodeId": "lotus-seed-goji-soup-op-001-rinse",
+        "operationType": "rinse",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-001-rinse-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lotus-seed-goji-soup-op-001-rinse"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lotus-seed-goji-soup-portion-01",
+          "lotus-seed-goji-soup-portion-05"
+        ],
+        "nodeId": "lotus-seed-goji-soup-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 1100
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lotus-seed-goji-soup-op-002-add"
+        ],
+        "equipmentId": "soup-pot",
+        "heatControl": {
+          "descriptorId": "boil",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "lotus-seed-goji-soup-op-003-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-003-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lotus-seed-goji-soup-op-003-set-heat"
+        ],
+        "equipmentId": "soup-pot",
+        "inputPortionIds": [
+          "lotus-seed-goji-soup-portion-02"
+        ],
+        "nodeId": "lotus-seed-goji-soup-op-004-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-004-simmer-done"
+        ],
+        "parameters": {
+          "temperatureC": 95
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lotus-seed-goji-soup-op-004-simmer"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lotus-seed-goji-soup-portion-03",
+          "lotus-seed-goji-soup-portion-04"
+        ],
+        "nodeId": "lotus-seed-goji-soup-op-005-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-005-season-done"
+        ],
+        "parameters": {
+          "quantityG": 55
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lotus-seed-goji-soup-op-005-season"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lotus-seed-goji-soup-portion-01"
+        ],
+        "nodeId": "lotus-seed-goji-soup-op-006-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-006-rest-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lotus-seed-goji-soup-op-006-rest"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "lotus-seed-goji-soup-portion-01"
+        ],
+        "nodeId": "lotus-seed-goji-soup-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lotus-seed-goji-soup-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "lotus-seed-goji-soup",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7d7ec563c7592d01",
+      "causeCodes": [
+        "operation-omitted:rinse"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rinse"
+      ],
+      "mutation": {
+        "targetNodeId": "lotus-seed-goji-soup-op-001-rinse",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lotus-seed-goji-soup-lotus-seed-goji-soup-op-001-rinse-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7d7ec563c7592d01",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "lotus-seed-goji-soup-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lotus-seed-goji-soup-lotus-seed-goji-soup-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7d7ec563c7592d01",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "lotus-seed-goji-soup-op-003-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lotus-seed-goji-soup-lotus-seed-goji-soup-op-003-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7d7ec563c7592d01",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "lotus-seed-goji-soup-op-004-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lotus-seed-goji-soup-lotus-seed-goji-soup-op-004-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7d7ec563c7592d01",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "lotus-seed-goji-soup-op-005-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lotus-seed-goji-soup-lotus-seed-goji-soup-op-005-season-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7d7ec563c7592d01",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "lotus-seed-goji-soup-op-006-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lotus-seed-goji-soup-lotus-seed-goji-soup-op-006-rest-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "lotus-seed-goji-soup",
+  "yield": {
+    "amount": 800,
+    "unit": "ml"
+  }
+}

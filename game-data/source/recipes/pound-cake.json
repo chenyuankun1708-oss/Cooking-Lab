@@ -1,0 +1,582 @@
+{
+  "artifactVersion": "clv1-cd6368524f984d35",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "soft",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "british"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "afternoon-tea",
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 225,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pound-cake-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 225,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 225,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pound-cake-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 225,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pound-cake-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 225,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pound-cake-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 225,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-vanilla",
+      "initialState": "raw",
+      "massG": 4,
+      "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pound-cake-portion-05",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 2.3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pound-cake-portion-06",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 2.3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 22.5,
+      "calories": 362.98,
+      "carbs": 39.88,
+      "fat": 20.37,
+      "fiber": 0.61,
+      "protein": 5.04,
+      "saturatedFat": 12.23,
+      "sodium": 121.75,
+      "sugar": 22.72
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-vanilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-vanilla",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 10,
+    "total": {
+      "addedSugar": 225,
+      "calories": 3629.77,
+      "carbs": 398.8,
+      "fat": 203.73,
+      "fiber": 6.08,
+      "protein": 50.4,
+      "saturatedFat": 122.3,
+      "sodium": 1217.51,
+      "sugar": 227.2
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "pound-cake-portion-01",
+          "pound-cake-portion-02"
+        ],
+        "nodeId": "pound-cake-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "pound-cake-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.6
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pound-cake-op-001-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "pound-cake-portion-03"
+        ],
+        "nodeId": "pound-cake-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "pound-cake-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 200
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pound-cake-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "pound-cake-portion-04",
+          "pound-cake-portion-05",
+          "pound-cake-portion-06"
+        ],
+        "nodeId": "pound-cake-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "pound-cake-op-003-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pound-cake-op-003-mix"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "pound-cake-portion-01"
+        ],
+        "nodeId": "pound-cake-op-004-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "pound-cake-op-004-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "pound-cake-op-004-shape"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "pound-cake-portion-01"
+        ],
+        "nodeId": "pound-cake-op-005-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "pound-cake-op-005-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 170
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.7,
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "pound-cake-op-005-bake"
+        ],
+        "inputPortionIds": [
+          "pound-cake-portion-01"
+        ],
+        "nodeId": "pound-cake-op-006-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "pound-cake-op-006-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "pound-cake-op-006-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "pound-cake-portion-01"
+        ],
+        "nodeId": "pound-cake-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "pound-cake-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "pound-cake",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cd6368524f984d35",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "pound-cake-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pound-cake-pound-cake-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cd6368524f984d35",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "pound-cake-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pound-cake-pound-cake-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cd6368524f984d35",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "pound-cake-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pound-cake-pound-cake-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cd6368524f984d35",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "pound-cake-op-004-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pound-cake-pound-cake-op-004-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cd6368524f984d35",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "pound-cake-op-005-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pound-cake-pound-cake-op-005-bake-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 10,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "pound-cake",
+  "yield": {
+    "amount": 10,
+    "unit": "piece"
+  }
+}

@@ -1,0 +1,504 @@
+{
+  "artifactVersion": "clv1-94cfecd9d598b879",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "light",
+        "clean-tasting"
+      ],
+      "tastes": {
+        "sweet": 2
+      },
+      "textureIds": [
+        "silky",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "breakfast"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "soy-milk",
+      "initialState": "liquid",
+      "massG": 800,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tofu-pudding-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 800,
+        "conversionRecordId": "soy-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "gelatin-powder",
+      "initialState": "dry",
+      "massG": 12,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gelatin-powder",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tofu-pudding-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 50,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "tofu-pudding-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger",
+      "initialState": "raw",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+      "optional": true,
+      "phase": "main",
+      "portionId": "tofu-pudding-portion-04",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 12.5,
+      "calories": 170.05,
+      "carbs": 24.97,
+      "fat": 3.62,
+      "fiber": 0.05,
+      "protein": 9.19,
+      "saturatedFat": 0.81,
+      "sodium": 82.64,
+      "sugar": 20.54
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "soy-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "soy-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "gelatin-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gelatin-powder",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "gelatin-powder",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 50,
+      "calories": 680.2,
+      "carbs": 99.86,
+      "fat": 14.48,
+      "fiber": 0.2,
+      "protein": 36.78,
+      "saturatedFat": 3.22,
+      "sodium": 330.54,
+      "sugar": 82.17
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "scald",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "tofu-pudding-op-001-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "tofu-pudding-op-001-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 80
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tofu-pudding-op-001-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "tofu-pudding-portion-02"
+        ],
+        "nodeId": "tofu-pudding-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "tofu-pudding-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 12
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tofu-pudding-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "tofu-pudding-portion-03"
+        ],
+        "nodeId": "tofu-pudding-op-003-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "tofu-pudding-op-003-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "tofu-pudding-op-003-stir"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "tofu-pudding-portion-01"
+        ],
+        "nodeId": "tofu-pudding-op-004-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "tofu-pudding-op-004-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "tofu-pudding-op-004-strain"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "tofu-pudding-portion-01"
+        ],
+        "nodeId": "tofu-pudding-op-005-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "tofu-pudding-op-005-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 10800000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tofu-pudding-op-005-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "tofu-pudding-portion-04"
+        ],
+        "nodeId": "tofu-pudding-op-006-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "tofu-pudding-op-006-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "tofu-pudding-op-006-garnish"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "tofu-pudding-portion-01"
+        ],
+        "nodeId": "tofu-pudding-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "tofu-pudding-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "tofu-pudding",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-94cfecd9d598b879",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "tofu-pudding-op-001-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tofu-pudding-tofu-pudding-op-001-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-94cfecd9d598b879",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "tofu-pudding-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tofu-pudding-tofu-pudding-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-94cfecd9d598b879",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "tofu-pudding-op-003-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tofu-pudding-tofu-pudding-op-003-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-94cfecd9d598b879",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "tofu-pudding-op-004-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tofu-pudding-tofu-pudding-op-004-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-94cfecd9d598b879",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "tofu-pudding-op-005-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "tofu-pudding-tofu-pudding-op-005-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "tofu-pudding",
+  "yield": {
+    "amount": 800,
+    "unit": "ml"
+  }
+}

@@ -1,0 +1,560 @@
+{
+  "artifactVersion": "clv1-79787b3751981f11",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity"
+      ],
+      "characterIds": [
+        "refreshing",
+        "comforting"
+      ],
+      "tastes": {
+        "sour": 3,
+        "sweet": 3
+      },
+      "textureIds": [
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "italian"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "amaretto-80",
+      "initialState": "liquid",
+      "massG": 47.25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-amaretto-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "amaretto-sour-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 45,
+        "conversionRecordId": "amaretto-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "bourbon-80",
+      "initialState": "liquid",
+      "massG": 14.1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bourbon-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "amaretto-sour-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "bourbon-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "amaretto-sour-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "simple-syrup",
+      "initialState": "liquid",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+      "optional": true,
+      "phase": "main",
+      "portionId": "amaretto-sour-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "prepared",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": true,
+      "phase": "main",
+      "portionId": "amaretto-sour-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "amaretto-sour-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 28.15,
+      "calories": 258.28,
+      "carbs": 31.15,
+      "fat": 2.94,
+      "fiber": 0.84,
+      "protein": 4.11,
+      "saturatedFat": 0.93,
+      "sodium": 45.7,
+      "sugar": 29.02
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "amaretto-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-amaretto-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "amaretto-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "bourbon-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bourbon-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "bourbon-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "simple-syrup",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "simple-syrup",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 28.15,
+      "calories": 258.28,
+      "carbs": 31.15,
+      "fat": 2.94,
+      "fiber": 0.84,
+      "protein": 4.11,
+      "saturatedFat": 0.93,
+      "sodium": 45.7,
+      "sugar": 29.02
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "amaretto-sour-portion-01"
+        ],
+        "nodeId": "amaretto-sour-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "amaretto-sour-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "amaretto-sour-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "amaretto-sour-portion-01",
+          "amaretto-sour-portion-02",
+          "amaretto-sour-portion-03",
+          "amaretto-sour-portion-04",
+          "amaretto-sour-portion-05"
+        ],
+        "nodeId": "amaretto-sour-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "amaretto-sour-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 131
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "amaretto-sour-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "amaretto-sour-portion-06"
+        ],
+        "nodeId": "amaretto-sour-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "amaretto-sour-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 18000,
+        "criticality": "quality",
+        "dependsOn": [
+          "amaretto-sour-op-003-add"
+        ],
+        "equipmentId": "pitcher",
+        "inputPortionIds": [
+          "amaretto-sour-portion-01"
+        ],
+        "nodeId": "amaretto-sour-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "amaretto-sour-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.9
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "amaretto-sour-op-004-mix"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "amaretto-sour-portion-01"
+        ],
+        "nodeId": "amaretto-sour-op-005-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "amaretto-sour-op-005-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "amaretto-sour-op-005-strain"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "amaretto-sour-portion-01"
+        ],
+        "nodeId": "amaretto-sour-op-006-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "amaretto-sour-op-006-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "amaretto-sour-op-006-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "amaretto-sour-portion-01"
+        ],
+        "nodeId": "amaretto-sour-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "amaretto-sour-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "amaretto-sour",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-79787b3751981f11",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "amaretto-sour-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "amaretto-sour-amaretto-sour-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-79787b3751981f11",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "amaretto-sour-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "amaretto-sour-amaretto-sour-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-79787b3751981f11",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "amaretto-sour-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "amaretto-sour-amaretto-sour-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-79787b3751981f11",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "amaretto-sour-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "amaretto-sour-amaretto-sour-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-79787b3751981f11",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "amaretto-sour-op-005-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "amaretto-sour-amaretto-sour-op-005-strain-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "amaretto-sour",
+  "yield": {
+    "amount": 120,
+    "unit": "ml"
+  }
+}

@@ -1,0 +1,528 @@
+{
+  "artifactVersion": "clv1-024443e5d79132a5",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "chewy",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "glutinous-rice-flour",
+      "initialState": "dry",
+      "massG": 250,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-glutinous-rice-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lvdagun-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lvdagun-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "red-bean-paste",
+      "initialState": "prepared",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-red-bean-paste",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lvdagun-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "roasted-peanut",
+      "initialState": "cooked",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-roasted-peanut",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lvdagun-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "soy-milk",
+      "initialState": "liquid",
+      "massG": 50,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-milk",
+      "optional": true,
+      "phase": "main",
+      "portionId": "lvdagun-portion-05",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "soy-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 12,
+      "calories": 243.31,
+      "carbs": 46.21,
+      "fat": 4.21,
+      "fiber": 2.66,
+      "protein": 5.45,
+      "saturatedFat": 0.63,
+      "sodium": 9.51,
+      "sugar": 12.57
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "glutinous-rice-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-glutinous-rice-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "glutinous-rice-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "red-bean-paste",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-red-bean-paste",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "red-bean-paste",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "roasted-peanut",
+        "ingredientState": "cooked",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-roasted-peanut",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "roasted-peanut",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "soy-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-soy-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "soy-milk",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 8,
+    "total": {
+      "addedSugar": 96,
+      "calories": 1946.5,
+      "carbs": 369.65,
+      "fat": 33.67,
+      "fiber": 21.3,
+      "protein": 43.62,
+      "saturatedFat": 5.04,
+      "sodium": 76.1,
+      "sugar": 100.52
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "lvdagun-portion-04"
+        ],
+        "nodeId": "lvdagun-op-001-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "lvdagun-op-001-crush-done"
+        ],
+        "parameters": {
+          "strength": 0.7
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lvdagun-op-001-crush"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lvdagun-portion-01",
+          "lvdagun-portion-02",
+          "lvdagun-portion-05"
+        ],
+        "nodeId": "lvdagun-op-002-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "lvdagun-op-002-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.6
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lvdagun-op-002-mix"
+        ],
+        "equipmentId": "steamer",
+        "inputPortionIds": [
+          "lvdagun-portion-01"
+        ],
+        "nodeId": "lvdagun-op-003-steam",
+        "operationType": "steam",
+        "outputStateIds": [
+          "lvdagun-op-003-steam-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1500000
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lvdagun-op-003-steam"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "lvdagun-portion-03"
+        ],
+        "nodeId": "lvdagun-op-004-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "lvdagun-op-004-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lvdagun-op-004-shape"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lvdagun-portion-04"
+        ],
+        "nodeId": "lvdagun-op-005-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "lvdagun-op-005-season-done"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "salt",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lvdagun-op-005-season"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "lvdagun-portion-01"
+        ],
+        "nodeId": "lvdagun-op-006-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lvdagun-op-006-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "lvdagun",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-024443e5d79132a5",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "lvdagun-op-001-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lvdagun-lvdagun-op-001-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-024443e5d79132a5",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "lvdagun-op-002-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lvdagun-lvdagun-op-002-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-024443e5d79132a5",
+      "causeCodes": [
+        "operation-omitted:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-steam"
+      ],
+      "mutation": {
+        "targetNodeId": "lvdagun-op-003-steam",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lvdagun-lvdagun-op-003-steam-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-024443e5d79132a5",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "lvdagun-op-004-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lvdagun-lvdagun-op-004-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-024443e5d79132a5",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "lvdagun-op-005-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lvdagun-lvdagun-op-005-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 8,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "lvdagun",
+  "yield": {
+    "amount": 8,
+    "unit": "piece"
+  }
+}

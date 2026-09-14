@@ -1,0 +1,491 @@
+{
+  "artifactVersion": "clv1-b2f638a398792a84",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "floral"
+      ],
+      "characterIds": [
+        "light",
+        "refreshing"
+      ],
+      "tastes": {
+        "sweet": 2
+      },
+      "textureIds": [
+        "silky",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "afternoon-tea",
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 500,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "osmanthus-cake-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "osmanthus-dried",
+      "initialState": "dry",
+      "massG": 10,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-osmanthus-dried",
+      "optional": false,
+      "phase": "main",
+      "portionId": "osmanthus-cake-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 10,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "gelatin-powder",
+      "initialState": "dry",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gelatin-powder",
+      "optional": false,
+      "phase": "main",
+      "portionId": "osmanthus-cake-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "osmanthus-cake-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 6.67,
+      "calories": 42.83,
+      "carbs": 7.72,
+      "fat": 0.05,
+      "fiber": 0.33,
+      "protein": 2.97,
+      "saturatedFat": 0,
+      "sodium": 2.9,
+      "sugar": 7.17
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "osmanthus-dried",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-osmanthus-dried",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "osmanthus-dried",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "gelatin-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gelatin-powder",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "gelatin-powder",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 6,
+    "total": {
+      "addedSugar": 40,
+      "calories": 257,
+      "carbs": 46.34,
+      "fat": 0.3,
+      "fiber": 2,
+      "protein": 17.8,
+      "saturatedFat": 0,
+      "sodium": 17.4,
+      "sugar": 43
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "teapot",
+        "inputPortionIds": [
+          "osmanthus-cake-portion-02"
+        ],
+        "nodeId": "osmanthus-cake-op-001-brew",
+        "operationType": "brew",
+        "outputStateIds": [
+          "osmanthus-cake-op-001-brew-done"
+        ],
+        "parameters": {
+          "temperatureC": 90
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "osmanthus-cake-op-001-brew"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "osmanthus-cake-portion-01"
+        ],
+        "nodeId": "osmanthus-cake-op-002-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "osmanthus-cake-op-002-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "osmanthus-cake-op-002-strain"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "osmanthus-cake-portion-03",
+          "osmanthus-cake-portion-04"
+        ],
+        "nodeId": "osmanthus-cake-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "osmanthus-cake-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "osmanthus-cake-op-003-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "osmanthus-cake-portion-01"
+        ],
+        "nodeId": "osmanthus-cake-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "osmanthus-cake-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "osmanthus-cake-op-004-mix"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "osmanthus-cake-portion-01"
+        ],
+        "nodeId": "osmanthus-cake-op-005-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "osmanthus-cake-op-005-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 10800000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "osmanthus-cake-op-005-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "osmanthus-cake-portion-01"
+        ],
+        "nodeId": "osmanthus-cake-op-006-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "osmanthus-cake-op-006-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "osmanthus-cake",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2f638a398792a84",
+      "causeCodes": [
+        "operation-omitted:brew"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-brew"
+      ],
+      "mutation": {
+        "targetNodeId": "osmanthus-cake-op-001-brew",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "osmanthus-cake-osmanthus-cake-op-001-brew-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2f638a398792a84",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "osmanthus-cake-op-002-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "osmanthus-cake-osmanthus-cake-op-002-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2f638a398792a84",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "osmanthus-cake-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "osmanthus-cake-osmanthus-cake-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2f638a398792a84",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "osmanthus-cake-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "osmanthus-cake-osmanthus-cake-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2f638a398792a84",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "osmanthus-cake-op-005-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "osmanthus-cake-osmanthus-cake-op-005-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 6,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "osmanthus-cake",
+  "yield": {
+    "amount": 6,
+    "unit": "piece"
+  }
+}

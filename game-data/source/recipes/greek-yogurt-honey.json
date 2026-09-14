@@ -1,0 +1,420 @@
+{
+  "artifactVersion": "clv1-c76a209c68e48244",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "light",
+        "refreshing"
+      ],
+      "tastes": {
+        "sour": 2,
+        "sweet": 2
+      },
+      "textureIds": [
+        "creamy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "greek"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "breakfast"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-yogurt",
+      "initialState": "prepared",
+      "massG": 400,
+      "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-yogurt-honey-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-honey",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-yogurt-honey-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "walnut",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-walnut",
+      "optional": false,
+      "phase": "main",
+      "portionId": "greek-yogurt-honey-portion-03",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 12.32,
+      "calories": 299.7,
+      "carbs": 25.56,
+      "fat": 18.74,
+      "fiber": 1.03,
+      "protein": 9.97,
+      "saturatedFat": 5.56,
+      "sodium": 84.5,
+      "sugar": 20.89
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-yogurt",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "usda-fdc:2259793:foundation-2026-04-30",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-yogurt",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-honey",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:169640:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-honey",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "walnut",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-walnut",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "walnut",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 2,
+    "total": {
+      "addedSugar": 24.63,
+      "calories": 599.4,
+      "carbs": 51.11,
+      "fat": 37.48,
+      "fiber": 2.07,
+      "protein": 19.93,
+      "saturatedFat": 11.11,
+      "sodium": 169,
+      "sugar": 41.77
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "greek-yogurt-honey-portion-01"
+        ],
+        "nodeId": "greek-yogurt-honey-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "greek-yogurt-honey-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-yogurt-honey-op-001-chill"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "greek-yogurt-honey-portion-03"
+        ],
+        "nodeId": "greek-yogurt-honey-op-002-crush",
+        "operationType": "crush",
+        "outputStateIds": [
+          "greek-yogurt-honey-op-002-crush-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-yogurt-honey-op-002-crush"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "greek-yogurt-honey-portion-01"
+        ],
+        "nodeId": "greek-yogurt-honey-op-003-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "greek-yogurt-honey-op-003-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "greek-yogurt-honey-op-003-assemble"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "greek-yogurt-honey-portion-02"
+        ],
+        "nodeId": "greek-yogurt-honey-op-004-season",
+        "operationType": "season",
+        "outputStateIds": [
+          "greek-yogurt-honey-op-004-season-done"
+        ],
+        "parameters": {
+          "quantityG": 30
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "sweet",
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-yogurt-honey-op-004-season"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "greek-yogurt-honey-portion-03"
+        ],
+        "nodeId": "greek-yogurt-honey-op-005-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "greek-yogurt-honey-op-005-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "greek-yogurt-honey-op-005-garnish"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "greek-yogurt-honey-portion-01"
+        ],
+        "nodeId": "greek-yogurt-honey-op-006-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "greek-yogurt-honey-op-006-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "greek-yogurt-honey",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c76a209c68e48244",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-yogurt-honey-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-yogurt-honey-greek-yogurt-honey-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c76a209c68e48244",
+      "causeCodes": [
+        "operation-omitted:crush"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-crush"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-yogurt-honey-op-002-crush",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-yogurt-honey-greek-yogurt-honey-op-002-crush-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c76a209c68e48244",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-yogurt-honey-op-003-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-yogurt-honey-greek-yogurt-honey-op-003-assemble-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c76a209c68e48244",
+      "causeCodes": [
+        "operation-omitted:season"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-season"
+      ],
+      "mutation": {
+        "targetNodeId": "greek-yogurt-honey-op-004-season",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "greek-yogurt-honey-greek-yogurt-honey-op-004-season-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 2,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "greek-yogurt-honey",
+  "yield": {
+    "amount": 2,
+    "unit": "piece"
+  }
+}

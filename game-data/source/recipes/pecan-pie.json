@@ -1,0 +1,759 @@
+{
+  "artifactVersion": "clv1-e4e94ee4769d1eb0",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "toasty",
+        "roasted"
+      ],
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "sweet": 4
+      },
+      "textureIds": [
+        "chewy",
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "pecan",
+      "initialState": "raw",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pecan",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brown-sugar",
+      "initialState": "dry",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-vanilla",
+      "initialState": "raw",
+      "massG": 4,
+      "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-06",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "pecan-pie-portion-07",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 30.69,
+      "calories": 435.34,
+      "carbs": 48.83,
+      "fat": 25.43,
+      "fiber": 2.91,
+      "protein": 5.87,
+      "saturatedFat": 5.83,
+      "sodium": 24.25,
+      "sugar": 31.84
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "pecan",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pecan",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "pecan",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brown-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brown-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-vanilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-vanilla",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 8,
+    "total": {
+      "addedSugar": 245.5,
+      "calories": 3482.72,
+      "carbs": 390.66,
+      "fat": 203.46,
+      "fiber": 23.25,
+      "protein": 46.99,
+      "saturatedFat": 46.64,
+      "sodium": 193.96,
+      "sugar": 254.71
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "pecan-pie-portion-07",
+          "pecan-pie-portion-04"
+        ],
+        "nodeId": "pecan-pie-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "pecan-pie-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.35
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-001-mix"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "pecan-pie-portion-01"
+        ],
+        "nodeId": "pecan-pie-op-002-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "pecan-pie-op-002-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-002-shape"
+        ],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "low-melt",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "pecan-pie-op-003-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "pecan-pie-op-003-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 70
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-003-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "pecan-pie-portion-02",
+          "pecan-pie-portion-03",
+          "pecan-pie-portion-04"
+        ],
+        "nodeId": "pecan-pie-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "pecan-pie-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 310
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-004-add"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "pecan-pie-portion-05",
+          "pecan-pie-portion-06"
+        ],
+        "nodeId": "pecan-pie-op-005-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "pecan-pie-op-005-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-005-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "pecan-pie-portion-01"
+        ],
+        "nodeId": "pecan-pie-op-006-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "pecan-pie-op-006-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-006-mix"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "pecan-pie-portion-01"
+        ],
+        "nodeId": "pecan-pie-op-007-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "pecan-pie-op-007-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "pecan-pie-op-007-assemble"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "pecan-pie-portion-01"
+        ],
+        "nodeId": "pecan-pie-op-008-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "pecan-pie-op-008-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 180
+        },
+        "sourceStepOrder": 8,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.7,
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 3000000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "pecan-pie-op-008-bake"
+        ],
+        "inputPortionIds": [
+          "pecan-pie-portion-01"
+        ],
+        "nodeId": "pecan-pie-op-009-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "pecan-pie-op-009-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "pecan-pie-op-009-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "pecan-pie-portion-01"
+        ],
+        "nodeId": "pecan-pie-op-010-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "pecan-pie-op-010-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 10,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "pecan-pie",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-002-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-002-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-003-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-003-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-005-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-005-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-006-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-006-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-007-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-007-assemble-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e94ee4769d1eb0",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "pecan-pie-op-008-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "pecan-pie-pecan-pie-op-008-bake-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 8,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "pecan-pie",
+  "yield": {
+    "amount": 8,
+    "unit": "piece"
+  }
+}

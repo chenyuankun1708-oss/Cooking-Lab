@@ -1,0 +1,1615 @@
+{
+  "commentary_evidence": [
+    {
+      "channel": "cat_reaction",
+      "id": "cat.curious",
+      "localization": {
+        "en": "The cat leans in, sniffs, and takes this experiment seriously.",
+        "zh_CN": "猫猫凑近闻了闻，认真记下这次实验。"
+      },
+      "localization_key": "cat.curious"
+    },
+    {
+      "channel": "cat_reaction",
+      "id": "cat.happy",
+      "localization": {
+        "en": "The cat gives an approving nod.",
+        "zh_CN": "猫猫满意地点点头。"
+      },
+      "localization_key": "cat.happy"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.harmony.score",
+      "localization": {
+        "en": "{subject} is a strength in this dish.",
+        "zh_CN": "{subject} 是这盘菜的亮点。"
+      },
+      "localization_key": "commentary.strength"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.identity.experimental",
+      "localization": {
+        "en": "This is an evidence-backed experiment; keep its strength and refine {subject}.",
+        "zh_CN": "这是一次有依据的新组合；保留优点，再处理 {subject}。"
+      },
+      "localization_key": "commentary.experimental"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.identity.similarity",
+      "localization": {
+        "en": "{subject} is a strength in this dish.",
+        "zh_CN": "{subject} 是这盘菜的亮点。"
+      },
+      "localization_key": "commentary.strength"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.nutrition.completeness",
+      "localization": {
+        "en": "Next time, try adjusting {subject}.",
+        "zh_CN": "下次可以把 {subject} 再调整一点。"
+      },
+      "localization_key": "commentary.improve"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.quality.appearance",
+      "localization": {
+        "en": "Next time, try adjusting {subject}.",
+        "zh_CN": "下次可以把 {subject} 再调整一点。"
+      },
+      "localization_key": "commentary.improve"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.quality.creativity",
+      "localization": {
+        "en": "{subject} is a strength in this dish.",
+        "zh_CN": "{subject} 是这盘菜的亮点。"
+      },
+      "localization_key": "commentary.strength"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.quality.taste",
+      "localization": {
+        "en": "{subject} is a strength in this dish.",
+        "zh_CN": "{subject} 是这盘菜的亮点。"
+      },
+      "localization_key": "commentary.strength"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.quality.technique",
+      "localization": {
+        "en": "Next time, try adjusting {subject}.",
+        "zh_CN": "下次可以把 {subject} 再调整一点。"
+      },
+      "localization_key": "commentary.improve"
+    },
+    {
+      "channel": "commentary",
+      "id": "dish.quality.texture",
+      "localization": {
+        "en": "{subject} is a strength in this dish.",
+        "zh_CN": "{subject} 是这盘菜的亮点。"
+      },
+      "localization_key": "commentary.strength"
+    }
+  ],
+  "cuisines": [
+    {
+      "id": "cat_kitchen_calibration",
+      "label": "Goal 17 calibration set; not a cultural representation."
+    }
+  ],
+  "dish_archetypes": [
+    {
+      "archetype": "hearty_stir_fry",
+      "aroma": 0.52,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "beef_potato_stir_fry",
+      "ingredient_ids": [
+        "beef",
+        "potato"
+      ],
+      "plating_component_ids": [
+        "protein_slice",
+        "starch_chunk"
+      ],
+      "sequence": [
+        "beef",
+        "potato"
+      ],
+      "taste": {
+        "acidity": 0.03,
+        "pungency": 0.06,
+        "sweetness": 0.06,
+        "umami": 0.3
+      },
+      "texture": 0.62,
+      "threshold": 0.71
+    },
+    {
+      "archetype": "protein_stir_fry",
+      "aroma": 0.5,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "chicken_broccoli",
+      "ingredient_ids": [
+        "chicken",
+        "broccoli"
+      ],
+      "plating_component_ids": [
+        "floret",
+        "protein_piece"
+      ],
+      "sequence": [
+        "chicken",
+        "broccoli"
+      ],
+      "taste": {
+        "acidity": 0.03,
+        "pungency": 0.03,
+        "sweetness": 0.06,
+        "umami": 0.27
+      },
+      "texture": 0.68,
+      "threshold": 0.72
+    },
+    {
+      "archetype": "grain_stir_fry",
+      "aroma": 0.55,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "egg_fried_rice",
+      "ingredient_ids": [
+        "rice",
+        "egg",
+        "scallion"
+      ],
+      "plating_component_ids": [
+        "aromatic_fleck",
+        "curd",
+        "grain_cluster"
+      ],
+      "sequence": [
+        "rice",
+        "egg",
+        "scallion"
+      ],
+      "taste": {
+        "acidity": 0.02,
+        "pungency": 0.03,
+        "sweetness": 0.04,
+        "umami": 0.23
+      },
+      "texture": 0.64,
+      "threshold": 0.71
+    },
+    {
+      "archetype": "vegetable_stir_fry",
+      "aroma": 0.66,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "garlic_bok_choy",
+      "ingredient_ids": [
+        "bok_choy",
+        "garlic"
+      ],
+      "plating_component_ids": [
+        "aromatic_fleck",
+        "leaf_cluster"
+      ],
+      "sequence": [
+        "bok_choy",
+        "garlic"
+      ],
+      "taste": {
+        "acidity": 0.02,
+        "pungency": 0.1,
+        "sweetness": 0.06,
+        "umami": 0.16
+      },
+      "texture": 0.7,
+      "threshold": 0.72
+    },
+    {
+      "archetype": "sauced_stir_fry",
+      "aroma": 0.66,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "kung_pao_chicken",
+      "ingredient_ids": [
+        "chicken",
+        "chili",
+        "peanut"
+      ],
+      "plating_component_ids": [
+        "aromatic_fleck",
+        "crunch_piece",
+        "protein_piece"
+      ],
+      "sequence": [
+        "chicken",
+        "chili",
+        "peanut"
+      ],
+      "taste": {
+        "acidity": 0.12,
+        "pungency": 0.45,
+        "sweetness": 0.16,
+        "umami": 0.32
+      },
+      "texture": 0.65,
+      "threshold": 0.7
+    },
+    {
+      "archetype": "bright_stir_fry",
+      "aroma": 0.64,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "lemon_chicken",
+      "ingredient_ids": [
+        "chicken",
+        "lemon"
+      ],
+      "plating_component_ids": [
+        "citrus_piece",
+        "protein_piece"
+      ],
+      "sequence": [
+        "chicken",
+        "lemon"
+      ],
+      "taste": {
+        "acidity": 0.48,
+        "pungency": 0.02,
+        "sweetness": 0.12,
+        "umami": 0.22
+      },
+      "texture": 0.62,
+      "threshold": 0.7
+    },
+    {
+      "archetype": "sauced_stir_fry",
+      "aroma": 0.62,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "mapo_tofu",
+      "ingredient_ids": [
+        "tofu",
+        "chili"
+      ],
+      "plating_component_ids": [
+        "aromatic_fleck",
+        "protein_cube"
+      ],
+      "sequence": [
+        "tofu",
+        "chili"
+      ],
+      "taste": {
+        "acidity": 0.04,
+        "pungency": 0.55,
+        "sweetness": 0.04,
+        "umami": 0.42
+      },
+      "texture": 0.55,
+      "threshold": 0.73
+    },
+    {
+      "archetype": "savory_stir_fry",
+      "aroma": 0.56,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "mushroom_tofu",
+      "ingredient_ids": [
+        "tofu",
+        "mushroom"
+      ],
+      "plating_component_ids": [
+        "protein_cube",
+        "vegetable_slice"
+      ],
+      "sequence": [
+        "tofu",
+        "mushroom"
+      ],
+      "taste": {
+        "acidity": 0.02,
+        "pungency": 0.02,
+        "sweetness": 0.04,
+        "umami": 0.35
+      },
+      "texture": 0.58,
+      "threshold": 0.72
+    },
+    {
+      "archetype": "protein_stir_fry",
+      "aroma": 0.58,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "pepper_beef",
+      "ingredient_ids": [
+        "beef",
+        "bell_pepper"
+      ],
+      "plating_component_ids": [
+        "protein_slice",
+        "vegetable_strip"
+      ],
+      "sequence": [
+        "beef",
+        "bell_pepper"
+      ],
+      "taste": {
+        "acidity": 0.04,
+        "pungency": 0.16,
+        "sweetness": 0.1,
+        "umami": 0.31
+      },
+      "texture": 0.66,
+      "threshold": 0.72
+    },
+    {
+      "archetype": "savory_scramble",
+      "aroma": 0.48,
+      "commentary_evidence_ids": [
+        "dish.identity.similarity",
+        "dish.harmony.score"
+      ],
+      "cuisine_id": "cat_kitchen_calibration",
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "tomato_scrambled_eggs",
+      "ingredient_ids": [
+        "tomato",
+        "egg"
+      ],
+      "plating_component_ids": [
+        "curd",
+        "vegetable_piece"
+      ],
+      "sequence": [
+        "tomato",
+        "egg"
+      ],
+      "taste": {
+        "acidity": 0.18,
+        "pungency": 0.02,
+        "sweetness": 0.12,
+        "umami": 0.18
+      },
+      "texture": 0.58,
+      "threshold": 0.72
+    }
+  ],
+  "engine_capabilities": [
+    {
+      "id": "dish_engine_v2_wok",
+      "supports": [
+        "wok",
+        "physical_truth_wrap",
+        "dish_profile_v1",
+        "commentary_v1",
+        "plating_plan_v1"
+      ]
+    }
+  ],
+  "flavor_relations": [
+    {
+      "evidence_code": "flavor.physical.complement.starch_protein",
+      "id": "beef_potato_physical",
+      "ingredient_ids": [
+        "beef",
+        "potato"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.aromatic_green",
+      "id": "bok_choy_garlic_physical",
+      "ingredient_ids": [
+        "bok_choy",
+        "garlic"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.lean_green",
+      "id": "broccoli_chicken_physical",
+      "ingredient_ids": [
+        "broccoli",
+        "chicken"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.heat_protein",
+      "id": "chicken_chili_physical",
+      "ingredient_ids": [
+        "chicken",
+        "chili"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.acid_protein",
+      "id": "chicken_lemon_physical",
+      "ingredient_ids": [
+        "chicken",
+        "lemon"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.fat_protein",
+      "id": "chicken_peanut_physical",
+      "ingredient_ids": [
+        "chicken",
+        "peanut"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.heat_fat",
+      "id": "chili_peanut_physical",
+      "ingredient_ids": [
+        "chili",
+        "peanut"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.clash.bitter_heat",
+      "id": "coffee_chili_clash",
+      "ingredient_ids": [
+        "chili",
+        "coffee"
+      ],
+      "polarity": "clash",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.grain_egg",
+      "id": "egg_rice_physical",
+      "ingredient_ids": [
+        "egg",
+        "rice"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.aromatic_egg",
+      "id": "egg_scallion_physical",
+      "ingredient_ids": [
+        "egg",
+        "scallion"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.acid_egg",
+      "id": "egg_tomato_physical",
+      "ingredient_ids": [
+        "egg",
+        "tomato"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.clash.watery_sulfur",
+      "id": "egg_watermelon_clash",
+      "ingredient_ids": [
+        "egg",
+        "watermelon"
+      ],
+      "polarity": "clash",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.clash.acid_bitter",
+      "id": "lemon_coffee_clash",
+      "ingredient_ids": [
+        "coffee",
+        "lemon"
+      ],
+      "polarity": "clash",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.complement.umami_soft",
+      "id": "mushroom_tofu_physical",
+      "ingredient_ids": [
+        "mushroom",
+        "tofu"
+      ],
+      "polarity": "complement",
+      "semantic_category": "physical",
+      "strength": 1
+    },
+    {
+      "evidence_code": "flavor.physical.clash.watery_bitter",
+      "id": "watermelon_coffee_clash",
+      "ingredient_ids": [
+        "coffee",
+        "watermelon"
+      ],
+      "polarity": "clash",
+      "semantic_category": "physical",
+      "strength": 1
+    }
+  ],
+  "ingredient_knowledge": [
+    {
+      "color_id": "brown",
+      "id": "beef",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 0,
+        "energy_kcal": 250,
+        "fat_g": 15,
+        "fiber_g": 0,
+        "protein_g": 26
+      },
+      "physical_model": {
+        "aroma_potential": 0.54,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0,
+        "base_umami": 0.3,
+        "browning_potential": 0.51,
+        "evaporation_rate": 0.834,
+        "fat_fraction": 0.15,
+        "protein_fraction": 0.26,
+        "sugar_fraction": 0,
+        "thermal_response": 1.208,
+        "water_fraction": 0.57
+      },
+      "plating_component_id": "protein_slice",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "protein"
+    },
+    {
+      "color_id": "bright",
+      "id": "bell_pepper",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 6,
+        "energy_kcal": 31,
+        "fat_g": 0.3,
+        "fiber_g": 2.1,
+        "protein_g": 1
+      },
+      "physical_model": {
+        "aroma_potential": 0.28,
+        "base_acidity": 0.06,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.2,
+        "base_umami": 0.04,
+        "browning_potential": 0.32,
+        "evaporation_rate": 0.904,
+        "fat_fraction": 0,
+        "protein_fraction": 0.01,
+        "sugar_fraction": 0.06,
+        "thermal_response": 1.008,
+        "water_fraction": 0.92
+      },
+      "plating_component_id": "vegetable_strip",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "green",
+      "id": "bok_choy",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 2.2,
+        "energy_kcal": 13,
+        "fat_g": 0.2,
+        "fiber_g": 1,
+        "protein_g": 1.5
+      },
+      "physical_model": {
+        "aroma_potential": 0.3,
+        "base_acidity": 0.02,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.05,
+        "base_umami": 0.06,
+        "browning_potential": 0.28,
+        "evaporation_rate": 0.91,
+        "fat_fraction": 0,
+        "protein_fraction": 0.02,
+        "sugar_fraction": 0.01,
+        "thermal_response": 1.016,
+        "water_fraction": 0.95
+      },
+      "plating_component_id": "leaf_cluster",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "green",
+      "id": "broccoli",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 7.2,
+        "energy_kcal": 35,
+        "fat_g": 0.4,
+        "fiber_g": 3.3,
+        "protein_g": 2.4
+      },
+      "physical_model": {
+        "aroma_potential": 0.32,
+        "base_acidity": 0.02,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.03,
+        "base_umami": 0.08,
+        "browning_potential": 0.32,
+        "evaporation_rate": 0.898,
+        "fat_fraction": 0,
+        "protein_fraction": 0.03,
+        "sugar_fraction": 0.04,
+        "thermal_response": 1.024,
+        "water_fraction": 0.89
+      },
+      "plating_component_id": "floret",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "orange",
+      "id": "carrot",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 9.6,
+        "energy_kcal": 41,
+        "fat_g": 0.2,
+        "fiber_g": 2.8,
+        "protein_g": 0.9
+      },
+      "physical_model": {
+        "aroma_potential": 0.29,
+        "base_acidity": 0.02,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.35,
+        "base_umami": 0.05,
+        "browning_potential": 0.36,
+        "evaporation_rate": 0.896,
+        "fat_fraction": 0,
+        "protein_fraction": 0.01,
+        "sugar_fraction": 0.1,
+        "thermal_response": 1.008,
+        "water_fraction": 0.88
+      },
+      "plating_component_id": "vegetable_slice",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "warm",
+      "id": "chicken",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 0,
+        "energy_kcal": 165,
+        "fat_g": 3.6,
+        "fiber_g": 0,
+        "protein_g": 31
+      },
+      "physical_model": {
+        "aroma_potential": 0.48,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0,
+        "base_umami": 0.24,
+        "browning_potential": 0.49,
+        "evaporation_rate": 0.852,
+        "fat_fraction": 0.09,
+        "protein_fraction": 0.24,
+        "sugar_fraction": 0,
+        "thermal_response": 1.192,
+        "water_fraction": 0.66
+      },
+      "plating_component_id": "protein_piece",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "protein"
+    },
+    {
+      "color_id": "red",
+      "id": "chili",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 8.8,
+        "energy_kcal": 40,
+        "fat_g": 0.4,
+        "fiber_g": 1.5,
+        "protein_g": 1.9
+      },
+      "physical_model": {
+        "aroma_potential": 0.55,
+        "base_acidity": 0.1,
+        "base_bitterness": 0,
+        "base_pungency": 0.65,
+        "base_sweetness": 0.05,
+        "base_umami": 0.05,
+        "browning_potential": 0.32,
+        "evaporation_rate": 0.896,
+        "fat_fraction": 0.01,
+        "protein_fraction": 0.02,
+        "sugar_fraction": 0.05,
+        "thermal_response": 1.016,
+        "water_fraction": 0.88
+      },
+      "plating_component_id": "aromatic_fleck",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "aromatic"
+    },
+    {
+      "color_id": "dark",
+      "id": "coffee",
+      "ingredient_state_ids": [
+        "liquid",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 0,
+        "energy_kcal": 2,
+        "fat_g": 0,
+        "fiber_g": 0,
+        "protein_g": 0.3
+      },
+      "physical_model": {
+        "aroma_potential": 0.55,
+        "base_acidity": 0.12,
+        "base_bitterness": 0.42,
+        "base_pungency": 0,
+        "base_sweetness": 0,
+        "base_umami": 0.03,
+        "browning_potential": 0.25,
+        "evaporation_rate": 0.914,
+        "fat_fraction": 0,
+        "protein_fraction": 0,
+        "sugar_fraction": 0,
+        "thermal_response": 1,
+        "water_fraction": 0.97
+      },
+      "plating_component_id": "sauce_dark",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "aromatic"
+    },
+    {
+      "color_id": "gold",
+      "id": "egg",
+      "ingredient_state_ids": [
+        "raw",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 0.7,
+        "energy_kcal": 143,
+        "fat_g": 9.5,
+        "fiber_g": 0,
+        "protein_g": 12.6
+      },
+      "physical_model": {
+        "aroma_potential": 0.42,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0,
+        "base_umami": 0.18,
+        "browning_potential": 0.38,
+        "evaporation_rate": 0.87,
+        "fat_fraction": 0.1,
+        "protein_fraction": 0.13,
+        "sugar_fraction": 0,
+        "thermal_response": 1.104,
+        "water_fraction": 0.75
+      },
+      "plating_component_id": "curd",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "protein"
+    },
+    {
+      "color_id": "pale",
+      "id": "garlic",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 33.1,
+        "energy_kcal": 149,
+        "fat_g": 0.5,
+        "fiber_g": 2.1,
+        "protein_g": 6.4
+      },
+      "physical_model": {
+        "aroma_potential": 0.55,
+        "base_acidity": 0.02,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.05,
+        "base_umami": 0.18,
+        "browning_potential": 0.64,
+        "evaporation_rate": 0.838,
+        "fat_fraction": 0,
+        "protein_fraction": 0.06,
+        "sugar_fraction": 0.33,
+        "thermal_response": 1.048,
+        "water_fraction": 0.59
+      },
+      "plating_component_id": "aromatic_fleck",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "aromatic"
+    },
+    {
+      "color_id": "yellow",
+      "id": "lemon",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 9.3,
+        "energy_kcal": 29,
+        "fat_g": 0.3,
+        "fiber_g": 2.8,
+        "protein_g": 1.1
+      },
+      "physical_model": {
+        "aroma_potential": 0.26,
+        "base_acidity": 0.8,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.03,
+        "base_umami": 0.02,
+        "browning_potential": 0.29,
+        "evaporation_rate": 0.898,
+        "fat_fraction": 0,
+        "protein_fraction": 0.01,
+        "sugar_fraction": 0.03,
+        "thermal_response": 1.008,
+        "water_fraction": 0.89
+      },
+      "plating_component_id": "citrus_piece",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "brown",
+      "id": "mushroom",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 3.3,
+        "energy_kcal": 22,
+        "fat_g": 0.3,
+        "fiber_g": 1,
+        "protein_g": 3.1
+      },
+      "physical_model": {
+        "aroma_potential": 0.32,
+        "base_acidity": 0.01,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.02,
+        "base_umami": 0.24,
+        "browning_potential": 0.31,
+        "evaporation_rate": 0.904,
+        "fat_fraction": 0,
+        "protein_fraction": 0.03,
+        "sugar_fraction": 0.03,
+        "thermal_response": 1.024,
+        "water_fraction": 0.92
+      },
+      "plating_component_id": "vegetable_slice",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "pale",
+      "id": "onion",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 9.3,
+        "energy_kcal": 40,
+        "fat_g": 0.1,
+        "fiber_g": 1.7,
+        "protein_g": 1.1
+      },
+      "physical_model": {
+        "aroma_potential": 0.55,
+        "base_acidity": 0.03,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.18,
+        "base_umami": 0.08,
+        "browning_potential": 0.35,
+        "evaporation_rate": 0.898,
+        "fat_fraction": 0,
+        "protein_fraction": 0.01,
+        "sugar_fraction": 0.09,
+        "thermal_response": 1.008,
+        "water_fraction": 0.89
+      },
+      "plating_component_id": "vegetable_strip",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "aromatic"
+    },
+    {
+      "color_id": "tan",
+      "id": "peanut",
+      "ingredient_state_ids": [
+        "raw",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 16.1,
+        "energy_kcal": 567,
+        "fat_g": 49.2,
+        "fiber_g": 8.5,
+        "protein_g": 25.8
+      },
+      "physical_model": {
+        "aroma_potential": 0.38,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.04,
+        "base_umami": 0.14,
+        "browning_potential": 0.67,
+        "evaporation_rate": 0.732,
+        "fat_fraction": 0.49,
+        "protein_fraction": 0.26,
+        "sugar_fraction": 0.16,
+        "thermal_response": 1.208,
+        "water_fraction": 0.06
+      },
+      "plating_component_id": "crunch_piece",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "fat"
+    },
+    {
+      "color_id": "pale",
+      "id": "potato",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 17,
+        "energy_kcal": 77,
+        "fat_g": 0.1,
+        "fiber_g": 2.2,
+        "protein_g": 2
+      },
+      "physical_model": {
+        "aroma_potential": 0.3,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.02,
+        "base_umami": 0.06,
+        "browning_potential": 0.44,
+        "evaporation_rate": 0.878,
+        "fat_fraction": 0,
+        "protein_fraction": 0.02,
+        "sugar_fraction": 0.17,
+        "thermal_response": 1.016,
+        "water_fraction": 0.79
+      },
+      "plating_component_id": "starch_chunk",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "starch"
+    },
+    {
+      "color_id": "white",
+      "id": "rice",
+      "ingredient_state_ids": [
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 28,
+        "energy_kcal": 130,
+        "fat_g": 0.3,
+        "fiber_g": 0.4,
+        "protein_g": 2.7
+      },
+      "physical_model": {
+        "aroma_potential": 0.27,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0,
+        "base_umami": 0.03,
+        "browning_potential": 0.56,
+        "evaporation_rate": 0.856,
+        "fat_fraction": 0,
+        "protein_fraction": 0.03,
+        "sugar_fraction": 0.28,
+        "thermal_response": 1.024,
+        "water_fraction": 0.68
+      },
+      "plating_component_id": "grain_cluster",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "starch"
+    },
+    {
+      "color_id": "green",
+      "id": "scallion",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 7.3,
+        "energy_kcal": 32,
+        "fat_g": 0.2,
+        "fiber_g": 2.6,
+        "protein_g": 1.8
+      },
+      "physical_model": {
+        "aroma_potential": 0.55,
+        "base_acidity": 0.02,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.08,
+        "base_umami": 0.08,
+        "browning_potential": 0.34,
+        "evaporation_rate": 0.9,
+        "fat_fraction": 0,
+        "protein_fraction": 0.02,
+        "sugar_fraction": 0.07,
+        "thermal_response": 1.016,
+        "water_fraction": 0.9
+      },
+      "plating_component_id": "aromatic_fleck",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "aromatic"
+    },
+    {
+      "color_id": "pale",
+      "id": "tofu",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 2.8,
+        "energy_kcal": 144,
+        "fat_g": 8.7,
+        "fiber_g": 2.3,
+        "protein_g": 17.3
+      },
+      "physical_model": {
+        "aroma_potential": 0.4,
+        "base_acidity": 0,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0,
+        "base_umami": 0.16,
+        "browning_potential": 0.42,
+        "evaporation_rate": 0.85,
+        "fat_fraction": 0.08,
+        "protein_fraction": 0.15,
+        "sugar_fraction": 0.02,
+        "thermal_response": 1.12,
+        "water_fraction": 0.65
+      },
+      "plating_component_id": "protein_cube",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "protein"
+    },
+    {
+      "color_id": "bright",
+      "id": "tomato",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 3.9,
+        "energy_kcal": 18,
+        "fat_g": 0.2,
+        "fiber_g": 1.2,
+        "protein_g": 0.9
+      },
+      "physical_model": {
+        "aroma_potential": 0.25,
+        "base_acidity": 0.25,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.15,
+        "base_umami": 0.12,
+        "browning_potential": 0.29,
+        "evaporation_rate": 0.908,
+        "fat_fraction": 0,
+        "protein_fraction": 0.01,
+        "sugar_fraction": 0.03,
+        "thermal_response": 1.008,
+        "water_fraction": 0.94
+      },
+      "plating_component_id": "vegetable_piece",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "produce"
+    },
+    {
+      "color_id": "pink",
+      "id": "watermelon",
+      "ingredient_state_ids": [
+        "raw",
+        "cut",
+        "wok_cooked"
+      ],
+      "nutrition_per_100g": {
+        "carbohydrate_g": 7.6,
+        "energy_kcal": 30,
+        "fat_g": 0.2,
+        "fiber_g": 0.4,
+        "protein_g": 0.6
+      },
+      "physical_model": {
+        "aroma_potential": 0.25,
+        "base_acidity": 0.05,
+        "base_bitterness": 0,
+        "base_pungency": 0,
+        "base_sweetness": 0.65,
+        "base_umami": 0.01,
+        "browning_potential": 0.32,
+        "evaporation_rate": 0.904,
+        "fat_fraction": 0,
+        "protein_fraction": 0.01,
+        "sugar_fraction": 0.06,
+        "thermal_response": 1.008,
+        "water_fraction": 0.92
+      },
+      "plating_component_id": "fruit_piece",
+      "retention": {
+        "carbohydrate": 0.96,
+        "energy": 0.96,
+        "fat": 0.98,
+        "fiber": 0.98,
+        "protein": 0.94
+      },
+      "role": "fruit"
+    }
+  ],
+  "ingredient_states": [
+    {
+      "description": "Prepared into cookable pieces.",
+      "id": "cut"
+    },
+    {
+      "description": "Pourable ingredient state for liquid culinary inputs.",
+      "id": "liquid"
+    },
+    {
+      "description": "Unheated ingredient state.",
+      "id": "raw"
+    },
+    {
+      "description": "Heated in a wok-compatible process.",
+      "id": "wok_cooked"
+    }
+  ],
+  "physical_content_version": "goal16-calibration-v1",
+  "plating_components": [
+    {
+      "id": "aromatic_fleck",
+      "scale": 0.35,
+      "shape": "fleck"
+    },
+    {
+      "id": "citrus_piece",
+      "scale": 0.6,
+      "shape": "wedge"
+    },
+    {
+      "id": "crunch_piece",
+      "scale": 0.45,
+      "shape": "small_piece"
+    },
+    {
+      "id": "curd",
+      "scale": 0.7,
+      "shape": "soft_cluster"
+    },
+    {
+      "id": "floret",
+      "scale": 0.8,
+      "shape": "floret"
+    },
+    {
+      "id": "fruit_piece",
+      "scale": 0.75,
+      "shape": "juicy_chunk"
+    },
+    {
+      "id": "grain_cluster",
+      "scale": 0.7,
+      "shape": "grain_mound"
+    },
+    {
+      "id": "leaf_cluster",
+      "scale": 0.8,
+      "shape": "leaf"
+    },
+    {
+      "id": "protein_cube",
+      "scale": 0.75,
+      "shape": "cube"
+    },
+    {
+      "id": "protein_piece",
+      "scale": 0.75,
+      "shape": "piece"
+    },
+    {
+      "id": "protein_slice",
+      "scale": 0.75,
+      "shape": "slice"
+    },
+    {
+      "id": "sauce_dark",
+      "scale": 0.5,
+      "shape": "sauce"
+    },
+    {
+      "id": "starch_chunk",
+      "scale": 0.8,
+      "shape": "chunk"
+    },
+    {
+      "id": "vegetable_piece",
+      "scale": 0.8,
+      "shape": "piece"
+    },
+    {
+      "id": "vegetable_slice",
+      "scale": 0.75,
+      "shape": "slice"
+    },
+    {
+      "id": "vegetable_strip",
+      "scale": 0.75,
+      "shape": "strip"
+    }
+  ],
+  "schema_id": "cat_kitchen.goal16_culinary_calibration_reference.v1",
+  "schema_version": 1,
+  "seasonings": [
+    {
+      "acidity_per_g": 0,
+      "aroma_per_g": 0,
+      "bitterness_per_g": 0,
+      "heat_sensitivity": 0,
+      "id": "salt",
+      "pungency_per_g": 0,
+      "saltiness_per_g": 0.08,
+      "sweetness_per_g": 0,
+      "umami_per_g": 0
+    },
+    {
+      "acidity_per_g": 0.005,
+      "aroma_per_g": 0.04,
+      "bitterness_per_g": 0,
+      "heat_sensitivity": 0.6,
+      "id": "soy_sauce",
+      "pungency_per_g": 0,
+      "saltiness_per_g": 0.045,
+      "sweetness_per_g": 0.01,
+      "umami_per_g": 0.05
+    },
+    {
+      "acidity_per_g": 0,
+      "aroma_per_g": 0,
+      "bitterness_per_g": 0,
+      "heat_sensitivity": 0,
+      "id": "sugar",
+      "pungency_per_g": 0,
+      "saltiness_per_g": 0,
+      "sweetness_per_g": 0.08,
+      "umami_per_g": 0
+    }
+  ],
+  "transformation_rules": [
+    {
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "add_to_wok",
+      "input_state_ids": [
+        "raw"
+      ],
+      "operation_id": "add",
+      "output_state_ids": [
+        "wok_cooked"
+      ]
+    },
+    {
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "cut_before_wok",
+      "input_state_ids": [
+        "raw"
+      ],
+      "operation_id": "cut",
+      "output_state_ids": [
+        "cut"
+      ]
+    },
+    {
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "season_in_wok",
+      "input_state_ids": [
+        "wok_cooked"
+      ],
+      "operation_id": "season",
+      "output_state_ids": [
+        "wok_cooked"
+      ]
+    },
+    {
+      "engine_capability_ids": [
+        "dish_engine_v2_wok"
+      ],
+      "id": "stir_heat_transfer",
+      "input_state_ids": [
+        "wok_cooked"
+      ],
+      "operation_id": "stir",
+      "output_state_ids": [
+        "wok_cooked"
+      ]
+    }
+  ]
+}

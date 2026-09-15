@@ -40,6 +40,27 @@ The required path is `verified cache → discovery candidate → SourceFactBundl
 
 The generated Godot JSON, SQLite, attribution report, rights summary, manifest and audit report live under gitignored `.local/game-data/`. They are build products, never source of truth and never part of the Next.js deployment.
 
+## Culinary Knowledge snapshot boundary
+
+`game-data/culinary-knowledge/goal17-source.json` is the reviewed Cooking Lab authoring record for
+Cat Kitchen Goal 17. It is separate from recipe eligibility: the 120 `database-entry` recipes and
+zero `game-exportable` recipes neither grant nor block this small knowledge snapshot. The source
+pins five real inputs by SHA-256: the ingredient, operation, nutrition and rights catalogs plus a
+frozen Cat Kitchen Goal 16 calibration reference. Every knowledge row carries review, rights,
+compatibility and provenance metadata.
+
+`npm run game-data:culinary-knowledge:prepare` deterministically refreshes the authoring record from
+the committed calibration reference. `npm run game-data:culinary-knowledge:compile` validates the
+source and all referenced file hashes, then writes a content-addressed snapshot and manifest below
+`.local/game-data/culinary-knowledge/`. Those files are build products. Cat Kitchen imports an exact
+committed copy of the reviewed authoring source and produces its own pinned consumer snapshot; its
+runtime and CI never read this sibling repository.
+
+Physical flavor relations and cultural co-occurrence are different semantic categories. Cultural
+co-occurrence may use only association polarity and may not be promoted to a physical complement or
+clash. Draft, unreviewed, rights-unapproved, incompatible, unknown-reference, unsafe-path,
+non-finite, over-precision or source-hash-mismatched content fails closed.
+
 ## Versioned contracts
 
 - `GameRecipeV1` records stable IDs, quantified portions, a dependency graph, USDA-derived nutrition, simulation scenarios and export eligibility.
@@ -69,6 +90,8 @@ The repository includes a minimal, read-only `cat-kitchen-goal1-v1` compiler con
 
 - `npm run game-data:audit`: validate every canonical file; drafts are valid data but do not count as exportable.
 - `npm run game-data:build`: require at least one fully eligible recipe, then generate Godot JSON, SQLite, manifest, attribution and audit output.
+- `npm run game-data:culinary-knowledge:prepare`: regenerate the reviewed Goal 17 authoring record from the committed calibration reference.
+- `npm run game-data:culinary-knowledge:compile`: validate and deterministically compile the Goal 17 Culinary Knowledge snapshot and manifest under `.local/`.
 - `npx tsx scripts/audit-game-data.ts --minimum-exportable=500`: final M13 release gate.
 
 The build uses `node:sqlite` already provided by the supported Node runtime and adds no runtime database dependency. It writes through a validated staging directory and only replaces an output located below the repository `.local/` directory or a dedicated Cooking Lab temporary container. Godot JSON and SQLite are round-tripped against the same canonical records before completion.

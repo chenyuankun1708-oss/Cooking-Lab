@@ -45,9 +45,10 @@ The generated Godot JSON, SQLite, attribution report, rights summary, manifest a
 `game-data/culinary-knowledge/goal17-source.json` is the reviewed Cooking Lab authoring record for
 Cat Kitchen Goal 17. It is separate from recipe eligibility: the 120 `database-entry` recipes and
 zero `game-exportable` recipes neither grant nor block this small knowledge snapshot. The source
-pins five real inputs by SHA-256: the ingredient, operation, nutrition and rights catalogs plus a
-frozen Cat Kitchen Goal 16 calibration reference. Every knowledge row carries review, rights,
-compatibility and provenance metadata.
+pins exactly one of each of five required real-input roles by SHA-256: the ingredient, operation,
+nutrition and rights catalogs plus a frozen Cat Kitchen Goal 16 calibration reference. Missing or
+duplicate roles fail closed. Every knowledge row carries review, rights, compatibility and
+provenance metadata.
 
 `npm run game-data:culinary-knowledge:prepare` deterministically refreshes the authoring record from
 the committed calibration reference. `npm run game-data:culinary-knowledge:compile` validates the
@@ -58,8 +59,9 @@ runtime and CI never read this sibling repository.
 
 Physical flavor relations and cultural co-occurrence are different semantic categories. Cultural
 co-occurrence may use only association polarity and may not be promoted to a physical complement or
-clash. Draft, unreviewed, rights-unapproved, incompatible, unknown-reference, unsafe-path,
-non-finite, over-precision or source-hash-mismatched content fails closed.
+clash. Draft, unreviewed, rights-unapproved, incompatible, unknown-reference, unsafe-path, negative
+physical/nutrition/seasoning quantities, non-finite, over-precision or source-hash-mismatched content
+fails closed.
 
 Dish archetypes carry evidence and sensory/structural features, not Cat Kitchen gameplay
 thresholds. Cat Kitchen owns a separately versioned and checksummed identity-tuning contract and

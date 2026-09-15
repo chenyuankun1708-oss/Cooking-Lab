@@ -47,6 +47,10 @@ const finiteNumberValue: Validator = (value, path) => {
   if (typeof value !== "number" || !Number.isFinite(value)) fail(path, "expected finite number");
   if (Number(value.toFixed(6)) !== value) fail(path, "expected no more than six decimal places");
 };
+const nonNegativeNumberValue: Validator = (value, path) => {
+  finiteNumberValue(value, path);
+  if ((value as number) < 0) fail(path, "expected non-negative number");
+};
 const normalizedNumberValue: Validator = (value, path) => {
   finiteNumberValue(value, path);
   if ((value as number) < 0 || (value as number) > 1) fail(path, "expected number in range 0..1");
@@ -118,10 +122,17 @@ export function parseGameArtifactPath(value: unknown, path = "artifactPath"): st
   return value as string;
 }
 
+const requiredSourceFileRoles = [
+  "ingredient-catalog",
+  "operation-catalog",
+  "nutrition-dataset",
+  "rights-registry",
+  "cat-kitchen-goal16-fixture",
+] as const;
 const sourceFileSchema = exactObject({
   path: artifactPathValue,
   sha256: sha256Value,
-  role: enumValue(["ingredient-catalog", "operation-catalog", "nutrition-dataset", "rights-registry", "cat-kitchen-goal16-fixture"]),
+  role: enumValue(requiredSourceFileRoles),
 });
 const provenanceSchema = exactObject({
   kind: enumValue(["cooking-lab-factual-source", "cat-kitchen-calibration", "cultural-cooccurrence"]),
@@ -139,7 +150,7 @@ const governanceSchema = exactObject({
   provenance: provenanceSchema,
 });
 const ingredientStateSchema = exactObject({ id: idValue, description: nonEmptyStringValue, governance: governanceSchema });
-const nutritionSchema = exactObject({ carbohydrateG: finiteNumberValue, energyKcal: finiteNumberValue, fatG: finiteNumberValue, fiberG: finiteNumberValue, proteinG: finiteNumberValue });
+const nutritionSchema = exactObject({ carbohydrateG: nonNegativeNumberValue, energyKcal: nonNegativeNumberValue, fatG: nonNegativeNumberValue, fiberG: nonNegativeNumberValue, proteinG: nonNegativeNumberValue });
 const retentionSchema = exactObject({ carbohydrate: normalizedNumberValue, energy: normalizedNumberValue, fat: normalizedNumberValue, fiber: normalizedNumberValue, protein: normalizedNumberValue });
 const physicalSchema = exactObject({
   aromaPotential: normalizedNumberValue,
@@ -153,7 +164,7 @@ const physicalSchema = exactObject({
   fatFraction: normalizedNumberValue,
   proteinFraction: normalizedNumberValue,
   sugarFraction: normalizedNumberValue,
-  thermalResponse: finiteNumberValue,
+  thermalResponse: nonNegativeNumberValue,
   waterFraction: normalizedNumberValue,
 });
 const ingredientSchema = exactObject({
@@ -169,14 +180,14 @@ const ingredientSchema = exactObject({
 });
 const seasoningSchema = exactObject({
   id: idValue,
-  acidityPerG: finiteNumberValue,
-  aromaPerG: finiteNumberValue,
-  bitternessPerG: finiteNumberValue,
+  acidityPerG: nonNegativeNumberValue,
+  aromaPerG: nonNegativeNumberValue,
+  bitternessPerG: nonNegativeNumberValue,
   heatSensitivity: normalizedNumberValue,
-  pungencyPerG: finiteNumberValue,
-  saltinessPerG: finiteNumberValue,
-  sweetnessPerG: finiteNumberValue,
-  umamiPerG: finiteNumberValue,
+  pungencyPerG: nonNegativeNumberValue,
+  saltinessPerG: nonNegativeNumberValue,
+  sweetnessPerG: nonNegativeNumberValue,
+  umamiPerG: nonNegativeNumberValue,
   governance: governanceSchema,
 });
 const transformationSchema = exactObject({ id: idValue, inputStateIds: sortedIds(idValue), operationId: idValue, outputStateIds: sortedIds(idValue), engineCapabilityIds: sortedIds(idValue), governance: governanceSchema });
@@ -235,7 +246,7 @@ const manifestSchema = exactObject({
   sourceSha256: sha256Value,
   compiledSnapshotPath: artifactPathValue,
   compiledSnapshotSha256: sha256Value,
-  sourceRevision: nonEmptyStringValue,
+  sourceRevision: gitShaValue,
   sourceFiles: arrayOf(sourceFileSchema, 1),
   counts: exactObject({
     ingredientStates: integerValue,
@@ -267,14 +278,32 @@ export function parseCulinaryKnowledgeSnapshot(value: unknown, path = "CulinaryK
 
 export function parseCulinaryKnowledgeManifest(value: unknown, path = "CulinaryKnowledgeManifestV1"): CulinaryKnowledgeManifestV1 {
   manifestSchema(value, path);
-  return value as CulinaryKnowledgeManifestV1;
+  const manifest = value as CulinaryKnowledgeManifestV1;
+  validateSourceFiles(manifest.sourceFiles, `${path}.sourceFiles`);
+  return manifest;
+}
+
+function validateSourceFiles(
+  sourceFiles: CulinaryKnowledgeSourceV1["sourceFiles"],
+  path: string,
+): void {
+  validateSorted(sourceFiles, path, (entry) => entry.path);
+  const roles = sourceFiles.map((entry) => entry.role);
+  const actualRoles = new Set(roles);
+  if (
+    roles.length !== requiredSourceFileRoles.length
+    || actualRoles.size !== requiredSourceFileRoles.length
+    || requiredSourceFileRoles.some((role) => !actualRoles.has(role))
+  ) {
+    fail(path, `expected exactly one of each required role: ${requiredSourceFileRoles.join(", ")}`);
+  }
 }
 
 function validateSemanticReferences(
   source: Omit<CulinaryKnowledgeSourceV1, "schemaId">,
   path: string,
 ): void {
-  validateSorted(source.sourceFiles, `${path}.sourceFiles`, (entry) => entry.path);
+  validateSourceFiles(source.sourceFiles, `${path}.sourceFiles`);
   validateSorted(source.ingredientStates, `${path}.ingredientStates`, (entry) => entry.id);
   validateSorted(source.ingredientKnowledge, `${path}.ingredientKnowledge`, (entry) => entry.id);
   validateSorted(source.seasonings, `${path}.seasonings`, (entry) => entry.id);

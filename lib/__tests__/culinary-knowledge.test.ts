@@ -6,6 +6,7 @@ import {
   culinaryKnowledgeSourcePath,
 } from "@/lib/culinary-knowledge";
 import {
+  parseCulinaryKnowledgeManifest,
   parseCulinaryKnowledgeSource,
   parseGameArtifactPath,
 } from "@/lib/culinary-knowledge-runtime-schema";
@@ -16,6 +17,22 @@ function source(): CulinaryKnowledgeSourceV1 {
   return parseCulinaryKnowledgeSource(
     JSON.parse(readFileSync(culinaryKnowledgeSourcePath, "utf8")) as unknown,
   );
+}
+
+function removeProvenanceSourceFile(value: unknown, sourcePath: string): void {
+  if (Array.isArray(value)) {
+    for (const entry of value) removeProvenanceSourceFile(entry, sourcePath);
+    return;
+  }
+  if (!value || typeof value !== "object") return;
+  const record = value as Record<string, unknown>;
+  if (
+    Array.isArray(record.sourceFiles)
+    && record.sourceFiles.every((entry) => typeof entry === "string")
+  ) {
+    record.sourceFiles = record.sourceFiles.filter((entry) => entry !== sourcePath);
+  }
+  for (const entry of Object.values(record)) removeProvenanceSourceFile(entry, sourcePath);
 }
 
 describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
@@ -63,6 +80,29 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
     expect(() => assertSourceFileHashes(mismatch.sourceFiles)).toThrow(/mismatch/);
   });
 
+  it("requires exactly one of every governed source role", () => {
+    const missingRole = structuredClone(source());
+    const nutritionPath = missingRole.sourceFiles.find(
+      (entry) => entry.role === "nutrition-dataset",
+    )?.path;
+    expect(nutritionPath).toBeDefined();
+    missingRole.sourceFiles = missingRole.sourceFiles.filter(
+      (entry) => entry.role !== "nutrition-dataset",
+    );
+    removeProvenanceSourceFile(missingRole, nutritionPath as string);
+    expect(() => parseCulinaryKnowledgeSource(missingRole)).toThrow(/exactly one.*required role/);
+
+    const duplicateRole = structuredClone(source());
+    duplicateRole.sourceFiles[0].role = duplicateRole.sourceFiles[1].role;
+    expect(() => parseCulinaryKnowledgeSource(duplicateRole)).toThrow(/exactly one.*required role/);
+
+    const compiled = compileCulinaryKnowledgeSnapshot(source());
+    compiled.manifest.sourceFiles = duplicateRole.sourceFiles;
+    expect(() => parseCulinaryKnowledgeManifest(compiled.manifest)).toThrow(
+      /exactly one.*required role/,
+    );
+  });
+
   it("rejects unsafe paths, duplicate IDs and unknown references", () => {
     expect(() => parseGameArtifactPath("../Cooking Lab/source.json")).toThrow(/must not contain/);
 
@@ -97,6 +137,28 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
     const overPrecise = structuredClone(source());
     overPrecise.ingredientKnowledge[0].physicalModel.waterFraction = 0.1234567;
     expect(() => parseCulinaryKnowledgeSource(overPrecise)).toThrow(/six decimal/);
+  });
+
+  it("rejects negative physical, nutrition and seasoning quantities", () => {
+    const negativeNutrition = structuredClone(source());
+    negativeNutrition.ingredientKnowledge[0].nutritionPer100g.energyKcal = -1;
+    expect(() => parseCulinaryKnowledgeSource(negativeNutrition)).toThrow(/non-negative/);
+
+    const negativeThermalResponse = structuredClone(source());
+    negativeThermalResponse.ingredientKnowledge[0].physicalModel.thermalResponse = -0.1;
+    expect(() => parseCulinaryKnowledgeSource(negativeThermalResponse)).toThrow(/non-negative/);
+
+    const negativeSeasoning = structuredClone(source());
+    negativeSeasoning.seasonings[0].saltinessPerG = -0.1;
+    expect(() => parseCulinaryKnowledgeSource(negativeSeasoning)).toThrow(/non-negative/);
+  });
+
+  it("requires a Git revision in the compiled manifest", () => {
+    const compiled = compileCulinaryKnowledgeSnapshot(source());
+    compiled.manifest.sourceRevision = "not-a-git-revision";
+    expect(() => parseCulinaryKnowledgeManifest(compiled.manifest)).toThrow(
+      /40-character Git SHA/,
+    );
   });
 
   it("keeps cultural co-occurrence distinct from physical complement", () => {

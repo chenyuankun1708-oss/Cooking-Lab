@@ -23,8 +23,18 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
     const value = source();
     expect(value.ingredientKnowledge).toHaveLength(20);
     expect(value.dishArchetypes).toHaveLength(10);
+    expect(
+      value.dishArchetypes.every((archetype) => !("threshold" in archetype)),
+    ).toBe(true);
     expect(value.sourceFiles).toHaveLength(5);
     expect(() => assertSourceFileHashes(value.sourceFiles)).not.toThrow();
+  });
+
+  it("keeps identity thresholds outside Cooking Lab knowledge", () => {
+    const invalid = structuredClone(source()) as unknown as Record<string, unknown>;
+    const archetypes = invalid.dishArchetypes as Array<Record<string, unknown>>;
+    archetypes[0].threshold = 0.71;
+    expect(() => parseCulinaryKnowledgeSource(invalid)).toThrow(/unexpected property/);
   });
 
   it("compiles byte-stable snapshot and manifest content", () => {

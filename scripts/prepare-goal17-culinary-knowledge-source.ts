@@ -104,7 +104,7 @@ const source: CulinaryKnowledgeSourceV1 = {
     ingredientIds: strings(row.ingredient_ids).sort(), sequence: strings(row.sequence),
     platingComponentIds: strings(row.plating_component_ids).sort(), engineCapabilityIds: strings(row.engine_capability_ids).sort(),
     commentaryEvidenceIds: strings(row.commentary_evidence_ids).sort(), taste: record(row.taste) as CulinaryKnowledgeSourceV1["dishArchetypes"][number]["taste"],
-    aroma: number(row.aroma), texture: number(row.texture), threshold: number(row.threshold),
+    aroma: number(row.aroma), texture: number(row.texture),
     governance: governance("cat-kitchen-calibration", calibrationFiles),
   })),
   cuisines: rows(input, "cuisines").map((row) => ({ id: text(row.id), label: text(row.label), governance: governance("cat-kitchen-calibration", calibrationFiles) })),

@@ -194,7 +194,6 @@ const archetypeSchema = exactObject({
   taste: tasteSchema,
   aroma: normalizedNumberValue,
   texture: normalizedNumberValue,
-  threshold: normalizedNumberValue,
   governance: governanceSchema,
 });
 const cuisineSchema = exactObject({ id: idValue, label: nonEmptyStringValue, governance: governanceSchema });

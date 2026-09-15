@@ -99,7 +99,6 @@ export interface CulinaryKnowledgeSourceV1 {
     taste: { acidity: number; pungency: number; sweetness: number; umami: number };
     aroma: number;
     texture: number;
-    threshold: number;
     governance: CulinaryKnowledgeGovernanceV1;
   }>;
   cuisines: Array<{ id: string; label: string; governance: CulinaryKnowledgeGovernanceV1 }>;

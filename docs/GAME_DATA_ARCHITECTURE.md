@@ -52,7 +52,8 @@ provenance metadata.
 
 `game-data/culinary-knowledge/goal17-hostile-conformance.json` is the checksum-pinned cross-language
 rejection corpus shared with Cat Kitchen. It enumerates the source-role, range, binary-relation,
-closed-enum, compatibility and manifest mutations that every applicable V1 reader must reject.
+flavor semantic/provenance matrix, closed-enum, compatibility and manifest mutations that every
+applicable V1 reader must reject.
 
 `npm run game-data:culinary-knowledge:prepare` deterministically refreshes the authoring record from
 the committed calibration reference. `npm run game-data:culinary-knowledge:compile` validates the

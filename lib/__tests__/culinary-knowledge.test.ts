@@ -50,7 +50,7 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
       schemaVersion: 1,
       expectedDecision: "reject",
     });
-    expect(corpus.cases).toHaveLength(15);
+    expect(corpus.cases).toHaveLength(18);
     for (const testCase of corpus.cases) {
       if (testCase.target === "cat_snapshot") continue;
       if (testCase.target === "manifest") {
@@ -82,6 +82,13 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
       } else if (testCase.id === "duplicate_flavor_relation") {
         const ingredientId = invalid.flavorRelations[0].ingredientIds[0];
         invalid.flavorRelations[0].ingredientIds = [ingredientId, ingredientId];
+      } else if (testCase.id === "cultural_relation_without_cultural_provenance") {
+        invalid.flavorRelations[0].semanticCategory = "cultural-cooccurrence";
+        invalid.flavorRelations[0].polarity = "association";
+      } else if (testCase.id === "physical_relation_with_cultural_provenance") {
+        invalid.flavorRelations[0].governance.provenance.kind = "cultural-cooccurrence";
+      } else if (testCase.id === "physical_relation_with_association_polarity") {
+        invalid.flavorRelations[0].polarity = "association";
       } else if (testCase.id === "unknown_transformation_operation") {
         invalid.transformationRules[0].operationId = "unknown" as never;
       } else if (testCase.id === "unknown_engine_support") {

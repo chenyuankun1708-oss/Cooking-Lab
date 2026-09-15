@@ -14,7 +14,7 @@
 - source 精确绑定各一份 ingredient/operation/nutrition/rights 文件及冻结 Goal 16 calibration
   reference 的 SHA-256；缺失或重复角色、placeholder、unsafe/missing/mismatched source、
   未审核/未批准权利、不兼容、未知引用、负的物理/营养/调味量、非有限数和超过六位精度均
-  fail closed。专项 11/11 测试、typecheck 和 lint 通过。
+  fail closed。共享 hostile conformance corpus 与专项 12/12 测试、typecheck 和 lint 通过。
 - `2a9213a` 将 Dish Identity threshold 从 Cooking Lab authoring/source/schema 中移除；Cooking
   Lab 只提供 archetype 特征与证据，Cat Kitchen 通过独立版本化 tuning 合同拥有判定阈值。
 - 生成的 snapshot/manifest 位于 `.local/game-data/culinary-knowledge/`，不是 source of truth，

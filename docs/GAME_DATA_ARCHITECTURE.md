@@ -50,6 +50,10 @@ nutrition and rights catalogs plus a frozen Cat Kitchen Goal 16 calibration refe
 duplicate roles fail closed. Every knowledge row carries review, rights, compatibility and
 provenance metadata.
 
+`game-data/culinary-knowledge/goal17-hostile-conformance.json` is the checksum-pinned cross-language
+rejection corpus shared with Cat Kitchen. It enumerates the source-role, range, binary-relation,
+closed-enum, compatibility and manifest mutations that every applicable V1 reader must reject.
+
 `npm run game-data:culinary-knowledge:prepare` deterministically refreshes the authoring record from
 the committed calibration reference. `npm run game-data:culinary-knowledge:compile` validates the
 source and all referenced file hashes, then writes a content-addressed snapshot and manifest below

@@ -13,6 +13,8 @@ import {
 import { stableJson } from "@/lib/stable-json";
 import type { CulinaryKnowledgeSourceV1 } from "@/types/culinary-knowledge";
 
+const hostileConformancePath = "game-data/culinary-knowledge/goal17-hostile-conformance.json";
+
 function source(): CulinaryKnowledgeSourceV1 {
   return parseCulinaryKnowledgeSource(
     JSON.parse(readFileSync(culinaryKnowledgeSourcePath, "utf8")) as unknown,
@@ -36,6 +38,59 @@ function removeProvenanceSourceFile(value: unknown, sourcePath: string): void {
 }
 
 describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
+  it("rejects every applicable shared hostile conformance case", () => {
+    const corpus = JSON.parse(readFileSync(hostileConformancePath, "utf8")) as {
+      schemaId: string;
+      schemaVersion: number;
+      expectedDecision: string;
+      cases: Array<{ id: string; target: string }>;
+    };
+    expect(corpus).toMatchObject({
+      schemaId: "cooking-lab-goal17-hostile-conformance-v1",
+      schemaVersion: 1,
+      expectedDecision: "reject",
+    });
+    expect(corpus.cases).toHaveLength(15);
+    for (const testCase of corpus.cases) {
+      if (testCase.target === "cat_snapshot") continue;
+      if (testCase.target === "manifest") {
+        const manifest = compileCulinaryKnowledgeSnapshot(source()).manifest;
+        if (testCase.id === "negative_manifest_count") manifest.counts.ingredientKnowledge = -1;
+        else if (testCase.id === "invalid_manifest_source_revision") manifest.sourceRevision = "invalid";
+        else if (testCase.id === "duplicate_manifest_source_role") {
+          manifest.sourceFiles[0].role = manifest.sourceFiles[1].role;
+        } else throw new Error(`Unhandled manifest conformance case: ${testCase.id}`);
+        expect(() => parseCulinaryKnowledgeManifest(manifest), testCase.id).toThrow();
+        continue;
+      }
+      const invalid = structuredClone(source());
+      if (testCase.id === "missing_required_source_role") {
+        const removed = invalid.sourceFiles.find((entry) => entry.role === "nutrition-dataset");
+        if (!removed) throw new Error("Missing nutrition fixture");
+        invalid.sourceFiles = invalid.sourceFiles.filter((entry) => entry !== removed);
+        removeProvenanceSourceFile(invalid, removed.path);
+      } else if (testCase.id === "duplicate_required_source_role") {
+        invalid.sourceFiles[0].role = invalid.sourceFiles[1].role;
+      } else if (testCase.id === "negative_nutrition") {
+        invalid.ingredientKnowledge[0].nutritionPer100g.energyKcal = -1;
+      } else if (testCase.id === "negative_seasoning") {
+        invalid.seasonings[0].saltinessPerG = -1;
+      } else if (testCase.id === "negative_thermal_response") {
+        invalid.ingredientKnowledge[0].physicalModel.thermalResponse = -1;
+      } else if (testCase.id === "unary_flavor_relation") {
+        invalid.flavorRelations[0].ingredientIds = [invalid.flavorRelations[0].ingredientIds[0]];
+      } else if (testCase.id === "duplicate_flavor_relation") {
+        const ingredientId = invalid.flavorRelations[0].ingredientIds[0];
+        invalid.flavorRelations[0].ingredientIds = [ingredientId, ingredientId];
+      } else if (testCase.id === "unknown_transformation_operation") {
+        invalid.transformationRules[0].operationId = "unknown" as never;
+      } else if (testCase.id === "unknown_engine_support") {
+        invalid.engineCapabilities[0].supports[0] = "unknown";
+      } else throw new Error(`Unhandled source conformance case: ${testCase.id}`);
+      expect(() => parseCulinaryKnowledgeSource(invalid), testCase.id).toThrow();
+    }
+  });
+
   it("validates the committed authoring source and every pinned source hash", () => {
     const value = source();
     expect(value.ingredientKnowledge).toHaveLength(20);
@@ -113,6 +168,16 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
     const unknown = structuredClone(source());
     unknown.flavorRelations[0].ingredientIds[0] = "missing";
     expect(() => parseCulinaryKnowledgeSource(unknown)).toThrow(/unknown id/);
+
+    const unaryRelation = structuredClone(source());
+    unaryRelation.flavorRelations[0].ingredientIds = [
+      unaryRelation.flavorRelations[0].ingredientIds[0],
+    ];
+    expect(() => parseCulinaryKnowledgeSource(unaryRelation)).toThrow(/exactly two distinct/);
+
+    const unknownCapabilitySupport = structuredClone(source());
+    unknownCapabilitySupport.engineCapabilities[0].supports[0] = "unknown_support";
+    expect(() => parseCulinaryKnowledgeSource(unknownCapabilitySupport)).toThrow(/expected one of/);
   });
 
   it("rejects unreviewed, rights-unapproved and incompatible records", () => {
@@ -159,6 +224,10 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
     expect(() => parseCulinaryKnowledgeManifest(compiled.manifest)).toThrow(
       /40-character Git SHA/,
     );
+
+    const negativeCount = compileCulinaryKnowledgeSnapshot(source()).manifest;
+    negativeCount.counts.ingredientKnowledge = -1;
+    expect(() => parseCulinaryKnowledgeManifest(negativeCount)).toThrow(/non-negative integer/);
   });
 
   it("keeps cultural co-occurrence distinct from physical complement", () => {

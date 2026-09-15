@@ -1,0 +1,22 @@
+{
+  "cases": [
+    { "id": "missing_required_source_role", "target": "source" },
+    { "id": "duplicate_required_source_role", "target": "source" },
+    { "id": "negative_nutrition", "target": "shared_records" },
+    { "id": "negative_seasoning", "target": "shared_records" },
+    { "id": "negative_thermal_response", "target": "shared_records" },
+    { "id": "unary_flavor_relation", "target": "shared_records" },
+    { "id": "duplicate_flavor_relation", "target": "shared_records" },
+    { "id": "unknown_transformation_operation", "target": "shared_records" },
+    { "id": "unknown_engine_support", "target": "shared_records" },
+    { "id": "compatibility_future_only", "target": "cat_snapshot" },
+    { "id": "compatibility_reversed", "target": "cat_snapshot" },
+    { "id": "compatibility_widened", "target": "cat_snapshot" },
+    { "id": "negative_manifest_count", "target": "manifest" },
+    { "id": "invalid_manifest_source_revision", "target": "manifest" },
+    { "id": "duplicate_manifest_source_role", "target": "manifest" }
+  ],
+  "expectedDecision": "reject",
+  "schemaId": "cooking-lab-goal17-hostile-conformance-v1",
+  "schemaVersion": 1
+}

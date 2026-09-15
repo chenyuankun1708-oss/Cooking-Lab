@@ -1,4 +1,3 @@
-import { gameOperationIds } from "@/types/game-recipe";
 import {
   culinaryKnowledgeManifestSchemaId,
   culinaryKnowledgeSnapshotSchemaId,
@@ -21,7 +20,7 @@ type Shape = Record<string, Validator>;
 const sha256Pattern = /^[a-f0-9]{64}$/;
 const gitShaPattern = /^[a-f0-9]{40}$/;
 const idPattern = /^[a-z0-9][a-z0-9_.-]*$/;
-const operationIds = new Set<string>(gameOperationIds);
+const transformationOperationIds = new Set<string>(["add", "season", "slice", "stir"]);
 
 const stringValue: Validator = (value, path) => {
   if (typeof value !== "string") fail(path, "expected string");
@@ -58,6 +57,10 @@ const normalizedNumberValue: Validator = (value, path) => {
 const integerValue: Validator = (value, path) => {
   finiteNumberValue(value, path);
   if (!Number.isInteger(value)) fail(path, "expected integer");
+};
+const nonNegativeIntegerValue: Validator = (value, path) => {
+  integerValue(value, path);
+  if ((value as number) < 0) fail(path, "expected non-negative integer");
 };
 
 function fail(path: string, message: string): never {
@@ -209,7 +212,14 @@ const archetypeSchema = exactObject({
 });
 const cuisineSchema = exactObject({ id: idValue, label: nonEmptyStringValue, governance: governanceSchema });
 const platingSchema = exactObject({ id: idValue, shape: idValue, scale: normalizedNumberValue, governance: governanceSchema });
-const engineSchema = exactObject({ id: idValue, supports: sortedIds(idValue), governance: governanceSchema });
+const engineSupports = [
+  "commentary_v1",
+  "dish_profile_v1",
+  "physical_truth_wrap",
+  "plating_plan_v1",
+  "wok",
+] as const;
+const engineSchema = exactObject({ id: idValue, supports: sortedIds(enumValue(engineSupports)), governance: governanceSchema });
 const commentarySchema = exactObject({ id: idValue, channel: enumValue(["commentary", "cat_reaction"]), localizationKey: nonEmptyStringValue, localization: exactObject({ en: nonEmptyStringValue, zhCN: nonEmptyStringValue }), governance: governanceSchema });
 
 const sourceFields: Shape = {
@@ -249,16 +259,16 @@ const manifestSchema = exactObject({
   sourceRevision: gitShaValue,
   sourceFiles: arrayOf(sourceFileSchema, 1),
   counts: exactObject({
-    ingredientStates: integerValue,
-    ingredientKnowledge: integerValue,
-    seasonings: integerValue,
-    transformationRules: integerValue,
-    flavorRelations: integerValue,
-    dishArchetypes: integerValue,
-    cuisines: integerValue,
-    platingComponents: integerValue,
-    engineCapabilities: integerValue,
-    commentaryEvidence: integerValue,
+    ingredientStates: nonNegativeIntegerValue,
+    ingredientKnowledge: nonNegativeIntegerValue,
+    seasonings: nonNegativeIntegerValue,
+    transformationRules: nonNegativeIntegerValue,
+    flavorRelations: nonNegativeIntegerValue,
+    dishArchetypes: nonNegativeIntegerValue,
+    cuisines: nonNegativeIntegerValue,
+    platingComponents: nonNegativeIntegerValue,
+    engineCapabilities: nonNegativeIntegerValue,
+    commentaryEvidence: nonNegativeIntegerValue,
   }),
 });
 
@@ -338,9 +348,14 @@ function validateSemanticReferences(
     requireKnown(rule.inputStateIds, stateIds, `${path}.transformationRules.${rule.id}.inputStateIds`);
     requireKnown(rule.outputStateIds, stateIds, `${path}.transformationRules.${rule.id}.outputStateIds`);
     requireKnown(rule.engineCapabilityIds, engineIds, `${path}.transformationRules.${rule.id}.engineCapabilityIds`);
-    if (!operationIds.has(rule.operationId)) fail(`${path}.transformationRules.${rule.id}.operationId`, "unknown operation id");
+    if (!transformationOperationIds.has(rule.operationId)) {
+      fail(`${path}.transformationRules.${rule.id}.operationId`, "unsupported Wok V1 operation id");
+    }
   }
   for (const relation of source.flavorRelations) {
+    if (relation.ingredientIds.length !== 2) {
+      fail(`${path}.flavorRelations.${relation.id}.ingredientIds`, "expected exactly two distinct ingredients");
+    }
     requireKnown(relation.ingredientIds, edibleIds, `${path}.flavorRelations.${relation.id}.ingredientIds`);
     if (relation.semanticCategory === "cultural-cooccurrence" && relation.governance.provenance.kind !== "cultural-cooccurrence") {
       fail(`${path}.flavorRelations.${relation.id}.governance.provenance.kind`, "cultural co-occurrence must use cultural-cooccurrence provenance");

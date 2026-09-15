@@ -1,0 +1,499 @@
+{
+  "artifactVersion": "clv1-78f6853a33579dbd",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-a-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "spiced"
+      ],
+      "characterIds": [
+        "refreshing"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sour": 1,
+        "sweet": 2
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch A pilot; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "british"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "dark-rum-80",
+      "initialState": "liquid",
+      "massG": 48,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dark-rum-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dark-and-stormy-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "dark-rum-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger-beer",
+      "initialState": "liquid",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger-beer",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dark-and-stormy-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "ginger-beer:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 7.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dark-and-stormy-portion-03",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 7.5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "dark-and-stormy-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 9.5,
+      "calories": 154.53,
+      "carbs": 10.59,
+      "fat": 0.02,
+      "fiber": 0.21,
+      "protein": 0.05,
+      "saturatedFat": 0,
+      "sodium": 0.15,
+      "sugar": 9.63
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dark-rum-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dark-rum-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dark-rum-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger-beer",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger-beer",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger-beer",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 9.5,
+      "calories": 154.53,
+      "carbs": 10.59,
+      "fat": 0.02,
+      "fiber": 0.21,
+      "protein": 0.05,
+      "saturatedFat": 0,
+      "sodium": 0.15,
+      "sugar": 9.63
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-01"
+        ],
+        "nodeId": "dark-and-stormy-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "dark-and-stormy-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "dark-and-stormy-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-04"
+        ],
+        "nodeId": "dark-and-stormy-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dark-and-stormy-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "dark-and-stormy-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-02"
+        ],
+        "nodeId": "dark-and-stormy-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dark-and-stormy-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "dark-and-stormy-op-003-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-01"
+        ],
+        "nodeId": "dark-and-stormy-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "dark-and-stormy-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 48
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "dark-and-stormy-op-004-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-01"
+        ],
+        "nodeId": "dark-and-stormy-op-005-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "dark-and-stormy-op-005-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.3,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dark-and-stormy-op-005-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-03"
+        ],
+        "nodeId": "dark-and-stormy-op-006-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "dark-and-stormy-op-006-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "dark-and-stormy-op-006-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "dark-and-stormy-portion-01"
+        ],
+        "nodeId": "dark-and-stormy-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "dark-and-stormy-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "dark-and-stormy",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-78f6853a33579dbd",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "dark-and-stormy-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dark-and-stormy-dark-and-stormy-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-78f6853a33579dbd",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "dark-and-stormy-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dark-and-stormy-dark-and-stormy-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-78f6853a33579dbd",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "dark-and-stormy-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dark-and-stormy-dark-and-stormy-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-78f6853a33579dbd",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "dark-and-stormy-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dark-and-stormy-dark-and-stormy-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-78f6853a33579dbd",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "dark-and-stormy-op-005-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "dark-and-stormy-dark-and-stormy-op-005-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "dark-and-stormy",
+  "yield": {
+    "amount": 200,
+    "unit": "ml"
+  }
+}

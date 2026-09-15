@@ -1,0 +1,701 @@
+{
+  "artifactVersion": "clv1-e6c19ed688ace051",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting",
+        "light"
+      ],
+      "tastes": {
+        "salty": 1,
+        "sweet": 3
+      },
+      "textureIds": [
+        "crisp",
+        "chewy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "cantonese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "afternoon-tea",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 70,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 70,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "evaporated-milk",
+      "initialState": "liquid",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-evaporated-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "evaporated-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 70,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 70,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-butter",
+      "initialState": "prepared",
+      "massG": 30,
+      "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-vanilla",
+      "initialState": "raw",
+      "massG": 4,
+      "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "egg-waffles-portion-07",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 4,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 17.5,
+      "calories": 386.51,
+      "carbs": 56.64,
+      "fat": 12.33,
+      "fiber": 1.22,
+      "protein": 10.91,
+      "saturatedFat": 6.72,
+      "sodium": 85.02,
+      "sugar": 22.37
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "evaporated-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-evaporated-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "evaporated-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-butter",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "usda-fdc:173430:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-vanilla",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:173471:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-vanilla",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 70,
+      "calories": 1546.02,
+      "carbs": 226.56,
+      "fat": 49.31,
+      "fiber": 4.86,
+      "protein": 43.64,
+      "saturatedFat": 26.89,
+      "sodium": 340.06,
+      "sugar": 89.46
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "egg-waffles-portion-02",
+          "egg-waffles-portion-03"
+        ],
+        "nodeId": "egg-waffles-op-001-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "egg-waffles-op-001-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "egg-waffles-op-001-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "egg-waffles-portion-04",
+          "egg-waffles-portion-05",
+          "egg-waffles-portion-07"
+        ],
+        "nodeId": "egg-waffles-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "egg-waffles-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 254
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "egg-waffles-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "egg-waffles-portion-01"
+        ],
+        "nodeId": "egg-waffles-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "egg-waffles-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 180
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "egg-waffles-op-003-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "egg-waffles-portion-06"
+        ],
+        "nodeId": "egg-waffles-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "egg-waffles-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "egg-waffles-op-004-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "egg-waffles-portion-01"
+        ],
+        "nodeId": "egg-waffles-op-005-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "egg-waffles-op-005-rest-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "egg-waffles-op-005-rest"
+        ],
+        "equipmentId": "frying-pan",
+        "heatControl": {
+          "descriptorId": "pan-hot",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "egg-waffles-op-006-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "egg-waffles-op-006-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 200
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 240000,
+        "criticality": "quality",
+        "dependsOn": [
+          "egg-waffles-op-006-set-heat"
+        ],
+        "equipmentId": "frying-pan",
+        "inputPortionIds": [
+          "egg-waffles-portion-01"
+        ],
+        "nodeId": "egg-waffles-op-007-pan-fry",
+        "operationType": "pan-fry",
+        "outputStateIds": [
+          "egg-waffles-op-007-pan-fry-done"
+        ],
+        "parameters": {
+          "temperatureC": 190
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.75,
+            "minimum": 0.5,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "egg-waffles-op-007-pan-fry"
+        ],
+        "inputPortionIds": [
+          "egg-waffles-portion-01"
+        ],
+        "nodeId": "egg-waffles-op-008-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "egg-waffles-op-008-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "egg-waffles-op-008-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "egg-waffles-portion-01"
+        ],
+        "nodeId": "egg-waffles-op-009-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "egg-waffles-op-009-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "egg-waffles",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-001-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-001-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-005-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-005-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-006-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-006-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e6c19ed688ace051",
+      "causeCodes": [
+        "operation-omitted:pan-fry"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-pan-fry"
+      ],
+      "mutation": {
+        "targetNodeId": "egg-waffles-op-007-pan-fry",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "egg-waffles-egg-waffles-op-007-pan-fry-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "egg-waffles",
+  "yield": {
+    "amount": 8,
+    "unit": "piece"
+  }
+}

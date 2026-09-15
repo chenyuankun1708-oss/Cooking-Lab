@@ -1,0 +1,745 @@
+{
+  "artifactVersion": "clv1-7bfc5ea58c170ba2",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "refreshing",
+        "hearty"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sour": 2,
+        "sweet": 2
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "vodka-80",
+      "initialState": "liquid",
+      "massG": 14.25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vodka-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "vodka-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "gin-80",
+      "initialState": "liquid",
+      "massG": 14.25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gin-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "gin-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "white-rum-80",
+      "initialState": "liquid",
+      "massG": 14.25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-rum-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "white-rum-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tequila-blanco-80",
+      "initialState": "liquid",
+      "massG": 14.25,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tequila-blanco-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "tequila-blanco-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "orange-liqueur-80",
+      "initialState": "liquid",
+      "massG": 15.45,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-liqueur-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "orange-liqueur-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "simple-syrup",
+      "initialState": "liquid",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-07",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cola",
+      "initialState": "liquid",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cola",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-08",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "cola:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "long-island-iced-tea-portion-09",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 32.76,
+      "calories": 291.8,
+      "carbs": 34.62,
+      "fat": 0.06,
+      "fiber": 0.56,
+      "protein": 0.22,
+      "saturatedFat": 0,
+      "sodium": 4.4,
+      "sugar": 33.26
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "vodka-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vodka-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "vodka-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "gin-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gin-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "gin-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "white-rum-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-rum-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "white-rum-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tequila-blanco-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tequila-blanco-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tequila-blanco-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "orange-liqueur-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-liqueur-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "orange-liqueur-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "simple-syrup",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "simple-syrup",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cola",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cola",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cola",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 32.76,
+      "calories": 291.8,
+      "carbs": 34.62,
+      "fat": 0.06,
+      "fiber": 0.56,
+      "protein": 0.22,
+      "saturatedFat": 0,
+      "sodium": 4.4,
+      "sugar": 33.26
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-01"
+        ],
+        "nodeId": "long-island-iced-tea-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "long-island-iced-tea-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "long-island-iced-tea-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-01",
+          "long-island-iced-tea-portion-02",
+          "long-island-iced-tea-portion-03",
+          "long-island-iced-tea-portion-04",
+          "long-island-iced-tea-portion-05"
+        ],
+        "nodeId": "long-island-iced-tea-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "long-island-iced-tea-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 72
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "long-island-iced-tea-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-06",
+          "long-island-iced-tea-portion-07"
+        ],
+        "nodeId": "long-island-iced-tea-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "long-island-iced-tea-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 40
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "long-island-iced-tea-op-003-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-09"
+        ],
+        "nodeId": "long-island-iced-tea-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "long-island-iced-tea-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "long-island-iced-tea-op-004-add"
+        ],
+        "equipmentId": "pitcher",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-01"
+        ],
+        "nodeId": "long-island-iced-tea-op-005-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "long-island-iced-tea-op-005-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.85
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "long-island-iced-tea-op-005-mix"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-08"
+        ],
+        "nodeId": "long-island-iced-tea-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "long-island-iced-tea-op-006-add-done"
+        ],
+        "parameters": {
+          "quantityG": 100
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "long-island-iced-tea-op-006-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-01"
+        ],
+        "nodeId": "long-island-iced-tea-op-007-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "long-island-iced-tea-op-007-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "long-island-iced-tea-op-007-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-01"
+        ],
+        "nodeId": "long-island-iced-tea-op-008-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "long-island-iced-tea-op-008-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "long-island-iced-tea-op-008-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "long-island-iced-tea-portion-01"
+        ],
+        "nodeId": "long-island-iced-tea-op-009-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "long-island-iced-tea-op-009-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "long-island-iced-tea",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-005-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-005-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-006-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-006-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-7bfc5ea58c170ba2",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "long-island-iced-tea-op-007-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "long-island-iced-tea-long-island-iced-tea-op-007-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "long-island-iced-tea",
+  "yield": {
+    "amount": 300,
+    "unit": "ml"
+  }
+}

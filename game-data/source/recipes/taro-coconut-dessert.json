@@ -1,0 +1,592 @@
+{
+  "artifactVersion": "clv1-c7538914705a4e7b",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "taro",
+      "initialState": "raw",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-taro",
+      "optional": false,
+      "phase": "main",
+      "portionId": "taro-coconut-dessert-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "coconut-milk",
+      "initialState": "liquid",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "taro-coconut-dessert-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "coconut-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "sago-pearls",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sago-pearls",
+      "optional": false,
+      "phase": "main",
+      "portionId": "taro-coconut-dessert-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "taro-coconut-dessert-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15,
+      "calories": 434.5,
+      "carbs": 60.6,
+      "fat": 21.1,
+      "fiber": 3.02,
+      "protein": 3.52,
+      "saturatedFat": 18.02,
+      "sodium": 29.3,
+      "sugar": 17.6
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "taro",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-taro",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "taro",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "coconut-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "coconut-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sago-pearls",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sago-pearls",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sago-pearls",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 60,
+      "calories": 1738,
+      "carbs": 242.4,
+      "fat": 84.4,
+      "fiber": 12.08,
+      "protein": 14.08,
+      "saturatedFat": 72.08,
+      "sodium": 117.2,
+      "sugar": 70.4
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-01"
+        ],
+        "nodeId": "taro-coconut-dessert-op-001-peel",
+        "operationType": "peel",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-001-peel-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "taro-coconut-dessert-op-001-peel"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-01"
+        ],
+        "nodeId": "taro-coconut-dessert-op-002-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-002-dice-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 20,
+          "uniformity": 0.7
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "taro-coconut-dessert-op-002-dice"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-03"
+        ],
+        "nodeId": "taro-coconut-dessert-op-003-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-003-boil-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1200000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "taro-coconut-dessert-op-003-boil"
+        ],
+        "equipmentId": "steamer",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-01"
+        ],
+        "nodeId": "taro-coconut-dessert-op-004-steam",
+        "operationType": "steam",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-004-steam-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1200000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "taro-coconut-dessert-op-004-steam"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-02",
+          "taro-coconut-dessert-portion-04"
+        ],
+        "nodeId": "taro-coconut-dessert-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-005-add-done"
+        ],
+        "parameters": {
+          "quantityG": 460
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "taro-coconut-dessert-op-005-add"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-01"
+        ],
+        "nodeId": "taro-coconut-dessert-op-006-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-006-simmer-done"
+        ],
+        "parameters": {
+          "temperatureC": 95
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.85,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "taro-coconut-dessert-op-006-simmer"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-01"
+        ],
+        "nodeId": "taro-coconut-dessert-op-007-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-007-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "taro-coconut-dessert-op-007-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "taro-coconut-dessert-portion-01"
+        ],
+        "nodeId": "taro-coconut-dessert-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "taro-coconut-dessert-op-008-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "taro-coconut-dessert",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:peel"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-peel"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-001-peel",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-001-peel-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-002-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-002-dice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-003-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-003-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-steam"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-004-steam",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-004-steam-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-005-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-005-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-006-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-006-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c7538914705a4e7b",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "taro-coconut-dessert-op-007-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "taro-coconut-dessert-taro-coconut-dessert-op-007-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "taro-coconut-dessert",
+  "yield": {
+    "amount": 700,
+    "unit": "ml"
+  }
+}

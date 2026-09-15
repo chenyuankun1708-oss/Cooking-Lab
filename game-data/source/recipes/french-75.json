@@ -1,0 +1,556 @@
+{
+  "artifactVersion": "clv1-e9715115f4516d9d",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy"
+      ],
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sour": 2,
+        "sweet": 2
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "french"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "gin-80",
+      "initialState": "liquid",
+      "massG": 23.75,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gin-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "french-75-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 25,
+        "conversionRecordId": "gin-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "french-75-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "simple-syrup",
+      "initialState": "liquid",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+      "optional": false,
+      "phase": "main",
+      "portionId": "french-75-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "prosecco",
+      "initialState": "liquid",
+      "massG": 89.1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-prosecco",
+      "optional": false,
+      "phase": "main",
+      "portionId": "french-75-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 90,
+        "conversionRecordId": "prosecco:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 80,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "french-75-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 80,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15.12,
+      "calories": 180.44,
+      "carbs": 16.52,
+      "fat": 0.05,
+      "fiber": 0.42,
+      "protein": 0.17,
+      "saturatedFat": 0,
+      "sodium": 9.21,
+      "sugar": 15.5
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "gin-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gin-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "gin-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "simple-syrup",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "simple-syrup",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "prosecco",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-prosecco",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "prosecco",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 15.12,
+      "calories": 180.44,
+      "carbs": 16.52,
+      "fat": 0.05,
+      "fiber": 0.42,
+      "protein": 0.17,
+      "saturatedFat": 0,
+      "sodium": 9.21,
+      "sugar": 15.5
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "french-75-portion-01"
+        ],
+        "nodeId": "french-75-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "french-75-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "french-75-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "french-75-portion-01",
+          "french-75-portion-02",
+          "french-75-portion-03"
+        ],
+        "nodeId": "french-75-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "french-75-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 54
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "french-75-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "french-75-portion-05"
+        ],
+        "nodeId": "french-75-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "french-75-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 80
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "french-75-op-003-add"
+        ],
+        "equipmentId": "pitcher",
+        "inputPortionIds": [
+          "french-75-portion-01"
+        ],
+        "nodeId": "french-75-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "french-75-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.85
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "french-75-op-004-mix"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "french-75-portion-01"
+        ],
+        "nodeId": "french-75-op-005-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "french-75-op-005-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "quality",
+        "dependsOn": [
+          "french-75-op-005-strain"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "french-75-portion-04"
+        ],
+        "nodeId": "french-75-op-006-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "french-75-op-006-add-done"
+        ],
+        "parameters": {
+          "quantityG": 89
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "french-75-op-006-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "french-75-portion-01"
+        ],
+        "nodeId": "french-75-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "french-75-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "french-75",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e9715115f4516d9d",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "french-75-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "french-75-french-75-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e9715115f4516d9d",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "french-75-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "french-75-french-75-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e9715115f4516d9d",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "french-75-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "french-75-french-75-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e9715115f4516d9d",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "french-75-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "french-75-french-75-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e9715115f4516d9d",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "french-75-op-005-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "french-75-french-75-op-005-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e9715115f4516d9d",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "french-75-op-006-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "french-75-french-75-op-006-add-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "french-75",
+  "yield": {
+    "amount": 150,
+    "unit": "ml"
+  }
+}

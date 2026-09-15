@@ -1,0 +1,840 @@
+{
+  "artifactVersion": "clv1-4f36c7b6e78557b6",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "spiced",
+        "fruity"
+      ],
+      "characterIds": [
+        "comforting",
+        "warming"
+      ],
+      "tastes": {
+        "spicy": 1,
+        "sweet": 3
+      },
+      "textureIds": [
+        "soft",
+        "chewy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-wheat-flour",
+      "initialState": "dry",
+      "massG": 250,
+      "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-carrot",
+      "initialState": "raw",
+      "massG": 250,
+      "nutritionProvenanceId": "usda-fdc:2258586:foundation-2026-04-30",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-canola-oil",
+      "initialState": "liquid",
+      "massG": 180,
+      "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "usda-canola-oil:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "walnut",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-walnut",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cinnamon",
+      "initialState": "raw",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-07",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "cream-cheese",
+      "initialState": "raw",
+      "massG": 200,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cream-cheese",
+      "optional": false,
+      "phase": "main",
+      "portionId": "carrot-cake-portion-08",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 200,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15,
+      "calories": 408.84,
+      "carbs": 35.53,
+      "fat": 27.64,
+      "fiber": 1.99,
+      "protein": 6.23,
+      "saturatedFat": 5.35,
+      "sodium": 89.92,
+      "sugar": 15.87
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:168936:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-carrot",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:2258586:foundation-2026-04-30",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-carrot",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-canola-oil",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "usda-fdc:172336:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-canola-oil",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "walnut",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-walnut",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "walnut",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cinnamon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cinnamon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cinnamon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "cream-cheese",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-cream-cheese",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "cream-cheese",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 12,
+    "total": {
+      "addedSugar": 180,
+      "calories": 4906.05,
+      "carbs": 426.3,
+      "fat": 331.64,
+      "fiber": 23.85,
+      "protein": 74.8,
+      "saturatedFat": 64.2,
+      "sodium": 1079,
+      "sugar": 190.39
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "carrot-cake-portion-02",
+          "carrot-cake-portion-04",
+          "carrot-cake-portion-05"
+        ],
+        "nodeId": "carrot-cake-op-001-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "carrot-cake-op-001-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-001-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "carrot-cake-portion-01",
+          "carrot-cake-portion-07"
+        ],
+        "nodeId": "carrot-cake-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "carrot-cake-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 255
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-002-add"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "carrot-cake-portion-03"
+        ],
+        "nodeId": "carrot-cake-op-003-grind",
+        "operationType": "grind",
+        "outputStateIds": [
+          "carrot-cake-op-003-grind-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 3,
+          "uniformity": 0.7
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-003-grind"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "carrot-cake-portion-01"
+        ],
+        "nodeId": "carrot-cake-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "carrot-cake-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-004-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "carrot-cake-portion-06"
+        ],
+        "nodeId": "carrot-cake-op-005-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "carrot-cake-op-005-fold-done"
+        ],
+        "parameters": {
+          "strength": 0.25
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-005-fold"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "carrot-cake-portion-01"
+        ],
+        "nodeId": "carrot-cake-op-006-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "carrot-cake-op-006-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 175
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.6,
+            "minimum": 0.35,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 2400000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "carrot-cake-op-006-bake"
+        ],
+        "inputPortionIds": [
+          "carrot-cake-portion-01"
+        ],
+        "nodeId": "carrot-cake-op-007-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "carrot-cake-op-007-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-007-remove"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "carrot-cake-portion-01"
+        ],
+        "nodeId": "carrot-cake-op-008-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "carrot-cake-op-008-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 20
+        },
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-008-chill"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "carrot-cake-portion-08"
+        ],
+        "nodeId": "carrot-cake-op-009-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "carrot-cake-op-009-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.6
+        },
+        "sourceStepOrder": 9,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "carrot-cake-op-009-whisk"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "carrot-cake-portion-01"
+        ],
+        "nodeId": "carrot-cake-op-010-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "carrot-cake-op-010-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 10,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "carrot-cake-op-010-assemble"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "carrot-cake-portion-01"
+        ],
+        "nodeId": "carrot-cake-op-011-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "carrot-cake-op-011-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 11,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "carrot-cake",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-001-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-001-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:grind"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-grind"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-003-grind",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-003-grind-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-005-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-005-fold-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-006-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-006-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-008-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-008-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-009-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-009-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-4f36c7b6e78557b6",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "carrot-cake-op-010-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "carrot-cake-carrot-cake-op-010-assemble-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 12,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "carrot-cake",
+  "yield": {
+    "amount": 12,
+    "unit": "piece"
+  }
+}

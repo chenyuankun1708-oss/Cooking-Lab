@@ -1,0 +1,674 @@
+{
+  "artifactVersion": "clv1-48f6d04e122459ba",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted"
+      ],
+      "characterIds": [
+        "light",
+        "comforting"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 3
+      },
+      "textureIds": [
+        "silky",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "french"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "dark-chocolate",
+      "initialState": "raw",
+      "massG": 130,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dark-chocolate",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-souffle-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 130,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-souffle-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "prepared",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-souffle-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-souffle-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "heavy-cream",
+      "initialState": "liquid",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-souffle-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "heavy-cream:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15,
+      "calories": 453.95,
+      "carbs": 30.84,
+      "fat": 33.81,
+      "fiber": 3.54,
+      "protein": 6.93,
+      "saturatedFat": 19.78,
+      "sodium": 50.2,
+      "sugar": 23.63
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dark-chocolate",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dark-chocolate",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dark-chocolate",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "heavy-cream",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "heavy-cream",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 60,
+      "calories": 1815.8,
+      "carbs": 123.35,
+      "fat": 135.22,
+      "fiber": 14.17,
+      "protein": 27.72,
+      "saturatedFat": 79.13,
+      "sodium": 200.8,
+      "sugar": 94.52
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "low-melt",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "chocolate-souffle-op-001-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "chocolate-souffle-op-001-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 55
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 180000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-souffle-op-001-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-01",
+          "chocolate-souffle-portion-02"
+        ],
+        "nodeId": "chocolate-souffle-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "chocolate-souffle-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 170
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chocolate-souffle-op-002-add"
+        ],
+        "inputPortionIds": [
+          "chocolate-souffle-portion-01"
+        ],
+        "nodeId": "chocolate-souffle-op-003-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "chocolate-souffle-op-003-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-souffle-op-003-remove"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-03"
+        ],
+        "nodeId": "chocolate-souffle-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "chocolate-souffle-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 300000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-souffle-op-004-mix"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-03",
+          "chocolate-souffle-portion-04"
+        ],
+        "nodeId": "chocolate-souffle-op-005-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "chocolate-souffle-op-005-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.75
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-souffle-op-005-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-01"
+        ],
+        "nodeId": "chocolate-souffle-op-006-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "chocolate-souffle-op-006-fold-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-souffle-op-006-fold"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-01"
+        ],
+        "nodeId": "chocolate-souffle-op-007-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "chocolate-souffle-op-007-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.85,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-souffle-op-007-shape"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-01"
+        ],
+        "nodeId": "chocolate-souffle-op-008-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "chocolate-souffle-op-008-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 190
+        },
+        "sourceStepOrder": 8,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "maximum": 0.9,
+            "minimum": 0.8,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.5,
+            "minimum": 0.25,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 3000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chocolate-souffle-op-008-bake"
+        ],
+        "inputPortionIds": [
+          "chocolate-souffle-portion-01"
+        ],
+        "nodeId": "chocolate-souffle-op-009-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "chocolate-souffle-op-009-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chocolate-souffle-op-009-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "chocolate-souffle-portion-05"
+        ],
+        "nodeId": "chocolate-souffle-op-010-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "chocolate-souffle-op-010-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 10,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "chocolate-souffle",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-001-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-001-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-005-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-005-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-006-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-006-fold-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-007-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-007-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-48f6d04e122459ba",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-souffle-op-008-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-souffle-chocolate-souffle-op-008-bake-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "chocolate-souffle",
+  "yield": {
+    "amount": 4,
+    "unit": "piece"
+  }
+}

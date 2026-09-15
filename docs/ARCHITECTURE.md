@@ -13,6 +13,10 @@
 - `types/`：共享的 Ingredient、Recipe、Nutrition、Recommendation 契约
 - `types/culinary.ts`：M6 CulinaryItem discriminated union，以及 Story、Source、Evidence、Translation 与 Pairing contracts
 - `types/research.ts`：source catalog、research decisions、considered claims 与 ResearchRecord contract
+- `types/game-recipe.ts`：M12 游戏料理、操作、营养、mutation、manifest 与隔离 rights registry 契约
+- `game-data/source/`：逐料理 JSON canonical source；不得被 Web 层 import
+- `lib/game-recipe-validation.ts`：DAG、数量、USDA、rights、review 独立性与 sampling 的 fail-closed gate
+- `lib/game-data-build.ts`：从同一 canonical source 生成 Godot JSON、SQLite、attribution、manifest 与审计报告
 - `lib/culinary-item-adapter.ts`：现有 Recipe 到 DishItem 的只读渐进迁移 adapter
 - `lib/culinary-validation.ts` / `lib/culinary-publishing.ts`：framework-independent schema 与 item-type publishing skeleton
 - `lib/research-validation.ts`：framework-independent source catalog / research registry validation 与 deterministic reference collection

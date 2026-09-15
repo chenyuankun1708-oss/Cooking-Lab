@@ -1,0 +1,667 @@
+{
+  "artifactVersion": "clv1-08e001017a90fa31",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity",
+        "floral"
+      ],
+      "characterIds": [
+        "refreshing",
+        "comforting"
+      ],
+      "tastes": {
+        "sour": 1,
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "cantonese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "mango",
+      "initialState": "raw",
+      "massG": 400,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-pomelo-sago-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 400,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "sago-pearls",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sago-pearls",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-pomelo-sago-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "coconut-milk",
+      "initialState": "liquid",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-pomelo-sago-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "coconut-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "evaporated-milk",
+      "initialState": "liquid",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-evaporated-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-pomelo-sago-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "evaporated-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "mango-pomelo-sago-portion-05",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 10,
+      "calories": 334.5,
+      "carbs": 42.8,
+      "fat": 18.05,
+      "fiber": 1.63,
+      "protein": 4.03,
+      "saturatedFat": 14.75,
+      "sodium": 39.2,
+      "sugar": 27.4
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "mango",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-mango",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "mango",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sago-pearls",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sago-pearls",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sago-pearls",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "coconut-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coconut-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "coconut-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "evaporated-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-evaporated-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "evaporated-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 40,
+      "calories": 1338,
+      "carbs": 171.2,
+      "fat": 72.2,
+      "fiber": 6.52,
+      "protein": 16.12,
+      "saturatedFat": 59,
+      "sodium": 156.8,
+      "sugar": 109.6
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-02"
+        ],
+        "nodeId": "mango-pomelo-sago-op-001-boil",
+        "operationType": "boil",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-001-boil-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1200000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-001-boil"
+        ],
+        "equipmentId": "colander",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-01"
+        ],
+        "nodeId": "mango-pomelo-sago-op-002-rinse",
+        "operationType": "rinse",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-002-rinse-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-002-rinse"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-01"
+        ],
+        "nodeId": "mango-pomelo-sago-op-003-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-003-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-003-chill"
+        ],
+        "equipmentId": "knife",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-01"
+        ],
+        "nodeId": "mango-pomelo-sago-op-004-dice",
+        "operationType": "dice",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-004-dice-done"
+        ],
+        "parameters": {
+          "cutSizeMm": 15,
+          "uniformity": 0.7
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-004-dice"
+        ],
+        "equipmentId": "blender",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-01",
+          "mango-pomelo-sago-portion-04"
+        ],
+        "nodeId": "mango-pomelo-sago-op-005-blend",
+        "operationType": "blend",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-005-blend-done"
+        ],
+        "parameters": {
+          "strength": 0.6
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "maximum": 0.2,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-005-blend"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-03",
+          "mango-pomelo-sago-portion-05"
+        ],
+        "nodeId": "mango-pomelo-sago-op-006-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-006-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-006-mix"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-02",
+          "mango-pomelo-sago-portion-01"
+        ],
+        "nodeId": "mango-pomelo-sago-op-007-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-007-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "mango-pomelo-sago-op-007-assemble"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-01"
+        ],
+        "nodeId": "mango-pomelo-sago-op-008-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-008-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "mango-pomelo-sago-op-008-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "mango-pomelo-sago-portion-01"
+        ],
+        "nodeId": "mango-pomelo-sago-op-009-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "mango-pomelo-sago-op-009-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "mango-pomelo-sago",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:boil"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-boil"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-001-boil",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-001-boil-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:rinse"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rinse"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-002-rinse",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-002-rinse-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-003-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-003-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:dice"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-dice"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-004-dice",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-004-dice-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:blend"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-blend"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-005-blend",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-005-blend-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-006-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-006-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-007-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-007-assemble-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-08e001017a90fa31",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "mango-pomelo-sago-op-008-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "mango-pomelo-sago-mango-pomelo-sago-op-008-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "mango-pomelo-sago",
+  "yield": {
+    "amount": 800,
+    "unit": "ml"
+  }
+}

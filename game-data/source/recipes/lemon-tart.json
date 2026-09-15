@@ -1,0 +1,895 @@
+{
+  "artifactVersion": "clv1-c8fc42dfdfd74463",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy"
+      ],
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "sour": 3,
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "french"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 180,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 180,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "powdered-sugar",
+      "initialState": "dry",
+      "massG": 50,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-powdered-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-06",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "heavy-cream",
+      "initialState": "liquid",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+      "optional": false,
+      "phase": "main",
+      "portionId": "lemon-tart-portion-07",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "heavy-cream:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 21.24,
+      "calories": 329.5,
+      "carbs": 40.29,
+      "fat": 16.69,
+      "fiber": 1.03,
+      "protein": 5.22,
+      "saturatedFat": 9.93,
+      "sodium": 28.75,
+      "sugar": 22.12
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "powdered-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-powdered-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "powdered-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "heavy-cream",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-heavy-cream",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "heavy-cream",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 8,
+    "total": {
+      "addedSugar": 169.9,
+      "calories": 2636,
+      "carbs": 322.35,
+      "fat": 133.51,
+      "fiber": 8.22,
+      "protein": 41.76,
+      "saturatedFat": 79.41,
+      "sodium": 230,
+      "sugar": 176.94
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lemon-tart-portion-01",
+          "lemon-tart-portion-02",
+          "lemon-tart-portion-03"
+        ],
+        "nodeId": "lemon-tart-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "lemon-tart-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.75,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-001-mix"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-002-rest",
+        "operationType": "rest",
+        "outputStateIds": [
+          "lemon-tart-op-002-rest-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-002-rest"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-003-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "lemon-tart-op-003-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-003-shape"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-004-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "lemon-tart-op-004-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 190
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "browning",
+            "maximum": 0.55,
+            "minimum": 0.3,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 900000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-004-bake"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "lemon-tart-portion-04",
+          "lemon-tart-portion-05",
+          "lemon-tart-portion-06",
+          "lemon-tart-portion-07"
+        ],
+        "nodeId": "lemon-tart-op-005-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "lemon-tart-op-005-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-005-whisk"
+        ],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "low-simmer",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "lemon-tart-op-006-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "lemon-tart-op-006-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 75
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 600000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-006-set-heat"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-007-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "lemon-tart-op-007-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 7,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-007-stir"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-008-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "lemon-tart-op-008-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-008-strain"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-009-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "lemon-tart-op-009-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 9,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-009-assemble"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-010-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "lemon-tart-op-010-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 160
+        },
+        "sourceStepOrder": 10,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.85,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lemon-tart-op-010-bake"
+        ],
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-011-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "lemon-tart-op-011-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 11,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "lemon-tart-op-011-remove"
+        ],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-012-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "lemon-tart-op-012-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 12,
+        "targetStates": [],
+        "waitDurationMs": 7200000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "lemon-tart-op-012-chill"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "lemon-tart-portion-01"
+        ],
+        "nodeId": "lemon-tart-op-013-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "lemon-tart-op-013-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 13,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "lemon-tart",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:rest"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-rest"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-002-rest",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-002-rest-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-003-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-003-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-004-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-004-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-005-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-005-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-006-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-006-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-007-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-007-stir-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-008-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-008-strain-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-009-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-009-assemble-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-010-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-010-bake-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-c8fc42dfdfd74463",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "lemon-tart-op-012-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "lemon-tart-lemon-tart-op-012-chill-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 8,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "lemon-tart",
+  "yield": {
+    "amount": 8,
+    "unit": "piece"
+  }
+}

@@ -1,0 +1,557 @@
+{
+  "artifactVersion": "clv1-93d55f2666404559",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-a-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sour": 3,
+        "sweet": 2
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch A pilot; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "mexican"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tequila-blanco-80",
+      "initialState": "liquid",
+      "massG": 42.75,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tequila-blanco-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "classic-margarita-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 45,
+        "conversionRecordId": "tequila-blanco-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "orange-liqueur-80",
+      "initialState": "liquid",
+      "massG": 15.45,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-liqueur-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "classic-margarita-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "orange-liqueur-80:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "classic-margarita-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "simple-syrup",
+      "initialState": "liquid",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+      "optional": false,
+      "phase": "main",
+      "portionId": "classic-margarita-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "simple-syrup:tbsp:weight-v1",
+        "unit": "tbsp"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "classic-margarita-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 2.3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "classic-margarita-portion-06",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "salt:tsp:weight-v1",
+        "unit": "tsp"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 22.16,
+      "calories": 220.08,
+      "carbs": 25.31,
+      "fat": 0.06,
+      "fiber": 0.84,
+      "protein": 0.21,
+      "saturatedFat": 0,
+      "sodium": 904.5,
+      "sugar": 22.67
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tequila-blanco-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tequila-blanco-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tequila-blanco-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "orange-liqueur-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-liqueur-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "orange-liqueur-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "simple-syrup",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "simple-syrup",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 22.16,
+      "calories": 220.08,
+      "carbs": 25.31,
+      "fat": 0.06,
+      "fiber": 0.84,
+      "protein": 0.21,
+      "saturatedFat": 0,
+      "sodium": 904.5,
+      "sugar": 22.67
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "classic-margarita-portion-01"
+        ],
+        "nodeId": "classic-margarita-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "classic-margarita-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 60000
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "classic-margarita-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "classic-margarita-portion-01",
+          "classic-margarita-portion-02",
+          "classic-margarita-portion-03",
+          "classic-margarita-portion-04"
+        ],
+        "nodeId": "classic-margarita-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "classic-margarita-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 108
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "classic-margarita-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "classic-margarita-portion-05"
+        ],
+        "nodeId": "classic-margarita-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "classic-margarita-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "classic-margarita-op-003-add"
+        ],
+        "equipmentId": "pitcher",
+        "inputPortionIds": [
+          "classic-margarita-portion-01"
+        ],
+        "nodeId": "classic-margarita-op-004-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "classic-margarita-op-004-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.85
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.6,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "classic-margarita-op-004-mix"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "classic-margarita-portion-01"
+        ],
+        "nodeId": "classic-margarita-op-005-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "classic-margarita-op-005-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "completion",
+        "dependsOn": [
+          "classic-margarita-op-005-strain"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "classic-margarita-portion-06"
+        ],
+        "nodeId": "classic-margarita-op-006-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "classic-margarita-op-006-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "classic-margarita-op-006-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "classic-margarita-portion-01"
+        ],
+        "nodeId": "classic-margarita-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "classic-margarita-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "classic-margarita",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-93d55f2666404559",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "classic-margarita-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "classic-margarita-classic-margarita-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-93d55f2666404559",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "classic-margarita-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "classic-margarita-classic-margarita-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-93d55f2666404559",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "classic-margarita-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "classic-margarita-classic-margarita-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-93d55f2666404559",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "classic-margarita-op-004-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "classic-margarita-classic-margarita-op-004-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-93d55f2666404559",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "classic-margarita-op-005-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "classic-margarita-classic-margarita-op-005-strain-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "classic-margarita",
+  "yield": {
+    "amount": 120,
+    "unit": "ml"
+  }
+}

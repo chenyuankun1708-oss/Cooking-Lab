@@ -1,0 +1,555 @@
+{
+  "artifactVersion": "clv1-a349976a52338949",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted",
+        "toasty"
+      ],
+      "characterIds": [
+        "comforting",
+        "light"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sweet": 3
+      },
+      "textureIds": [
+        "soft",
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking",
+        "dessert"
+      ],
+      "cuisineIds": [
+        "french"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "egg",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-sponge-cake-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "egg:piece:weight-v1",
+        "unit": "piece"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 150,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-sponge-cake-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 150,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-sponge-cake-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-cocoa",
+      "initialState": "dry",
+      "massG": 30,
+      "nutritionProvenanceId": "usda-fdc:169593:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-sponge-cake-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "chocolate-sponge-cake-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15,
+      "calories": 174.82,
+      "carbs": 24.58,
+      "fat": 6.61,
+      "fiber": 1.38,
+      "protein": 5.43,
+      "saturatedFat": 3.25,
+      "sodium": 43.87,
+      "sugar": 15.21
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "egg",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-egg",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "egg",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-cocoa",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:169593:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-cocoa",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 10,
+    "total": {
+      "addedSugar": 150,
+      "calories": 1748.2,
+      "carbs": 245.81,
+      "fat": 66.05,
+      "fiber": 13.8,
+      "protein": 54.34,
+      "saturatedFat": 32.48,
+      "sodium": 438.7,
+      "sugar": 152.07
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 600000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-01",
+          "chocolate-sponge-cake-portion-02"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-001-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-001-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.7
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-sponge-cake-op-001-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-03",
+          "chocolate-sponge-cake-portion-04"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 130
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-sponge-cake-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-05"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-003-fold",
+        "operationType": "fold",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-003-fold-done"
+        ],
+        "parameters": {
+          "strength": 0.25
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.65,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-sponge-cake-op-003-fold"
+        ],
+        "equipmentId": "cutting-board",
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-01"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-004-shape",
+        "operationType": "shape",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-004-shape-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "chocolate-sponge-cake-op-004-shape"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-01"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-005-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-005-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 170
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.65,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1500000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chocolate-sponge-cake-op-005-bake"
+        ],
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-01"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-006-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-006-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "chocolate-sponge-cake-op-006-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "chocolate-sponge-cake-portion-01"
+        ],
+        "nodeId": "chocolate-sponge-cake-op-007-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "chocolate-sponge-cake-op-007-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "chocolate-sponge-cake",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a349976a52338949",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-sponge-cake-op-001-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-sponge-cake-chocolate-sponge-cake-op-001-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a349976a52338949",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-sponge-cake-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-sponge-cake-chocolate-sponge-cake-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a349976a52338949",
+      "causeCodes": [
+        "operation-omitted:fold"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-fold"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-sponge-cake-op-003-fold",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-sponge-cake-chocolate-sponge-cake-op-003-fold-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a349976a52338949",
+      "causeCodes": [
+        "operation-omitted:shape"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-shape"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-sponge-cake-op-004-shape",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-sponge-cake-chocolate-sponge-cake-op-004-shape-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-a349976a52338949",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "chocolate-sponge-cake-op-005-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "chocolate-sponge-cake-chocolate-sponge-cake-op-005-bake-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 10,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "chocolate-sponge-cake",
+  "yield": {
+    "amount": 10,
+    "unit": "piece"
+  }
+}

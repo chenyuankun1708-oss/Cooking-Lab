@@ -1,0 +1,573 @@
+{
+  "artifactVersion": "clv1-e2443a494d23f717",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-b-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "citrusy",
+        "herbal"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 2
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch B; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "italian"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "aperol",
+      "initialState": "liquid",
+      "massG": 42.4,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-aperol",
+      "optional": false,
+      "phase": "main",
+      "portionId": "aperol-spritz-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "aperol:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "prosecco",
+      "initialState": "liquid",
+      "massG": 59.4,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-prosecco",
+      "optional": false,
+      "phase": "main",
+      "portionId": "aperol-spritz-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "prosecco:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "club-soda",
+      "initialState": "liquid",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-club-soda",
+      "optional": false,
+      "phase": "main",
+      "portionId": "aperol-spritz-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "club-soda:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-orange",
+      "initialState": "raw",
+      "massG": 8,
+      "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+      "optional": false,
+      "phase": "main",
+      "portionId": "aperol-spritz-portion-04",
+      "role": "garnish",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "prepared",
+      "massG": 70,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "aperol-spritz-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 70,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 15.35,
+      "calories": 150.5,
+      "carbs": 16.29,
+      "fat": 0.01,
+      "fiber": 0.16,
+      "protein": 0.07,
+      "saturatedFat": 0,
+      "sodium": 30.82,
+      "sugar": 16.04
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "aperol",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-aperol",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "aperol",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "prosecco",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-prosecco",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "prosecco",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "club-soda",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-club-soda",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "club-soda",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-orange",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "usda-fdc:746771:foundation-2026-04-30",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-orange",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 15.35,
+      "calories": 150.5,
+      "carbs": 16.29,
+      "fat": 0.01,
+      "fiber": 0.16,
+      "protein": 0.07,
+      "saturatedFat": 0,
+      "sodium": 30.82,
+      "sugar": 16.04
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-01"
+        ],
+        "nodeId": "aperol-spritz-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "aperol-spritz-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "aperol-spritz-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-05"
+        ],
+        "nodeId": "aperol-spritz-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "aperol-spritz-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 70
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "aperol-spritz-op-002-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-01"
+        ],
+        "nodeId": "aperol-spritz-op-003-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "aperol-spritz-op-003-add-done"
+        ],
+        "parameters": {
+          "quantityG": 42
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "aperol-spritz-op-003-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-02"
+        ],
+        "nodeId": "aperol-spritz-op-004-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "aperol-spritz-op-004-add-done"
+        ],
+        "parameters": {
+          "quantityG": 59
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "quality",
+        "dependsOn": [
+          "aperol-spritz-op-004-add"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-03"
+        ],
+        "nodeId": "aperol-spritz-op-005-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "aperol-spritz-op-005-add-done"
+        ],
+        "parameters": {
+          "quantityG": 60
+        },
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "aperol-spritz-op-005-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "aperol-spritz-portion-01"
+        ],
+        "nodeId": "aperol-spritz-op-006-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "aperol-spritz-op-006-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 6,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.5,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "aperol-spritz-op-006-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-04"
+        ],
+        "nodeId": "aperol-spritz-op-007-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "aperol-spritz-op-007-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 7,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "aperol-spritz-op-007-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "aperol-spritz-portion-01"
+        ],
+        "nodeId": "aperol-spritz-op-008-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "aperol-spritz-op-008-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 8,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "aperol-spritz",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e2443a494d23f717",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "aperol-spritz-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "aperol-spritz-aperol-spritz-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e2443a494d23f717",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "aperol-spritz-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "aperol-spritz-aperol-spritz-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e2443a494d23f717",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "aperol-spritz-op-003-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "aperol-spritz-aperol-spritz-op-003-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e2443a494d23f717",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "aperol-spritz-op-004-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "aperol-spritz-aperol-spritz-op-004-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e2443a494d23f717",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "aperol-spritz-op-005-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "aperol-spritz-aperol-spritz-op-005-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e2443a494d23f717",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "aperol-spritz-op-006-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "aperol-spritz-aperol-spritz-op-006-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "aperol-spritz",
+  "yield": {
+    "amount": 180,
+    "unit": "ml"
+  }
+}

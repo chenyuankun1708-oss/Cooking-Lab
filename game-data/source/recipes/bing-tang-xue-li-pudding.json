@@ -1,0 +1,367 @@
+{
+  "artifactVersion": "clv1-6d84b516ef227e62",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-d-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "juicy",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch D; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "asian-pear",
+      "initialState": "raw",
+      "massG": 500,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-asian-pear",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bing-tang-xue-li-pudding-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bing-tang-xue-li-pudding-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "dried-longan",
+      "initialState": "dry",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dried-longan",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bing-tang-xue-li-pudding-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bing-tang-xue-li-pudding-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 10,
+      "calories": 103.23,
+      "carbs": 26.04,
+      "fat": 0.27,
+      "fiber": 4.61,
+      "protein": 0.81,
+      "saturatedFat": 0,
+      "sodium": 2.69,
+      "sugar": 21
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "asian-pear",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-asian-pear",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "asian-pear",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dried-longan",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dried-longan",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dried-longan",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 40,
+      "calories": 412.9,
+      "carbs": 104.15,
+      "fat": 1.08,
+      "fiber": 18.45,
+      "protein": 3.25,
+      "saturatedFat": 0,
+      "sodium": 10.75,
+      "sugar": 84
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "bing-tang-xue-li-pudding-portion-01",
+          "bing-tang-xue-li-pudding-portion-02",
+          "bing-tang-xue-li-pudding-portion-03",
+          "bing-tang-xue-li-pudding-portion-04"
+        ],
+        "nodeId": "bing-tang-xue-li-pudding-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "bing-tang-xue-li-pudding-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "bing-tang-xue-li-pudding-op-001-mix"
+        ],
+        "equipmentId": "steamer",
+        "inputPortionIds": [
+          "bing-tang-xue-li-pudding-portion-01"
+        ],
+        "nodeId": "bing-tang-xue-li-pudding-op-002-steam",
+        "operationType": "steam",
+        "outputStateIds": [
+          "bing-tang-xue-li-pudding-op-002-steam-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "bing-tang-xue-li-pudding-op-002-steam"
+        ],
+        "inputPortionIds": [
+          "bing-tang-xue-li-pudding-portion-01"
+        ],
+        "nodeId": "bing-tang-xue-li-pudding-op-003-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "bing-tang-xue-li-pudding-op-003-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "bing-tang-xue-li-pudding-op-003-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "bing-tang-xue-li-pudding-portion-01"
+        ],
+        "nodeId": "bing-tang-xue-li-pudding-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "bing-tang-xue-li-pudding-op-004-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "bing-tang-xue-li-pudding",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6d84b516ef227e62",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "bing-tang-xue-li-pudding-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bing-tang-xue-li-pudding-bing-tang-xue-li-pudding-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-6d84b516ef227e62",
+      "causeCodes": [
+        "operation-omitted:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-steam"
+      ],
+      "mutation": {
+        "targetNodeId": "bing-tang-xue-li-pudding-op-002-steam",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bing-tang-xue-li-pudding-bing-tang-xue-li-pudding-op-002-steam-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "bing-tang-xue-li-pudding",
+  "yield": {
+    "amount": 4,
+    "unit": "piece"
+  }
+}

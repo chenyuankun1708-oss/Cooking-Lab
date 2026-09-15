@@ -1,0 +1,338 @@
+{
+  "artifactVersion": "clv1-23eeb87de36f0125",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-d-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity"
+      ],
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "sour": 2,
+        "sweet": 3
+      },
+      "textureIds": [
+        "crisp",
+        "saucy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch D; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "japanese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "strawberry",
+      "initialState": "raw",
+      "massG": 250,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-strawberry",
+      "optional": false,
+      "phase": "main",
+      "portionId": "kakigori-strawberry-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 250,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "kakigori-strawberry-portion-02",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "sweetened-condensed-milk",
+      "initialState": "liquid",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "kakigori-strawberry-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "sweetened-condensed-milk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ice",
+      "initialState": "raw",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "kakigori-strawberry-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 21.6,
+      "calories": 128.15,
+      "carbs": 27.97,
+      "fat": 1.49,
+      "fiber": 1.25,
+      "protein": 1.62,
+      "saturatedFat": 0.83,
+      "sodium": 19.68,
+      "sugar": 26.22
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "strawberry",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-strawberry",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "strawberry",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sweetened-condensed-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sweetened-condensed-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ice",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ice",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 86.4,
+      "calories": 512.6,
+      "carbs": 111.89,
+      "fat": 5.97,
+      "fiber": 5,
+      "protein": 6.49,
+      "saturatedFat": 3.3,
+      "sodium": 78.7,
+      "sugar": 104.89
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "refrigerator",
+        "inputPortionIds": [
+          "kakigori-strawberry-portion-01",
+          "kakigori-strawberry-portion-02",
+          "kakigori-strawberry-portion-03",
+          "kakigori-strawberry-portion-04"
+        ],
+        "nodeId": "kakigori-strawberry-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "kakigori-strawberry-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": 4
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 3600000
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "kakigori-strawberry-op-001-chill"
+        ],
+        "equipmentId": "baking-dish",
+        "inputPortionIds": [
+          "kakigori-strawberry-portion-01"
+        ],
+        "nodeId": "kakigori-strawberry-op-002-assemble",
+        "operationType": "assemble",
+        "outputStateIds": [
+          "kakigori-strawberry-op-002-assemble-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "kakigori-strawberry-op-002-assemble"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "kakigori-strawberry-portion-01"
+        ],
+        "nodeId": "kakigori-strawberry-op-003-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "kakigori-strawberry-op-003-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "kakigori-strawberry",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-23eeb87de36f0125",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "kakigori-strawberry-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "kakigori-strawberry-kakigori-strawberry-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-23eeb87de36f0125",
+      "causeCodes": [
+        "operation-omitted:assemble"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-assemble"
+      ],
+      "mutation": {
+        "targetNodeId": "kakigori-strawberry-op-002-assemble",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "kakigori-strawberry-kakigori-strawberry-op-002-assemble-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "kakigori-strawberry",
+  "yield": {
+    "amount": 4,
+    "unit": "piece"
+  }
+}

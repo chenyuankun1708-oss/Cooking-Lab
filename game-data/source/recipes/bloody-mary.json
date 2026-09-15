@@ -1,0 +1,530 @@
+{
+  "artifactVersion": "clv1-3ae3c81d0d0df7b3",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-c-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "peppery"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sour": 2,
+        "spicy": 1,
+        "umami": 1
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch C; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "lunch",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "vodka-80",
+      "initialState": "liquid",
+      "massG": 42,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vodka-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 42,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "tomato-juice",
+      "initialState": "liquid",
+      "massG": 90,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato-juice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 90,
+        "conversionRecordId": "tomato-juice:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "worcestershire-sauce",
+      "initialState": "liquid",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-worcestershire-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "hot-sauce",
+      "initialState": "liquid",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-hot-sauce",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-05",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "horseradish",
+      "initialState": "prepared",
+      "massG": 3,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-horseradish",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 3,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "celery-salt",
+      "initialState": "dry",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-celery-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-07",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "black-pepper",
+      "initialState": "raw",
+      "massG": 0.5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-pepper",
+      "optional": false,
+      "phase": "main",
+      "portionId": "bloody-mary-portion-08",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 0.5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 125.31,
+      "carbs": 6.03,
+      "fat": 0.16,
+      "fiber": 1,
+      "protein": 1,
+      "saturatedFat": 0.01,
+      "sodium": 468,
+      "sugar": 3.5
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "vodka-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-vodka-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "vodka-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "tomato-juice",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-tomato-juice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "tomato-juice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "worcestershire-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-worcestershire-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "worcestershire-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "hot-sauce",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-hot-sauce",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "hot-sauce",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "horseradish",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-horseradish",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "horseradish",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "celery-salt",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-celery-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "celery-salt",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "black-pepper",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-black-pepper",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "black-pepper",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 0,
+      "calories": 125.31,
+      "carbs": 6.03,
+      "fat": 0.16,
+      "fiber": 1,
+      "protein": 1,
+      "saturatedFat": 0.01,
+      "sodium": 468,
+      "sugar": 3.5
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bloody-mary-portion-01"
+        ],
+        "nodeId": "bloody-mary-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "bloody-mary-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bloody-mary-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bloody-mary-portion-01",
+          "bloody-mary-portion-02",
+          "bloody-mary-portion-03",
+          "bloody-mary-portion-04",
+          "bloody-mary-portion-05",
+          "bloody-mary-portion-06",
+          "bloody-mary-portion-07",
+          "bloody-mary-portion-08"
+        ],
+        "nodeId": "bloody-mary-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "bloody-mary-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 158
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "bloody-mary-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "bloody-mary-portion-01"
+        ],
+        "nodeId": "bloody-mary-op-003-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "bloody-mary-op-003-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "bloody-mary-op-003-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bloody-mary-portion-01"
+        ],
+        "nodeId": "bloody-mary-op-004-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "bloody-mary-op-004-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "bloody-mary-op-004-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "bloody-mary-portion-01"
+        ],
+        "nodeId": "bloody-mary-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "bloody-mary-op-005-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "bloody-mary",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ae3c81d0d0df7b3",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "bloody-mary-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bloody-mary-bloody-mary-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ae3c81d0d0df7b3",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "bloody-mary-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bloody-mary-bloody-mary-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-3ae3c81d0d0df7b3",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "bloody-mary-op-003-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "bloody-mary-bloody-mary-op-003-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "bloody-mary",
+  "yield": {
+    "amount": 160,
+    "unit": "ml"
+  }
+}

@@ -1,0 +1,485 @@
+{
+  "artifactVersion": "clv1-b2e5f62e36a50150",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-c-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity"
+      ],
+      "characterIds": [
+        "refreshing",
+        "appetizing"
+      ],
+      "tastes": {
+        "sour": 2,
+        "sweet": 3
+      },
+      "textureIds": [
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch C; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "mexican"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "white-rum-80",
+      "initialState": "liquid",
+      "massG": 42,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-rum-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hotel-nacional-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 42,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "peach-schnapps",
+      "initialState": "liquid",
+      "massG": 14,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-peach-schnapps",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hotel-nacional-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "raspberry-liqueur",
+      "initialState": "liquid",
+      "massG": 14,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-raspberry-liqueur",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hotel-nacional-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lime",
+      "initialState": "raw",
+      "massG": 15,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hotel-nacional-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 15,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "simple-syrup",
+      "initialState": "liquid",
+      "massG": 7,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+      "optional": false,
+      "phase": "main",
+      "portionId": "hotel-nacional-portion-05",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 7,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 16.73,
+      "calories": 207.15,
+      "carbs": 18.31,
+      "fat": 0.03,
+      "fiber": 0.42,
+      "protein": 0.11,
+      "saturatedFat": 0,
+      "sodium": 2.26,
+      "sugar": 16.99
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "white-rum-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-white-rum-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "white-rum-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "peach-schnapps",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-peach-schnapps",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "peach-schnapps",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "raspberry-liqueur",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-raspberry-liqueur",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "raspberry-liqueur",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lime",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lime",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lime",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "simple-syrup",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-simple-syrup",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "simple-syrup",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 16.73,
+      "calories": 207.15,
+      "carbs": 18.31,
+      "fat": 0.03,
+      "fiber": 0.42,
+      "protein": 0.11,
+      "saturatedFat": 0,
+      "sodium": 2.26,
+      "sugar": 16.99
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "hotel-nacional-portion-01"
+        ],
+        "nodeId": "hotel-nacional-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "hotel-nacional-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hotel-nacional-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "hotel-nacional-portion-01",
+          "hotel-nacional-portion-02",
+          "hotel-nacional-portion-03",
+          "hotel-nacional-portion-04",
+          "hotel-nacional-portion-05"
+        ],
+        "nodeId": "hotel-nacional-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "hotel-nacional-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 92
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hotel-nacional-op-002-add"
+        ],
+        "equipmentId": "pitcher",
+        "inputPortionIds": [
+          "hotel-nacional-portion-01"
+        ],
+        "nodeId": "hotel-nacional-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "hotel-nacional-op-003-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.85
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "hotel-nacional-op-003-mix"
+        ],
+        "equipmentId": "fine-strainer",
+        "inputPortionIds": [
+          "hotel-nacional-portion-01"
+        ],
+        "nodeId": "hotel-nacional-op-004-strain",
+        "operationType": "strain",
+        "outputStateIds": [
+          "hotel-nacional-op-004-strain-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "hotel-nacional-op-004-strain"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "hotel-nacional-portion-01"
+        ],
+        "nodeId": "hotel-nacional-op-005-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "hotel-nacional-op-005-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "hotel-nacional-op-005-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "hotel-nacional-portion-01"
+        ],
+        "nodeId": "hotel-nacional-op-006-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "hotel-nacional-op-006-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "hotel-nacional",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2e5f62e36a50150",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "hotel-nacional-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hotel-nacional-hotel-nacional-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2e5f62e36a50150",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "hotel-nacional-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hotel-nacional-hotel-nacional-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2e5f62e36a50150",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "hotel-nacional-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hotel-nacional-hotel-nacional-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-b2e5f62e36a50150",
+      "causeCodes": [
+        "operation-omitted:strain"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-strain"
+      ],
+      "mutation": {
+        "targetNodeId": "hotel-nacional-op-004-strain",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "hotel-nacional-hotel-nacional-op-004-strain-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "hotel-nacional",
+  "yield": {
+    "amount": 90,
+    "unit": "ml"
+  }
+}

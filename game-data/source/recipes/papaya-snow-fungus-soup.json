@@ -1,0 +1,443 @@
+{
+  "artifactVersion": "clv1-5a2e2976e93eec40",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-c-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "refreshing",
+        "comforting"
+      ],
+      "tastes": {
+        "sweet": 3
+      },
+      "textureIds": [
+        "brothy",
+        "silky"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch C; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "chinese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "papaya",
+      "initialState": "raw",
+      "massG": 500,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-papaya",
+      "optional": false,
+      "phase": "main",
+      "portionId": "papaya-snow-fungus-soup-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 500,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "snow-fungus",
+      "initialState": "dry",
+      "massG": 20,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-snow-fungus",
+      "optional": false,
+      "phase": "main",
+      "portionId": "papaya-snow-fungus-soup-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 20,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drinking-water",
+      "initialState": "liquid",
+      "massG": 1000,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+      "optional": false,
+      "phase": "main",
+      "portionId": "papaya-snow-fungus-soup-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 1000,
+        "conversionRecordId": "drinking-water:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "granulated-sugar",
+      "initialState": "dry",
+      "massG": 50,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "papaya-snow-fungus-soup-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 50,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 12.5,
+      "calories": 113.75,
+      "carbs": 29.75,
+      "fat": 0.4,
+      "fiber": 5.13,
+      "protein": 1.02,
+      "saturatedFat": 0,
+      "sodium": 11,
+      "sugar": 22.25
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "papaya",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-papaya",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "papaya",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "snow-fungus",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-snow-fungus",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "snow-fungus",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drinking-water",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drinking-water",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drinking-water",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "granulated-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-granulated-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "granulated-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 50,
+      "calories": 455,
+      "carbs": 119,
+      "fat": 1.6,
+      "fiber": 20.5,
+      "protein": 4.06,
+      "saturatedFat": 0,
+      "sodium": 44,
+      "sugar": 89
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "papaya-snow-fungus-soup-portion-01",
+          "papaya-snow-fungus-soup-portion-02",
+          "papaya-snow-fungus-soup-portion-03",
+          "papaya-snow-fungus-soup-portion-04"
+        ],
+        "nodeId": "papaya-snow-fungus-soup-op-001-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "papaya-snow-fungus-soup-op-001-add-done"
+        ],
+        "parameters": {
+          "quantityG": 1570
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "papaya-snow-fungus-soup-op-001-add"
+        ],
+        "equipmentId": "saucepan",
+        "heatControl": {
+          "descriptorId": "boil",
+          "kind": "qualitative",
+          "sourceFactId": ""
+        },
+        "inputPortionIds": [],
+        "nodeId": "papaya-snow-fungus-soup-op-002-set-heat",
+        "operationType": "set-heat",
+        "outputStateIds": [
+          "papaya-snow-fungus-soup-op-002-set-heat-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "papaya-snow-fungus-soup-op-002-set-heat"
+        ],
+        "equipmentId": "saucepan",
+        "inputPortionIds": [
+          "papaya-snow-fungus-soup-portion-01"
+        ],
+        "nodeId": "papaya-snow-fungus-soup-op-003-simmer",
+        "operationType": "simmer",
+        "outputStateIds": [
+          "papaya-snow-fungus-soup-op-003-simmer-done"
+        ],
+        "parameters": {
+          "temperatureC": 95
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.9,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 2700000
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "papaya-snow-fungus-soup-op-003-simmer"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "papaya-snow-fungus-soup-portion-01"
+        ],
+        "nodeId": "papaya-snow-fungus-soup-op-004-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "papaya-snow-fungus-soup-op-004-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "papaya-snow-fungus-soup-op-004-stir"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "papaya-snow-fungus-soup-portion-01"
+        ],
+        "nodeId": "papaya-snow-fungus-soup-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "papaya-snow-fungus-soup-op-005-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "papaya-snow-fungus-soup",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5a2e2976e93eec40",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "papaya-snow-fungus-soup-op-001-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "papaya-snow-fungus-soup-papaya-snow-fungus-soup-op-001-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5a2e2976e93eec40",
+      "causeCodes": [
+        "operation-omitted:set-heat"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-set-heat"
+      ],
+      "mutation": {
+        "targetNodeId": "papaya-snow-fungus-soup-op-002-set-heat",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "papaya-snow-fungus-soup-papaya-snow-fungus-soup-op-002-set-heat-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5a2e2976e93eec40",
+      "causeCodes": [
+        "operation-omitted:simmer"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-simmer"
+      ],
+      "mutation": {
+        "targetNodeId": "papaya-snow-fungus-soup-op-003-simmer",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "papaya-snow-fungus-soup-papaya-snow-fungus-soup-op-003-simmer-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-5a2e2976e93eec40",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "papaya-snow-fungus-soup-op-004-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "papaya-snow-fungus-soup-papaya-snow-fungus-soup-op-004-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "papaya-snow-fungus-soup",
+  "yield": {
+    "amount": 1000,
+    "unit": "ml"
+  }
+}

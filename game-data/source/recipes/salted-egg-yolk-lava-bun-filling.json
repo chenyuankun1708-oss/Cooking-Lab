@@ -1,0 +1,371 @@
+{
+  "artifactVersion": "clv1-e4e87908f0a5afc5",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-c-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted"
+      ],
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "salty": 2,
+        "sweet": 3
+      },
+      "textureIds": [
+        "creamy",
+        "soft"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch C; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "dessert"
+      ],
+      "cuisineIds": [
+        "cantonese"
+      ],
+      "mealRoleIds": [
+        "dessert"
+      ],
+      "servingContextIds": [
+        "after-meal",
+        "afternoon-tea"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salted-egg-yolk",
+      "initialState": "prepared",
+      "massG": 100,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salted-egg-yolk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "salted-egg-yolk-lava-bun-filling-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 100,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "sweetened-condensed-milk",
+      "initialState": "liquid",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "salted-egg-yolk-lava-bun-filling-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 40,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "salted-egg-yolk-lava-bun-filling-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 40,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "milk-powder",
+      "initialState": "dry",
+      "massG": 30,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk-powder",
+      "optional": false,
+      "phase": "main",
+      "portionId": "salted-egg-yolk-lava-bun-filling-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 30,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dessert",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 6.6,
+      "calories": 253.3,
+      "carbs": 11.55,
+      "fat": 19.67,
+      "fiber": 0,
+      "protein": 6.75,
+      "saturatedFat": 9.98,
+      "sodium": 424.93,
+      "sugar": 11.15
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salted-egg-yolk",
+        "ingredientState": "prepared",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salted-egg-yolk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salted-egg-yolk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "sweetened-condensed-milk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-sweetened-condensed-milk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "sweetened-condensed-milk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "milk-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-milk-powder",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "milk-powder",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 4,
+    "total": {
+      "addedSugar": 26.4,
+      "calories": 1013.2,
+      "carbs": 46.2,
+      "fat": 78.67,
+      "fiber": 0,
+      "protein": 26.99,
+      "saturatedFat": 39.93,
+      "sodium": 1699.7,
+      "sugar": 44.6
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 120000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "salted-egg-yolk-lava-bun-filling-portion-01",
+          "salted-egg-yolk-lava-bun-filling-portion-02",
+          "salted-egg-yolk-lava-bun-filling-portion-03",
+          "salted-egg-yolk-lava-bun-filling-portion-04"
+        ],
+        "nodeId": "salted-egg-yolk-lava-bun-filling-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "salted-egg-yolk-lava-bun-filling-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.7,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "salted-egg-yolk-lava-bun-filling-op-001-mix"
+        ],
+        "equipmentId": "steamer",
+        "inputPortionIds": [
+          "salted-egg-yolk-lava-bun-filling-portion-01"
+        ],
+        "nodeId": "salted-egg-yolk-lava-bun-filling-op-002-steam",
+        "operationType": "steam",
+        "outputStateIds": [
+          "salted-egg-yolk-lava-bun-filling-op-002-steam-done"
+        ],
+        "parameters": {
+          "temperatureC": 100
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 1800000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "salted-egg-yolk-lava-bun-filling-op-002-steam"
+        ],
+        "inputPortionIds": [
+          "salted-egg-yolk-lava-bun-filling-portion-01"
+        ],
+        "nodeId": "salted-egg-yolk-lava-bun-filling-op-003-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "salted-egg-yolk-lava-bun-filling-op-003-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "salted-egg-yolk-lava-bun-filling-op-003-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "salted-egg-yolk-lava-bun-filling-portion-01"
+        ],
+        "nodeId": "salted-egg-yolk-lava-bun-filling-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "salted-egg-yolk-lava-bun-filling-op-004-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "salted-egg-yolk-lava-bun-filling",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e87908f0a5afc5",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "salted-egg-yolk-lava-bun-filling-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "salted-egg-yolk-lava-bun-filling-salted-egg-yolk-lava-bun-filling-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-e4e87908f0a5afc5",
+      "causeCodes": [
+        "operation-omitted:steam"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-steam"
+      ],
+      "mutation": {
+        "targetNodeId": "salted-egg-yolk-lava-bun-filling-op-002-steam",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "salted-egg-yolk-lava-bun-filling-salted-egg-yolk-lava-bun-filling-op-002-steam-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 4,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "salted-egg-yolk-lava-bun-filling",
+  "yield": {
+    "amount": 4,
+    "unit": "piece"
+  }
+}

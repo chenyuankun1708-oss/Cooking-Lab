@@ -1,0 +1,509 @@
+{
+  "artifactVersion": "clv1-84916c01cc0cf4b0",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-d-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "comforting",
+        "hearty"
+      ],
+      "tastes": {
+        "salty": 2
+      },
+      "textureIds": [
+        "crisp",
+        "tender"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch D; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "baking"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "side"
+      ],
+      "servingContextIds": [
+        "breakfast"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "wheat-flour",
+      "initialState": "dry",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+      "optional": false,
+      "phase": "main",
+      "portionId": "biscuits-and-gravy-biscuits-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "butter",
+      "initialState": "raw",
+      "massG": 120,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+      "optional": false,
+      "phase": "main",
+      "portionId": "biscuits-and-gravy-biscuits-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 120,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "buttermilk",
+      "initialState": "liquid",
+      "massG": 300,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-buttermilk",
+      "optional": false,
+      "phase": "main",
+      "portionId": "biscuits-and-gravy-biscuits-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 300,
+        "conversionRecordId": "buttermilk:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "usda-baking-powder",
+      "initialState": "dry",
+      "massG": 12,
+      "nutritionProvenanceId": "usda-fdc:172803:sr-legacy-2018-04",
+      "optional": false,
+      "phase": "main",
+      "portionId": "biscuits-and-gravy-biscuits-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "salt",
+      "initialState": "raw",
+      "massG": 5,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+      "optional": false,
+      "phase": "main",
+      "portionId": "biscuits-and-gravy-biscuits-portion-05",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 5,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "dish",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0,
+      "calories": 268.1,
+      "carbs": 30.84,
+      "fat": 13.85,
+      "fiber": 1.02,
+      "protein": 5.2,
+      "saturatedFat": 8.54,
+      "sodium": 446.4,
+      "sugar": 1.93
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "wheat-flour",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-wheat-flour",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "wheat-flour",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "butter",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-butter",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "butter",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "buttermilk",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-buttermilk",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "buttermilk",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "usda-baking-powder",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "usda-fdc:172803:sr-legacy-2018-04",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "usda-baking-powder",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "salt",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-salt",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "salt",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 8,
+    "total": {
+      "addedSugar": 0,
+      "calories": 2144.76,
+      "carbs": 246.74,
+      "fat": 110.82,
+      "fiber": 8.12,
+      "protein": 41.58,
+      "saturatedFat": 68.28,
+      "sodium": 3571.2,
+      "sugar": 15.42
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "biscuits-and-gravy-biscuits-portion-01",
+          "biscuits-and-gravy-biscuits-portion-04",
+          "biscuits-and-gravy-biscuits-portion-05"
+        ],
+        "nodeId": "biscuits-and-gravy-biscuits-op-001-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "biscuits-and-gravy-biscuits-op-001-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.3
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 60000,
+        "criticality": "quality",
+        "dependsOn": [
+          "biscuits-and-gravy-biscuits-op-001-mix"
+        ],
+        "equipmentId": "whisk",
+        "inputPortionIds": [
+          "biscuits-and-gravy-biscuits-portion-02",
+          "biscuits-and-gravy-biscuits-portion-03"
+        ],
+        "nodeId": "biscuits-and-gravy-biscuits-op-002-whisk",
+        "operationType": "whisk",
+        "outputStateIds": [
+          "biscuits-and-gravy-biscuits-op-002-whisk-done"
+        ],
+        "parameters": {
+          "strength": 0.5
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 30000,
+        "criticality": "quality",
+        "dependsOn": [
+          "biscuits-and-gravy-biscuits-op-002-whisk"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "biscuits-and-gravy-biscuits-portion-01",
+          "biscuits-and-gravy-biscuits-portion-02",
+          "biscuits-and-gravy-biscuits-portion-03",
+          "biscuits-and-gravy-biscuits-portion-04",
+          "biscuits-and-gravy-biscuits-portion-05"
+        ],
+        "nodeId": "biscuits-and-gravy-biscuits-op-003-mix",
+        "operationType": "mix",
+        "outputStateIds": [
+          "biscuits-and-gravy-biscuits-op-003-mix-done"
+        ],
+        "parameters": {
+          "strength": 0.35
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.65,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [
+          "biscuits-and-gravy-biscuits-op-003-mix"
+        ],
+        "equipmentId": "oven",
+        "inputPortionIds": [
+          "biscuits-and-gravy-biscuits-portion-01"
+        ],
+        "nodeId": "biscuits-and-gravy-biscuits-op-004-bake",
+        "operationType": "bake",
+        "outputStateIds": [
+          "biscuits-and-gravy-biscuits-op-004-bake-done"
+        ],
+        "parameters": {
+          "temperatureC": 230
+        },
+        "sourceStepOrder": 4,
+        "targetStates": [
+          {
+            "dimension": "doneness",
+            "minimum": 0.95,
+            "unit": "normalized"
+          },
+          {
+            "dimension": "browning",
+            "maximum": 0.65,
+            "minimum": 0.4,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 600000
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "biscuits-and-gravy-biscuits-op-004-bake"
+        ],
+        "inputPortionIds": [
+          "biscuits-and-gravy-biscuits-portion-01"
+        ],
+        "nodeId": "biscuits-and-gravy-biscuits-op-005-remove",
+        "operationType": "remove",
+        "outputStateIds": [
+          "biscuits-and-gravy-biscuits-op-005-remove-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "biscuits-and-gravy-biscuits-op-005-remove"
+        ],
+        "equipmentId": "heatproof-plate",
+        "inputPortionIds": [
+          "biscuits-and-gravy-biscuits-portion-01"
+        ],
+        "nodeId": "biscuits-and-gravy-biscuits-op-006-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "biscuits-and-gravy-biscuits-op-006-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 6,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "biscuits-and-gravy-biscuits",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-84916c01cc0cf4b0",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "biscuits-and-gravy-biscuits-op-001-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "biscuits-and-gravy-biscuits-biscuits-and-gravy-biscuits-op-001-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-84916c01cc0cf4b0",
+      "causeCodes": [
+        "operation-omitted:whisk"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-whisk"
+      ],
+      "mutation": {
+        "targetNodeId": "biscuits-and-gravy-biscuits-op-002-whisk",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "biscuits-and-gravy-biscuits-biscuits-and-gravy-biscuits-op-002-whisk-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-84916c01cc0cf4b0",
+      "causeCodes": [
+        "operation-omitted:mix"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-mix"
+      ],
+      "mutation": {
+        "targetNodeId": "biscuits-and-gravy-biscuits-op-003-mix",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "biscuits-and-gravy-biscuits-biscuits-and-gravy-biscuits-op-003-mix-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-84916c01cc0cf4b0",
+      "causeCodes": [
+        "operation-omitted:bake"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-bake"
+      ],
+      "mutation": {
+        "targetNodeId": "biscuits-and-gravy-biscuits-op-004-bake",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "biscuits-and-gravy-biscuits-biscuits-and-gravy-biscuits-op-004-bake-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 8,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "biscuits-and-gravy-biscuits",
+  "yield": {
+    "amount": 8,
+    "unit": "piece"
+  }
+}

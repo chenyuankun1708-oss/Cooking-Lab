@@ -1,0 +1,343 @@
+{
+  "artifactVersion": "clv1-391e20ca954e5652",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-d-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "clean-tasting",
+        "appetizing"
+      ],
+      "tastes": {
+        "bitter": 2
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch D; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "gin-80",
+      "initialState": "liquid",
+      "massG": 57,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gin-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "martini-classic-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 57,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "dry-vermouth",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-vermouth",
+      "optional": false,
+      "phase": "main",
+      "portionId": "martini-classic-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 0.48,
+      "calories": 145.83,
+      "carbs": 0.6,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0,
+      "sugar": 0.48
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "gin-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-gin-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "gin-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "dry-vermouth",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-dry-vermouth",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "dry-vermouth",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 0.48,
+      "calories": 145.83,
+      "carbs": 0.6,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0,
+      "sugar": 0.48
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "martini-classic-portion-01"
+        ],
+        "nodeId": "martini-classic-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "martini-classic-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "martini-classic-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "martini-classic-portion-01",
+          "martini-classic-portion-02"
+        ],
+        "nodeId": "martini-classic-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "martini-classic-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 69
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "martini-classic-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "martini-classic-portion-01"
+        ],
+        "nodeId": "martini-classic-op-003-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "martini-classic-op-003-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "martini-classic-op-003-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "martini-classic-portion-01"
+        ],
+        "nodeId": "martini-classic-op-004-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "martini-classic-op-004-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "martini-classic-op-004-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "martini-classic-portion-01"
+        ],
+        "nodeId": "martini-classic-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "martini-classic-op-005-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "martini-classic",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-391e20ca954e5652",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "martini-classic-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "martini-classic-martini-classic-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-391e20ca954e5652",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "martini-classic-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "martini-classic-martini-classic-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-391e20ca954e5652",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "martini-classic-op-003-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "martini-classic-martini-classic-op-003-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "martini-classic",
+  "yield": {
+    "amount": 70,
+    "unit": "ml"
+  }
+}

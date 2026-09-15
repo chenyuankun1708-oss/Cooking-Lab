@@ -1,0 +1,473 @@
+{
+  "artifactVersion": "clv1-1a3a7eeb34255d41",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-c-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "fruity",
+        "roasted"
+      ],
+      "characterIds": [
+        "refreshing",
+        "light"
+      ],
+      "tastes": {
+        "bitter": 1,
+        "sour": 1,
+        "sweet": 2
+      },
+      "textureIds": [
+        "crisp"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch C; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "japanese"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "aperitif",
+        "social-gathering"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "raspberry-liqueur",
+      "initialState": "liquid",
+      "massG": 42,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-raspberry-liqueur",
+      "optional": false,
+      "phase": "main",
+      "portionId": "umeshu-highball-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 42,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "scotch-80",
+      "initialState": "liquid",
+      "massG": 14,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scotch-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "umeshu-highball-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "pineapple-juice",
+      "initialState": "liquid",
+      "massG": 22,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pineapple-juice",
+      "optional": false,
+      "phase": "main",
+      "portionId": "umeshu-highball-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 22,
+        "conversionRecordId": "pineapple-juice:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "lemon",
+      "initialState": "raw",
+      "massG": 6,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+      "optional": false,
+      "phase": "main",
+      "portionId": "umeshu-highball-portion-04",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 6,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "orange-bitters",
+      "initialState": "liquid",
+      "massG": 1,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-bitters",
+      "optional": false,
+      "phase": "main",
+      "portionId": "umeshu-highball-portion-05",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 1,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "ginger-ale",
+      "initialState": "liquid",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger-ale",
+      "optional": false,
+      "phase": "main",
+      "portionId": "umeshu-highball-portion-06",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "ginger-ale:ml:weight-v1",
+        "unit": "ml"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 24.48,
+      "calories": 201.08,
+      "carbs": 27.9,
+      "fat": 0.04,
+      "fiber": 0.21,
+      "protein": 0.15,
+      "saturatedFat": 0,
+      "sodium": 8.52,
+      "sugar": 26.83
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "raspberry-liqueur",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-raspberry-liqueur",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "raspberry-liqueur",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scotch-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scotch-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scotch-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "pineapple-juice",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-pineapple-juice",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "pineapple-juice",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "lemon",
+        "ingredientState": "raw",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-lemon",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "lemon",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "orange-bitters",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-orange-bitters",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "orange-bitters",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "ginger-ale",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-ginger-ale",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "ginger-ale",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 24.48,
+      "calories": 201.08,
+      "carbs": 27.9,
+      "fat": 0.04,
+      "fiber": 0.21,
+      "protein": 0.15,
+      "saturatedFat": 0,
+      "sodium": 8.52,
+      "sugar": 26.83
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "umeshu-highball-portion-01"
+        ],
+        "nodeId": "umeshu-highball-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "umeshu-highball-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "umeshu-highball-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "umeshu-highball-portion-01",
+          "umeshu-highball-portion-02",
+          "umeshu-highball-portion-03",
+          "umeshu-highball-portion-04",
+          "umeshu-highball-portion-05",
+          "umeshu-highball-portion-06"
+        ],
+        "nodeId": "umeshu-highball-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "umeshu-highball-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 145
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "umeshu-highball-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "umeshu-highball-portion-01"
+        ],
+        "nodeId": "umeshu-highball-op-003-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "umeshu-highball-op-003-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "umeshu-highball-op-003-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "umeshu-highball-portion-01"
+        ],
+        "nodeId": "umeshu-highball-op-004-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "umeshu-highball-op-004-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "umeshu-highball-op-004-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "umeshu-highball-portion-01"
+        ],
+        "nodeId": "umeshu-highball-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "umeshu-highball-op-005-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "umeshu-highball",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1a3a7eeb34255d41",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "umeshu-highball-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "umeshu-highball-umeshu-highball-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1a3a7eeb34255d41",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "umeshu-highball-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "umeshu-highball-umeshu-highball-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1a3a7eeb34255d41",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "umeshu-highball-op-003-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "umeshu-highball-umeshu-highball-op-003-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "umeshu-highball",
+  "yield": {
+    "amount": 150,
+    "unit": "ml"
+  }
+}

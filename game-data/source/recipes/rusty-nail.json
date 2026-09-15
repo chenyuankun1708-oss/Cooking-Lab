@@ -1,0 +1,347 @@
+{
+  "artifactVersion": "clv1-1e40c4d05e535ff8",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-c-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "herbal"
+      ],
+      "characterIds": [
+        "warming",
+        "hearty"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 3
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch C; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "british"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "scotch-80",
+      "initialState": "liquid",
+      "massG": 47,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scotch-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "rusty-nail-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 47,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "drambuie",
+      "initialState": "liquid",
+      "massG": 21,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drambuie",
+      "optional": false,
+      "phase": "main",
+      "portionId": "rusty-nail-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 21,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 7.98,
+      "calories": 170.94,
+      "carbs": 7.98,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0.47,
+      "sugar": 7.98
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "scotch-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-scotch-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "scotch-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-14",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "drambuie",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-drambuie",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "drambuie",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 7.98,
+      "calories": 170.94,
+      "carbs": 7.98,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 0.47,
+      "sugar": 7.98
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "rusty-nail-portion-01"
+        ],
+        "nodeId": "rusty-nail-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "rusty-nail-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "rusty-nail-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "rusty-nail-portion-01",
+          "rusty-nail-portion-02"
+        ],
+        "nodeId": "rusty-nail-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "rusty-nail-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 68
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "rusty-nail-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "rusty-nail-portion-01"
+        ],
+        "nodeId": "rusty-nail-op-003-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "rusty-nail-op-003-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "rusty-nail-op-003-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "rusty-nail-portion-01"
+        ],
+        "nodeId": "rusty-nail-op-004-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "rusty-nail-op-004-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "rusty-nail-op-004-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "rusty-nail-portion-01"
+        ],
+        "nodeId": "rusty-nail-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "rusty-nail-op-005-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "rusty-nail",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1e40c4d05e535ff8",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "rusty-nail-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "rusty-nail-rusty-nail-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1e40c4d05e535ff8",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "rusty-nail-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "rusty-nail-rusty-nail-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-1e40c4d05e535ff8",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "rusty-nail-op-003-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "rusty-nail-rusty-nail-op-003-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "rusty-nail",
+  "yield": {
+    "amount": 70,
+    "unit": "ml"
+  }
+}

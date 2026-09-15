@@ -1,0 +1,374 @@
+{
+  "artifactVersion": "clv1-d27f8b05b96d5a5d",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-d-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "characterIds": [
+        "warming",
+        "hearty"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 2
+      }
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch D; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "american"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "bourbon-80",
+      "initialState": "liquid",
+      "massG": 47,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bourbon-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-blackstrap-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 47,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "blackstrap-rum",
+      "initialState": "liquid",
+      "massG": 12,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-blackstrap-rum",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-blackstrap-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 12,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "angostura-bitters",
+      "initialState": "liquid",
+      "massG": 2,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-angostura-bitters",
+      "optional": false,
+      "phase": "main",
+      "portionId": "old-fashioned-blackstrap-portion-03",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 2,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 1.1,
+      "calories": 143.77,
+      "carbs": 1.29,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 3.23,
+      "sugar": 1.1
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "bourbon-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-bourbon-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "bourbon-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "blackstrap-rum",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-blackstrap-rum",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "blackstrap-rum",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "angostura-bitters",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-angostura-bitters",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "angostura-bitters",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 1.1,
+      "calories": 143.77,
+      "carbs": 1.29,
+      "fat": 0,
+      "fiber": 0,
+      "protein": 0,
+      "saturatedFat": 0,
+      "sodium": 3.23,
+      "sugar": 1.1
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-blackstrap-portion-01"
+        ],
+        "nodeId": "old-fashioned-blackstrap-op-001-chill",
+        "operationType": "chill",
+        "outputStateIds": [
+          "old-fashioned-blackstrap-op-001-chill-done"
+        ],
+        "parameters": {
+          "temperatureC": -18
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [],
+        "waitDurationMs": 300000
+      },
+      {
+        "activeDurationMs": 10000,
+        "criticality": "quality",
+        "dependsOn": [
+          "old-fashioned-blackstrap-op-001-chill"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-blackstrap-portion-01",
+          "old-fashioned-blackstrap-portion-02",
+          "old-fashioned-blackstrap-portion-03"
+        ],
+        "nodeId": "old-fashioned-blackstrap-op-002-add",
+        "operationType": "add",
+        "outputStateIds": [
+          "old-fashioned-blackstrap-op-002-add-done"
+        ],
+        "parameters": {
+          "quantityG": 61
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 15000,
+        "criticality": "quality",
+        "dependsOn": [
+          "old-fashioned-blackstrap-op-002-add"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "old-fashioned-blackstrap-portion-01"
+        ],
+        "nodeId": "old-fashioned-blackstrap-op-003-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "old-fashioned-blackstrap-op-003-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 3,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.45,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "old-fashioned-blackstrap-op-003-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-blackstrap-portion-01"
+        ],
+        "nodeId": "old-fashioned-blackstrap-op-004-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "old-fashioned-blackstrap-op-004-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "old-fashioned-blackstrap-op-004-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "old-fashioned-blackstrap-portion-01"
+        ],
+        "nodeId": "old-fashioned-blackstrap-op-005-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "old-fashioned-blackstrap-op-005-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 5,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "old-fashioned-blackstrap",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d27f8b05b96d5a5d",
+      "causeCodes": [
+        "operation-omitted:chill"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-chill"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-blackstrap-op-001-chill",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-blackstrap-old-fashioned-blackstrap-op-001-chill-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d27f8b05b96d5a5d",
+      "causeCodes": [
+        "operation-omitted:add"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-add"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-blackstrap-op-002-add",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-blackstrap-old-fashioned-blackstrap-op-002-add-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-d27f8b05b96d5a5d",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "old-fashioned-blackstrap-op-003-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "old-fashioned-blackstrap-old-fashioned-blackstrap-op-003-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "old-fashioned-blackstrap",
+  "yield": {
+    "amount": 60,
+    "unit": "ml"
+  }
+}

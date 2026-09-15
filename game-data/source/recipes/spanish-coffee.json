@@ -1,0 +1,370 @@
+{
+  "artifactVersion": "clv1-cc6af7cec4db19b8",
+  "authoring": {
+    "containsGeneratedExpression": false,
+    "generatorVersion": "m13-database-batch-d-1",
+    "method": "deterministic-migration",
+    "unresolvedMappings": []
+  },
+  "database": {
+    "extensionVersion": "cooking-lab-recipe-database-v1",
+    "flavor": {
+      "aromaIds": [
+        "roasted"
+      ],
+      "characterIds": [
+        "warming",
+        "comforting"
+      ],
+      "tastes": {
+        "bitter": 2,
+        "sweet": 2
+      },
+      "textureIds": [
+        "creamy"
+      ]
+    },
+    "images": [
+      {
+        "status": "missing"
+      }
+    ],
+    "sourceNotes": "Knowledge-base authored draft for the recipe database batch D; not eligible for Web publication or game export without full independent review.",
+    "sourceType": "ai-assisted",
+    "tags": {
+      "categoryTags": [
+        "bartending"
+      ],
+      "cuisineIds": [
+        "spanish"
+      ],
+      "mealRoleIds": [
+        "drink"
+      ],
+      "servingContextIds": [
+        "after-meal"
+      ]
+    }
+  },
+  "eligibility": "database-entry",
+  "governance": {
+    "reviewAttestationIds": [],
+    "riskClassificationId": "",
+    "riskLevel": "low"
+  },
+  "ingredientPortions": [
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brandy-80",
+      "initialState": "liquid",
+      "massG": 38,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brandy-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "spanish-coffee-portion-01",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 38,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "coffee-liqueur-80",
+      "initialState": "liquid",
+      "massG": 14,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coffee-liqueur-80",
+      "optional": false,
+      "phase": "main",
+      "portionId": "spanish-coffee-portion-02",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 14,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brewed-espresso",
+      "initialState": "liquid",
+      "massG": 60,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brewed-espresso",
+      "optional": false,
+      "phase": "main",
+      "portionId": "spanish-coffee-portion-03",
+      "role": "main",
+      "sourceQuantity": {
+        "amount": 60,
+        "conversionRecordId": "brewed-espresso:ml:weight-v1",
+        "unit": "ml"
+      }
+    },
+    {
+      "allowedSubstitutionIngredientIds": [],
+      "ingredientId": "brown-sugar",
+      "initialState": "dry",
+      "massG": 8,
+      "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+      "optional": false,
+      "phase": "main",
+      "portionId": "spanish-coffee-portion-04",
+      "role": "seasoning",
+      "sourceQuantity": {
+        "amount": 8,
+        "conversionRecordId": "si:g:v1",
+        "unit": "g"
+      }
+    }
+  ],
+  "itemType": "alcoholic-drink",
+  "nutritionProfile": {
+    "estimated": true,
+    "method": "ingredient-sum-v1",
+    "perServing": {
+      "addedSugar": 12.24,
+      "calories": 169.36,
+      "carbs": 13.49,
+      "fat": 0.12,
+      "fiber": 0,
+      "protein": 0.06,
+      "saturatedFat": 0.06,
+      "sodium": 13.42,
+      "sugar": 12.24
+    },
+    "provenance": [
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brandy-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brandy-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brandy-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "coffee-liqueur-80",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-coffee-liqueur-80",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "coffee-liqueur-80",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brewed-espresso",
+        "ingredientState": "liquid",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brewed-espresso",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brewed-espresso",
+        "yieldFactor": 1
+      },
+      {
+        "accessedAt": "2026-09-15",
+        "basis": "per-100g",
+        "conversionMethod": "existing unit weight to grams; ingredient-sum-v1",
+        "datasetVersion": "demo-estimated-v1",
+        "ingredientId": "brown-sugar",
+        "ingredientState": "dry",
+        "nutritionProvenanceId": "cooking-lab-editorial-nutrition-brown-sugar",
+        "provider": "Cooking Lab editorial estimate",
+        "retentionFactor": 1,
+        "upstreamRecordId": "brown-sugar",
+        "yieldFactor": 1
+      }
+    ],
+    "servings": 1,
+    "total": {
+      "addedSugar": 12.24,
+      "calories": 169.36,
+      "carbs": 13.49,
+      "fat": 0.12,
+      "fiber": 0,
+      "protein": 0.06,
+      "saturatedFat": 0.06,
+      "sodium": 13.42,
+      "sugar": 12.24
+    }
+  },
+  "operationGraph": {
+    "nodes": [
+      {
+        "activeDurationMs": 0,
+        "criticality": "quality",
+        "dependsOn": [],
+        "equipmentId": "kettle",
+        "inputPortionIds": [
+          "spanish-coffee-portion-01",
+          "spanish-coffee-portion-02",
+          "spanish-coffee-portion-03",
+          "spanish-coffee-portion-04"
+        ],
+        "nodeId": "spanish-coffee-op-001-brew",
+        "operationType": "brew",
+        "outputStateIds": [
+          "spanish-coffee-op-001-brew-done"
+        ],
+        "parameters": {
+          "temperatureC": 90
+        },
+        "sourceStepOrder": 1,
+        "targetStates": [
+          {
+            "dimension": "aroma",
+            "minimum": 0.5,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 240000
+      },
+      {
+        "activeDurationMs": 20000,
+        "criticality": "quality",
+        "dependsOn": [
+          "spanish-coffee-op-001-brew"
+        ],
+        "equipmentId": "mixing-bowl",
+        "inputPortionIds": [
+          "spanish-coffee-portion-01"
+        ],
+        "nodeId": "spanish-coffee-op-002-stir",
+        "operationType": "stir",
+        "outputStateIds": [
+          "spanish-coffee-op-002-stir-done"
+        ],
+        "parameters": {
+          "strength": 0.4
+        },
+        "sourceStepOrder": 2,
+        "targetStates": [
+          {
+            "dimension": "structural-integrity",
+            "minimum": 0.8,
+            "unit": "normalized"
+          }
+        ],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 8000,
+        "criticality": "completion",
+        "dependsOn": [
+          "spanish-coffee-op-002-stir"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "spanish-coffee-portion-01"
+        ],
+        "nodeId": "spanish-coffee-op-003-garnish",
+        "operationType": "garnish",
+        "outputStateIds": [
+          "spanish-coffee-op-003-garnish-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 3,
+        "targetStates": [],
+        "waitDurationMs": 0
+      },
+      {
+        "activeDurationMs": 5000,
+        "criticality": "completion",
+        "dependsOn": [
+          "spanish-coffee-op-003-garnish"
+        ],
+        "equipmentId": "glass",
+        "inputPortionIds": [
+          "spanish-coffee-portion-01"
+        ],
+        "nodeId": "spanish-coffee-op-004-serve",
+        "operationType": "serve",
+        "outputStateIds": [
+          "spanish-coffee-op-004-serve-done"
+        ],
+        "parameters": {},
+        "sourceStepOrder": 4,
+        "targetStates": [],
+        "waitDurationMs": 0
+      }
+    ]
+  },
+  "recipeId": "spanish-coffee",
+  "rights": {
+    "artifactIds": [],
+    "evidenceIds": [],
+    "intendedUse": "game-commercial-ready",
+    "sourceIds": [],
+    "usageDecisionIds": []
+  },
+  "scenarios": [
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cc6af7cec4db19b8",
+      "causeCodes": [
+        "operation-omitted:brew"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-brew"
+      ],
+      "mutation": {
+        "targetNodeId": "spanish-coffee-op-001-brew",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "spanish-coffee-spanish-coffee-op-001-brew-omit"
+    },
+    {
+      "applicableEngine": "requires-cat-kitchen-v2",
+      "baselineArtifactVersion": "clv1-cc6af7cec4db19b8",
+      "causeCodes": [
+        "operation-omitted:stir"
+      ],
+      "expectedDeltas": [
+        {
+          "confidence": "rule-based",
+          "dimension": "structural-integrity",
+          "direction": "decrease"
+        }
+      ],
+      "expectedFaultCodes": [
+        "missing-stir"
+      ],
+      "mutation": {
+        "targetNodeId": "spanish-coffee-op-002-stir",
+        "type": "omit"
+      },
+      "nutritionEffect": "unchanged",
+      "recoverability": "partially-recoverable",
+      "scenarioId": "spanish-coffee-spanish-coffee-op-002-stir-omit"
+    }
+  ],
+  "schemaVersion": "cooking-lab-game-recipe-v1",
+  "servings": 1,
+  "simulationProfile": "requires-cat-kitchen-v2",
+  "slug": "spanish-coffee",
+  "yield": {
+    "amount": 120,
+    "unit": "ml"
+  }
+}

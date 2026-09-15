@@ -25,7 +25,7 @@ function refreshArtifactVersion(recipe: GameRecipeV1): GameRecipeV1 {
 describe("M13 revised scope: recipe database entries", () => {
   const data = loadCanonicalGameData();
 
-  it("keeps the 120-item corpus structurally valid after the eligibility extension", () => {
+  it("keeps the 500-item corpus structurally valid after the eligibility extension", () => {
     const result = evaluateGameRecipeCorpus(data.recipes, {
       operations: gameOperationCatalog,
       ingredients: data.ingredients,
@@ -33,8 +33,8 @@ describe("M13 revised scope: recipe database entries", () => {
       now: "2026-09-11",
     });
     expect(result.issues).toEqual([]);
-    expect(result.recipeCount).toBe(120);
-    expect(result.databaseEntryCount).toBe(120);
+    expect(result.recipeCount).toBe(500);
+    expect(result.databaseEntryCount).toBe(500);
     expect(result.exportableCount).toBe(0);
   });
 

@@ -30,6 +30,11 @@ interface BrowseEntry {
   steps: number;
   sourceType: string;
   flavors: string[];
+  // Detail projection (for the entry drawer)
+  portionRows: Array<{ ingredient: string; grams: number; unit: string; role: string; optional: boolean }>;
+  stepRows: Array<{ order: number; op: string; durationS: number; equipment: string; note: string }>;
+  nutrition: { calories: number; protein: number; fat: number; saturatedFat: number; carbs: number; sugar: number; fiber: number; sodium: number };
+  sourceNotes: string;
 }
 
 const entries: BrowseEntry[] = data.recipes.map((recipe) => {
@@ -44,6 +49,7 @@ const entries: BrowseEntry[] = data.recipes.map((recipe) => {
     for (const texture of flavor.textureIds ?? []) flavors.push(texture);
     for (const character of flavor.characterIds ?? []) flavors.push(character);
   }
+  const per = recipe.nutritionProfile.perServing;
   return {
     slug: recipe.slug,
     itemType: recipe.itemType,
@@ -51,11 +57,31 @@ const entries: BrowseEntry[] = data.recipes.map((recipe) => {
     cuisine: db?.tags.cuisineIds?.[0] ?? "",
     contexts: [...(db?.tags.servingContextIds ?? [])],
     servings: recipe.servings,
-    kcalPerServing: Math.round(recipe.nutritionProfile.perServing.calories),
+    kcalPerServing: Math.round(per.calories),
     portions: recipe.ingredientPortions.length,
     steps: recipe.operationGraph.nodes.length,
     sourceType: db?.sourceType ?? "",
     flavors: flavors.slice(0, 5),
+    portionRows: recipe.ingredientPortions.map((portion) => ({
+      ingredient: portion.ingredientId,
+      grams: portion.massG,
+      unit: `${portion.sourceQuantity.amount} ${portion.sourceQuantity.unit}`,
+      role: portion.role ?? "main",
+      optional: portion.optional,
+    })),
+    stepRows: recipe.operationGraph.nodes.map((node, index) => ({
+      order: node.sourceStepOrder ?? index + 1,
+      op: node.operationType,
+      durationS: Math.round((node.activeDurationMs + node.waitDurationMs) / 1000),
+      equipment: node.equipmentId ?? "",
+      note: node.heatControl ? `${node.parameters?.temperatureC ?? ""}${node.heatControl.kind === "qualitative" ? " (qualitative heat)" : ""}` : Object.entries(node.parameters ?? {}).map(([key, value]) => `${key}=${value}`).join(" "),
+    })),
+    nutrition: {
+      calories: Math.round(per.calories), protein: Math.round(per.protein), fat: Math.round(per.fat),
+      saturatedFat: Math.round(per.saturatedFat), carbs: Math.round(per.carbs), sugar: Math.round(per.sugar),
+      fiber: Math.round(per.fiber), sodium: Math.round(per.sodium),
+    },
+    sourceNotes: db?.sourceNotes ?? "",
   };
 });
 
@@ -90,6 +116,10 @@ export interface DatabaseBrowseEntry {
   steps: number;
   sourceType: string;
   flavors: string[];
+  portionRows: Array<{ ingredient: string; grams: number; unit: string; role: string; optional: boolean }>;
+  stepRows: Array<{ order: number; op: string; durationS: number; equipment: string; note: string }>;
+  nutrition: { calories: number; protein: number; fat: number; saturatedFat: number; carbs: number; sugar: number; fiber: number; sodium: number };
+  sourceNotes: string;
 }
 
 export interface DatabaseBrowseSummary {

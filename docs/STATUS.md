@@ -1,6 +1,6 @@
 # Status
 
-最近更新：2026-09-15
+最近更新：2026-09-16
 
 ## Cat Kitchen Goal 17 本地 authoring 状态
 
@@ -14,6 +14,8 @@
 - source 绑定真实 ingredient/operation/nutrition/rights 文件及冻结 Goal 16 calibration
   reference 的 SHA-256；placeholder、unsafe/missing/mismatched source、未审核/未批准权利、
   不兼容、未知引用、非有限数和超过六位精度均 fail closed。
+- `2a9213a` 将 Dish Identity threshold 从 Cooking Lab authoring/source/schema 中移除；Cooking
+  Lab 只提供 archetype 特征与证据，Cat Kitchen 通过独立版本化 tuning 合同拥有判定阈值。
 - 生成的 snapshot/manifest 位于 `.local/game-data/culinary-knowledge/`，不是 source of truth，
   也不改变当前 120 database entries、0 game-exportable recipes 的门禁事实。
 

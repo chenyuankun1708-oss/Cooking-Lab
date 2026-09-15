@@ -61,6 +61,10 @@ co-occurrence may use only association polarity and may not be promoted to a phy
 clash. Draft, unreviewed, rights-unapproved, incompatible, unknown-reference, unsafe-path,
 non-finite, over-precision or source-hash-mismatched content fails closed.
 
+Dish archetypes carry evidence and sensory/structural features, not Cat Kitchen gameplay
+thresholds. Cat Kitchen owns a separately versioned and checksummed identity-tuning contract and
+joins it only at its Wok adapter boundary.
+
 ## Versioned contracts
 
 - `GameRecipeV1` records stable IDs, quantified portions, a dependency graph, USDA-derived nutrition, simulation scenarios and export eligibility.

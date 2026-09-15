@@ -24,6 +24,7 @@ type JsonRecord = Record<string, unknown>;
 
 const inputPath = process.argv[2] ?? DEFAULT_INPUT;
 const input = JSON.parse(readFileSync(resolve(inputPath), "utf8")) as JsonRecord;
+restoreGoal16PhysicalCalibration(input);
 const reference = {
   schema_id: "cat_kitchen.goal16_culinary_calibration_reference.v1",
   schema_version: 1,
@@ -134,3 +135,22 @@ function sourceFile(path: string, role: CulinaryKnowledgeSourceFileV1["role"]): 
 function writeStable(path: string, value: unknown): void { const target = resolve(path); mkdirSync(dirname(target), { recursive: true }); writeFileSync(target, stableJson(value)); }
 function mapNutrition(value: JsonRecord) { return { carbohydrateG: number(value.carbohydrate_g), energyKcal: number(value.energy_kcal), fatG: number(value.fat_g), fiberG: number(value.fiber_g), proteinG: number(value.protein_g) }; }
 function mapPhysical(value: JsonRecord) { return { aromaPotential: number(value.aroma_potential), baseAcidity: number(value.base_acidity), baseBitterness: number(value.base_bitterness), basePungency: number(value.base_pungency), baseSweetness: number(value.base_sweetness), baseUmami: number(value.base_umami), browningPotential: number(value.browning_potential), evaporationRate: number(value.evaporation_rate), fatFraction: number(value.fat_fraction), proteinFraction: number(value.protein_fraction), sugarFraction: number(value.sugar_fraction), thermalResponse: number(value.thermal_response), waterFraction: number(value.water_fraction) }; }
+function restoreGoal16PhysicalCalibration(value: JsonRecord): void {
+  for (const ingredient of rows(value, "ingredient_knowledge")) {
+    const physical = record(ingredient.physical_model);
+    const water = number(physical.water_fraction);
+    const protein = number(physical.protein_fraction);
+    const sugar = number(physical.sugar_fraction);
+    const umami = number(physical.base_umami);
+    physical.thermal_response = quantize(1 + protein * 0.8);
+    physical.evaporation_rate = quantize(0.72 + water * 0.2);
+    physical.browning_potential = quantize(Math.min(1, Math.max(0, 0.25 + protein + sugar)));
+    physical.aroma_potential = quantize(text(ingredient.role) === "aromatic" ? 0.55 : 0.24 + umami);
+  }
+  for (const seasoning of rows(value, "seasonings")) {
+    if (text(seasoning.id) === "salt" || text(seasoning.id) === "sugar") {
+      seasoning.heat_sensitivity = 0.5;
+    }
+  }
+}
+function quantize(value: number): number { return Number(value.toFixed(6)); }

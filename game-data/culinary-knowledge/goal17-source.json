@@ -313,6 +313,60 @@
   ],
   "dishArchetypes": [
     {
+      "archetype": "clear_noodle_soup",
+      "aroma": 0.72,
+      "commentaryEvidenceIds": [
+        "dish.harmony.score",
+        "dish.identity.similarity"
+      ],
+      "cuisineId": "cat_kitchen_calibration",
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "beef_pho",
+      "ingredientIds": [
+        "beef",
+        "onion",
+        "rice_noodle",
+        "star_anise"
+      ],
+      "platingComponentIds": [
+        "aromatic_fleck",
+        "leaf_cluster",
+        "protein_piece"
+      ],
+      "sequence": [
+        "onion",
+        "star_anise",
+        "beef",
+        "rice_noodle"
+      ],
+      "taste": {
+        "acidity": 0.12,
+        "pungency": 0.05,
+        "sweetness": 0.12,
+        "umami": 0.72
+      },
+      "texture": 0.72
+    },
+    {
       "archetype": "hearty_stir_fry",
       "aroma": 0.52,
       "commentaryEvidenceIds": [
@@ -760,6 +814,116 @@
       "texture": 0.66
     },
     {
+      "archetype": "aromatic_wok",
+      "aroma": 0.9,
+      "commentaryEvidenceIds": [
+        "dish.harmony.score",
+        "dish.identity.similarity"
+      ],
+      "cuisineId": "cat_kitchen_calibration",
+      "engineCapabilityIds": [
+        "dish_engine_v2_wok"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "thai_basil_chicken",
+      "ingredientIds": [
+        "chicken",
+        "chili",
+        "thai_basil"
+      ],
+      "platingComponentIds": [
+        "aromatic_fleck",
+        "leaf_cluster",
+        "protein_piece"
+      ],
+      "sequence": [
+        "chicken",
+        "chili",
+        "thai_basil"
+      ],
+      "taste": {
+        "acidity": 0.08,
+        "pungency": 0.65,
+        "sweetness": 0.08,
+        "umami": 0.7
+      },
+      "texture": 0.68
+    },
+    {
+      "archetype": "bright_aromatic_soup",
+      "aroma": 0.92,
+      "commentaryEvidenceIds": [
+        "dish.harmony.score",
+        "dish.identity.similarity"
+      ],
+      "cuisineId": "cat_kitchen_calibration",
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "tom_yum_goong",
+      "ingredientIds": [
+        "chili",
+        "galangal",
+        "lemongrass",
+        "lime_leaf",
+        "mushroom",
+        "shrimp"
+      ],
+      "platingComponentIds": [
+        "aromatic_fleck",
+        "leaf_cluster",
+        "protein_piece"
+      ],
+      "sequence": [
+        "lemongrass",
+        "galangal",
+        "lime_leaf",
+        "mushroom",
+        "shrimp",
+        "chili"
+      ],
+      "taste": {
+        "acidity": 0.72,
+        "pungency": 0.62,
+        "sweetness": 0.12,
+        "umami": 0.68
+      },
+      "texture": 0.62
+    },
+    {
       "archetype": "savory_scramble",
       "aroma": 0.48,
       "commentaryEvidenceIds": [
@@ -810,6 +974,33 @@
     }
   ],
   "engineCapabilities": [
+    {
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "dish_engine_v2_pot",
+      "supports": [
+        "commentary_v1",
+        "dish_profile_v1",
+        "physical_truth_wrap",
+        "plating_plan_v1",
+        "pot"
+      ]
+    },
     {
       "governance": {
         "compatibilityStatus": "compatible",
@@ -866,6 +1057,62 @@
       "polarity": "complement",
       "semanticCategory": "physical",
       "strength": 1
+    },
+    {
+      "evidenceCode": "flavor.complement.beef_rice_noodle_physical",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "beef_rice_noodle_physical",
+      "ingredientIds": [
+        "beef",
+        "rice_noodle"
+      ],
+      "polarity": "complement",
+      "semanticCategory": "physical",
+      "strength": 0.72
+    },
+    {
+      "evidenceCode": "flavor.complement.beef_star_anise_physical",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "beef_star_anise_physical",
+      "ingredientIds": [
+        "beef",
+        "star_anise"
+      ],
+      "polarity": "complement",
+      "semanticCategory": "physical",
+      "strength": 0.82
     },
     {
       "evidenceCode": "flavor.physical.complement.aromatic_green",
@@ -1006,6 +1253,34 @@
       "polarity": "complement",
       "semanticCategory": "physical",
       "strength": 1
+    },
+    {
+      "evidenceCode": "flavor.complement.chicken_thai_basil_physical",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "chicken_thai_basil_physical",
+      "ingredientIds": [
+        "chicken",
+        "thai_basil"
+      ],
+      "polarity": "complement",
+      "semanticCategory": "physical",
+      "strength": 0.85
     },
     {
       "evidenceCode": "flavor.physical.complement.heat_fat",
@@ -1176,6 +1451,34 @@
       "strength": 1
     },
     {
+      "evidenceCode": "flavor.complement.galangal_shrimp_physical",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "galangal_shrimp_physical",
+      "ingredientIds": [
+        "galangal",
+        "shrimp"
+      ],
+      "polarity": "complement",
+      "semanticCategory": "physical",
+      "strength": 0.78
+    },
+    {
       "evidenceCode": "flavor.physical.clash.acid_bitter",
       "governance": {
         "compatibilityStatus": "compatible",
@@ -1202,6 +1505,62 @@
       "polarity": "clash",
       "semanticCategory": "physical",
       "strength": 1
+    },
+    {
+      "evidenceCode": "flavor.complement.lemongrass_lime_leaf_physical",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "lemongrass_lime_leaf_physical",
+      "ingredientIds": [
+        "lemongrass",
+        "lime_leaf"
+      ],
+      "polarity": "complement",
+      "semanticCategory": "physical",
+      "strength": 0.84
+    },
+    {
+      "evidenceCode": "flavor.complement.lemongrass_shrimp_physical",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "lemongrass_shrimp_physical",
+      "ingredientIds": [
+        "lemongrass",
+        "shrimp"
+      ],
+      "polarity": "complement",
+      "semanticCategory": "physical",
+      "strength": 0.82
     },
     {
       "evidenceCode": "flavor.physical.complement.umami_soft",
@@ -1320,6 +1679,61 @@
         "protein": 0.94
       },
       "role": "protein"
+    },
+    {
+      "colorId": "brown",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "beef_stock",
+      "ingredientStateIds": [
+        "liquid"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 0.5,
+        "energyKcal": 12,
+        "fatG": 0.4,
+        "fiberG": 0,
+        "proteinG": 2.2
+      },
+      "physicalModel": {
+        "aromaPotential": 0.35,
+        "baseAcidity": 0.01,
+        "baseBitterness": 0,
+        "basePungency": 0,
+        "baseSweetness": 0.01,
+        "baseUmami": 0.45,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.004,
+        "proteinFraction": 0.02,
+        "sugarFraction": 0.002,
+        "thermalResponse": 1,
+        "waterFraction": 0.97
+      },
+      "platingComponentId": "sauce_dark",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "liquid"
     },
     {
       "colorId": "bright",
@@ -1800,6 +2214,61 @@
       "role": "protein"
     },
     {
+      "colorId": "tan",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "galangal",
+      "ingredientStateIds": [
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 15,
+        "energyKcal": 71,
+        "fatG": 0.3,
+        "fiberG": 2,
+        "proteinG": 1
+      },
+      "physicalModel": {
+        "aromaPotential": 0.9,
+        "baseAcidity": 0.06,
+        "baseBitterness": 0,
+        "basePungency": 0.3,
+        "baseSweetness": 0.08,
+        "baseUmami": 0.12,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.003,
+        "proteinFraction": 0.01,
+        "sugarFraction": 0.03,
+        "thermalResponse": 1,
+        "waterFraction": 0.79
+      },
+      "platingComponentId": "aromatic_fleck",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "aromatic"
+    },
+    {
       "colorId": "pale",
       "governance": {
         "compatibilityStatus": "compatible",
@@ -1918,6 +2387,116 @@
         "protein": 0.94
       },
       "role": "produce"
+    },
+    {
+      "colorId": "green",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "lemongrass",
+      "ingredientStateIds": [
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 25.3,
+        "energyKcal": 99,
+        "fatG": 0.5,
+        "fiberG": 0,
+        "proteinG": 1.8
+      },
+      "physicalModel": {
+        "aromaPotential": 0.9,
+        "baseAcidity": 0.08,
+        "baseBitterness": 0,
+        "basePungency": 0.1,
+        "baseSweetness": 0.05,
+        "baseUmami": 0.12,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.005,
+        "proteinFraction": 0.018,
+        "sugarFraction": 0.04,
+        "thermalResponse": 1,
+        "waterFraction": 0.71
+      },
+      "platingComponentId": "vegetable_strip",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "aromatic"
+    },
+    {
+      "colorId": "green",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "lime_leaf",
+      "ingredientStateIds": [
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 10,
+        "energyKcal": 70,
+        "fatG": 1,
+        "fiberG": 5,
+        "proteinG": 6
+      },
+      "physicalModel": {
+        "aromaPotential": 0.9,
+        "baseAcidity": 0.35,
+        "baseBitterness": 0,
+        "basePungency": 0.08,
+        "baseSweetness": 0.03,
+        "baseUmami": 0.12,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.01,
+        "proteinFraction": 0.06,
+        "sugarFraction": 0.02,
+        "thermalResponse": 1,
+        "waterFraction": 0.69
+      },
+      "platingComponentId": "leaf_cluster",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "aromatic"
     },
     {
       "colorId": "brown",
@@ -2217,6 +2796,62 @@
       "role": "starch"
     },
     {
+      "colorId": "white",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "rice_noodle",
+      "ingredientStateIds": [
+        "hydrated",
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 25,
+        "energyKcal": 109,
+        "fatG": 0.2,
+        "fiberG": 0.8,
+        "proteinG": 1.8
+      },
+      "physicalModel": {
+        "aromaPotential": 0.35,
+        "baseAcidity": 0,
+        "baseBitterness": 0,
+        "basePungency": 0,
+        "baseSweetness": 0.05,
+        "baseUmami": 0.12,
+        "browningPotential": 0.6,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.002,
+        "proteinFraction": 0.018,
+        "sugarFraction": 0.01,
+        "thermalResponse": 1,
+        "waterFraction": 0.12
+      },
+      "platingComponentId": "grain_cluster",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "starch"
+    },
+    {
       "colorId": "green",
       "governance": {
         "compatibilityStatus": "compatible",
@@ -2273,6 +2908,171 @@
         "fat": 0.98,
         "fiber": 0.98,
         "protein": 0.94
+      },
+      "role": "aromatic"
+    },
+    {
+      "colorId": "pink",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "shrimp",
+      "ingredientStateIds": [
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 0.2,
+        "energyKcal": 99,
+        "fatG": 0.3,
+        "fiberG": 0,
+        "proteinG": 24
+      },
+      "physicalModel": {
+        "aromaPotential": 0.35,
+        "baseAcidity": 0,
+        "baseBitterness": 0,
+        "basePungency": 0,
+        "baseSweetness": 0.01,
+        "baseUmami": 0.45,
+        "browningPotential": 0.6,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.003,
+        "proteinFraction": 0.24,
+        "sugarFraction": 0,
+        "thermalResponse": 1,
+        "waterFraction": 0.72
+      },
+      "platingComponentId": "protein_piece",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "protein"
+    },
+    {
+      "colorId": "brown",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "star_anise",
+      "ingredientStateIds": [
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 50,
+        "energyKcal": 337,
+        "fatG": 16,
+        "fiberG": 15,
+        "proteinG": 18
+      },
+      "physicalModel": {
+        "aromaPotential": 0.9,
+        "baseAcidity": 0.02,
+        "baseBitterness": 0,
+        "basePungency": 0.05,
+        "baseSweetness": 0.08,
+        "baseUmami": 0.12,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.16,
+        "proteinFraction": 0.18,
+        "sugarFraction": 0.08,
+        "thermalResponse": 1,
+        "waterFraction": 0.1
+      },
+      "platingComponentId": "aromatic_fleck",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "aromatic"
+    },
+    {
+      "colorId": "green",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "thai_basil",
+      "ingredientStateIds": [
+        "raw"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 2.7,
+        "energyKcal": 23,
+        "fatG": 0.6,
+        "fiberG": 1.6,
+        "proteinG": 3.2
+      },
+      "physicalModel": {
+        "aromaPotential": 0.9,
+        "baseAcidity": 0.02,
+        "baseBitterness": 0,
+        "basePungency": 0.05,
+        "baseSweetness": 0.03,
+        "baseUmami": 0.12,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0.006,
+        "proteinFraction": 0.032,
+        "sugarFraction": 0.01,
+        "thermalResponse": 1,
+        "waterFraction": 0.82
+      },
+      "platingComponentId": "leaf_cluster",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
       },
       "role": "aromatic"
     },
@@ -2397,6 +3197,61 @@
       "role": "produce"
     },
     {
+      "colorId": "clear",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "water",
+      "ingredientStateIds": [
+        "liquid"
+      ],
+      "nutritionPer100g": {
+        "carbohydrateG": 0,
+        "energyKcal": 0,
+        "fatG": 0,
+        "fiberG": 0,
+        "proteinG": 0
+      },
+      "physicalModel": {
+        "aromaPotential": 0.35,
+        "baseAcidity": 0,
+        "baseBitterness": 0,
+        "basePungency": 0,
+        "baseSweetness": 0,
+        "baseUmami": 0.45,
+        "browningPotential": 0.25,
+        "evaporationRate": 0.85,
+        "fatFraction": 0,
+        "proteinFraction": 0,
+        "sugarFraction": 0,
+        "thermalResponse": 1,
+        "waterFraction": 1
+      },
+      "platingComponentId": "sauce_dark",
+      "retention": {
+        "carbohydrate": 0.95,
+        "energy": 0.95,
+        "fat": 0.95,
+        "fiber": 1,
+        "protein": 0.95
+      },
+      "role": "liquid"
+    },
+    {
       "colorId": "pink",
       "governance": {
         "compatibilityStatus": "compatible",
@@ -2483,6 +3338,27 @@
       "id": "cut"
     },
     {
+      "description": "Hydrated starch or noodle state produced by controlled liquid cooking.",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "hydrated"
+    },
+    {
       "description": "Pourable ingredient state for liquid culinary inputs.",
       "governance": {
         "compatibilityStatus": "compatible",
@@ -2505,6 +3381,27 @@
         "rightsStatus": "approved"
       },
       "id": "liquid"
+    },
+    {
+      "description": "Pot-cooked state with flavor compounds extracted into a liquid medium.",
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "pot_extracted"
     },
     {
       "description": "Unheated ingredient state.",
@@ -2556,7 +3453,7 @@
     }
   ],
   "owner": "Cooking Lab",
-  "physicalContentVersion": "goal16-calibration-v1",
+  "physicalContentVersion": "goal3-wok-pot-calibration-v1",
   "platingComponents": [
     {
       "governance": {
@@ -2919,6 +3816,62 @@
   "seasonings": [
     {
       "acidityPerG": 0,
+      "aromaPerG": 0.32,
+      "bitternessPerG": 0,
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "heatSensitivity": 0.55,
+      "id": "fish_sauce",
+      "pungencyPerG": 0,
+      "saltinessPerG": 0.45,
+      "sweetnessPerG": 0.02,
+      "umamiPerG": 0.62
+    },
+    {
+      "acidityPerG": 0.9,
+      "aromaPerG": 0.48,
+      "bitternessPerG": 0,
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cat-kitchen-calibration",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "heatSensitivity": 0.55,
+      "id": "lime_juice",
+      "pungencyPerG": 0,
+      "saltinessPerG": 0,
+      "sweetnessPerG": 0.02,
+      "umamiPerG": 0
+    },
+    {
+      "acidityPerG": 0,
       "aromaPerG": 0,
       "bitternessPerG": 0,
       "governance": {
@@ -3002,13 +3955,18 @@
       "umamiPerG": 0
     }
   ],
-  "snapshotId": "culinary-knowledge-v1",
-  "sourceAuditSha": "9e9f01c8f7b45815c0fdeac2d80bd9b8a6198397",
+  "snapshotId": "culinary-knowledge-wok-pot-v1",
+  "sourceAuditSha": "137ee1513b3935efd887b4a89bff56f09c31d8ed",
   "sourceFiles": [
     {
       "path": "game-data/culinary-knowledge/reference/cat-kitchen-goal16-fixture.json",
       "role": "cat-kitchen-goal16-fixture",
       "sha256": "1d95c23494caa34d41994aa4033d5bbe69357fef03c94202edff7bc8a49e89e3"
+    },
+    {
+      "path": "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+      "role": "cat-kitchen-goal3-fixture",
+      "sha256": "f6e15c46ece89575d587924a2423870c5ae576c4730706637ae0316c51dc93c8"
     },
     {
       "path": "game-data/nutrition/usda-fooddata-central-subset.json",
@@ -3032,8 +3990,68 @@
     }
   ],
   "sourceKind": "goal17-calibration",
-  "sourceRevision": "9e9f01c8f7b45815c0fdeac2d80bd9b8a6198397",
+  "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed",
   "transformationRules": [
+    {
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "add_liquid_to_pot",
+      "inputStateIds": [
+        "liquid"
+      ],
+      "operationId": "add_liquid",
+      "outputStateIds": [
+        "liquid"
+      ]
+    },
+    {
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "add_solid_to_pot",
+      "inputStateIds": [
+        "raw"
+      ],
+      "operationId": "add_solid",
+      "outputStateIds": [
+        "pot_extracted"
+      ]
+    },
     {
       "engineCapabilityIds": [
         "dish_engine_v2_wok"
@@ -3102,6 +4120,96 @@
     },
     {
       "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "hydrate_noodle_in_pot",
+      "inputStateIds": [
+        "raw"
+      ],
+      "operationId": "simmer",
+      "outputStateIds": [
+        "hydrated"
+      ]
+    },
+    {
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "prepare_before_pot",
+      "inputStateIds": [
+        "raw"
+      ],
+      "operationId": "prepare",
+      "outputStateIds": [
+        "cut"
+      ]
+    },
+    {
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "season_in_pot",
+      "inputStateIds": [
+        "liquid"
+      ],
+      "operationId": "season",
+      "outputStateIds": [
+        "liquid"
+      ]
+    },
+    {
+      "engineCapabilityIds": [
         "dish_engine_v2_wok"
       ],
       "governance": {
@@ -3131,6 +4239,36 @@
       "operationId": "season",
       "outputStateIds": [
         "wok_cooked"
+      ]
+    },
+    {
+      "engineCapabilityIds": [
+        "dish_engine_v2_pot"
+      ],
+      "governance": {
+        "compatibilityStatus": "compatible",
+        "provenance": {
+          "kind": "cooking-lab-factual-source",
+          "notes": "Reviewed Cat Kitchen Goal 3 Wok/Pot interpretation knowledge; gameplay formulas and thresholds remain game-owned.",
+          "sourceFiles": [
+            "game-data/culinary-knowledge/reference/cat-kitchen-goal3-wok-pot-fixture.json",
+            "game-data/source/rights-registry.json"
+          ],
+          "sourceRevision": "137ee1513b3935efd887b4a89bff56f09c31d8ed"
+        },
+        "recordStatus": "reviewed",
+        "reviewStatus": "reviewed",
+        "reviewer": "cooking-lab-goal17-culinary-knowledge-review",
+        "rightsReviewer": "cooking-lab-goal17-rights-review",
+        "rightsStatus": "approved"
+      },
+      "id": "skim_broth",
+      "inputStateIds": [
+        "liquid"
+      ],
+      "operationId": "skim",
+      "outputStateIds": [
+        "liquid"
       ]
     },
     {

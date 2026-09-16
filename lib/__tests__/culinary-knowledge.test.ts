@@ -100,12 +100,12 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
 
   it("validates the committed authoring source and every pinned source hash", () => {
     const value = source();
-    expect(value.ingredientKnowledge).toHaveLength(20);
-    expect(value.dishArchetypes).toHaveLength(10);
+    expect(value.ingredientKnowledge).toHaveLength(29);
+    expect(value.dishArchetypes).toHaveLength(13);
     expect(
       value.dishArchetypes.every((archetype) => !("threshold" in archetype)),
     ).toBe(true);
-    expect(value.sourceFiles).toHaveLength(5);
+    expect(value.sourceFiles).toHaveLength(6);
     expect(() => assertSourceFileHashes(value.sourceFiles)).not.toThrow();
   });
 
@@ -120,12 +120,33 @@ describe("Goal 17 reviewed Culinary Knowledge snapshot", () => {
     const left = compileCulinaryKnowledgeSnapshot(source());
     const right = compileCulinaryKnowledgeSnapshot(source());
     expect(stableJson(left)).toBe(stableJson(right));
-    expect(left.snapshot.physicalContentVersion).toBe("goal16-calibration-v1");
+    expect(left.snapshot.physicalContentVersion).toBe("goal3-wok-pot-calibration-v1");
     expect(left.manifest.counts).toMatchObject({
-      ingredientKnowledge: 20,
-      dishArchetypes: 10,
-      flavorRelations: 15,
+      ingredientKnowledge: 29,
+      dishArchetypes: 13,
+      flavorRelations: 21,
     });
+  });
+
+  it("covers both Cat Kitchen physical engines and required identities", () => {
+    const value = source();
+    expect(value.engineCapabilities.map((entry) => entry.id)).toEqual([
+      "dish_engine_v2_pot",
+      "dish_engine_v2_wok",
+    ]);
+    const archetypes = new Map(value.dishArchetypes.map((entry) => [entry.id, entry]));
+    expect(archetypes.get("tomato_scrambled_eggs")?.engineCapabilityIds).toEqual([
+      "dish_engine_v2_wok",
+    ]);
+    expect(archetypes.get("thai_basil_chicken")?.engineCapabilityIds).toEqual([
+      "dish_engine_v2_wok",
+    ]);
+    expect(archetypes.get("tom_yum_goong")?.engineCapabilityIds).toEqual([
+      "dish_engine_v2_pot",
+    ]);
+    expect(archetypes.get("beef_pho")?.engineCapabilityIds).toEqual([
+      "dish_engine_v2_pot",
+    ]);
   });
 
   it("fails closed for placeholder, missing and mismatched source hashes", () => {

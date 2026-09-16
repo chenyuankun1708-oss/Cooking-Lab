@@ -20,7 +20,17 @@ type Shape = Record<string, Validator>;
 const sha256Pattern = /^[a-f0-9]{64}$/;
 const gitShaPattern = /^[a-f0-9]{40}$/;
 const idPattern = /^[a-z0-9][a-z0-9_.-]*$/;
-const transformationOperationIds = new Set<string>(["add", "season", "slice", "stir"]);
+const transformationOperationIds = new Set<string>([
+  "add",
+  "add_liquid",
+  "add_solid",
+  "prepare",
+  "season",
+  "simmer",
+  "skim",
+  "slice",
+  "stir",
+]);
 
 const stringValue: Validator = (value, path) => {
   if (typeof value !== "string") fail(path, "expected string");
@@ -131,6 +141,7 @@ const requiredSourceFileRoles = [
   "nutrition-dataset",
   "rights-registry",
   "cat-kitchen-goal16-fixture",
+  "cat-kitchen-goal3-fixture",
 ] as const;
 const sourceFileSchema = exactObject({
   path: artifactPathValue,
@@ -217,6 +228,7 @@ const engineSupports = [
   "dish_profile_v1",
   "physical_truth_wrap",
   "plating_plan_v1",
+  "pot",
   "wok",
 ] as const;
 const engineSchema = exactObject({ id: idValue, supports: sortedIds(enumValue(engineSupports)), governance: governanceSchema });

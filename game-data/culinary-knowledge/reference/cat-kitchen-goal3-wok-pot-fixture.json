@@ -1,0 +1,52 @@
+{
+  "schema_id": "cat_kitchen.goal3_wok_pot_knowledge_reference.v1",
+  "schema_version": 1,
+  "purpose": "Reviewed minimum offline knowledge needed to interpret Cat Kitchen Goal 2 Wok and Pot fixtures.",
+  "boundary": "Cooking Lab owns reviewed knowledge and provenance. Cat Kitchen owns identity thresholds, formula weights, difficulty, rewards, and presentation selection.",
+  "engine_capabilities": [
+    "dish_engine_v2_pot",
+    "dish_engine_v2_wok"
+  ],
+  "ingredients": [
+    "beef_stock",
+    "galangal",
+    "lemongrass",
+    "lime_leaf",
+    "rice_noodle",
+    "shrimp",
+    "star_anise",
+    "thai_basil",
+    "water"
+  ],
+  "seasonings": [
+    "fish_sauce",
+    "lime_juice"
+  ],
+  "dish_archetypes": [
+    {
+      "id": "beef_pho",
+      "engine": "pot",
+      "ingredients": ["beef", "onion", "rice_noodle", "star_anise"],
+      "sequence": ["onion", "star_anise", "beef", "rice_noodle"]
+    },
+    {
+      "id": "thai_basil_chicken",
+      "engine": "wok",
+      "ingredients": ["chicken", "chili", "thai_basil"],
+      "sequence": ["chicken", "chili", "thai_basil"]
+    },
+    {
+      "id": "tom_yum_goong",
+      "engine": "pot",
+      "ingredients": ["chili", "galangal", "lemongrass", "lime_leaf", "mushroom", "shrimp"],
+      "sequence": ["lemongrass", "galangal", "lime_leaf", "mushroom", "shrimp", "chili"]
+    }
+  ],
+  "review": {
+    "record_status": "reviewed",
+    "review_status": "reviewed",
+    "rights_status": "approved",
+    "compatibility_status": "compatible",
+    "notes": "Calibration records are scoped to gameplay interpretation and do not claim that a cat breed represents a culture."
+  }
+}

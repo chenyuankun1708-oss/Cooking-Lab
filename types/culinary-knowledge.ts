@@ -15,7 +15,8 @@ export interface CulinaryKnowledgeSourceFileV1 {
     | "operation-catalog"
     | "nutrition-dataset"
     | "rights-registry"
-    | "cat-kitchen-goal16-fixture";
+    | "cat-kitchen-goal16-fixture"
+    | "cat-kitchen-goal3-fixture";
 }
 
 export interface CulinaryKnowledgeGovernanceV1 {

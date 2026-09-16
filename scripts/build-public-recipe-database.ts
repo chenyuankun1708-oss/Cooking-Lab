@@ -1,6 +1,21 @@
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { loadCanonicalGameData } from "@/lib/game-data-canonical";
+
+/**
+ * Parse the public culinary image registry (data/culinary/images.ts) into a
+ * id -> { src, alt, sourceUrl, author, license } map. Database entries whose
+ * images[].imageId matches a published public asset get that image attached.
+ */
+function parsePublicImageRegistry(): Map<string, { src: string; alt: string; sourceUrl: string; author: string; license: string }> {
+  const registry = readFileSync(resolve(process.cwd(), "data/culinary/images.ts"), "utf8");
+  const map = new Map<string, { src: string; alt: string; sourceUrl: string; author: string; license: string }>();
+  const block = /\{\s*id: "([a-z0-9-]+)",\s*\n\s*src: "([^"]+)",\s*\n\s*alt: "([^"]+)",[\s\S]*?source: "([^"]+)",\s*\n\s*sourceUrl: "([^"]+)",\s*\n\s*author: "([^"]+)",\s*\n\s*license: "([^"]+)"/g;
+  for (const match of registry.matchAll(block)) {
+    map.set(match[1], { src: match[2], alt: match[3], sourceUrl: match[5], author: match[6], license: match[7] });
+  }
+  return map;
+}
 
 /**
  * Projects the M13 recipe database into a PUBLIC browsing dataset
@@ -26,12 +41,15 @@ interface PublicRecipeEntry {
   complexity: number;
   sourceType: string;
   flavors: string[];
+  image: { src: string; alt: string; sourceUrl: string; author: string; license: string } | null;
   portionRows: Array<{ ingredient: string; grams: number; unit: string; role: string; optional: boolean }>;
   stepRows: Array<{ order: number; op: string; durationS: number; equipment: string }>;
   nutrition: { calories: number; protein: number; fat: number; saturatedFat: number; carbs: number; sugar: number; fiber: number; sodium: number };
 }
 
 const LIMIT = 300;
+
+const publicImages = parsePublicImageRegistry();
 
 const scored = data.recipes.map((recipe) => {
   const db = recipe.database;
@@ -63,6 +81,11 @@ const scored = data.recipes.map((recipe) => {
     complexity,
     sourceType: db?.sourceType ?? "",
     flavors: flavors.slice(0, 5),
+    image: (() => {
+      const published = (db?.images ?? []).find((img) => img.status === "published" && img.imageId !== undefined && publicImages.has(img.imageId));
+      const asset = published?.imageId ? publicImages.get(published.imageId) : undefined;
+      return asset ? { ...asset } : null;
+    })(),
     portionRows: recipe.ingredientPortions.map((portion) => ({
       ingredient: portion.ingredientId,
       grams: portion.massG,
@@ -90,6 +113,7 @@ const entries = scored.slice(0, LIMIT);
 
 const summary = {
   total: entries.length,
+  withImages: entries.filter((entry) => entry.image !== null).length,
   databaseTotal: data.recipes.length,
   baking: entries.filter((entry) => entry.categories.includes("baking")).length,
   bartending: entries.filter((entry) => entry.categories.includes("bartending")).length,
@@ -122,6 +146,7 @@ export interface PublicRecipeEntry {
   complexity: number;
   sourceType: string;
   flavors: string[];
+  image: { src: string; alt: string; sourceUrl: string; author: string; license: string } | null;
   portionRows: Array<{ ingredient: string; grams: number; unit: string; role: string; optional: boolean }>;
   stepRows: Array<{ order: number; op: string; durationS: number; equipment: string }>;
   nutrition: { calories: number; protein: number; fat: number; saturatedFat: number; carbs: number; sugar: number; fiber: number; sodium: number };
@@ -134,6 +159,7 @@ export interface PublicRecipeDatabaseSummary {
   bartending: number;
   dessert: number;
   ingredients: number;
+  withImages: number;
   sources: Array<{ sourceType: string; count: number }>;
   cuisines: string[];
 }

@@ -44,7 +44,7 @@ export default async function PublicDatabasePage({ params }: DatabasePageProps) 
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900">
-      <SiteHeader locale={locale} currentPath={`/${locale}/database`} />
+      <SiteHeader active="database" locale={locale} currentPath={`/${locale}/database`} />
       <main className="mx-auto max-w-7xl px-6 py-10">
         <header className="mb-8">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-stone-400">{t.eyebrow}</p>

@@ -4,7 +4,7 @@ import { getAlternateLocale, getLocalizedPath, replacePathLocale } from "@/lib/l
 import { getMessages } from "@/lib/messages";
 import { ThemeToggle } from "./theme-toggle";
 
-export function SiteHeader({ active, inverse = false, locale, currentPath, query }: { active?: "home" | "recipes" | "stories"; inverse?: boolean; locale: SupportedLocale; currentPath: string; query?: string }) {
+export function SiteHeader({ active, inverse = false, locale, currentPath, query }: { active?: "home" | "recipes" | "database" | "stories"; inverse?: boolean; locale: SupportedLocale; currentPath: string; query?: string }) {
   const textClass = inverse ? "text-white" : "text-stone-950";
   const mutedClass = inverse ? "text-white/82 hover:text-white" : "text-stone-600 hover:text-stone-950";
   const messages = getMessages(locale);
@@ -23,6 +23,9 @@ export function SiteHeader({ active, inverse = false, locale, currentPath, query
           </Link>
           <Link aria-current={active === "recipes" ? "page" : undefined} className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center hover:underline" href={getLocalizedPath(locale, "/recipes")}>
             {messages.nav.recipes}
+          </Link>
+          <Link aria-current={active === "database" ? "page" : undefined} className="focus-ring inline-flex min-h-11 items-center px-1 hover:underline" href={getLocalizedPath(locale, "/database")}>
+            {messages.nav.database}
           </Link>
           <Link className="focus-ring inline-flex min-h-11 items-center px-1 hover:underline" href={`${getLocalizedPath(locale)}#decide`}>
             <span className="md:hidden">{locale === "zh-CN" ? "今晚" : "Decide"}</span>

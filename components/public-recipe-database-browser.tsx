@@ -21,7 +21,7 @@ const zh = {
   col: { recipe: "菜谱", category: "品类", type: "类型", cuisine: "菜系", servings: "份", kcal: "kcal/份", portions: "食材", steps: "步骤", source: "来源", flavors: "味道标签", complexity: "复杂度" },
   empty: "没有匹配的条目——试试放宽筛选条件。",
   close: "关闭",
-  detail: { flavors: "味道档案", portions: "配料", steps: "操作步骤", nutrition: "营养（每份）", optional: "可选" },
+  detail: { flavors: "味道档案", portions: "配料", steps: "操作步骤", nutrition: "营养（每份）", optional: "可选", attribution: "图片来源", withPhoto: "有成品图" },
   nutrition: { calories: "热量", protein: "蛋白质", fat: "脂肪", saturatedFat: "饱和脂肪", carbs: "碳水", sugar: "糖", fiber: "纤维", sodium: "钠" },
   sources: { "web-migrated": "Web 迁移", "loc-public-domain": "LOC 公版", "web-curated": "Web 改编", "ai-assisted": "知识库", original: "原创" } as Record<string, string>,
   category: { baking: "烘焙", bartending: "调酒", dessert: "甜品" } as Record<string, string>,
@@ -38,7 +38,7 @@ const en = {
   col: { recipe: "Recipe", category: "Category", type: "Type", cuisine: "Cuisine", servings: "Servings", kcal: "kcal/serving", portions: "Ingredients", steps: "Steps", source: "Source", flavors: "Flavors", complexity: "Complexity" },
   empty: "No matching entries — try relaxing the filters.",
   close: "Close",
-  detail: { flavors: "Flavor profile", portions: "Ingredients", steps: "Preparation steps", nutrition: "Nutrition (per serving)", optional: "optional" },
+  detail: { flavors: "Flavor profile", portions: "Ingredients", steps: "Preparation steps", nutrition: "Nutrition (per serving)", optional: "optional", attribution: "Photo credit", withPhoto: "Has photo" },
   nutrition: { calories: "Calories", protein: "Protein", fat: "Fat", saturatedFat: "Sat. fat", carbs: "Carbs", sugar: "Sugar", fiber: "Fiber", sodium: "Sodium" },
   sources: {} as Record<string, string>,
   category: {} as Record<string, string>,
@@ -129,6 +129,7 @@ export function PublicRecipeDatabaseBrowser({ entries, summary, locale }: Public
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 z-10">
               <tr className="border-b border-stone-100 bg-stone-50 text-xs uppercase tracking-wide text-stone-400">
+                <th className="py-3 pl-5 font-medium" aria-label="photo">{t.detail.withPhoto}</th>
                 <th className="px-5 py-3 font-medium">{t.col.recipe}</th>
                 <th className="px-3 py-3 font-medium">{t.col.category}</th>
                 <th className="px-3 py-3 font-medium">{t.col.type}</th>
@@ -147,6 +148,14 @@ export function PublicRecipeDatabaseBrowser({ entries, summary, locale }: Public
                   onClick={() => setSelected(row)}
                   className="cursor-pointer border-b border-stone-50 last:border-0 hover:bg-stone-50"
                 >
+                  <td className="py-3 pr-0 pl-5">
+                    {row.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={row.image.src} alt={row.image.alt} width={52} height={35} className="rounded-md object-cover" />
+                    ) : (
+                      <span className="flex h-[35px] w-[52px] items-center justify-center rounded-md bg-stone-100 text-[10px] text-stone-300">{row.categories[0]?.slice(0, 2).toUpperCase() ?? "—"}</span>
+                    )}
+                  </td>
                   <td className="px-5 py-3 font-medium text-stone-800">{row.slug}</td>
                   <td className="px-3 py-3">
                     <div className="flex gap-1">
@@ -174,7 +183,7 @@ export function PublicRecipeDatabaseBrowser({ entries, summary, locale }: Public
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={9} className="px-5 py-10 text-center text-sm text-stone-400">{t.empty}</td>
+                  <td colSpan={10} className="px-5 py-10 text-center text-sm text-stone-400">{t.empty}</td>
                 </tr>
               )}
             </tbody>
@@ -188,7 +197,12 @@ export function PublicRecipeDatabaseBrowser({ entries, summary, locale }: Public
             className="h-full w-full max-w-xl overflow-y-auto bg-white shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
-            <header className="sticky top-0 flex items-start justify-between border-b border-stone-100 bg-white/95 px-6 py-4 backdrop-blur">
+            <header className="sticky top-0 border-b border-stone-100 bg-white/95 backdrop-blur">
+              {selected.image && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={selected.image.src} alt={selected.image.alt} width={576} height={384} className="h-56 w-full object-cover" />
+              )}
+              <div className="flex items-start justify-between px-6 py-4">
               <div>
                 <div className="flex flex-wrap gap-1">
                   {selected.categories.map((cat) => (
@@ -210,6 +224,7 @@ export function PublicRecipeDatabaseBrowser({ entries, summary, locale }: Public
               >
                 {t.close}
               </button>
+              </div>
             </header>
 
             <div className="space-y-6 px-6 py-5">
@@ -285,6 +300,16 @@ export function PublicRecipeDatabaseBrowser({ entries, summary, locale }: Public
                   ))}
                 </div>
               </div>
+
+              {selected.image && (
+                <div>
+                  <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-stone-400">{t.detail.attribution}</h3>
+                  <p className="text-xs leading-relaxed text-stone-400">
+                    {selected.image.author} · {selected.image.license.toUpperCase()} ·{" "}
+                    <a href={selected.image.sourceUrl} target="_blank" rel="noreferrer" className="underline hover:text-stone-600">source</a>
+                  </p>
+                </div>
+              )}
             </div>
           </aside>
         </div>

@@ -16,6 +16,7 @@ export interface PublicRecipeEntry {
   complexity: number;
   sourceType: string;
   flavors: string[];
+  image: { src: string; alt: string; sourceUrl: string; author: string; license: string } | null;
   portionRows: Array<{ ingredient: string; grams: number; unit: string; role: string; optional: boolean }>;
   stepRows: Array<{ order: number; op: string; durationS: number; equipment: string }>;
   nutrition: { calories: number; protein: number; fat: number; saturatedFat: number; carbs: number; sugar: number; fiber: number; sodium: number };
@@ -28,12 +29,14 @@ export interface PublicRecipeDatabaseSummary {
   bartending: number;
   dessert: number;
   ingredients: number;
+  withImages: number;
   sources: Array<{ sourceType: string; count: number }>;
   cuisines: string[];
 }
 
 export const publicRecipeDatabaseSummary: PublicRecipeDatabaseSummary = {
   "total": 300,
+  "withImages": 11,
   "databaseTotal": 500,
   "baking": 155,
   "bartending": 79,
@@ -103,6 +106,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "sweet1",
       "citrusy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "green-papaya",
@@ -323,6 +327,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami3",
       "fermented"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "rice",
@@ -527,6 +532,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "floral",
       "soft"
     ],
+    "image": {
+      "src": "/images/culinary/mango-sticky-rice/hero.webp",
+      "alt": "白盘中摆着金黄芒果片、椰浆和一份晶亮糯米饭",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mango_sticky_rice_served_in_Thailand.jpg",
+      "author": "Arthur Taksin",
+      "license": "cc-by"
+    },
     "portionRows": [
       {
         "ingredient": "glutinous-rice",
@@ -720,6 +732,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "spiced"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cooked-black-bean",
@@ -927,6 +940,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "toasty"
     ],
+    "image": {
+      "src": "/images/culinary/apple-crumble/hero.webp",
+      "alt": "透明烤皿中铺着松散金黄酥粒的英式苹果酥粒甜品",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:British_apple_crumble_02.jpg",
+      "author": "Jonathan Harker",
+      "license": "cc-by"
+    },
     "portionRows": [
       {
         "ingredient": "apple",
@@ -1110,6 +1130,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "gingery"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "chicken-thigh",
@@ -1295,6 +1316,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "herbal",
       "peppery"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "chicken-thigh",
@@ -1467,6 +1489,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "gingery",
       "floral"
     ],
+    "image": {
+      "src": "/images/culinary/masala-chai/hero.webp",
+      "alt": "深色桌面上的白杯马萨拉奶茶，茶汤呈均匀焦糖色",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masala_Chai.jpg",
+      "author": "Ganesh Mohan T",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "black-tea-leaf",
@@ -1650,6 +1679,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami3",
       "spiced"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cooked-chickpea",
@@ -1835,6 +1865,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "garlicky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cooked-chickpea",
@@ -2005,6 +2036,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "peppery",
       "garlicky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pork-shoulder",
@@ -2156,6 +2188,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "roasted"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "lamb",
@@ -2313,6 +2346,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami3",
       "citrusy"
     ],
+    "image": {
+      "src": "/images/culinary/tomyum-kung/hero.webp",
+      "alt": "宽边白碗中盛着红褐色冬阴功汤、虾肉、蘑菇和青柠",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tom_Yum_Koong_Soup_with_Prawn_and_Straw_Mushroom.jpg",
+      "author": "Zheng Zhou",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "shrimp",
@@ -2501,6 +2541,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -2662,6 +2703,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -2829,6 +2871,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-wheat-flour",
@@ -2988,6 +3031,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fermented",
       "garlicky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tofu",
@@ -3143,6 +3187,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "toasty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -3295,6 +3340,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "spiced"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dry-lentil",
@@ -3464,6 +3510,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "almond-flour",
@@ -3624,6 +3671,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "creamy"
     ],
+    "image": {
+      "src": "/images/culinary/tiramisu/hero.webp",
+      "alt": "白盘中一块可可粉覆盖的提拉米苏，能看到咖啡饼干与奶油层",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_serving_of_tiramisu_dusted_with_cacao.jpg",
+      "author": "Hungry Dudes",
+      "license": "cc-by"
+    },
     "portionRows": [
       {
         "ingredient": "egg",
@@ -3778,6 +3832,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "drinking-water",
@@ -3937,6 +3992,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "tomato-rich"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tomato",
@@ -4096,6 +4152,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "garlicky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cooked-chickpea",
@@ -4248,6 +4305,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami1",
       "herbal"
     ],
+    "image": {
+      "src": "/images/culinary/greek-village-salad/hero.webp",
+      "alt": "白色大盘中的番茄、黄瓜、甜椒、橄榄和大块菲达奶酪",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greek_Salad_from_Thessaloniki.jpg",
+      "author": "Armineaghayan",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "tomato",
@@ -4415,6 +4479,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami4",
       "fermented"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tofu",
@@ -4570,6 +4635,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cream-cheese",
@@ -4719,6 +4785,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pecan",
@@ -4867,6 +4934,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -5012,6 +5080,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "tomato-rich"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "egg",
@@ -5171,6 +5240,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "tomato-rich"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "eggplant",
@@ -5310,6 +5380,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "roasted",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "glass-noodles",
@@ -5466,6 +5537,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -5609,6 +5681,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-banana",
@@ -5758,6 +5831,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-chocolate",
@@ -5892,6 +5966,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "citrusy"
     ],
+    "image": {
+      "src": "/images/culinary/hibiscus-agua-fresca/hero.webp",
+      "alt": "玻璃杯中装着清亮宝石红色的冰镇洛神花饮",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_glass_of_hibiscus_tea_01.jpg",
+      "author": "claralieu",
+      "license": "cc-by"
+    },
     "portionRows": [
       {
         "ingredient": "dried-hibiscus",
@@ -6031,6 +6112,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "heavy-cream",
@@ -6163,6 +6245,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "roasted",
       "gingery"
     ],
+    "image": {
+      "src": "/images/culinary/dongpo-pork/hero.webp",
+      "alt": "两只陶盅中盛着酱色浓亮、方整软糯的东坡肉",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dongpo_pork_(a_Hangzhou_dish).jpg",
+      "author": "Pauloleong2002",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "pork-belly",
@@ -6313,6 +6402,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-oats",
@@ -6454,6 +6544,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "roasted",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "potato",
@@ -6588,6 +6679,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -6731,6 +6823,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-chocolate",
@@ -6872,6 +6965,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -7028,6 +7122,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -7154,6 +7249,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "herbal"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dry-lentil",
@@ -7303,6 +7399,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pumpkin-puree",
@@ -7444,6 +7541,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami1",
       "garlicky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cucumber",
@@ -7587,6 +7685,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -7730,6 +7829,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -7859,6 +7959,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "floral",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "mango",
@@ -7986,6 +8087,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -8113,6 +8215,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "gingery",
       "herbal"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "rice-noodles",
@@ -8263,6 +8366,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-banana",
@@ -8398,6 +8502,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -8519,6 +8624,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "roasted",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -8648,6 +8754,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "glutinous-rice-flour",
@@ -8768,6 +8875,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "rice",
@@ -8903,6 +9011,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -9033,6 +9142,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "zucchini",
@@ -9161,6 +9271,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "chicken-thigh",
@@ -9291,6 +9402,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -9421,6 +9533,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-chocolate",
@@ -9541,6 +9654,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "garlicky",
       "peppery"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "chicken-thigh",
@@ -9671,6 +9785,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -9802,6 +9917,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -9933,6 +10049,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "milk",
@@ -10047,6 +10164,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -10177,6 +10295,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "mango",
@@ -10300,6 +10419,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "butter",
@@ -10424,6 +10544,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -10555,6 +10676,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -10686,6 +10808,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -10817,6 +10940,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "taro",
@@ -10931,6 +11055,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11055,6 +11180,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11178,6 +11304,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11302,6 +11429,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11426,6 +11554,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11549,6 +11678,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "glutinous-rice-flour",
@@ -11665,6 +11795,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11790,6 +11921,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -11915,6 +12047,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "egg",
@@ -12032,6 +12165,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -12155,6 +12289,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -12284,6 +12419,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -12408,6 +12544,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -12532,6 +12669,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -12657,6 +12795,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -12782,6 +12921,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -12904,6 +13044,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "brothy",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tofu",
@@ -13019,6 +13160,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -13143,6 +13285,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -13268,6 +13411,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "almond-flour",
@@ -13392,6 +13536,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -13516,6 +13661,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -13639,6 +13785,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -13763,6 +13910,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "butter",
@@ -13879,6 +14027,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14003,6 +14152,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "glutinous-rice-flour",
@@ -14118,6 +14268,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14243,6 +14394,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14367,6 +14519,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "floral",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14484,6 +14637,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14601,6 +14755,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14718,6 +14873,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -14833,6 +14989,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -14948,6 +15105,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -15065,6 +15223,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-chocolate",
@@ -15182,6 +15341,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -15299,6 +15459,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -15415,6 +15576,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -15533,6 +15695,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -15650,6 +15813,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -15767,6 +15931,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-cherries",
@@ -15882,6 +16047,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -15998,6 +16164,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-corn",
@@ -16116,6 +16283,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -16233,6 +16401,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -16348,6 +16517,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -16465,6 +16635,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -16582,6 +16753,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "roasted",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -16699,6 +16871,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-butter",
@@ -16816,6 +16989,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -16933,6 +17107,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -17051,6 +17226,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -17168,6 +17344,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -17283,6 +17460,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "herbal"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "chicken-thigh",
@@ -17412,6 +17590,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "milk-powder",
@@ -17529,6 +17708,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -17645,6 +17825,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-corn-flour",
@@ -17760,6 +17941,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fermented",
       "roasted"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "salmon",
@@ -17882,6 +18064,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -17999,6 +18182,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18114,6 +18298,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18231,6 +18416,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18349,6 +18535,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18466,6 +18653,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "floral",
       "toasty"
     ],
+    "image": {
+      "src": "/images/culinary/longjing-green-tea/hero.webp",
+      "alt": "白色盖碗中舒展的龙井茶叶与清亮浅黄绿色茶汤",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Longjing_tea_steeping_in_gaiwan.jpg",
+      "author": "Difference engine",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "longjing-tea-leaf",
@@ -18567,6 +18761,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18683,6 +18878,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18799,6 +18995,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -18916,6 +19113,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-oats",
@@ -19032,6 +19230,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19150,6 +19349,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19267,6 +19467,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19384,6 +19585,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19500,6 +19702,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19616,6 +19819,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19733,6 +19937,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -19850,6 +20055,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "sago-pearls",
@@ -19965,6 +20171,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "butter",
@@ -20082,6 +20289,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -20200,6 +20408,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -20318,6 +20527,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "butter",
@@ -20435,6 +20645,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -20552,6 +20763,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -20669,6 +20881,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -20786,6 +20999,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "canned-pineapple",
@@ -20903,6 +21117,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -21020,6 +21235,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -21137,6 +21353,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "herbal",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "aperol",
@@ -21259,6 +21476,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -21369,6 +21587,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "saucy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-corn-flour",
@@ -21479,6 +21698,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cream-cheese",
@@ -21588,6 +21808,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -21697,6 +21918,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -21806,6 +22028,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -21916,6 +22139,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22026,6 +22250,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "hearty",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-corn-flour",
@@ -22136,6 +22361,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22247,6 +22473,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22358,6 +22585,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "shredded-coconut",
@@ -22467,6 +22695,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22575,6 +22804,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22685,6 +22915,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22795,6 +23026,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -22904,6 +23136,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23015,6 +23248,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23125,6 +23359,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23235,6 +23470,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23344,6 +23580,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "milk",
@@ -23452,6 +23689,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23561,6 +23799,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23671,6 +23910,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23779,6 +24019,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23886,6 +24127,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -23996,6 +24238,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24106,6 +24349,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24216,6 +24460,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24326,6 +24571,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24436,6 +24682,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24546,6 +24793,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24656,6 +24904,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24766,6 +25015,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24874,6 +25124,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -24984,6 +25235,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -25094,6 +25346,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "light"
     ],
+    "image": {
+      "src": "/images/culinary/salted-lassi/hero.webp",
+      "alt": "高脚玻璃杯中的白色拉西，表面有细密泡沫",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lassi_1.jpg",
+      "author": "Gaurav Dhwaj Khadka",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "yogurt",
@@ -25209,6 +25468,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -25319,6 +25579,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-corn-flour",
@@ -25429,6 +25690,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -25539,6 +25801,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "butter",
@@ -25649,6 +25912,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "cake-flour",
@@ -25758,6 +26022,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -25868,6 +26133,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "almond-flour",
@@ -25978,6 +26244,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "amaretto-80",
@@ -26101,6 +26368,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "peach",
@@ -26209,6 +26477,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tequila-blanco-80",
@@ -26332,6 +26601,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "silky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-chocolate",
@@ -26434,6 +26704,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -26535,6 +26806,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "tomato-rich"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pasta",
@@ -26651,6 +26923,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "clean-tasting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "lotus-seed",
@@ -26767,6 +27040,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "glutinous-rice-flour",
@@ -26876,6 +27150,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -26979,6 +27254,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "wheat-flour",
@@ -27082,6 +27358,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "toasty",
       "tender"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-apple",
@@ -27185,6 +27462,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tequila-blanco-80",
@@ -27298,6 +27576,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami2",
       "tomato-rich"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "egg",
@@ -27406,6 +27685,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "ginger-beer",
@@ -27522,6 +27802,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "coconut-milk",
@@ -27631,6 +27912,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -27747,6 +28029,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -27862,6 +28145,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "irish-cream-34",
@@ -27971,6 +28255,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "herbal",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -28086,6 +28371,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -28202,6 +28488,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tequila-blanco-80",
@@ -28318,6 +28605,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "clean-tasting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "soy-milk",
@@ -28426,6 +28714,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "spiced"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -28550,6 +28839,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "glutinous-rice-flour",
@@ -28676,6 +28966,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "umami1",
       "peppery"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -28800,6 +29091,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pisco",
@@ -28916,6 +29208,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -29025,6 +29318,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -29141,6 +29435,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "floral"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -29258,6 +29553,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "crisp"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -29366,6 +29662,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -29483,6 +29780,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -29600,6 +29898,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "creamy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "heavy-cream",
@@ -29710,6 +30009,13 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "floral",
       "refreshing"
     ],
+    "image": {
+      "src": "/images/culinary/moroccan-mint-tea/hero.webp",
+      "alt": "马拉喀什桌面玻璃杯中的琥珀色薄荷茶与新鲜薄荷叶",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mint_tea,_Marrakesh.jpg",
+      "author": "Adam Harangozó",
+      "license": "cc-by-sa"
+    },
     "portionRows": [
       {
         "ingredient": "gunpowder-green-tea-leaf",
@@ -29813,6 +30119,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "drinking-water",
@@ -29915,6 +30222,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -30025,6 +30333,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -30135,6 +30444,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "roasted"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tequila-blanco-80",
@@ -30244,6 +30554,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "spiced",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -30354,6 +30665,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -30464,6 +30776,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -30573,6 +30886,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -30683,6 +30997,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "roasted"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -30793,6 +31108,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "roasted"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -30903,6 +31219,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -31006,6 +31323,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "silky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -31116,6 +31434,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -31225,6 +31544,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "hearty"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -31335,6 +31655,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -31444,6 +31765,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "amaretto-80",
@@ -31547,6 +31869,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -31650,6 +31973,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -31753,6 +32077,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -31855,6 +32180,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -31958,6 +32284,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "saucy",
       "soft"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-banana",
@@ -32062,6 +32389,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -32165,6 +32493,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "brandy-80",
@@ -32267,6 +32596,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "warming",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "brandy-80",
@@ -32370,6 +32700,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -32472,6 +32803,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "appetizing",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "brandy-80",
@@ -32575,6 +32907,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "chewy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "purple-sweet-potato",
@@ -32677,6 +33010,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "juicy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-fish",
@@ -32787,6 +33121,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "herbal",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "green-chartreuse",
@@ -32889,6 +33224,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "dark-rum-80",
@@ -32992,6 +33328,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -33094,6 +33431,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "creamy",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -33197,6 +33535,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -33298,6 +33637,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "clean-tasting",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -33400,6 +33740,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -33502,6 +33843,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "chewy",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "purple-sweet-potato",
@@ -33604,6 +33946,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -33707,6 +34050,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "warming",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "red-bean-paste",
@@ -33809,6 +34153,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "tender",
       "saucy"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "rice",
@@ -33920,6 +34265,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "herbal",
       "silky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -34023,6 +34369,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -34126,6 +34473,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "lotus-seed",
@@ -34229,6 +34577,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -34332,6 +34681,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "crisp",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "tequila-blanco-80",
@@ -34435,6 +34785,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "white-rum-80",
@@ -34537,6 +34888,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "midori",
@@ -34639,6 +34991,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "vodka-80",
@@ -34741,6 +35094,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "sweet2",
       "silky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "scotch-80",
@@ -34844,6 +35198,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -34947,6 +35302,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "bourbon-80",
@@ -35050,6 +35406,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pisco",
@@ -35152,6 +35509,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "pisco",
@@ -35255,6 +35613,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "asian-pear",
@@ -35359,6 +35718,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "refreshing",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "snow-fungus",
@@ -35462,6 +35822,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "red-bean-paste",
@@ -35559,6 +35920,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "soft",
       "comforting"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "usda-white-rice",
@@ -35662,6 +36024,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "comforting",
       "light"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -35764,6 +36127,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "warming",
       "appetizing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "scotch-80",
@@ -35867,6 +36231,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "warming"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "brandy-80",
@@ -35970,6 +36335,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "light",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "soju",
@@ -36073,6 +36439,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "citrusy",
       "silky"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -36176,6 +36543,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "silky",
       "refreshing"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "gin-80",
@@ -36279,6 +36647,7 @@ export const publicRecipeEntries: PublicRecipeEntry[] = [
       "fruity",
       "roasted"
     ],
+    "image": null,
     "portionRows": [
       {
         "ingredient": "raspberry-liqueur",
